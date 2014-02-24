@@ -1,0 +1,51 @@
+ABOUT
+
+Windy City is a style for biblatex that formats notes, bibliographies,
+parenthetical citations, and reference lists according to The
+Chicago Manual of Style. It accurately handles a wide range of
+citations and includes a set of options and commands to accommodate
+special circumstances. It also has extensive support for citing and
+arranging different kinds of editors, translators, and compilers
+within a single citation. These features make Windy City especially
+suitable for academic work.
+
+For more information, see Windy City's documentation:
+
+* http://hesperusisphosphorus.com/prj/windycity.pdf
+
+Or download the complete package:
+
+* http://hesperusisphosphorus.com/prj/windycity.zip
+
+LICENSE
+
+Copyright (c) 2014 Brian Michael Chase. Under the terms of the LaTeX
+Project Public License, version 1.3, permission is granted to copy,
+distribute, or modify this software.
+
+This software is provided 'as is', without warranty of any kind,
+either expressed or implied, including, but not limited to, the
+implied warranties of merchantability and fitness for a particular
+purpose.
+
+FEEDBACK
+
+* brian@hesperusisphosphorus.com
+* http://github.com/brianchase/windycity
+* http://hesperusisphosphorus.com
+
+REQUIREMENTS
+
+* bilatex 2.6 or higher
+
+USAGE
+
+For an overview of features, along with many examples, see
+windycity.pdf and associated files:
+
+* http://hesperusisphosphorus.com/prj/windycity.pdf
+* http://hesperusisphosphorus.com/prj/windycity.zip
+
+For information specifically about bilatex, see:
+
+* http://www.ctan.org/pkg/biblatex

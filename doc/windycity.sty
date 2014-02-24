@@ -1,0 +1,176 @@
+% Last modified: Mon 24 Feb 2014 04:49:05 AM EST
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{windycity}
+\RequirePackage{ifxetex}
+
+\setlength{\parindent}{1.1em}
+\frenchspacing
+\usepackage{setspace}
+\singlespacing
+\widowpenalty=1000
+\clubpenalty=1000
+
+\ifxetex
+  \usepackage{xltxtra}
+  \usepackage{xunicode}
+  \usepackage{fontspec}
+  \PassOptionsToPackage{unicode,xetex}{hyperref}
+  \defaultfontfeatures{Ligatures=TeX,Numbers={OldStyle,Proportional}}
+  \setmainfont[
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic]{texgyretermes}
+  \setmonofont[
+    Scale=MatchLowercase,
+    Extension=.otf,
+    UprightFont=*mono10-regular,
+    ItalicFont=*mono10-italic]{lm}
+  \renewcommand{\@makefnmark}{%
+    \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{pifont}
+  \usepackage[full]{textcomp}
+  \usepackage[utf8]{inputenc}
+  \newcommand{\addfontfeature}[1]{}
+  \usepackage{tgtermes}
+  \usepackage[scaled=.90]{helvet}
+  \renewcommand{\ttdefault}{lmtt}%
+\fi
+
+\newcommand{\email}[1]{\gdef\@email{\mailto{#1}}}%
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}%
+\newcommand{\version}[1]{\gdef\@version{Version #1}}%
+\gdef\@email{}%
+\gdef\@subtitle{}%
+\gdef\@version{}%
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+
+\renewcommand\@maketitle{%
+  \begin{center}%
+    {\LARGE\@title \par}%
+    \vskip 1.75em%
+    {\Large\@subtitle}%
+    \vskip 1.5em%
+    {\large\@author\par\@email\par\@version\par\@date}%
+  \end{center}%
+  \vskip 1.5em}%
+
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[style=windycity]{biblatex}
+\bibliography{windycity}
+
+\usepackage{tocloft}
+\setcounter{tocdepth}{2}
+\renewcommand{\cftbeforesecskip}{0em}%
+\renewcommand{\cftmarktoc}{\@mkboth{\contentsname}{\contentsname}}%
+\renewcommand{\cftsecfont}{\normalfont}%
+\renewcommand{\cftsecpagefont}{\normalfont}%
+%\renewcommand{\cftsubsubsecfont}{\small}%
+
+\newcounter{sh}
+\renewcommand{\thesh}{Abbreviations}%
+\newcounter{bib}
+\renewcommand{\thebib}{Bibliography}%
+\newcounter{ref}
+\renewcommand{\theref}{References}%
+
+\defbibheading{shorthands}{%
+  \newpage
+  \begin{center}\section*{Abbreviations}\end{center}
+  \addcontentsline{toc}{section}{Abbreviations}
+  \markright{Abbreviations}}%
+\defbibheading{bibliography}{%
+  \newpage
+  \begin{center}\section*{Bibliography (Standard Format)}\end{center}
+  \addcontentsline{toc}{section}{Bibliography (Standard Format)}
+  \markright{Bibliography}}%
+\defbibheading{references}{%
+  \newpage
+  \begin{center}\section*{References (Author-Date Format)}\end{center}
+  \addcontentsline{toc}{section}{References (Author-Date Format)}
+  \markright{References}}%
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,RE]{\small\rightmark}%
+\fancyhead[LE,RO]{\small\thepage}%
+\renewcommand{\headrulewidth}{0pt}%
+\renewcommand{\footrulewidth}{0pt}%
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}%
+\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}%
+
+\renewcommand*{\@seccntformat}[1]{%
+  \csname the#1\endcsname
+  \csname adddot@#1\endcsname\quad}%
+\newcommand*{\adddot@section}{.}%
+\renewcommand\thesubsubsection{%
+  \normalfont\arabic{subsection}.\@arabic\c@subsubsection}
+
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\normalfont\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-3.5ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\bfseries}}%
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  {-4ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\it}}
+
+\renewcommand\@makefntext[1]{%
+  \parindent 1em%
+  \normalfont\@thefnmark.\hspace{0.4em}#1}%
+
+\usepackage{calc}
+\usepackage{enumitem}
+\setlist[enumerate]{noitemsep}
+\setlist[itemize]{%
+  itemsep=3pt,
+  labelsep=1.75em,
+  labelwidth=\widthof{N},
+  leftmargin={\labelwidth+\labelsep},
+  parsep=4pt}
+
+\usepackage{etoolbox}
+\AtBeginEnvironment{itemize}{\preto\item{\raggedright}}
+
+\long\def\nfootnote#1{%
+  \insert\footins{\normalfont\footnotesize
+  \interlinepenalty\interfootnotelinepenalty
+  \splittopskip\footnotesep
+  \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+  \hsize\columnwidth \@parboxrestore
+  \footnoterule
+  {\rule{\z@}{\footnotesep}\ignorespaces
+    #1\strut}}}
+
+\usepackage{dtklogos}
+\newcommand{\biblatex}{%
+  \href{http://www.ctan.org/pkg/biblatex}{\texttt{biblatex}}\xspace}%
+\newcommand{\biber}{%
+  \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
+
+\usepackage[
+  anchorcolor=black,
+  breaklinks=true,
+  citecolor=black,
+  colorlinks=true,
+  linkcolor=black,
+  pdfauthor={Brian Michael Chase},
+  pdftitle={Windy City for biblatex},
+  urlcolor=black]{hyperref}
+\urlstyle{rm}
+\usepackage{btxdockit}
+\lstset{basicstyle=\small\ttfamily}
+\pretocmd{\cmd}{\sloppy}{}{}
+\pretocmd{\bibfield}{\sloppy}{}{}
+\pretocmd{\bibtype}{\sloppy}{}{}
+
+\endinput
