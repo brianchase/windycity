@@ -1,0 +1,513 @@
+% Last modified: Mon 24 Feb 2014 08:42:25 AM EST
+
+% Copyright (c) 2014 Brian Michael Chase.
+%
+% Permission is granted to copy, distribute and/or modify this
+% software under the terms of the LaTeX Project Public License (LPPL),
+% version 1.3.
+%
+% The LPPL maintenance status of this software is 'author-maintained'.
+%
+% This software is provided 'as is', without warranty of any kind,
+% either expressed or implied, including, but not limited to, the
+% implied warranties of merchantability and fitness for a particular
+% purpose.
+
+\ProvidesFile{windycity.cbx}[Windy City style for biblatex]
+
+\@ifpackagelater{biblatex}{2013/04/30}
+   {}
+   {\PackageError{biblatex}
+      {Outdated 'biblatex' package}
+      {Windy City 0.8 is for biblatex v2.6 and above.\MessageBreak
+       You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
+       This is a fatal error. I'm aborting now.}%
+    \endinput}%
+\RequireBiber
+
+% The content in this file is specific to notes and parenthetical
+% citations. For any content that is also used for bibliographies and
+% reference lists, see windycity.bbx.
+
+%%%%%%%%%%%%%%%%%%%
+%%  Preliminary  %%
+%%%%%%%%%%%%%%%%%%%
+
+\AtEveryCite{%
+  \global\boolfalse{bibliography}%
+  \global\boolfalse{cbx@first}%
+  \global\boolfalse{cbx@loccit}%
+  \AtEveryItem}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Citation Commands  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareCiteCommand{\bibentry}
+  {}
+  {\citetrackerfalse
+   \AtBeginLists
+   \usedriver
+     {\DeclareNameAlias{author}{sortname}}%
+     {\thefield{entrytype}}%
+   \finentry}%
+  {}{}
+
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \toggletrue{noauth}%
+   \usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\providetoggle{reprinted}
+\DeclareCiteCommand{\citerp}
+  {}
+  {\usebibmacro{citeindex}%
+   \toggletrue{noauth}%
+   \toggletrue{reprinted}%
+   \bibsentence\bibstring{reprinted}\space
+   \usebibmacro{cite}%
+   \togglefalse{reprinted}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\bibsentence\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
+  {\bibsentence\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\booltrue{cbx@first}%
+   \usebibmacro{cite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\booltrue{cbx@first}%
+   \usebibmacro{cite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand*{\fullcite}
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\booltrue{cbx@first}%
+   \toggletrue{noauth}%
+   \usebibmacro{cite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\fullcitens}
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\booltrue{cbx@first}%
+   \clearfield{shorthand}%
+   \usebibmacro{cite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\fullparencite}[\mkbibparens]
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \global\booltrue{cbx@first}%
+   \usebibmacro{pcite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{pcite:postnote}}%
+
+\DeclareCiteCommand*{\fullparencite}[\mkbibparens]
+  {\usebibmacro{prenote}}%
+  {\citetrackerfalse
+   \usebibmacro{citeindex}%
+   \toggletrue{noauth}%
+   \global\booltrue{cbx@first}%
+   \usebibmacro{pcite:long}}%
+  {\multicitedelim}%
+  {\usebibmacro{pcite:postnote}}%
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{parencite}}%
+  {\multicitedelim}%
+  {\usebibmacro{pcite:postnote}}%
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \toggletrue{noauth}%
+   \usebibmacro{parencite}}%
+  {\multicitedelim}%
+  {\usebibmacro{pcite:postnote}}%
+
+\DeclareCiteCommand{\refentry}
+  {}
+  {\citetrackerfalse
+   \AtBeginLists
+   \global\toggletrue{reflist}%
+   \usedriver
+     {\DeclareNameAlias{author}{sortname}}%
+     {\thefield{entrytype}}%
+   \global\togglefalse{reflist}%
+   \finentry}%
+  {}{}
+
+% NOT IN USE: In reference lists, no entry after this will take the
+% author-date format.
+\DeclareCiteCommand{\review}
+  {}
+  {\citetrackerfalse
+   \AtEveryItem
+   \usebibmacro{citeindex}%
+   \usebibmacro{cite:review}}%
+  {}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Stand-alone Tests  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*{\ifciteibidmv}{%
+  \blx@ifcitesingle
+    {\blx@ifmpfncheck
+       {\ifthenelse{\ifentrytype{inbook}\AND
+                      \iffieldequalcs{booktitle}{lastbooktitle}\AND
+                      \iffieldequalcs{year}{lastyear}\AND
+                      \NOT\iffieldundef{volumes}\AND
+                      \NOT\iffirstonpage}}%
+       {\@secondoftwo}}%
+    {\@secondoftwo}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Parenthetical Citations  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{parencite}{%
+  \ifciteseen
+    {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+       {\usebibmacro{pcite:labelyear+etc}}%
+       {\iffieldundef{shorthand}
+          {\usebibmacro{pcite:labelname+labeltitle}%
+           \usebibmacro{pcite:labelyear+extrayear}}%
+          {\usebibmacro{cite:shorthand}}}}
+    {\usebibmacro{pcite:long}}}
+
+\newbibmacro*{pcite:labelyear+etc}{%
+  \iffieldundef{postnote}
+    {\usebibmacro{pcite:labelyear+extrayear}}%
+    {}}
+
+\newbibmacro*{pcite:labelname+labeltitle}{%
+  \iftoggle{noauth}
+    {}
+    {\ifthenelse{\ifnameundef{labelname}\OR
+                   \iffieldundef{labelyear}}%
+       {\iffieldundef{label}
+          {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}%
+          {\printtext[bibhyperref]{\printfield{label}}}}% needs these '%'
+       {\global\booltrue{cbx@short}%
+        \renewcommand*{\cbx@deflabel}{labelname}%
+        \clearfield{nameaddon}%
+        \usebibmacro{a:xy+prep}%
+        \usebibmacro{author+bookauthor+etc}%
+        \setunit{\space}}}}
+
+\newbibmacro*{pcite:labelyear+extrayear}{%
+  \iffieldundef{labelyear}
+    {}
+    {\usebibmacro{pcite:origyear}%
+     \ifthenelse{\iffieldnum{year}\OR
+                   \iffieldnums{year}}
+      {}
+      {\addcomma}%
+     \printtext[bibhyperref]{%
+       \printfield{labelyear}%
+       \printfield{extrayear}}}}
+
+\newbibmacro*{pcite:long}{%
+  \global\booltrue{cbx@first}%
+  \usebibmacro{pcite:labelname+labeltitle}%
+  \usebibmacro{pcite:labelyear+extrayear}}%
+
+\newbibmacro*{pcite:origyear}{%
+  \iffieldundef{origyear}
+    {}
+    {\printfield[brackets]{origyear}%
+     \space}}%
+
+\newbibmacro*{pcite:postnote}{%
+  \newunit
+  \usebibmacro{cite:vol+page}%
+  \ifbool{cbx@first}
+    {\usebibmacro{pages}%
+     \printfield{postnote}%
+     \iffieldundef{shorthand}
+       {}
+       {\setunit{\addsemicolon\space}%
+        \bibstring{citedas}%
+        \addcomma\space
+        \printfield{shorthand}}}
+    {\printfield{postnote}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Citations in Notes  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{cite}{%
+  \ifciteseen
+    {\renewcommand*{\cbx@deflabel}{labelname}%
+     \iffieldundef{shorthand}
+       {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+          {\usebibmacro{cite:ibid}}%
+          {\usebibmacro{cite:short}}}
+       {\usebibmacro{cite:shorthand}}}
+    {\usebibmacro{cite:crossref}}%
+  \usebibmacro{savefields}}%
+
+\newbibmacro*{cite:ibid}{%
+  \bibcpstring{ibidem}%
+  \newunit
+  \ifloccit
+    {\global\booltrue{cbx@loccit}}%
+    {}}
+
+\newbibmacro*{cite:short}{%
+  \global\booltrue{cbx@short}%
+  \printtext[bibhyperref]{%
+    \usebibmacro{author+bookauthor+etc}%
+    \ifentrytype{review}
+      {\usebibmacro{review+title}}%
+      {\usebibmacro{booktitle}}%
+       \usebibmacro{title+labelyear}}%
+  \newunit}%
+
+\newbibmacro*{cite:shorthand}{%
+  \printtext[bibhyperref]{\printfield{shorthand}}}
+
+\newbibmacro*{cite:crossref}{%
+  \ifciteibidmv
+    {\usebibmacro{crossref+ibid}}%
+    {\usebibmacro{deflabel}%
+     \providebool{test:\thefield{crossref}}%
+     \ifbool{test:\thefield{crossref}}
+       {\usebibmacro{cite:short}}%
+       {\usebibmacro{cite:long+cite:short}%
+        \iffieldsequal{year}{bookyear}
+          {\global\booltrue{test:\thefield{crossref}}}
+          {}}}}
+
+\newbibmacro*{crossref+ibid}{%
+  \bibcpstring{ibidem}%
+  \newunit
+  \iffieldundef{postnote}
+    {\printfield{volume}%
+     \newunit}%
+    {}}
+
+\newbibmacro*{cite:long+cite:short}{%
+   \global\booltrue{cbx@first}%
+   \iftoggle{firstshort}
+     {\usebibmacro{cite:short}}%
+     {\usebibmacro{cite:long}}}
+
+\newbibmacro*{savefields}{%
+  \savefieldcs{booktitle}{lastbooktitle}%
+  \savefieldcs{year}{lastyear}}%
+
+\newbibmacro*{cite:long}{%
+  \printtext{%
+    \usedriver
+      {\DeclareNameAlias{sortname}{default}}%
+      {cite:\thefield{entrytype}}}}
+
+\newbibmacro*{deflabel}{%
+  \ifciteidem
+    {\renewcommand*{\cbx@deflabel}{labelname}}%
+    {\renewcommand*{\cbx@deflabel}{default}}}
+
+\newbibmacro*{cite:postnote}{%
+  \ifbool{cbx@loccit}
+    {}
+    {\ifbool{cbx@first}
+       {\usebibmacro{postnote:first}%
+        \usebibmacro{shorthand}}%
+       {\usebibmacro{cite:vol+page}%
+        \printfield{postnote}}%
+     \addperiod}}%
+
+\newbibmacro*{postnote:first}{%
+  \ifthenelse{\iffieldundef{postnote}\AND
+                \iffieldundef{pages}\AND
+                \iffieldundef{url}}
+    {\usebibmacro{doi+url+etc}}%
+    {\usebibmacro{pages}%
+     \printfield{postnote}%
+     \usebibmacro{doi+url+etc}}}
+
+\newbibmacro*{cite:vol+page}{%
+  \ifthenelse{\ifentrytype{book}\OR
+                \ifentrytype{bookinbook}\OR
+                \ifentrytype{inbook}\OR
+                \ifentrytype{incollection}}
+    {\usebibmacro{vol+page}}%
+    {\newunit}}%
+
+\newbibmacro*{vol+page}{%
+  \iffieldundef{volume}
+    {\newunit}
+    {\iffieldundef{postnote}
+       {\newunit}
+       {\iffieldpages{postnote}
+          {\newunit
+           \usebibmacro{vol+colon}}%
+          {\newunit
+           \printfield{volume}%
+           \newunit}}}}
+
+% Automatically print 'pages' but only for articles. See 14.119,
+% 14.174, and 14.183.
+
+\newbibmacro*{pages}{%
+  \iffieldundef{pages}
+    {}
+    {\ifthenelse{\ifentrytype{article}\OR
+                   \ifentrytype{review}}
+       {\iffieldundef{postnote}
+          {\printfield{pages}}%
+          {}}
+       {}}}
+
+\newbibmacro*{shorthand}{%
+  \iffieldundef{shorthand}
+    {}
+    {\setunit{\addperiod\space}%
+     \bibstring{citedas}%
+     \addcomma\space
+     \printfield{shorthand}}}
+
+% Protect commas against abbreviation dots and terminal punctuation
+% marks. Note '\addspace'; using '\space' causes problems.
+
+\renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
+
+\newbibmacro*{colon}{%
+  \ifthenelse{\iffieldundef{pages}\AND
+                \iffieldundef{postnote}}
+    {}
+    {\ifthenelse{\iffieldundef{year}\AND
+                   \iffieldundef{month}\AND
+                   \iffieldundef{issue}}
+       {\setunit{\addcolon}}%
+       {\ifthenelse{\iffieldundef{number}\AND
+                      \iffieldundef{volume}}
+          {\newunit}%
+          {\setunit{\addcolon\space}}}}}
+
+% NOT IN USE:
+\newbibmacro*{cite:review}{%
+  \ifciteseen
+    {\usebibmacro{shorttitle}}%
+    {\usebibmacro{longtitle+titleaddon}%
+     \setunit{\addcomma\space}%
+     \ifthenelse{\ifnameundef{author}\AND
+                   \ifnameundef{bookauthor}}
+       {}
+       {\bibstring{by}\space
+        \usebibmacro{author+bookauthor+etc}}%
+     \setunit{\addcomma\space}%
+     \ifbool{bibliography}
+       {\global\booltrue{bibliography}}%
+       {\usebibmacro{citeindex}}%
+     \iftoggle{firstshort}
+       {}
+       {\usebibmacro{a:xy+prep}%
+        \usebibmacro{edposition}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Bibliography Drivers for Notes  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareBibliographyDriver{cite:article}{%
+  \usebibmacro{author+title+ed+note}%
+  \usebibmacro{articles}%
+  \usebibmacro{colon}}%
+
+\DeclareBibliographyDriver{cite:book}{%
+  \usebibmacro{eventtitle}%
+  \usebibmacro{author+title+ed+note}%
+  \usebibmacro{edition}%
+  \usebibmacro{ed+vol+part+etc}%
+  \usebibmacro{vol+page}}%
+
+\DeclareBibliographyDriver{cite:incollection}{%
+  \usebibmacro{incollections}%
+  \usebibmacro{ed+vol+part+etc}%
+  \usebibmacro{vol+page}}%
+
+\DeclareBibliographyDriver{cite:letter}{%
+  \toggletrue{noauth}%
+  \usebibmacro{incollections}%
+  \usebibmacro{ed+vol+part+etc}%
+  \usebibmacro{vol+page}}%
+
+\DeclareBibliographyDriver{cite:misc}{%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{title+labelyear}%
+  \newunit
+  \printfield{usera}%
+  \newunit}%
+
+\DeclareBibliographyDriver{cite:online}{%
+  \usebibmacro{author+title+ed+note}%
+  \printlist{institution}%
+  \newunit
+  \printlist{organization}%
+  \newunit}%
+
+\DeclareBibliographyDriver{cite:patent}{%
+  \usebibmacro{author+title+ed+note}%
+  \printfield{number}%
+  \newunit}%
+
+\DeclareBibliographyDriver{cite:review}{%
+  \usebibmacro{reviews}%
+  \usebibmacro{articles}%
+  \usebibmacro{colon}}%
+
+\DeclareBibliographyDriver{cite:thesis}{%
+  \usebibmacro{author+title+ed+note}%
+  \printtext[parens]{%
+    \printfield{type}%
+    \newunit
+    \usebibmacro{inst+loc+date}}%
+  \usebibmacro{howpublished}%
+  \newunit}%
+
+\DeclareBibliographyDriver{cite:unpublished}{%
+  \usebibmacro{author+title+ed+note}%
+  \printtext[parens]{%
+    \printfield[noformat]{type}%
+    \newunit
+    \usebibmacro{inst+loc+date}}%
+  \usebibmacro{howpublished}%
+  \newunit}%
+
+\endinput

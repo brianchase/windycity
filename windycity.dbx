@@ -1,0 +1,10 @@
+
+\DeclareDatamodelFields[type=field,datatype=literal]{%
+  bookyear,
+  editoraddon,
+  seriesaddon,
+  shortbooktitle,
+  volumea,
+  volumetitle}
+\DeclareDatamodelFields[type=list,datatype=name]{translatora}
+
