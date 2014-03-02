@@ -1,3 +1,16 @@
+RELEASE NOTES FOR VERSION 0.9
+
+* greatly simplified the handling of editors and translators
+* changes and fixes to 'incollections', 'ed+vol+part+etc', and
+  associated macros, especially affecting the placement of a book's
+  series in relation to other elements
+* added and changed placement of 'note' for some entry types
+* added support for abstracts (via 'note' for @article)
+* simplified 'reviews'
+* made @unpublished an alias of @thesis
+* other minor changes and fixes
+* updated windycity.tex and windycity.bib
+
 RELEASE NOTES FOR VERSION 0.8
 
 * initial release

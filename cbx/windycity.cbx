@@ -1,4 +1,4 @@
-% Last modified: Mon 24 Feb 2014 08:42:25 AM EST
+% Last modified: Sun 02 Mar 2014 01:50:37 PM EST
 
 % Copyright (c) 2014 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 0.8 is for biblatex v2.6 and above.\MessageBreak
+      {Windy City 0.9 is for biblatex v2.6 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -34,9 +34,9 @@
 %%%%%%%%%%%%%%%%%%%
 
 \AtEveryCite{%
-  \global\boolfalse{bibliography}%
-  \global\boolfalse{cbx@first}%
-  \global\boolfalse{cbx@loccit}%
+  \global\togglefalse{bibliography}%
+  \global\togglefalse{cbx@first}%
+  \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,7 +91,7 @@
   {\bibsentence\usebibmacro{prenote}}%
   {\citetrackerfalse
    \usebibmacro{citeindex}%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \usebibmacro{cite:long}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
@@ -100,7 +100,7 @@
   {\usebibmacro{prenote}}%
   {\citetrackerfalse
    \usebibmacro{citeindex}%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \usebibmacro{cite:long}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
@@ -109,7 +109,7 @@
   {\usebibmacro{prenote}}%
   {\citetrackerfalse
    \usebibmacro{citeindex}%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \toggletrue{noauth}%
    \usebibmacro{cite:long}}%
   {\multicitedelim}%
@@ -119,7 +119,7 @@
   {\usebibmacro{prenote}}%
   {\citetrackerfalse
    \usebibmacro{citeindex}%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \clearfield{shorthand}%
    \usebibmacro{cite:long}}%
   {\multicitedelim}%
@@ -129,7 +129,7 @@
   {\usebibmacro{prenote}}%
   {\citetrackerfalse
    \usebibmacro{citeindex}%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \usebibmacro{pcite:long}}%
   {\multicitedelim}%
   {\usebibmacro{pcite:postnote}}%
@@ -139,7 +139,7 @@
   {\citetrackerfalse
    \usebibmacro{citeindex}%
    \toggletrue{noauth}%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \usebibmacro{pcite:long}}%
   {\multicitedelim}%
   {\usebibmacro{pcite:postnote}}%
@@ -223,10 +223,9 @@
        {\iffieldundef{label}
           {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}%
           {\printtext[bibhyperref]{\printfield{label}}}}% needs these '%'
-       {\global\booltrue{cbx@short}%
+       {\global\toggletrue{cbx@short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
         \clearfield{nameaddon}%
-        \usebibmacro{a:xy+prep}%
         \usebibmacro{author+bookauthor+etc}%
         \setunit{\space}}}}
 
@@ -243,7 +242,7 @@
        \printfield{extrayear}}}}
 
 \newbibmacro*{pcite:long}{%
-  \global\booltrue{cbx@first}%
+  \global\toggletrue{cbx@first}%
   \usebibmacro{pcite:labelname+labeltitle}%
   \usebibmacro{pcite:labelyear+extrayear}}%
 
@@ -256,8 +255,8 @@
 \newbibmacro*{pcite:postnote}{%
   \newunit
   \usebibmacro{cite:vol+page}%
-  \ifbool{cbx@first}
-    {\usebibmacro{pages}%
+  \iftoggle{cbx@first}
+    {\usebibmacro{cite:pages}%
      \printfield{postnote}%
      \iffieldundef{shorthand}
        {}
@@ -286,11 +285,11 @@
   \bibcpstring{ibidem}%
   \newunit
   \ifloccit
-    {\global\booltrue{cbx@loccit}}%
+    {\global\toggletrue{cbx@loccit}}%
     {}}
 
 \newbibmacro*{cite:short}{%
-  \global\booltrue{cbx@short}%
+  \global\toggletrue{cbx@short}%
   \printtext[bibhyperref]{%
     \usebibmacro{author+bookauthor+etc}%
     \ifentrytype{review}
@@ -306,12 +305,12 @@
   \ifciteibidmv
     {\usebibmacro{crossref+ibid}}%
     {\usebibmacro{deflabel}%
-     \providebool{test:\thefield{crossref}}%
-     \ifbool{test:\thefield{crossref}}
+     \providetoggle{test:\thefield{crossref}}%
+     \iftoggle{test:\thefield{crossref}}
        {\usebibmacro{cite:short}}%
        {\usebibmacro{cite:long+cite:short}%
         \iffieldsequal{year}{bookyear}
-          {\global\booltrue{test:\thefield{crossref}}}
+          {\global\toggletrue{test:\thefield{crossref}}}
           {}}}}
 
 \newbibmacro*{crossref+ibid}{%
@@ -323,7 +322,7 @@
     {}}
 
 \newbibmacro*{cite:long+cite:short}{%
-   \global\booltrue{cbx@first}%
+   \global\toggletrue{cbx@first}%
    \iftoggle{firstshort}
      {\usebibmacro{cite:short}}%
      {\usebibmacro{cite:long}}}
@@ -344,9 +343,9 @@
     {\renewcommand*{\cbx@deflabel}{default}}}
 
 \newbibmacro*{cite:postnote}{%
-  \ifbool{cbx@loccit}
+  \iftoggle{cbx@loccit}
     {}
-    {\ifbool{cbx@first}
+    {\iftoggle{cbx@first}
        {\usebibmacro{postnote:first}%
         \usebibmacro{shorthand}}%
        {\usebibmacro{cite:vol+page}%
@@ -358,7 +357,7 @@
                 \iffieldundef{pages}\AND
                 \iffieldundef{url}}
     {\usebibmacro{doi+url+etc}}%
-    {\usebibmacro{pages}%
+    {\usebibmacro{cite:pages}%
      \printfield{postnote}%
      \usebibmacro{doi+url+etc}}}
 
@@ -385,7 +384,7 @@
 % Automatically print 'pages' but only for articles. See 14.119,
 % 14.174, and 14.183.
 
-\newbibmacro*{pages}{%
+\newbibmacro*{cite:pages}{%
   \iffieldundef{pages}
     {}
     {\ifthenelse{\ifentrytype{article}\OR
@@ -433,8 +432,8 @@
        {\bibstring{by}\space
         \usebibmacro{author+bookauthor+etc}}%
      \setunit{\addcomma\space}%
-     \ifbool{bibliography}
-       {\global\booltrue{bibliography}}%
+     \iftoggle{bibliography}
+       {\global\toggletrue{bibliography}}%
        {\usebibmacro{citeindex}}%
      \iftoggle{firstshort}
        {}
@@ -452,20 +451,17 @@
 
 \DeclareBibliographyDriver{cite:book}{%
   \usebibmacro{eventtitle}%
-  \usebibmacro{author+title+ed+note}%
-  \usebibmacro{edition}%
+  \usebibmacro{author+title+ed}%
   \usebibmacro{ed+vol+part+etc}%
   \usebibmacro{vol+page}}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
   \usebibmacro{incollections}%
-  \usebibmacro{ed+vol+part+etc}%
   \usebibmacro{vol+page}}%
 
 \DeclareBibliographyDriver{cite:letter}{%
   \toggletrue{noauth}%
   \usebibmacro{incollections}%
-  \usebibmacro{ed+vol+part+etc}%
   \usebibmacro{vol+page}}%
 
 \DeclareBibliographyDriver{cite:misc}{%
@@ -477,6 +473,7 @@
 
 \DeclareBibliographyDriver{cite:online}{%
   \usebibmacro{author+title+ed+note}%
+  \usebibmacro{note}%
   \printlist{institution}%
   \newunit
   \printlist{organization}%
@@ -484,6 +481,7 @@
 
 \DeclareBibliographyDriver{cite:patent}{%
   \usebibmacro{author+title+ed+note}%
+  \usebibmacro{note}%
   \printfield{number}%
   \newunit}%
 
@@ -496,15 +494,6 @@
   \usebibmacro{author+title+ed+note}%
   \printtext[parens]{%
     \printfield{type}%
-    \newunit
-    \usebibmacro{inst+loc+date}}%
-  \usebibmacro{howpublished}%
-  \newunit}%
-
-\DeclareBibliographyDriver{cite:unpublished}{%
-  \usebibmacro{author+title+ed+note}%
-  \printtext[parens]{%
-    \printfield[noformat]{type}%
     \newunit
     \usebibmacro{inst+loc+date}}%
   \usebibmacro{howpublished}%
