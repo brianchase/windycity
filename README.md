@@ -1,4 +1,4 @@
-ABOUT
+# ABOUT
 
 Windy City is a style for biblatex that formats notes, bibliographies,
 parenthetical citations, and reference lists according to The
@@ -11,35 +11,35 @@ suitable for academic work.
 
 For more information, see Windy City's documentation:
 
-* http://hesperusisphosphorus.com/prj/windycity.pdf
+http://hesperusisphosphorus.com/prj/windycity.pdf
 
 Or download the complete package:
 
-* http://hesperusisphosphorus.com/prj/windycity.zip
+http://hesperusisphosphorus.com/prj/windycity.zip
 
-LICENSE
+# LICENSE
 
 Copyright (c) 2014 Brian Michael Chase. Under the terms of the LaTeX
 Project Public License, version 1.3, permission is granted to copy,
 distribute, or modify this software.
 
-* http://www.latex-project.org/lppl.txt
+http://www.latex-project.org/lppl.txt
 
 This software is provided 'as is', without warranty of any kind,
 either expressed or implied, including, but not limited to, the
 implied warranties of merchantability and fitness for a particular
 purpose.
 
-FEEDBACK
+# FEEDBACK
 
 * http://github.com/brianchase/windycity
 * http://hesperusisphosphorus.com
 
-REQUIREMENTS
+# REQUIREMENTS
 
-* bilatex 2.6 or higher
+bilatex 2.6 or higher
 
-USAGE
+# USAGE
 
 For an overview of features, along with many examples, see
 windycity.pdf and associated files:
@@ -49,4 +49,4 @@ windycity.pdf and associated files:
 
 For information about bilatex, see:
 
-* http://www.ctan.org/pkg/biblatex
+http://www.ctan.org/pkg/biblatex
