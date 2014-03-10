@@ -1,4 +1,4 @@
-% Last modified: Sun 02 Mar 2014 01:50:31 PM EST
+% Last modified: Sat 08 Mar 2014 01:25:26 PM EST
 
 % Copyright (c) 2014 Brian Michael Chase.
 %
@@ -1331,7 +1331,8 @@
   \iffieldundef{pages}
     {}
     {\iftoggle{bibliography}
-       {\printfield{pages}%
+       {\addspace% sometimes but rarely necessary
+        \printfield{pages}%
         \clearfield{pages}}%
        {}}}
 
