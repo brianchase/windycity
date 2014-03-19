@@ -1,4 +1,4 @@
-% Last modified: Sat 08 Mar 2014 01:25:26 PM EST
+% Last modified: Wed 19 Mar 2014 01:57:24 PM EDT
 
 % Copyright (c) 2014 Brian Michael Chase.
 %
@@ -883,7 +883,10 @@
 
 \newbibmacro*{test:titledupes}{%
   \iffieldsequal{title}{booktitle}
-    {\clearfield{booktitle}}%
+    {\ifthenelse{\iffieldundef{subtitle}\OR
+                   \iffieldsequal{subtitle}{booksubtitle}}
+       {\clearfield{booktitle}}%
+       {}}
     {}}
 
 \newbibmacro*{titleaddon}{%
@@ -1318,7 +1321,8 @@
        {\iffieldundef{pages}
           {\usebibmacro{volume+title+part}}%
           {\usebibmacro{vol+colon}%
-           \usebibmacro{pages}%
+           \printfield{pages}%
+           \clearfield{pages}%
            \usebibmacro{volumetitle}%
            \usebibmacro{part}}}
        {\iffieldundef{postnote}
@@ -1331,7 +1335,7 @@
   \iffieldundef{pages}
     {}
     {\iftoggle{bibliography}
-       {\addspace% sometimes but rarely necessary
+       {\setunit{\addcomma\space}% sometimes necessary
         \printfield{pages}%
         \clearfield{pages}}%
        {}}}
@@ -1386,6 +1390,29 @@
         \printfield{number}}%
        {\setunit{\addspace}% '\addspace' not '\space'
         \printfield{number}}}}
+
+\newbibmacro*{number}{%
+  \iffieldundef{number}
+    {}
+    {\ifentrytype{letter}
+       {\usebibmacro{letternumber}}%
+       {\usebibmacro{othernumber}}}}
+
+\newbibmacro*{letternumber}{%
+  \iftoggle{bibliography}
+    {\setunit{\addcomma\space}%
+     \printfield[journum]{number}}%
+    {}}
+
+\newbibmacro*{othernumber}{%
+  \ifthenelse{\equal{series}{\thefield{editortype}}\OR
+                \equal{series}{\thefield{editoratype}}\OR
+                \equal{series}{\thefield{editorbtype}}\OR
+                \equal{series}{\thefield{editorctype}}}
+    {\setunit{\addcomma\space}%
+     \printfield{number}}%
+    {\setunit{\addspace}% '\addspace' not '\space'
+     \printfield{number}}}
 
 \renewbibmacro*{maintitle}{%
   \iffieldundef{maintitle}
