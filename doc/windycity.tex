@@ -1,4 +1,4 @@
-% Last modified: Fri 07 Mar 2014 10:52:35 AM EST
+% Last modified: Fri 21 Mar 2014 04:41:18 PM EDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -7,7 +7,7 @@
 \subtitle{A Chicago Style for \biblatex}
 \author{Brian Michael Chase}
 \email{brian@hesperusisphosphorus.com}
-\version{0.9}
+\version{0.9a}
 \date{\today}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
@@ -377,8 +377,11 @@ The style recognizes several data fields that are not available with
 
 \begin{marglist}
 
-\item[bookyear] This field is for the style's internal use. Do not use
-it in a bibliography database.
+\item[bookbooktitle] This field is for the style's internal use. Do
+not use it in a bibliography database.
+
+\item[bookyear] Also for the style's internal use. Do not use it in a
+bibliography database.
 
 \item[editoraddon] With this field, you may include additional
 editorial information about a work. An example of this appeared
@@ -540,8 +543,13 @@ collection is:
 \end{lstlisting}
 
 \noindent The above is the minimum information necessary to get the
-correct output. Adding more information has no effect. Thus, you could
-change the entry to:
+correct output.\footnote{As noted later, using \bibtype{inbook} for
+books in collections may seem to stretch the usual profile of the
+entry type. To avoid this confusion, while getting the same results,
+you could also use \bibtype{bookinbook}.}
+
+Adding more information has no effect. Thus, you could change the
+entry to:
 
 \begin{lstlisting}
   @InBook{byrne1981.4,
@@ -762,10 +770,13 @@ entry types listed above. A PhD thesis, for example, may have the
 entry type \bibtype{thesis} or \bibtype{phdthesis}; the output is the
 same either way. An exception applies to books in collections: Every
 book in a one-volume or multivolume collection needs the
-\bibtype{inbook} or \bibtype{bookinbook} entry type. You may choose
-either; \bibtype{inbook} or \bibtype{bookinbook} entries have the same
-format. If an entry belongs to a type other than the ones listed
-above, the style processes it as a book.
+\bibtype{inbook} or \bibtype{bookinbook} entry type.\footnote{Using
+\bibtype{inbook} for books in collections departs somewhat from the
+specifications of \BibTeX and \biblatex, though it seems harmless
+enough.} You may choose either; \bibtype{inbook} or
+\bibtype{bookinbook} entries have the same format. If an entry belongs
+to a type other than the ones listed above, the style processes it as
+a book.
 
 For unusually complicated ci\-ta\-tions---at any rate, too complicated
 for the style---consider using the \bibtype{misc} entry type. The
