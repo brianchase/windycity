@@ -1,4 +1,4 @@
-% Last modified: Wed 19 Mar 2014 01:57:24 PM EDT
+% Last modified: Fri 21 Mar 2014 04:12:25 PM EDT
 
 % Copyright (c) 2014 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 0.9 is for biblatex v2.6 and above.\MessageBreak
+      {Windy City 0.9a is for biblatex v2.6 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -149,6 +149,7 @@
     \field{sorttitle}
     \field{title}
     \field{booktitle}
+    \field{bookbooktitle}
   }
   \sort{
     \field{sorttitle}
@@ -182,6 +183,7 @@
     \field{sorttitle}
     \field{title}
     \field{booktitle}
+    \field{bookbooktitle}
   }
   \sort{
     \field{sortyear}
@@ -238,8 +240,11 @@
   \inherit{shorttitle}{shortbooktitle}
   \inherit{options}{options}
 }
-\DeclareDataInheritance{collection}{inbook,bookinbook}{
+\DeclareDataInheritance{collection}{collection,inbook,bookinbook}{
   \inherit{year}{bookyear}
+}
+\DeclareDataInheritance{collection}{collection}{
+  \inherit{title}{bookbooktitle}
 }
 
 %%%%%%%%%%%%%%%%%%%
@@ -322,9 +327,7 @@
      \setunit{\unspace}% odd but necessary after '\bibnamedash'
      \printfield{extrayear}%
      \newunit
-     \clearfield{bookyear}%
-     \clearfield{origyear}%
-     \clearfield{year}}%
+     \clearfield{origyear}}%
     {}}%
 
 \newbibmacro*{b:labelyear+extrayear}{%
@@ -439,6 +442,7 @@
 \DeclareFieldFormat{labeltitle}{\mkbibemph{#1}}
 \DeclareIndexFieldFormat{indextitle}{%
   \usebibmacro{index:title}{\index}{\mkbibemph{#1}}}
+\DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
 \renewbibmacro*{index:title}[2]{%
   \usebibmacro{index:field}{#1}{\thefield{indexsorttitle}}{#2}}%
@@ -917,6 +921,14 @@
      \usebibmacro{longtitle+titleaddon}%
      \setunit{\addcomma\space}}}
 
+\newbibmacro*{bookbooktitle}{%
+  \iffieldundef{bookbooktitle}
+    {}
+    {\bibstring{in}\space
+     \renewcommand*{\xtitle}{bookbook}%
+     \usebibmacro{longtitle+titleaddon}%
+     \setunit{\addcomma\space}}}
+
 \newbibmacro*{issuetitle}{%
   \iffieldundef{issuetitle}
     {}
@@ -933,7 +945,7 @@
 \newbibmacro*{test:title+booktitle}{%
   \ifthenelse{\iffieldundef{title}\AND
                 \iffieldundef{booktitle}}
-    {}
+    {\renewcommand*{\xtitle}{bookbook}}%
     {\iffieldundef{title}
        {\renewcommand*{\xtitle}{book}}%
        {}}}
@@ -1090,6 +1102,7 @@
 \newbibmacro*{incollections}{%
   \usebibmacro{author+title+etc}%
   \usebibmacro{booktitle}%
+  \usebibmacro{bookbooktitle}%
   \usebibmacro{bybookauthor}%
   \usebibmacro{ed+vol+part+etc}}%
 
@@ -1487,7 +1500,8 @@
     {\printlist{location}}}
 
 \newbibmacro*{year+bookyear}{%
-  \iftoggle{reflist}
+  \ifboolexpr{ test {\iftoggle{bibliography}}
+               and test {\iftoggle{reflist}}}
     {}
     {\iffieldundef{year}
        {\iffieldundef{bookyear}

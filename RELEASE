@@ -1,3 +1,12 @@
+
+RELEASE NOTES FOR VERSION 0.9a
+
+* improved and fixed cross-referencing of collections to other collections
+* fixed missing publication year in notes under option 'reflist'
+* fixed incorrect printing of 'volumes' under option 'reflist'
+* minor fixes
+* updated documentation
+
 RELEASE NOTES FOR VERSION 0.9
 
 * greatly simplified the handling of editors and translators

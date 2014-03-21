@@ -1,5 +1,6 @@
 
 \DeclareDatamodelFields[type=field,datatype=literal]{%
+  bookbooktitle,
   bookyear,
   editoraddon,
   seriesaddon,
