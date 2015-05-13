@@ -11,11 +11,11 @@ suitable for academic work.
 
 For more information, see Windy City's documentation:
 
-http://hesperusisphosphorus.com/prj/windycity.pdf
+http://hesperusisphosphorus.com/projects/windycity.pdf
 
 Or download the complete package:
 
-http://hesperusisphosphorus.com/prj/windycity.zip
+http://hesperusisphosphorus.com/projects/windycity.zip
 
 # LICENSE
 
@@ -44,8 +44,8 @@ bilatex 2.6 or higher
 For an overview of features, along with many examples, see
 windycity.pdf and associated files:
 
-* http://hesperusisphosphorus.com/prj/windycity.pdf
-* http://hesperusisphosphorus.com/prj/windycity.zip
+* http://hesperusisphosphorus.com/projects/windycity.pdf
+* http://hesperusisphosphorus.com/projects/windycity.zip
 
 For information about bilatex, see:
 
