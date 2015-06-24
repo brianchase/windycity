@@ -38,11 +38,3 @@ purpose.
 
 bilatex 2.6 or higher
 
-## USAGE
-
-For an overview of features, along with many examples, see
-windycity.pdf and associated files:
-
-* http://hesperusisphosphorus.com/projects/windycity.pdf
-* http://hesperusisphosphorus.com/projects/windycity.zip
-
