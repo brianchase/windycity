@@ -36,5 +36,6 @@ purpose.
 
 ## REQUIREMENTS
 
-bilatex 2.6 or higher
+[biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 2.6 or
+higher
 
