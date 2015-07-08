@@ -1,4 +1,4 @@
-% Last modified: Fri 14 Mar 2014 12:10:20 PM EDT
+% Last modified: Wed 08 Jul 2015 02:14:52 PM EDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -26,44 +26,57 @@
     UprightFont=*mono10-regular,
     ItalicFont=*mono10-italic]{lm}
   \renewcommand{\@makefnmark}{%
-    \hbox{\@textsuperscript{\addfontfeature{Numbers=Lining}\@thefnmark}}}
+    \hbox{\@textsuperscript{\liningnums{\@thefnmark}}}}
 \else
   \usepackage[T1]{fontenc}
   \usepackage{pifont}
   \usepackage[full]{textcomp}
   \usepackage[utf8]{inputenc}
-  \newcommand{\addfontfeature}[1]{}
   \usepackage{tgtermes}
   \usepackage[scaled=.90]{helvet}
+  \newcommand{\liningnums}[1]{#1}%
   \renewcommand{\ttdefault}{lmtt}%
 \fi
 
-\newcommand{\email}[1]{\gdef\@email{\mailto{#1}}}%
-\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}%
-\newcommand{\version}[1]{\gdef\@version{Version #1}}%
 \gdef\@email{}%
 \gdef\@subtitle{}%
 \gdef\@version{}%
+\newcommand{\email}[1]{\gdef\@email{\mailto{#1}}}%
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}%
+\newcommand{\version}[1]{\gdef\@version{Version \liningnums{#1}}}
 
 \renewcommand\@maketitle{%
   \begin{center}%
-    {\LARGE\@title \par}%
-    \vskip 1.75em%
+    {\LARGE\@title}%
+    \vskip 4ex%
     {\Large\@subtitle}%
-    \vskip 1.5em%
+    \vskip 4ex%
     {\large\@author\par\@email\par\@version\par\@date}%
   \end{center}%
-  \vskip 1.5em}%
+  \vskip 4ex}%
 
 \usepackage[american]{babel}
 \usepackage{csquotes}
 \usepackage[style=windycity]{biblatex}
 \bibliography{windycity}
 
+\renewcommand\@makefntext[1]{%
+  \parindent 1em%
+  \normalfont\@thefnmark.\hspace{0.4em}#1}%
+\newcommand{\nfootnote}[1]{%
+  \insert\footins{\normalfont\footnotesize
+  \interlinepenalty\interfootnotelinepenalty
+  \splittopskip\footnotesep
+  \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+  \hsize\columnwidth \@parboxrestore
+  \footnoterule
+  {\rule{\z@}{\footnotesep}\ignorespaces
+    #1\strut}}}
+
 \usepackage{tocloft}
 \setcounter{tocdepth}{2}
-\renewcommand{\cftbeforesecskip}{0em}%
+\renewcommand{\cftbeforesecskip}{0pt}%
 \renewcommand{\cftmarktoc}{\@mkboth{\contentsname}{\contentsname}}%
 \renewcommand{\cftsecfont}{\normalfont}%
 \renewcommand{\cftsecpagefont}{\normalfont}%
@@ -122,10 +135,6 @@
   {1.5ex \@plus .2ex}%
   {\normalfont\it}}
 
-\renewcommand\@makefntext[1]{%
-  \parindent 1em%
-  \normalfont\@thefnmark.\hspace{0.4em}#1}%
-
 \usepackage{calc}
 \usepackage{enumitem}
 \setlist[enumerate]{noitemsep}
@@ -139,19 +148,11 @@
 \usepackage{etoolbox}
 \AtBeginEnvironment{itemize}{\preto\item{\raggedright}}
 
-\long\def\nfootnote#1{%
-  \insert\footins{\normalfont\footnotesize
-  \interlinepenalty\interfootnotelinepenalty
-  \splittopskip\footnotesep
-  \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
-  \hsize\columnwidth \@parboxrestore
-  \footnoterule
-  {\rule{\z@}{\footnotesep}\ignorespaces
-    #1\strut}}}
-
-\usepackage{dtklogos}
 \newcommand{\biblatex}{%
   \href{http://www.ctan.org/pkg/biblatex}{\texttt{biblatex}}\xspace}%
+% From Oren Patashnik's documentation for bibtex:
+\newcommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+  T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
 \newcommand{\biber}{%
   \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
 

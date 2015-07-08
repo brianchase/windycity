@@ -1,4 +1,12 @@
 
+RELEASE NOTES FOR VERSION 2015.07.08
+
+* removed a bibmacro that wasn't in use
+* minor edits and fixes to windycity.sty and windycity.tex
+* minor edits to readme
+* removed an empty line from windycity.bib
+* changed the version number format to match the release date
+
 RELEASE NOTES FOR VERSION 0.9a
 
 * improved and fixed cross-referencing of collections to other collections

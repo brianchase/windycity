@@ -1,4 +1,4 @@
-% Last modified: Fri 21 Mar 2014 04:12:25 PM EDT
+% Last modified: Wed 08 Jul 2015 01:18:59 PM EDT
 
 % Copyright (c) 2014 Brian Michael Chase.
 %
@@ -1391,18 +1391,6 @@
     {\addcomma\space%
      \printfield{seriesaddon}%
      \isdot\addcomma}}%
-
-\newbibmacro*{number}{%
-  \iffieldundef{number}
-    {}
-    {\ifthenelse{\equal{series}{\thefield{editortype}}\OR
-                   \equal{series}{\thefield{editoratype}}\OR
-                   \equal{series}{\thefield{editorbtype}}\OR
-                   \equal{series}{\thefield{editorctype}}}
-       {\setunit{\addcomma\space}%
-        \printfield{number}}%
-       {\setunit{\addspace}% '\addspace' not '\space'
-        \printfield{number}}}}
 
 \newbibmacro*{number}{%
   \iffieldundef{number}
