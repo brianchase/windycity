@@ -1,4 +1,9 @@
 
+RELEASE NOTES FOR VERSION 2015.12.28
+
+* added missing \setunit for when bybookauthor prints an author's name
+  and the collection has an editor, translator, or compiler
+
 RELEASE NOTES FOR VERSION 2015.07.08
 
 * removed a bibmacro that wasn't in use
