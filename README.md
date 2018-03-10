@@ -10,9 +10,9 @@ support for citing and arranging different kinds of editors,
 translators, and compilers within a single citation. These features
 make Windy City especially suitable for academic work.
 
-For more information, see Windy City's [documentation](https://s3.amazonaws.com/philos-public/windycity.pdf
+For more information, see Windy City's [documentation](https://s3.amazonaws.com/brianchase/windycity.pdf
 "windycity.pdf") (PDF) or [download the complete
-package](https://s3.amazonaws.com/philos-public/windycity.zip
+package](https://s3.amazonaws.com/brianchase/windycity.zip
 "windycity.zip") (ZIP).
 
 ## LICENSE
