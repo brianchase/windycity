@@ -10,10 +10,9 @@ support for citing and arranging different kinds of editors,
 translators, and compilers within a single citation. These features
 make Windy City especially suitable for academic work.
 
-For more information, see Windy City's
-[documentation](http://hesperusisphosphorus.com/projects/windycity.pdf
+For more information, see Windy City's [documentation](https://s3.amazonaws.com/philos-public/windycity.pdf
 "windycity.pdf") (PDF) or [download the complete
-package](http://hesperusisphosphorus.com/projects/windycity.zip
+package](https://s3.amazonaws.com/philos-public/windycity.zip
 "windycity.zip") (ZIP).
 
 ## LICENSE
@@ -31,7 +30,6 @@ purpose.
 ## FEEDBACK
 
 * http://github.com/brianchase/windycity
-* http://hesperusisphosphorus.com
 
 ## REQUIREMENTS
 
