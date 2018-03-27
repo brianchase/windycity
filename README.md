@@ -1,3 +1,5 @@
+# Windy City
+
 ## ABOUT
 
 Windy City is a style for [biblatex](http://www.ctan.org/pkg/biblatex)
