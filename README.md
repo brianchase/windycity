@@ -29,12 +29,12 @@ either expressed or implied, including, but not limited to, the
 implied warranties of merchantability and fitness for a particular
 purpose.
 
-## FEEDBACK
-
-* http://github.com/brianchase/windycity
-
 ## REQUIREMENTS
 
 * [TeX Live](http://www.tug.org/texlive "TeX Live")
 * [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 2.6 or higher
+
+## FEEDBACK
+
+* http://github.com/brianchase/windycity
 
