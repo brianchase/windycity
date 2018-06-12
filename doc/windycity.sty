@@ -1,4 +1,4 @@
-% Last modified: Wed 08 Jul 2015 02:14:52 PM EDT
+% Last modified: Tue 12 Jun 2018 04:31:51 PM CDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -41,10 +41,12 @@
 \gdef\@email{}%
 \gdef\@subtitle{}%
 \gdef\@version{}%
+\gdef\@website{}%
 \newcommand{\email}[1]{\gdef\@email{\mailto{#1}}}%
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
 \newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}%
 \newcommand{\version}[1]{\gdef\@version{Version \liningnums{#1}}}
+\newcommand{\website}[1]{\gdef\@website{\href{#1}{#1}}}%
 
 \renewcommand\@maketitle{%
   \begin{center}%
@@ -52,7 +54,10 @@
     \vskip 4ex%
     {\Large\@subtitle}%
     \vskip 4ex%
-    {\large\@author\par\@email\par\@version\par\@date}%
+%    {\large\@author\par\@email\par\@version\par\@date}%
+%    {\large\@author\par\@webside\par\@version\par\@date}%
+    {\large\@author\par\@website\par\@version\par
+     December 28, 2015}%
   \end{center}%
   \vskip 4ex}%
 
