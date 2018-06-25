@@ -34,7 +34,3 @@ purpose.
 * [TeX Live](http://www.tug.org/texlive "TeX Live")
 * [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 2.6 or higher
 
-## FEEDBACK
-
-* http://github.com/brianchase/windycity
-
