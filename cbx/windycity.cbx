@@ -1,6 +1,6 @@
-% Last modified: Mon 28 Dec 2015 09:47:57 AM EST
+% Last modified: Sat 20 Oct 2018 08:00:51 AM CDT
 
-% Copyright (c) 2014 Brian Michael Chase.
+% Copyright (c) 2018 Brian Michael Chase.
 %
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -15,11 +15,11 @@
 
 \ProvidesFile{windycity.cbx}[Windy City style for biblatex]
 
-\@ifpackagelater{biblatex}{2013/04/30}
+\@ifpackagelater{biblatex}{2017/11/04}
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2015.12.28 is for biblatex v2.6 and above.\MessageBreak
+      {Windy City 2018.10.20 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -173,13 +173,13 @@
 
 % NOT IN USE: In reference lists, no entry after this will take the
 % author-date format.
-\DeclareCiteCommand{\review}
-  {}
-  {\citetrackerfalse
-   \AtEveryItem
-   \usebibmacro{citeindex}%
-   \usebibmacro{cite:review}}%
-  {}{}
+%\DeclareCiteCommand{\review}
+%  {}
+%  {\citetrackerfalse
+%   \AtEveryItem
+%   \usebibmacro{citeindex}%
+%   \usebibmacro{cite:review}}%
+%  {}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Stand-alone Tests  %%
@@ -206,13 +206,13 @@
        {\usebibmacro{pcite:labelyear+etc}}%
        {\iffieldundef{shorthand}
           {\usebibmacro{pcite:labelname+labeltitle}%
-           \usebibmacro{pcite:labelyear+extrayear}}%
+           \usebibmacro{pcite:labelyear+extradate}}%
           {\usebibmacro{cite:shorthand}}}}
     {\usebibmacro{pcite:long}}}
 
 \newbibmacro*{pcite:labelyear+etc}{%
   \iffieldundef{postnote}
-    {\usebibmacro{pcite:labelyear+extrayear}}%
+    {\usebibmacro{pcite:labelyear+extradate}}%
     {}}
 
 \newbibmacro*{pcite:labelname+labeltitle}{%
@@ -229,7 +229,7 @@
         \usebibmacro{author+bookauthor+etc}%
         \setunit{\space}}}}
 
-\newbibmacro*{pcite:labelyear+extrayear}{%
+\newbibmacro*{pcite:labelyear+extradate}{%
   \iffieldundef{labelyear}
     {}
     {\usebibmacro{pcite:origyear}%
@@ -239,12 +239,12 @@
       {\addcomma}%
      \printtext[bibhyperref]{%
        \printfield{labelyear}%
-       \printfield{extrayear}}}}
+       \printfield{extradate}}}}
 
 \newbibmacro*{pcite:long}{%
   \global\toggletrue{cbx@first}%
   \usebibmacro{pcite:labelname+labeltitle}%
-  \usebibmacro{pcite:labelyear+extrayear}}%
+  \usebibmacro{pcite:labelyear+extradate}}%
 
 \newbibmacro*{pcite:origyear}{%
   \iffieldundef{origyear}
@@ -421,24 +421,24 @@
           {\setunit{\addcolon\space}}}}}
 
 % NOT IN USE:
-\newbibmacro*{cite:review}{%
-  \ifciteseen
-    {\usebibmacro{shorttitle}}%
-    {\usebibmacro{longtitle+titleaddon}%
-     \setunit{\addcomma\space}%
-     \ifthenelse{\ifnameundef{author}\AND
-                   \ifnameundef{bookauthor}}
-       {}
-       {\bibstring{by}\space
-        \usebibmacro{author+bookauthor+etc}}%
-     \setunit{\addcomma\space}%
-     \iftoggle{bibliography}
-       {\global\toggletrue{bibliography}}%
-       {\usebibmacro{citeindex}}%
-     \iftoggle{firstshort}
-       {}
-       {\usebibmacro{a:xy+prep}%
-        \usebibmacro{edposition}}}}
+%\newbibmacro*{cite:review}{%
+%  \ifciteseen
+%    {\usebibmacro{shorttitle}}%
+%    {\usebibmacro{longtitle+titleaddon}%
+%     \setunit{\addcomma\space}%
+%     \ifthenelse{\ifnameundef{author}\AND
+%                   \ifnameundef{bookauthor}}
+%       {}
+%       {\bibstring{by}\space
+%        \usebibmacro{author+bookauthor+etc}}%
+%     \setunit{\addcomma\space}%
+%     \iftoggle{bibliography}
+%       {\global\toggletrue{bibliography}}%
+%       {\usebibmacro{citeindex}}%
+%     \iftoggle{firstshort}
+%       {}
+%       {\usebibmacro{a:xy+prep}%
+%        \usebibmacro{edposition}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers for Notes  %%

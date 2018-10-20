@@ -20,7 +20,7 @@ here](https://s3.amazonaws.com/brianchase/windycity.zip
 
 ## License
 
-Copyright (c) 2014 Brian Michael Chase. Under the terms of the [LaTeX
+Copyright (c) 2018 Brian Michael Chase. Under the terms of the [LaTeX
 Project Public License](http://www.latex-project.org/lppl.txt),
 version 1.3, permission is granted to copy, distribute, or modify this
 software.
@@ -32,5 +32,5 @@ warranties of merchantability and fitness for a particular purpose.
 ## Requirements
 
 * [TeX Live](http://www.tug.org/texlive "TeX Live")
-* [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 2.6 or higher
+* [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 3.8 or higher
 

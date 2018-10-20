@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Jun 2018 04:31:51 PM CDT
+% Last modified: Sat 20 Oct 2018 10:28:26 AM CDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -21,7 +21,8 @@
     ItalicFont=*-italic,
     BoldItalicFont=*-bolditalic]{texgyretermes}
   \setmonofont[
-    Scale=MatchLowercase,
+%    Scale=MatchLowercase,
+    SizeFeatures={Size=10.5},
     Extension=.otf,
     UprightFont=*mono10-regular,
     ItalicFont=*mono10-italic]{lm}
@@ -141,17 +142,16 @@
   {\normalfont\it}}
 
 \usepackage{calc}
+\usepackage{ragged2e}
 \usepackage{enumitem}
 \setlist[enumerate]{noitemsep}
 \setlist[itemize]{%
+  before=\RaggedRight,
   itemsep=3pt,
   labelsep=1.75em,
   labelwidth=\widthof{N},
   leftmargin={\labelwidth+\labelsep},
   parsep=4pt}
-
-\usepackage{etoolbox}
-\AtBeginEnvironment{itemize}{\preto\item{\raggedright}}
 
 \newcommand{\biblatex}{%
   \href{http://www.ctan.org/pkg/biblatex}{\texttt{biblatex}}\xspace}%

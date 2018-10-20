@@ -1,4 +1,13 @@
 
+RELEASE NOTES FOR VERSION 2018.10.20
+
+* fixed broken date formatting in author-date citations
+* changed \DeclareSortingScheme to \DeclareSortingTemplate
+* changed bibliography option labeldate to labeldateparts
+* changed special field extrayear to extradate
+* bumped minimum compatible release to biblatex 3.8
+* other minor changes for the version bump
+
 RELEASE NOTES FOR VERSION 2015.12.28
 
 * added missing \setunit for when bybookauthor prints an author's name

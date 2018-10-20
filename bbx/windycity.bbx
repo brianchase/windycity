@@ -1,6 +1,6 @@
-% Last modified: Fri 19 Oct 2018 11:26:23 AM CDT
+% Last modified: Sat 20 Oct 2018 08:04:55 AM CDT
 
-% Copyright (c) 2014 Brian Michael Chase.
+% Copyright (c) 2018 Brian Michael Chase.
 %
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -15,11 +15,11 @@
 
 \ProvidesFile{windycity.bbx}[Windy City style for biblatex]
 
-\@ifpackagelater{biblatex}{2013/04/30}
+\@ifpackagelater{biblatex}{2017/11/04}
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2015.12.28 is for biblatex v2.6 and above.\MessageBreak
+      {Windy City 2018.10.20 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -99,7 +99,7 @@
   ibidtracker=constrict,
   idemtracker=constrict,
   indexing=true,
-  labeldate=true,
+  labeldateparts=true,
   loccittracker=constrict,
   minnames=7,
   maxnames=10,
@@ -118,6 +118,7 @@
 \DeclareLanguageMapping{english}{american-windycity}
 \DeclareLabeldate{%
   \field{date}
+  \field{year}% not needed in earlier versions of biblatex!
   \field{bookyear}
 %  \field{eventdate}
   \field{origdate}
@@ -311,12 +312,12 @@
 %%  Reference Lists  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\newbibmacro*{a:labelyear+extrayear}{%
+\newbibmacro*{a:labelyear+extradate}{%
   \iftoggle{noauth}
     {}
-    {\usebibmacro{labelyear+extrayear}}}
+    {\usebibmacro{labelyear+extradate}}}
 
-\newbibmacro*{labelyear+extrayear}{%
+\newbibmacro*{labelyear+extradate}{%
   \iftoggle{reflist}
     {\newunit
      \iffieldundef{origyear}
@@ -325,15 +326,15 @@
         \space}%
      \printfield{labelyear}%
      \setunit{\unspace}% odd but necessary after '\bibnamedash'
-     \printfield{extrayear}%
+     \printfield{extradate}%
      \newunit
      \clearfield{origyear}}%
     {}}%
 
-\newbibmacro*{b:labelyear+extrayear}{%
+\newbibmacro*{b:labelyear+extradate}{%
   \iftoggle{noauth}
     {\newunit
-     \usebibmacro{labelyear+extrayear}}%
+     \usebibmacro{labelyear+extradate}}%
     {}}%
 
 \newbibmacro*{reflist+date+number}{%
@@ -830,7 +831,7 @@
   \ifboolexpr{ test {\iftoggle{authposition}}
                and test {\iftoggle{bibliography}}}
     {\usebibmacro{bibnamedash+printnames}%
-     \usebibmacro{a:labelyear+extrayear}}%
+     \usebibmacro{a:labelyear+extradate}}%
     {\usebibmacro{printnames}}%
   \usebibmacro{authpos+deflabel}%
   \usebibmacro{clearnames+empty}}%
@@ -1049,7 +1050,6 @@
   \usebibmacro{a:edtrans}}%
 
 \newbibmacro*{articles}{%
-%  \usebibmacro{review}%
   \usebibmacro{part}%
   \usebibmacro{issuetitle}%
   \newunit
@@ -1161,7 +1161,7 @@
 \newbibmacro*{title+labelyear}{%
   \iftoggle{bibliography}
     {\usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{b:labelyear+extrayear}}%
+     \usebibmacro{b:labelyear+extradate}}%
     {\ifciteseen
        {\usebibmacro{shorttitle}}%
        {\usebibmacro{longtitle+titleaddon}}}}
