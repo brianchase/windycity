@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Oct 2018 03:38:45 PM CDT
+% Last modified: Sun 21 Oct 2018 04:18:39 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -832,13 +832,15 @@ translators' names first. For that, use the entry option
 \opt{transfirst} (see Section \ref{entryops}). Compare:
 
 \begin{itemize}
-\item[N] \fullcite{doe2010a}
+\AtNextCitekey{\togglefalse{transfirst}}
+\item[N] \fullcite{doe2010}
 
-\item[B] \bibentry{doe2010a}
+\AtNextCitekey{\togglefalse{transfirst}}
+\item[B] \bibentry{doe2010}
 
-\item[N] \fullcite{doe2010b}
+\item[N] \fullcite{doe2010}
 
-\item[B] \bibentry{doe2010b}
+\item[B] \bibentry{doe2010}
 \end{itemize}
 
 If a work has no author, but has an editor, the style will print the
@@ -865,17 +867,19 @@ author but has editors and translators, the style will print the
 editors' names in the author's position:
 
 \begin{itemize}
-\item[N] \fullcite{smith2002a}
+\AtNextCitekey{\togglefalse{transfirst}}
+\item[N] \fullcite{smith2002}
 
-\item[B] \bibentry{smith2002a}
+\AtNextCitekey{\togglefalse{transfirst}}
+\item[B] \bibentry{smith2002}
 \end{itemize}
 
 \noindent Use \opt{transfirst} to reverse them:
 
 \begin{itemize}
-\item[N] \fullcite{smith2002b}
+\item[N] \fullcite{smith2002}
 
-\item[B] \bibentry{smith2002b}
+\item[B] \bibentry{smith2002}
 \end{itemize}
 
 Similarly, if a work's editors and translators are identical, the
