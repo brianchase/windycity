@@ -1,4 +1,4 @@
-% Last modified: Sat 20 Oct 2018 11:01:11 AM CDT
+% Last modified: Sun 21 Oct 2018 03:38:45 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -205,9 +205,11 @@ But consider an example from \textit{CMS} \S14.89:
 \noindent Without \opt{noauth}, the style prints:
 
 \begin{itemize}
-\item[N] \fullcite{crow1966b}
+\AtNextCitekey{\togglefalse{noauth}}
+\item[N] \fullcite{crow1966}
 
-\item[B] \bibentry{crow1966b}
+\AtNextCitekey{\togglefalse{noauth}}
+\item[B] \bibentry{crow1966}
 \end{itemize}
 
 \noindent If you choose the former, remember that unless you adjust
