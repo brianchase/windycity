@@ -1,4 +1,4 @@
-% Last modified: Sat 20 Oct 2018 08:00:51 AM CDT
+% Last modified: Fri 02 Nov 2018 04:41:06 PM CDT
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.10.20 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.11.02 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -38,6 +38,8 @@
   \global\togglefalse{cbx@first}%
   \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
+
+\AtEveryCitekey{\clearfield{addendum}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citation Commands  %%

@@ -1,4 +1,4 @@
-% Last modified: Sat 20 Oct 2018 08:04:55 AM CDT
+% Last modified: Fri 02 Nov 2018 05:45:21 PM CDT
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.10.20 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.11.02 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -38,6 +38,7 @@
 \DeclareBibliographyOption{collsonly}[true]{%
   \ifstrequal{#1}{true}
     {\ExecuteBibliographyOptions{mincrossrefs=1}%
+     \ExecuteBibliographyOptions{minxrefs=1}%
      \AtBeginBibliography{\blx@key@bibcheck{collsonly}}}
     {}}%
 
@@ -104,7 +105,9 @@
   minnames=7,
   maxnames=10,
   mincrossrefs=2,
-  pagetracker=true,
+  minxrefs=2,
+  pagetracker=page,
+  parentracker=true,
 %  singletitle=true,
   sortcites=false,
   uniquelist=minyear,
@@ -340,8 +343,7 @@
 \newbibmacro*{reflist+date+number}{%
   \iffieldundef{number}
     {\ifthenelse{\iffieldundef{month}\AND
-                   \iffieldundef{day}\AND
-                   \iffieldundef{year}}
+                   \iffieldundef{day}}
        {}
        {\setunit{\addspace}%
         \printtext[parens]{\usebibmacro{month+day+year}}}}
@@ -585,7 +587,7 @@
     {\ifthenelse{\ifnameundef{author}\AND
                    \ifnameundef{bookauthor}}
        {\usebibmacro{authposition}}%
-       {\usebibmacro{author+nameaddon}}%
+       {\usebibmacro{author+namelist}}%
      \savefield{namehash}{\bbx@lasthash}%
      \usebibmacro{authpos+deflabel}%
      \newunit}}%
@@ -594,15 +596,11 @@
   \global\togglefalse{authposition}%
   \renewcommand*{\cbx@deflabel}{default}}%
 
-\newbibmacro*{author+nameaddon}{%
+\newbibmacro*{author+namelist}{%
   \ifnameundef{author}
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
     {\renewcommand*{\cbx@namelist}{author}}%
-  \usebibmacro{printnames+etc}%
-  \iffieldundef{nameaddon}
-    {}
-    {\space
-     \printfield[brackets]{nameaddon}}}
+  \usebibmacro{printnames+etc}}%
 
 \renewbibmacro*{bybookauthor}{%
   \ifnameundef{bookauthor}
@@ -832,7 +830,8 @@
                and test {\iftoggle{bibliography}}}
     {\usebibmacro{bibnamedash+printnames}%
      \usebibmacro{a:labelyear+extradate}}%
-    {\usebibmacro{printnames}}%
+    {\usebibmacro{printnames}%
+     \usebibmacro{nameaddon}}%
   \usebibmacro{authpos+deflabel}%
   \usebibmacro{clearnames+empty}}%
 
@@ -843,7 +842,8 @@
                    \ifnameundef{bookauthor}}
        {\bibnamedash\plugb}%
        {\bibnamedash\newunitpunct}}%
-    {\usebibmacro{printnames}}}
+    {\usebibmacro{printnames}%
+     \usebibmacro{nameaddon}}}
 
 \newbibmacro*{printnames}{%
   \ifnameundef{\cbx@namelist}
@@ -855,6 +855,13 @@
            \plugb}%
           {\pluga\printnames[\cbx@deflabel]{\cbx@namelist}%
            \plugb}}}}
+
+\newbibmacro*{nameaddon}{%
+  \iffieldundef{nameaddon}
+    {}
+    {\space
+     \printfield[brackets]{nameaddon}%
+     \clearfield{nameaddon}}}
 
 \newbibmacro*{clearnames+empty}{%
   \clearname{\cbx@namelist}%
@@ -956,7 +963,7 @@
 %%  Bibliography Drivers  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareBibliographyDriver{shorthands}{%
+\DeclareBibliographyDriver{shorthand}{%
   \usedriver
     {\DeclareNameAlias{author}{sortname}}%
     {\thefield{entrytype}}%
@@ -1185,14 +1192,14 @@
      {}}
 
 % NOT IN USE:
-\newbibmacro*{review}{%
-  \iffieldundef{review}
-    {}
-    {\iftoggle{noauth}
-       {\bibcpstring{reviewnoauth}\space}%
-       {\bibstring{review}\space}%
-     \review{\thefield{review}}%
-     \newunit}}%
+%\newbibmacro*{review}{%
+%  \iffieldundef{review}
+%    {}
+%    {\iftoggle{noauth}
+%       {\bibcpstring{reviewnoauth}\space}%
+%       {\bibstring{review}\space}%
+%     \review{\thefield{review}}%
+%     \newunit}}%
 
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{test:bookauthor}%
@@ -1275,9 +1282,9 @@
           {\usebibmacro{month+day+year}}}
        {\setunit{\space}%
         \printtext[parens]{%
-        \iffieldundef{month}
-         {\usebibmacro{issue+year}}%
-         {\usebibmacro{month+day+year}}}}}}
+          \iffieldundef{month}
+           {\usebibmacro{issue+year}}%
+           {\usebibmacro{month+day+year}}}}}}
 
 \newbibmacro*{month+day+year}{%
   \printfield{month}%
@@ -1292,6 +1299,9 @@
     {}
     {\addspace
      \stripzeros{\thefield{day}}%
+     \iffieldundef{endday}
+       {}
+       {\textendash\stripzeros{\thefield{endday}}}
      \iffieldundef{year}
        {}
        {\addcomma\space}}}

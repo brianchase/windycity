@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Oct 2018 04:18:39 PM CDT
+% Last modified: Fri 02 Nov 2018 06:40:21 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 %\email{}
 \website{https://github.com/brianchase/windycity}
-\version{2018.10.20}
+\version{2018.11.02}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 
@@ -45,8 +45,8 @@ document's bibliography database and \LaTeX\ file,
 Aside from \biber, which is necessary for a few options, Windy City
 has no requirements beyond those of \biblatex. Most of its development
 occurred under \biblatex versions 2.7 and 2.8, with only minor updates
-and bug fixes in the years since. The current release, also very
-minor, nonetheless requires \biblatex version 3.8 or later.
+and bug fixes in the years since. Current releases nonetheless require
+\biblatex version 3.8 or later.
 
 \section{Some Basics}
 \label{basics}
@@ -132,18 +132,18 @@ the value of \cmd{bibitemsep}.
 
 \item[collsonly] By default, citing individual works of a collection
 adds an entry for each work to the bibliography.\footnote{The style's
-default for \opt{mincrossrefs} is \textit{2}. This means that the
-style requires at least two cross-references to a collection before
-adding it to the bibliography.} This could result in needless clutter,
-especially after citing many volumes of a multivolume work. To exclude
-individual works and print only an entry for the collection as a
-whole, use \opt{collsonly}. This option sets \opt{mincrossrefs} to
-\textit{1} and then filters from the bibliography all \bibtype{inbook}
-entries that cross-reference other entries and all
-\bibtype{incollection} entries that cite chapters of a
-cross-referenced book. Thus, it has no effect on many
-\bibtype{incollection} entries, such as articles in books, which need
-their own place in the bibliography. For some discussion of
+defaults for \opt{mincrossrefs} and \opt{minxrefs} is \liningnums{2}.
+This means that the style requires at least two cross-references to a
+collection before adding it to the bibliography.} This could result in
+needless clutter, especially after citing many volumes of a
+multivolume work. To exclude individual works and print only an entry
+for the collection as a whole, use \opt{collsonly}. This option sets
+\opt{mincrossrefs} and \opt{minxrefs} to \liningnums{1} and then
+filters from the bibliography all \bibtype{inbook} entries that
+cross-reference other entries and all \bibtype{incollection} entries
+that cite chapters of a cross-referenced book. Thus, it has no effect
+on many \bibtype{incollection} entries, such as articles in books,
+which need their own place in the bibliography. For some discussion of
 collections and multivolume works, see Section \ref{collect}.
 
 \item[firstshort] Use this option to print a shortened form of the
@@ -203,6 +203,12 @@ But consider an example from \textit{CMS} \S14.89:
 \end{itemize}
 
 \noindent Without \opt{noauth}, the style prints:
+
+% I use \AtNextCitekey to set 'noauth' to false to avoid having two
+% nearly identical entries in windycity.bib for crow1966. Having those
+% entries caused the bibliography for the author-date format to print
+% the entry for crow1966 as 1966b. I don't use \AtNextCitekey for
+% similar examples below.
 
 \begin{itemize}
 \AtNextCitekey{\togglefalse{noauth}}
@@ -832,15 +838,13 @@ translators' names first. For that, use the entry option
 \opt{transfirst} (see Section \ref{entryops}). Compare:
 
 \begin{itemize}
-\AtNextCitekey{\togglefalse{transfirst}}
-\item[N] \fullcite{doe2010}
+\item[N] \fullcite{doe2010a}
 
-\AtNextCitekey{\togglefalse{transfirst}}
-\item[B] \bibentry{doe2010}
+\item[B] \bibentry{doe2010a}
 
-\item[N] \fullcite{doe2010}
+\item[N] \fullcite{doe2010b}
 
-\item[B] \bibentry{doe2010}
+\item[B] \bibentry{doe2010b}
 \end{itemize}
 
 If a work has no author, but has an editor, the style will print the
@@ -867,19 +871,17 @@ author but has editors and translators, the style will print the
 editors' names in the author's position:
 
 \begin{itemize}
-\AtNextCitekey{\togglefalse{transfirst}}
-\item[N] \fullcite{smith2002}
+\item[N] \fullcite{smith2002a}
 
-\AtNextCitekey{\togglefalse{transfirst}}
-\item[B] \bibentry{smith2002}
+\item[B] \bibentry{smith2002a}
 \end{itemize}
 
 \noindent Use \opt{transfirst} to reverse them:
 
 \begin{itemize}
-\item[N] \fullcite{smith2002}
+\item[N] \fullcite{smith2002b}
 
-\item[B] \bibentry{smith2002}
+\item[B] \bibentry{smith2002b}
 \end{itemize}
 
 Similarly, if a work's editors and translators are identical, the
@@ -1421,9 +1423,9 @@ and \S\ref{14.127}.
 % 14.117
 
 \begin{itemize}
-\item[N] \fullcite[133--34]{adams1868}
+\item[N] \fullcite[133--34]{adams1867}
 
-\item[B] \bibentry{adams1868}
+\item[B] \bibentry{adams1867}
 
 \item[N] \fullcite{jackson1676}
 
@@ -1995,6 +1997,16 @@ and \S\ref{14.127}.
 \item[B] \bibentry{derasmo2000}
 \end{itemize}
 
+\noindent The 15\textsuperscript{th} edition of \textit{The Chicago
+Manual of Style} shows this citations of an event spanning several
+days:\footcite[\S17.215]{chicago2003}
+
+\begin{itemize}
+\item[N] \fullcite{nass2000}
+
+\item[B] \bibentry{nass2000}
+\end{itemize}
+
 \setcounter{subsubsection}{227}
 \subsubsection{Working papers and other unpublished works}
 % 14.228
@@ -2077,7 +2089,7 @@ expected place for this format and at the end of the entry.
 \end{itemize}
 
 \setcounter{subsubsection}{18}
-\subsubsection{Author-date references---examples and variations}
+\subsubsection{Reference list entries with same author(s), same year}
 % 15.19
 \label{15.19}
 
@@ -2175,10 +2187,9 @@ date}
 \cmd{printshorthands}. By default, works from this list also appear in
 bibliographies and reference lists. To exclude them, use the preamble
 option \opt{nolos} (see Section \ref{preops}). Note that the style
-does not automatically italicize shorthands, as whether you should
-italicize a shorthand depends on whether you should italicize the
-work's title (\S14.55). See the entry for \textit{CMS} in
-\file{windycity.bib}.\\}%
+does not automatically italicize shorthands, as whether you should do
+so depends on whether you should italicize the work's title
+(\S14.55).\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. In the next section, the same works appear in
@@ -2191,12 +2202,11 @@ previous section but in the author-date format.\\}%
 
 \printshorthands[prenote=sh]
 \refstepcounter{sh}\label{sh}
-\printbibliography[notkeyword=exclude,prenote=bib]
+\printbibliography[prenote=bib]
 \refstepcounter{bib}\label{bib}
 \printbibliography[%
   env=reflist,
   heading=references,
-  notkeyword=exclude,
   prenote=ref]
 \refstepcounter{ref}\label{ref}
 
