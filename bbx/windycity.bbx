@@ -1,4 +1,4 @@
-% Last modified: Fri 02 Nov 2018 05:45:21 PM CDT
+% Last modified: Wed 07 Nov 2018 04:17:59 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -498,6 +498,7 @@
     {\mkbibordedition{#1}~\bibstring{edition}}%
     {\ifcapital{\MakeCapital{#1}}{#1}}}
 \DeclareFieldFormat{howpublished}{\ifcapital{\MakeCapital{#1}}{#1}}%
+\DeclareFieldFormat{issue}{\MakeCapital{#1}}% always capitalize
 \DeclareFieldFormat{journum}{%
   \ifnumeral{#1}
    {no\adddotspace\printfield{number}}%
@@ -511,6 +512,7 @@
 \DeclareFieldFormat{pages}{#1}
 \DeclareFieldFormat{part}{\bibstring{part}\space#1}
 \DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
 
 % A shorthand is italicized if the title that it abbreviates is also
 % italicized. Set this in the bibliography database by enclosing the
@@ -1264,9 +1266,9 @@
 \newbibmacro*{number+issue+month+etc}{%
   \setunit{\addcomma\space}%
   \printfield[journum]{number}%
-  \usebibmacro{issue+month+day+year}}%
+  \usebibmacro{issue+month+etc}}%
 
-\newbibmacro*{issue+month+day+year}{%
+\newbibmacro*{issue+month+etc}{%
   \iffieldundef{year}
     {\iffieldundef{month}
        {}
@@ -1278,12 +1280,12 @@
           {}
           {\setunit{\addcomma\space}}%
         \iffieldundef{month}
-          {\usebibmacro{issue+year}}%
+          {\usebibmacro{issue+season+year}}%
           {\usebibmacro{month+day+year}}}
        {\setunit{\space}%
         \printtext[parens]{%
           \iffieldundef{month}
-           {\usebibmacro{issue+year}}%
+           {\usebibmacro{issue+season+year}}%
            {\usebibmacro{month+day+year}}}}}}
 
 \newbibmacro*{month+day+year}{%
@@ -1306,12 +1308,18 @@
        {}
        {\addcomma\space}}}
 
-\newbibmacro*{issue+year}{%
-  \iffieldundef{issue}
+% Treat 'season' as an alternative for 'issue':
+\newbibmacro*{issue+season+year}{%
+  \ifthenelse{\iffieldundef{issue}\AND
+                \iffieldundef{season}}
     {\printfield{year}}%
-    {\printfield{issue}%
-     \space
-     \printfield{year}}}
+    {\iffieldundef{issue}
+      {\printfield{season}%
+       \space
+       \printfield{year}}%
+      {\printfield{issue}%
+       \space
+       \printfield{year}}}}
 
 \newbibmacro*{colon+pages}{%
   \ifthenelse{\iffieldundef{month}\AND
