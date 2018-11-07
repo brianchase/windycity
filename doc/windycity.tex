@@ -1,4 +1,4 @@
-% Last modified: Fri 02 Nov 2018 06:40:21 PM CDT
+% Last modified: Wed 07 Nov 2018 05:21:52 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -24,9 +24,10 @@ See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}.}
 
 Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
-to \textit{The Chicago Manual of Style}
-(\textit{CMS}).\footcite{chicago2010} It accurately handles a wide
-range of citations and includes a set of options and commands to
+to the \textit{The Chicago Manual of Style}
+(\textit{CMS}).\footnote{\cite{chicago2010} Support for the 17th
+edition of \textit{CMS} is in development.} It accurately handles a
+wide range of citations and includes a set of options and commands to
 accommodate special circumstances. It also has extensive support for
 citing and arranging different kinds of editors, translators, and
 compilers within a single citation. These features make Windy City
@@ -43,10 +44,7 @@ document's bibliography database and \LaTeX\ file,
 \file{windycity.bib} and \file{windycity.tex}, respectively.
 
 Aside from \biber, which is necessary for a few options, Windy City
-has no requirements beyond those of \biblatex. Most of its development
-occurred under \biblatex versions 2.7 and 2.8, with only minor updates
-and bug fixes in the years since. Current releases nonetheless require
-\biblatex version 3.8 or later.
+has no requirements beyond those of \biblatex version 3.8 or later.
 
 \section{Some Basics}
 \label{basics}
@@ -55,13 +53,15 @@ Consider a few footnotes: One.\footcite{beattie1974}
 Two.\footcite[51]{beattie1974} Three.\footcite[51]{beattie1974}
 Four.\footcite[35]{shields2008} And five.\footcite[51]{beattie1974}
 
-By default, the fist citation of a work takes a long form, similar to
+By default, the first citation of a work takes a long form, similar to
 its entry in the bibliography. If consecutive citations of a work
 appear on the same page, citations after the first receive an
 \textit{ibid}.\footnote{As such, the first citation of a work on a
-page never receives an \textit{ibid}.} Otherwise, subsequent citations
-of a work usually list short forms of the author's name and the work's
-title.
+page never receives an \textit{ibid}. In line with the 17th edition of
+\textit{CMS}, which discourages the use of \textit{ibid}., the style
+will eventually drop it from the standard format but allow it as an
+option.} Otherwise, subsequent citations of a work usually list short
+forms of the author's name and the work's title.
 
 The short form of a name usually consists of a surname. If the name of
 an editor, translator, or compiler occupies the author's position, the
@@ -93,10 +93,10 @@ style.\footcite{camus1991a,camus1991b} It contains consecutive, first
 citations of works by the same author. The style prints the author's
 full name in the first citation and the short form in the
 second.\footnote{As far as I know, \textit{CMS} has no explicit policy
-on this point. But the practice seems reasonable and conventional
-enough to support.} If these citations were not consecutive, both
-citations would include the full name; only subsequent citations would
-use the short form.
+on this point. But the practice seems reasonable and fairly
+conventional.} If these citations were not consecutive, both citations
+would include the full name; only subsequent citations would use the
+short form.
 
 With certain collections, still other results are possible (see
 Section \ref{collect}). For examples of how the style truncates lists
@@ -1997,8 +1997,8 @@ and \S\ref{14.127}.
 \item[B] \bibentry{derasmo2000}
 \end{itemize}
 
-\noindent The 15\textsuperscript{th} edition of \textit{The Chicago
-Manual of Style} shows this citations of an event spanning several
+\noindent The 15th edition of \textit{The Chicago Manual of Style}
+shows this citations of an event spanning several
 days:\footcite[\S17.215]{chicago2003}
 
 \begin{itemize}
