@@ -1,13 +1,16 @@
 
+INTERIM
+* for articles etc., limited support for 'season' field
+
 RELEASE NOTES FOR VERSION 2018.11.02
 
 * fixed author-date system printing the year of many articles twice
 * fixed author-date system printing the year between an author's name
-  and the field nameaddon
+  and the field 'nameaddon'
 * fixed bibliography driver for shorhands that caused it to print just
   titles, rather than full entries
-* added support for endday field
-* addendum field prints only in bibliographies and reference
+* added support for 'endday' field
+* 'addendum' field prints only in bibliographies and reference
   lists, not in notes
 * set parentracker bibliography option
 * set minxrefs bibliography option
@@ -20,7 +23,7 @@ RELEASE NOTES FOR VERSION 2018.10.20
 * fixed broken date formatting in author-date citations
 * changed \DeclareSortingScheme to \DeclareSortingTemplate
 * changed bibliography option labeldate to labeldateparts
-* changed special field extrayear to extradate
+* changed special field 'extrayear' to 'extradate'
 * bumped minimum compatible release to biblatex 3.8
 * other minor changes for the version bump
 
