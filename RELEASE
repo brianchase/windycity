@@ -1,6 +1,9 @@
 
 INTERIM
+
 * for articles etc., limited support for 'season' field
+* limited support for 'endyear' and 'endorigyear' fields
+* removed unused bibliography options
 
 RELEASE NOTES FOR VERSION 2018.11.02
 

@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Nov 2018 04:17:59 PM CST
+% Last modified: Fri 09 Nov 2018 02:23:12 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -90,6 +90,8 @@
 % For setting 'minnames' and 'maxnames', see 16th ed., 14.76, and 15th
 % ed., 17.29--17.30.
 
+% FIX: You may be able to delete 'useauthor', 'useeditor', and
+% 'usetranslator'.
 \ExecuteBibliographyOptions{%
   abbreviate=true,
   autopunct=true,
@@ -108,14 +110,10 @@
   minxrefs=2,
   pagetracker=page,
   parentracker=true,
-%  singletitle=true,
   sortcites=false,
   uniquelist=minyear,
   uniquename=full,
   urldate=long,
-  useauthor=true,
-  useeditor=true,
-  usetranslator=true,
   useprefix=false}
 
 \DeclareLanguageMapping{english}{american-windycity}
@@ -246,6 +244,7 @@
 }
 \DeclareDataInheritance{collection}{collection,inbook,bookinbook}{
   \inherit{year}{bookyear}
+  \inherit{endyear}{endbookyear}
 }
 \DeclareDataInheritance{collection}{collection}{
   \inherit{title}{bookbooktitle}
@@ -310,48 +309,6 @@
   \ifciteindex
     {\indexnames{labelname}}%
     {}}%
-
-%%%%%%%%%%%%%%%%%%%%%%%
-%%  Reference Lists  %%
-%%%%%%%%%%%%%%%%%%%%%%%
-
-\newbibmacro*{a:labelyear+extradate}{%
-  \iftoggle{noauth}
-    {}
-    {\usebibmacro{labelyear+extradate}}}
-
-\newbibmacro*{labelyear+extradate}{%
-  \iftoggle{reflist}
-    {\newunit
-     \iffieldundef{origyear}
-       {}
-       {\printfield[parens]{origyear}%
-        \space}%
-     \printfield{labelyear}%
-     \setunit{\unspace}% odd but necessary after '\bibnamedash'
-     \printfield{extradate}%
-     \newunit
-     \clearfield{origyear}}%
-    {}}%
-
-\newbibmacro*{b:labelyear+extradate}{%
-  \iftoggle{noauth}
-    {\newunit
-     \usebibmacro{labelyear+extradate}}%
-    {}}%
-
-\newbibmacro*{reflist+date+number}{%
-  \iffieldundef{number}
-    {\ifthenelse{\iffieldundef{month}\AND
-                   \iffieldundef{day}}
-       {}
-       {\setunit{\addspace}%
-        \printtext[parens]{\usebibmacro{month+day+year}}}}
-    {\iffieldundef{volume}
-       {\setunit{\addcomma\space}%
-        \printfield[journum]{number}}%
-       {\setunit{\addspace}%
-        \printfield[parens]{number}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Field Formats for Names  %%
@@ -573,6 +530,50 @@
 
 \DeclareBibliographyAlias{*}{book}
 \DeclareBibliographyAlias{cite:*}{cite:book}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%  Reference Lists  %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{a:labelyear+extradate}{%
+  \iftoggle{noauth}
+    {}
+    {\usebibmacro{labelyear+extradate}}}
+
+\newbibmacro*{labelyear+extradate}{%
+  \iftoggle{reflist}
+    {\newunit
+     \iffieldundef{origyear}
+       {}
+       {\printtext[parens]{\usebibmacro{origyear+origendyear}}%
+        \clearfield{origyear}%
+        \clearfield{origendyear}%
+        \space}%
+     \printfield{labelyear}%
+     \usebibmacro{endyear+endbookyear}%
+     \iffieldundef{extradate}
+       {}
+       {\mknumalph{\thefield{extradate}}}
+     \newunit}%
+    {}}%
+
+\newbibmacro*{b:labelyear+extradate}{%
+  \iftoggle{noauth}
+    {\usebibmacro{labelyear+extradate}}%
+    {}}%
+
+\newbibmacro*{reflist+date+number}{%
+  \iffieldundef{number}
+    {\ifthenelse{\iffieldundef{month}\AND
+                   \iffieldundef{day}}
+       {}
+       {\setunit{\addspace}%
+        \printtext[parens]{\usebibmacro{month+day+year}}}}
+    {\iffieldundef{volume}
+       {\setunit{\addcomma\space}%
+        \printfield[journum]{number}}%
+       {\setunit{\addspace}%
+        \printfield[parens]{number}}}}
 
 %%%%%%%%%%%%%%%
 %%  Authors  %%
@@ -1290,13 +1291,13 @@
 
 \newbibmacro*{month+day+year}{%
   \printfield{month}%
-  \usebibmacro{day}%
+  \usebibmacro{day+endday}%
   \iffieldundef{year}
     {}
     {\addspace
      \printfield{year}}}
 
-\newbibmacro*{day}{%
+\newbibmacro*{day+endday}{%
   \iffieldundef{day}
     {}
     {\addspace
@@ -1468,7 +1469,7 @@
 \newbibmacro*{orig+etc}{%
   \usebibmacro{origlocation}%
   \usebibmacro{origpublisher}%
-  \printfield{origyear}%
+  \usebibmacro{origyear+origendyear}%
   \usebibmacro{reprint}%
   \usebibmacro{loc+pub+year}}%
 
@@ -1513,8 +1514,20 @@
     {\iffieldundef{year}
        {\iffieldundef{bookyear}
           {\bibstring{nodate}}%
-          {\printfield{bookyear}}}
-       {\printfield{year}}}}
+          {\printfield{bookyear}%
+           \usebibmacro{endyear+endbookyear}}}
+       {\printfield{year}%
+        \usebibmacro{endyear+endbookyear}}}}
+
+\newbibmacro*{endyear+endbookyear}{%
+  \iffieldundef{endyear}
+    {\ifthenelse{\iffieldundef{endbookyear}\OR
+                   \iffieldsequal{bookyear}{endbookyear}}
+       {}
+       {\textendash\printfield{endbookyear}}}
+    {\iffieldsequal{year}{endyear}
+       {}
+       {\textendash\printfield{endyear}}}}
 
 \newbibmacro*{origtitle}{%
   \iffieldundef{origtitle}
@@ -1528,7 +1541,17 @@
      \printtext[parens]{%
        \usebibmacro{origlocation}%
        \usebibmacro{origpublisher}%
-       \printfield{origyear}}}}
+       \usebibmacro{origyear+origendyear}}}}
+
+% CHECK:
+\newbibmacro*{origyear+origendyear}{%
+  \iffieldundef{origyear}
+    {}
+    {\printfield{origyear}%
+     \ifthenelse{\iffieldundef{endorigyear}\OR
+                   \iffieldsequal{origyear}{endorigyear}}
+       {}
+       {\textendash\printfield{endorigyear}}}}
 
 \newbibmacro*{doi+url+etc}{%
   \ifthenelse{\iffieldundef{doi}\AND

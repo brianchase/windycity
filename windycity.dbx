@@ -2,6 +2,7 @@
 \DeclareDatamodelFields[type=field,datatype=literal]{%
   bookbooktitle,
   bookyear,
+  endbookyear,
   editoraddon,
   seriesaddon,
   shortbooktitle,
