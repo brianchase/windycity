@@ -1,4 +1,4 @@
-% Last modified: Fri 09 Nov 2018 03:09:01 PM CST
+% Last modified: Fri 09 Nov 2018 04:01:53 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -13,7 +13,7 @@
   \usepackage{xunicode}
   \usepackage{fontspec}
   \PassOptionsToPackage{unicode,xetex}{hyperref}
-  \defaultfontfeatures{Ligatures=TeX,Numbers={OldStyle,Proportional}}
+  \defaultfontfeatures{Ligatures=TeX,Numbers={OldStyle,Proportional},Scale=MatchLowercase}
   \setmainfont[
     Extension=.otf,
     UprightFont=*-regular,
@@ -21,8 +21,6 @@
     ItalicFont=*-italic,
     BoldItalicFont=*-bolditalic]{texgyretermes}
   \setmonofont[
-%    Scale=MatchLowercase,
-    Scale=MatchUppercase,
     Extension=.otf,
     UprightFont=*mono10-regular,
     ItalicFont=*mono10-italic]{lm}
@@ -149,13 +147,13 @@
   leftmargin={\labelwidth+\labelsep},
   parsep=4pt}
 
+\newcommand{\biber}{%
+  \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
 \newcommand{\biblatex}{%
   \href{http://www.ctan.org/pkg/biblatex}{\texttt{biblatex}}\xspace}%
 % From Oren Patashnik's documentation for bibtex:
 \newcommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
   T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
-\newcommand{\biber}{%
-  \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
 
 \usepackage[
   anchorcolor=black,
