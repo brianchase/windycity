@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Nov 2018 05:21:52 PM CST
+% Last modified: Fri 09 Nov 2018 03:45:08 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -11,7 +11,6 @@
 \version{2018.11.02}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
-
 \newpage
 
 \section{Introduction}
@@ -67,19 +66,19 @@ The short form of a name usually consists of a surname. If the name of
 an editor, translator, or compiler occupies the author's position, the
 short form of the name omits abbreviations of editorial roles, such as
 \textit{ed.} and \textit{trans.}, which appear only in first
-citations.\footcite[See \S14.18, \S14.27, \S14.76]{chicago2010} If
-necessary to distinguish names, the short form will include first and
-middle initials.
+citations.\footcite[See 14.18, 14.27, 14.76]{chicago2010} If necessary
+to distinguish names, the short form will include first and middle
+initials.
 
 Several factors determine the short form of a title. If a work's entry
-in the bibliography database includes a \bibfield{shorttitle} or, if
-applicable, a \bibfield{shortbooktitle} (see Section
-\ref{datafields}), the style will print one of them, giving preference
-to \bibfield{shorttitle}. If neither field is available, the short
-form is the work's title minus its subtitle.
+in the bibliography database includes a \bibfield{shorttitle} or
+\bibfield{shortbooktitle} (see Section \ref{datafields}), the style
+will print one of them, giving preference to \bibfield{shorttitle}. If
+neither field is available, the short form is the work's title minus
+its subtitle.
 
-If a work uses an abbreviation---a \bibfield{shorthand} in the
-terminology of \biblatex---the \bibfield{shorthand} replaces
+If a work uses an abbreviation---what \biblatex calls a
+\bibfield{shorthand}---the \bibfield{shorthand} replaces
 \textit{ibid}, the author's name, and related elements in subsequent
 citations. A few citations like these are scattered throughout these
 pages in reference to \textit{The Chicago Manual of Style}, which here
@@ -93,16 +92,15 @@ style.\footcite{camus1991a,camus1991b} It contains consecutive, first
 citations of works by the same author. The style prints the author's
 full name in the first citation and the short form in the
 second.\footnote{As far as I know, \textit{CMS} has no explicit policy
-on this point. But the practice seems reasonable and fairly
-conventional.} If these citations were not consecutive, both citations
-would include the full name; only subsequent citations would use the
-short form.
+on this point, but it seems reasonable and fairly conventional.} If
+these citations were not consecutive, both citations would include the
+full name; only subsequent citations would use the short form.
 
 With certain collections, still other results are possible (see
 Section \ref{collect}). For examples of how the style truncates lists
-of names, see Section \ref{notes16}---in particular, \S\ref{14.76}.
-For options to skip long first citations, drop parts of citations,
-change the order of editors and translators, and more, see Sections
+of names, see Section \ref{notes16}---in particular, \ref{14.76}. For
+options to skip long first citations, drop parts of citations, change
+the order of editors and translators, and more, see Sections
 \ref{preops} and \ref{entryops}.
 
 In addition to notes, the style supports parenthetical citations and
@@ -150,8 +148,8 @@ collections and multivolume works, see Section \ref{collect}.
 first citation of each work. The resulting citation consists mainly of
 the author's name and the title. According to \textit{CMS}, this
 approach is optional for documents that have a complete
-bibliography.\footnote{\cite[\S14.14]{chicago2010} See also
-\S\S14.24--14.28. By default, the style adds every cited work to the
+bibliography.\footnote{\cite[14.14]{chicago2010} See also
+14.24--14.28. By default, the style adds every cited work to the
 bibliography.}
 
 \item[isbn] Use this option to print ISBNs in bibliographies. A work's
@@ -194,7 +192,7 @@ but before its annotation. To print ISBNs of every work, see the
 \item[noauth] This option tells the style to bypass the author's
 position of a work, both in notes and in bibliographies. Citations
 will begin with the title's position. This option is rarely necessary.
-But consider an example from \textit{CMS} \S14.89:
+But consider an example from \textit{CMS} 14.89:
 
 \begin{itemize}
 \item[N] \fullcite{crow1966}
@@ -227,13 +225,13 @@ first editor's surname, \textit{Crow}. See also \cmd{cite*} in Section
 \item[transfirst] According to \textit{CMS}, if a work has both an
 editor and a translator, their names should appear in citations in the
 order in which they appear on the work's title
-page.\footcite[\S14.88]{chicago2010} By default, the style lists
-editors first. However, entries with the option \bibfield{transfirst}
-reverse this order: Their translators print first. If a work's
-translators and editors are identical, using \bibfield{transfirst}
-reverses the order of their roles---for example, from \textit{edited
-and translated by} to \textit{translated and edited by}. For more on
-this option, and examples, see Section \ref{edtranspos}.
+page.\footcite[14.88]{chicago2010} By default, the style lists editors
+first. However, entries with the option \bibfield{transfirst} reverse
+this order: Their translators print first. If a work's translators and
+editors are identical, using \bibfield{transfirst} reverses the order
+of their roles---for example, from \textit{edited and translated by}
+to \textit{translated and edited by}. For more on this option, and
+examples, see Section \ref{edtranspos}.
 
 \end{marglist}
 
@@ -277,7 +275,7 @@ hope, are fixed.}
 Use this command to cite a work without printing anything in the
 author's position of a note. This is most likely useful when the
 context makes clear who the author is. Consider this example from
-\S\ref{14.78}:
+\ref{14.78}:
 
 \begin{itemize}
 \item[N] \fullcite*[44--45]{mccullers1999}
@@ -353,7 +351,7 @@ testing.
 Use this command to print a parenthetical citation without the
 author's position. The most likely contexts for this are sentences in
 which the author receives explicit mention.\footnote{For discussion
-and examples in \textit{CMS}, see especially \S15.24.}
+and examples in \textit{CMS}, see especially 15.24.}
 
 \cmditem{refentry}{key}
 
@@ -367,7 +365,7 @@ entry of a work.
 %\bibtype{article} and \bibtype{review} entries. If those entries have
 %the data field \bibfield{review}, the style uses this command to cite
 %the \bibfield{entrykey} in that field. For more on reviews, see
-%\bibfield in Section \ref{datafields} and \S\ref{14.215}.
+%\bibfield in Section \ref{datafields} and \ref{14.215}.
 
 \end{ltxsyntax}
 
@@ -395,11 +393,11 @@ Richert, with the assistance of Lilian J. Redstone et al.''
 % NOT IN USE:
 %\item[review] This field, for \bibtype{article} or \bibtype{review}
 %entries, holds the \bibfield{entrykey} of a work under review. An
-%example appears below, in \S\ref{14.215}.
+%example appears below, in \ref{14.215}.
 
 \item[seriesaddon] This field is for additional information about a
 book's series, such as \textit{2nd ser.} and \textit{n.s.}. For
-examples, see \S\ref{14.132} and \S\ref{14.195}.
+examples, see \ref{14.132} and \ref{14.195}.
 
 \item[shortbooktitle] This field is for the short form of a
 \bibfield{booktitle}, just as \bibfield{shorttitle} is for
@@ -424,7 +422,7 @@ titles, see Section \ref{authtitles}.
 number. For an example, see Section \ref{collect}.
 
 \item[volumetitle] Use this field when a volume has a title. In the
-following example, from \textit{CMS} \S\ref{14.123}, the
+following example, from \textit{CMS} \ref{14.123}, the
 \bibfield{volumetitle} is \textit{1883--1884}:
 
 \begin{itemize}
@@ -501,10 +499,10 @@ typical. This section addresses some of them.
 Although its discussion is a bit obscure, \textit{CMS} treats some
 multivolume works as if they formed a single unit---but only if every
 volume of the collection has the same title and publication
-year.\footcite[See the examples of short citations in \S14.29 and
-\S\S14.122--14.125]{chicago2010} The style accommodates these
-citations. Below is a note with an example from
-\S\ref{14.123}.\footcite[243]{byrne1981.4} In citing the fourth volume
+year.\footcite[See the examples of short citations in 14.29 and
+14.122--14.125]{chicago2010} The style accommodates these citations.
+Below is a note with an example from
+\ref{14.123}.\footcite[243]{byrne1981.4} In citing the fourth volume
 of the collection, the style prints the volume number not in the usual
 place, between the title and publisher's address, but near the end of
 the note, separated from the page number by a colon. Citing the fifth
@@ -704,8 +702,8 @@ as a series at all, rather than as the title of a multivolume work.
 After that, the most common question is how to format a series number.
 Sometimes, the number appears alone, with no preceding abbreviation.
 But it may also appear with \textit{vol.} or
-\textit{no.}\footcite[\S\ref{14.128}. See also \S\ref{14.130} and
-\S\ref{14.132}.]{chicago2010}. In order to avoid using multiple fields
+\textit{no.}\footcite[\ref{14.128}. See also \ref{14.130} and
+\ref{14.132}.]{chicago2010}. In order to avoid using multiple fields
 for essentially the same task, the style uses \bibfield{number} for
 all of them. By default, it places no abbreviation before the number.
 Add abbreviations to the field as necessary. In the database entry for
@@ -721,7 +719,7 @@ To indicate the run of a series, such as \textit{2nd ser.} or
 \textit{n.s.}, use \bibfield{seriesaddon} (see Section
 \ref{datafields}). However, this does not apply to journals, where
 such labels usually modify a journal's title. For them, use
-\bibfield{series}, as in this example from \S\ref{14.195}:
+\bibfield{series}, as in this example from \ref{14.195}:
 
 \begin{itemize}
 \item[N] \fullcite{moraes1950}
@@ -784,7 +782,7 @@ For unusually complicated ci\-ta\-tions---at any rate, too complicated
 for the style---consider using the \bibtype{misc} entry type. The
 style formats these entries with a small number of fields but in way
 that makes it a fallback for almost anything. The example below is
-from \S14.277:
+from 14.277:
 
 \begin{itemize}
 \item[N] \fullcite{roosevelt1959}
@@ -849,7 +847,7 @@ translators' names first. For that, use the entry option
 
 If a work has no author, but has an editor, the style will print the
 name of the editor in the author's position, as in this example from
-\textit{CMS} \S\ref{14.87}:
+\textit{CMS} \ref{14.87}:
 
 \begin{itemize}
 \item[N] \fullcite[94]{young2007}
@@ -857,7 +855,7 @@ name of the editor in the author's position, as in this example from
 \item[B] \bibentry{young2007}
 \end{itemize}
 
-\noindent A similar switch happens if a work has no author, but has a
+\noindent A similar switch happens if a work has no author but has a
 translator:
 
 \begin{itemize}
@@ -887,7 +885,7 @@ editors' names in the author's position:
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in, ``Edited and
 translated by\ldots'' Use \opt{transfirst} to reverse them, as in this
-example from \textit{CMS} \S\ref{14.88}:
+example from \textit{CMS} \ref{14.88}:
 
 \begin{itemize}
 \item[N] \fullcite{menchu1999}
@@ -920,7 +918,7 @@ translators are often automatic. The style's default is to associate
 title within the scope of an entry. For most sources, then, no more
 work is necessary than just adding \bibfield{editor} and
 \bibfield{translator} fields to a database entry. For example, this
-entry shows data for \S\ref{14.88}:
+entry shows data for \ref{14.88}:
 
 \begin{lstlisting}
   @Book{menchu1999,
@@ -1106,28 +1104,27 @@ follow those of the book. \textit{N} indicates a note, \textit{B}
 indicates a bibliography entry. Bear in mind that the book's examples
 occasionally show inconsistencies, a few of them very likely errors:
 
-\begin{enumerate}
-\item \S\ref{14.78} includes \textit{3 vols.} in a note for
-\textit{The Letters of George Meredith}, inconsistent with examples in
-\S\ref{14.123} and \S\ref{14.125}
+\begin{enumerate} \item \ref{14.78} includes \textit{3 vols.} in a
+note for \textit{The Letters of George Meredith}, inconsistent with
+examples in \ref{14.123} and \ref{14.125}
 
-\item \S\ref{14.82} has \textit{Trans} instead of \textit{Translated
-by} in a bibliography entry for \textit{The Charterhouse of Parma}.
+\item \ref{14.82} has \textit{Trans} instead of \textit{Translated by}
+in a bibliography entry for \textit{The Charterhouse of Parma}.
 
-\item \S\ref{14.132} omits a comma after \textit{ed.} in a note for
+\item \ref{14.132} omits a comma after \textit{ed.} in a note for
 \textit{South China in the Sixteenth Century}.
 
-\item \S\ref{14.187} inverts an author's name in a note for ``Learning
+\item \ref{14.187} inverts an author's name in a note for ``Learning
 to be an `American Lady'?'' and omits a page reference in a
 bibliography entry for ``Non-Subject-Matter Outcomes of Schooling.''
 \end{enumerate}
 
 \noindent Also, the style always prints \bibfield{title} before
 \bibfield{maintitle}. In several sections, \textit{CMS} offers the
-option of reversing this order, and at least once, in \S\ref{14.120},
+option of reversing this order, and at least once, in \ref{14.120},
 reverses them without showing the alternative. This potential source
-of confusion affects \S\ref{14.120}, \S\ref{14.124}, \S\ref{14.126},
-and \S\ref{14.127}.
+of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
+\ref{14.127}.
 
 \subsection{Books}
 \setcounter{subsection}{14}
@@ -1999,7 +1996,7 @@ and \S\ref{14.127}.
 
 \noindent The 15th edition of \textit{The Chicago Manual of Style}
 shows this citations of an event spanning several
-days:\footcite[\S17.215]{chicago2003}
+days:\footcite[17.215]{chicago2003}
 
 \begin{itemize}
 \item[N] \fullcite{nass2000}
@@ -2063,7 +2060,7 @@ more selective than those in the previous section.
 
 As with the previous section, bear in mind that the book's examples
 occasionally show inconsistencies and, very likely, errors.
-Specifically, \S\ref{15.9} includes the publication year twice: in the
+Specifically, \ref{15.9} includes the publication year twice: in the
 expected place for this format and at the end of the entry.
 
 \subsection{Reference Lists and Text Citations}
@@ -2189,7 +2186,7 @@ bibliographies and reference lists. To exclude them, use the preamble
 option \opt{nolos} (see Section \ref{preops}). Note that the style
 does not automatically italicize shorthands, as whether you should do
 so depends on whether you should italicize the work's title
-(\S14.55).\\}%
+(14.55).\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. In the next section, the same works appear in
