@@ -1,4 +1,4 @@
-% Last modified: Fri 09 Nov 2018 02:23:12 PM CST
+% Last modified: Fri 09 Nov 2018 04:50:35 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -487,9 +487,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyAlias{periodical}{article}
-%\DeclareBibliographyAlias{review}{article}
 \DeclareBibliographyAlias{cite:periodical}{cite:article}
-%\DeclareBibliographyAlias{cite:review}{cite:article}
 
 \DeclareBibliographyAlias{booklet}{book}
 \DeclareBibliographyAlias{collection}{book}
@@ -1193,16 +1191,6 @@
           {\bibstring{by}\space
            \usebibmacro{author+bookauthor+etc}}}}
      {}}
-
-% NOT IN USE:
-%\newbibmacro*{review}{%
-%  \iffieldundef{review}
-%    {}
-%    {\iftoggle{noauth}
-%       {\bibcpstring{reviewnoauth}\space}%
-%       {\bibstring{review}\space}%
-%     \review{\thefield{review}}%
-%     \newunit}}%
 
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{test:bookauthor}%
