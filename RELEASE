@@ -1,9 +1,10 @@
 
-INTERIM
+RELEASE NOTES FOR VERSION 2018.11.09
 
 * for articles etc., limited support for 'season' field
 * limited support for 'endyear' and 'endorigyear' fields
-* removed unused bibliography options
+* removed unused bibliography options and commented code
+* fix inreference bibliography alias
 
 RELEASE NOTES FOR VERSION 2018.11.02
 
