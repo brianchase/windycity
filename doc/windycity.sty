@@ -1,4 +1,4 @@
-% Last modified: Fri 02 Nov 2018 06:31:31 PM CDT
+% Last modified: Fri 09 Nov 2018 03:09:01 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -83,7 +83,6 @@
 \renewcommand{\cftmarktoc}{\@mkboth{\contentsname}{\contentsname}}%
 \renewcommand{\cftsecfont}{\normalfont}%
 \renewcommand{\cftsecpagefont}{\normalfont}%
-%\renewcommand{\cftsubsubsecfont}{\small}%
 
 \newcounter{sh}
 \renewcommand{\thesh}{Abbreviations}%
@@ -138,8 +137,8 @@
   {1.5ex \@plus .2ex}%
   {\normalfont\it}}
 
-\usepackage{calc}
 \usepackage{ragged2e}
+\usepackage{calc}% for \setlist[itemize] below
 \usepackage{enumitem}
 \setlist[enumerate]{noitemsep}
 \setlist[itemize]{%
@@ -168,10 +167,10 @@
   pdftitle={Windy City for biblatex},
   urlcolor=black]{hyperref}
 \urlstyle{rm}
-\usepackage{btxdockit}
+\usepackage{btxdockit}% for \bibfield, \bibtype, \cmd, marglist
 \lstset{basicstyle=\small\ttfamily}
-\pretocmd{\cmd}{\sloppy}{}{}
 \pretocmd{\bibfield}{\sloppy}{}{}
 \pretocmd{\bibtype}{\sloppy}{}{}
+\pretocmd{\cmd}{\sloppy}{}{}
 
 \endinput
