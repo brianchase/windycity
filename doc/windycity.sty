@@ -1,4 +1,4 @@
-% Last modified: Fri 09 Nov 2018 04:01:53 PM CST
+% Last modified: Fri 09 Nov 2018 05:00:30 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -37,12 +37,12 @@
   \renewcommand{\ttdefault}{lmtt}%
 \fi
 
-%\gdef\@email{}%
+\gdef\@email{}%
 \gdef\@subtitle{}%
 \gdef\@version{}%
 \gdef\@website{}%
-%\newcommand{\email}[1]{\gdef\@email{\mailto{#1}}}%
-%\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+\newcommand{\email}[1]{\gdef\@email{\mailto{#1}}}%
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
 \newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}%
 \newcommand{\version}[1]{\gdef\@version{Version \liningnums{#1}}}
 \newcommand{\website}[1]{\gdef\@website{\url{#1}}}%
