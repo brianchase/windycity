@@ -1,4 +1,4 @@
-% Last modified: Fri 09 Nov 2018 05:13:06 PM CST
+% Last modified: Fri 09 Nov 2018 07:46:28 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -165,10 +165,11 @@
   pdftitle={Windy City for biblatex},
   urlcolor=black]{hyperref}
 \urlstyle{rm}
-\usepackage{btxdockit}% for \bibfield, \bibtype, \cmd, marglist
+\usepackage{btxdockit}% for \bibfield, \bibtype, \cmd, marglist, \op
 \lstset{basicstyle=\small\ttfamily}
 \pretocmd{\bibfield}{\sloppy}{}{}
 \pretocmd{\bibtype}{\sloppy}{}{}
 \pretocmd{\cmd}{\sloppy}{}{}
+\pretocmd{\op}{\sloppy}{}{}
 
 \endinput
