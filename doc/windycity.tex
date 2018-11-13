@@ -1,4 +1,4 @@
-% Last modified: Fri 09 Nov 2018 07:37:34 PM CST
+% Last modified: Tue 13 Nov 2018 04:21:01 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -328,10 +328,6 @@ retain the author's position. However, like \cmd{fullcite}, and unlike
 \cmd{cite*}, it has no effect on citation tracking. There is perhaps
 no practical use for this command aside from testing.
 
-% No need to mention, but this command differs from \cmd{fullcite}
-% only in that it does not print \bibfield{shorthands}.
-%\cmditem{fullcitens}[prenote][postnote]{key}
-
 \cmditem{fullparencite}[prenote][postnote]{key}
 
 Also mainly for testing, this command prints the first, complete
@@ -358,15 +354,6 @@ and examples in \textit{CMS}, see especially 15.24.}
 Similar to \cmd{bibentry}, this command prints the reference list
 entry of a work.
 
-% NOT IN USE:
-%\cmditem{review}{key}
-
-%This command is strictly for the style's internal use when processing
-%\bibtype{article} and \bibtype{review} entries. If those entries have
-%the data field \bibfield{review}, the style uses this command to cite
-%the \bibfield{entrykey} in that field. For more on reviews, see
-%\bibfield in Section \ref{datafields} and \ref{14.215}.
-
 \end{ltxsyntax}
 
 \subsection{Additional Data Fields}
@@ -390,11 +377,6 @@ earlier, the citation of \textit{Chaucer Life-Records} in Section
 punctuation, by ``from materials compiled by John M. Manly and Edith
 Richert, with the assistance of Lilian J. Redstone et al.''
 
-% NOT IN USE:
-%\item[review] This field, for \bibtype{article} or \bibtype{review}
-%entries, holds the \bibfield{entrykey} of a work under review. An
-%example appears below, in \ref{14.215}.
-
 \item[seriesaddon] This field is for additional information about a
 book's series, such as \textit{2nd ser.} and \textit{n.s.}. For
 examples, see \ref{14.132} and \ref{14.195}.
@@ -405,18 +387,6 @@ examples, see \ref{14.132} and \ref{14.195}.
 need to use it in a bibliography database. Instead, always use
 \bibfield{shorttitle}. For more information on how the style handles
 titles, see Section \ref{authtitles}.
-
-% NOT IN USE:
-%\item[translatortype] The style recognizes just two types of
-%translators, those of a \bibfield{title} and those of a
-%\bibfield{booktitle}. Accordingly, the style looks for just two
-%values of \bibfield{translatortype}: \textit{title} and
-%\textit{booktitle}. By default, the style treats all translators as
-%those of a \bibfield{title}. Therefore, you only need to use
-%\bibfield{translatortype} to indicate the translator of a
-%\bibfield{booktitle}. For more information on how the style handles
-%titles, see Section \ref{authtitles}. For more information on how
-%the style handles translators, see Section \ref{edtrans}.
 
 \item[volumea] Use this field when an entry requires a second volume
 number. For an example, see Section \ref{collect}.
@@ -1185,7 +1155,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 %\subsubsection{Anonymous works---known authorship}
 % 14.80
 
-% No way to do this:
 %\begin{itemize}
 %\item[N] \fullcite{horsley1796}
 
@@ -1658,11 +1627,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 \subsubsection{Books consulted online}
 % 14.167
 
-% The \bibfield{doi} won't wrap. The problem is that, if I want a proper
-% link to the document, I need to wrap \bibfield{doi} in 'href' with the
-% initial part of the address. But, it seems, \cmd{biblatex} wraps
-% links in 'url', not 'href'.
-
 \begin{itemize}
 \item[N] \fullcite{antokoletz2008}
 
@@ -1743,10 +1707,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 
 \item[B] \bibentry{authora}
 \end{itemize}
-
-% No need to add this:
-%\subsubsection{Journal page references}
-% 14.183
 
 \setcounter{subsubsection}{183}
 \subsubsection{Electronic journal articles---URI or DOI}
@@ -1885,11 +1845,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 \item[B] \bibentry{cole1992}
 \end{itemize}
 
-% No need to add this:
-%\subsubsection{Magazine article titles}
-% 14.201
-
-% FIX: Not possible. Add a field for 'department'?
 %\subsubsection{Magazine departments}
 % 14.202
 
@@ -1907,7 +1862,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 \item[B] \bibentry{forester2000}
 \end{itemize}
 
-% FIX: Not possible. Add a field for 'department'?
 %\setcounter{subsubsection}{204}
 %\subsubsection{Regular columns}
 % 14.205
@@ -1922,17 +1876,10 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 \item[B] \bibentry{nytimes2002}
 \end{itemize}
 
-% FIX: Perhaps use howpublished field to accommodate this?
 %\setcounter{subsubsection}{208}
 %\subsubsection{Weekend supplements, magazines, and the like}
 % 14.209
 
-% No need to add this:
-%\setcounter{subsubsection}{211}
-%\subsubsection{News services}
-% 14.212
-
-% FIX: Perhaps use howpublished field to accommodate this?
 %\subsubsection{News releases}
 % 14.213
 
@@ -1947,7 +1894,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 \item[B] \bibentry{ratliff1999}
 \end{itemize}
 
-% FIX: Not possible. Add fields for this?
 %\subsubsection{Reviews of plays, movies, television programs,
 %concerts, and the like}
 % 14.216
@@ -1956,7 +1902,6 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 %\subsubsection{Unsigned reviews}
 % 14.217
 
-% Not possible: too many oddities in how CMS format this:
 %\begin{itemize}
 %\item[N] \fullcite{zeitung1828}
 
@@ -2027,12 +1972,9 @@ days:\footcite[17.215]{chicago2003}
 %\subsection{Special Types of References}
 %\setcounter{subsection}{14}
 
-% FIX: Not possible. Perhaps use 'type' field to identify an entry as
-% citing a dictionary or encyclopedia and cite accordingly.
 %\subsubsection{Dictionaries and encyclopedias}
 % 14.247
 
-% FIX: Not possible. See previous note.
 %\subsubsection{Dictionaries and encyclopedias online}
 % 14.248
 
