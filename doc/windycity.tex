@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Nov 2018 04:21:01 AM CST
+% Last modified: Tue 13 Nov 2018 03:21:20 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2018.11.09}
+\version{2018.11.13}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 \newpage
@@ -183,6 +183,25 @@ work's database entry. Options affect how the style formats citations
 of that work.
 
 \begin{marglist}
+
+\item[anonauth] This option prints the author's name of an anonymously
+published work in brackets, as shown in \textit{CMS} \ref{14.80}:
+
+\begin{itemize}
+\item[N] \fullcite{horsley1796}
+
+\item[B] \bibentry{horsley1796}
+\end{itemize}
+
+\item[anonqauth] This option is similar to the previous but adds a
+question mark after the author's name, indicating doubt about the
+authorship. The following example also comes from \ref{14.80}:
+
+\begin{itemize}
+\item[N] \fullcite{cook1730}
+
+\item[B] \bibentry{cook1730}
+\end{itemize}
 
 \item[isbn] Use this option to print the ISBN of a particular work in
 bibliographies. The ISBN will appear at the end of the work's entry
@@ -1148,23 +1167,54 @@ of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
 %\item[B] \bibentry{meredith1970.1}
 \end{itemize}
 
-%\subsubsection{Anonymous works---unknown authorship}
+\subsubsection{Anonymous works---unknown authorship}
 % 14.79
 
-%\setcounter{subsubsection}{79}
-%\subsubsection{Anonymous works---known authorship}
+\begin{itemize}
+\item[N] \fullcite{anon1610}
+
+\item[B] \bibentry{anon1610}
+
+\item[N] \fullcite{anon1547}
+
+\item[B] \bibentry{anon1547}
+\end{itemize}
+
+\subsubsection{Anonymous works---known authorship}
 % 14.80
+\label{14.80}
+
+\begin{itemize}
+\item[N] \fullcite{horsley1796}
+
+\item[B] \bibentry{horsley1796}
+
+\item[N] \fullcite{cook1730}
+
+\item[B] \bibentry{cook1730}
+\end{itemize}
+
+%\subsubsection{Pseudonyms---unknown authorship}
+% 14.81
+
+% See comment for 14.82, below.
 
 %\begin{itemize}
-%\item[N] \fullcite{horsley1796}
+%\item[N] \fullcite{centinel1981}
 
-%\item[B] \bibentry{horsley1796}
+%\item[B] \bibentry{centinel1981}
 %\end{itemize}
 
 \setcounter{subsubsection}{81}
 \subsubsection{Pseudonyms---known authorship}
 % 14.82
 \label{14.82}
+
+If you want to give an author's real name, put it in the
+\bibfield{nameaddon} field. If the real name is unknown, and you want
+to indicate that the printed name is a pseudonym, put 'pseud.' in
+\bibfield{nameaddon}. \textit{CMS} discusses the latter issue in
+14.81, but the style has problems formatting its example.
 
 \begin{itemize}
 \item[N] \fullcite{carre1982}

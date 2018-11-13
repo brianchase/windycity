@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Nov 2018 12:45:47 PM CST
+% Last modified: Tue 13 Nov 2018 05:11:17 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.11.09 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.11.13 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -28,6 +28,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography and Entry Options  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providetoggle{anonauth}
+\DeclareEntryOption{anonauth}[true]{%
+  \ifstrequal{#1}{true}
+    {\renewcommand*{\anona}{\bibopenbracket}%
+     \renewcommand*{\anonb}{\bibclosebracket}}%
+    {}}%
+
+\providetoggle{anonqauth}
+\DeclareEntryOption{anonqauth}[true]{%
+  \ifstrequal{#1}{true}
+    {\renewcommand*{\anona}{\bibopenbracket}%
+     \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
+    {}}%
 
 \providetoggle{annotate}
 \DeclareBibliographyOption{annotate}[true]{%
@@ -255,6 +269,8 @@
 \let\cbx@bibstring\empty
 \let\cbx@deflabel\empty
 \let\cbx@namelist\empty
+\let\anona\empty
+\let\anonb\empty
 \let\pluga\empty
 \let\plugb\empty
 \let\xeditor\empty
@@ -550,6 +566,8 @@
      \iffieldundef{extradate}
        {}
        {\mknumalph{\thefield{extradate}}}
+     \clearfield{year}%
+     \clearfield{endyear}%
      \newunit}%
     {}}%
 
@@ -848,12 +866,12 @@
   \ifnameundef{\cbx@namelist}
     {}
     {\iftoggle{bibliography}
-       {\pluga\printnames[\cbx@deflabel]{\cbx@namelist}\plugb}%
+       {\anona\pluga\printnames[\cbx@deflabel]{\cbx@namelist}\plugb\anonb}%
        {\ifthenelse{\value{\cbx@namelist}>3}
-          {\pluga\printnames[\cbx@deflabel][-1]{\cbx@namelist}%
-           \plugb}%
-          {\pluga\printnames[\cbx@deflabel]{\cbx@namelist}%
-           \plugb}}}}
+          {\anona\pluga\printnames[\cbx@deflabel][-1]{\cbx@namelist}%
+           \plugb\anonb}%
+          {\anona\pluga\printnames[\cbx@deflabel]{\cbx@namelist}%
+           \plugb\anonb}}}}
 
 \newbibmacro*{nameaddon}{%
   \iffieldundef{nameaddon}
@@ -865,6 +883,8 @@
 \newbibmacro*{clearnames+empty}{%
   \clearname{\cbx@namelist}%
   \let\cbx@namelist\empty
+  \let\anona\empty
+  \let\anonb\empty
   \let\pluga\empty
   \let\plugb\empty}%
 
@@ -1075,8 +1095,12 @@
   \iffieldundef{pages}
     {}
     {\iftoggle{reflist}
-       {\setunit{\addcolon\space}%
-        \printfield{pages}}%
+       {\ifthenelse{\iffieldundef{number}\AND
+                      \iffieldundef{month}}
+          {\setunit{\addcolon}%
+           \printfield{pages}}%
+          {\setunit{\addcolon\space}%
+           \printfield{pages}}}
        {\usebibmacro{colon+pages}}}}
 
 \newbibmacro*{doi+finentry+etc}{%
@@ -1290,7 +1314,7 @@
      \stripzeros{\thefield{day}}%
      \iffieldundef{endday}
        {}
-       {\textendash\stripzeros{\thefield{endday}}}
+       {\textendash\stripzeros{\thefield{endday}}}% needs '%'
      \iffieldundef{year}
        {}
        {\addcomma\space}}}

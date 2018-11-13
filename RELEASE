@@ -1,4 +1,13 @@
 
+RELEASE NOTES FOR VERSION 2018.11.13
+
+* fixed spacing of date for periodicals (resuling from recent support
+  for endday field)
+* fixed spacing between volumes and pages in author-date system for
+  periodicals
+* support names of anonymous authors as in CMS 14.80 (16th edition)
+  and CMS 14.79 (17th edition)
+
 RELEASE NOTES FOR VERSION 2018.11.09
 
 * for articles etc., limited support for 'season' field
