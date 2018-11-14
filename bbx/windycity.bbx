@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Nov 2018 05:11:17 PM CST
+% Last modified: Wed 14 Nov 2018 10:21:42 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -566,8 +566,6 @@
      \iffieldundef{extradate}
        {}
        {\mknumalph{\thefield{extradate}}}
-     \clearfield{year}%
-     \clearfield{endyear}%
      \newunit}%
     {}}%
 
@@ -1553,7 +1551,6 @@
        \usebibmacro{origpublisher}%
        \usebibmacro{origyear+origendyear}}}}
 
-% CHECK:
 \newbibmacro*{origyear+origendyear}{%
   \iffieldundef{origyear}
     {}
