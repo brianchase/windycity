@@ -1,4 +1,4 @@
-% Last modified: Wed 14 Nov 2018 10:21:42 AM CST
+% Last modified: Wed 14 Nov 2018 10:23:55 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1299,23 +1299,24 @@
 
 \newbibmacro*{month+day+year}{%
   \printfield{month}%
-  \usebibmacro{day+endday}%
-  \iffieldundef{year}
+  \ifboolexpr{ test {\iffieldundef{day}}
+               and test {\iffieldundef{year}}}
     {}
-    {\addspace
-     \printfield{year}}}
+    {\iffieldundef{year}
+       {\usebibmacro{day+endday}}%
+       {\iffieldundef{day}
+          {\addspace
+           \printfield{year}}%
+          {\usebibmacro{day+endday}%
+           \addcomma\space
+           \printfield{year}}}}}
 
 \newbibmacro*{day+endday}{%
-  \iffieldundef{day}
+  \addspace
+  \stripzeros{\thefield{day}}%
+  \iffieldundef{endday}
     {}
-    {\addspace
-     \stripzeros{\thefield{day}}%
-     \iffieldundef{endday}
-       {}
-       {\textendash\stripzeros{\thefield{endday}}}% needs '%'
-     \iffieldundef{year}
-       {}
-       {\addcomma\space}}}
+    {\textendash\stripzeros{\thefield{endday}}}}
 
 % Treat 'season' as an alternative for 'issue':
 \newbibmacro*{issue+season+year}{%
