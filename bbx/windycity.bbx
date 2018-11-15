@@ -1,4 +1,4 @@
-% Last modified: Wed 14 Nov 2018 09:05:31 PM CST
+% Last modified: Wed 14 Nov 2018 09:06:15 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.11.13 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.11.14 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -61,6 +61,12 @@
   \ifstrequal{#1}{true}
     {\global\toggletrue{firstshort}}%
     {\global\togglefalse{firstshort}}}
+
+\providetoggle{ibid}
+\DeclareBibliographyOption{ibid}[true]{%
+  \ifstrequal{#1}{true}
+    {\global\toggletrue{ibid}}%
+    {\global\togglefalse{ibid}}}
 
 \providetoggle{isbn}
 \DeclareBibliographyOption{isbn}[true]{%
@@ -111,6 +117,8 @@
   citetracker=constrict,
   date=long,
   dateabbrev=false,
+% Drop this line for CMS 17th ed.:
+  ibid=true,
   ibidtracker=constrict,
   idemtracker=constrict,
   indexing=true,

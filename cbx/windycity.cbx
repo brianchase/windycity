@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Nov 2018 03:22:07 PM CST
+% Last modified: Wed 14 Nov 2018 09:04:47 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.11.13 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.11.14 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -273,8 +273,18 @@
     {\usebibmacro{cite:crossref}}%
   \usebibmacro{savefields}}%
 
-\newbibmacro*{cite:ibid}{%
+\newbibmacro*{cite:ibid+old}{%
   \bibcpstring{ibidem}%
+  \newunit
+  \ifloccit
+    {\global\toggletrue{cbx@loccit}}%
+    {}}
+
+\newbibmacro*{cite:ibid}{%
+  \iftoggle{ibid}
+    {\bibcpstring{ibidem}}%
+    {\renewcommand*{\cbx@deflabel}{labelname}%
+     \printtext[bibhyperref]{\usebibmacro{author+bookauthor+etc}}}
   \newunit
   \ifloccit
     {\global\toggletrue{cbx@loccit}}%
