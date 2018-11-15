@@ -1,4 +1,17 @@
 
+RELEASE NOTES FOR VERSION 2018.11.14
+
+* finally got a handle on the author-date format for periodicals,
+  rolling back some recent changes (ugh!)
+* put back bibliography options 'useeditor' and 'usetranslator', which
+  are necessary after all (double ugh!)
+* more readable and arguably simpler date processing for periodicals
+* added bibliography (or preamble) option 'ibid' to prepare for the
+  17th edition of CMS
+* updated windycity.tex to reflect the last point, also to make use of
+  optionlist
+* remove unused entries from windycity.bib for the 15th edition of CMS
+
 RELEASE NOTES FOR VERSION 2018.11.13
 
 * fixed spacing of date for periodicals (resuling from recent support
