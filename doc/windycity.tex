@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Nov 2018 03:21:20 PM CST
+% Last modified: Wed 14 Nov 2018 04:41:08 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2018.11.13}
+\version{2018.11.14}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 \newpage
@@ -25,12 +25,12 @@ Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
 to the \textit{The Chicago Manual of Style}
 (\textit{CMS}).\footnote{\cite{chicago2010} Support for the 17th
-edition of \textit{CMS} is in development.} It accurately handles a
-wide range of citations and includes a set of options and commands to
-accommodate special circumstances. It also has extensive support for
-citing and arranging different kinds of editors, translators, and
-compilers within a single citation. These features make Windy City
-especially suitable for academic work.
+edition is in development.} It accurately handles a wide range of
+citations and includes a set of options and commands to accommodate
+special circumstances. It also has extensive support for citing and
+arranging different kinds of editors, translators, and compilers
+within a single citation. These features make Windy City especially
+suitable for academic work.
 
 The following sections assume familiarity with \textit{CMS} and
 \biblatex. Section \ref{basics} gives a brief overview of the style's
@@ -55,12 +55,13 @@ Four.\footcite[35]{shields2008} And five.\footcite[51]{beattie1974}
 By default, the first citation of a work takes a long form, similar to
 its entry in the bibliography. If consecutive citations of a work
 appear on the same page, citations after the first receive an
-\textit{ibid}.\footnote{As such, the first citation of a work on a
-page never receives an \textit{ibid}. In line with the 17th edition of
-\textit{CMS}, which discourages the use of \textit{ibid}., the style
-will eventually drop it from the standard format but allow it as an
-option.} Otherwise, subsequent citations of a work usually list short
-forms of the author's name and the work's title.
+\textit{ibid}.\footnote{In line with the 17th edition of \textit{CMS},
+which discourages the use of \textit{ibid}., Windy City will
+eventually drop it from the standard format but allow it as an option
+(see \textit{CMS}, 17th edition, 14.34).\nocite{chicago2017} To
+disable it in the current version, see Section \ref{preops}.}
+Otherwise, subsequent citations of a work usually list short forms of
+the author's name and the work's title.
 
 The short form of a name usually consists of a surname. If the name of
 an editor, translator, or compiler occupies the author's position, the
@@ -90,9 +91,7 @@ output of \cmd{printshorthands}.
 The next note shows another feature of the
 style.\footcite{camus1991a,camus1991b} It contains consecutive, first
 citations of works by the same author. The style prints the author's
-full name in the first citation and the short form in the
-second.\footnote{As far as I know, \textit{CMS} has no explicit policy
-on this point, but it seems reasonable and fairly conventional.} If
+full name in the first citation and the short form in the second. If
 these citations were not consecutive, both citations would include the
 full name; only subsequent citations would use the short form.
 
@@ -121,71 +120,94 @@ loads \biblatex. Preamble options affect the format of notes,
 bibliographies, and reference lists. Some features of the style
 require them.
 
-\begin{marglist}
+\begin{optionlist}
 
-\item[annotate] Use this option to print an annotated bibliography.
-Annotations will appear in block paragraphs below their associated
-entries. To change the spacing between entries and annotations, change
-the value of \cmd{bibitemsep}.
+\optitem[false]{annotate}{\opt{true}, \opt{false}}
 
-\item[collsonly] By default, citing individual works of a collection
-adds an entry for each work to the bibliography.\footnote{The style's
-defaults for \opt{mincrossrefs} and \opt{minxrefs} is \liningnums{2}.
-This means that the style requires at least two cross-references to a
-collection before adding it to the bibliography.} This could result in
-needless clutter, especially after citing many volumes of a
-multivolume work. To exclude individual works and print only an entry
-for the collection as a whole, use \opt{collsonly}. This option sets
-\opt{mincrossrefs} and \opt{minxrefs} to \liningnums{1} and then
-filters from the bibliography all \bibtype{inbook} entries that
-cross-reference other entries and all \bibtype{incollection} entries
-that cite chapters of a cross-referenced book. Thus, it has no effect
-on many \bibtype{incollection} entries, such as articles in books,
-which need their own place in the bibliography. For some discussion of
+Use this option to print an annotated bibliography. Annotations will
+appear in block paragraphs below their associated entries. To change
+the spacing between entries and annotations, change the value of
+\cmd{bibitemsep}.
+
+\optitem[false]{collsonly}{\opt{true}, \opt{false}}
+
+By default, citing individual works of a collection adds an entry for
+each work to the bibliography.\footnote{The style's defaults for
+\opt{mincrossrefs} and \opt{minxrefs} is \liningnums{2}. This means
+that the style requires at least two cross-references to a collection
+before adding it to the bibliography.} This could result in needless
+clutter, especially after citing many volumes of a multivolume work.
+To exclude individual works and print only an entry for the collection
+as a whole, use \opt{collsonly}. This option sets \opt{mincrossrefs}
+and \opt{minxrefs} to \liningnums{1} and then filters from the
+bibliography all \bibtype{inbook} entries that cross-reference other
+entries and all \bibtype{incollection} entries that cite chapters of a
+cross-referenced book. Thus, it has no effect on many
+\bibtype{incollection} entries, such as articles in books, which need
+their own place in the bibliography. For some discussion of
 collections and multivolume works, see Section \ref{collect}.
 
-\item[firstshort] Use this option to print a shortened form of the
-first citation of each work. The resulting citation consists mainly of
-the author's name and the title. According to \textit{CMS}, this
-approach is optional for documents that have a complete
+\optitem[false]{firstshort}{\opt{true}, \opt{false}}
+
+Use this option to print a shortened form of the first citation of
+each work. The resulting citation consists mainly of the author's name
+and the title. According to \textit{CMS}, this approach is optional
+for documents that have a complete
 bibliography.\footnote{\cite[14.14]{chicago2010} See also
 14.24--14.28. By default, the style adds every cited work to the
 bibliography.}
 
-\item[isbn] Use this option to print ISBNs in bibliographies. A work's
-ISBN belongs in the \bibfield{isbn} field of its database entry. With
-this option, the style will print ISBNs at the end of every entry in
-the bibliography, though before annotations. To print the ISBN of a
+\optitem[true]{ibid}{\opt{true}, \opt{false}}
+
+This option controls whether consecutive citations to a work on the
+same page receive an \textit{ibid.}. Unlike the other entry options
+discussed here, the style sets this one to \textit{true} by default.
+Nevertheless, since the 17th edition of \textit{CMS} discourages the
+use of \textit{ibid.} (see 14.34), a subsequent release of the style
+will set it to \textit{false}.
+
+\optitem[false]{isbn}{\opt{true}, \opt{false}}
+
+Use this option to print ISBNs in bibliographies. A work's ISBN
+belongs in the \bibfield{isbn} field of its database entry. With this
+option, the style will print ISBNs at the end of every entry in the
+bibliography, though before annotations. To print the ISBN of a
 particular work, see the \bibfield{isbn} entry option in Section
 \ref{entryops}.
 
-\item[nolos] By default, every work with a \bibfield{shorthand}
-receives an entry in the bibliography. If you wish to exclude them,
-say, to avoid duplication with the output of \cmd{printshorthands},
-use \opt{nolos}.
+\optitem[false]{nolos}{\opt{true}, \opt{false}}
 
-\item[reflist] Use this option to print what \textit{CMS} calls a
-reference list, a bibliography in the author-date format. If you
-choose parenthetical citations over notes, you should consider using
-\opt{reflist} to maintain consistency with \textit{CMS}. You can
-accomplish the same effect by giving the option \opt{env=reflist} to
+By default, every work with a \bibfield{shorthand} receives an entry
+in the bibliography. If you wish to exclude them, say, to avoid
+duplication with the output of \cmd{printshorthands}, use \opt{nolos}.
+
+\optitem[false]{reflist}{\opt{true}, \opt{false}}
+
+Use this option to print what \textit{CMS} calls a reference list, a
+bibliography in the author-date format. If you choose parenthetical
+citations over notes, you should consider using \opt{reflist} to
+maintain consistency with \textit{CMS}. You can accomplish the same
+effect by giving the option \opt{env=reflist} to
 \cmd{printbibliography}. Thus, if you have more than one bibliography
 in a document, as in this one, you may print them in different
 formats.
 
-\end{marglist}
+\end{optionlist}
 
 \subsection{Entry Options}
 \label{entryops}
 
 An entry option is a value for the \bibfield{options} field of a
-work's database entry. Options affect how the style formats citations
-of that work.
+work's database entry. It affects the format of that particular work.
+For options that affect the format of every work, see the previous
+section.
 
-\begin{marglist}
+\begin{optionlist}
 
-\item[anonauth] This option prints the author's name of an anonymously
-published work in brackets, as shown in \textit{CMS} \ref{14.80}:
+\optitem[false]{anonauth}{\opt{true}, \opt{false}}
+
+This option prints the author's name of an anonymously published work
+in brackets, as shown in \textit{CMS} \ref{14.80}:
 
 \begin{itemize}
 \item[N] \fullcite{horsley1796}
@@ -193,9 +215,11 @@ published work in brackets, as shown in \textit{CMS} \ref{14.80}:
 \item[B] \bibentry{horsley1796}
 \end{itemize}
 
-\item[anonqauth] This option is similar to the previous but adds a
-question mark after the author's name, indicating doubt about the
-authorship. The following example also comes from \ref{14.80}:
+\optitem[false]{anonqauth}{\opt{true}, \opt{false}}
+
+This option is similar to the previous but adds a question mark after
+the author's name, indicating doubt about the authorship. The
+following example also comes from \ref{14.80}:
 
 \begin{itemize}
 \item[N] \fullcite{cook1730}
@@ -203,15 +227,19 @@ authorship. The following example also comes from \ref{14.80}:
 \item[B] \bibentry{cook1730}
 \end{itemize}
 
-\item[isbn] Use this option to print the ISBN of a particular work in
+\optitem[false]{isbn}{\opt{true}, \opt{false}}
+
+Use this option to print the ISBN of a particular work in
 bibliographies. The ISBN will appear at the end of the work's entry
 but before its annotation. To print ISBNs of every work, see the
 \bibfield{isbn} preamble option in the previous section.
 
-\item[noauth] This option tells the style to bypass the author's
-position of a work, both in notes and in bibliographies. Citations
-will begin with the title's position. This option is rarely necessary.
-But consider an example from \textit{CMS} 14.89:
+\optitem[false]{noauth}{\opt{true}, \opt{false}}
+
+This option tells the style to bypass the author's position of a work,
+both in notes and in bibliographies. Citations will begin with the
+title's position. This option is rarely necessary. But consider an
+example from \textit{CMS} 14.89:
 
 \begin{itemize}
 \item[N] \fullcite{crow1966}
@@ -241,9 +269,11 @@ how the work is sorted in the bibliography by, for example, setting
 first editor's surname, \textit{Crow}. See also \cmd{cite*} in Section
 \ref{citecmds}.
 
-\item[transfirst] According to \textit{CMS}, if a work has both an
-editor and a translator, their names should appear in citations in the
-order in which they appear on the work's title
+\optitem[false]{transfirst}{\opt{true}, \opt{false}}
+
+According to \textit{CMS}, if a work has both an editor and a
+translator, their names should appear in citations in the order in
+which they appear on the work's title
 page.\footcite[14.88]{chicago2010} By default, the style lists editors
 first. However, entries with the option \bibfield{transfirst} reverse
 this order: Their translators print first. If a work's translators and
@@ -252,7 +282,7 @@ of their roles---for example, from \textit{edited and translated by}
 to \textit{translated and edited by}. For more on this option, and
 examples, see Section \ref{edtranspos}.
 
-\end{marglist}
+\end{optionlist}
 
 \subsection{Citation Commands}
 \label{citecmds}
@@ -433,23 +463,23 @@ them, though using them causes no harm. As such, you may designate a
 book's author, title, and subtitle in one of three ways:
 
 \begin{lstlisting}
-    ...
-    author = {Doe, Jane},
-    title = {A Book's Title},
-    subtitle = {A Book's Subtitle},
-    ...
-    bookauthor = {Doe, Jane},
-    booktitle = {A Book's Title},
-    booksubtitle = {A Book's Subtitle},
-    ...
-    bookauthor = {Doe, Jane},
-    title = {A Book's Title},
-    subtitle = {A Book's Subtitle},
-    ...
-    author = {Doe, Jane},
-    booktitle = {A Book's Title},
-    booksubtitle = {A Book's Subtitle},
-    ...
+  ...
+  author = {Doe, Jane},
+  title = {A Book's Title},
+  subtitle = {A Book's Subtitle},
+  ...
+  bookauthor = {Doe, Jane},
+  booktitle = {A Book's Title},
+  booksubtitle = {A Book's Subtitle},
+  ...
+  bookauthor = {Doe, Jane},
+  title = {A Book's Title},
+  subtitle = {A Book's Subtitle},
+  ...
+  author = {Doe, Jane},
+  booktitle = {A Book's Title},
+  booksubtitle = {A Book's Subtitle},
+  ...
 \end{lstlisting}
 
 \noindent Note that a \bibfield{subtitle} must go with a
