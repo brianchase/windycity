@@ -1,4 +1,4 @@
-% Last modified: Wed 14 Nov 2018 09:04:47 PM CST
+% Last modified: Fri 16 Nov 2018 10:36:28 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -273,18 +273,10 @@
     {\usebibmacro{cite:crossref}}%
   \usebibmacro{savefields}}%
 
-\newbibmacro*{cite:ibid+old}{%
-  \bibcpstring{ibidem}%
-  \newunit
-  \ifloccit
-    {\global\toggletrue{cbx@loccit}}%
-    {}}
-
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
     {\bibcpstring{ibidem}}%
-    {\renewcommand*{\cbx@deflabel}{labelname}%
-     \printtext[bibhyperref]{\usebibmacro{author+bookauthor+etc}}}
+    {\printtext[bibhyperref]{\usebibmacro{author+bookauthor+etc}}}
   \newunit
   \ifloccit
     {\global\toggletrue{cbx@loccit}}%
