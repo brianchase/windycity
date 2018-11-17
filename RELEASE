@@ -1,6 +1,7 @@
 INTERIM
 * better handling of editors for a series, maintitle, or issuetitle
 * limited support for 'endmonth' field for periodicals
+* fixed extra space from multicitedelim
 
 RELEASE NOTES FOR VERSION 2018.11.14
 
