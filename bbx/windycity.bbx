@@ -1,4 +1,4 @@
-% Last modified: Thu 15 Nov 2018 01:45:03 PM CST
+% Last modified: Sat 17 Nov 2018 11:45:47 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -808,7 +808,7 @@
 
 \newbibmacro*{edtranspunct}{%
   \ifthenelse{\equal{\xtitle}{book}\AND\NOT
-                  \iffieldundef{title}}
+                \iffieldundef{title}}
     {\setunit{\addcomma\space}}%
     {\newunit}}%
 
@@ -824,27 +824,23 @@
 % For editors and translators whose names belong after 'issuetitle',
 % 'maintitle', or 'series':
 
-\newbibmacro*{xeditor+yeditor}{%
-  \ifthenelse{\equal{\xeditor}{\thefield{editortype}}\OR
-                \equal{\xeditor}{\thefield{editoratype}}\OR
-                \equal{\xeditor}{\thefield{editorbtype}}\OR
-                \equal{\xeditor}{\thefield{editorctype}}}
-    {\renewcommand*{\yeditor}{\xeditor}%
-     \usebibmacro{editortypes}}%
+\newbibmacro*{xeditor+yeditor}[1]{%
+  \ifboolexpr{ test {\iffieldequalstr{editortype}{#1}}
+               or test {\iffieldequalstr{editoratype}{#1}}
+               or test {\iffieldequalstr{editorbtype}{#1}}
+               or test {\iffieldequalstr{editorctype}{#1}}}
+    {\setunit{\addcomma\space}%
+     \renewcommand*{\cbx@bibstring}{editor}%
+     \usebibmacro{editorlists}{#1}%
+     \usebibmacro{pluga+printnames}}%
     {}}%
 
-\newbibmacro*{editortypes}{%
-  \setunit{\addcomma\space}%
-  \renewcommand*{\cbx@bibstring}{editor}%
-  \usebibmacro{editorlists}%
-  \usebibmacro{pluga+printnames}}%
-
-\newbibmacro*{editorlists}{%
-  \ifthenelse{\equal{\yeditor}{\thefield{editortype}}}
+\newbibmacro*{editorlists}[1]{%
+  \iffieldequalstr{editortype}{#1}
     {\renewcommand*{\cbx@namelist}{editor}}%
-    {\ifthenelse{\equal{\yeditor}{\thefield{editoratype}}}
+    {\iffieldequalstr{editoratype}{#1}
        {\renewcommand*{\cbx@namelist}{editora}}%
-       {\ifthenelse{\equal{\yeditor}{\thefield{editorbtype}}}
+       {\iffieldequalstr{editorbtype}{#1}
           {\renewcommand*{\cbx@namelist}{editorb}}%
           {\renewcommand*{\cbx@namelist}{editorc}}}}}
 
@@ -970,13 +966,12 @@
 \newbibmacro*{issuetitle}{%
   \iffieldundef{issuetitle}
     {}
-    {\ifthenelse{\equal{special issue}{\thefield{issuetitle}}}
+    {\iffieldequalstr{issuetitle}{special issue}
        {}
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \renewcommand*{\xeditor}{issuetitle}%
-        \usebibmacro{xeditor+yeditor}}%
+        \usebibmacro{xeditor+yeditor}{issuetitle}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
@@ -1274,8 +1269,7 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \renewcommand*{\xeditor}{series}%
-     \usebibmacro{xeditor+yeditor}%
+     \usebibmacro{xeditor+yeditor}{series}%
      \newunit}}%
 
 \newbibmacro*{journallocation}{%
@@ -1429,8 +1423,7 @@
     {\newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \renewcommand*{\xeditor}{series}%
-     \usebibmacro{xeditor+yeditor}%
+     \usebibmacro{xeditor+yeditor}{series}%
      \setunit{\addcomma\space}}}
 
 \newbibmacro*{seriesaddon}{%
@@ -1470,8 +1463,7 @@
      \space\bibstring{of}\space
      \renewcommand*{\xtitle}{main}%
      \usebibmacro{longtitle+titleaddon}%
-     \renewcommand*{\xeditor}{maintitle}%
-     \usebibmacro{xeditor+yeditor}}}
+     \usebibmacro{xeditor+yeditor}{maintitle}}}
 
 \newbibmacro*{volumea}{%
   \iffieldundef{volumea}
