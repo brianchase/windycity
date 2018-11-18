@@ -1,4 +1,4 @@
-% Last modified: Sat 17 Nov 2018 04:04:02 PM CST
+% Last modified: Sat 17 Nov 2018 07:15:54 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.11.14 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.11.17 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -181,11 +181,11 @@
 \newcommand*{\ifciteibidmv}{%
   \blx@ifcitesingle
     {\blx@ifmpfncheck
-       {\ifthenelse{\ifentrytype{inbook}\AND
-                      \iffieldequalcs{booktitle}{lastbooktitle}\AND
-                      \iffieldequalcs{year}{lastyear}\AND
-                      \NOT\iffieldundef{volumes}\AND
-                      \NOT\iffirstonpage}}%
+       {\ifboolexpr{ test {\ifentrytype{inbook}}
+          and test {\iffieldequalcs{booktitle}{lastbooktitle}}
+          and test {\iffieldequalcs{year}{lastyear}}
+          and not test {\iffieldundef{volumes}}
+          and not test \iffirstonpage}}
        {\@secondoftwo}}%
     {\@secondoftwo}}%
 
@@ -195,7 +195,8 @@
 
 \newbibmacro*{parencite}{%
   \ifciteseen
-    {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+    {\ifboolexpr{ test \ifciteibid
+                  and not test \iffirstonpage}
        {\usebibmacro{pcite:labelyear+etc}}%
        {\iffieldundef{shorthand}
           {\usebibmacro{pcite:labelname+labeltitle}%
@@ -211,8 +212,8 @@
 \newbibmacro*{pcite:labelname+labeltitle}{%
   \iftoggle{noauth}
     {}
-    {\ifthenelse{\ifnameundef{labelname}\OR
-                   \iffieldundef{labelyear}}
+    {\ifboolexpr{ test {\ifnameundef{labelname}}
+                  or test {\iffieldundef{labelyear}}}
        {\iffieldundef{label}
           {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}%
           {\printtext[bibhyperref]{\printfield{label}}}}% needs these '%'
@@ -226,8 +227,8 @@
   \iffieldundef{labelyear}
     {}
     {\usebibmacro{pcite:origyear}%
-     \ifthenelse{\iffieldnum{year}\OR
-                   \iffieldnums{year}}
+     \ifboolexpr{ test {\iffieldnum{year}}
+                  or test {\iffieldnums{year}}}
       {}
       {\addcomma}%
      \printtext[bibhyperref]{%
@@ -267,12 +268,20 @@
   \ifciteseen
     {\renewcommand*{\cbx@deflabel}{labelname}%
      \iffieldundef{shorthand}
-       {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+       {\ifboolexpr{ test \ifciteibid
+                     and not test \iffirstonpage}
           {\usebibmacro{cite:ibid}}%
           {\usebibmacro{cite:short}}}
        {\usebibmacro{cite:shorthand}}}
     {\usebibmacro{cite:crossref}}%
   \usebibmacro{savefields}}%
+
+\newbibmacro*{cite:ibid+old}{%
+  \bibcpstring{ibidem}%
+  \newunit
+  \ifloccit
+    {\global\toggletrue{cbx@loccit}}%
+    {}}
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
@@ -348,19 +357,19 @@
      \addperiod}}%
 
 \newbibmacro*{postnote:first}{%
-  \ifthenelse{\iffieldundef{postnote}\AND
-                \iffieldundef{pages}\AND
-                \iffieldundef{url}}
+  \ifboolexpr{ test {\iffieldundef{postnote}}
+               and test {\iffieldundef{pages}}
+               and test {\iffieldundef{url}}}
     {\usebibmacro{doi+url+etc}}%
     {\usebibmacro{cite:pages}%
      \printfield{postnote}%
      \usebibmacro{doi+url+etc}}}
 
 \newbibmacro*{cite:vol+page}{%
-  \ifthenelse{\ifentrytype{book}\OR
-                \ifentrytype{bookinbook}\OR
-                \ifentrytype{inbook}\OR
-                \ifentrytype{incollection}}
+  \ifboolexpr{ test {\ifentrytype{book}}
+               or test {\ifentrytype{bookinbook}}
+               or test {\ifentrytype{inbook}}
+               or test {\ifentrytype{incollection}}}
     {\usebibmacro{vol+page}}%
     {\newunit}}%
 
@@ -382,8 +391,8 @@
 \newbibmacro*{cite:pages}{%
   \iffieldundef{pages}
     {}
-    {\ifthenelse{\ifentrytype{article}\OR
-                   \ifentrytype{review}}
+    {\ifboolexpr{ test {\ifentrytype{article}}
+                  or test {\ifentrytype{review}}}
        {\iffieldundef{postnote}
           {\printfield{pages}}%
           {}}
@@ -403,15 +412,15 @@
 \renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
 
 \newbibmacro*{colon}{%
-  \ifthenelse{\iffieldundef{pages}\AND
-                \iffieldundef{postnote}}
+  \ifboolexpr{ test {\iffieldundef{pages}}
+               and test {\iffieldundef{postnote}}}
     {}
-    {\ifthenelse{\iffieldundef{year}\AND
-                   \iffieldundef{month}\AND
-                   \iffieldundef{issue}}
+    {\ifboolexpr{ test {\iffieldundef{year}}
+                  and test {\iffieldundef{month}}
+                  and test {\iffieldundef{issue}}}
        {\setunit{\addcolon}}%
-       {\ifthenelse{\iffieldundef{number}\AND
-                      \iffieldundef{volume}}
+       {\ifboolexpr{ test {\iffieldundef{number}}
+                     and test {\iffieldundef{volume}}}
           {\newunit}%
           {\setunit{\addcolon\space}}}}}
 
