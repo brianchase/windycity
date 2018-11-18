@@ -1,4 +1,7 @@
-INTERIM
+
+RELEASE NOTES FOR VERSION 2018.11.17
+
+* replaced \ifthenelse with commands from etoolbox
 * better handling of editors for a series, maintitle, or issuetitle
 * limited support for 'endmonth' field for periodicals
 * fixed extra space from multicitedelim
