@@ -1,4 +1,4 @@
-% Last modified: Sun 18 Nov 2018 03:04:30 PM CST
+% Last modified: Sun 18 Nov 2018 03:23:01 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1163,7 +1163,9 @@
   \setunit{\addcomma\space}%
   \printlist{location}%
   \setunit{\addcomma\space}%
-  \usebibmacro{month+day+year}}%
+  \iftoggle{reflist}
+    {}
+    {\printfield{year}}}
 
 \newbibmacro*{howpublished}{%
   \iffieldundef{howpublished}
