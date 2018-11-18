@@ -1,4 +1,11 @@
 
+INTERIM
+
+* fixed 'type' field format
+* fixed double printing of year for theses and dissertations in
+  the author-date system
+* fixed punctation after 'Special issue' in bibliographies
+
 RELEASE NOTES FOR VERSION 2018.11.17
 
 * replaced \ifthenelse with commands from etoolbox
