@@ -1,4 +1,4 @@
-% Last modified: Sat 17 Nov 2018 11:26:28 PM CST
+% Last modified: Sun 18 Nov 2018 12:03:12 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -141,9 +141,8 @@
 \DeclareLanguageMapping{english}{american-windycity}
 \DeclareLabeldate{%
   \field{date}
-  \field{year}% not needed in earlier versions of biblatex!
+  \field{year}
   \field{bookyear}
-%  \field{eventdate}
   \field{origdate}
   \field{urldate}
   \literal{nodate}
@@ -943,11 +942,6 @@
           {\printfield{shortbooktitle}}}}
     {\printfield[\thefield{entrytype}]{labeltitle}}}
 
-\newbibmacro*{eventtitle}{%
-  \iffieldequalstr{entrytype}{proceedings}
-    {\renewcommand*{\xtitle}{event}}%
-    {}}
-
 \renewbibmacro*{booktitle}{%
   \iffieldundef{booktitle}
     {}
@@ -1005,7 +999,6 @@
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{book}{%
-  \usebibmacro{eventtitle}%
   \usebibmacro{bibindex}%
   \usebibmacro{author+title+ed}%
   \usebibmacro{ed+vol+part+etc}%
