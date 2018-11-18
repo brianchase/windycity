@@ -1,4 +1,4 @@
-% Last modified: Wed 14 Nov 2018 04:41:08 PM CST
+% Last modified: Sat 17 Nov 2018 07:17:24 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2018.11.14}
+\version{2018.11.17}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 \newpage
@@ -67,9 +67,9 @@ The short form of a name usually consists of a surname. If the name of
 an editor, translator, or compiler occupies the author's position, the
 short form of the name omits abbreviations of editorial roles, such as
 \textit{ed.} and \textit{trans.}, which appear only in first
-citations.\footcite[See 14.18, 14.27, 14.76]{chicago2010} If necessary
-to distinguish names, the short form will include first and middle
-initials.
+citations.\footnote{See \textit{CMS} 14.18, 14.27, 14.76.} If
+necessary to distinguish names, the short form will include first and
+middle initials.
 
 Several factors determine the short form of a title. If a work's entry
 in the bibliography database includes a \bibfield{shorttitle} or
@@ -273,14 +273,14 @@ first editor's surname, \textit{Crow}. See also \cmd{cite*} in Section
 
 According to \textit{CMS}, if a work has both an editor and a
 translator, their names should appear in citations in the order in
-which they appear on the work's title
-page.\footcite[14.88]{chicago2010} By default, the style lists editors
-first. However, entries with the option \bibfield{transfirst} reverse
-this order: Their translators print first. If a work's translators and
-editors are identical, using \bibfield{transfirst} reverses the order
-of their roles---for example, from \textit{edited and translated by}
-to \textit{translated and edited by}. For more on this option, and
-examples, see Section \ref{edtranspos}.
+which they appear on the work's title page (14.88). By default, the
+style lists editors first. However, entries with the option
+\bibfield{transfirst} reverse this order: Their translators print
+first. If a work's translators and editors are identical, using
+\bibfield{transfirst} reverses the order of their roles---for example,
+from \textit{edited and translated by} to \textit{translated and
+edited by}. For more on this option, and examples, see Section
+\ref{edtranspos}.
 
 \end{optionlist}
 
@@ -313,11 +313,7 @@ particular works. Use it with an asterisk to add every work in every
 
 This command prints the bibliography entry of a work. Although mainly
 for testing, you might use it for printing lists of works, as for a
-syllabus. It has no effect on citation tracking.\footnote{With
-\cmd{bibentry} and \cmd{refentry}, some discrepancies with
-bibliographies and references lists are possible but extremely rare. I
-have only seen them result from bugs in the style, all of which, I
-hope, are fixed.}
+syllabus. It has no effect on citation tracking.
 
 \cmditem{cite*}[prenote][postnote]{key}
 
@@ -518,17 +514,17 @@ typical. This section addresses some of them.
 Although its discussion is a bit obscure, \textit{CMS} treats some
 multivolume works as if they formed a single unit---but only if every
 volume of the collection has the same title and publication
-year.\footcite[See the examples of short citations in 14.29 and
-14.122--14.125]{chicago2010} The style accommodates these citations.
-Below is a note with an example from
-\ref{14.123}.\footcite[243]{byrne1981.4} In citing the fourth volume
-of the collection, the style prints the volume number not in the usual
-place, between the title and publisher's address, but near the end of
-the note, separated from the page number by a colon. Citing the fifth
-volume immediately thereafter, on the same page, produces an
-\textit{ibid} with the same arrangement of volume and page
-number.\footcite[91]{byrne1981.5} This occurs even though the fourth
-and fifth volumes are distinct entries in the bibliography database.
+year.\footnote{See the examples of short citations in 14.29 and
+14.122--14.125.} The style accommodates these citations. Below is a
+note with an example from \ref{14.123}.\footcite[243]{byrne1981.4} In
+citing the fourth volume of the collection, the style prints the
+volume number not in the usual place, between the title and
+publisher's address, but near the end of the note, separated from the
+page number by a colon. Citing the fifth volume immediately
+thereafter, on the same page, produces an \textit{ibid} with the same
+arrangement of volume and page number.\footcite[91]{byrne1981.5} This
+occurs even though the fourth and fifth volumes are distinct entries
+in the bibliography database.
 
 If citations to other volumes are not consecutive, or if consecutive
 citations are not on the same page, the style will render them in the
@@ -543,9 +539,7 @@ have printed ``Ibid., vol. 6.'' The first note would have shown the
 volume number in the usual place:
 
 \begin{itemize}
-\item[N] \fullcite{byrne1981.4}
-
-\item[B] \bibentry{byrne1981.4}
+\item[] \fullcite{byrne1981.4}
 \end{itemize}
 
 Citing multivolume works in this way requires you to cross-reference
@@ -565,7 +559,7 @@ collection is:
 correct output.\footnote{As noted later, using \bibtype{inbook} for
 books in collections may seem to stretch the usual profile of the
 entry type. To avoid this confusion, while getting the same results,
-you could also use \bibtype{bookinbook}.}
+you could use \bibtype{bookinbook}.}
 
 Adding more information has no effect. Thus, you could change the
 entry to:
@@ -597,8 +591,8 @@ must cross-reference the col\-lec\-tion---in this case,
   }
 \end{lstlisting}
 
-Occasionally, getting acceptable output for a multivolume work may
-require some trial-and-error. Consider a difficult example:
+Occasionally, getting acceptable output for a multivolume work
+requires some trial-and-error. Consider a difficult example:
 
 \begin{itemize}
 \item[N] \fullcite{kierkegaard1987}
@@ -651,7 +645,7 @@ entries. The output is at least adequate, though the placement of
 \end{itemize}
 
 \noindent Alternatively, you could have the style treat
-\textit{Either/Or} in the same way that it treated \textit{The Lisle
+\textit{Either/Or} in the same way that it treats \textit{The Lisle
 Letters} above. Here, too, you have options. First, cross-reference
 each volume of \textit{Either/Or} to the collection, making sure to
 include the year and volume in each \bibtype{inbook} entry. Then,
@@ -679,10 +673,9 @@ cross-reference individual works to their respective volume:
   }
 \end{lstlisting}
 
-\noindent The entries above drop the \bibfield{note} and
-\bibfield{maintitle} and reserve \bibfield{volume} for the volume of
-\textit{Either/Or} rather than \textit{Kierkegaard's Writings}. The
-resulting output is fairly clean:
+\noindent These entries drop the \bibfield{note} and
+\bibfield{maintitle} and use \bibfield{volume} for the volume of
+\textit{Either/Or}. The resulting output is fairly clean:
 
 \begin{itemize}
 \item[N] \fullcite[290]{kierkegaard1987.1.8b}
@@ -797,11 +790,11 @@ enough.} You may choose either \bibtype{inbook} or
 to a type other than the ones listed above, the style processes it as
 a book.
 
-For unusually complicated ci\-ta\-tions---at any rate, too complicated
-for the style---consider using the \bibtype{misc} entry type. The
-style formats these entries with a small number of fields but in way
-that makes it a fallback for almost anything. The example below is
-from 14.277:
+For unusually complicated ci\-ta\-tions---at any rate, those too
+complicated for the style---consider using the \bibtype{misc} entry
+type. The style formats these entries with a small number of fields
+but in way that makes it a fallback for almost anything. The example
+below is from 14.277:
 
 \begin{itemize}
 \item[N] \fullcite{roosevelt1959}
@@ -828,7 +821,7 @@ reference list entry.
              May 6, \thefield{year}, radio broadcast, Windows
              Media Audio, 47:46},
     userb = {Convocation Speech. Ball State Teacher's College.
-             May 6\newunit\thefield{year}. Radio broadcast.
+             May 6, \thefield{year}. Radio broadcast.
              Windows Media Audio. 47:46},
     url = {http://libx.bsu.edu/cdm4/item_viewer.php?CISOROOT=
            /ElRoos&CISOPTR=0&CISOBOX=1&REC=2},
@@ -913,10 +906,10 @@ example from \textit{CMS} \ref{14.88}:
 \end{itemize}
 
 Since the style treats a compiler as a kind of editor, the comments
-about editors above apply equally to compilers: If a work has
-compilers and translators, the style will print compilers' names
-first, unless you use \opt{transfirst}. For more on compilers, see
-Section \ref{edtransnames}.
+above apply to compilers, too: If a work has compilers and
+translators, the style will print compilers' names first, unless you
+use \opt{transfirst}. For more on compilers, see Section
+\ref{edtransnames}.
 
 \subsection{Types of Editors, Translators, and Compilers}
 \label{edtransnames}
