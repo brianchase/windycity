@@ -1,4 +1,4 @@
-% Last modified: Sun 18 Nov 2018 04:06:35 PM CST
+% Last modified: Sun 18 Nov 2018 07:36:27 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -468,6 +468,7 @@
 
 \DeclareFieldFormat{addendum}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{annotation}{\\[\bibitemsep] #1}
+% FIX: This must change for CMS 17th edition:
 \DeclareFieldFormat{doi}{%
   doi\addcolon
   \ifhyperref
@@ -1163,8 +1164,10 @@
   \setunit{\addcomma\space}%
   \printlist{location}%
   \setunit{\addcomma\space}%
-  \iftoggle{reflist}
-    {}
+  \iftoggle{bibliography}
+    {\iftoggle{reflist}
+       {}
+       {\printfield{year}}}
     {\printfield{year}}}
 
 \newbibmacro*{howpublished}{%
