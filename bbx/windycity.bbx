@@ -1,4 +1,4 @@
-% Last modified: Mon 19 Nov 2018 06:15:31 PM CST
+% Last modified: Tue 20 Nov 2018 02:41:21 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -472,8 +472,8 @@
 \DeclareFieldFormat{doi}{%
   doi\addcolon
   \ifhyperref
-    {\href{http://dx.doi.org/#1}{\nolinkurl{#1}}}
-    {#1}}%
+    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
 \DeclareFieldFormat{edition}{%
   \ifinteger{#1}
     {\mkbibordedition{#1}~\bibstring{edition}}%
