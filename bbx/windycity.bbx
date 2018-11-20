@@ -1,4 +1,4 @@
-% Last modified: Sun 18 Nov 2018 07:36:27 PM CST
+% Last modified: Mon 19 Nov 2018 06:15:31 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -503,6 +503,8 @@
 % font.
 
 \DeclareFieldFormat{shorthand}{#1}
+\DeclareFieldFormat{shorthandintro}{%
+  \ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{shorthandwidth}{#1}
 \DeclareFieldFormat{type}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{url}{\url{#1}}

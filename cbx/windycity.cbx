@@ -1,4 +1,4 @@
-% Last modified: Tue 20 Nov 2018 02:13:20 PM CST
+% Last modified: Tue 20 Nov 2018 02:13:04 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -269,7 +269,7 @@
        {\setunit{\addsemicolon\space}%
         \bibstring{citedas}%
         \addcomma\space
-        \printfield{shorthand}}}
+        \usebibmacro{cite:shorthand}}}
     {\printfield{postnote}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,7 +356,7 @@
     {}
     {\iftoggle{cbx@first}
        {\usebibmacro{postnote:first}%
-        \usebibmacro{shorthand}}%
+        \usebibmacro{shorthand+intro}}%
        {\usebibmacro{cite:vol+page}%
         \printfield{postnote}}%
      \addperiod}}%
@@ -403,13 +403,19 @@
           {}}
        {}}}
 
-\newbibmacro*{shorthand}{%
+% Use 'shorthandintro' to introduce a shorthand in whatever format you
+% want. See the example in windycity.bib.
+
+\newbibmacro*{shorthand+intro}{%
   \iffieldundef{shorthand}
     {}
-    {\setunit{\addperiod\space}%
-     \bibstring{citedas}%
-     \addcomma\space
-     \printfield{shorthand}}}
+    {\iffieldundef{shorthandintro}
+       {\setunit{\addspace}%
+        \printtext[parens]{%
+          \bibstring{citedas}\space
+          \usebibmacro{cite:shorthand}}}
+       {\setunit{\addspace}%
+        \printfield{shorthandintro}}}}
 
 % Protect commas against abbreviation dots and terminal punctuation
 % marks. Note '\addspace'. Using '\space' there causes problems.
