@@ -1,4 +1,4 @@
-% Last modified: Sun 18 Nov 2018 12:03:00 PM CST
+% Last modified: Tue 20 Nov 2018 02:13:20 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -41,6 +41,18 @@
 
 \AtEveryCitekey{\clearfield{addendum}}%
 \renewcommand*{\multicitedelim}{\addsemicolon}%
+
+% To facilitate uniform output, citations in notes always end with
+% '\addperiod' (see cite:postnote). This makes '\footcite{something}'
+% and '\footnote{\cite{something}}' functionally equivalent. To
+% prevent an extra period from printing in very rare cases, as when
+% the text of '\footcite{something}' ends with a capital letter,
+% remove '\addperiod' from the commands below:
+
+\renewcommand{\bibfootnotewrapper}[1]{%
+  \bibsentence#1}%
+\renewcommand{\bibendnotewrapper}[1]{%
+  \bibsentence#1}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citation Commands  %%
@@ -275,13 +287,6 @@
        {\usebibmacro{cite:shorthand}}}
     {\usebibmacro{cite:crossref}}%
   \usebibmacro{savefields}}%
-
-\newbibmacro*{cite:ibid+old}{%
-  \bibcpstring{ibidem}%
-  \newunit
-  \ifloccit
-    {\global\toggletrue{cbx@loccit}}%
-    {}}
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
