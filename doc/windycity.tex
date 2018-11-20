@@ -1,4 +1,4 @@
-% Last modified: Sat 17 Nov 2018 07:17:24 PM CST
+% Last modified: Tue 20 Nov 2018 04:15:28 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -67,7 +67,7 @@ The short form of a name usually consists of a surname. If the name of
 an editor, translator, or compiler occupies the author's position, the
 short form of the name omits abbreviations of editorial roles, such as
 \textit{ed.} and \textit{trans.}, which appear only in first
-citations.\footnote{See \textit{CMS} 14.18, 14.27, 14.76.} If
+citations.\footnote{See \textit{CMS} 14.18, 14.27, and 14.76.} If
 necessary to distinguish names, the short form will include first and
 middle initials.
 
@@ -80,13 +80,20 @@ its subtitle.
 
 If a work uses an abbreviation---what \biblatex calls a
 \bibfield{shorthand}---it replaces \textit{ibid}, the author's name,
-and related elements in subsequent citations. A few citations like
-these are scattered throughout these pages in reference to \textit{The
+and related elements in subsequent citations. Citations like
+this are scattered throughout these pages in reference to \textit{The
 Chicago Manual of Style}, which here takes the abbreviation
-\textit{CMS}. The first citation of a work with a \bibfield{shorthand}
-announces it at the end of the citation, as in, ``Hereafter,
-\textit{CMS}.'' See \ref{sh}, near the end of this document, for the
-output of \cmd{printshorthands}.
+\textit{CMS}. By default, the first citation of a work with a
+\bibfield{shorthand} announces it in parentheses at the end of the
+citation, as in the following:
+
+\begin{itemize}
+\item[] \fullcite[1:126]{shurtleff1853}
+\end{itemize}
+
+\noindent You may override the default announcement, and format it
+however you like, by adding your preferred content to
+\bibfield{shorthandintro}.
 
 The next note shows another feature of the
 style.\footcite{camus1991a,camus1991b} It contains consecutive, first
@@ -97,10 +104,10 @@ full name; only subsequent citations would use the short form.
 
 With certain collections, still other results are possible (see
 Section \ref{collect}). For examples of how the style truncates lists
-of names, see Section \ref{notes16}---in particular, \ref{14.76}. For
-options to skip long first citations, drop parts of citations, change
-the order of editors and translators, and more, see Sections
-\ref{preops} and \ref{entryops}.
+of names, see Section \ref{notes16}---in particular, the examples from
+\textit{CMS} \ref{14.76}. For options to skip long first citations,
+drop parts of citations, change the order of editors and translators,
+and more, see Sections \ref{preops} and \ref{entryops}.
 
 In addition to notes, the style supports parenthetical citations and
 reference lists in the author-date format of \textit{CMS}. You may use
@@ -2199,9 +2206,9 @@ date}
 \cmd{printshorthands}. By default, works from this list also appear in
 bibliographies and reference lists. To exclude them, use the preamble
 option \opt{nolos} (see Section \ref{preops}). Note that the style
-does not automatically italicize shorthands, as whether you should do
-so depends on whether you should italicize the work's title
-(14.55).\\}%
+does not automatically italicize a \bibfield{shorthand}. Whether you
+should italicize it depends on whether you should italicize the work's
+title (14.55).\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. In the next section, the same works appear in
