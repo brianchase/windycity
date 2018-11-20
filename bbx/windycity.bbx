@@ -1,4 +1,4 @@
-% Last modified: Tue 20 Nov 2018 02:41:21 PM CST
+% Last modified: Tue 20 Nov 2018 05:20:19 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -361,61 +361,64 @@
 
 % Affixes like 'Jr.', should appear last, delimited with a comma.
 
-\renewbibmacro*{name:first-last}[4]{%
+\renewbibmacro*{name:given-family}[4]{%
   \usebibmacro{name:delim}{#2#3#1}%
   \usebibmacro{name:hook}{#2#3#1}%
-  \ifblank{#2}{}{\mkbibnamefirst{#2}\isdot\bibnamedelimd}%
-  \ifblank{#3}{}{%
+  \ifdefvoid{#2}{}{\mkbibnamegiven{#2}\isdot\bibnamedelimd}%
+  \ifdefvoid{#3}{}{%
     \mkbibnameprefix{#3}\isdot
-    \ifpunctmark{'}
+    \ifprefchar
       {}
       {\ifuseprefix{\bibnamedelimc}{\bibnamedelimd}}}%
-  \mkbibnamelast{#1}\isdot
-  \ifblank{#4}{}{,\bibnamedelimd\mkbibnameaffix{#4}\isdot}}
+  \mkbibnamefamily{#1}\isdot
+  \ifdefvoid{#4}{}{\revsdnamepunct\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
 
-\renewbibmacro*{name:last-first}[4]{%
+\renewbibmacro*{name:family-given}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifblank{#3}{}{%
+     \ifdefvoid{#3}{}{%
        \ifcapital
          {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
-	 {\mkbibnameprefix{#3}\isdot}%
-       \ifpunctmark{'}{}{\bibnamedelimc}}%
-     \mkbibnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibnameaffix{#4}\isdot}%
-     \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibnamefirst{#2}\isdot}}
+         {\mkbibnameprefix{#3}\isdot}%
+       \ifprefchar{}{\bibnamedelimc}}%
+     \mkbibnamefamily{#1}\isdot
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
+     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibnamelast{#1}\isdot
-     \ifblank{#2#3}{}{\addcomma}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibnamefirst{#2}\isdot}%
-     \ifblank{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
-     \ifblank{#4}{}{,\bibnamedelimd\mkbibnameaffix{#4}\isdot}}}
+     \mkbibnamefamily{#1}\isdot
+     \ifboolexpe{%
+       test {\ifdefvoid{#2}}
+       and
+       test {\ifdefvoid{#3}}}
+       {}
+       {\revsdnamepunct}%
+     \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
+     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
+     \revsdnamepunct\ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}
 
-\renewbibmacro*{index:name}[5]{%
-  \begingroup
+\renewcommand*{\mkbibindexname}[4]{%
   \ifuseprefix
-    {\edef\theindexentry{%
-       \unexpanded{#1}{%
-         \ifblank{#4}{}{\unexpanded{#4} }%
-         \expandonce{\@firstofone #2}% remove spurious braces
-         \ifblank{#5}{}{ \unexpanded{#5}}%
-         \ifblank{#3}{}{, \unexpanded{#3}}%
-         \actualoperator
-         \ifblank{#4}{}{ \unexpanded{\MakeCapital{#4}} }%
-         \unexpanded{#2}%
-         \ifblank{#5}{}{ \unexpanded{#5}}%
-         \ifblank{#3}{}{, \unexpanded{#3}}}}}
-    {\edef\theindexentry{%
-       \unexpanded{#1}{%
-         \expandonce{\@firstofone #2}% remove spurious braces
-         \ifblank{#3#4}{}{,}%
-         \ifblank{#3}{}{ \unexpanded{#3}}%
-         \ifblank{#4}{}{ \unexpanded{#4}}%
-         \ifblank{#5}{}{, \unexpanded{#5}}}}}%
-  \theindexentry
-  \endgroup}%
+    {\ifdefvoid{#3}{}{#3 }%
+     \@firstofone #1% remove spurious braces
+     \ifdefvoid{#4}{}{ #4}%
+     \ifdefvoid{#2}{}{, #2}%
+     \actualoperator
+     \ifdefvoid{#3}{}{\MakeCapital{#3} }%
+     #1%
+     \ifdefvoid{#4}{}{ #4}%
+     \ifdefvoid{#2}{}{, #2}}
+    {\@firstofone #1% remove spurious braces
+     \ifboolexpe{%
+       test {\ifdefvoid{#2}}
+       and
+       test {\ifdefvoid{#3}}}
+       {}
+       {,}%
+     \ifdefvoid{#2}{}{ #2}%
+     \ifdefvoid{#3}{}{ #3}%
+     \ifdefvoid{#4}{}{, #4}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Field Formats for Titles  %%
