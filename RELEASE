@@ -8,6 +8,7 @@ INTERIM
 * fixed obscure punctuation issue with *notewrapper commands
 * added support for shorthandintro and improved handling of shorthands
 * updated field format for DOIs
+* update name formatting for affixes like 'Jr.'
 
 RELEASE NOTES FOR VERSION 2018.11.17
 
