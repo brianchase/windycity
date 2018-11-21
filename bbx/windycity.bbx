@@ -1,4 +1,4 @@
-% Last modified: Tue 20 Nov 2018 09:26:59 PM CST
+% Last modified: Wed 21 Nov 2018 02:14:24 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -770,10 +770,10 @@
   \iftoggle{transfirst}
     {}
     {\ifnameundef{editor}
-       {\ifboolexpr{ test {\ifnumgreater{\value{editora}}{1}}}
+       {\ifnumgreater{\value{editora}}{1}
           {\edef\cbx@bibstring{\cbx@bibstring +}}%
           {}}
-       {\ifboolexpr{ test {\ifnumgreater{\value{editor}}{1}}}
+       {\ifnumgreater{\value{editor}}{1}
           {\edef\cbx@bibstring{\cbx@bibstring +}}%
           {}}}}
 
@@ -865,7 +865,7 @@
 
 \newbibmacro*{bibnamedash+printnames}{%
   \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
-               and not test {\iffirstonpage}}
+               and not test \iffirstonpage}
     {\ifboolexpr{ test {\ifnameundef{author}}
                   and test {\ifnameundef{bookauthor}}}
        {\bibnamedash\plugb}%
@@ -878,7 +878,7 @@
     {}
     {\iftoggle{bibliography}
        {\anona\pluga\printnames[\cbx@deflabel]{\cbx@namelist}\plugb\anonb}%
-       {\ifboolexpr{ test {\ifnumgreater{\value{\cbx@namelist}}{3}}}
+       {\ifnumgreater{\value{\cbx@namelist}}{3}
           {\anona\pluga\printnames[\cbx@deflabel][-1]{\cbx@namelist}%
            \plugb\anonb}%
           {\anona\pluga\printnames[\cbx@deflabel]{\cbx@namelist}%
