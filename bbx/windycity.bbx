@@ -1,4 +1,4 @@
-% Last modified: Tue 20 Nov 2018 05:20:19 PM CST
+% Last modified: Tue 20 Nov 2018 09:26:59 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -148,12 +148,12 @@
   \literal{nodate}
 }
 \DeclareLabelname[inbook,incollection]{%
-    \field{author}
-    \field{bookauthor}
-    \field{editor}
-    \field{translator}
-    \field{editora}
-    \field{translatora}
+  \field{author}
+  \field{bookauthor}
+  \field{editor}
+  \field{translator}
+  \field{editora}
+  \field{translatora}
 }
 \DeclareSortingTemplate{nty}{
   \sort{
@@ -396,7 +396,7 @@
        {\revsdnamepunct}%
      \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
      \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
-     \revsdnamepunct\ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}
+     \ifdefvoid{#4}{}{\revsdnamepunct\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}
 
 \renewcommand*{\mkbibindexname}[4]{%
   \ifuseprefix
