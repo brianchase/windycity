@@ -1,4 +1,4 @@
-% Last modified: Wed 21 Nov 2018 02:14:24 PM CST
+% Last modified: Thu 22 Nov 2018 11:38:46 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -664,9 +664,9 @@
   \usebibmacro{a:authpos+edtrans}%
   \ifboolexpr{ togl {noed}
                and togl {notrans}}
-    {\toggletrue{noauth}}% for 'reflist'
+    {\toggletrue{noauth}}%
     {\ifnameundef{\cbx@namelist}
-       {\toggletrue{noauth}}% for 'reflist'
+       {\toggletrue{noauth}}%
        {\usebibmacro{b:authpos+edtrans}}}}
 
 \newbibmacro*{a:authpos+edtrans}{%
@@ -1099,8 +1099,10 @@
   \iffieldundef{pages}
     {}
     {\iftoggle{reflist}
-       {\ifboolexpr{ test {\iffieldundef{number}}
-                     and test {\iffieldundef{month}}}
+       {\ifboolexpr{test {\iffieldundef{number}}
+                    and test {\iffieldundef{month}}
+                    and test {\iffieldundef{issue}}
+                    and test {\iffieldundef{season}}}
           {\setunit{\addcolon}%
            \printfield{pages}}%
           {\setunit{\addcolon\space}%
