@@ -1,4 +1,4 @@
-% Last modified: Thu 22 Nov 2018 11:38:46 AM CST
+% Last modified: Fri 23 Nov 2018 03:14:40 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -288,6 +288,7 @@
 
 \providetoggle{authposition}
 \providetoggle{bibliography}
+\providetoggle{journalfirst}
 \providetoggle{cbx@first}
 \providetoggle{cbx@loccit}
 \providetoggle{cbx@short}
@@ -587,22 +588,10 @@
     {}}%
 
 \newbibmacro*{b:labelyear+extradate}{%
-  \iftoggle{noauth}
+  \ifboolexpr{ togl {noauth}
+               and not togl {journalfirst}}
     {\usebibmacro{labelyear+extradate}}%
     {}}%
-
-\newbibmacro*{reflist+date+number}{%
-  \iffieldundef{number}
-    {\ifboolexpr{ test {\iffieldundef{month}}
-                  and test {\iffieldundef{day}}}
-       {}
-       {\setunit{\addspace}%
-        \printtext[parens]{\usebibmacro{month+day+year}}}}
-    {\iffieldundef{volume}
-       {\setunit{\addcomma\space}%
-        \printfield[journum]{number}}%
-       {\setunit{\addspace}%
-        \printfield[parens]{number}}}}
 
 %%%%%%%%%%%%%%%
 %%  Authors  %%
@@ -620,7 +609,7 @@
                   and test {\ifnameundef{bookauthor}}}
        {\usebibmacro{authposition}}%
        {\usebibmacro{author+namelist}}%
-     \savefield{namehash}{\bbx@lasthash}%
+     \usebibmacro{journalfirst}%
      \usebibmacro{authpos+deflabel}%
      \newunit}}%
 
@@ -1089,11 +1078,7 @@
   \setunit{\space}%
   \usebibmacro{journallocation}%
   \printfield[noformat]{volume}%
-  \iftoggle{bibliography}
-    {\iftoggle{reflist}
-       {\usebibmacro{reflist+date+number}}%
-       {\usebibmacro{number+issue+month+etc}}}
-    {\usebibmacro{number+issue+month+etc}}}
+  \usebibmacro{number+issue+month+etc}}%
 
 \newbibmacro*{colon+pages+etc}{%
   \iffieldundef{pages}
@@ -1129,7 +1114,7 @@
   \usebibmacro{volume}%
   \usebibmacro{pages}%
   \usebibmacro{bookseries}%
-  \usebibmacro{number}%
+  \usebibmacro{book:number}%
   \usebibmacro{part}%
   \usebibmacro{maintitle}%
   \usebibmacro{publishers}%
@@ -1277,6 +1262,29 @@
      \usebibmacro{xeditor+yeditor}{series}%
      \newunit}}%
 
+\newbibmacro*{journalfirst}{%
+  \ifboolexpr{ test {\ifentrytype{article}}
+               and togl {bibliography}
+               and togl {noauth}}
+    {\toggletrue{journalfirst}%
+     \usebibmacro{bibjournaldash}%
+     \setunit{\space}%
+     \usebibmacro{journallocation}%
+     \clearlist{location}%
+     \usebibmacro{labelyear+extradate}}%
+    {\savefield{namehash}{\bbx@lasthash}}}
+
+\newbibmacro*{bibjournaldash}{%
+  \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
+               and not test \iffirstonpage}
+    {\bibnamedash\newunitpunct
+     \clearfield{journaltitle}%
+     \clearlist{location}}%
+    {\savefield{journaltitle}{\bbx@lasthash}%
+     \renewcommand*{\xtitle}{journal}%
+     \usebibmacro{longtitle+titleaddon}%
+     \let\xtitle\empty}}%
+
 \newbibmacro*{journallocation}{%
   \iflistundef{location}
     {}
@@ -1284,9 +1292,28 @@
        \printlist{location}}\space}}%
 
 \newbibmacro*{number+issue+month+etc}{%
-  \setunit{\addcomma\space}%
-  \printfield[journum]{number}%
+  \iftoggle{journalfirst}
+    {\newunit}%
+    {\setunit{\addcomma\space}}%
+  \usebibmacro{periodical:number}%
   \usebibmacro{issue+month+etc}}%
+
+% On how to format the issue number for periodicals, see CMS 17th
+% edition, 14.171 and 15.47.
+
+\newbibmacro*{periodical:number}{%
+  \iffieldundef{number}
+    {}
+    {\ifboolexpr{ togl {bibliography}
+                  and togl {reflist}
+                  and test {\iffieldundef{issue}}
+                  and test {\iffieldundef{season}}
+                  and test {\iffieldundef{month}}
+                  and not test {\iffieldundef{volume}}}
+       {\setunit{\space}%
+        \printfield[parens]{number}}%
+       {\setunit{\addcomma\space}%
+        \printfield[journum]{number}}}}
 
 \newbibmacro*{issue+month+etc}{%
   \iffieldundef{year}
@@ -1303,40 +1330,60 @@
           {\usebibmacro{issue+season+year}}%
           {\usebibmacro{month+day+year}}}
        {\setunit{\space}%
-        \printtext[parens]{%
-          \iffieldundef{month}
-           {\usebibmacro{issue+season+year}}%
-           {\usebibmacro{month+day+year}}}}}}
+        \iffieldundef{month}
+          {\usebibmacro{reflist+issue+season+year}}%
+          {\printtext[parens]{%
+             \usebibmacro{month+day+year}}}}}}
 
 \newbibmacro*{month+day+year}{%
   \usebibmacro{month+endmonth}%
-  \ifboolexpr{ test {\iffieldundef{day}}
-               and test {\iffieldundef{year}}}
-    {}
-    {\iffieldundef{year}
-       {\usebibmacro{day+endday}}%
-       {\iffieldundef{day}
-          {\addspace
-           \printfield{year}}%
-          {\usebibmacro{day+endday}%
-           \addcomma\space
-           \printfield{year}}}}}
+  \usebibmacro{reflist+day+year}}%
 
 \newbibmacro*{month+endmonth}{%
-  \printfield{month}%
-  \ifboolexpr{ test {\iffieldundef{endmonth}}
-               or test {\iffieldsequal{month}{endmonth}}}
+  \iffieldundef{month}
     {}
-    {\addslash\printfield{endmonth}}}%
+    {\printfield{month}%
+     \ifboolexpr{ test {\iffieldundef{endmonth}}
+                  or test {\iffieldsequal{month}{endmonth}}}
+       {}
+       {\addslash\printfield{endmonth}}}}
+
+\newbibmacro*{reflist+day+year}{%
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}}
+    {\iffieldundef{day}
+       {}
+       {\usebibmacro{day+endday+year}}}
+    {\iffieldundef{day}
+       {\addspace
+        \printfield{year}}%
+       {\usebibmacro{day+endday+year}}}}
+
+\newbibmacro*{day+endday+year}{%
+   \usebibmacro{day+endday}%
+   \addcomma\space
+   \printfield{year}}%
 
 \newbibmacro*{day+endday}{%
-  \addspace
-  \stripzeros{\thefield{day}}%
-  \iffieldundef{endday}
+  \iffieldundef{day}
     {}
-    {\textendash\stripzeros{\thefield{endday}}}}
+    {\addspace
+     \stripzeros{\thefield{day}}%
+     \iffieldundef{endday}
+       {}
+       {\textendash\stripzeros{\thefield{endday}}}}}
 
-% Treat 'season' as an alternative for 'issue':
+\newbibmacro*{reflist+issue+season+year}{%
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}
+               and test {\iffieldundef{issue}}
+               and test {\iffieldundef{season}}}
+      {}
+      {\setunit{\space}%
+       \printtext[parens]{\usebibmacro{issue+season+year}}}}
+
+% Treat 'season' as an alternative for 'issue'.
+
 \newbibmacro*{issue+season+year}{%
   \ifboolexpr{ test {\iffieldundef{issue}}
                and test {\iffieldundef{season}}}
@@ -1438,20 +1485,20 @@
      \printfield{seriesaddon}%
      \isdot\addcomma}}%
 
-\newbibmacro*{number}{%
+\newbibmacro*{book:number}{%
   \iffieldundef{number}
     {}
     {\ifentrytype{letter}
-       {\usebibmacro{letternumber}}%
-       {\usebibmacro{othernumber}}}}
+       {\usebibmacro{letter:number}}%
+       {\usebibmacro{other:number}}}}
 
-\newbibmacro*{letternumber}{%
+\newbibmacro*{letter:number}{%
   \iftoggle{bibliography}
     {\setunit{\addcomma\space}%
      \printfield[journum]{number}}%
     {}}
 
-\newbibmacro*{othernumber}{%
+\newbibmacro*{other:number}{%
   \ifboolexpr{ test {\iffieldequalstr{editortype}{series}}
                or test {\iffieldequalstr{editoratype}{series}}
                or test {\iffieldequalstr{editorbtype}{series}}

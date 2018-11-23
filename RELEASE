@@ -1,6 +1,9 @@
 
-INTERIM
+RELEASE NOTES FOR VERSION 2018.11.23
 
+* improved and in some cases fixed processing of numbers,
+  dates, and issues of periodicals
+* much better support for unsigned articles
 * fixed 'type' field format
 * fixed double printing of year for theses and dissertations in
   the author-date system
