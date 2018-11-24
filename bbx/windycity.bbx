@@ -1,4 +1,4 @@
-% Last modified: Sat 24 Nov 2018 12:05:21 PM CST
+% Last modified: Sat 24 Nov 2018 12:16:30 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1356,9 +1356,9 @@
        {\usebibmacro{day+endday+year}}}}
 
 \newbibmacro*{day+endday+year}{%
-   \usebibmacro{day+endday}%
-   \addcomma\space
-   \printfield{year}}%
+  \usebibmacro{day+endday}%
+  \addcomma\space
+  \printfield{year}}%
 
 \newbibmacro*{day+endday}{%
   \iffieldundef{day}
@@ -1564,16 +1564,23 @@
      \addcomma\space}}%
 
 \newbibmacro*{loc+pub+year}{%
-  \usebibmacro{location}%
-  \setunit{\addcolon\space}%
-  \printlist{publisher}%
+  \usebibmacro{loc+pub}{1}%
+  \ifnumgreater{\value{publisher}}{1}
+    {\setunit{\addsemicolon\space}%
+     \usebibmacro{loc+pub}{2}}%
+    {}
   \setunit{\addcomma\space}%
   \usebibmacro{year+bookyear}}%
 
-\newbibmacro*{location}{%
+\newbibmacro*{loc+pub}[1]{%
+  \usebibmacro{location}{#1}%
+  \setunit{\addcolon\space}%
+  \printlist[publisher][#1-#1]{publisher}}%
+
+\newbibmacro*{location}[1]{%
   \iflistundef{location}
     {\bibstring{noplace}}%
-    {\printlist{location}}}
+    {\printlist[location][#1-#1]{location}}}
 
 \newbibmacro*{year+bookyear}{%
   \ifboolexpr{ togl {bibliography}

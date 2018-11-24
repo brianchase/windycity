@@ -1,4 +1,9 @@
 
+INTERIM
+
+* fixed 'inst+loc+date'
+* limited support for copublication
+
 RELEASE NOTES FOR VERSION 2018.11.23
 
 * improved and in some cases fixed processing of numbers,
