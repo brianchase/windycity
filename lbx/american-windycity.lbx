@@ -1,4 +1,4 @@
-% Last modified: Fri 23 Nov 2018 01:58:59 PM CST
+% Last modified: Sat 24 Nov 2018 11:18:48 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -18,6 +18,26 @@
 
 \InheritBibliographyExtras{american}
 \InheritBibliographyStrings{american}
+
+% The code below comes from english.lbx. The only change is to remove
+% '\parentext{}' from '\mkbibtimezone{\thefield{#4}'.
+
+\DeclareBibliographyExtras{%
+  \expandafter\protected\expandafter\def\csname mkbibtime12h\endcsname#1#2#3#4{%
+    \stripzeros{\mktimehh{\thefield{#1}}}%
+    \bibtimesep
+    \forcezerosmdt{\thefield{#2}}%
+    \iffieldundef{#3}{}
+      {\bibtimesep
+       \forcezerosmdt{\thefield{#3}}}%
+     \space
+     \ifnumless{\thefield{#1}}{12}
+       {\bibstring{am}}
+       {\bibstring{pm}}%
+    \iffieldundef{#4}{}
+     {\space\bibtimezonesep
+      \mkbibtimezone{\thefield{#4}}}}%
+}
 
 \NewBibliographyString{by}
 \NewBibliographyString{compiler}
@@ -44,6 +64,7 @@
 \NewBibliographyString{transed+}
 
 \DeclareBibliographyStrings{%
+  am            = {{a\adddot m\adddot}{a\adddot m\adddot}},
   afterword     = {{afterword to}{afterword to}},
   andothers     = {{et\addabbrvspace al\adddot}{et\addabbrvspace al\adddot}},
   by            = {{by}{by}},
@@ -73,6 +94,7 @@
   page          = {{Page}{Page}},   % assures proper case in 'pageref'
   pages         = {{Pages}{Pages}}, % assures proper case in 'pageref'
   phdthesis     = {{PhD diss\adddot}{PhD diss\adddot}},
+  pm            = {{p\adddot m\adddot}{p\adddot m\adddot}},
   references    = {{Bibliography}{Bibliography}},
   reprint       = {{reprint}{repr\adddot}},
   reprinted     = {{reprinted in}{reprinted in}},

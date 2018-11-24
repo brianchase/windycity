@@ -1,4 +1,4 @@
-% Last modified: Sat 24 Nov 2018 12:16:30 PM CST
+% Last modified: Sat 24 Nov 2018 12:15:40 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -117,6 +117,7 @@
   citetracker=constrict,
   date=long,
   dateabbrev=false,
+  dateusetime=true,
 % Drop this line for CMS 17th ed.:
   ibid=true,
   ibidtracker=constrict,
@@ -131,6 +132,8 @@
   pagetracker=page,
   parentracker=true,
   sortcites=false,
+  time=12h,
+  timezones=true,
   uniquelist=minyear,
   uniquename=full,
   urldate=long,
@@ -494,11 +497,13 @@
                and test {\iffieldundef{bookyear}}}
     {\biblcstring{#1}}%
     {\ifbibstring{#1}{\bibstring{#1}}{\stripzeros{#1}}}}
+\DeclareListFormat{location}{#1}%
 \DeclareFieldFormat{month}{\mkbibmonth{#1}}%
 \DeclareFieldFormat{note}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{pages}{#1}
 \DeclareFieldFormat{part}{\bibstring{part}\space#1}
 \DeclareFieldFormat{postnote}{#1}
+\DeclareListFormat{publisher}{#1}
 \DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
 
 % A shorthand is italicized if the title that it abbreviates is also
@@ -1358,7 +1363,8 @@
 \newbibmacro*{day+endday+year}{%
   \usebibmacro{day+endday}%
   \addcomma\space
-  \printfield{year}}%
+  \printfield{year}%
+  \usebibmacro{hour+minute+timezone}}%
 
 \newbibmacro*{day+endday}{%
   \iffieldundef{day}
@@ -1368,6 +1374,12 @@
      \iffieldundef{endday}
        {}
        {\textendash\stripzeros{\thefield{endday}}}}}
+
+\newbibmacro*{hour+minute+timezone}{%
+  \iffieldundef{hour}
+    {}
+    {\addcomma\space
+     \printtime}}%
 
 \newbibmacro*{reflist+issue+season+year}{%
   \ifboolexpr{ togl {bibliography}
