@@ -1,4 +1,4 @@
-% Last modified: Fri 23 Nov 2018 03:22:48 PM CST
+% Last modified: Sat 24 Nov 2018 10:50:51 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -193,10 +193,10 @@
   \blx@ifcitesingle
     {\blx@ifmpfncheck
        {\ifboolexpr{ test {\ifentrytype{inbook}}
-          and test {\iffieldequalcs{booktitle}{lastbooktitle}}
-          and test {\iffieldequalcs{year}{lastyear}}
-          and not test {\iffieldundef{volumes}}
-          and not test \iffirstonpage}}
+                     and test {\iffieldequalcs{booktitle}{lastbooktitle}}
+                     and test {\iffieldequalcs{year}{lastyear}}
+                     and not test {\iffieldundef{volumes}}
+                     and not test \iffirstonpage}}
        {\@secondoftwo}}%
     {\@secondoftwo}}%
 
@@ -379,9 +379,9 @@
 
 \newbibmacro*{vol+page}{%
   \iffieldundef{volume}
-    {\newunit}
+    {\newunit}%
     {\iffieldundef{postnote}
-       {\newunit}
+       {\newunit}%
        {\iffieldpages{postnote}
           {\newunit
            \usebibmacro{vol+colon}}%
