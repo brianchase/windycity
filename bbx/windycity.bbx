@@ -1,4 +1,4 @@
-% Last modified: Fri 23 Nov 2018 03:22:33 PM CST
+% Last modified: Sat 24 Nov 2018 10:43:26 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -731,7 +731,7 @@
   \renewcommand*{\cbx@namelist}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
-     \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}}
+     \iffieldequalstr{\xeditor type}{compiler}
        {\renewcommand*{\cbx@bibstring}{transcomp}}%
        {\renewcommand*{\cbx@bibstring}{transed}}}
     {\renewcommand*{\cbx@bibstring}{translator}}}
@@ -740,10 +740,10 @@
   \renewcommand*{\cbx@namelist}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
-     \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}}
+     \iffieldequalstr{\xeditor type}{compiler}
        {\renewcommand*{\cbx@bibstring}{comptrans}}%
        {\renewcommand*{\cbx@bibstring}{edtrans}}}%
-    {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}}
+    {\iffieldequalstr{\xeditor type}{compiler}
        {\renewcommand*{\cbx@bibstring}{compiler}}%
        {\renewcommand*{\cbx@bibstring}{editor}}}}
 
