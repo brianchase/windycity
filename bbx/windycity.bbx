@@ -1,4 +1,4 @@
-% Last modified: Sat 24 Nov 2018 12:15:40 PM CST
+% Last modified: Mon 26 Nov 2018 10:42:13 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -118,8 +118,9 @@
   date=long,
   dateabbrev=false,
   dateusetime=true,
-% Drop this line for CMS 17th ed.:
+% FIX: Drop this line for CMS 17th ed.:
   ibid=true,
+% FIX: Set to false for CMS 17th ed.:
   ibidtracker=constrict,
   idemtracker=constrict,
   indexing=true,
@@ -363,19 +364,9 @@
 \DeclareIndexNameAlias{introduction}{default}
 \DeclareIndexNameAlias{translator}{default}
 
-% Affixes like 'Jr.', should appear last, delimited with a comma.
-
-\renewbibmacro*{name:given-family}[4]{%
-  \usebibmacro{name:delim}{#2#3#1}%
-  \usebibmacro{name:hook}{#2#3#1}%
-  \ifdefvoid{#2}{}{\mkbibnamegiven{#2}\isdot\bibnamedelimd}%
-  \ifdefvoid{#3}{}{%
-    \mkbibnameprefix{#3}\isdot
-    \ifprefchar
-      {}
-      {\ifuseprefix{\bibnamedelimc}{\bibnamedelimd}}}%
-  \mkbibnamefamily{#1}\isdot
-  \ifdefvoid{#4}{}{\revsdnamepunct\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
+% Affixes like 'Jr.', should appear last, delimited with a comma, when
+% inverted, as in a bibliography, but not otherwise, as in a note. See
+% CMS, 17th ed., 6.43 and 16.41 and example in 14.75.
 
 \renewbibmacro*{name:family-given}[4]{%
   \ifuseprefix
