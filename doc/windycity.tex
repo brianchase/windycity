@@ -1,4 +1,4 @@
-% Last modified: Mon 26 Nov 2018 01:17:09 PM CST
+% Last modified: Mon 26 Nov 2018 03:26:27 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -251,11 +251,29 @@ but before its annotation. To print ISBNs of every work, see the
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
 
 This option tells the style to bypass the author's position of a work
-in notes. As a result, citations to the work always begin at the
-title's position, though as usual, in the bibliography, the work's
-entry begins with the author. To bypass the author's position on a
-case-by-case basis, rather than globally, use \cmd{cite*} or
-\cmd{footcite*}, described in Section \ref{citecmds}.
+in notes and bibliographies. Citations will begin with the title's
+position. This option is rarely necessary. But consider an example
+from \textit{CMS} \ref{14.89}:
+
+\begin{itemize}
+\item[N] \fullcite{chaucer1966}
+
+\item[B] \bibentry{chaucer1966}
+\end{itemize}
+
+\noindent Without \opt{noauth}, the style prints:
+
+\begin{itemize}
+\AtNextCitekey{\togglefalse{noauth}}
+\item[N] \fullcite{chaucer1966}
+
+\AtNextCitekey{\togglefalse{noauth}}
+\item[B] \bibentry{chaucer1966}
+\end{itemize}
+
+\noindent To bypass the author's position on a case-by-case basis,
+rather than globally, and only in notes, not in the bibliography, use
+\cmd{cite*} or \cmd{footcite*}. See Section \ref{citecmds}.
 
 \optitem[false]{transfirst}{\opt{true}, \opt{false}}
 
@@ -411,18 +429,17 @@ not use it in a bibliography database.
 bibliography database.
 
 \item[editoraddon] Use this field to include additional editorial
-information about a work. The following example comes from
-\textit{CMS} \ref{14.89}:
+information about a work. Earlier, in Section \ref{entryops}, the
+example from \textit{CMS} \ref{14.89} uses it: In the work's database
+entry, \bibfield{editoraddon} contains ``from materials compiled by
+John M. Manly and Edith Richert, with the assistance of Lilian J.
+Redstone et al.'' This content prints after the editor's position,
+without intervening punctuation. Again, in the bibliography, the
+result is:
 
 \begin{itemize}
-\item[N] \fullcite*{crow1966}
-
-\item[B] \bibentry{crow1966}
+\item[] \bibentry{chaucer1966}
 \end{itemize}
-
-\noindent In the work's database entry, \bibfield{editoraddon}
-contains ``from materials compiled by John M. Manly and Edith Richert,
-with the assistance of Lilian J. Redstone et al.''
 
 \item[seriesaddon] This field is for additional information about a
 book's series, such as \textit{2nd ser.} and \textit{n.s.}. For
@@ -1295,9 +1312,9 @@ to indicate that the printed name is a pseudonym, put 'pseud.' in
 % the first letter of the note in uppercase.
 
 \begin{itemize}
-\item[N] \fullcite*{crow1966}
+\item[N] \fullcite{chaucer1966}
 
-\item[B] \bibentry{crow1966}
+\item[B] \bibentry{chaucer1966}
 
 \item[N] \fullcite{cullen1961}
 

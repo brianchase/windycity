@@ -1,4 +1,8 @@
 
+INTERIM
+
+* undid change to 'noauth' entry option (it was right the first time!)
+
 RELEASE NOTES FOR VERSION 2018.11.26
 
 * fixed 'noauth' entry option (it should only affect notes)
