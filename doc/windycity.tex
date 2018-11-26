@@ -1,4 +1,4 @@
-% Last modified: Fri 23 Nov 2018 05:10:46 PM CST
+% Last modified: Mon 26 Nov 2018 01:17:09 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2018.11.23}
+\version{2018.11.26}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 \newpage
@@ -95,13 +95,6 @@ citation, as in the following:
 however you like, by adding your preferred content to
 \bibfield{shorthandintro}.
 
-The next note shows another feature of the
-style.\footcite{camus1991a,camus1991b} It contains consecutive, first
-citations of works by the same author. The style prints the author's
-full name in the first citation and the short form in the second. If
-these citations were not consecutive, both citations would include the
-full name; only subsequent citations would use the short form.
-
 With certain collections, still other results are possible (see
 Section \ref{collect}). For examples of how the style truncates lists
 of names, see Section \ref{notes16}---in particular, the examples from
@@ -126,6 +119,19 @@ A preamble option is an argument for the \cmd{usepackage} macro that
 loads \biblatex. Preamble options affect the format of notes,
 bibliographies, and reference lists. Some features of the style
 require them.
+
+The following list describes preamble options that are unique to the
+style. However, it relies on many others that are native to \biblatex,
+some of which you may want to change. In particular, it sets
+\opt{ibidtracker} to true, as by default it uses \textit{ibid.} to
+refer to consecutive citations of the same work on the same page. If
+you follow the 17th edition of \textit{CMS}, you might prefer to set
+\opt{ibidtracker} to false, along with the option \opt{ibid},
+described below. The latter will suppress the use of \textit{ibid.},
+printing instead the author's name and page reference, if applicable;
+the former, in addition, will give a slightly longer citation that
+includes the work's title (or a shortened form of it). See, for
+example, 14.34 of the 17th edition.
 
 \begin{optionlist}
 
@@ -166,12 +172,13 @@ bibliography.}
 
 \optitem[true]{ibid}{\opt{true}, \opt{false}}
 
-This option controls whether consecutive citations to a work on the
-same page receive an \textit{ibid.}. Unlike the other entry options
+This option controls whether consecutive citations of a work on the
+same page receive an \textit{ibid}. Unlike the other preamble options
 discussed here, the style sets this one to \textit{true} by default.
 Nevertheless, since the 17th edition of \textit{CMS} discourages the
 use of \textit{ibid.} (see 14.34), a subsequent release of the style
-will set it to \textit{false}.
+will set it to \textit{false}. See also the comments above about the
+native preamble option \opt{ibidtracker}.
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
@@ -243,38 +250,12 @@ but before its annotation. To print ISBNs of every work, see the
 
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
 
-This option tells the style to bypass the author's position of a work,
-both in notes and in bibliographies. Citations will begin with the
-title's position. This option is rarely necessary. But consider an
-example from \textit{CMS} 14.89:
-
-\begin{itemize}
-\item[N] \fullcite{crow1966}
-
-\item[B] \bibentry{crow1966}
-\end{itemize}
-
-\noindent Without \opt{noauth}, the style prints:
-
-% I use \AtNextCitekey to set 'noauth' to false to avoid having two
-% nearly identical entries in windycity.bib for crow1966. Having those
-% entries caused the bibliography for the author-date format to print
-% the entry for crow1966 as 1966b. I don't use \AtNextCitekey for
-% similar examples below.
-
-\begin{itemize}
-\AtNextCitekey{\togglefalse{noauth}}
-\item[N] \fullcite{crow1966}
-
-\AtNextCitekey{\togglefalse{noauth}}
-\item[B] \bibentry{crow1966}
-\end{itemize}
-
-\noindent If you choose the former, remember that unless you adjust
-how the work is sorted in the bibliography by, for example, setting
-\bibfield{sortname} to \textit{Chaucer}, the style will sort it by the
-first editor's surname, \textit{Crow}. See also \cmd{cite*} in Section
-\ref{citecmds}.
+This option tells the style to bypass the author's position of a work
+in notes. As a result, citations to the work always begin at the
+title's position, though as usual, in the bibliography, the work's
+entry begins with the author. To bypass the author's position on a
+case-by-case basis, rather than globally, use \cmd{cite*} or
+\cmd{footcite*}, described in Section \ref{citecmds}.
 
 \optitem[false]{transfirst}{\opt{true}, \opt{false}}
 
@@ -325,9 +306,10 @@ syllabus. It has no effect on citation tracking.
 \cmditem{cite*}[prenote][postnote]{key}
 
 Use this command to cite a work without printing anything in the
-author's position of a note. This is most likely useful when the
-context makes clear who the author is. Consider this example from
-\ref{14.78}:
+author's position of the note. It comes in handy when the context of a
+citation makes the author's name clear, such as when the name appears
+in the title. \textit{CMS} \ref{14.78} gives several examples of this,
+including:
 
 \begin{itemize}
 \item[N] \fullcite*[44--45]{mccullers1999}
@@ -351,6 +333,12 @@ example, the first citation below uses \cmd{cite}, the second uses
 \begin{itemize}
 \item[] \cite{frankfurt1969} \citerp[1--10]{frankfurt1988.1}
 \end{itemize}
+
+\cmditem{footcite*}[prenote][postnote]{key}
+
+Like \cmd{cite*}, described above, this command suppresses the
+author's position of a note. Otherwise, it functions like the native
+\cmd{footcite} command.
 
 \cmditem{footfullcite}[prenote][postnote]{key}
 
@@ -422,12 +410,19 @@ not use it in a bibliography database.
 \item[bookyear] Also for the style's internal use. Do not use it in a
 bibliography database.
 
-\item[editoraddon] With this field, you may include additional
-editorial information about a work. An example of this appeared
-earlier, the citation of \textit{Chaucer Life-Records} in Section
-\ref{entryops}, where the editors' names are followed, without
-punctuation, by ``from materials compiled by John M. Manly and Edith
-Richert, with the assistance of Lilian J. Redstone et al.''
+\item[editoraddon] Use this field to include additional editorial
+information about a work. The following example comes from
+\textit{CMS} \ref{14.89}:
+
+\begin{itemize}
+\item[N] \fullcite*{crow1966}
+
+\item[B] \bibentry{crow1966}
+\end{itemize}
+
+\noindent In the work's database entry, \bibfield{editoraddon}
+contains ``from materials compiled by John M. Manly and Edith Richert,
+with the assistance of Lilian J. Redstone et al.''
 
 \item[seriesaddon] This field is for additional information about a
 book's series, such as \textit{2nd ser.} and \textit{n.s.}. For
@@ -1115,7 +1110,8 @@ entry needs to use \bibfield{editor} and \bibfield{editora}:
 \end{lstlisting}
 
 \section{Examples from \emph{CMS} Chap. 14, ``Notes and
-Bibliography''} \label{notes16}
+Bibliography''}
+\label{notes16}
 
 Examples in this section reproduce those in \textit{CMS} Chapter 14.
 To help with cross-checking, subsection numbers and headings below
@@ -1292,13 +1288,14 @@ to indicate that the printed name is a pseudonym, put 'pseud.' in
 
 \subsubsection{``With the assistance of'' and the like}
 % 14.89
+\label{14.89}
 
 % Use the \bibfield{note} field to include this sort of information.
 % Since \cmd{biblatex} handles capitalization automatically, don't put
 % the first letter of the note in uppercase.
 
 \begin{itemize}
-\item[N] \fullcite{crow1966}
+\item[N] \fullcite*{crow1966}
 
 \item[B] \bibentry{crow1966}
 

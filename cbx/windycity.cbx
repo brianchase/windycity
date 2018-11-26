@@ -1,4 +1,4 @@
-% Last modified: Mon 26 Nov 2018 10:50:25 AM CST
+% Last modified: Mon 26 Nov 2018 01:17:21 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -15,7 +15,7 @@
 
 \ProvidesFile{windycity.cbx}[Windy City style for biblatex]
 
-\@ifpackagelater{biblatex}{2017/11/04}
+\@ifpackagelater{biblatex}{2017/11/26}
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
@@ -97,6 +97,14 @@
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
   {\bibsentence\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand*{\footcite}[\mkbibfootnote]
+  {\bibsentence\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \toggletrue{noauth}%
    \usebibmacro{cite}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%

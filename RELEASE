@@ -1,9 +1,15 @@
 
-INTERIM
+RELEASE NOTES FOR VERSION 2018.11.26
 
+* fixed 'noauth' entry option (it should only affect notes)
 * fixed 'inst+loc+date'
+* following CMS, made 'cite:short' print just a work's title without
+  the name of the collection
+* fixed name formatting for affixes like 'Jr.' in notes (no comma
+  before them, unlike in bibliographies, where names are inverted)
 * limited support for copublication
 * limited support for publication times
+* added '\footcite*' command and updated documentation
 
 RELEASE NOTES FOR VERSION 2018.11.23
 
