@@ -1,4 +1,4 @@
-% Last modified: Mon 26 Nov 2018 07:55:53 PM CST
+% Last modified: Tue 27 Nov 2018 11:51:30 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -107,8 +107,7 @@
     {\toggletrue{transfirst}}%
     {\togglefalse{transfirst}}}
 
-% For setting 'minnames' and 'maxnames', see 16th ed., 14.76, and 15th
-% ed., 17.29--17.30.
+% For setting 'minnames' and 'maxnames', see CMS, 17th ed., 14.76.
 
 \ExecuteBibliographyOptions{%
   abbreviate=true,
@@ -366,7 +365,7 @@
 
 % Affixes like 'Jr.', should appear last, delimited with a comma, when
 % inverted, as in a bibliography, but not otherwise, as in a note. See
-% CMS, 17th ed., 6.43 and 16.41 and example in 14.75.
+% CMS, 17th ed., 6.43 and 16.41, as well as the example in 14.75.
 
 \renewbibmacro*{name:family-given}[4]{%
   \ifuseprefix
@@ -1291,8 +1290,8 @@
   \usebibmacro{periodical:number}%
   \usebibmacro{issue+month+etc}}%
 
-% On how to format the issue number for periodicals, see CMS 17th
-% edition, 14.171 and 15.47.
+% On how to format the issue number for periodicals, see CMS, 17th
+% ed., 14.171 and 15.47.
 
 \newbibmacro*{periodical:number}{%
   \iffieldundef{number}
