@@ -1,4 +1,4 @@
-% Last modified: Tue 27 Nov 2018 03:38:01 PM CST
+% Last modified: Tue 27 Nov 2018 04:01:49 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1037,7 +1037,6 @@
   \usebibmacro{type}%
   \setunit{\addcomma\space}%
   \usebibmacro{inst+loc+date}%
-  \usebibmacro{howpublished}%
   \newunit
   \printfield{addendum}%
   \usebibmacro{doi+finentry+etc}}%
@@ -1114,8 +1113,7 @@
   \usebibmacro{part}%
   \usebibmacro{maintitle}%
   \usebibmacro{publishers}%
-  \usebibmacro{origtitle}%
-  \usebibmacro{howpublished}}%
+  \usebibmacro{origtitle}}%
 
 \newbibmacro*{incollections}{%
   \usebibmacro{author+title+etc}%
@@ -1153,12 +1151,6 @@
   \printlist{location}%
   \setunit{\addcomma\space}%
   \usebibmacro{month+day+year}}%
-
-\newbibmacro*{howpublished}{%
-  \iffieldundef{howpublished}
-    {}
-    {\newunit
-     \printfield{howpublished}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Third and Higher Tier Macros  %%
@@ -1634,11 +1626,14 @@
        {\textendash\printfield{endorigyear}}}}
 
 \newbibmacro*{doi+url+etc}{%
-  \ifboolexpr{ test {\iffieldundef{doi}}
+  \ifboolexpr{ test {\iffieldundef{howpublished}}
                and test {\iffieldundef{url}}
+               and test {\iffieldundef{doi}}
                and test {\iffieldundef{addendum}}}
     {}
     {\newunit
+     \printfield{howpublished}%
+     \newunit
      \printurldate
      \newunit
      \printfield{url}%
