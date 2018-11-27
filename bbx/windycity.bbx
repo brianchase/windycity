@@ -1,4 +1,4 @@
-% Last modified: Mon 26 Nov 2018 02:43:16 PM CST
+% Last modified: Mon 26 Nov 2018 07:55:53 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -812,14 +812,15 @@
   \usebibmacro{printnames+etc}}%
 
 % For editors and translators whose names belong after 'issuetitle',
-% 'maintitle', or 'series':
+% 'maintitle', or 'series'. The '\midsentence' below prevents a maintitle
+% ending with punctuation from causing the start of a new sentence.
 
 \newbibmacro*{xeditor+yeditor}[1]{%
   \ifboolexpr{ test {\iffieldequalstr{editortype}{#1}}
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
                or test {\iffieldequalstr{editorctype}{#1}}}
-    {\setunit{\addcomma\space}%
+    {\midsentence\setunit{\addcomma\space}%
      \renewcommand*{\cbx@bibstring}{editor}%
      \usebibmacro{editorlists}{#1}%
      \usebibmacro{pluga+printnames}}%
