@@ -1,4 +1,4 @@
-% Last modified: Tue 27 Nov 2018 11:51:30 AM CST
+% Last modified: Tue 27 Nov 2018 03:38:01 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1581,7 +1581,10 @@
   \printlist[publisher][#1-#1]{publisher}}%
 
 \newbibmacro*{location}[1]{%
-  \iflistundef{location}
+  \ifboolexpr{ test {\iflistundef{location}}
+               and test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{url}}
+               and test {\iffieldundef{doi}}}
     {\bibstring{noplace}}%
     {\printlist[location][#1-#1]{location}}}
 
