@@ -1,4 +1,4 @@
-% Last modified: Tue 27 Nov 2018 03:59:27 PM CST
+% Last modified: Wed 28 Nov 2018 02:12:43 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -193,21 +193,6 @@
    \finentry}%
   {}{}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Stand-alone Tests  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand*{\ifciteibidmv}{%
-  \blx@ifcitesingle
-    {\blx@ifmpfncheck
-       {\ifboolexpr{ test {\ifentrytype{inbook}}
-                     and test {\iffieldequalcs{booktitle}{lastbooktitle}}
-                     and test {\iffieldequalcs{year}{lastyear}}
-                     and not test {\iffieldundef{volumes}}
-                     and not test \iffirstonpage}}
-       {\@secondoftwo}}%
-    {\@secondoftwo}}%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Parenthetical Citations  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -292,7 +277,7 @@
           {\usebibmacro{cite:ibid}}%
           {\usebibmacro{cite:short}}}
        {\usebibmacro{cite:shorthand}}}
-    {\usebibmacro{cite:crossref}}%
+    {\usebibmacro{cite:new}}%
   \usebibmacro{savefields}}%
 
 \newbibmacro*{cite:ibid}{%
@@ -317,31 +302,12 @@
 \newbibmacro*{cite:shorthand}{%
   \printtext[bibhyperref]{\printfield{shorthand}}}
 
-\newbibmacro*{cite:crossref}{%
-  \ifciteibidmv
-    {\usebibmacro{crossref+ibid}}%
-    {\usebibmacro{deflabel}%
-     \providetoggle{test:\thefield{crossref}}%
-     \iftoggle{test:\thefield{crossref}}
-       {\usebibmacro{cite:short}}%
-       {\usebibmacro{cite:long+cite:short}%
-        \iffieldsequal{year}{bookyear}
-          {\global\toggletrue{test:\thefield{crossref}}}
-          {}}}}
-
-\newbibmacro*{crossref+ibid}{%
-  \bibcpstring{ibidem}%
-  \newunit
-  \iffieldundef{postnote}
-    {\printfield{volume}%
-     \newunit}%
-    {}}
-
-\newbibmacro*{cite:long+cite:short}{%
-   \global\toggletrue{cbx@first}%
-   \iftoggle{firstshort}
-     {\usebibmacro{cite:short}}%
-     {\usebibmacro{cite:long}}}
+\newbibmacro*{cite:new}{%
+  \global\toggletrue{cbx@first}%
+  \usebibmacro{deflabel}%
+  \iftoggle{firstshort}
+    {\usebibmacro{cite:short}}%
+    {\usebibmacro{cite:long}}}
 
 \newbibmacro*{savefields}{%
   \savefieldcs{booktitle}{lastbooktitle}%
