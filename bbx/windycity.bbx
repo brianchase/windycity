@@ -1,4 +1,4 @@
-% Last modified: Tue 27 Nov 2018 04:48:37 PM CST
+% Last modified: Thu 29 Nov 2018 12:27:07 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1075,8 +1075,12 @@
   \printfield[noformat]{volume}%
   \usebibmacro{number+issue+month+etc}}%
 
+% If an article has an electronic article ID, don't print its page
+% range in the bibliography. See CMS, 17th ed., 14.174.
+
 \newbibmacro*{colon+pages+etc}{%
-  \iffieldundef{pages}
+  \ifboolexpr{ test {\iffieldundef{pages}}
+               or not test {\iffieldundef{eid}}}
     {}
     {\iftoggle{reflist}
        {\ifboolexpr{test {\iffieldundef{number}}
@@ -1627,11 +1631,13 @@
 
 \newbibmacro*{doi+url+etc}{%
   \ifboolexpr{ test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{howpublished}}
                and test {\iffieldundef{url}}
                and test {\iffieldundef{doi}}
                and test {\iffieldundef{addendum}}}
     {}
-    {\newunit
+    {\usebibmacro{eid}%
+     \newunit
      \printfield{howpublished}%
      \newunit
      \printurldate
@@ -1641,6 +1647,14 @@
      \printfield{doi}%
      \newunit
      \printfield{addendum}}}
+
+\newbibmacro*{eid}{%
+  \iffieldundef{eid}
+    {}
+    {\iftoggle{bibliography}
+       {\setunit{\addcolon\space}}%
+       {\newunit}%
+     \printfield{eid}}}
 
 \newbibmacro*{isbn}{%
   \iffieldundef{isbn}
