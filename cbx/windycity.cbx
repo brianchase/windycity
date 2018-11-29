@@ -1,4 +1,4 @@
-% Last modified: Wed 28 Nov 2018 06:23:23 PM CST
+% Last modified: Wed 28 Nov 2018 08:53:49 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -284,7 +284,10 @@
   \iftoggle{ibid}
     {\bibcpstring{ibidem}}%
     {\printtext[bibhyperref]{%
-       \usebibmacro{author+bookauthor+etc}}}
+       \usebibmacro{author+bookauthor+etc}%
+       \iftoggle{noauth}
+         {\usebibmacro{title+labelyear}}%
+         {}}}
   \newunit
   \ifloccit
     {\global\toggletrue{cbx@loccit}}%
