@@ -1,4 +1,4 @@
-% Last modified: Wed 28 Nov 2018 02:12:43 PM CST
+% Last modified: Wed 28 Nov 2018 06:23:23 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -283,7 +283,8 @@
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
     {\bibcpstring{ibidem}}%
-    {\printtext[bibhyperref]{\usebibmacro{author+bookauthor+etc}}}
+    {\printtext[bibhyperref]{%
+       \usebibmacro{author+bookauthor+etc}}}
   \newunit
   \ifloccit
     {\global\toggletrue{cbx@loccit}}%
@@ -293,9 +294,7 @@
   \global\toggletrue{cbx@short}%
   \printtext[bibhyperref]{%
     \usebibmacro{author+bookauthor+etc}%
-    \ifentrytype{review}
-      {\usebibmacro{review+title}}%
-      {}% needs '%'
+    \usebibmacro{review+title}%
     \usebibmacro{title+labelyear}}%
   \newunit}%
 
