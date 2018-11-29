@@ -1,4 +1,4 @@
-% Last modified: Thu 29 Nov 2018 12:27:07 PM CST
+% Last modified: Thu 29 Nov 2018 01:53:04 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1132,6 +1132,9 @@
     {\nopunct\printfield{editoraddon}}}
 
 \newbibmacro*{reviews}{%
+  \let\saveauth\empty
+  \savename{bookauthor}{\saveauth}%
+  \clearname{bookauthor}%
   \usebibmacro{author+bookauthor+etc}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{note}%
@@ -1181,20 +1184,21 @@
 
 \newbibmacro*{review+title}{%
   \ifentrytype{review}
-    {\newunit
-     \iftoggle{noauth}
-       {\bibcpstring{reviewnoauth}\space}%
-       {\bibstring{review}\space}%
+    {\iftoggle{noauth}
+       {\bibcpstring{reviewnoauth}\nopunct}%
+       {\bibstring{review}}%
+     \space
      \usebibmacro{test:title+booktitle}%
-     \ifciteseen
+     \usebibmacro{title+labelyear}%
+     \setunit{\addcomma\space}%
+     \restorename{author}{\saveauth}%
+     \let\saveauth\empty
+     \togglefalse{noauth}%
+     \ifboolexpr{ test {\ifnameundef{author}}
+                  and test {\ifnameundef{bookauthor}}}
        {}
-       {\usebibmacro{title+labelyear}%
-        \setunit{\addcomma\space}%
-        \ifboolexpr{ test {\ifnameundef{author}}
-                     and test {\ifnameundef{bookauthor}}}
-          {}
-          {\bibstring{by}\space
-           \usebibmacro{author+bookauthor+etc}}}}
+       {\bibstring{by}\space
+        \usebibmacro{author+bookauthor+etc}}}
      {}}
 
 \newbibmacro*{author+title+etc}{%
