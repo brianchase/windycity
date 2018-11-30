@@ -1,4 +1,4 @@
-% Last modified: Thu 29 Nov 2018 01:53:04 PM CST
+% Last modified: Fri 30 Nov 2018 10:11:57 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -119,7 +119,6 @@
   dateusetime=true,
 % FIX: Drop this line for CMS 17th ed.:
   ibid=true,
-% FIX: Set to false for CMS 17th ed.:
   ibidtracker=constrict,
   idemtracker=constrict,
   indexing=true,
@@ -127,6 +126,8 @@
   loccittracker=constrict,
   minnames=7,
   maxnames=10,
+% The use of \citecrossref, with counters, has essentially the same
+% effect as setting 'mincrossrefs=2'.
   mincrossrefs=2,
   minxrefs=2,
   pagetracker=page,
@@ -283,6 +284,7 @@
 \let\cbx@namelist\empty
 \let\anona\empty
 \let\anonb\empty
+\let\crossreflist\empty
 \let\pluga\empty
 \let\plugb\empty
 \let\xeditor\empty
@@ -997,7 +999,8 @@
 
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{incollections}%
+  \usebibmacro{author+title+etc}%
+  \usebibmacro{test:crossref}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{misc}{%
@@ -1093,11 +1096,6 @@
            \printfield{pages}}}
        {\usebibmacro{colon+pages}}}}
 
-\newbibmacro*{doi+finentry+etc}{%
-  \usebibmacro{doi+url+etc}%
-  \usebibmacro{isbn}%
-  \usebibmacro{pageref+finentry}}%
-
 \newbibmacro*{edition}{%
   \iffieldundef{edition}
     {}
@@ -1119,12 +1117,28 @@
   \usebibmacro{publishers}%
   \usebibmacro{origtitle}}%
 
-\newbibmacro*{incollections}{%
-  \usebibmacro{author+title+etc}%
-  \usebibmacro{booktitle}%
-  \usebibmacro{bookbooktitle}%
-  \usebibmacro{bybookauthor}%
-  \usebibmacro{ed+vol+part+etc}}%
+\newbibmacro*{author+title+etc}{%
+  \usebibmacro{test:bookauthor}%
+  \iftoggle{reprinted}
+    {}
+    {\ifboolexpr{ test {\ifnameundef{afterword}}
+                  and test {\ifnameundef{foreword}}
+                  and test {\ifnameundef{introduction}}}
+       {\usebibmacro{author+title+ed}%
+        \usebibmacro{chap+in}}%
+       {\usebibmacro{aft+fore+intro}}}}
+
+\newbibmacro*{test:crossref}{%
+  \iffieldundef{crossref}
+    {\usebibmacro{incollections}}%
+    {\xifinlist{\thefield{crossref}}{\crossreflist}
+       {\ifnumgreater{\value{\thefield{crossref}}}{0}
+          {\citecrossref{\thefield{crossref}}%
+           \toggletrue{bibliography}% \citecrossref makes it false
+           \usebibmacro{pages}}
+          {\usebibmacro{incollections}}}
+       {\listxadd{\crossreflist}{\thefield{crossref}}%
+        \usebibmacro{incollections}}}}
 
 \newbibmacro*{editoraddon}{%
   \iffieldundef{editoraddon}
@@ -1201,17 +1215,6 @@
         \usebibmacro{author+bookauthor+etc}}}
      {}}
 
-\newbibmacro*{author+title+etc}{%
-  \usebibmacro{test:bookauthor}%
-  \iftoggle{reprinted}
-    {}
-    {\ifboolexpr{ test {\ifnameundef{afterword}}
-                  and test {\ifnameundef{foreword}}
-                  and test {\ifnameundef{introduction}}}
-       {\usebibmacro{author+title+ed}%
-        \usebibmacro{chap+in}}%
-       {\usebibmacro{aft+fore+intro}}}}
-
 \newbibmacro*{test:bookauthor}{%
   \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
                or test {\ifnamesequal{afterword}{bookauthor}}
@@ -1230,6 +1233,12 @@
        {\bibstring{in}\space}%
        {\printfield{chapter}\space
         \bibstring{in}\space}}}
+
+\newbibmacro*{incollections}{%
+  \usebibmacro{booktitle}%
+  \usebibmacro{bookbooktitle}%
+  \usebibmacro{bybookauthor}%
+  \usebibmacro{ed+vol+part+etc}}%
 
 \newbibmacro*{part}{%
   \iffieldundef{part}
@@ -1394,6 +1403,11 @@
       {\printfield{issue}%
        \space
        \printfield{year}}}}
+
+\newbibmacro*{doi+finentry+etc}{%
+  \usebibmacro{doi+url+etc}%
+  \usebibmacro{isbn}%
+  \usebibmacro{pageref+finentry}}%
 
 \newbibmacro*{colon+pages}{%
   \ifboolexpr{ test {\iffieldundef{month}}

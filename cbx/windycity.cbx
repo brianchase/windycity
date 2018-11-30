@@ -1,4 +1,4 @@
-% Last modified: Thu 29 Nov 2018 11:16:19 AM CST
+% Last modified: Thu 29 Nov 2018 06:55:18 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -33,12 +33,12 @@
 %%  Preliminary  %%
 %%%%%%%%%%%%%%%%%%%
 
+\InitializeCitationStyle{\let\crossreflist\empty}%
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{cbx@first}%
   \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
-
 \renewcommand*{\multicitedelim}{\addsemicolon}%
 
 % To facilitate uniform output, citations in notes always end with
@@ -93,6 +93,13 @@
    \togglefalse{reprinted}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\citecrossref}
+  {}
+  {\printnames{labelname}%
+   \setunit{\addcomma\space}%
+   \printfield{labeltitle}}%
+  {}{}%
 
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
   {\bibsentence\usebibmacro{prenote}}%
@@ -309,22 +316,37 @@
   \usebibmacro{deflabel}%
   \iftoggle{firstshort}
     {\usebibmacro{cite:short}}%
-    {\usebibmacro{cite:long}}}
+    {\usebibmacro{crossref+long}}}
 
 \newbibmacro*{savefields}{%
   \savefieldcs{booktitle}{lastbooktitle}%
   \savefieldcs{year}{lastyear}}%
+
+\newbibmacro*{deflabel}{%
+  \ifciteidem
+    {\renewcommand*{\cbx@deflabel}{labelname}}%
+    {\renewcommand*{\cbx@deflabel}{default}}}
+
+\newbibmacro*{crossref+long}{%
+  \iffieldundef{crossref}
+    {\usebibmacro{cite:long}}%
+    {\xifinlist{\thefield{crossref}}{\crossreflist}
+       {\stepcounter{\thefield{crossref}}%
+        \printtext{%
+          \usedriver
+            {\DeclareNameAlias{sortname}{default}}%
+            {cite:crossref}}}
+       {\listxadd{\crossreflist}{\thefield{crossref}}%
+        \ifcsdef{c@\thefield{crossref}}
+          {\setcounter{\thefield{crossref}}{0}}%
+          {\newcounter{\thefield{crossref}}}
+        \usebibmacro{cite:long}}}}
 
 \newbibmacro*{cite:long}{%
   \printtext{%
     \usedriver
       {\DeclareNameAlias{sortname}{default}}%
       {cite:\thefield{entrytype}}}}
-
-\newbibmacro*{deflabel}{%
-  \ifciteidem
-    {\renewcommand*{\cbx@deflabel}{labelname}}%
-    {\renewcommand*{\cbx@deflabel}{default}}}
 
 \newbibmacro*{cite:postnote}{%
   \ifboolexpr{ togl {cbx@loccit}
@@ -369,7 +391,8 @@
 % If the postnote is empty, print the page ranges of journal articles.
 % See CMS, 17th ed., 14.153, 14.167, and 14.174. Do the same for
 % incollection and inbook entries, though the policy seems less clear.
-% See 14:106.
+% See 14:106. For magazines, the range can be left out. To do so,
+% simply omit it from your bibliography database.
 
 \newbibmacro*{cite:pages}{%
   \iffieldundef{pages}
@@ -429,12 +452,19 @@
   \usebibmacro{ed+vol+part+etc}%
   \usebibmacro{vol+page}}%
 
+\DeclareBibliographyDriver{cite:crossref}{%
+  \usebibmacro{author+title+etc}%
+  \citecrossref{\thefield{crossref}}%
+  \newunit}%
+
 \DeclareBibliographyDriver{cite:incollection}{%
+  \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
   \usebibmacro{vol+page}}%
 
 \DeclareBibliographyDriver{cite:letter}{%
   \toggletrue{noauth}%
+  \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
   \usebibmacro{vol+page}}%
 
