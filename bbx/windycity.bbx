@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 08:20:18 AM CST
+% Last modified: Sat 01 Dec 2018 08:31:27 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -65,7 +65,8 @@
 \providetoggle{ibid}
 \DeclareBibliographyOption{ibid}[true]{%
   \ifstrequal{#1}{true}
-    {\global\toggletrue{ibid}}%
+    {\global\toggletrue{ibid}%
+     \global\toggletrue{short}}%
     {\global\togglefalse{ibid}}}
 
 \providetoggle{isbn}
@@ -101,6 +102,13 @@
        autocite=footnote,
        sorting=nty}}}
 
+\providetoggle{short}
+\DeclareBibliographyOption{short}[true]{%
+  \ifstrequal{#1}{true}
+    {\global\toggletrue{short}%
+     \global\toggletrue{firstshort}}%
+    {\global\togglefalse{short}}}
+
 \providetoggle{transfirst}
 \DeclareEntryOption{transfirst}[true]{%
   \ifstrequal{#1}{true}
@@ -117,8 +125,6 @@
   date=long,
   dateabbrev=false,
   dateusetime=true,
-% FIX: Drop this line for CMS 17th ed.:
-  ibid=true,
   ibidtracker=constrict,
   idemtracker=constrict,
   indexing=true,
@@ -1193,7 +1199,8 @@
   \iftoggle{bibliography}
     {\usebibmacro{longtitle+titleaddon}%
      \usebibmacro{b:labelyear+extradate}}%
-    {\ifciteseen
+    {\ifboolexpr{ test {\ifciteseen}
+                  or togl {firstshort}}
        {\usebibmacro{shorttitle}}%
        {\usebibmacro{longtitle+titleaddon}}}}
 

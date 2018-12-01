@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 08:24:35 AM CST
+% Last modified: Sat 01 Dec 2018 08:36:09 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -207,6 +207,7 @@
 \newbibmacro*{parencite}{%
   \ifciteseen
     {\ifboolexpr{ test \ifciteibid
+                  and togl {short}
                   and not test \iffirstonpage}
        {\usebibmacro{pcite:labelyear+etc}}%
        {\iffieldundef{shorthand}
@@ -280,6 +281,7 @@
     {\renewcommand*{\cbx@deflabel}{labelname}%
      \iffieldundef{shorthand}
        {\ifboolexpr{ test \ifciteibid
+                     and togl {short}
                      and not test \iffirstonpage}
           {\usebibmacro{cite:ibid}}%
           {\usebibmacro{cite:short}}}
@@ -323,7 +325,8 @@
   \savefieldcs{year}{lastyear}}%
 
 \newbibmacro*{deflabel}{%
-  \ifciteidem
+  \ifboolexpr{ test {\ifciteidem}
+               or togl {firstshort}}
     {\renewcommand*{\cbx@deflabel}{labelname}}%
     {\renewcommand*{\cbx@deflabel}{default}}}
 
