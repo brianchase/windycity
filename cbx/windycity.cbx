@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 08:36:09 AM CST
+% Last modified: Sat 01 Dec 2018 08:44:36 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -36,10 +36,11 @@
 \InitializeCitationStyle{\let\crossreflist\empty}%
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
+  \global\togglefalse{multicite}%
   \global\togglefalse{cbx@first}%
   \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
-\renewcommand*{\multicitedelim}{\addsemicolon}%
+\AtEveryMultiCite{\toggletrue{multicite}}%
 
 % To facilitate uniform output, citations in notes always end with
 % '\addperiod' (see cite:postnote). This makes '\footcite{something}'
@@ -277,6 +278,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{cite}{%
+  \usebibmacro{test:multicite}%
   \ifciteseen
     {\renewcommand*{\cbx@deflabel}{labelname}%
      \iffieldundef{shorthand}
@@ -288,6 +290,12 @@
        {\usebibmacro{cite:shorthand}}}
     {\usebibmacro{cite:new}}%
   \usebibmacro{savefields}}%
+
+\newbibmacro*{test:multicite}{%
+  \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
+               and togl {multicite}}
+   {\toggletrue{noauth}}%
+   {}}
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
@@ -359,8 +367,10 @@
        {\usebibmacro{postnote:first}%
         \usebibmacro{shorthand+intro}}%
        {\usebibmacro{cite:vol+page}%
-        \printfield{postnote}}}
-  \addperiod}%
+        \usebibmacro{postnote}}}
+  \iflastcitekey
+    {\addperiod}%
+    {}}
 
 \newbibmacro*{postnote:first}{%
   \ifboolexpr{ test {\iffieldundef{postnote}}
