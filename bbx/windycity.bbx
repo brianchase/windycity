@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 10:13:55 AM CST
+% Last modified: Sat 01 Dec 2018 10:50:49 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -157,7 +157,16 @@
   \field{urldate}
   \literal{nodate}
 }
+\DeclareLabelname{%
+  \field{shortauthor}
+  \field{author}
+  \field{editor}
+  \field{translator}
+  \field{editora}
+  \field{translatora}
+}
 \DeclareLabelname[inbook,incollection]{%
+  \field{shortauthor}
   \field{author}
   \field{bookauthor}
   \field{editor}
@@ -620,7 +629,9 @@
 \newbibmacro*{author+namelist}{%
   \ifnameundef{author}
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
-    {\renewcommand*{\cbx@namelist}{author}}%
+    {\ifnameundef{shortauthor}
+       {\renewcommand*{\cbx@namelist}{author}}%
+       {\renewcommand*{\cbx@namelist}{shortauthor}}}
   \usebibmacro{printnames+etc}}%
 
 \renewbibmacro*{bybookauthor}{%
