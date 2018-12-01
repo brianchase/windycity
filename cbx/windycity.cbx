@@ -1,4 +1,4 @@
-% Last modified: Thu 29 Nov 2018 06:55:18 PM CST
+% Last modified: Sat 01 Dec 2018 08:24:35 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -438,6 +438,36 @@
           {\newunit}%
           {\setunit{\addcolon\space}}}}}
 
+% The next two macros determine whether to treat a multivolume
+% collection as a single work when you cite an InBook entry that
+% cross-references a Collection entry. In those cases, citing pages
+% prints the volume and pages together, separated by a colon, as in
+% '4:243'. Following CMS 14.118, 17th ed., what matters is whether all
+% volumes in the collection have the same publication date and title.
+% To match apparent exceptions, like the second example in 14.59, cite
+% the Collection entry and enter the volume and page in the postnote,
+% such as '1:126'.
+
+\newbibmacro*{test:multivolume}{%
+  \ifentrytype{inbook}
+    {\usebibmacro{test:multivolume:years}%
+     \iffieldsequal{title}{booktitle}
+       {\iffieldundef{volumetitle}
+          {}
+          {\togglefalse{multivolume}}}
+       {\togglefalse{multivolume}}}
+    {}}
+
+\newbibmacro*{test:multivolume:years}{%
+  \iffieldsequal{year}{bookyear}
+    {\ifboolexpr{ test {\iffieldundef{endyear}}
+                  and test {\iffieldundef{endbookyear}}}
+       {\toggletrue{multivolume}}%
+       {\iffieldsequal{endyear}{endbookyear}
+          {\toggletrue{multivolume}}%
+          {}}}
+     {}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers for Notes  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -458,6 +488,7 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
+  \usebibmacro{test:multivolume}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
   \usebibmacro{vol+page}}%

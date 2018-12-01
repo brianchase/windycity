@@ -1,4 +1,4 @@
-% Last modified: Fri 30 Nov 2018 10:11:57 AM CST
+% Last modified: Sat 01 Dec 2018 08:20:18 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -294,6 +294,7 @@
 \providetoggle{authposition}
 \providetoggle{bibliography}
 \providetoggle{journalfirst}
+\providetoggle{multivolume}
 \providetoggle{cbx@first}
 \providetoggle{cbx@loccit}
 \providetoggle{cbx@short}
@@ -1447,7 +1448,7 @@
            \usebibmacro{part}}}
        {\iffieldundef{postnote}
           {\usebibmacro{volume+title+part}}%
-          {\iffieldsequal{year}{bookyear}
+          {\iftoggle{multivolume}
              {}
              {\usebibmacro{volume+title+part}}}}}}
 
