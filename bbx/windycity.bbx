@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 08:48:04 AM CST
+% Last modified: Sat 01 Dec 2018 10:13:55 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -475,12 +475,7 @@
 
 \DeclareFieldFormat{addendum}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{annotation}{\\[\bibitemsep] #1}
-% FIX: This must change for CMS 17th edition:
-\DeclareFieldFormat{doi}{%
-  doi\addcolon
-  \ifhyperref
-    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
-    {\nolinkurl{#1}}}
+\DeclareFieldAlias{doi}{url}
 \DeclareFieldFormat{edition}{%
   \ifinteger{#1}
     {\mkbibordedition{#1}~\bibstring{edition}}%
