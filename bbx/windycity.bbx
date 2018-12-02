@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 10:50:49 AM CST
+% Last modified: Sun 02 Dec 2018 09:28:48 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -631,7 +631,7 @@
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
     {\ifnameundef{shortauthor}
        {\renewcommand*{\cbx@namelist}{author}}%
-       {\renewcommand*{\cbx@namelist}{shortauthor}}}
+       {\renewcommand*{\cbx@namelist}{shortauthor}}}% needs this '%'
   \usebibmacro{printnames+etc}}%
 
 \renewbibmacro*{bybookauthor}{%
@@ -1495,7 +1495,7 @@
   \setunit{\addcomma\space}%
   \printfield[noformat]{volume}%
   \clearfield{volume}%
-  \setunit{\addcolon}}%
+  \addcolon}%
 
 \newbibmacro*{bookseries}{%
   \iffieldundef{series}
