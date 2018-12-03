@@ -1,4 +1,4 @@
-% Last modified: Sun 02 Dec 2018 09:28:48 AM CST
+% Last modified: Sun 02 Dec 2018 07:57:36 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -629,7 +629,8 @@
 \newbibmacro*{author+namelist}{%
   \ifnameundef{author}
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
-    {\ifnameundef{shortauthor}
+    {\ifboolexpr{ test {\ifnameundef{shortauthor}}
+                  or togl {bibliography}}
        {\renewcommand*{\cbx@namelist}{author}}%
        {\renewcommand*{\cbx@namelist}{shortauthor}}}% needs this '%'
   \usebibmacro{printnames+etc}}%
