@@ -1,4 +1,4 @@
-% Last modified: Sat 01 Dec 2018 10:08:03 AM CST
+% Last modified: Sun 02 Dec 2018 07:29:59 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -37,6 +37,7 @@
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{multicite}%
+  \global\togglefalse{multivolume}%
   \global\togglefalse{cbx@first}%
   \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
@@ -280,6 +281,7 @@
 
 \newbibmacro*{cite}{%
   \usebibmacro{test:multicite}%
+  \usebibmacro{test:multivolume}%
   \ifciteseen
     {\renewcommand*{\cbx@deflabel}{labelname}%
      \iffieldundef{shorthand}
@@ -300,24 +302,25 @@
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
-    {\bibcpstring{ibidem}}%
-    {\printtext[bibhyperref]{%
+    {\bibcpstring{ibidem}
+     \ifloccit
+       {\global\toggletrue{cbx@loccit}}%
+       {\usebibmacro{cite:vol+page}}}
+    {\global\toggletrue{cbx@short}%
+     \printtext[bibhyperref]{%
        \usebibmacro{author+bookauthor+etc}%
        \iftoggle{noauth}
          {\usebibmacro{title+labelyear}}%
-         {}}}
-  \newunit
-  \ifloccit
-    {\global\toggletrue{cbx@loccit}}%
-    {}}
+         {}
+       \usebibmacro{cite:vol+page}}}}
 
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx@short}%
   \printtext[bibhyperref]{%
     \usebibmacro{author+bookauthor+etc}%
     \usebibmacro{review+title}%
-    \usebibmacro{title+labelyear}}%
-  \newunit}%
+    \usebibmacro{title+labelyear}%
+    \usebibmacro{cite:vol+page}}}
 
 \newbibmacro*{cite:shorthand}{%
   \printtext[bibhyperref]{\printfield{shorthand}}}
@@ -325,13 +328,19 @@
 \newbibmacro*{cite:new}{%
   \global\toggletrue{cbx@first}%
   \usebibmacro{deflabel}%
-  \iftoggle{firstshort}
-    {\usebibmacro{cite:short}}%
-    {\usebibmacro{crossref+long}}}
+  \iftoggle{multivolume}
+    {\usebibmacro{crossref+short+long}}%
+    {\iftoggle{firstshort}
+      {\usebibmacro{cite:short}}%
+      {\usebibmacro{crossref+long}}}}
 
+% FIX: Are the commented lines unnecessary?
 \newbibmacro*{savefields}{%
-  \savefieldcs{booktitle}{lastbooktitle}%
-  \savefieldcs{year}{lastyear}}%
+%  \savefieldcs{booktitle}{lastbooktitle}%
+%  \savefieldcs{year}{lastyear}%
+  \iffieldundef{crossref}
+    {\let\cbx@keyhash\empty}%
+    {\savefield{crossref}{\cbx@keyhash}}}
 
 \newbibmacro*{deflabel}{%
   \ifboolexpr{ test {\ifciteidem}
@@ -360,6 +369,23 @@
       {\DeclareNameAlias{sortname}{default}}%
       {cite:\thefield{entrytype}}}}
 
+\newbibmacro*{crossref+short+long}{%
+  \xifinlist{\thefield{crossref}}{\crossreflist}
+    {\stepcounter{\thefield{crossref}}%
+     \global\togglefalse{cbx@first}%
+     \ifboolexpr{ test {\iffieldequals{crossref}{\cbx@keyhash}}
+                  and togl {short}
+                  and not test \iffirstonpage}
+       {\usebibmacro{cite:ibid}}%
+       {\usebibmacro{cite:short}}}
+    {\listxadd{\crossreflist}{\thefield{crossref}}%
+     \ifcsdef{c@\thefield{crossref}}
+       {\setcounter{\thefield{crossref}}{0}}%
+       {\newcounter{\thefield{crossref}}}
+     \iftoggle{firstshort}
+      {\usebibmacro{cite:short}}%
+      {\usebibmacro{cite:long}}}}
+
 \newbibmacro*{cite:postnote}{%
   \ifboolexpr{ togl {cbx@loccit}
                and togl {ibid}}
@@ -367,8 +393,7 @@
     {\iftoggle{cbx@first}
        {\usebibmacro{postnote:first}%
         \usebibmacro{shorthand+intro}}%
-       {\usebibmacro{cite:vol+page}%
-        \usebibmacro{postnote}}}
+       {\usebibmacro{postnote}}}
   \iflastcitekey
     {\addperiod}%
     {}}
@@ -376,7 +401,9 @@
 \renewbibmacro*{postnote}{%
   \iffieldundef{postnote}
     {}
-    {\newunit
+    {\iftoggle{multivolume}
+       {}
+       {\newunit}%
      \printfield{postnote}}}
 
 \newbibmacro*{postnote:first}{%
@@ -395,6 +422,18 @@
                or test {\ifentrytype{incollection}}}
     {\usebibmacro{vol+page}}%
     {\newunit}}%
+
+\newbibmacro*{vol+page+new}{%
+  \iffieldundef{volume}
+    {\newunit}
+    {\iffieldundef{postnote}
+       {\newunit}
+       {\iffieldpages{postnote}
+          {\newunit
+           \usebibmacro{vol+colon}}%
+          {\newunit
+           \printfield{volume}%
+           \newunit}}}}
 
 \newbibmacro*{vol+page}{%
   \iffieldundef{volume}
@@ -471,17 +510,17 @@
      \iffieldsequal{title}{booktitle}
        {\iffieldundef{volumetitle}
           {}
-          {\togglefalse{multivolume}}}
-       {\togglefalse{multivolume}}}
+          {\global\togglefalse{multivolume}}}
+       {\global\togglefalse{multivolume}}}
     {}}
 
 \newbibmacro*{test:multivolume:years}{%
   \iffieldsequal{year}{bookyear}
     {\ifboolexpr{ test {\iffieldundef{endyear}}
                   and test {\iffieldundef{endbookyear}}}
-       {\toggletrue{multivolume}}%
+       {\global\toggletrue{multivolume}}%
        {\iffieldsequal{endyear}{endbookyear}
-          {\toggletrue{multivolume}}%
+          {\global\toggletrue{multivolume}}%
           {}}}
      {}}
 
@@ -505,7 +544,6 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
-  \usebibmacro{test:multivolume}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
   \usebibmacro{vol+page}}%

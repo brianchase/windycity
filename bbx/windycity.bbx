@@ -1,4 +1,4 @@
-% Last modified: Sun 02 Dec 2018 07:57:36 PM CST
+% Last modified: Sun 02 Dec 2018 07:57:06 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -296,6 +296,8 @@
 
 \let\cbx@bibstring\empty
 \let\cbx@deflabel\empty
+\let\cbx@keyhash\empty
+\let\cbx@namelist\empty
 \let\cbx@namelist\empty
 \let\anona\empty
 \let\anonb\empty
@@ -327,6 +329,7 @@
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
+  \global\togglefalse{multivolume}%
   \global\togglefalse{cbx@short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
