@@ -1,4 +1,4 @@
-% Last modified: Sun 02 Dec 2018 07:29:59 PM CST
+% Last modified: Mon 03 Dec 2018 10:08:05 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -444,17 +444,15 @@
        {\printfield{volume}}}}
 
 % If the postnote is empty, print the page ranges of journal articles.
-% See CMS, 17th ed., 14.153, 14.167, and 14.174. Do the same for
-% incollection and inbook entries, though the policy seems less clear.
-% See 14:106. For magazines, the range can be left out. To do so,
-% simply omit it from your bibliography database.
+% See CMS, 17th ed., 14.153, 14.167, and 14.174. As for incollection
+% and inbook entries, 14.106 seems to suggest the same, but the
+% example in 14.30 suggests otherwise For magazines, the range can be
+% left out. To do so, simply omit it from your bibliography database.
 
 \newbibmacro*{cite:pages}{%
   \iffieldundef{pages}
     {}
     {\ifboolexpr{ test {\ifentrytype{article}}
-                  or test {\ifentrytype{inbook}}
-                  or test {\ifentrytype{incollection}}
                   or test {\ifentrytype{review}}}
        {\iffieldundef{postnote}
           {\newunit
