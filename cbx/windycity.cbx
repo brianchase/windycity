@@ -1,4 +1,4 @@
-% Last modified: Mon 03 Dec 2018 10:08:05 AM CST
+% Last modified: Tue 04 Dec 2018 01:46:30 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -118,15 +118,6 @@
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
 
-\DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
-  {\bibsentence\usebibmacro{prenote}}%
-  {\citetrackerfalse
-   \usebibmacro{citeindex}%
-   \global\toggletrue{cbx@first}%
-   \usebibmacro{cite:long}}%
-  {\multicitedelim}%
-  {\usebibmacro{cite:postnote}}%
-
 \DeclareCiteCommand{\fullcite}
   {\usebibmacro{prenote}}%
   {\citetrackerfalse
@@ -145,35 +136,6 @@
    \usebibmacro{cite:long}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
-
-\DeclareCiteCommand{\fullcitens}
-  {\usebibmacro{prenote}}%
-  {\citetrackerfalse
-   \usebibmacro{citeindex}%
-   \global\toggletrue{cbx@first}%
-   \clearfield{shorthand}%
-   \usebibmacro{cite:long}}%
-  {\multicitedelim}%
-  {\usebibmacro{cite:postnote}}%
-
-\DeclareCiteCommand{\fullparencite}[\mkbibparens]
-  {\usebibmacro{prenote}}%
-  {\citetrackerfalse
-   \usebibmacro{citeindex}%
-   \global\toggletrue{cbx@first}%
-   \usebibmacro{pcite:long}}%
-  {\multicitedelim}%
-  {\usebibmacro{pcite:postnote}}%
-
-\DeclareCiteCommand*{\fullparencite}[\mkbibparens]
-  {\usebibmacro{prenote}}%
-  {\citetrackerfalse
-   \usebibmacro{citeindex}%
-   \toggletrue{noauth}%
-   \global\toggletrue{cbx@first}%
-   \usebibmacro{pcite:long}}%
-  {\multicitedelim}%
-  {\usebibmacro{pcite:postnote}}%
 
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}%
