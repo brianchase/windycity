@@ -1,4 +1,4 @@
-% Last modified: Tue 04 Dec 2018 02:03:03 PM CST
+% Last modified: Tue 04 Dec 2018 04:19:59 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -133,9 +133,11 @@
   minnames=7,
   maxnames=10,
 % The use of \citecrossref, with counters, has essentially the same
-% effect as setting 'mincrossrefs=2'.
-  mincrossrefs=2,
-  minxrefs=2,
+% effect as setting 'mincrossrefs=2'. Regardless, set it to '1'.
+% Otherwise, if you cite just one entrykey in a document (or
+% refsection, etc), the 'crossref' field is always undefined.
+  mincrossrefs=1,
+  minxrefs=1,
   pagetracker=page,
   parentracker=true,
   sortcites=false,
