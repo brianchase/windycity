@@ -1,4 +1,4 @@
-% Last modified: Tue 04 Dec 2018 08:35:23 PM CST
+% Last modified: Wed 05 Dec 2018 10:53:45 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -258,7 +258,8 @@
 
 \newbibmacro*{test:multicite}{%
   \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
-               and togl {multicite}}
+               and togl {multicite}
+               and togl {short}}
    {\toggletrue{noauth}}%
    {}}
 
@@ -296,10 +297,8 @@
       {\usebibmacro{cite:short}}%
       {\usebibmacro{crossref+long}}}}
 
-% FIX: Are the commented lines unnecessary?
+% FIX:
 \newbibmacro*{savefields}{%
-%  \savefieldcs{booktitle}{lastbooktitle}%
-%  \savefieldcs{year}{lastyear}%
   \iffieldundef{crossref}
     {\let\cbx@keyhash\empty}%
     {\savefield{crossref}{\cbx@keyhash}}}
