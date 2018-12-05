@@ -1,4 +1,4 @@
-% Last modified: Tue 04 Dec 2018 01:46:30 PM CST
+% Last modified: Tue 04 Dec 2018 08:35:23 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -335,6 +335,7 @@
   \xifinlist{\thefield{crossref}}{\crossreflist}
     {\stepcounter{\thefield{crossref}}%
      \global\togglefalse{cbx@first}%
+     \renewcommand*{\cbx@deflabel}{labelname}%
      \ifboolexpr{ test {\iffieldequals{crossref}{\cbx@keyhash}}
                   and togl {short}
                   and not test \iffirstonpage}
@@ -385,24 +386,13 @@
     {\usebibmacro{vol+page}}%
     {\newunit}}%
 
-\newbibmacro*{vol+page+new}{%
-  \iffieldundef{volume}
-    {\newunit}
-    {\iffieldundef{postnote}
-       {\newunit}
-       {\iffieldpages{postnote}
-          {\newunit
-           \usebibmacro{vol+colon}}%
-          {\newunit
-           \printfield{volume}%
-           \newunit}}}}
-
 \newbibmacro*{vol+page}{%
   \iffieldundef{volume}
     {}
     {\newunit
      \iffieldpages{postnote}
-       {\usebibmacro{vol+colon}}%
+       {\global\toggletrue{multivolume}%
+        \usebibmacro{vol+colon}}%
        {\printfield{volume}}}}
 
 % If the postnote is empty, print the page ranges of journal articles.

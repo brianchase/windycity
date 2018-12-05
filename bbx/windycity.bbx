@@ -1,4 +1,4 @@
-% Last modified: Tue 04 Dec 2018 04:19:59 PM CST
+% Last modified: Tue 04 Dec 2018 08:47:11 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1020,6 +1020,7 @@
 
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
+  \usebibmacro{test:multivolume}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{test:crossref}%
   \usebibmacro{doi+finentry+etc}}%
@@ -1150,7 +1151,8 @@
        {\usebibmacro{aft+fore+intro}}}}
 
 \newbibmacro*{test:crossref}{%
-  \iffieldundef{crossref}
+  \ifboolexpr{ test {\iffieldundef{crossref}}
+               or togl {multivolume}}
     {\usebibmacro{incollections}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
