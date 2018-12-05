@@ -1,4 +1,4 @@
-% Last modified: Tue 04 Dec 2018 08:47:11 PM CST
+% Last modified: Tue 04 Dec 2018 11:23:54 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -324,13 +324,13 @@
 \providetoggle{notrans}
 
 \newcommand*{\AtBeginLists}{%
-  \global\toggletrue{bibliography}%
   \renewcommand*{\newunitpunct}{\addperiod\space}%
   \let\bibstring\biblstring
   \global\undef\bbx@lasthash}%
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
+  \global\toggletrue{bibliography}%
   \global\togglefalse{multivolume}%
   \global\togglefalse{cbx@short}}%
 
