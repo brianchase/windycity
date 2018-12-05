@@ -1,4 +1,4 @@
-% Last modified: Tue 04 Dec 2018 11:35:46 PM CST
+% Last modified: Wed 05 Dec 2018 11:34:25 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -329,13 +329,14 @@
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
-  \global\toggletrue{bibliography}%
   \global\togglefalse{multivolume}%
   \global\togglefalse{cbx@short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
 \AtBeginShorthands{\AtBeginLists}%
-\AtEveryBibitem{\AtEveryItem}%
+\AtEveryBibitem{%
+  \global\toggletrue{bibliography}%
+  \AtEveryItem}%
 \AtEveryLositem{\AtEveryItem}%
 
 \defbibenvironment{reflist}
