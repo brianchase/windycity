@@ -1,4 +1,4 @@
-% Last modified: Wed 05 Dec 2018 11:34:25 AM CST
+% Last modified: Wed 05 Dec 2018 11:49:19 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -132,11 +132,11 @@
   loccittracker=constrict,
   minnames=7,
   maxnames=10,
-% Ideally, mincrossrefs would be '2'. But then if you cite just one
-% entrykey in a document (or refsection, etc), 'crossref' is
-% undefined. Since several macros depend on it, set the value to '1'.
-  mincrossrefs=1,
-  minxrefs=1,
+% Remember, if 'mincrossrefs' is greater than 1 and you cite just one
+% entrykey in a document (or refsection, etc), the field 'crossref' is
+% undefined.
+  mincrossrefs=2,
+  minxrefs=2,
   pagetracker=page,
   parentracker=true,
   sortcites=false,
