@@ -1,4 +1,4 @@
-% Last modified: Thu 06 Dec 2018 12:55:55 PM CST
+% Last modified: Thu 06 Dec 2018 03:14:39 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -2140,14 +2140,24 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 \item \cite[¶2,620]{standardtax1996}
 \end{citebib}
 
-%\setcounter{subsection}{7}
-%\subsection{Manuscript Collections}
-%\setcounter{subsection}{14}
+\setcounter{subsection}{7}
+\subsection{Special Types of References}
+\setcounter{subsection}{14}
 
-%\setcounter{subsubsection}{231}
-%\subsubsection{Reference works consulted in physical formats}
+\setcounter{subsubsection}{231}
+\subsubsection{Reference works consulted in physical formats}
 % 14.232 Reference works consulted in physical formats
 
+At present, Windy City has difficulty with some reference works.
+Exceptions like the ones below show full publication information in
+the same way as books.
+
+\begin{citebib}
+\item \cite[s.vv. \mkbibquote{police ranks}, \mkbibquote{postal addresses}]{timestyle2003}
+\item \cite[6.8.2]{mla2008}
+\end{citebib}
+
+%\setcounter{subsubsection}{232}
 %\subsubsection{Reference works consulted online}
 % 14.233 Reference works consulted online
 
@@ -2155,17 +2165,12 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 \subsubsection{Citing individual reference entries by author}
 % 14.234 Citing individual reference entries by author
 
-At present, the style has difficulty with many types of reference
-works. Exceptions like the one below take the form of articles in
-collections.
+Reference works like the following have the same format as articles in
+collections. Otherwise, Windy City formats them incorrectly.
 
 \begin{citebib}
 \item \cite{isaacson2005}
 \end{citebib}
-
-\setcounter{subsection}{7}
-\subsection{Special Types of References}
-\setcounter{subsection}{14}
 
 \setcounter{subsubsection}{245}
 \subsubsection{Citing specific editions of classical references}
