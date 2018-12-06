@@ -1,7 +1,19 @@
 
-INTERIM
+RELEASE NOTES FOR VERSION 2018.12.05
 
+* added much better support for cross-referencing collections in notes
+  and bibliographies, including enhanced support for treating multivolume
+  collections as a single work
+* support for short format of citations, with 'short' and 'ibid'
+  preamble options
+* added support for self-published books
+* added support for electronic article IDs
+* added support for 'shortauthor' namelist
+* better processing of reviews, though still limited
+* fixed and improved multicite output
 * undid change to 'noauth' entry option (it was right the first time!)
+* many bug fixes (mainly spacing, punctuation, and toggles)
+* new documentation
 
 RELEASE NOTES FOR VERSION 2018.11.26
 

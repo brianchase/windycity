@@ -1,4 +1,4 @@
-% Last modified: Tue 20 Nov 2018 03:38:32 PM CST
+% Last modified: Wed 05 Dec 2018 05:15:30 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -82,6 +82,66 @@
 \renewcommand{\cftsecfont}{\normalfont}%
 \renewcommand{\cftsecpagefont}{\normalfont}%
 
+\usepackage{ragged2e}
+\usepackage[inline]{enumitem}
+\setlist[enumerate,itemize]{noitemsep}
+
+\newenvironment{citebib}
+  {\begin{enumerate}[%
+     before=\RaggedRight\citereset\newrefsegment\small,
+     itemindent=2.2em,
+     labelsep=0.2em,
+     leftmargin=1.1em]}%
+  {\end{enumerate}
+   \printbibliography[env=bib,heading=none,segment=\therefsegment]
+   \endrefsegment}%
+\newenvironment{citeref}
+  {\begin{enumerate}[%
+     before=\RaggedRight\citereset\newrefsegment\small,
+     itemindent=2.2em,
+     labelsep=0.2em,
+     leftmargin=1.1em]}%
+  {\end{enumerate}
+   \printbibliography[env=ref,heading=none,segment=\therefsegment]
+   \endrefsegment}%
+\newenvironment{citeonly}
+  {\begin{enumerate}[%
+     before=\RaggedRight\citereset\newrefsegment\small,
+     itemindent=2.2em,
+     labelsep=0.2em,
+     leftmargin=1.1em]}%
+  {\end{enumerate}}%
+\newenvironment{bibonly}
+  {\citereset\newrefsegment\small}%
+  {\printbibliography[env=bib,heading=none,segment=\therefsegment]
+   \endrefsegment}%
+\newenvironment{refonly}
+  {\citereset\newrefsegment\small}%
+  {\printbibliography[env=ref,heading=none,segment=\therefsegment]
+   \endrefsegment}%
+
+\defbibenvironment{bib}
+  {\list{}{%
+     \small
+     \setlength{\leftmargin}{2.2em}%
+     \setlength{\itemindent}{-1.1em}%
+     \itemsep 0\baselineskip
+     \parsep 0\baselineskip}}
+  {\endlist}
+  {\item}
+\defbibenvironment{ref}
+  {\global\toggletrue{reflist}%
+   \list{}{%
+     \small
+     \setlength{\leftmargin}{2.2em}%
+     \setlength{\itemindent}{-1.1em}%
+     \itemsep 0\baselineskip
+     \parsep 0\baselineskip}}
+  {\endlist
+   \global\togglefalse{reflist}}
+  {\item}
+\defbibheading{none}{}%
+
 \newcounter{sh}
 \renewcommand{\thesh}{Abbreviations}%
 \newcounter{bib}
@@ -104,6 +164,7 @@
   \begin{center}\section*{References (Author-Date Format)}\end{center}
   \addcontentsline{toc}{section}{References (Author-Date Format)}
   \markright{References}}%
+\defbibheading{none}{}%
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -115,6 +176,7 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}%
 \renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}%
 
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}%
 \renewcommand*{\@seccntformat}[1]{%
   \csname the#1\endcsname
   \csname adddot@#1\endcsname\quad}%
@@ -135,18 +197,6 @@
   {1.5ex \@plus .2ex}%
   {\normalfont\it}}
 
-\usepackage{ragged2e}
-\usepackage{calc}% for \setlist[itemize] below
-\usepackage{enumitem}
-\setlist[enumerate]{noitemsep}
-\setlist[itemize]{%
-  before=\RaggedRight,
-  itemsep=3pt,
-  labelsep=1.75em,
-  labelwidth=\widthof{N},
-  leftmargin={\labelwidth+\labelsep},
-  parsep=4pt}
-
 \newcommand{\biber}{%
   \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
 \newcommand{\biblatex}{%
@@ -156,16 +206,27 @@
   T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
 
 \usepackage[
-  anchorcolor=black,
+  anchorcolor=,
   breaklinks=true,
-  citecolor=black,
-  colorlinks=true,
-  linkcolor=black,
+  citecolor=,
+  colorlinks=,
+  linkcolor=,
   pdfauthor={Brian Michael Chase},
   pdftitle={Windy City for biblatex},
-  urlcolor=black]{hyperref}
+  urlcolor=]{hyperref}
 \urlstyle{rm}
-\usepackage{btxdockit}% for \bibfield, \bibtype, \cmd, marglist, optionlist, \op, etc.
+\usepackage{btxdockit}% For \bibfield, \bibtype, \cmd, marglist, optionlist, \op, etc.
+\renewenvironment*{optionlist}
+  {\list{}{%
+     \setlength{\labelwidth}{\marglistwidth}%
+     \setlength{\labelsep}{\z@}%
+% Added next two lines for normal paragraphing:
+     \setlength{\leftmargin}{0pt}%
+     \setlength{\parsep}{0pt}%
+     \setlength{\listparindent}{\parindent}%
+     \renewcommand*{\makelabel}[1]{\hss\optionlistfont##1}}%
+   \ltd@optionlist}
+  {\endlist}
 \lstset{basicstyle=\small\ttfamily}
 \pretocmd{\bibfield}{\sloppy}{}{}
 \pretocmd{\bibtype}{\sloppy}{}{}

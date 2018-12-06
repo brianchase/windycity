@@ -1,4 +1,4 @@
-% Last modified: Wed 05 Dec 2018 10:53:45 AM CST
+% Last modified: Wed 05 Dec 2018 05:47:56 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -15,11 +15,11 @@
 
 \ProvidesFile{windycity.cbx}[Windy City style for biblatex]
 
-\@ifpackagelater{biblatex}{2017/11/26}
+\@ifpackagelater{biblatex}{2017/11/04}
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.11.23 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2018.12.05 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -297,7 +297,6 @@
       {\usebibmacro{cite:short}}%
       {\usebibmacro{crossref+long}}}}
 
-% FIX:
 \newbibmacro*{savefields}{%
   \iffieldundef{crossref}
     {\let\cbx@keyhash\empty}%

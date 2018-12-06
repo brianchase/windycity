@@ -1,4 +1,4 @@
-% Last modified: Mon 26 Nov 2018 03:26:27 PM CST
+% Last modified: Wed 05 Dec 2018 06:18:38 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,13 +8,11 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2018.11.26}
+\version{2018.12.05}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
-\newpage
 
 \section{Introduction}
-\label{intro}
 
 \nfootnote{Copyright \textcopyright\ 2018 Brian Michael Chase. Under
 the terms of the \LaTeX\ Project Public License, version 1.3,
@@ -24,93 +22,246 @@ See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}.}
 Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
 to the \textit{The Chicago Manual of Style}
-(\textit{CMS}).\footnote{\cite{chicago2010} Support for the 17th
-edition is in development.} It accurately handles a wide range of
-citations and includes a set of options and commands to accommodate
-special circumstances. It also has extensive support for citing and
-arranging different kinds of editors, translators, and compilers
-within a single citation. These features make Windy City especially
-suitable for academic work.
+(\textit{CMS}).\footnote{\cite{chicago2017}} It accurately handles a
+wide range of citations in different formats and includes a set of
+options and commands to accommodate special circumstances. It also has
+extensive support for citing and arranging different kinds of editors,
+translators, and compilers within a single citation. These features
+make Windy City especially suitable for academic work.
 
 The following sections assume familiarity with \textit{CMS} and
-\biblatex. Section \ref{basics} gives a brief overview of the style's
-features. Section \ref{edtrans} discusses the assignment of editors,
-translators, and compilers. Sections \ref{notes16} and \ref{paren16}
-reproduce examples from various parts of \textit{CMS} with a focus on
-notes and bibliographies. It will help to compare the results
-throughout these sections with the corresponding information in this
-document's bibliography database and \LaTeX\ file,
+\biblatex. Section \ref{overview} gives a brief overview of the
+style's features. Section \ref{edtrans} discusses the assignment of
+editors, translators, and compilers. Section \ref{multivolume}
+discusses several issues with multivolume works. Sections \ref{notes}
+and \ref{paren} reproduce examples from various parts of \textit{CMS}
+with a focus on notes and bibliographies. It will help to compare the
+results throughout these sections with the corresponding information
+in this document's bibliography database and \LaTeX\ file,
 \file{windycity.bib} and \file{windycity.tex}, respectively.
 
 Aside from \biber, which is necessary for a few options, Windy City
 has no requirements beyond those of \biblatex version 3.8 or later.
 
-\section{Some Basics}
-\label{basics}
+\section{Overview}
+\label{overview}
 
-Consider a few footnotes: One.\footcite{beattie1974}
-Two.\footcite[51]{beattie1974} Three.\footcite[51]{beattie1974}
-Four.\footcite[35]{shields2008} And five.\footcite[51]{beattie1974}
+This section covers basic information about Windy City. If you're
+completely new to \biblatex, you should probably glance at its
+documentation and try one of the styles that come with it, if only to
+get a sense of the basic commands. For the impatient, examples in
+Sections \ref{default}, \ref{short}, \ref{notes}, and \ref{paren}
+might be of more immediate interest.
 
-By default, the first citation of a work takes a long form, similar to
-its entry in the bibliography. If consecutive citations of a work
-appear on the same page, citations after the first receive an
-\textit{ibid}.\footnote{In line with the 17th edition of \textit{CMS},
-which discourages the use of \textit{ibid}., Windy City will
-eventually drop it from the standard format but allow it as an option
-(see \textit{CMS}, 17th edition, 14.34).\nocite{chicago2017} To
-disable it in the current version, see Section \ref{preops}.}
-Otherwise, subsequent citations of a work usually list short forms of
-the author's name and the work's title.
+\subsection{Getting Started}
 
-The short form of a name usually consists of a surname. If the name of
-an editor, translator, or compiler occupies the author's position, the
-short form of the name omits abbreviations of editorial roles, such as
-\textit{ed.} and \textit{trans.}, which appear only in first
-citations.\footnote{See \textit{CMS} 14.18, 14.27, and 14.76.} If
-necessary to distinguish names, the short form will include first and
-middle initials.
+If you already know how to use \biblatex, getting started with Windy
+City is easy. Locate \biblatex on your system, and copy Windy City's
+files into their respective directories:
 
-Several factors determine the short form of a title. If a work's entry
-in the bibliography database includes a \bibfield{shorttitle} or
-\bibfield{shortbooktitle} (see Section \ref{datafields}), the style
-will print one of them, giving preference to \bibfield{shorttitle}. If
-neither field is available, the short form is the work's title minus
-its subtitle.
-
-If a work uses an abbreviation---what \biblatex calls a
-\bibfield{shorthand}---it replaces \textit{ibid}, the author's name,
-and related elements in subsequent citations. Citations like
-this are scattered throughout these pages in reference to \textit{The
-Chicago Manual of Style}, which here takes the abbreviation
-\textit{CMS}. By default, the first citation of a work with a
-\bibfield{shorthand} announces it in parentheses at the end of the
-citation, as in the following:
-
-\begin{itemize}
-\item[] \fullcite[1:126]{shurtleff1853}
+\begin{itemize}[label=]
+\item \ldots\path{/biblatex/windycity.dbx}
+\item \ldots\path{/biblatex/cbx/windycity.cbx}
+\item \ldots\path{/biblatex/bbx/windycity.bbx}
+\item \ldots\path{/biblatex/lbx/american-windycity.lbx}
 \end{itemize}
 
-\noindent You may override the default announcement, and format it
-however you like, by adding your preferred content to
-\bibfield{shorthandintro}.
+\noindent Next, tell \biblatex to load Windy City with the load-time
+option \opt{style}:
 
-With certain collections, still other results are possible (see
-Section \ref{collect}). For examples of how the style truncates lists
-of names, see Section \ref{notes16}---in particular, the examples from
-\textit{CMS} \ref{14.76}. For options to skip long first citations,
-drop parts of citations, change the order of editors and translators,
-and more, see Sections \ref{preops} and \ref{entryops}.
+\begin{verbatim}
+   \usepackage[style=windycity]{biblatex}
+\end{verbatim}
 
-In addition to notes, the style supports parenthetical citations and
-reference lists in the author-date format of \textit{CMS}. You may use
-parenthetical citations in conjunction with notes. But you most choose
-between the standard format of a bibliography, which is the style's
-default, and that of a reference list (see \opt{reflist} in Section
-\ref{preops}). For examples of parenthetical citations and reference
-list entries, see Section \ref{paren16} and, at the end of this
-document, \ref{ref}. The latter shows in the author-date format the
-same sources as the \ref{bib}.
+For some entries in your bibliography database, you may need to add
+fields or make other adjustments to get the right output. However,
+since Windy City relies as much as possible on standard \BibTeX
+fields, and secondarily on \biblatex fields, you may not need to make
+major changes. The examples in this document and its accompanying
+bibliography database, \file{windycity.bib}, should serve as a guide
+for how to manage your input for nearly every circumstance that the
+style is meant to handle.
+
+\subsection{The Default Format}
+\label{default}
+
+For a first set of examples, consider this passage from \textit{CMS}
+\ref{14.30}:
+
+\begin{citeonly}
+\item \cite[24--25]{morley1995}
+\item \cite{schwartz1992}
+\item \cite{kaiser1964}
+\item \cite[43]{morley1995}
+\item \cite[138]{schwartz1992}
+\item \cite[189--90]{kaiser1964}
+\end{citeonly}
+
+The output shows Windy City's default format. The first citation of a
+work is similar to its entry in the bibliography. It includes all or
+most of its bibliographic information. Subsequent citations are
+shorter, usually consisting of a shortened form of the author's name
+and a shortened form of the work's title.
+
+Windy City supports variations on this format. For information on
+short forms of citation, including the use of \textit{ibid.}, see
+Section \ref{short}. For options to skip parts of citations, change
+the order of editors and translators, and more, see Sections
+\ref{preops} and \ref{entryops}. For parenthetical citations, see
+examples in Section \ref{paren}.
+
+The block below shows Windy City's default bibliography for the
+previously cited works:
+
+\begin{bibonly}
+\nocite{kaiser1964,morley1995,schwartz1992}
+\end{bibonly}
+
+\noindent You may also print a bibliography in an author-date format,
+what \textit{CMS} calls a reference list:
+
+\begin{refonly}
+\nocite{kaiser1964,morley1995,schwartz1992}
+\end{refonly}
+
+To make every instance of \cmd{printbibliography} use the author-date
+format, load \biblatex with the preamble option \opt{reflist}:
+
+\begin{verbatim}
+   \usepackage[reflist,style=windycity]{biblatex}
+\end{verbatim}
+
+\noindent Note that \opt{reflist=true} has the same effect:
+
+\begin{verbatim}
+   \usepackage[reflist=true,style=windycity]{biblatex}
+\end{verbatim}
+
+To use the author-date format on a case-by-case basis, run
+\cmd{printbibliography} with an appropriate \opt{env} option. In order
+to use Windy City's author-date format, a so-called ``bib
+environment'' must set the style's internal \opt{reflist} toggle to
+\opt{true}. Windy City's own such environment is called \opt{reflist},
+which you may use as follows:
+
+\begin{verbatim}
+   \printbibliography[env=reflist]
+\end{verbatim}
+
+As you proceed through the text, note that all examples of citations
+and bibliographies are outputs of the style from commands that you can
+inspect in the document's source, \file{windycity.tex}, and in its
+style file, \file{windycity.sty}. Almost all citations are from
+\cmd{cite} or \cmd{parencite}. A few are from more specialized
+commands, such as \cmd{cite*} or \cmd{cites}. All example
+bibliographies are outputs of the style from \cmd{printbibliography}.
+All bibliographic data resides in \file{windycity.bib}.
+
+\subsection{Short Citations}
+\label{short}
+
+Aside from parenthetical citations, which \textit{CMS} covers in
+Chapter 15, alternative formats receive scant documentation.
+Nevertheless, \textit{CMS} does give options. Consider this example
+from \textit{CMS} \ref{14.34}:\footnote{Switching formats within a
+document isn't a feature of the style and isn't at all convenient.}
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\item \cite[3]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[24--26]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\item \cite[401-2]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[433]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\item \cite[37--38]{diaz2008}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[403]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[152]{diaz2008}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[201-2]{diaz2008}
+\AtNextMultiCite{\toggletrue{short}}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}} \item \cite[33]{morrison2004a}
+\end{citeonly}
+
+Compare that with the style's default output:
+
+\begin{citeonly}
+\item \cite[3]{morrison2004a}
+\item \cite[18]{morrison2004a}
+\item \cite[18]{morrison2004a}
+\item \cite[24--26]{morrison2004a}
+\item \cite[401-2]{morrison2004b}
+\item \cite[433]{morrison2004b}
+\item \cite[37--38]{diaz2008}
+\item \cite[403]{morrison2004b}
+\item \cite[152]{diaz2008}
+\item \cite[201-2]{diaz2008}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\item \cite[33]{morrison2004a}
+\end{citeonly}
+
+In the short format, a work's first citation is much shorter than in
+the default, and consecutive citations of a work may omit the title.
+To use this format, start \biblatex with the preamble option
+\opt{short}. See Section \ref{preops} for more information.
+
+\textit{CMS} \ref{14.34} also shows how to render the passage with
+\textit{ibid.} Unlike previous editions of \textit{CMS}, the 17th
+edition discourages its use. As such, \textit{ibid.} is no longer part
+of Windy City's default format. Enable it with the preamble option
+\opt{ibid} (again, see Section \ref{preops}). The combination of
+options \opt{short} and \opt{ibid} yield the following:
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\item \cite[3]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[24--26]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\item \cite[401-2]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[433]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\item \cite[37--38]{diaz2008}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[403]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[152]{diaz2008}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[201-2]{diaz2008}
+\AtNextMultiCite{\toggletrue{short}\toggletrue{firstshort}}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[33]{morrison2004a}
+\end{citeonly}
+
+There are still other ways to save space: With the default format, you
+can use the preamble option \opt{firstshort} to swap long first
+citations for short ones (see Section \ref{preops}). The entry option
+\opt{noauth} prints a citation without the author's position (see
+Section \ref{entryops}). And the field \bibfield{shorthand} allows you
+to specify an abbreviation to stand in place of the author's name, the
+work's title, and other elements that ordinarily appear in citations
+(see \ref{14.59}).
+
+In total, Windy City allows a fair amount of control over the format
+of notes and bibliographies, consistent with \textit{CMS}. The
+remainder of this section, and the next few section thereafter,
+describe these and other features of the style in a more systematic
+way.
 
 \subsection{Preamble Options}
 \label{preops}
@@ -120,91 +271,113 @@ loads \biblatex. Preamble options affect the format of notes,
 bibliographies, and reference lists. Some features of the style
 require them.
 
-The following list describes preamble options that are unique to the
-style. However, it relies on many others that are native to \biblatex,
-some of which you may want to change. In particular, it sets
-\opt{ibidtracker} to true, as by default it uses \textit{ibid.} to
-refer to consecutive citations of the same work on the same page. If
-you follow the 17th edition of \textit{CMS}, you might prefer to set
-\opt{ibidtracker} to false, along with the option \opt{ibid},
-described below. The latter will suppress the use of \textit{ibid.},
-printing instead the author's name and page reference, if applicable;
-the former, in addition, will give a slightly longer citation that
-includes the work's title (or a shortened form of it). See, for
-example, 14.34 of the 17th edition.
+All options described below are \opt{false} by default. Set them to
+\opt{true} by passing the name of the option to \biblatex, with or
+without an additional \opt{=true}. In other words, using the option
+\opt{annotate} as an example, the following are equivalent:
+
+\begin{verbatim}
+   \usepackage[annotate,style=windycity]{biblatex}
+   \usepackage[annotate=true,style=windycity]{biblatex}
+\end{verbatim}
 
 \begin{optionlist}
 
 \optitem[false]{annotate}{\opt{true}, \opt{false}}
 
-Use this option to print an annotated bibliography. Annotations will
-appear in block paragraphs below their associated entries. To change
-the spacing between entries and annotations, change the value of
-\cmd{bibitemsep}.
+\noindent This option is for printing annotated bibliographies.
+Annotations will appear in block paragraphs below their associated
+entries. To change the spacing between entries and annotations, change
+the value of \cmd{bibitemsep}. Store the text of an annotation in the
+\bibfield{annotation} field of the work's bibliography database entry.
 
 \optitem[false]{collsonly}{\opt{true}, \opt{false}}
 
-By default, citing individual works of a collection adds an entry for
-each work to the bibliography.\footnote{The style's defaults for
-\opt{mincrossrefs} and \opt{minxrefs} is \liningnums{2}. This means
-that the style requires at least two cross-references to a collection
-before adding it to the bibliography.} This could result in needless
-clutter, especially after citing many volumes of a multivolume work.
-To exclude individual works and print only an entry for the collection
-as a whole, use \opt{collsonly}. This option sets \opt{mincrossrefs}
-and \opt{minxrefs} to \liningnums{1} and then filters from the
-bibliography all \bibtype{inbook} entries that cross-reference other
-entries and all \bibtype{incollection} entries that cite chapters of a
-cross-referenced book. Thus, it has no effect on many
-\bibtype{incollection} entries, such as articles in books, which need
-their own place in the bibliography. For some discussion of
-collections and multivolume works, see Section \ref{collect}.
+\noindent Citing individual works of a collection adds an entry for
+each work to the bibliography. This could result in needless clutter,
+especially after citing many volumes of a multivolume work. To exclude
+individual works and print only an entry for the whole collection, use
+\opt{collsonly}. It has no effect on many \bibtype{InCollection}
+entries, such as articles in books, which need (or ought to have) a
+place in the bibliography but does filter out chapters of books and
+volumes of collections. For discussion of collections and multivolume
+works, see Section \ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
-Use this option to print a shortened form of the first citation of
-each work. The resulting citation consists mainly of the author's name
-and the title. According to \textit{CMS}, this approach is optional
-for documents that have a complete
-bibliography.\footnote{\cite[14.14]{chicago2010} See also
-14.24--14.28. By default, the style adds every cited work to the
-bibliography.}
+\noindent Use this option to print a shortened form of the first
+citation of each work. The resulting citation consists mainly of the
+author's name and the work's title. According to \textit{CMS}, this
+approach is optional for documents with complete
+bibliographies.\footnote{\textit{CMS} \ref{14.23}. See also
+14.29--14.36.} You may use this option in conjunction with \opt{ibid}.
+However, \opt{firstshort} adds nothing to \opt{short}. The latter
+implies \opt{firstshort} but goes beyond it to give a short format to
+other citations as well.
 
-\optitem[true]{ibid}{\opt{true}, \opt{false}}
+\optitem[false]{ibid}{\opt{true}, \opt{false}}
 
-This option controls whether consecutive citations of a work on the
-same page receive an \textit{ibid}. Unlike the other preamble options
-discussed here, the style sets this one to \textit{true} by default.
-Nevertheless, since the 17th edition of \textit{CMS} discourages the
-use of \textit{ibid.} (see 14.34), a subsequent release of the style
-will set it to \textit{false}. See also the comments above about the
-native preamble option \opt{ibidtracker}.
+\noindent This option controls whether consecutive citations of a work
+on the same page receive an \textit{ibid}. The qualification ``on the
+same page'' means that \textit{ibid.} always refers to a work cited on
+the current page without an \textit{ibid.} The latter is not a
+requirement of \textit{CMS} but seems reasonable, since it prevents
+readers from having to look at another page to determine the referent
+of an \textit{ibid.} For an example of its output, see Section
+\ref{short} or \ref{14.34}. Recall that, as of the 17th edition,
+\textit{CMS} discourages the use of \textit{ibid.} (see \ref{14.34}).
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
-Use this option to print ISBNs in bibliographies. A work's ISBN
-belongs in the \bibfield{isbn} field of its database entry. With this
-option, the style will print ISBNs at the end of every entry in the
-bibliography, though before annotations. To print the ISBN of a
+\noindent Use this option to print ISBNs in bibliographies. A work's
+ISBN belongs in the \bibfield{isbn} field of its database entry. With
+this option, the style will print ISBNs at the end of every entry in
+the bibliography, though before annotations. To print the ISBN of a
 particular work, see the \bibfield{isbn} entry option in Section
 \ref{entryops}.
 
 \optitem[false]{nolos}{\opt{true}, \opt{false}}
 
-By default, every work with a \bibfield{shorthand} receives an entry
-in the bibliography. If you wish to exclude them, say, to avoid
-duplication with the output of \cmd{printshorthands}, use \opt{nolos}.
+\noindent By default, every work with a \bibfield{shorthand} receives
+an entry in the bibliography. If you wish to exclude them, say, to
+avoid duplication with the output of \cmd{printshorthands}, use
+\opt{nolos}.
 
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
-Use this option to print what \textit{CMS} calls a reference list, a
+\noindent Use this option to print a reference list, that is, a
 bibliography in the author-date format. If you choose parenthetical
 citations over notes, you should consider using \opt{reflist} to
-maintain consistency with \textit{CMS}. You can accomplish the same
-effect by giving the option \opt{env=reflist} to
-\cmd{printbibliography}. Thus, if you have more than one bibliography
-in a document, as in this one, you may print them in different
-formats.
+maintain consistency with \textit{CMS}. As mentioned in Section
+\ref{overview}, this is one of two ways to print reference lists with
+Windy City. The other is to use the \opt{env} option of
+\cmd{printbibliography}. See Section \ref{overview} for more
+information.
+
+\optitem[false]{short}{\opt{true}, \opt{false}}
+
+\noindent As shown in Section \ref{short}, this option prints
+citations in a short format (see \textit{CMS} \ref{14.34}). The use of
+\opt{short} has one feature in common with \opt{ibid}: Just as an
+\textit{ibid.} appears only for consecutive citations of a work on the
+same page, and so never refers to a citation on a previous page,
+\opt{short} drops the title from consecutive citations of a work on
+the same page, never in reference to a citation on a previous page. As
+with \textit{ibid.}, this feature isn't required by \textit{CMS}, but
+it prevents readers from having to look at a previous page to
+determine which title a citation refers to.
+
+In contexts where \opt{short} would drop a title from a citation, but
+where no name occupies the author's position, it will print the work's
+\bibfield{labeltitle}. This can be a shortened form of the title,
+either the title minus the subtitle or the \bibfield{shorttitle}, if
+present in the bibliography database. In those situations, the short
+format is no different from the default.
+
+As noted earlier, \opt{short} implies \opt{firstshort}, so using them
+together has no affect beyond using \opt{short} by itself. However,
+recall from Section \ref{short} that you can combine \opt{short} and
+\opt{ibid} for even more concise notes.
 
 \end{optionlist}
 
@@ -213,79 +386,61 @@ formats.
 
 An entry option is a value for the \bibfield{options} field of a
 work's database entry. It affects the format of that particular work.
-For options that affect the format of every work, see the previous
-section.
+For options that affect the format of every work, see Section
+\ref{preops}.
 
 \begin{optionlist}
 
 \optitem[false]{anonauth}{\opt{true}, \opt{false}}
 
-This option prints the author's name of an anonymously published work
-in brackets, as shown in \textit{CMS} \ref{14.80}:
+\noindent This option prints the author's name of an anonymously
+published work in brackets, as shown in \textit{CMS} \ref{14.79}:
 
-\begin{itemize}
-\item[N] \fullcite{horsley1796}
-
-\item[B] \bibentry{horsley1796}
-\end{itemize}
+\begin{citebib}
+\item \cite{horsley1796}
+\end{citebib}
 
 \optitem[false]{anonqauth}{\opt{true}, \opt{false}}
 
-This option is similar to the previous but adds a question mark after
-the author's name, indicating doubt about the authorship. The
-following example also comes from \ref{14.80}:
+\noindent This option is similar to the previous but adds a question
+mark after the author's name, indicating doubt about the authorship.
+The following example is from \ref{14.79}:
 
-\begin{itemize}
-\item[N] \fullcite{cook1730}
-
-\item[B] \bibentry{cook1730}
-\end{itemize}
+\begin{citebib}
+\item \cite{hawkes1834}
+\end{citebib}
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
-Use this option to print the ISBN of a particular work in
-bibliographies. The ISBN will appear at the end of the work's entry
-but before its annotation. To print ISBNs of every work, see the
-\bibfield{isbn} preamble option in the previous section.
+\noindent Use this option to print the ISBN of a particular work in a
+bibliography. The ISBN will appear at the end of the work's entry but
+before an annotation. To print ISBNs of every work, see the
+\bibfield{isbn} preamble option in Section \ref{preops}.
 
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
 
-This option tells the style to bypass the author's position of a work
-in notes and bibliographies. Citations will begin with the title's
-position. This option is rarely necessary. But consider an example
-from \textit{CMS} \ref{14.89}:
+\noindent This option tells the style to bypass the author's position
+of a work in notes and bibliographies. Citations will begin with the
+title's position. Below is an example from \textit{CMS} \ref{14.105}:
 
-\begin{itemize}
-\item[N] \fullcite{chaucer1966}
+\begin{citebib}
+\item \cite{chaucer1966}
+\end{citebib}
 
-\item[B] \bibentry{chaucer1966}
-\end{itemize}
-
-\noindent Without \opt{noauth}, the style prints:
-
-\begin{itemize}
-\AtNextCitekey{\togglefalse{noauth}}
-\item[N] \fullcite{chaucer1966}
-
-\AtNextCitekey{\togglefalse{noauth}}
-\item[B] \bibentry{chaucer1966}
-\end{itemize}
-
-\noindent To bypass the author's position on a case-by-case basis,
-rather than globally, and only in notes, not in the bibliography, use
+\noindent To bypass the author's position in a single note, use
 \cmd{cite*} or \cmd{footcite*}. See Section \ref{citecmds}.
 
 \optitem[false]{transfirst}{\opt{true}, \opt{false}}
 
-According to \textit{CMS}, if a work has both an editor and a
-translator, their names should appear in citations in the order in
-which they appear on the work's title page (14.88). By default, the
-style lists editors first. However, entries with the option
+\noindent According to \textit{CMS}, if a work has both an editor and
+a translator, their names should appear in citations in the order in
+which they appear on the work's title page (\ref{14.104}). By default,
+the style lists editors first. However, entries with the option
 \bibfield{transfirst} reverse this order: Their translators print
 first. If a work's translators and editors are identical, using
-\bibfield{transfirst} reverses the order of their roles---for example,
-from \textit{edited and translated by} to \textit{translated and
-edited by}. For more on this option, and examples, see Section
+\bibfield{transfirst} reverses the order of their roles, say, from
+\textit{edited and translated by} to \textit{translated and edited
+by}. For more on this option, with examples, see Section
 \ref{edtranspos}.
 
 \end{optionlist}
@@ -297,13 +452,11 @@ The most important citation commands are already familiar from
 \biblatex:
 
 \begin{ltxsyntax}
-
 \cmditem{cite}[prenote][postnote]{key}
 \cmditem{footcite}[prenote][postnote]{key}
 \cmditem{nocite}{key}
 \cmditem*{nocite}|\{*\}|
 \cmditem{parencite}[prenote][postnote]{key}
-
 \end{ltxsyntax}
 
 \noindent Insert notes with \cmd{cite} and \cmd{footcite}. Insert
@@ -318,106 +471,90 @@ particular works. Use it with an asterisk to add every work in every
 \cmditem{bibentry}{key}
 
 This command prints the bibliography entry of a work. Although mainly
-for testing, you might use it for printing lists of works, as for a
-syllabus. It has no effect on citation tracking.
+for testing, you might use a series of these commands to print a
+reading list, as for a syllabus. It has no effect on citation
+tracking.
 
 \cmditem{cite*}[prenote][postnote]{key}
 
 Use this command to cite a work without printing anything in the
-author's position of the note. It comes in handy when the context of a
-citation makes the author's name clear, such as when the name appears
-in the title. \textit{CMS} \ref{14.78} gives several examples of this,
-including:
+author's position. It comes in handy when the context of a citation
+makes the author's name clear, such as when the name appears in the
+work's title. From \textit{CMS} \ref{14.78}:
 
-\begin{itemize}
-\item[N] \fullcite*[44--45]{mccullers1999}
-
-\item[B] \bibentry{mccullers1999}
-\end{itemize}
-
-\noindent Ordinarily, the style would print the author's name in the
-note, but \textit{CMS} allows you to drop it. You may do so with
-\cmd{cite*}.\footnote{Technically, the example uses \cmd{fullcite*},
-since there is no need here for citation tracking.}
+\begin{citebib}
+\item \cite*[233]{franklin1868}
+\item \cite*[234]{franklin1868}
+\end{citebib}
 
 \cmditem{citerp}[postnote]{key}
 
-This command precedes a citation with ``Reprinted in'' and then
-bypasses the author's position and title. This is useful for citing
-reprints, especially of articles, after citing the original. For
-example, the first citation below uses \cmd{cite}, the second uses
-\cmd{citerp}:
+This command precedes a citation with ``Reprinted in'' and then skips
+the author's position and the work's title. This is useful for citing
+a reprint of a work after citing the original:
 
-\begin{itemize}
-\item[] \cite{frankfurt1969} \citerp[1--10]{frankfurt1988.1}
-\end{itemize}
+\begin{citebib}
+\item \cite{frankfurt1969} \citerp[1--10]{frankfurt1988.1}
+\end{citebib}
+
+\noindent The output above results from:
+
+\begin{verbatim}
+   \cite{frankfurt1969} \citerp[1--10]{frankfurt1988.1}
+\end{verbatim}
 
 \cmditem{footcite*}[prenote][postnote]{key}
 
-Like \cmd{cite*}, described above, this command suppresses the
-author's position of a note. Otherwise, it functions like the native
-\cmd{footcite} command.
-
-\cmditem{footfullcite}[prenote][postnote]{key}
-
-A slight modification of \cmd{fullcite} (see below), this command
-prints the first, complete citation of a work in a footnote. Like
-\cmd{fullcite}, it does not include the work in citation tracking.
-Thus, more so than \cmd{fullcite}, it is mainly for testing.
+Like \cmd{cite*}, this command suppresses the author's position of a
+note but otherwise functions like \cmd{footcite}.
 
 \cmditem{fullcite}[prenote][postnote]{key}
 
-This command prints the first, complete citation of a work in the
-format of a note. Unlike \cmd{footfullcite}, which prints the same
-content in a footnote, \cmd{fullcite} prints citations in place. This
-command is mainly useful for testing, though, like \cmd{bibentry}, you
-may use it for printing lists of works. Since it has no effect on
-citation tracking, and ignores the preamble option
-\bibfield{firstshort} (see Section \ref{preops}), using it will never
-result in an \textit{ibid} or a shortened citation.
+Mainly for testing, this command prints the first, long citation of a
+work in the default format, regardless of whether the preamble options
+\opt{short} or \opt{firstshort} are true. Like \cmd{bibentry}, it has
+no effect on citation tracking.
 
 \cmditem{fullcite*}[prenote][postnote]{key}
 
-Mainly for testing, this command prints the first, complete citation
-of a work in the format of a note but without the author's position.
-Like \cmd{cite*}, but unlike the entry option \opt{noauth} (see
-Section \ref{entryops}), the corresponding entries in bibliographies
-retain the author's position. However, like \cmd{fullcite}, and unlike
-\cmd{cite*}, it has no effect on citation tracking. There is perhaps
-no practical use for this command aside from testing.
-
-\cmditem{fullparencite}[prenote][postnote]{key}
-
-Also mainly for testing, this command prints the first, complete
-parenthetical citation of a work. It has no effect on citation
-tracking.
-
-\cmditem{fullparencite*}[prenote][postnote]{key}
-
-This command does for parenthetical citations what \cmd{fullcite*}
-does for notes: It prints the first, complete parenthetical citation
-of a work but without the author's position and without affecting
-citation tracking. It, too, may have no practical use aside from
-testing.
+Like \cmd{fullcite}, this command prints the first, long citation of a
+work in the default format but, like \cmd{cite*}, skips the author's
+position. Also like \cmd{cite*}, the corresponding entry in the
+bibliography retains the author's position. It has no effect on
+citation tracking.
 
 \cmditem{parencite*}[prenote][postnote]{key}
 
 Use this command to print a parenthetical citation without the
-author's position. The most likely contexts for this are sentences in
-which the author receives explicit mention.\footnote{For discussion
-and examples in \textit{CMS}, see especially 15.24.}
+author's position. The most likely context for this is a sentence in
+which the author receives explicit mention. Here's an example from
+\textit{CMS} 15.25:
+
+\begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
+Hout \parencite*{fischer2006} reach more or less the same conclusions.
+In contrast, Abramowitz and Saunders \parencite*{abramowitz2005}
+suggest that the mass public is deeply divided between red states and
+blue states and between churchgoers and secular voters. \end{quote}
+
+The source for the passage above contains:
+
+\begin{verbatim}
+   \begin{quote} Fiorina et al. \parencite*{fiorina2005}...
+   Fischer and Hout \parencite*{fischer2006}... Abramowitz
+   and Saunders \parencite*{abramowitz2005}... \end{quote}
+\end{verbatim}
 
 \cmditem{refentry}{key}
 
 Similar to \cmd{bibentry}, this command prints the reference list
-entry of a work.
+entry of a work. It, too, has no effect on citation tracking.
 
 \end{ltxsyntax}
 
 \subsection{Additional Data Fields}
 \label{datafields}
 
-The style recognizes several data fields that are not available with
+Windy City uses several data fields that are not available with
 \biblatex.
 
 \begin{marglist}
@@ -430,40 +567,38 @@ bibliography database.
 
 \item[editoraddon] Use this field to include additional editorial
 information about a work. Earlier, in Section \ref{entryops}, the
-example from \textit{CMS} \ref{14.89} uses it: In the work's database
+example from \textit{CMS} \ref{14.105} uses it: In the work's database
 entry, \bibfield{editoraddon} contains ``from materials compiled by
 John M. Manly and Edith Richert, with the assistance of Lilian J.
 Redstone et al.'' This content prints after the editor's position,
 without intervening punctuation. Again, in the bibliography, the
 result is:
 
-\begin{itemize}
-\item[] \bibentry{chaucer1966}
-\end{itemize}
+\begin{bibonly}
+\nocite{chaucer1966}
+\end{bibonly}
 
 \item[seriesaddon] This field is for additional information about a
 book's series, such as \textit{2nd ser.} and \textit{n.s.}. For
-examples, see \ref{14.132} and \ref{14.195}.
+examples, see \ref{14.126} and \ref{14.184}.
 
 \item[shortbooktitle] This field is for the short form of a
 \bibfield{booktitle}, just as \bibfield{shorttitle} is for
-\bibfield{title}. Nevertheless, its use is mainly internal. You never
-need to use it in a bibliography database. Instead, always use
+\bibfield{title}. Nevertheless, its use is internal. You never need to
+use it in a bibliography database. Instead, always use
 \bibfield{shorttitle}. For more information on how the style handles
 titles, see Section \ref{authtitles}.
 
 \item[volumea] Use this field when an entry requires a second volume
-number. For an example, see Section \ref{collect}.
+number. For an example, see Section \ref{multivolume}.
 
 \item[volumetitle] Use this field when a volume has a title. In the
 following example, from \textit{CMS} \ref{14.123}, the
 \bibfield{volumetitle} is \textit{1883--1884}:
 
-\begin{itemize}
-\item[N] \fullcite*[32--33]{james1963.5}
-
-\item[B] \bibentry{james1963.5}
-\end{itemize}
+\begin{citeonly}
+\item \cite*[32--33]{james1963.5}
+\end{citeonly}
 
 \end{marglist}
 
@@ -471,260 +606,56 @@ following example, from \textit{CMS} \ref{14.123}, the
 \label{authtitles}
 
 The style allows for some flexibility over how you designate authors
-and titles in bibliography databases. In particular, some standard
+and titles in a bibliography database. In particular, some standard
 data fields are optional: \bibfield{bookauthor}, \bibfield{booktitle},
 and \bibfield{booksubtitle}. No bibliography database entry needs
 them, though using them causes no harm. As such, you may designate a
 book's author, title, and subtitle in one of three ways:
 
-\begin{lstlisting}
-  ...
-  author = {Doe, Jane},
-  title = {A Book's Title},
-  subtitle = {A Book's Subtitle},
-  ...
-  bookauthor = {Doe, Jane},
-  booktitle = {A Book's Title},
-  booksubtitle = {A Book's Subtitle},
-  ...
-  bookauthor = {Doe, Jane},
-  title = {A Book's Title},
-  subtitle = {A Book's Subtitle},
-  ...
-  author = {Doe, Jane},
-  booktitle = {A Book's Title},
-  booksubtitle = {A Book's Subtitle},
-  ...
-\end{lstlisting}
+\begin{verbatim}
+   ...
+   author = {Doe, Jane},
+   title = {A Book's Title},
+   subtitle = {A Book's Subtitle},
+   ...
+   bookauthor = {Doe, Jane},
+   booktitle = {A Book's Title},
+   booksubtitle = {A Book's Subtitle},
+   ...
+   bookauthor = {Doe, Jane},
+   title = {A Book's Title},
+   subtitle = {A Book's Subtitle},
+   ...
+   author = {Doe, Jane},
+   booktitle = {A Book's Title},
+   booksubtitle = {A Book's Subtitle},
+   ...
+\end{verbatim}
 
 \noindent Note that a \bibfield{subtitle} must go with a
 \bibfield{title} and a \bibfield{booksubtitle} must go with a
-\bibfield{booktitle}. Also, cross-referencing is no concern, so one
-work may cross-reference another while each retains its own
-\bibfield{author}, \bibfield{title}, and \bibfield{subtitle}. For
-example:
+\bibfield{booktitle}. Also, a work may cross-reference another while
+both retain their own \bibfield{author}, \bibfield{title}, and
+\bibfield{subtitle}. For example:
 
-\begin{lstlisting}
-  @InCollection{doe2014a,
-    crossref = {doe2014},
-    author = {Doe, Jane},
-    title = {An Article's Title},
-    subtitle = {An Article's Subtitle},
-    ...
-  }
-  @Collection{doe2014,
-    author = {Doe, Jane and Doe, John},
-    title = {A Book's Title},
-    subtitle = {A Book's Subtitle},
-    ...
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @InCollection{doe2014a,
+     author = {Doe, Jane},
+     title = {An Article's Title},
+     subtitle = {An Article's Subtitle},
+     crossref = {doe2014}
+     ...
+   }
+   @Collection{doe2014,
+     author = {Doe, Jane and Doe, John},
+     title = {A Book's Title},
+     subtitle = {A Book's Subtitle},
+     ...
+   }
+\end{verbatim}
 
 \noindent Much the same holds for editors and translators. See Section
 \ref{edtrans}.
-
-\subsection{Data Fields for Collections}
-\label{collect}
-
-Typical examples of \bibtype{collection} and \bibtype{incollection}
-entries appear in Section \ref{notes16}. But not all such works are
-typical. This section addresses some of them.
-
-Although its discussion is a bit obscure, \textit{CMS} treats some
-multivolume works as if they formed a single unit---but only if every
-volume of the collection has the same title and publication
-year.\footnote{See the examples of short citations in 14.29 and
-14.122--14.125.} The style accommodates these citations. Below is a
-note with an example from \ref{14.123}.\footcite[243]{byrne1981.4} In
-citing the fourth volume of the collection, the style prints the
-volume number not in the usual place, between the title and
-publisher's address, but near the end of the note, separated from the
-page number by a colon. Citing the fifth volume immediately
-thereafter, on the same page, produces an \textit{ibid} with the same
-arrangement of volume and page number.\footcite[91]{byrne1981.5} This
-occurs even though the fourth and fifth volumes are distinct entries
-in the bibliography database.
-
-If citations to other volumes are not consecutive, or if consecutive
-citations are not on the same page, the style will render them in the
-short form, even if those volumes have not been cited before. For
-example, here is an intervening note.\footnote{Hello!} And here is a
-citation of the sixth volume.\footcite[23--32]{byrne1981.6}
-
-Since notes of this sort must indicate the volume number, the style
-always prints it, regardless of whether the citation includes a page
-reference. So, if the last note had no page reference, the style would
-have printed ``Ibid., vol. 6.'' The first note would have shown the
-volume number in the usual place:
-
-\begin{itemize}
-\item[] \fullcite{byrne1981.4}
-\end{itemize}
-
-Citing multivolume works in this way requires you to cross-reference
-individual volumes to their collection. In the bibliography database
-for this document, the entry for the fourth volume of Byrne's
-collection is:
-
-\begin{lstlisting}
-  @InBook{byrne1981.4,
-    crossref = {byrne1981},
-    volume = {4},
-    year = {1981}
-  }
-\end{lstlisting}
-
-\noindent The above is the minimum information necessary to get the
-correct output.\footnote{As noted later, using \bibtype{inbook} for
-books in collections may seem to stretch the usual profile of the
-entry type. To avoid this confusion, while getting the same results,
-you could use \bibtype{bookinbook}.}
-
-Adding more information has no effect. Thus, you could change the
-entry to:
-
-\begin{lstlisting}
-  @InBook{byrne1981.4,
-    crossref = {byrne1981},
-    title = {The Lisle Letters},
-    editor = {Byrne, Muriel St. Clare},
-    volume = {4},
-    address = {Chicago},
-    publisher = ucp,
-    year = {1981}
-  }
-\end{lstlisting}
-
-\noindent However you fill them out, entries for individual volumes
-must cross-reference the col\-lec\-tion---in this case,
-\bibfield{byrne1981}:
-
-\begin{lstlisting}
-  @Collection{byrne1981,
-    editor = {Byrne, Muriel St. Clare},
-    title = {The Lisle Letters},
-    volumes = {6},
-    address = {Chicago},
-    publisher = ucp,
-    year = {1981}
-  }
-\end{lstlisting}
-
-Occasionally, getting acceptable output for a multivolume work
-requires some trial-and-error. Consider a difficult example:
-
-\begin{itemize}
-\item[N] \fullcite{kierkegaard1987}
-
-\item[B] \bibentry{kierkegaard1987}
-\end{itemize}
-
-\noindent This edition of \textit{Either/Or} is a two-volume work,
-each volume of which is a volume of \textit{Kierkegaard's Writings}.
-In the bibliography database, \bibfield{volume} contains \textit{3 and
-4}, though ordinarily it would contain a single number for a single
-volume. The style responds by preceding \textit{3 and 4} with the
-abbreviation \textit{vols.}, rather than the usual, \textit{vol}.
-Meanwhile, \bibfield{volumes} contains \textit{2}, indicating the two
-volumes of \textit{Either/Or}, and \bibfield{maintitle} contains
-\textit{Kierkegaard's Writings}. No cross-referencing occurs with the
-entry.\footnote{You could drop \bibfield{volume} for simpler output.
-But there are occasions when you need it along with
-\bibfield{volumes}, such as when a two-volume work comprises a single
-volume of a multivolume collection. This is the case with \textit{The
-Wealth of Nations} cited in Section \ref{edtransnames}.}
-
-The greatest difficulty, though, is how to cite particular works from
-\textit{Either/Or}. A citation should include the volume of the book.
-But each volume is also a volume of \textit{Kierkegaard's Writings},
-which makes each volume a volume twice over. Plus, each volume is a
-collection, which means that each volume is a collection (consisting
-of essays) within a collection (the two-volume book) within a
-collection (of \textit{Kierkegaard's Writings}).
-
-The title pages of \textit{Either/Or} might suggest a solution. They
-refer to the volumes as \textit{Part I} and \textit{Part II}. But
-using \bibfield{part} is incorrect, since its function in entries for
-books is to indicate parts of a volume, not volumes of a collection.
-What should you do?
-
-One solution is to keep a separate entry in the bibliography database
-for each volume, without cross-referencing to the original entry, and
-to use \bibfield{note} for holding \textit{Part I} and \textit{Part
-II}. Citing particular works from each volume is then a
-straightforward matter of making \bibtype{incollection} entries for
-those works and cross-referencing them to the new \bibtype{collection}
-entries. The output is at least adequate, though the placement of
-\textit{Part I} may seem odd:
-
-\begin{itemize}
-\item[N] \fullcite[290]{kierkegaard1987.1.8a}
-
-\item[B] \bibentry{kierkegaard1987.1.8a}
-\end{itemize}
-
-\noindent Alternatively, you could have the style treat
-\textit{Either/Or} in the same way that it treats \textit{The Lisle
-Letters} above. Here, too, you have options. First, cross-reference
-each volume of \textit{Either/Or} to the collection, making sure to
-include the year and volume in each \bibtype{inbook} entry. Then,
-cross-reference individual works to their respective volume:
-
-\begin{lstlisting}
-  @InCollection{kierkegaard1987.1.8,
-    crossref = {kierkegaard1987.1},
-    title = {Rotation of Crops},
-    pages = {281--300},
-  }
-  @InBook{kierkegaard1987.1,
-    crossref = {kierkegaard1987},
-    volume = {1},
-    year = {1987}
-  }
-  @Collection{kierkegaard1987,
-    author = {Kierkegaard, S{\o}ren},
-    title = {Either/Or},
-    editor = {Hong, Howard V. and Hong, Edna H.},
-    translator = {Hong, Howard V. and Hong, Edna H.},
-    address = {Princeton, NJ},
-    publisher = {Princeton University Press},
-    year = {1987}
-  }
-\end{lstlisting}
-
-\noindent These entries drop the \bibfield{note} and
-\bibfield{maintitle} and use \bibfield{volume} for the volume of
-\textit{Either/Or}. The resulting output is fairly clean:
-
-\begin{itemize}
-\item[N] \fullcite[290]{kierkegaard1987.1.8b}
-
-\item[B] \bibentry{kierkegaard1987.1.8b}
-\end{itemize}
-
-But what if you want to include the \bibfield{maintitle} with its
-volume number? Add \bibfield{maintitle} to \bibtype{collection} along
-with a new field, \bibfield{volumea}, for the volume of
-\textit{Kierkegaard's Writings}. The result:
-
-\begin{itemize}
-\item[N] \fullcite[290]{kierkegaard1987.1.8c}
-
-\item[B] \bibentry{kierkegaard1987.1.8c}
-\end{itemize}
-
-By default, the style adds an entry to the bibliography for every work
-that you cite from a collection. If you cite two or more works from a
-collection, the style will add a separate entry for the collection
-(see \ref{bib}, under Byrne). If you prefer a different threshold,
-load \biblatex with a different value for the preamble option
-\opt{mincrossrefs}. A value of \textit{1}, for example, will add an
-entry for the collection if you cite from it at least once.
-
-Multivolume works like \textit{The Lisle Letters} are perhaps best
-accounted for in a bibliography by a single entry for the collection
-and no entries for individual volumes. For that, use the preamble
-option \opt{collsonly} (see Section \ref{preops}).
 
 \subsection{Data Fields for Series}
 
@@ -733,32 +664,29 @@ as a series at all, rather than as the title of a multivolume work.
 After that, the most common question is how to format a series number.
 Sometimes, the number appears alone, with no preceding abbreviation.
 But it may also appear with \textit{vol.} or
-\textit{no.}\footcite[\ref{14.128}. See also \ref{14.130} and
-\ref{14.132}.]{chicago2010}. In order to avoid using multiple fields
-for essentially the same task, the style uses \bibfield{number} for
-all of them. By default, it places no abbreviation before the number.
-Add abbreviations to the field as necessary. In the database entry for
-the example below, \bibfield{number} contains \textit{vol. 6}:
+\textit{no.}\footnote{\textit{CMS} \ref{14.123}}.
 
-\begin{itemize}
-\item[N] \fullcite{cochrane1987}
+In order to avoid using multiple fields for essentially the same task,
+the style uses \bibfield{number} for all of them. By default, it
+places no abbreviation before the number. Add abbreviations to the
+field as necessary. In the database entry for the example below,
+\bibfield{number} contains \textit{vol. 6}:
 
-\item[B] \bibentry{cochrane1987}
-\end{itemize}
+\begin{citebib}
+\item \cite{cochrane1987}
+\end{citebib}
 
 To indicate the run of a series, such as \textit{2nd ser.} or
 \textit{n.s.}, use \bibfield{seriesaddon} (see Section
 \ref{datafields}). However, this does not apply to journals, where
 such labels usually modify a journal's title. For them, use
-\bibfield{series}, as in this example from \ref{14.195}:
+\bibfield{series}, as in this example from \ref{14.184}:
 
-\begin{itemize}
-\item[N] \fullcite{moraes1950}
+\begin{citebib}
+\item \cite{moraes1950}
+\end{citebib}
 
-\item[B] \bibentry{moraes1950}
-\end{itemize}
-
-\subsection{Entry Types and Their Aliases}
+\subsection{Entry Types}
 
 In a bibliography database, every entry has an entry type. The style
 recognizes the standard ones for \BibTeX, as well as some that are
@@ -767,88 +695,81 @@ basic. The style treats the rest as aliases of the basic ones.
 
 \begin{typelist}\raggedright
 
-\typeitem{article}
+\typeitem{Article}
 
-Aliases: \bibtype{periodical}
+Aliases: \bibtype{Periodical}
 
-\typeitem{book}
+\typeitem{Book}
 
-Aliases: \bibtype{booklet}, \bibtype{collection}, \bibtype{manual},
-\bibtype{proceedings}, \bibtype{reference}, \bibtype{report},
-\bibtype{techreport}
+Aliases: \bibtype{Booklet}, \bibtype{Collection}, \bibtype{Manual},
+\bibtype{Proceedings}, \bibtype{Reference}, \bibtype{Report},
+\bibtype{Techreport}
 
-\typeitem{incollection}
+\typeitem{InCollection}
 
-Aliases: \bibtype{bookinbook}, \bibtype{conference},
-\bibtype{inproceedings}, \bibtype{inbook}, \bibtype{inreference},
-\bibtype{letter}, \bibtype{suppbook}, \bibtype{suppcollection}
+Aliases: \bibtype{BookInBook}, \bibtype{Conference},
+\bibtype{InProceedings}, \bibtype{InBook}, \bibtype{InReference},
+\bibtype{Letter}, \bibtype{SuppBook}, \bibtype{SuppCollection}
 
-\typeitem{letter} Aliases: none
-\typeitem{misc} Aliases: none
-\typeitem{online} Aliases: none
-\typeitem{patent} Aliases: none
-\typeitem{review} Aliases: none
+\typeitem{Letter} Aliases: none
+\typeitem{Misc} Aliases: none
+\typeitem{Online} Aliases: none
+\typeitem{Patent} Aliases: none
+\typeitem{Review} Aliases: none
 
-\typeitem{thesis}
+\typeitem{Thesis}
 
-Aliases: \bibtype{mastersthesis}, \bibtype{phdthesis},
-\bibtype{unpublished}
+Aliases: \bibtype{MastersThesis}, \bibtype{PhdThesis},
+\bibtype{Unpublished}
 
 \end{typelist}
 
 \noindent For the most part, you may assign every work to the basic
 entry types listed above. A PhD thesis, for example, may have the
-entry type \bibtype{thesis} or \bibtype{phdthesis}; the output is the
-same either way. An exception applies to books in collections: Every
-book in a one-volume or multivolume collection needs the
-\bibtype{inbook} or \bibtype{bookinbook} entry type.\footnote{Using
-\bibtype{inbook} for books in collections departs somewhat from the
-specifications of \BibTeX\ and \biblatex, though it seems harmless
-enough.} You may choose either \bibtype{inbook} or
-\bibtype{bookinbook} entries have the same format. If an entry belongs
-to a type other than the ones listed above, the style processes it as
-a book.
+entry type \bibtype{Thesis} or \bibtype{PhdThesis}; the output is the
+same. An exception applies to books in collections: Every book in a
+one-volume or multivolume collection needs the \bibtype{InBook} or
+\bibtype{BookInBook} entry type.\footnote{Using \bibtype{InBook} for
+books in collections departs somewhat from the specifications of
+\BibTeX\ and \biblatex, though it seems harmless enough.} You may
+choose either \bibtype{InBook} or \bibtype{BookInBook} entries have
+the same format. If an entry belongs to a type other than the ones
+listed above, the style processes it as a book.
 
 For unusually complicated ci\-ta\-tions---at any rate, those too
-complicated for the style---consider using the \bibtype{misc} entry
+complicated for the style---consider using the \bibtype{Misc} entry
 type. The style formats these entries with a small number of fields
 but in way that makes it a fallback for almost anything. The example
-below is from 14.277:
+below is from \textit{CMS} 14.264:
 
-\begin{itemize}
-\item[N] \fullcite{roosevelt1959}
-
-\item[B] \bibentry{roosevelt1959}
-
-\item[P] \fullparencite{roosevelt1959}
-
-\item[R] \refentry{roosevelt1959}
-\end{itemize}
+\begin{citebib}
+\item \cite{roosevelt1959}
+\end{citebib}
 
 \noindent The database entry for this work contains most of the format
-in \bibfield{usera} (for the note) and \bibfield{userb} (for
+in \bibfield{usera} (for notes) and \bibfield{userb} (for
 bibliographies). In \bibfield{title}, the style needs manual
 formatting, since works of this type may have titles in italics or
 quotation marks. Some trickery with the year helps with formatting the
 reference list entry.
 
-\begin{lstlisting}
-  @Misc{roosevelt1959,
-    author = {Roosevelt, Eleanor},
-    title = {\mkbibquote{Is America Facing World Leadership?}},
-    usera = {convocation speech, Ball State Teacher's College,
-             May 6, \thefield{year}, radio broadcast, Windows
-             Media Audio, 47:46},
-    userb = {Convocation Speech. Ball State Teacher's College.
-             May 6, \thefield{year}. Radio broadcast.
-             Windows Media Audio. 47:46},
-    url = {http://libx.bsu.edu/cdm4/item_viewer.php?CISOROOT=
-           /ElRoos&CISOPTR=0&CISOBOX=1&REC=2},
-    year = {1959}
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @Misc{roosevelt1959,
+     author = {Roosevelt, Eleanor},
+     title = {\mkbibquote{Is America Facing World Leadership?}},
 
-\noindent No other example in this document relies on \bibtype{misc}.
+     usera = {convocation speech, Ball State Teacher's College,
+              May 6, \thefield{year}, radio broadcast,
+              reel-to-reel tape, MPEG copy, 1:12:49},
+     userb = {Convocation Speech. Ball State Teacher's College.
+              May 6, \thefield{year}. Radio broadcast.
+              Reel-to-reel tape. MPEG copy. 1:12:49},
+     url = {http://libx.bsu.edu/cdm4/singleitem/collection/ElRoos/id/1},
+     year = {1959}
+   }
+\end{verbatim}
+
+\noindent No other example in this document relies on \bibtype{Misc}.
 
 \section{Editors, Translators, and Compilers}
 \label{edtrans}
@@ -866,63 +787,48 @@ relevant place), you may want to reverse the order and print the
 translators' names first. For that, use the entry option
 \opt{transfirst} (see Section \ref{entryops}). Compare:
 
-\begin{itemize}
-\item[N] \fullcite{doe2010a}
-
-\item[B] \bibentry{doe2010a}
-
-\item[N] \fullcite{doe2010b}
-
-\item[B] \bibentry{doe2010b}
-\end{itemize}
+\begin{citebib}
+\item \cite{doe2010a}
+\item \cite{doe2010b}
+\end{citebib}
 
 If a work has no author, but has an editor, the style will print the
 name of the editor in the author's position, as in this example from
-\textit{CMS} \ref{14.87}:
+\textit{CMS} \ref{14.103}:
 
-\begin{itemize}
-\item[N] \fullcite[94]{young2007}
-
-\item[B] \bibentry{young2007}
-\end{itemize}
+\begin{citebib}
+\item \cite[100]{egan2014}
+\end{citebib}
 
 \noindent A similar switch happens if a work has no author but has a
 translator:
 
-\begin{itemize}
-\item[N] \fullcite[34]{silverstein1974}
-
-\item[B] \bibentry{silverstein1974}
-\end{itemize}
+\begin{citebib}
+\item \cite[34]{silverstein1974}
+\end{citebib}
 
 Again, the style prints editors' names first, so if a work has no
 author but has editors and translators, the style will print the
 editors' names in the author's position:
 
-\begin{itemize}
-\item[N] \fullcite{smith2002a}
-
-\item[B] \bibentry{smith2002a}
-\end{itemize}
+\begin{citebib}
+\item \cite{smith2002a}
+\end{citebib}
 
 \noindent Use \opt{transfirst} to reverse them:
 
-\begin{itemize}
-\item[N] \fullcite{smith2002b}
-
-\item[B] \bibentry{smith2002b}
-\end{itemize}
+\begin{citebib}
+\item \cite{smith2002b}
+\end{citebib}
 
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in, ``Edited and
 translated by\ldots'' Use \opt{transfirst} to reverse them, as in this
-example from \textit{CMS} \ref{14.88}:
+example from \textit{CMS} \ref{14.104}:
 
-\begin{itemize}
-\item[N] \fullcite{menchu1999}
-
-\item[B] \bibentry{menchu1999}
-\end{itemize}
+\begin{citebib}
+\item \cite{menchu1999}
+\end{citebib}
 
 Since the style treats a compiler as a kind of editor, the comments
 above apply to compilers, too: If a work has compilers and
@@ -949,20 +855,20 @@ translators are often automatic. The style's default is to associate
 title within the scope of an entry. For most sources, then, no more
 work is necessary than just adding \bibfield{editor} and
 \bibfield{translator} fields to a database entry. For example, this
-entry shows data for \ref{14.88}:
+entry shows data for \ref{14.104}:
 
-\begin{lstlisting}
-  @Book{menchu1999,
-    options = {transfirst},
-    author = {Mench{\'u}, Rigoberta},
-    title = {Crossing Borders},
-    editor = {Wright, Ann},
-    translator = {Wright, Ann},
-    address = {New York},
-    publisher = {Verso},
-    year = {1999}
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @Book{menchu1999,
+     options = {transfirst},
+     author = {Menchú, Rigoberta},
+     title = {Crossing Borders},
+     editor = {Wright, Ann},
+     translator = {Wright, Ann},
+     address = {New York},
+     publisher = {Verso},
+     year = {1999}
+   }
+\end{verbatim}
 
 \noindent When the style processes this entry, it identifies Ann
 Wright as the book's translator and editor.\footnote{The entry option
@@ -976,28 +882,26 @@ title. In this example, which shows an essay cross-referenced to a
 collection, \bibfield{editor} appears within the collection's database
 entry:
 
-\begin{lstlisting}
-  @InCollection{thoreau2007.7,
-    crossref = {thoreau2007},
-    title = {Walking},
-    pages = {185--222},
-  }
-  @Collection{thoreau2007,
-    author = {Thoreau, Henry David},
-    title = {Excursions},
-    editor = {Moldenhauer, Joseph J.},
-    series = {The Writings of Henry D. Thoreau},
-    publisher = {Princeton University Press},
-    address = {Princeton, NJ},
-    year = {2009}
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @InCollection{thoreau2007.7,
+     title = {Walking},
+     pages = {185--222},
+     crossref = {thoreau2007}
+   }
+   @Collection{thoreau2007,
+     author = {Thoreau, Henry David},
+     title = {Excursions},
+     editor = {Moldenhauer, Joseph J.},
+     series = {The Writings of Henry D. Thoreau},
+     publisher = {Princeton University Press},
+     address = {Princeton, NJ},
+     year = {2009}
+   }
+\end{verbatim}
 
-\begin{itemize}
-\item[N] \fullcite{thoreau2007.7}
-
-\item[B] \bibentry{thoreau2007.7}
-\end{itemize}
+\begin{citebib}
+\item \cite{thoreau2007.7}
+\end{citebib}
 
 \noindent As a result, the style identifies Joseph Moldenhauer as the
 editor of \textit{Excursions}. If you moved \bibfield{editor} from
@@ -1006,9 +910,9 @@ style would identify him as the editor of ``Walking.'' If instead you
 want him as the editor of the series, leave \bibfield{editor} in
 \bibtype{collection} but add a line to the entry:
 
-\begin{lstlisting}
-  editortype = {series},
-\end{lstlisting}
+\begin{verbatim}
+   editortype = {series},
+\end{verbatim}
 
 Other values of \bibfield{editortype} are \textit{maintitle},
 \textit{issuetitle}, and \textit{compiler}. So, to add a compiler to
@@ -1017,72 +921,67 @@ an entry, add the compiler's name to \bibfield{editor}, then add
 course, if \bibfield{editor} is occupied, do the same for
 \bibfield{editora} and \bibfield{editoratype}, and so on.}
 
-\begin{lstlisting}
-  @InCollection{orwell2009.17,
-    crossref = {orwell2009},
-    title = {Politics and the English Language},
-    pages = {270--86}
-  }
-  @Collection{orwell2009,
-    author = {Orwell, George},
-    title = {All Art is Propaganda},
-    subtitle = {Critical Essays},
-    editor = {Packer, George},
-    editortype = {compiler},
-    address = {Boston},
-    publisher = {Mariner Books},
-    year = {2009}
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @InCollection{orwell2009.17,
+     title = {Politics and the English Language},
+     pages = {270--86},
+     crossref = {orwell2009}
+   }
+   @Collection{orwell2009,
+     author = {Orwell, George},
+     title = {All Art is Propaganda},
+     subtitle = {Critical Essays},
+     editor = {Packer, George},
+     editortype = {compiler},
+     address = {Boston},
+     publisher = {Mariner Books},
+     year = {2009}
+   }
+\end{verbatim}
 
-\begin{itemize}
-\item[N] \fullcite{orwell2009.17}
-
-\item[B] \bibentry{orwell2009.17}
-\end{itemize}
+\begin{citebib}
+\item \cite{orwell2009.17}
+\end{citebib}
 
 As already mentioned, this way of handling editors and translators
 allows you to assign them to particular works in a collection. This is
 most often useful for citing translators, as in the following:
 
-\begin{itemize}
-\item[N] \fullcite{cassirer1948.4}
-
-\item[B] \bibentry{cassirer1948.4}
-\end{itemize}
+\begin{citebib}
+\item \cite{petrarca1948}
+\end{citebib}
 
 \noindent Hans Nachod translated ``The Ascent of Mont Ventoux,'' among
 other works in the collection, but not \textit{every} work in the
 entire collection. Thus, \bibfield{translator} must fall within the
 scope of \bibtype{incollection}:
 
-\begin{lstlisting}
-  @InCollection{cassirer1948.4,
-    crossref = {cassirer1948},
-    author = {Petrarca, Francesco},
-    title = {The Ascent of Mont Ventoux},
-    translator = {Nachod, Hans},
-    pages = {36--46}
-  }
-  @Collection{cassirer1948,
-    title = {The Renaissance Philosophy of Man},
-    editor = {Cassirer, Ernst and Kristeller, Paul Oskar and
-              Randall, Jr., John Herman},
-    address = {Chicago},
-    publisher = ucp,
-    year = {1948}
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @InCollection{petrarca1948,
+     author = {Petrarca, Francesco},
+     title = {The Ascent of Mont Ventoux},
+     translator = {Nachod, Hans},
+     pages = {36--46},
+     crossref = {cassirer1948}
+   }
+   @Collection{cassirer1948,
+     title = {The Renaissance Philosophy of Man},
+     editor = {Cassirer, Ernst and Kristeller, Paul Oskar and
+               Randall, Jr., John Herman},
+     address = {Chicago},
+     publisher = ucp,
+     year = {1948}
+   }
+\end{verbatim}
 
 \noindent By the same token, since \bibfield{editor} falls within
 \bibtype{collection}, the style assigns it to \textit{The Renaissance
 Philosophy of Man}.
 
-One more complication remains: There are other name lists for editors
-than just \bibfield{editor}. The style also recognizes
-\bibfield{editora}, \bibfield{editorb}, and
-\bibfield{editorc}.\footnote{The style also recognizes
-\bibfield{translatora}, though only for internal purposes.}
+One complication remains: There are other name lists for editors than
+\bibfield{editor}. The style also uses \bibfield{editora},
+\bibfield{editorb}, and \bibfield{editorc}.\footnote{The style also
+uses \bibfield{translatora}, though only for internal purposes.}
 
 Designate editors much like you designate titles. Reserve
 \bibfield{editor} for the lowest level title in a work that you wish
@@ -1095,1156 +994,1347 @@ an editor's role. These fields are \bibfield{editortype} (for
 \bibfield{editorbtype} (for \bibfield{editorb}), and
 \bibfield{editorctype} (for \bibfield{editorc}). For example:
 
-\begin{itemize}
-\item[N] \fullcite{smith1981}
-
-\item[B] \bibentry{smith1981}
-\end{itemize}
+\begin{citebib}
+\item \cite{smith1981}
+\end{citebib}
 
 \noindent Since the work above has two sets of editors, the database
 entry needs to use \bibfield{editor} and \bibfield{editora}:
 
-\begin{lstlisting}
-  @Book{smith1981,
-    author = {Smith, Adam},
-    title = {An Inquiry into the Nature and Causes of the
-             Wealth of Nations},
-    shorttitle = {The Wealth of Nations},
-    editor = {Todd, W. B.},
-    volumes = {2},
-    volume = {2},
-    maintitle = {The Glasgow Edition of the Works and
-                 Correspondence of Adam Smith},
-    editora = {Campbell, R. H. and Skinner, A. S.},
-    editoratype = {maintitle},
-    address = {Indianapolis},
-    publisher = {Liberty Fund},
-    year = {1981},
-    origlocation = {Oxford},
-    origpublisher = {Oxford University Press},
-    origdate = {1976}
-  }
-\end{lstlisting}
+\begin{verbatim}
+   @Book{smith1981,
+     author = {Smith, Adam},
+     title = {An Inquiry into the Nature and Causes of the
+              Wealth of Nations},
+     shorttitle = {The Wealth of Nations},
+     editor = {Todd, W. B.},
+     volumes = {2},
+     volume = {2},
+     maintitle = {The Glasgow Edition of the Works and
+                  Correspondence of Adam Smith},
+     editora = {Campbell, R. H. and Skinner, A. S.},
+     editoratype = {maintitle},
+     address = {Indianapolis},
+     publisher = {Liberty Fund},
+     year = {1981},
+     origlocation = {Oxford},
+     origpublisher = {Oxford University Press},
+     origdate = {1976}
+   }
+\end{verbatim}
+
+\section{Multivolume Works}
+\label{multivolume}
+
+Typical examples of \bibtype{Collection} and \bibtype{InCollection}
+entries appear in Section \ref{notes}. But not all such works are
+typical. This section addresses some of them.
+
+\subsection{Collections as Single Works}
+
+Although its discussion is a bit obscure, \textit{CMS} treats some
+multivolume works as a single work---but only, it seems, if every
+volume of the collection has the same title and publication date.
+Below are some examples from \ref{14.118}:
+
+\begin{citeonly}
+\item \cite[243]{byrne1981.4}
+\item \cite*[32--33]{james1963.5}
+\item \cite[245]{byrne1981.4}
+\item \cite*[34]{james1963.5}
+\end{citeonly}
+
+In three of the four notes, the volume numbers and pages are separated
+by a colon. The exception is the second note, where the volume number
+appears after the editor's name. What makes it different?
+
+Apparently, \textit{The Lisle Letters} counts as a single work because
+every volume in the collection has the same title and publication
+date. Not so \textit{The Complete Tales of Henry James}. The volumes
+of that collection have different titles and publication dates.
+
+How exactly that justifies the difference in format is less clear, but
+Windy City accommodates it. Citations to other volumes of \textit{The
+Lisle Letters} receive short first citations, as though they were all
+citations of the same work, while other volumes of \textit{Henry
+James} receive long first citations, as though they were unique works,
+not parts of a single work. Let's extend the previous examples:
+
+\begin{citeonly}
+\item \cite[243]{byrne1981.4}
+\item \cite*[32--33]{james1963.5}
+\item \cite[245]{byrne1981.4}
+\item \cite*[34]{james1963.5}
+\item \cite[91]{byrne1981.5}
+\item \cite*[67]{james1962.4}
+\item \cite*[106]{james1962.4}
+\end{citeonly}
+
+This treatment of multivolume works is consistent across formats.
+Switching to \opt{short}, \opt{ibid}, or \opt{firstshort} will change
+the appearance of citations but maintain the treatment of \textit{The
+Lisle Letters} as a single work and the volumes of \textit{Henry
+James} as distinct works.
+
+How does Windy City do it? For \textit{The Lisle Letters}, the
+bibliography database contains a \bibtype{Collection} entry with
+information about the whole collection and separate \bibtype{InBook}
+entries for each volume. (This use of \bibtype{InBook} is perhaps a
+bit nonstandard but makes sense if you regard the collection as a
+single work consisting of books.) The \bibtype{InBook} entries
+cross-reference the \bibtype{Collection} entry and have the same title
+and publication date as the \bibtype{Collection}. That's enough for
+the style to format them as \textit{CMS} recommends. Meanwhile, the
+volumes of \textit{Henry James} have separate \bibtype{Book} entries,
+with no cross-referencing. Regardless, the publication dates and
+titles of the volumes differ, so cross-referencing alone won't suffice
+to turn multivolume collections into single works.
+
+It may help to reproduce some entries from this document's
+bibliography database. Here are two entries for \textit{The Lisle
+Letters}, one for the fourth volume and the one for the whole
+collection:
+
+\begin{verbatim}
+   @InBook{byrne1981.4,
+     title = {The Lisle Letters},
+     volume = {4},
+     year = {1981},
+     crossref = {byrne1981}
+   }
+   @Collection{byrne1981,
+     editor = {Byrne, Muriel St. Clare},
+     title = {The Lisle Letters},
+     volumes = {6},
+     address = {Chicago},
+     publisher = ucp,
+     year = {1981}
+   }
+\end{verbatim}
+
+The \bibtype{InBook} entry, \bibfield{byrne1981.4}, contains the
+minimum information that Windy City needs to format its citation
+correctly. Adding information, such as the publisher, address, and
+editor would have no effect on the output.
+
+By contrast, here is the \bibtype{Book} entry for a volume of
+\textit{Henry James}, along with one for the collection:
+
+\begin{verbatim}
+   @Book{james1963.5,
+     author = {James, Henry},
+     title = {The Complete Tales of Henry James},
+     shorttitle = {Complete Tales of Henry James},
+     editor = {Edel, Leon},
+     volume = {5},
+     volumetitle = {1883–1884},
+     address = {London},
+     publisher = {Rupert Hart-Davis},
+     year = {1963}
+   }
+   @Collection{james1962,
+     author = {James, Henry},
+     title = {The Complete Tales of Henry James},
+     shorttitle = {Complete Tales of Henry James},
+     editor = {Edel, Leon},
+     volumes = {12},
+     address = {London},
+     publisher = {Rupert Hart-Davis},
+     date = {1962/1964}
+   }
+\end{verbatim}
+
+Cross-referencing in this case is inadvisable, since not all data for
+the \bibtype{Collection} is true of the volume.
+
+\subsection{Options for Difficult Cases}
+
+Occasionally, getting acceptable output for a multivolume work
+requires some trial-and-error. Consider a difficult example:
+
+\begin{citebib}
+\item \cite{kierkegaard1987}
+\end{citebib}
+
+\noindent This edition of \textit{Either/Or} is a two-volume work,
+each volume of which is a volume of \textit{Kierkegaard's Writings}.
+In the bibliography database, \bibfield{volume} contains \textit{3 and
+4}, though ordinarily it would contain a single number for a single
+volume. The style responds by preceding \textit{3 and 4} with the
+abbreviation \textit{vols.}, rather than the usual, \textit{vol}.
+Meanwhile, \bibfield{volumes} contains \textit{2}, indicating the two
+volumes of \textit{Either/Or}, and \bibfield{maintitle} contains
+\textit{Kierkegaard's Writings}. No cross-referencing occurs with the
+entry.\footnote{You could drop \bibfield{volume} for simpler output.
+But there are occasions when you need it along with
+\bibfield{volumes}, such as when a two-volume work comprises a single
+volume of a multivolume collection. This is the case with \textit{The
+Wealth of Nations} cited in Section \ref{edtransnames}.}
+
+The greatest difficulty, though, is how to cite particular works from
+\textit{Either/Or}. A citation should include the volume of the book.
+But each volume is also a volume of \textit{Kierkegaard's Writings},
+which makes each volume a volume twice over. Plus, each volume is a
+collection, which means that each volume is a collection (consisting
+of essays) within a collection (the two-volume book) within a
+collection (of \textit{Kierkegaard's Writings}).
+
+The title pages of \textit{Either/Or} might suggest a solution. They
+refer to the volumes as \textit{Part I} and \textit{Part II}. But
+using \bibfield{part} is incorrect, since, for books, its function is
+to indicate parts of a volume, not volumes of a collection. What
+should you do?
+
+One solution is to keep a separate entry in the bibliography database
+for each volume, without cross-referencing the original entry, and to
+use \bibfield{note} for holding \textit{Part I} and \textit{Part II}.
+Citing particular works from each volume is then a straightforward
+matter of making \bibtype{InCollection} entries for those works and
+cross-referencing them to the new \bibtype{Collection} entries. The
+output is at least adequate, though the placement of \textit{Part I}
+may seem odd:
+
+\begin{citebib}
+\item \cite[290]{kierkegaard1987.1.8a}
+\end{citebib}
+
+\noindent Alternatively, you could cross-reference each volume of
+\textit{Either/Or} to the collection, then cross-reference
+individual works to their respective volume:
+
+\begin{verbatim}
+   @InCollection{kierkegaard1987.1.8b,
+     title = {Rotation of Crops},
+     pages = {281–300},
+     crossref = {kierkegaard1987.1b}
+   }
+   @InBook{kierkegaard1987.1b,
+     title = {Either/Or},
+     volume = {1},
+     crossref = {kierkegaard1987b}
+   }
+   @Collection{kierkegaard1987b,
+     author = {Kierkegaard, Søren},
+     title = {Either/Or},
+     editor = {Hong, Howard V. and Hong, Edna H.},
+     translator = {Hong, Howard V. and Hong, Edna H.},
+     address = {Princeton, NJ},
+     publisher = {Princeton University Press},
+     year = {1987}
+   }
+\end{verbatim}
+
+\noindent The entries above drop the \bibfield{note} and
+\bibfield{maintitle} and use \bibfield{volume} for the volume of
+\textit{Either/Or}. The resulting output is fairly clean:
+
+\begin{citebib}
+\item \cite[290]{kierkegaard1987.1.8b}
+\end{citebib}
+
+But what if you want to include the \bibfield{maintitle} with its
+volume number? Try adding \bibfield{maintitle} to \bibtype{Collection}
+along with a new field, \bibfield{volumea}, for the volume of
+\textit{Kierkegaard's Writings}. The result:
+
+\begin{citebib}
+\item \cite[290]{kierkegaard1987.1.8c}
+\end{citebib}
+
+Windy City adds an entry to the bibliography for every work that you
+cite from a collection. Generally, the style will add a separate entry
+for the collection after you cite two or more works from
+it.\footnote{This isn't always true. In some cases, depending on the
+parameters of \cmd{printbibliography}, and how the document is divided
+into reference sections and segments, bibliographies won't
+automatically include a collection that hasn't been explicitly cited.}
+If you prefer a different threshold, load \biblatex with a different
+value for the preamble option \opt{mincrossrefs}. A value of
+\liningnums{1}, for example, should add an entry for the collection if
+you cite from it at least once.
 
 \section{Examples from \emph{CMS} Chap. 14, ``Notes and
 Bibliography''}
-\label{notes16}
+\label{notes}
 
 Examples in this section reproduce those in \textit{CMS} Chapter 14.
-To help with cross-checking, subsection numbers and headings below
-follow those of the book. \textit{N} indicates a note, \textit{B}
-indicates a bibliography entry. Bear in mind that the book's examples
-occasionally show inconsistencies, a few of them very likely errors:
+To help with cross-checking, subsection numbers and headings are from
+\textit{CMS}.
 
-\begin{enumerate} \item \ref{14.78} includes \textit{3 vols.} in a
-note for \textit{The Letters of George Meredith}, inconsistent with
-examples in \ref{14.123} and \ref{14.125}
+\subsection{Basic Format, With Examples and Variations}
+\setcounter{subsection}{14}
 
-\item \ref{14.82} has \textit{Trans} instead of \textit{Translated by}
-in a bibliography entry for \textit{The Charterhouse of Parma}.
+\setcounter{subsubsection}{22}
+\subsubsection{Notes and bibliography—examples and variations}
+% 14.23 Notes and bibliography—examples and variations
+\label{14.23}
 
-\item \ref{14.132} omits a comma after \textit{ed.} in a note for
-\textit{South China in the Sixteenth Century}.
+\begin{citebib}
+\item \cite[87-88]{strayed2012}
+\item \cite[261, 265]{strayed2012}
+\item \cite[32]{daum2015}
+\item \cite[134--35]{daum2015}
+\item \cite[188]{grazer2015}
+\item \cite[190]{grazer2015}
+\item \cite[242--55]{garcia1988}
+\item \cite[33]{garcia1988}
+\item \cite[310]{gould1984a}
+\item \cite[309]{gould1984a}
+\item \cite[484--85]{bagley2015}
+\item \cite[501]{bagley2015}
+\item \cite[311]{liu2015}
+\item \cite[312]{liu2015}
+\end{citebib}
 
-\item \ref{14.187} inverts an author's name in a note for ``Learning
-to be an `American Lady'?'' and omits a page reference in a
-bibliography entry for ``Non-Subject-Matter Outcomes of Schooling.''
-\end{enumerate}
+\setcounter{subsection}{1}
+\subsection{Notes}
+\setcounter{subsection}{14}
 
-\noindent Also, the style always prints \bibfield{title} before
-\bibfield{maintitle}. In several sections, \textit{CMS} offers the
-option of reversing this order, and at least once, in \ref{14.120},
-reverses them without showing the alternative. This potential source
-of confusion affects \ref{14.120}, \ref{14.124}, \ref{14.126}, and
-\ref{14.127}.
+\setcounter{subsubsection}{29}
+\subsubsection{Basic structure of the short form}
+% 14.30: Basic structure of the short form
+\label{14.30}
 
-\subsection{Books}
+\begin{citebib}
+\item \cite[24--25]{morley1995}
+\item \cite{schwartz1992}
+\item \cite{kaiser1964}
+\item \cite[43]{morley1995}
+\item \cite[138]{schwartz1992}
+\item \cite[189--90]{kaiser1964}
+\end{citebib}
+
+\setcounter{subsubsection}{33}
+\subsubsection{Shortened citations versus ``ibid''}
+% 14.34:
+\label{14.34}
+
+See Section \ref{short} for a discussion of how to enable the short
+format and the use of \textit{ibid.} First, the short format:
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\item \cite[3]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[24--26]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\item \cite[401-2]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[433]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\item \cite[37--38]{diaz2008}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[403]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[152]{diaz2008}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[201-2]{diaz2008}
+\AtNextMultiCite{\toggletrue{short}}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}} \item \cite[33]{morrison2004a}
+\end{citeonly}
+
+\noindent With \textit{ibid.}:
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\item \cite[3]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[24--26]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\item \cite[401-2]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[433]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\item \cite[37--38]{diaz2008}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[403]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[152]{diaz2008}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[201-2]{diaz2008}
+\AtNextMultiCite{\toggletrue{short}\toggletrue{firstshort}}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\item \cite[33]{morrison2004a}
+\end{citeonly}
+
+\setcounter{subsubsection}{58}
+\subsubsection{Abbreviations for frequently cited works}
+% 14.59 Abbreviations for frequently cited works
+\label{14.59}
+
+The only way for the style to match \textit{CMS} on these citations is
+by citing a \bibtype{Collection} entry with the volume and page
+numbers in the \bibfield{postnote} field, as in ``1:126.''
+
+You may override the default announcement of a \bibfield{shorthand},
+and format it however you like, by adding your preferred content to
+\bibfield{shorthandintro}.
+
+\begin{citebib}
+% Better to use furet199 in 14.99, without shorthand:
+%\item \cite[368]{furet1999}
+% FIX: Explain how you get these examples!
+\item \cite[1:126]{shurtleff1853}
+\item \cite[2:330]{shurtleff1853}
+\end{citebib}
+
+\setcounter{subsection}{2}
+\subsection{Author's Name}
 \setcounter{subsection}{14}
 
 \setcounter{subsubsection}{74}
 \subsubsection{One author}
-% 14.75
+% 14.75 One author
 
-\begin{itemize}
-\item[N] \fullcite{shields2008}
-
-\item[B] \bibentry{shields2008}
-
-\item[N] \fullcite{martin2000}
-
-\item[B] \bibentry{martin2000}
-\end{itemize}
+\begin{citebib}
+\item \cite[33]{shields2013}
+\item \cite[677]{chun2015}
+\item \cite[5]{mccune2014}
+\item \cite[100--101]{shields2013}
+\item \cite[681]{chun2015}
+\item \cite[105--11]{mccune2014}
+\end{citebib}
 
 \subsubsection{Two or more authors (or editors)}
-% 14.76
+% 14.76 Two or more authors (or editors)
 \label{14.76}
 
-\begin{itemize}
-\item[N] \fullcite[32]{jacobs1997}
+\begin{citebib}
+\item \cite[xvi]{sorrells2015}
+\item \cite[20--21]{levitt2005}
+\item \cite[422]{umbers2015}
+\item \cite[xx-xxi]{sorrells2015}
+\item \cite[158]{gmuca2015}
+\item \cite[160]{gmuca2015}
+\end{citebib}
 
-\item[B] \bibentry{jacobs1997}
+\subsubsection{Two or more authors (or editors) with same family name}
+% 14.77 Two or more authors (or editors) with same family name
 
-\item[N] \fullcite[20--21]{levitt2005}
+\begin{citebib}
+\item \cite[14]{kendris2010}
+\item \cite[27--28]{kendris2010}
+\end{citebib}
 
-\item[B] \bibentry{levitt2005}
-
-\item[N] \fullcite[243]{sechzer1996}
-
-\item[B] \bibentry{sechzer1996}
-\end{itemize}
-
-\setcounter{subsubsection}{77}
 \subsubsection{Author's name in title}
-% 14.78
+% 14.78 Author's name in title
 \label{14.78}
 
-\begin{itemize}
-\item[N] \fullcite*[44--45]{mccullers1999}
+\begin{citebib}
+\item \cite*[233]{franklin1868}
+\item \cite*[234]{franklin1868}
+\end{citebib}
 
-\item[B] \bibentry{mccullers1999}
+\subsubsection{No listed author (anonymous works)}
+% 14.79 No listed author (anonymous works)
+\label{14.79}
 
-% Error in book: inclusion of '3 vols.' is inconsistent with examples
-% in 14.123 and 14.125:
-%\item[N] \fullcite*[125]{meredith1970.1}
+\begin{citebib}
+\item \cite{anon1610}
+\item \cite{anon1547}
+\item \cite{horsley1796}
+\item \cite{hawkes1834}
+\end{citebib}
 
-%\item[B] \bibentry{meredith1970.1}
-\end{itemize}
+\subsubsection{Pseudonyms}
+% 14.80 Pseudonyms
 
-\subsubsection{Anonymous works---unknown authorship}
-% 14.79
+\begin{citebib}
+\item \cite{carre1982}
+\item \cite{stendhal1925}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{anon1610}
+\setcounter{subsubsection}{82}
+\subsubsection{Authors known by a given name}
+% 14.83 Authors known by a given name
 
-\item[B] \bibentry{anon1610}
-
-\item[N] \fullcite{anon1547}
-
-\item[B] \bibentry{anon1547}
-\end{itemize}
-
-\subsubsection{Anonymous works---known authorship}
-% 14.80
-\label{14.80}
-
-\begin{itemize}
-\item[N] \fullcite{horsley1796}
-
-\item[B] \bibentry{horsley1796}
-
-\item[N] \fullcite{cook1730}
-
-\item[B] \bibentry{cook1730}
-\end{itemize}
-
-%\subsubsection{Pseudonyms---unknown authorship}
-% 14.81
-
-% See comment for 14.82, below.
-
-%\begin{itemize}
-%\item[N] \fullcite{centinel1981}
-
-%\item[B] \bibentry{centinel1981}
-%\end{itemize}
-
-\setcounter{subsubsection}{81}
-\subsubsection{Pseudonyms---known authorship}
-% 14.82
-\label{14.82}
-
-If you want to give an author's real name, put it in the
-\bibfield{nameaddon} field. If the real name is unknown, and you want
-to indicate that the printed name is a pseudonym, put 'pseud.' in
-\bibfield{nameaddon}. \textit{CMS} discusses the latter issue in
-14.81, but the style has problems formatting its example.
-
-\begin{itemize}
-\item[N] \fullcite{carre1982}
-
-\item[B] \bibentry{carre1982}
-
-\item[N] \fullcite{stendhal1925}
-
-% Error in book: 'Trans' instead of 'Translated by':
-\item[B] \bibentry{stendhal1925}
-\end{itemize}
-
-\setcounter{subsubsection}{86}
-\subsubsection{Editor in place of author}
-% 14.87
-\label{14.87}
-
-\begin{itemize}
-\item[N] \fullcite[94]{young2007}
-
-\item[B] \bibentry{young2007}
-
-\item[N] \fullcite[34]{silverstein1974}
-
-\item[B] \bibentry{silverstein1974}
-\end{itemize}
-
-\subsubsection{Editor or translator in addition to author}
-% 14.88
-\label{14.88}
-
-\begin{itemize}
-\item[N] \fullcite{bonnefoy1995}
-
-\item[B] \bibentry{bonnefoy1995}
-
-\item[N] \fullcite{menchu1999}
-
-\item[B] \bibentry{menchu1999}
-
-\item[N] \fullcite{adorno1999}
-
-\item[B] \bibentry{adorno1999}
-\end{itemize}
-
-\subsubsection{``With the assistance of'' and the like}
-% 14.89
-\label{14.89}
-
-% Use the \bibfield{note} field to include this sort of information.
-% Since \cmd{biblatex} handles capitalization automatically, don't put
-% the first letter of the note in uppercase.
-
-\begin{itemize}
-\item[N] \fullcite{chaucer1966}
-
-\item[B] \bibentry{chaucer1966}
-
-\item[N] \fullcite{cullen1961}
-
-\item[B] \bibentry{cullen1961}
-
-\item[N] \fullcite{prather1998}
-
-\item[B] \bibentry{prather1998}
-\end{itemize}
-
-\setcounter{subsubsection}{90}
-\subsubsection{Authors of forewords and the like}
-% 14.91
-
-\begin{itemize}
-\item[N] \fullcite{hayek1994}
-
-\item[B] \bibentry{hayek1994}
-\end{itemize}
+\begin{citebib}
+\item \cite{elizabeth2000}
+\end{citebib}
 
 \subsubsection{Organization as author}
-% 14.92
+% 14.84 Organization as author
 
-% If an organization is the work's author, remember to add an extra
-% pair of brackets around the name of the organization in your
-% bibliography database.
+\begin{citebib}
+\AtNextCitekey{\clearfield{shorthand}}
+\item \cite{chicago2017}
+\item \cite{iso1997}
+\end{citebib}
 
-\begin{itemize}
-% Use '\fullcitens' to suppress shorthand:
-\item[N] \fullcitens{chicago2010}
+\setcounter{subsection}{3}
+\subsection{Title of Work}
+\setcounter{subsection}{14}
 
-\item[B] \bibentry{chicago2010}
-\end{itemize}
+\setcounter{subsubsection}{88}
+\subsubsection{Subtitles in cited works and the use of the colon}
+% 14.89 Subtitles in cited works and the use of the colon
 
-\setcounter{subsubsection}{96}
-\subsubsection{Subtitles---the colon}
-% 14.97
+\begin{citebib}
+\item \cite{gladwell2013}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{weiss2008}
+\subsubsection{Two subtitles in a cited work}
+% 14.90 Two subtitles in a cited work
 
-\item[B] \bibentry{weiss2008}
-\end{itemize}
+\begin{citebib}
+\item \cite{sereny1999}
+\end{citebib}
 
-%\subsubsection{Two subtitles}
-% 14.98
+\setcounter{subsubsection}{91}
+\subsubsection{``And other stories'' and such}
+% 14.92 ``And other stories'' and such
 
-\setcounter{subsubsection}{101}
-\subsubsection{Titles within titles}
-% 14.102
+\begin{citebib}
+\item \cite[104]{maclean1976}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{mchugh1980}
+\subsubsection{Dates in titles of cited works}
+% 14.93 Dates in titles of cited works
 
-\item[B] \bibentry{mchugh1980}
-\end{itemize}
+\begin{citebib}
+\item \cite{beiser2014}
+\end{citebib}
+
+\subsubsection{Quoted titles and other terms within cited titles of works}
+% 14.94 Quoted titles and other terms within cited titles of works
+
+\begin{citebib}
+\item \cite{levitt2005}
+\item \cite{mchugh1980}
+\end{citebib}
+
+\subsubsection{Italicized titles and other terms within cited titles of works}
+% 14.95 Italicized titles and other terms within cited titles of works
+
+\begin{citebib}
+\item \cite{vanwagenen1973}
+\end{citebib}
+
+\subsubsection{Question marks or exclamation points in titles of cited works}
+% 14.96 Question marks or exclamation points in titles of cited works
+
+\begin{citebib}
+\item \cite[63]{berra2002}
+\item \cite[183]{oram2007}
+\item \cite[778]{tessler2014}
+\item \cite[336]{batson1990}
+\item \cite[55--56]{berra2002}
+\item \cite[184]{oram2007}
+\item \cite[780]{tessler2014}
+\item \cite[337]{batson1990}
+\end{citebib}
+
+\setcounter{subsubsection}{98}
+\subsubsection{Translated titles of cited works}
+% 14.99 Translated titles of cited works
+
+\begin{citebib}
+% Gives a comma before postnote, not a semicolon as in CMS:
+%\item \cite[includes a summary in German]{wereszycki1977}
+\item \cite[272]{kern1938}
+\item \cite{pirumova1977b}
+\item \cite{furet1999}
+\end{citebib}
+
+\setcounter{subsection}{4}
+\subsection{Books}
+\setcounter{subsection}{14}
+
+\setcounter{subsubsection}{100}
+\subsubsection{Form of author’s name and title of book in source citations}
+% 14.101 Form of author’s name and title of book in source citations
+
+\begin{citebib}
+\item \cite[79--80]{gawande2014}
+\item \cite[191]{gawande2014}
+\end{citebib}
 
 \setcounter{subsubsection}{102}
-\subsubsection{Italicized terms within titles}
-% 14.103
+\subsubsection{Editor in place of author}
+% 14.103 Editor in place of author
+\label{14.103}
 
-\begin{itemize}
-\item[N] \fullcite{vanwagenen1973}
+\begin{citebib}
+\item \cite[100]{egan2014}
+\item \cite[33]{schechter2011}
+\item \cite[34]{silverstein1974}
+\item \cite[301--2]{egan2014}
+\item \cite[54--56]{schechter2011}
+\item \cite[38]{silverstein1974}
+\end{citebib}
 
-\item[B] \bibentry{vanwagenen1973}
-\end{itemize}
+\subsubsection{Editor or translator in addition to author}
+% 14.104 Editor or translator in addition to author
+\label{14.104}
 
-\setcounter{subsubsection}{104}
-\subsubsection{Question marks or exclamation points in book titles}
-% 14.105
+\begin{citebib}
+\item \cite{bonnefoy1995}
+\item \cite{menchu1999}
+\item \cite{adorno1999}
+% FIX: Requires a new option!
+%\item \cite{pound1953}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite[63]{berra2002}
+\subsubsection{Other contributors listed on the title page}
+% 14.105 Other contributors listed on the title page
+\label{14.105}
 
-\item[B] \bibentry{berra2002}
+\begin{citebib}
+\item \cite{chaucer1966}
+\item \cite{cullen1961}
+\item \cite{hayek1994}
+\item \cite{prather1998}
+\item \cite{williams1990}
+\end{citebib}
 
-\item[N] \fullcite[183]{oram2007}
-
-\item[B] \bibentry{oram2007}
-\end{itemize}
-
-\setcounter{subsubsection}{107}
-\subsubsection{Translated titles supplied by author or editor}
-% 14.108
-
-\begin{itemize}
-%\item[N] \fullcite[; includes a summary in German]{wereszycki1977}
-\item[N] \fullcite{wereszycki1977}
-
-\item[B] \bibentry{wereszycki1977}
-\end{itemize}
-
-\setcounter{subsubsection}{108}
-\subsubsection{Original plus published translation}
-% 14.109
-
-\begin{itemize}
-\item[N] \fullcite{furet1999}
-
-\item[B] \bibentry{furet1999}
-\end{itemize}
-
-%\subsubsection{Unpublished translation of title standing in for original}
-% 14.110
-
-% This works, though not the punctuation in the publisher's name:
-%\begin{itemize}
-%\item[N] \fullcite{pirumova1977}
-
-%\item[B] \bibentry{pirumova1977}
-%\end{itemize}
-
-\setcounter{subsubsection}{110}
 \subsubsection{Chapter in a single-author book}
-% 14.111
+% 14.106 Chapter in a single-author book
 
-\begin{itemize}
-\item[N] \fullcite[117--63]{phibbs1987a}
-
-\item[B] \bibentry{phibbs1987a}
-
-\item[N] \fullcite{samples2006.7}
-
-\item[B] \bibentry{samples2006.7}
-\end{itemize}
+\begin{citebib}
+\item \cite[211]{brower2015.8}
+\item \cite{samples2006.7}
+\item \cite[30-31]{samples2006.7}
+\end{citebib}
 
 \subsubsection{Contribution to a multiauthor book}
-% 14.112
-\label{14.112}
+% 14.107 Contribution to a multiauthor book
 
-\begin{itemize}
-\item[N] \fullcite[14]{carr1996a}
+\begin{citebib}
+\item \cite[325]{miller2014}
+\item \cite{ellet1968}
+\end{citebib}
 
-\item[B] \bibentry{carr1996a}
+\subsubsection{Several contributions to the same multiauthor book}
+% 14.108 Several contributions to the same multiauthor book
 
-\item[N] \fullcite{ellet1968a}
+\begin{citebib}
+\item \cite[84--87]{keating1968}
+\item \cite[362--70]{lippincott1968}
+\item \cite{draper1987}
+\item \cite{harrington1987}
+\item \cite{zukowsky1987}
+\end{citebib}
 
-\item[B] \bibentry{ellet1968a}
-\end{itemize}
-
-\setcounter{subsubsection}{113}
 \subsubsection{Book-length work within a book}
-% 14.114
+% 14.109 Book-length work within a book
 
-\begin{itemize}
-\item[N] \fullcite{bernard1990a}
+\begin{citebib}
+\item \cite{bernard1990a}
+\item \cite{updike1995a}
+\end{citebib}
 
-\item[B] \bibentry{bernard1990a}
-\end{itemize}
-
-\setcounter{subsubsection}{115}
 \subsubsection{Introductions, prefaces, afterwords, and the like}
-% 14.116
+% 14.110 Introductions, prefaces, afterwords, and the like
 
-\begin{itemize}
-\item[N] \fullcite{polakow1993a}
-
-\item[B] \bibentry{polakow1993a}
-
-\item[N] \fullcite{prose2000}
-
-\item[B] \bibentry{prose2000}
-\end{itemize}
+\begin{citebib}
+\item \cite{morrison2004b.f}
+\item \cite{mansfield2000}
+\end{citebib}
 
 \subsubsection{Letters in published collections}
-% 14.117
+% 14.111 Letters in published collections
 
-\begin{itemize}
-\item[N] \fullcite[133--34]{adams1867}
+\begin{citebib}
+\item \cite[133--34]{adams1867}
+\item \cite{jackson1676}
+\end{citebib}
 
-\item[B] \bibentry{adams1867}
-
-\item[N] \fullcite{jackson1676}
-
-\item[B] \bibentry{jackson1676}
-\end{itemize}
-
-\setcounter{subsubsection}{117}
+\setcounter{subsubsection}{112}
 \subsubsection{Editions other than the first}
-% 14.118
+% 14.113 Editions other than the first
 
-\begin{itemize}
-\item[N] \fullcite[43]{harper-dorton2002}
-
-\item[B] \bibentry{harper-dorton2002}
-
-\item[N] \fullcite[199]{babb1989}
-
-\item[B] \bibentry{babb1989}
-\end{itemize}
+\begin{citebib}
+\item \cite[401--2]{einsohn2011}
+\item \cite[101]{boudett2013}
+\item \cite{strunk2000}
+\end{citebib}
 
 \subsubsection{Reprint editions and modern editions}
-% 14.119
+% 14.114 Reprint editions and modern editions
 
-% You can have at most one \bibfield{origdate} per entry. So, if the
-% citation is to a work in a collection, say, an article or book in an
-% anthology, the style assumes that \bibfield{origdate} is for the
-% collection, not for the individual work.
-
-\begin{itemize}
-%\item[N] \fullcite{emerson1985}
-
-%\item[B] \bibentry{emerson1985}
-
-\item[N] \fullcite[152--53]{barzun1994}
-
-\item[B] \bibentry{barzun1994}
-
-\item[N] \fullcite{schweitzer1966}
-
-\item[B] \bibentry{schweitzer1966}
-\end{itemize}
+\begin{citebib}
+\item \cite[152--53]{barzun1994}
+\item \cite{bahadur2014}
+\item \cite{emerson1985}
+\item \cite{schweitzer1966}
+\end{citebib}
 
 \subsubsection{Microform editions}
-% 14.120
-\label{14.120}
+% 14.115 Microform editions
 
-% In the book, the \bibfield{maintitle} precedes the \bibfield{title}.
-% Hence, the book reads 'vol. 12' instead of 'vol. 12 of'.
+The citation of Farwell comes close to \textit{CMS} but isn't an exact
+match. The problem is with the field \bibfield{howpublished}, which
+seems like the best choice to contain ``microfiche'' but which, as
+must happen in other cases, prints after the \bibfield{postnote}, ``p.
+67, 3C12.''
 
-\begin{itemize}
-\item[N] \fullcite[p. 67, 3C12]{farwell1997}
+\begin{citebib}
+\item \cite[p. 67, 3C12]{farwell1997}
+\item \cite{tauber1958}
+\end{citebib}
 
-\item[B] \bibentry{farwell1997}
-\end{itemize}
-
-\setcounter{subsubsection}{121}
+\setcounter{subsubsection}{116}
 \subsubsection{Citing a multivolume work as a whole}
-% 14.122
-\label{14.122}
+% 14.117 Citing a multivolume work as a whole
 
-\begin{itemize}
-\item[N] \fullcite{aristotle1983}
-
-\item[B] \bibentry{aristotle1983}
-
-\item[N] \fullcite{byrne1981}
-
-\item[B] \bibentry{byrne1981}
-\end{itemize}
+\begin{citebib}
+\item \cite{aristotle1983}
+\item \cite{byrne1981}
+\item \cite{james1962}
+\end{citebib}
 
 \subsubsection{Citing a particular volume in a note}
-% 14.123
-\label{14.123}
+% 14.118 Citing a particular volume in a note
+\label{14.118}
 
-\begin{itemize}
-\item[N] \fullcite[243]{byrne1981.4}
-
-\item[B] \bibentry{byrne1981.4}
-
-\item[N] \fullcite*[32--33]{james1963.5}
-
-\item[B] \bibentry{james1963.5}
-\end{itemize}
+\begin{citebib}
+\item \cite[243]{byrne1981.4}
+\item \cite*[32--33]{james1963.5}
+\item \cite[245]{byrne1981.4}
+\item \cite*[34]{james1963.5}
+\end{citebib}
 
 \subsubsection{Citing a particular volume in a bibliography}
-% 14.124
-\label{14.124}
+% 14.119 Citing a particular volume in a bibliography
 
-\begin{itemize}
-\item[N] \fullcite{pelikan1971}
+\begin{citebib}
+\item \cite{armstrong1992}
+\end{citebib}
 
-\item[B] \bibentry{pelikan1971}
-\end{itemize}
+%\subsubsection{Chapters and other parts of individual volumes}
+% 14.120 Chapters and other parts of individual volumes
 
-\subsubsection{Chapters and other parts of individual volumes}
-% 14.125
-\label{14.125}
+%\begin{citebib}
+% Error in book: In bib entry, 'ed.' should be 'edited by'.
+% FIX: Has CMS moved away from the format that would make the volume
+% and page reference here '3:181--200' instead of '181--200. Vol. 3',
+% as in the book?
+%\item \cite[180]{chen2010.3}
+%\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite[893--95]{bonnefoy1991a}
-
-\item[N] \fullcite[chap. 6]{bonnefoy1991a}
-
-\item[B] \bibentry{bonnefoy1991a}
-\end{itemize}
-
+\setcounter{subsubsection}{120}
 \subsubsection{One volume in two or more books}
-% 14.126
-\label{14.126}
+% 14.121 One volume in two or more books
 
-% The example with Harley is complicated by how \textit{CMS} shows the
-% bibliography entry. One option gives the publication year of the
-% title. The other gives the publication years of the main title.
-
-\begin{itemize}
-\item[N] \fullcite[351]{lach1977}
-
-\item[B] \bibentry{lach1977}
-
-\item[N] \fullcite{harley1994a}
-
-\item[B] \bibentry{harley1994a}
-\end{itemize}
-
-\noindent Alternatively:
-
-\begin{itemize}
-\item[N] \fullcite{harley1994b}
-
-\item[B] \bibentry{harley1994b}
-\end{itemize}
+\begin{citebib}
+\item \cite[351]{lach1977}
+\item \cite{harley1994}
+\end{citebib}
 
 \subsubsection{Authors and editors of multivolume works}
-% 14.127
-\label{14.127}
+% 14.122 Authors and editors of multivolume works
 
-\begin{itemize}
-\item[N] \fullcite{barrows1959}
-
-\item[B] \bibentry{barrows1959}
-
-\item[N] \fullcite{donne1995}
-
-\item[B] \bibentry{donne1995}
-\end{itemize}
+\begin{citebib}
+\item \cite{barrows1959}
+\item \cite{donne1995}
+\end{citebib}
 
 \subsubsection{Series titles, numbers, and editors}
-% 14.128
-\label{14.128}
+% 14.123 Series titles, numbers, and editors
+\label{14.123}
 
-\begin{itemize}
-\item[N] \fullcite{hundert1992}
-
-\item[B] \bibentry{hundert1992}
-
-\item[N] \fullcite{fowler1989}
-
-\item[B] \bibentry{fowler1989}
-\end{itemize}
-
-\subsubsection{Series editor}
-% 14.129
-
-\begin{itemize}
-\item[N] \fullcite{howell1998}
-
-\item[B] \bibentry{howell1998}
-\end{itemize}
+\begin{citebib}
+\item \cite{lei2014}
+\item \cite{mazrim2011}
+\item \cite{wauchope1950}
+\item \cite{allen2009}
+\end{citebib}
 
 \subsubsection{Series or multivolume work?}
-% 14.130
-\label{14.130}
+% 14.124 Series or multivolume work?
 
-\begin{itemize}
-\item[N] \fullcite{boyer1986}
+\begin{citebib}
+\item \cite{boyer1986}
+\item \cite{cochrane1987}
+\end{citebib}
 
-\item[B] \bibentry{boyer1986}
+\setcounter{subsubsection}{125}
+\subsubsection{``Old series'' and ``new series''}
+% 14.126 ``Old series'' and ``new series''
+\label{14.126}
 
-\item[N] \fullcite{cochrane1987}
+\begin{citebib}
+\item \cite{boxer1953}
+\item \cite{palmatary1950}
+\end{citebib}
 
-\item[B] \bibentry{cochrane1987}
-\end{itemize}
+\subsubsection{Place, publisher, and date}
+% 14.127 Place, publisher, and date
 
-%\subsubsection{Multivolume work within a series}
-% 14.131
-% This won't work. The style doesn't print, in a single entry, the
-% titles of multiple volumes in a series.
+\begin{citebib}
+\item \cite{woolf1927}
+\end{citebib}
+
+\subsubsection{Place and date only, for books published before 1900}
+% 14.128 Place and date only, for books published before 1900
+
+\begin{citebib}
+\item \cite{goldsmith1766}
+\item \cite{cervantes1605}
+\end{citebib}
 
 \setcounter{subsubsection}{131}
-\subsubsection{``Old series'' and ``new series''}
-% 14.132
-\label{14.132}
+\subsubsection{No place of publication}
+% 14.132 No place of publication
 
-\begin{itemize}
-% Error in book: 'ed.' instead of 'ed.,':
-\item[N] \fullcite{boxer1953}
+\begin{citebib}
+\item \cite{windsor1910}
+\item \cite{vliet1890}
+\end{citebib}
 
-\item[B] \bibentry{boxer1953}
+\setcounter{subsubsection}{136}
+\subsubsection{Self-published or privately published books}
+% 14.137 Self-published or privately published books
 
-\item[N] \fullcite{palmatary1950}
+\begin{citebib}
+\item \cite{karavaev2015}
+\item \cite{shumaker2014}
+\end{citebib}
 
-\item[B] \bibentry{palmatary1950}
-\end{itemize}
-
-\setcounter{subsubsection}{137}
-\subsubsection{``No place.''}
-% 14.138
-
-\begin{itemize}
-\item[N] \fullcite{windsor1910}
-
-\item[B] \bibentry{windsor1910}
-\end{itemize}
-
-\setcounter{subsubsection}{146}
+\setcounter{subsubsection}{139}
 \subsubsection{Copublication}
-% 14.147
+% 14.140 Copublication
 
-\begin{itemize}
-\item[N] \fullcite{strauss1962}
+\begin{citebib}
+\item \cite{strauss1962}
+\end{citebib}
 
-\item[B] \bibentry{strauss1962}
-\end{itemize}
+\subsubsection{Distributed books}
+% 14.141 Distributed books
 
-\setcounter{subsubsection}{151}
-\subsubsection{``No date.''}
-% 14.152
+\begin{citebib}
+\item \cite{willke2007}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \bibentry{boston}
-\end{itemize}
+\setcounter{subsubsection}{143}
+\subsubsection{Multivolume works published over more than one year}
+% 14.144 Multivolume works published over more than one year
 
-\setcounter{subsubsection}{165}
-\subsubsection{Books downloaded from a library or bookseller}
-% 14.166
+\begin{citebib}
+\item \cite[329]{hayek1988}
+\item \cite{tillich1951}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{austen2007}
+\subsubsection{No date of publication}
+% 14.145 No date of publication
 
-\item[B] \bibentry{austen2007}
-\end{itemize}
+\begin{citebib}
+\item \cite{boston}
+\item \cite{edinburgh1750}
+\item \cite{edinburgh}
+\end{citebib}
 
+\subsubsection{Forthcoming publications}
+% 14.146 Forthcoming publications
+
+\begin{citebib}
+\item \cite{author}
+\item \cite[345--46]{writer}
+\item \cite{contributor}
+\end{citebib}
+
+\setcounter{subsubsection}{158}
+\subsubsection{Books requiring a specific application or device (e-books)}
+% 14.159 Books requiring a specific application or device (e-books)
+
+\begin{citebib}
+\item \cite{borel2015}
+\end{citebib}
+
+\setcounter{subsubsection}{160}
 \subsubsection{Books consulted online}
-% 14.167
+% 14.161 Books consulted online
 
-\begin{itemize}
-\item[N] \fullcite{antokoletz2008}
+\begin{citebib}
+\item \cite[59]{lystra2004}
+\item \cite[60--61]{lystra2004}
+\end{citebib}
 
-\item[B] \bibentry{antokoletz2008}
-\end{itemize}
+\subsubsection{Freely available electronic editions of older works}
+% 14.162 Freely available electronic editions of older works
+
+\begin{citebib}
+\item \cite{james2008}
+\end{citebib}
 
 \subsubsection{Books on CD-ROM and other fixed media}
-% 14.168
+% 14.163 Books on CD-ROM and other fixed media
 
-\begin{itemize}
-\item[N] \fullcite{hicks1996}
+\begin{citebib}
+\item \cite[1.4]{chicago2003}
+\end{citebib}
 
-\item[B] \bibentry{hicks1996}
-\end{itemize}
-
-%\subsubsection{Freely available electronic editions of older works}
-% 14.169
-% Close but not exact. The style is more consistent:
-%\begin{itemize}
-%\item[N] \fullcite[bk. 6, chap. 1]{james1996a}
-
-%\item[B] \bibentry{james1996a}
-%\end{itemize}
-
-\setcounter{subsection}{1}
+\setcounter{subsection}{5}
 \subsection{Periodicals}
 \setcounter{subsection}{14}
 
-\setcounter{subsubsection}{175}
-\subsubsection{Journal article---title}
-% 14.176
+\setcounter{subsubsection}{170}
+\subsubsection{Journal volume, issue, and date}
+% 14.171 Journal volume, issue, and date
 
-\begin{itemize}
-\item[N] \fullcite{manjivar2006}
+% Errors in book: The note to harper2015 includes the month of
+% publication, which the bibliography example omits. The example
+% bibliography also gets Lock's name wrong.
 
-\item[B] \bibentry{manjivar2006}
-\end{itemize}
+\begin{citebib}
+\item \cite[155]{lock2015}
+\item \cite[651]{wesoky2015}
+\item \cite[645]{harper2014}
+\item \cite[60]{wilder2013}
+\item \cite[52]{beattie1974}
+\end{citebib}
+
+\subsubsection{Forthcoming journal articles}
+% 14.172 Forthcoming journal articles
+
+\begin{citebib}
+\item \cite{authora}
+\end{citebib}
+
+\setcounter{subsubsection}{173}
+\subsubsection{Journal page references}
+% 14.174 Journal page references
+
+\begin{citebib}
+\item \cite{gold2015}
+\item \cite[2--3]{paudyal2015}
+\end{citebib}
+
+\subsubsection{Journal articles consulted online}
+% 14.175 Journal articles consulted online
+
+\begin{citebib}
+\item \cite[268]{whitney1929}
+\item \cite[260--61]{schoenfield2016}
+\end{citebib}
+
+\subsubsection{Access dates for journal articles}
+% 14.176 Access dates for journal articles
+
+\begin{citebib}
+\item \cite[81]{narr2015}
+\item \cite[88--89]{narr2015}
+\end{citebib}
 
 \setcounter{subsubsection}{177}
-\subsubsection{Question marks or exclamation points in article titles}
-% 14.178
+\subsubsection{Journal special issues}
+% 14.178 Journal special issues
 
-\begin{itemize}
-\item[N] \fullcite[336]{batson1990}
-
-\item[B] \bibentry{batson1990}
-
-\item[N] \fullcite{abrams2007}
-
-\item[B] \bibentry{abrams2007}
-\end{itemize}
+\begin{citebib}
+\item \cite[351--81]{tezuka2013}
+\end{citebib}
 
 \setcounter{subsubsection}{179}
-\subsubsection{Journal volume, issue, and date}
-% 14.180
-
-\begin{itemize}
-\item[N] \fullcite[153]{meban2008}
-
-\item[B] \bibentry{meban2008}
-\end{itemize}
-
-\setcounter{subsubsection}{180}
-\subsubsection{No volume number or date only}
-% 14.181
-
-\begin{itemize}
-\item[N] \fullcite{beattie1974}
-
-\item[B] \bibentry{beattie1974}
-\end{itemize}
-
-\subsubsection{Forthcoming articles}
-% 14.182
-
-\begin{itemize}
-\item[N] \fullcite{authora}
-
-\item[B] \bibentry{authora}
-\end{itemize}
-
-\setcounter{subsubsection}{183}
-\subsubsection{Electronic journal articles---URI or DOI}
-% 14.184
-
-\begin{itemize}
-\item[N] \fullcite[268]{whitney1929}
-
-\item[B] \bibentry{whitney1929}
-\end{itemize}
-
-\subsubsection{Electronic journal articles---access dates}
-% 14.185
-
-\begin{itemize}
-\item[N] \fullcite[377]{charles2008}
-
-\item[B] \bibentry{charles2008}
-\end{itemize}
-
-\setcounter{subsubsection}{186}
-\subsubsection{Special issues}
-% 14.187
-\label{14.187}
-
-% Since 'issuetitle' is sometimes but not always in quotes, the
-% default is not to use them. If you need quotes, as with
-% 'sassler2000' below, use '\mkbibquote' in your bibliography
-% database.
-
-\begin{itemize}
-% Error in book: surname-first name instead of reverse:
-\item[N] \fullcite[201--2]{sassler2000}
-
-\item[B] \bibentry{sassler2000}
-
-% Error in book: missing page reference
-\item[N] \fullcite{good1999}
-
-\item[B] \bibentry{good1999}
-\end{itemize}
-
-\setcounter{subsubsection}{188}
 \subsubsection{Articles published in installments}
-% 14.189
+% 14.180 Articles published in installments
 
-% The formating is correct for the note, but the style has no way of
-% citing both parts of the article in one bibliography entry. I could
-% fix this by adding a 'parts' field.
+\begin{citebib}
+\item \cite[312]{brown1978}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{brown1978}
-
-\item[B] \bibentry{brown1978}
-\end{itemize}
-
-\setcounter{subsubsection}{190}
+\setcounter{subsubsection}{181}
 \subsubsection{Place where journal is published}
-% 14.191
+% 14.182 Place where journal is published
 
-\begin{itemize}
-\item[N] \fullcite{luu1999}
-
-\item[B] \bibentry{luu1999}
-
-\item[N] \fullcite{garrett1975}
-
-\item[B] \bibentry{garrett1975}
-\end{itemize}
+\begin{citebib}
+\item \cite[65--70]{luu1999}
+\item \cite{garrett1975}
+\end{citebib}
 
 \subsubsection{Translated or edited article}
-% 14.192
-\label{14.192}
+% 14.183 Translated or edited article
 
-\begin{itemize}
-\item[N] \fullcite{authorb}
+\begin{citebib}
+\item \cite{authorb}
+\item \cite{authorc}
+\end{citebib}
 
-\item[B] \bibentry{authorb}
+\subsubsection{New series for journal volumes}
+% 14.184 New series for journal volumes
+\label{14.184}
 
-\item[N] \fullcite{authorc}
+\begin{citebib}
+\item \cite[414]{sewall1896}
+\item \cite{moraes1950}
+\end{citebib}
 
-\item[B] \bibentry{authorc}
-\end{itemize}
+\subsubsection{Short titles for articles}
+% 14.185 Short titles for articles
 
-\setcounter{subsubsection}{193}
-\subsubsection{Translated article titles}
-% 14.194
+\begin{citebib}
+\item \cite[223]{rosenblum2015}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{kern1938}
+\subsubsection{Abstracts}
+% 14.186 Abstracts
 
-\item[B] \bibentry{kern1938}
-\end{itemize}
+\begin{citebib}
+\item \cite{matute2015}
+\end{citebib}
+
+\setcounter{subsubsection}{187}
+\subsubsection{Basic citation format for magazine articles}
+% 14.188 Basic citation format for magazine articles
+
+\begin{citebib}
+\item \cite[48]{saulnier2008}
+\item \cite[59]{lepore2015}
+\end{citebib}
+
+\subsubsection{Magazine articles consulted online}
+% 14.189 Magazine articles consulted online
+
+\begin{citebib}
+\item \cite{vick2015}
+\item \cite[5]{hanemann1926}
+\end{citebib}
+
+\subsubsection{Magazine departments}
+% 14.190 Magazine departments
+
+\begin{citebib}
+\item \cite{marx2015}
+\item \cite{wallraff2008}
+\item \cite{gourmet2000}
+\end{citebib}
+
+\subsubsection{Basic citation format for newspaper articles}
+% 14.191 Basic citation format for newspaper articles
+
+\begin{citebib}
+\item \cite{editorial1990}
+\item \cite{royko1992}
+\item \cite{forester2000}
+\item \cite{samenow2016}
+\end{citebib}
 
 \setcounter{subsubsection}{194}
-\subsubsection{New series for journal volumes}
-% 14.195
-\label{14.195}
+\subsubsection{Regular columns or features}
+% 14.195 Regular columns or features
 
-\begin{itemize}
-\item[N] \fullcite[414]{sewall1896}
-
-\item[B] \bibentry{sewall1896}
-
-\item[N] \fullcite{moraes1950}
-
-\item[B] \bibentry{moraes1950}
-\end{itemize}
+\begin{citebib}
+\item \cite{jaffe2015}
+\end{citebib}
 
 \setcounter{subsubsection}{196}
-\subsubsection{Abstract}
-% 14.197
+\subsubsection{Weekend supplements, magazines, and the like}
+% 14.197 Weekend supplements, magazines, and the like
 
-\begin{itemize}
-\item[N] \fullcite{hoover2008}
-
-\item[B] \bibentry{hoover2008}
-\end{itemize}
+\begin{citebib}
+\item \cite[48]{ghansah2015}
+\end{citebib}
 
 \setcounter{subsubsection}{198}
-\subsubsection{Citing magazines by date}
-% 14.199
+\subsubsection{Unsigned newspaper articles}
+% 14.199 Unsigned newspaper articles
 
-\begin{itemize}
-\item[N] \fullcite[81]{lepore2008}
+\begin{citebib}
+\item \cite{nytimes2002}
+\end{citebib}
 
-\item[B] \bibentry{lepore2008}
-\end{itemize}
+\subsubsection{News services and news releases}
+% 14.200 News services and news releases
 
-\subsubsection{Online magazine articles}
-% 14.200
-
-\begin{itemize}
-\item[N] \fullcite{cole1992}
-
-\item[B] \bibentry{cole1992}
-\end{itemize}
+\begin{citebib}
+\item \cite{ap2015}
+\end{citebib}
 
 \setcounter{subsubsection}{201}
-\subsubsection{Magazine departments}
-% 14.202
-
-\begin{itemize}
-\item[N] \fullcite{wallraff2008}
-
-\item[B] \bibentry{wallraff2008}
-
-\item[N] \fullcite{gourmet2000}
-
-\item[B] \bibentry{gourmet2000}
-\end{itemize}
-
-\subsubsection{Newspaper citations---basic elements}
-% 14.203
-
-\begin{itemize}
-\item[N] \fullcite{royko1992}
-
-\item[B] \bibentry{royko1992}
-
-\item[N] \fullcite{forester2000}
-
-\item[B] \bibentry{forester2000}
-\end{itemize}
-
-\setcounter{subsubsection}{204}
-\subsubsection{Regular columns}
-% 14.205
-
-\begin{itemize}
-\item[N] \fullcite{fields2008}
-
-\item[B] \bibentry{fields2008}
-\end{itemize}
-
-\setcounter{subsubsection}{206}
-\subsubsection{Unsigned newspaper articles}
-% 14.207
-
-\begin{itemize}
-\item[N] \fullcite{nytimes2002}
-
-\item[B] \bibentry{nytimes2002}
-\end{itemize}
-
-%\setcounter{subsubsection}{208}
-%\subsubsection{Weekend supplements, magazines, and the like}
-% 14.209
-
-%\subsubsection{News releases}
-% 14.213
-
-\setcounter{subsubsection}{214}
 \subsubsection{Book reviews}
-% 14.215
-\label{14.215}
+% 14.202 Book reviews
 
-\begin{itemize}
-\item[N] \fullcite{ratliff1999}
+\begin{citebib}
+\item \cite[B13--B14]{ratliff1999}
+\item \cite{brehm2015}
+\end{citebib}
 
-\item[B] \bibentry{ratliff1999}
-\end{itemize}
+\setcounter{subsubsection}{203}
+\subsubsection{Unsigned reviews}
+% 14.204 Unsigned reviews
 
-%\subsubsection{Reviews of plays, movies, television programs,
-%concerts, and the like}
-% 14.216
+This example fails to match \textit{CMS}. The date should appear
+immediately after the newspaper's title and not in parentheses. The
+problem stems from the style using many of the same macros to format
+every article, regardless of whether its source is a journal,
+magazine, or newspaper.
 
-%\setcounter{subsubsection}{216}
-%\subsubsection{Unsigned reviews}
-% 14.217
+For now, unsigned reviews format badly in reference lists, so the work
+below is excluded from Section \ref{paren}.
 
-%\begin{itemize}
-%\item[N] \fullcite{zeitung1828}
+% FIX: Presumably, CMS places 'nos. 23–24' after the date because the
+% date is a more important part of a magazine's or newspaper's
+% citation.
 
-%\item[B] \bibentry{zeitung1828}
-%\end{itemize}
+\begin{citebib}
+\item \cite{zeitung1828}
+\end{citebib}
 
-%\subsection{Interviews and Personal Communications}
-%\setcounter{subsection}{14}
-
-\setcounter{subsection}{2}
-\subsection{Unpublished and Informally Published Material}
+\setcounter{subsection}{6}
+\subsection{Papers, Contracts, and Reports}
 \setcounter{subsection}{14}
 
-\setcounter{subsubsection}{223}
+\setcounter{subsubsection}{214}
 \subsubsection{Theses and dissertations}
-% 14.224
+% 14.215 Theses and dissertations
 
-\begin{itemize}
-\item[N] \fullcite[59]{vedrashko2006}
+\begin{citebib}
+\item \cite[59]{vedrashko2006}
+\item \cite{choi2008}
+\end{citebib}
 
-\item[B] \bibentry{vedrashko2006}
+\setcounter{subsubsection}{216}
+\subsubsection{Lectures and papers or posters presented at meetings}
+% 14.217 Lectures and papers or posters presented at meetings
 
-\item[N] \fullcite{choi2008}
+\begin{citebib}
+\item \cite{hong2015}
+\end{citebib}
 
-\item[B] \bibentry{choi2008}
-\end{itemize}
+\subsubsection{Working papers and the like}
+% 14.218 Working papers and the like
 
-\setcounter{subsubsection}{225}
-\subsubsection{Lectures, papers presented at meetings, and the like}
-% 14.226
+\begin{citebib}
+\item \cite{lucki1980}
+\end{citebib}
 
-\begin{itemize}
-\item[N] \fullcite{derasmo2000}
+\setcounter{subsubsection}{219}
+\subsubsection{Pamphlets, reports, and the like}
+% 14.220 Pamphlets, reports, and the like
 
-\item[B] \bibentry{derasmo2000}
-\end{itemize}
+\begin{citebib}
+\item \cite{lifestyles1996}
+\item \cite{mcdonalds2014}
+\item \cite[¶2,620]{standardtax1996}
+\end{citebib}
 
-\noindent The 15th edition of \textit{The Chicago Manual of Style}
-shows this citations of an event spanning several
-days:\footcite[17.215]{chicago2003}
-
-\begin{itemize}
-\item[N] \fullcite{nass2000}
-
-\item[B] \bibentry{nass2000}
-\end{itemize}
-
-\setcounter{subsubsection}{227}
-\subsubsection{Working papers and other unpublished works}
-% 14.228
-
-\begin{itemize}
-\item[N] \fullcite{lucki1980}
-
-\item[B] \bibentry{lucki1980}
-\end{itemize}
-
-\setcounter{subsubsection}{229}
-\subsubsection{Patents}
-% 14.230
-
-\begin{itemize}
-\item[N] \fullcite{iizuka1986}
-
-\item[B] \bibentry{iizuka1986}
-\end{itemize}
-
-%\subsection{Special Types of References}
+%\setcounter{subsection}{7}
+%\subsection{Manuscript Collections}
 %\setcounter{subsection}{14}
 
-%\subsubsection{Dictionaries and encyclopedias}
-% 14.247
+%\setcounter{subsubsection}{231}
+%\subsubsection{Reference works consulted in physical formats}
+% 14.232 Reference works consulted in physical formats
 
-%\subsubsection{Dictionaries and encyclopedias online}
-% 14.248
+%\subsubsection{Reference works consulted online}
+% 14.233 Reference works consulted online
 
-\setcounter{subsubsection}{248}
-\subsubsection{Pamphlets, reports, and the like}
-% 14.249
+\setcounter{subsubsection}{233}
+\subsubsection{Citing individual reference entries by author}
+% 14.234 Citing individual reference entries by author
 
-\begin{itemize}
-\item[N] \fullcite{lifestyles1996}
+At present, the style has difficulty with many types of reference
+works. Exceptions like the one below take the form of articles in
+collections.
 
-\item[B] \bibentry{lifestyles1996}
-\end{itemize}
+\begin{citebib}
+\item \cite{isaacson2005}
+\end{citebib}
+
+\setcounter{subsection}{7}
+\subsection{Special Types of References}
+\setcounter{subsection}{14}
+
+\setcounter{subsubsection}{245}
+\subsubsection{Citing specific editions of classical references}
+% 14.246 Citing specific editions of classical references
+
+\begin{citebib}
+\item \cite{epictetus1916}
+\end{citebib}
+
+\setcounter{subsubsection}{250}
+\subsubsection{Modern editions of the classics}
+% 14.251 Modern editions of the classics
+
+\begin{citebib}
+\item \cite{aristotle1983}
+\item \cite{maimonides1965}
+\end{citebib}
+
+\setcounter{subsubsection}{257}
+\subsubsection{Patents}
+% 14.258 Patents
+
+\begin{citebib}
+\item \cite{iizuka1986}
+\end{citebib}
+
+%\setcounter{subsubsection}{259}
+%\subsubsection{Citations taken from secondary sources}
+% 14.260 Citations taken from secondary sources
+
+%\begin{citebib}
+% FIX: can't override period at the end of first \cite
+%\item \cite[269]{zukofsky1931}, quoted in \cite[78]{costello1981}
+%\end{citebib}
 
 \section{Examples from \emph{CMS} Chap. 15, ``Author-Date
 References''}
-\label{paren16}
+\label{paren}
 
 Examples in this section reproduce those in \textit{CMS} Chapter 15.
-To help with cross-checking, section numbers and headings below follow
-those of the book. \textit{P} indicates a parenthetical citation
-\textit{R}, indicates a reference list entry. Since parenthetical
-citations are relatively simple and the format of references lists is
-largely derivative of the standard format, the examples below are much
-more selective than those in the previous section.
+To help with cross-checking, subsection numbers and headings are from
+\textit{CMS}. Since parenthetical citations are relatively simple, and
+since the format of references lists is derivative of the default, the
+examples below are more selective than those in the previous section.
 
-As with the previous section, bear in mind that the book's examples
-occasionally show inconsistencies and, very likely, errors.
-Specifically, \ref{15.9} includes the publication year twice: in the
-expected place for this format and at the end of the entry.
-
-\subsection{Reference Lists and Text Citations}
+\subsection{Basic Format, With Examples and Variations}
 \setcounter{subsection}{15}
 
 \setcounter{subsubsection}{8}
-\subsubsection{Author-date references---examples and variations}
-% 15.9
-\label{15.9}
+\subsubsection{Author-date references—examples and variations}
+% 15.9 Author-date references—examples and variations
 
-\begin{itemize}
-\item[P] \fullparencite[99--100]{pollan2006}
+\begin{citeref}
+\item \parencite[87-88]{strayed2012}
+\item \parencite[261, 265]{strayed2012}
+\item \parencite[32]{daum2015}
+\item \parencite[188]{grazer2015}
+\item \parencite[242--55]{garcia1988}
+\item \parencite[310]{gould1984a}
+\item \parencite[484--85]{bagley2015}
+\item \parencite[312]{liu2015}
+\end{citeref}
 
-\item[R] \refentry{pollan2006}
+\setcounter{subsubsection}{13}
+\subsubsection{Placement of dates in reference list entries}
+% 15.14 Placement of dates in reference list entries
 
-\item[P] \fullparencite[42]{greenberg2008}
+\begin{citeref}
+\item \parencite{pager2015}
+\item \parencite{unger2014}
+\end{citeref}
 
-\item[R] \refentry{greenberg2008}
-
-\item[P] \fullparencite[331--32]{blair1977}
-
-\item[R] \refentry{blair1977}
-
-\item[P] \fullparencite[758]{novak2008}
-
-\item[R] \refentry{novak2008}
-\end{itemize}
-
-\setcounter{subsubsection}{18}
+\setcounter{subsubsection}{19}
 \subsubsection{Reference list entries with same author(s), same year}
-% 15.19
-\label{15.19}
+% 15.20 Reference list entries with same author(s), same year
 
-\begin{itemize}
-\item[P] \parencite[218]{fogel2004b}
-
-\item[R] \refentry{fogel2004b}
-
-\item[P] \parencite[45--46]{fogel2004a}
-
-% Error in book: includes year at end of entry
-\item[R] \refentry{fogel2004a}
-\end{itemize}
+\begin{citeref}
+\item \parencite[218]{fogel2004b}
+\item \parencite[45--46]{fogel2004a}
+\end{citeref}
 
 \setcounter{subsection}{1}
-\subsection{Special Cases}
+\subsection{Author-Date References: Special Cases}
 \setcounter{subsection}{15}
 
 \setcounter{subsubsection}{33}
+\subsubsection{Author-date format for anonymous works (no listed author)}
+% 15.34 Author-date format for anonymous works (no listed author)
+
+\begin{citeref}
+\item \parencite{anon1610}
+\item \parencite{anon1547}
+\item \parencite{horsley1796}
+\item \parencite{hawkes1834}
+\end{citeref}
+
 \subsubsection{Pseudonyms in author-date references}
-% 15.34
+% 15.35 Pseudonyms in author-date references
 
-\begin{itemize}
-\item[P] \fullparencite{stendhal1925}
-
-\item[R] \refentry{stendhal1925}
-\end{itemize}
+\begin{citeref}
+\item \parencite{stendhal1925}
+\end{citeref}
 
 \subsubsection{Editor in place of author in text citations}
-% 15.35
+% 15.36 Editor in place of author in text citations
 
-\begin{itemize}
-\item[P] \fullparencite{silverstein1974}
+\begin{citeref}
+\item \parencite{silverstein1974}
+\item \parencite{soltes1999}
+\end{citeref}
 
-\item[R] \refentry{silverstein1974}
+\subsubsection{Organization as author in author-date references}
+% 15.37 Organization as author in author-date references
 
-\item[P] \fullparencite{soltes1999}
+\begin{citeref}
+% Error in book: '4:1997' shouldn't be part of the citation
+\item \parencite{iso1997.ref}
+\end{citeref}
 
-\item[R] \refentry{soltes1999}
-\end{itemize}
+\setcounter{subsubsection}{39}
+\subsubsection{Reprint editions and modern editions—more than one date}
+% 15.40 Reprint editions and modern editions—more than one date
 
-\setcounter{subsubsection}{37}
-\subsubsection{Reprint editions and modern editions---more than one
-date}
-% 15.38
+\begin{citeref}
+\item \parencite{austen2003}
+\item \parencite{maitland1998}
+\end{citeref}
 
-\begin{itemize}
-\item[P] \fullparencite{austen2003}
+\subsubsection{Multivolume works published over more than one year}
+% 15.41 Multivolume works published over more than one year
 
-\item[R] \refentry{austen2003}
-\end{itemize}
+\begin{citeref}
+\item \parencite[1:133]{tillich1951}
+\item \parencite[vol. 2]{tillich1951}
+\item \parencite[329]{hayek1988}
+\end{citeref}
 
-\setcounter{subsubsection}{40}
-\subsubsection{``No date'' in author-date references}
-% 15.41
+\subsubsection{Cross-references to multiauthor books in reference lists}
+% 15.42 Cross-references to multiauthor books in reference lists
 
-\begin{itemize}
-\item[P] \fullparencite{nano1750}
+\begin{citebib}
+\item \cite{draper1987}
+\item \cite{harrington1987}
+\item \cite{zukowsky1987}
+\end{citebib}
 
-%\item[R] \refentry{nano1750}
+\setcounter{subsubsection}{43}
+\subsubsection{No date of publication in author-date references}
+% 15.44 No date of publication in author-date references
 
-\item[P] \fullparencite{nano}
-
-%\item[R] \refentry{nano}
-\end{itemize}
+\begin{citeref}
+\item \parencite{nano1750}
+\item \parencite{nano}
+\end{citeref}
 
 \subsubsection{``Forthcoming'' in author-date references}
-% 15.42
+% 15.45 ``Forthcoming'' in author-date references
 
-\begin{itemize}
-\item[P] \fullparencite{faraday}
+\begin{citeref}
+\item \parencite{faraday}
+\end{citeref}
 
-\item[R] \refentry{faraday}
-\end{itemize}
+\setcounter{subsubsection}{46}
+\subsubsection{Parentheses or comma with issue number}
+% 15.47 Parentheses or comma with issue number
 
-\setcounter{subsection}{2}
-\subsection{Peridocals}
-\setcounter{subsection}{15}
+\begin{citeref}
+\item \parencite{glass2014}
+\item \parencite{meyerovitch1959}
+\end{citeref}
 
-\setcounter{subsubsection}{45}
-\subsubsection{Parentheses with issue number}
-% 15.46
+\subsubsection{Colon with volume number}
+% 15.48 Colon with volume number
 
-\begin{itemize}
-\item[P] \fullparencite{meyerovitch1959}
+\begin{citeref}
+\item \parencite{gunderson2015}
+\end{citeref}
 
-\item[R] \refentry{meyerovitch1959}
+\subsubsection{Newspapers and magazines in reference lists}
+% 15.49 Newspapers and magazines in reference lists
 
-\item[P] \fullparencite{morasse2008}
+\begin{citeref}
+\item \parencite{nytimes2002}
+\end{citeref}
 
-\item[R] \refentry{morasse2008}
-\end{itemize}
+\setcounter{subsubsection}{54}
+\subsubsection{Patents or other documents cited by more than one date}
+% 15.55 Patents or other documents cited by more than one date
+
+\begin{citeref}
+\item \parencite{iizuka1986}
+\end{citeref}
 
 \defbibnote{sh}{This section shows the output of
 \cmd{printshorthands}. By default, works from this list also appear in
@@ -2252,7 +2342,7 @@ bibliographies and reference lists. To exclude them, use the preamble
 option \opt{nolos} (see Section \ref{preops}). Note that the style
 does not automatically italicize a \bibfield{shorthand}. Whether you
 should italicize it depends on whether you should italicize the work's
-title (14.55).\\}%
+title (14.60).\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. In the next section, the same works appear in
@@ -2265,12 +2355,12 @@ previous section but in the author-date format.\\}%
 
 \printshorthands[prenote=sh]
 \refstepcounter{sh}\label{sh}
-\printbibliography[prenote=bib]
+\printbibliography[notkeyword=notinbib,prenote=bib]
 \refstepcounter{bib}\label{bib}
 \printbibliography[%
   env=reflist,
   heading=references,
+  notkeyword=notinref,
   prenote=ref]
 \refstepcounter{ref}\label{ref}
-
 \end{document}
