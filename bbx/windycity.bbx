@@ -1,4 +1,4 @@
-% Last modified: Thu 06 Dec 2018 01:03:29 PM CST
+% Last modified: Thu 06 Dec 2018 01:05:58 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1689,7 +1689,8 @@
                and test {\iffieldundef{howpublished}}
                and test {\iffieldundef{url}}
                and test {\iffieldundef{doi}}
-               and test {\iffieldundef{addendum}}}
+               and test {\iffieldundef{addendum}}
+               or ( togl {firstshort} and not togl {bibliography} )}
     {}
     {\usebibmacro{eid}%
      \newunit
