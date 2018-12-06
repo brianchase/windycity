@@ -1,4 +1,4 @@
-% Last modified: Wed 05 Dec 2018 05:48:06 PM CST
+% Last modified: Thu 06 Dec 2018 01:03:29 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -132,7 +132,7 @@
   loccittracker=constrict,
   minnames=7,
   maxnames=10,
-% Remember, if 'mincrossrefs' is greater than 1 and you cite just one
+% Remember, if 'mincrossrefs' is greater than 1, and you cite just one
 % entrykey in a document (or refsection, etc), the field 'crossref' is
 % undefined.
   mincrossrefs=2,
@@ -1176,6 +1176,14 @@
   \savename{bookauthor}{\saveauth}%
   \clearname{bookauthor}%
   \usebibmacro{author+bookauthor+etc}%
+% Unsigned reviews have no plausible place to put the publication year
+% but where the default format would put it. Perhaps best to use the
+% default format from here.
+  \ifboolexpr{ togl {reflist}
+               and togl {noauth}}
+    {\togglefalse{reflist}}%
+    {}
+  \usebibmacro{title+labelyear}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{note}%
   \usebibmacro{review+title}%
@@ -1231,16 +1239,18 @@
      \space
      \usebibmacro{test:title+booktitle}%
      \usebibmacro{title+labelyear}%
-     \setunit{\addcomma\space}%
-     \restorename{author}{\saveauth}%
-     \let\saveauth\empty
-     \togglefalse{noauth}%
-     \ifboolexpr{ test {\ifnameundef{author}}
-                  and test {\ifnameundef{bookauthor}}}
-       {}
-       {\bibstring{by}\space
-        \usebibmacro{author+bookauthor+etc}}}
-     {}}
+     \iftoggle{firstshort}
+       {\clearfield{booktitle}}
+       {\setunit{\addcomma\space}%
+        \restorename{author}{\saveauth}%
+        \let\saveauth\empty
+        \togglefalse{noauth}%
+        \ifboolexpr{ test {\ifnameundef{author}}
+                     and test {\ifnameundef{bookauthor}}}
+          {}
+          {\bibstring{by}\space
+           \usebibmacro{author+bookauthor+etc}}}}
+    {}}
 
 \newbibmacro*{test:bookauthor}{%
   \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}

@@ -1,4 +1,4 @@
-% Last modified: Wed 05 Dec 2018 06:18:38 PM CST
+% Last modified: Thu 06 Dec 2018 12:55:55 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1439,6 +1439,9 @@ and format it however you like, by adding your preferred content to
 % 14.79 No listed author (anonymous works)
 \label{14.79}
 
+See Section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
+entry options.
+
 \begin{citebib}
 \item \cite{anon1610}
 \item \cite{anon1547}
@@ -1448,6 +1451,11 @@ and format it however you like, by adding your preferred content to
 
 \subsubsection{Pseudonyms}
 % 14.80 Pseudonyms
+
+To print the author's real name in brackets after a pseudonym, use the
+\bibfield{nameaddon} field. If the real name is unknown, and you want
+to indicate that a name is a pseudonym, put 'pseud.' in
+\bibfield{nameaddon}.
 
 \begin{citebib}
 \item \cite{carre1982}
@@ -1464,6 +1472,10 @@ and format it however you like, by adding your preferred content to
 
 \subsubsection{Organization as author}
 % 14.84 Organization as author
+
+If an organization is the work's author, remember to add an extra pair
+of brackets around the name of the organization in your bibliography
+database.
 
 \begin{citebib}
 \AtNextCitekey{\clearfield{shorthand}}
@@ -1661,6 +1673,11 @@ and format it however you like, by adding your preferred content to
 
 \subsubsection{Reprint editions and modern editions}
 % 14.114 Reprint editions and modern editions
+
+% You can have at most one \bibfield{origdate} per entry. So, if the
+% citation is to a work in a collection, say, an article or book in an
+% anthology, the style assumes that \bibfield{origdate} is for the
+% collection, not for the individual work.
 
 \begin{citebib}
 \item \cite[152--53]{barzun1994}
@@ -2058,26 +2075,32 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 \item \cite{brehm2015}
 \end{citebib}
 
-\setcounter{subsubsection}{203}
-\subsubsection{Unsigned reviews}
+%\setcounter{subsubsection}{203}
+%\subsubsection{Unsigned reviews}
 % 14.204 Unsigned reviews
 
-This example fails to match \textit{CMS}. The date should appear
-immediately after the newspaper's title and not in parentheses. The
-problem stems from the style using many of the same macros to format
-every article, regardless of whether its source is a journal,
-magazine, or newspaper.
+%This example fails to match \textit{CMS}. The date should appear
+%immediately after the newspaper's title and not in parentheses. The
+%problem stems from the style using many of the same macros to format
+%every article, regardless of whether its source is a journal,
+%magazine, or newspaper.
 
-For now, unsigned reviews format badly in reference lists, so the work
-below is excluded from Section \ref{paren}.
+%For reference lists, unsigned reviews have no plausible place to put
+%the publication year but where the default format would put it. The
+%easiest solution is to give unsigned reviews the same format in
+%reference lists and bibliographies.
+
+% FIX: Unsigned reviews don't work with the \opt{short} or
+% \opt{firstshort} preamble options. In the default format, only the
+% first citation close to correct.
 
 % FIX: Presumably, CMS places 'nos. 23–24' after the date because the
 % date is a more important part of a magazine's or newspaper's
 % citation.
 
-\begin{citebib}
-\item \cite{zeitung1828}
-\end{citebib}
+%\begin{citebib}
+%\item \cite{zeitung1828}
+%\end{citebib}
 
 \setcounter{subsection}{6}
 \subsection{Papers, Contracts, and Reports}
@@ -2231,6 +2254,9 @@ examples below are more selective than those in the previous section.
 \setcounter{subsubsection}{33}
 \subsubsection{Author-date format for anonymous works (no listed author)}
 % 15.34 Author-date format for anonymous works (no listed author)
+
+See Section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
+entry options.
 
 \begin{citeref}
 \item \parencite{anon1610}
