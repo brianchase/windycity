@@ -1,4 +1,11 @@
 
+INTERIM
+
+* added support for common reference works, such as dictionaries and
+  encyclopedias
+* fixed short option printing urls and related data on first citations
+* some fixes, though incomplete, for reviews
+
 RELEASE NOTES FOR VERSION 2018.12.05
 
 * added much better support for cross-referencing collections in notes
