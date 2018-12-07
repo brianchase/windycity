@@ -1,4 +1,4 @@
-% Last modified: Thu 06 Dec 2018 03:14:39 PM CST
+% Last modified: Fri 07 Dec 2018 12:16:17 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -297,7 +297,7 @@ the value of \cmd{bibitemsep}. Store the text of an annotation in the
 each work to the bibliography. This could result in needless clutter,
 especially after citing many volumes of a multivolume work. To exclude
 individual works and print only an entry for the whole collection, use
-\opt{collsonly}. It has no effect on many \bibtype{InCollection}
+\opt{collsonly}. It has no effect on many \bibtype{incollection}
 entries, such as articles in books, which need (or ought to have) a
 place in the bibliography but does filter out chapters of books and
 volumes of collections. For discussion of collections and multivolume
@@ -687,60 +687,107 @@ such labels usually modify a journal's title. For them, use
 \end{citebib}
 
 \subsection{Entry Types}
+\label{entrytypes}
 
 In a bibliography database, every entry has an entry type. The style
 recognizes the standard ones for \BibTeX, as well as some that are
 specific to \biblatex. A relatively small number of entry types are
 basic. The style treats the rest as aliases of the basic ones.
 
-\begin{typelist}\raggedright
+\begin{typelist}
+\RaggedRight
 
-\typeitem{Article}
+\typeitem{article}
 
-Aliases: \bibtype{Periodical}
+Aliases: \bibtype{periodical}
 
-\typeitem{Book}
+\typeitem{book}
 
-Aliases: \bibtype{Booklet}, \bibtype{Collection}, \bibtype{Manual},
-\bibtype{Proceedings}, \bibtype{Reference}, \bibtype{Report},
-\bibtype{Techreport}
+Aliases: \bibtype{booklet}, \bibtype{collection}, \bibtype{manual},
+\bibtype{proceedings}, \bibtype{report}, \bibtype{techreport}
 
-\typeitem{InCollection}
+\typeitem{incollection}
 
-Aliases: \bibtype{BookInBook}, \bibtype{Conference},
-\bibtype{InProceedings}, \bibtype{InBook}, \bibtype{InReference},
-\bibtype{Letter}, \bibtype{SuppBook}, \bibtype{SuppCollection}
+Aliases: \bibtype{bookinbook}, \bibtype{conference},
+\bibtype{inproceedings}, \bibtype{inbook}, \bibtype{letter},
+\bibtype{suppbook}, \bibtype{suppcollection}
 
-\typeitem{Letter} Aliases: none
-\typeitem{Misc} Aliases: none
-\typeitem{Online} Aliases: none
-\typeitem{Patent} Aliases: none
-\typeitem{Review} Aliases: none
+\typeitem{letter} No aliases
+\typeitem{misc} No aliases
+\typeitem{online} No aliases
+\typeitem{patent} No aliases
 
-\typeitem{Thesis}
+\typeitem{reference}
 
-Aliases: \bibtype{MastersThesis}, \bibtype{PhdThesis},
-\bibtype{Unpublished}
+Aliases: \bibtype{inreference}
+
+\typeitem{review} No aliases
+
+\typeitem{thesis}
+
+Aliases: \bibtype{mastersthesis}, \bibtype{phdthesis},
+\bibtype{unpublished}
 
 \end{typelist}
 
 \noindent For the most part, you may assign every work to the basic
 entry types listed above. A PhD thesis, for example, may have the
-entry type \bibtype{Thesis} or \bibtype{PhdThesis}; the output is the
+entry type \bibtype{thesis} or \bibtype{phdthesis}; the output is the
 same. An exception applies to books in collections: Every book in a
-one-volume or multivolume collection needs the \bibtype{InBook} or
-\bibtype{BookInBook} entry type.\footnote{Using \bibtype{InBook} for
+one-volume or multivolume collection needs the \bibtype{inbook} or
+\bibtype{bookinbook} entry type.\footnote{Using \bibtype{inbook} for
 books in collections departs somewhat from the specifications of
-\BibTeX\ and \biblatex, though it seems harmless enough.} You may
-choose either \bibtype{InBook} or \bibtype{BookInBook} entries have
-the same format. If an entry belongs to a type other than the ones
-listed above, the style processes it as a book.
+\BibTeX\ and \biblatex, though it seems harmless enough.} You may use
+either \bibtype{inbook} or \bibtype{bookinbook}. If an entry belongs
+to a type other than the ones listed above, the style processes it as
+a book.
 
-For unusually complicated ci\-ta\-tions---at any rate, those too
-complicated for the style---consider using the \bibtype{Misc} entry
-type. The style formats these entries with a small number of fields
-but in way that makes it a fallback for almost anything. The example
-below is from \textit{CMS} 14.264:
+One comment about \bibtype{reference} and \bibtype{inreference}
+entries: You may cross-reference \bibtype{inreference} entries to
+\bibtype{reference} entries, as with articles in books, but you can
+get the same output using one or the other entry type alone. Take an
+example from \textit{CMS} \ref{14.232}:
+
+\begin{citeonly}
+\item \cite{salvation1980}
+\end{citeonly}
+
+A bibliography database could have an \bibtype{inreference} entry for
+the article cross-referenced to a \bibtype{reference} entry for
+\textit{Encyclopaedia Britannica}:
+
+\begin{verbatim}
+   @InReference{salvation1980,
+     title = {salvation},
+     crossref = {britannica1980}
+   }
+   @Reference{britannica1980,
+     organization = {{\emph{Encyclopaedia Britannica}}},
+     edition = {15},
+     year = {1980}
+   }
+\end{verbatim}
+
+\noindent This approach makes sense if you plan to cite more than one
+article from the source.\footnote{Incidentally, reference work's don't
+always have titles in italics. As a result, you need to handle it in
+your bibliography database.} But you don't need to. You could have a
+single entry of either type with the same data, like this:
+
+\begin{verbatim}
+   @Reference{salvation1980,
+     organization = {{\emph{Encyclopaedia Britannica}}},
+     edition = {15},
+     title = {salvation},
+     year = {1980}
+   }
+\end{verbatim}
+
+For unusually complicated ci\-ta\-tions---or those just not supported
+by the style---consider using the \bibtype{misc} entry type. The style
+formats these entries with a small number of fields but in way that
+makes it a fallback for almost anything. The example below is from
+\textit{CMS} 14.264:
 
 \begin{citebib}
 \item \cite{roosevelt1959}
@@ -756,20 +803,23 @@ reference list entry.
 \begin{verbatim}
    @Misc{roosevelt1959,
      author = {Roosevelt, Eleanor},
-     title = {\mkbibquote{Is America Facing World Leadership?}},
-
-     usera = {convocation speech, Ball State Teacher's College,
-              May 6, \thefield{year}, radio broadcast,
-              reel-to-reel tape, MPEG copy, 1:12:49},
-     userb = {Convocation Speech. Ball State Teacher's College.
-              May 6, \thefield{year}. Radio broadcast.
-              Reel-to-reel tape. MPEG copy. 1:12:49},
-     url = {http://libx.bsu.edu/cdm4/singleitem/collection/ElRoos/id/1},
+     title = {\mkbibquote{Is America Facing World
+              Leadership?}},
+     usera = {convocation speech, Ball State Teacher's
+              College, May 6, \thefield{year}, radio
+              broadcast, reel-to-reel tape, MPEG copy,
+              1:12:49},
+     userb = {Convocation Speech. Ball State Teacher's
+              College. May 6, \thefield{year}. Radio
+              broadcast. Reel-to-reel tape. MPEG copy.
+              1:12:49},
+     url = {http://libx.bsu.edu/cdm4/singleitem/collection/
+            ElRoos/id/1},
      year = {1959}
    }
 \end{verbatim}
 
-\noindent No other example in this document relies on \bibtype{Misc}.
+\noindent No other example in this document relies on \bibtype{misc}.
 
 \section{Editors, Translators, and Compilers}
 \label{edtrans}
@@ -1026,7 +1076,7 @@ entry needs to use \bibfield{editor} and \bibfield{editora}:
 \section{Multivolume Works}
 \label{multivolume}
 
-Typical examples of \bibtype{Collection} and \bibtype{InCollection}
+Typical examples of \bibtype{collection} and \bibtype{incollection}
 entries appear in Section \ref{notes}. But not all such works are
 typical. This section addresses some of them.
 
@@ -1077,15 +1127,15 @@ Lisle Letters} as a single work and the volumes of \textit{Henry
 James} as distinct works.
 
 How does Windy City do it? For \textit{The Lisle Letters}, the
-bibliography database contains a \bibtype{Collection} entry with
-information about the whole collection and separate \bibtype{InBook}
-entries for each volume. (This use of \bibtype{InBook} is perhaps a
+bibliography database contains a \bibtype{collection} entry with
+information about the whole collection and separate \bibtype{inbook}
+entries for each volume. (This use of \bibtype{inbook} is perhaps a
 bit nonstandard but makes sense if you regard the collection as a
-single work consisting of books.) The \bibtype{InBook} entries
-cross-reference the \bibtype{Collection} entry and have the same title
-and publication date as the \bibtype{Collection}. That's enough for
+single work consisting of books.) The \bibtype{inbook} entries
+cross-reference the \bibtype{collection} entry and have the same title
+and publication date as the \bibtype{collection}. That's enough for
 the style to format them as \textit{CMS} recommends. Meanwhile, the
-volumes of \textit{Henry James} have separate \bibtype{Book} entries,
+volumes of \textit{Henry James} have separate \bibtype{book} entries,
 with no cross-referencing. Regardless, the publication dates and
 titles of the volumes differ, so cross-referencing alone won't suffice
 to turn multivolume collections into single works.
@@ -1112,12 +1162,12 @@ collection:
    }
 \end{verbatim}
 
-The \bibtype{InBook} entry, \bibfield{byrne1981.4}, contains the
+The \bibtype{inbook} entry, \bibfield{byrne1981.4}, contains the
 minimum information that Windy City needs to format its citation
 correctly. Adding information, such as the publisher, address, and
 editor would have no effect on the output.
 
-By contrast, here is the \bibtype{Book} entry for a volume of
+By contrast, here is the \bibtype{book} entry for a volume of
 \textit{Henry James}, along with one for the collection:
 
 \begin{verbatim}
@@ -1145,7 +1195,7 @@ By contrast, here is the \bibtype{Book} entry for a volume of
 \end{verbatim}
 
 Cross-referencing in this case is inadvisable, since not all data for
-the \bibtype{Collection} is true of the volume.
+the \bibtype{collection} is true of the volume.
 
 \subsection{Options for Difficult Cases}
 
@@ -1189,8 +1239,8 @@ One solution is to keep a separate entry in the bibliography database
 for each volume, without cross-referencing the original entry, and to
 use \bibfield{note} for holding \textit{Part I} and \textit{Part II}.
 Citing particular works from each volume is then a straightforward
-matter of making \bibtype{InCollection} entries for those works and
-cross-referencing them to the new \bibtype{Collection} entries. The
+matter of making \bibtype{incollection} entries for those works and
+cross-referencing them to the new \bibtype{collection} entries. The
 output is at least adequate, though the placement of \textit{Part I}
 may seem odd:
 
@@ -1233,7 +1283,7 @@ individual works to their respective volume:
 \end{citebib}
 
 But what if you want to include the \bibfield{maintitle} with its
-volume number? Try adding \bibfield{maintitle} to \bibtype{Collection}
+volume number? Try adding \bibfield{maintitle} to \bibtype{collection}
 along with a new field, \bibfield{volumea}, for the volume of
 \textit{Kierkegaard's Writings}. The result:
 
@@ -1373,7 +1423,7 @@ format and the use of \textit{ibid.} First, the short format:
 \label{14.59}
 
 The only way for the style to match \textit{CMS} on these citations is
-by citing a \bibtype{Collection} entry with the volume and page
+by citing a \bibtype{collection} entry with the volume and page
 numbers in the \bibfield{postnote} field, as in ``1:126.''
 
 You may override the default announcement of a \bibfield{shorthand},
@@ -2147,26 +2197,46 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 \setcounter{subsubsection}{231}
 \subsubsection{Reference works consulted in physical formats}
 % 14.232 Reference works consulted in physical formats
+\label{14.232}
 
-At present, Windy City has difficulty with some reference works.
-Exceptions like the ones below show full publication information in
-the same way as books.
+Some reference works show full publication information in the same way
+as books. Use the \bibtype{book} entry type for them. The first three
+citations below are different. They need the \bibtype{reference} or
+\bibtype{inreference} entry type. See Section \ref{entrytypes} for
+more information. Following the suggestion in \textit{CMS} 14.232,
+\bibtype{reference} and \bibtype{inreference} works don't appear in
+bibliographies and reference lists.
 
 \begin{citebib}
+\item \cite{salvation1980}
+\item \cite{hootananny2009}
+\item \cite{dab1937}
 \item \cite[s.vv. \mkbibquote{police ranks}, \mkbibquote{postal addresses}]{timestyle2003}
 \item \cite[6.8.2]{mla2008}
 \end{citebib}
 
-%\setcounter{subsubsection}{232}
-%\subsubsection{Reference works consulted online}
+\subsubsection{Reference works consulted online}
 % 14.233 Reference works consulted online
 
-\setcounter{subsubsection}{233}
+Like some of the reference works in the previous section, the ones
+below need the \bibtype{reference} or \bibtype{inreference} entry
+type. Odd as it may seem, but consistent with \textit{CMS}, they, too,
+aren't included in bibliographies and reference lists. See Section
+\ref{entrytypes} for more information.
+
+\begin{citeonly}
+\item \cite{toscanini2016}
+\item \cite{cairns2016}
+\item \cite{wikipedia2016}
+\item \cite{merriam2016}
+\end{citeonly}
+
 \subsubsection{Citing individual reference entries by author}
 % 14.234 Citing individual reference entries by author
 
 Reference works like the following have the same format as articles in
-collections. Otherwise, Windy City formats them incorrectly.
+collections. Otherwise, Windy City doesn't quite format them
+correctly.
 
 \begin{citebib}
 \item \cite{isaacson2005}
