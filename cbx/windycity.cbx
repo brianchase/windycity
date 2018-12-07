@@ -1,4 +1,4 @@
-% Last modified: Wed 05 Dec 2018 05:47:56 PM CST
+% Last modified: Fri 07 Dec 2018 10:25:35 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -522,6 +522,30 @@
   \usebibmacro{note}%
   \printfield{number}%
   \newunit}%
+
+\DeclareBibliographyDriver{cite:reference}{%
+  \printlist{organization}%
+  \usebibmacro{edition}%
+  \ifboolexpr{ test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{year}}}
+    {}
+    {\space
+     \iffieldundef{howpublished}
+       {\printtext[parens]{\printfield{year}}}
+       {\global\togglefalse{cbx@first}%
+        \printtext[parens]{%
+          \printfield{howpublished}%
+          \newunit
+          \printfield{version}%
+          \newunit
+          \printfield{year}}}}
+  \newunit
+  \bibstring{subverbo}\space
+  \usebibmacro{longtitle+titleaddon}%
+  \newunit
+  \renewcommand*{\pluga}{\bibstring{by}\space}%
+  \renewcommand*{\cbx@namelist}{author}%
+  \usebibmacro{printnames+etc}}%
 
 \DeclareBibliographyDriver{cite:review}{%
   \usebibmacro{reviews}%

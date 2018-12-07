@@ -1,4 +1,4 @@
-% Last modified: Thu 06 Dec 2018 07:45:07 PM CST
+% Last modified: Fri 07 Dec 2018 10:28:16 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -256,11 +256,14 @@
           {\iffieldundef{chapter}
              {}
              {\skipentry}}}}}
-
 \defbibcheck{nolos}{%
   \iffieldundef{shorthand}
     {}
     {\skipentry}}%
+\defbibcheck{reference}{%
+  \ifentrytype{reference}
+    {\skipentry}%
+    {}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Data Inheritance  %%
@@ -325,7 +328,8 @@
 \newcommand*{\AtBeginLists}{%
   \renewcommand*{\newunitpunct}{\addperiod\space}%
   \let\bibstring\biblstring
-  \global\undef\bbx@lasthash}%
+  \global\undef\bbx@lasthash
+  \blx@key@bibcheck{reference}}%
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
@@ -452,11 +456,14 @@
 \renewbibmacro*{index:title}[2]{%
   \usebibmacro{index:field}{#1}{\thefield{indexsorttitle}}{#2}}%
 
-\DeclareFieldFormat[article,incollection,inproceedings,online,review]
+\DeclareFieldFormat[%
+  article,incollection,inreference,inproceedings,online,reference,review]
   {title}{\mkbibquote{#1}}
-\DeclareFieldFormat[article,incollection,inproceedings,online,review]
+\DeclareFieldFormat[%
+  article,incollection,inreference,inproceedings,online,reference,review]
   {labeltitle}{\mkbibquote{#1}}
-\DeclareIndexFieldFormat[article,incollection,inproceedings,online,review]
+\DeclareIndexFieldFormat[%
+  article,incollection,inreference,inproceedings,online,reference,review]
   {indextitle}{\usebibmacro{index:title}{\index}{\mkbibquote{#1}}}
 
 \DeclareFieldAlias[inbook]{title}{title}
@@ -540,14 +547,12 @@
 \DeclareBibliographyAlias{collection}{book}
 \DeclareBibliographyAlias{manual}{book}
 \DeclareBibliographyAlias{proceedings}{book}
-\DeclareBibliographyAlias{reference}{book}
 \DeclareBibliographyAlias{report}{book}
 \DeclareBibliographyAlias{techreport}{book}
 \DeclareBibliographyAlias{cite:booklet}{cite:book}
 \DeclareBibliographyAlias{cite:collection}{cite:book}
 \DeclareBibliographyAlias{cite:manual}{cite:book}
 \DeclareBibliographyAlias{cite:proceedings}{cite:book}
-\DeclareBibliographyAlias{cite:reference}{cite:book}
 \DeclareBibliographyAlias{cite:report}{cite:book}
 \DeclareBibliographyAlias{cite:techreport}{cite:book}
 
@@ -555,14 +560,14 @@
 \DeclareBibliographyAlias{conference}{incollection}
 \DeclareBibliographyAlias{inbook}{incollection}
 \DeclareBibliographyAlias{inproceedings}{incollection}
-\DeclareBibliographyAlias{inreference}{incollection}
+\DeclareBibliographyAlias{inreference}{reference}
 \DeclareBibliographyAlias{letter}{incollection}
 \DeclareBibliographyAlias{suppbook}{incollection}
 \DeclareBibliographyAlias{suppcollection}{incollection}
 \DeclareBibliographyAlias{cite:bookinbook}{cite:incollection}
 \DeclareBibliographyAlias{cite:inbook}{cite:incollection}
 \DeclareBibliographyAlias{cite:inproceedings}{cite:incollection}
-\DeclareBibliographyAlias{cite:inreference}{cite:incollection}
+\DeclareBibliographyAlias{cite:inreference}{cite:reference}
 \DeclareBibliographyAlias{cite:suppbook}{cite:incollection}
 \DeclareBibliographyAlias{cite:suppcollection}{cite:incollection}
 
@@ -1696,6 +1701,8 @@
      \printfield{howpublished}%
      \newunit
      \printurldate
+     \newunit
+     \printfield[noformat]{version}%
      \newunit
      \printfield{url}%
      \newunit
