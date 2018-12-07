@@ -1,4 +1,4 @@
-% Last modified: Wed 05 Dec 2018 05:15:30 PM CST
+% Last modified: Fri 07 Dec 2018 01:33:44 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -228,9 +228,10 @@
    \ltd@optionlist}
   {\endlist}
 \lstset{basicstyle=\small\ttfamily}
-\pretocmd{\bibfield}{\sloppy}{}{}
-\pretocmd{\bibtype}{\sloppy}{}{}
-\pretocmd{\cmd}{\sloppy}{}{}
-\pretocmd{\op}{\sloppy}{}{}
+\renewcommand{\bibfield}[1]{\emph{#1}}%
+\renewcommand{\bibtype}[1]{\emph{#1}}% Don't affix with '@'!
+\renewcommand{\cmd}[1]{\emph{#1}}%
+\renewcommand{\file}[1]{\emph{#1}}%
+\renewcommand{\opt}[1]{\emph{#1}}%
 
 \endinput

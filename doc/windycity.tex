@@ -1,4 +1,4 @@
-% Last modified: Fri 07 Dec 2018 12:16:17 PM CST
+% Last modified: Fri 07 Dec 2018 01:48:24 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -299,7 +299,7 @@ especially after citing many volumes of a multivolume work. To exclude
 individual works and print only an entry for the whole collection, use
 \opt{collsonly}. It has no effect on many \bibtype{incollection}
 entries, such as articles in books, which need (or ought to have) a
-place in the bibliography but does filter out chapters of books and
+place in the bibliography, but does filter out chapters of books and
 volumes of collections. For discussion of collections and multivolume
 works, see Section \ref{multivolume}.
 
@@ -312,8 +312,8 @@ approach is optional for documents with complete
 bibliographies.\footnote{\textit{CMS} \ref{14.23}. See also
 14.29--14.36.} You may use this option in conjunction with \opt{ibid}.
 However, \opt{firstshort} adds nothing to \opt{short}. The latter
-implies \opt{firstshort} but goes beyond it to give a short format to
-other citations as well.
+implies \opt{firstshort} but goes beyond it by giving a short format
+to subsequent citations of a work.
 
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
@@ -435,7 +435,7 @@ title's position. Below is an example from \textit{CMS} \ref{14.105}:
 \noindent According to \textit{CMS}, if a work has both an editor and
 a translator, their names should appear in citations in the order in
 which they appear on the work's title page (\ref{14.104}). By default,
-the style lists editors first. However, entries with the option
+the style lists editors first. Entries with the option
 \bibfield{transfirst} reverse this order: Their translators print
 first. If a work's translators and editors are identical, using
 \bibfield{transfirst} reverses the order of their roles, say, from
@@ -566,13 +566,12 @@ not use it in a bibliography database.
 bibliography database.
 
 \item[editoraddon] Use this field to include additional editorial
-information about a work. Earlier, in Section \ref{entryops}, the
-example from \textit{CMS} \ref{14.105} uses it: In the work's database
-entry, \bibfield{editoraddon} contains ``from materials compiled by
-John M. Manly and Edith Richert, with the assistance of Lilian J.
-Redstone et al.'' This content prints after the editor's position,
-without intervening punctuation. Again, in the bibliography, the
-result is:
+information about a work. In Section \ref{entryops}, an example from
+\textit{CMS} \ref{14.105} uses it: In the work's database entry,
+\bibfield{editoraddon} contains ``from materials compiled by John M.
+Manly and Edith Richert, with the assistance of Lilian J. Redstone et
+al.'' This content prints after the editor's position, without
+intervening punctuation. Again, in the bibliography, the result is:
 
 \begin{bibonly}
 \nocite{chaucer1966}
@@ -590,7 +589,9 @@ use it in a bibliography database. Instead, always use
 titles, see Section \ref{authtitles}.
 
 \item[volumea] Use this field when an entry requires a second volume
-number. For an example, see Section \ref{multivolume}.
+number. Very few works are likely to need it. For an example, see the
+entry for \bibfield{kierkegaard1987c} in \file{windycity.bib} and the
+resulting output in Section \ref{multivolume}.
 
 \item[volumetitle] Use this field when a volume has a title. In the
 following example, from \textit{CMS} \ref{14.123}, the
@@ -771,8 +772,8 @@ the article cross-referenced to a \bibtype{reference} entry for
 \noindent This approach makes sense if you plan to cite more than one
 article from the source.\footnote{Incidentally, reference work's don't
 always have titles in italics. As a result, you need to handle it in
-your bibliography database.} But you don't need to. You could have a
-single entry of either type with the same data, like this:
+your bibliography database.} But you could also have a single entry of
+either type with the same data, like this:
 
 \begin{verbatim}
    @Reference{salvation1980,
@@ -1137,8 +1138,8 @@ and publication date as the \bibtype{collection}. That's enough for
 the style to format them as \textit{CMS} recommends. Meanwhile, the
 volumes of \textit{Henry James} have separate \bibtype{book} entries,
 with no cross-referencing. Regardless, the publication dates and
-titles of the volumes differ, so cross-referencing alone won't suffice
-to turn multivolume collections into single works.
+titles of the volumes differ, so cross-referencing wouldn't make the
+collection into a single work.
 
 It may help to reproduce some entries from this document's
 bibliography database. Here are two entries for \textit{The Lisle
@@ -1195,12 +1196,12 @@ By contrast, here is the \bibtype{book} entry for a volume of
 \end{verbatim}
 
 Cross-referencing in this case is inadvisable, since not all data for
-the \bibtype{collection} is true of the volume.
+the collection as a whole is true of particular volumes.
 
 \subsection{Options for Difficult Cases}
 
 Occasionally, getting acceptable output for a multivolume work
-requires some trial-and-error. Consider a difficult example:
+requires trial-and-error. Consider a difficult example:
 
 \begin{citebib}
 \item \cite{kierkegaard1987}
@@ -1208,12 +1209,12 @@ requires some trial-and-error. Consider a difficult example:
 
 \noindent This edition of \textit{Either/Or} is a two-volume work,
 each volume of which is a volume of \textit{Kierkegaard's Writings}.
-In the bibliography database, \bibfield{volume} contains \textit{3 and
-4}, though ordinarily it would contain a single number for a single
-volume. The style responds by preceding \textit{3 and 4} with the
+In the bibliography database, \bibfield{volume} contains ``3 and 4,''
+though ordinarily it would contain a single number for a single
+volume. The style responds by preceding ``3 and 4'' with the
 abbreviation \textit{vols.}, rather than the usual, \textit{vol}.
-Meanwhile, \bibfield{volumes} contains \textit{2}, indicating the two
-volumes of \textit{Either/Or}, and \bibfield{maintitle} contains
+Meanwhile, \bibfield{volumes} contains \liningnums{2}, indicating the
+two volumes of \textit{Either/Or}, and \bibfield{maintitle} contains
 \textit{Kierkegaard's Writings}. No cross-referencing occurs with the
 entry.\footnote{You could drop \bibfield{volume} for simpler output.
 But there are occasions when you need it along with
@@ -1237,9 +1238,9 @@ should you do?
 
 One solution is to keep a separate entry in the bibliography database
 for each volume, without cross-referencing the original entry, and to
-use \bibfield{note} for holding \textit{Part I} and \textit{Part II}.
-Citing particular works from each volume is then a straightforward
-matter of making \bibtype{incollection} entries for those works and
+use \bibfield{note} for holding ``Part I'' and ``Part II.'' Citing
+particular works from each volume is then a straightforward matter of
+making \bibtype{incollection} entries for those works and
 cross-referencing them to the new \bibtype{collection} entries. The
 output is at least adequate, though the placement of \textit{Part I}
 may seem odd:
@@ -1283,9 +1284,9 @@ individual works to their respective volume:
 \end{citebib}
 
 But what if you want to include the \bibfield{maintitle} with its
-volume number? Try adding \bibfield{maintitle} to \bibtype{collection}
-along with a new field, \bibfield{volumea}, for the volume of
-\textit{Kierkegaard's Writings}. The result:
+volume number? Try adding a \bibfield{maintitle} to
+\bibtype{collection} along with a new field, \bibfield{volumea}, for
+the volume of \textit{Kierkegaard's Writings}. The result:
 
 \begin{citebib}
 \item \cite[290]{kierkegaard1987.1.8c}
@@ -2220,9 +2221,9 @@ bibliographies and reference lists.
 
 Like some of the reference works in the previous section, the ones
 below need the \bibtype{reference} or \bibtype{inreference} entry
-type. Odd as it may seem, but consistent with \textit{CMS}, they, too,
-aren't included in bibliographies and reference lists. See Section
-\ref{entrytypes} for more information.
+type. As odd as it may seem, but consistent with \textit{CMS}, they,
+too, aren't included in bibliographies and reference lists. See
+Section \ref{entrytypes} for more information.
 
 \begin{citeonly}
 \item \cite{toscanini2016}
