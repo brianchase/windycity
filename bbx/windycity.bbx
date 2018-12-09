@@ -1,4 +1,4 @@
-% Last modified: Sun 09 Dec 2018 01:48:47 PM CST
+% Last modified: Sun 09 Dec 2018 03:24:04 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -615,9 +615,9 @@
     {\usebibmacro{labelyear+extradate}}%
     {}}%
 
-%%%%%%%%%%%%%%%
-%%  Authors  %%
-%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Author's Position %%
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand*{\revsdnamedelim}{%
   \iftoggle{bibliography}
@@ -625,15 +625,17 @@
     {}}%
 
 \newbibmacro*{author+bookauthor+etc}{%
-  \iftoggle{noauth}
+  \iftoggle{noauth}% true by entry option
     {\usebibmacro{authpos+deflabel}}%
-    {\ifboolexpr{ test {\ifnameundef{author}}
-                  and test {\ifnameundef{bookauthor}}}
-       {\usebibmacro{authposition}}%
-       {\usebibmacro{author+namelist}}%
-     \usebibmacro{journalfirst}%
-     \usebibmacro{authpos+deflabel}%
-     \newunit}}%
+    {\usebibmacro{author+namelist}%
+     \ifnameundef{\cbx@namelist}
+       {\usebibmacro{a:authpos+edtrans}%
+        \ifnameundef{\cbx@namelist}
+          {\toggletrue{noauth}%
+           \usebibmacro{journalfirst}}%
+          {\usebibmacro{b:authpos+edtrans}%
+           \usebibmacro{namehash+etc}}}%
+       {\usebibmacro{namehash+etc}}}}
 
 \newbibmacro*{authpos+deflabel}{%
   \global\togglefalse{authposition}%
@@ -645,8 +647,26 @@
     {\ifboolexpr{ test {\ifnameundef{shortauthor}}
                   or togl {bibliography}}
        {\renewcommand*{\cbx@namelist}{author}}%
-       {\renewcommand*{\cbx@namelist}{shortauthor}}}% needs this '%'
-  \usebibmacro{printnames+etc}}%
+       {\renewcommand*{\cbx@namelist}{shortauthor}}}}
+
+\newbibmacro*{journalfirst}{%
+  \usebibmacro{authpos+deflabel}%
+  \ifboolexpr{ test {\ifentrytype{article}}
+               and togl {bibliography}}
+    {\toggletrue{journalfirst}%
+     \usebibmacro{bibjournaldash}%
+     \setunit{\space}%
+     \usebibmacro{journallocation}%
+     \clearlist{location}%
+     \usebibmacro{labelyear+extradate}%
+     \newunit}%
+    {}}
+
+\newbibmacro*{namehash+etc}{%
+  \usebibmacro{printnames+etc}%
+  \savefield{namehash}{\bbx@lasthash}%
+  \usebibmacro{authpos+deflabel}%
+  \newunit}%
 
 \renewbibmacro*{bybookauthor}{%
   \ifnameundef{bookauthor}
@@ -667,21 +687,13 @@
     {\renewcommand*{\cbx@namelist}{afterword}%
      \renewcommand*{\cbx@bibstring}{foreword}}%
   \usebibmacro{printnames+etc}%
+  \usebibmacro{authpos+deflabel}%
   \newunit
   \bibstring{\cbx@bibstring}\space}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Editors and Translators  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newbibmacro*{authposition}{%
-  \usebibmacro{a:authpos+edtrans}%
-  \ifboolexpr{ togl {noed}
-               and togl {notrans}}
-    {\toggletrue{noauth}}%
-    {\ifnameundef{\cbx@namelist}
-       {\toggletrue{noauth}}%
-       {\usebibmacro{b:authpos+edtrans}}}}
 
 \newbibmacro*{a:authpos+edtrans}{%
   \usebibmacro{prep:edtrans}%
@@ -777,8 +789,7 @@
     {}
     {\usebibmacro{eds+comps}%
      \renewcommand*{\plugb}{%
-       \addcomma\space\bibsstring{\cbx@bibstring}}}% needs '%'
-  \usebibmacro{printnames+etc}}%
+       \addcomma\space\bibsstring{\cbx@bibstring}}}}
 
 \newbibmacro*{eds+comps}{%
   \iftoggle{transfirst}
@@ -875,7 +886,6 @@
      \usebibmacro{a:labelyear+extradate}}%
     {\usebibmacro{printnames}%
      \usebibmacro{nameaddon}}%
-  \usebibmacro{authpos+deflabel}%
   \usebibmacro{clearnames+empty}}%
 
 \newbibmacro*{bibnamedash+printnames}{%
@@ -1179,17 +1189,14 @@
     {\nopunct\printfield{editoraddon}}}
 
 \newbibmacro*{reviews}{%
-  \let\saveauth\empty
-  \savename{bookauthor}{\saveauth}%
-  \clearname{bookauthor}%
-  \usebibmacro{author+bookauthor+etc}%
 % Unsigned reviews have no plausible place to put the publication year
 % but where the default format would put it. Perhaps best to use the
 % default format from here.
-  \ifboolexpr{ togl {reflist}
-               and togl {noauth}}
-    {\togglefalse{reflist}}%
-    {}
+  \ifnameundef{author}
+    {\toggletrue{noauth}%
+     \togglefalse{reflist}}%
+    {}%
+  \usebibmacro{author+bookauthor+etc}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{note}%
@@ -1241,7 +1248,7 @@
 \newbibmacro*{review+title}{%
   \ifentrytype{review}
     {\iftoggle{noauth}
-       {\bibcpstring{reviewnoauth}\nopunct}%
+       {\bibcpstring{reviewnoauth}}%
        {\bibstring{review}}%
      \space
      \usebibmacro{test:title+booktitle}%
@@ -1249,14 +1256,10 @@
      \iftoggle{firstshort}
        {\clearfield{booktitle}}
        {\setunit{\addcomma\space}%
-        \restorename{author}{\saveauth}%
-        \let\saveauth\empty
         \togglefalse{noauth}%
-        \ifboolexpr{ test {\ifnameundef{author}}
-                     and test {\ifnameundef{bookauthor}}}
-          {}
-          {\bibstring{by}\space
-           \usebibmacro{author+bookauthor+etc}}}}
+        \renewcommand*{\pluga}{\bibstring{by}\space}%
+        \renewcommand*{\cbx@namelist}{bookauthor}%
+        \usebibmacro{printnames+etc}}}
     {}}
 
 \newbibmacro*{test:bookauthor}{%
@@ -1306,18 +1309,6 @@
      \usebibmacro{seriesaddon}%
      \usebibmacro{xeditor+yeditor}{series}%
      \newunit}}%
-
-\newbibmacro*{journalfirst}{%
-  \ifboolexpr{ test {\ifentrytype{article}}
-               and togl {bibliography}
-               and togl {noauth}}
-    {\toggletrue{journalfirst}%
-     \usebibmacro{bibjournaldash}%
-     \setunit{\space}%
-     \usebibmacro{journallocation}%
-     \clearlist{location}%
-     \usebibmacro{labelyear+extradate}}%
-    {\savefield{namehash}{\bbx@lasthash}}}
 
 \newbibmacro*{bibjournaldash}{%
   \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
