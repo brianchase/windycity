@@ -1,6 +1,7 @@
 
 RELEASE NOTES FOR VERSION 2018.12.09
 
+* simpler processing of author's position
 * added support for common reference works, such as dictionaries and
   encyclopedias
 * fixed \defbibcheck for reference works
