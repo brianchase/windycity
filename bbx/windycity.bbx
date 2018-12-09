@@ -1,4 +1,4 @@
-% Last modified: Fri 07 Dec 2018 10:28:16 AM CST
+% Last modified: Sun 09 Dec 2018 01:48:47 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -263,7 +263,9 @@
 \defbibcheck{reference}{%
   \ifentrytype{reference}
     {\skipentry}%
-    {}}
+    {\ifentrytype{inreference}
+      {\skipentry}%
+      {}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Data Inheritance  %%
