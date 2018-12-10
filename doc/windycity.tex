@@ -1,4 +1,4 @@
-% Last modified: Mon 10 Dec 2018 10:35:05 AM CST
+% Last modified: Mon 10 Dec 2018 11:51:54 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -61,8 +61,8 @@ files into their respective directories:
 
 \begin{itemize}[label=]
 \item \ldots\path{/biblatex/windycity.dbx}
-\item \ldots\path{/biblatex/cbx/windycity.cbx}
 \item \ldots\path{/biblatex/bbx/windycity.bbx}
+\item \ldots\path{/biblatex/cbx/windycity.cbx}
 \item \ldots\path{/biblatex/lbx/american-windycity.lbx}
 \end{itemize}
 
@@ -488,21 +488,12 @@ work's title. From \textit{CMS} \ref{14.78}:
 \item \cite*[234]{franklin1868}
 \end{citebib}
 
-\cmditem{citerp}[postnote]{key}
+\cmditem{crossref}{key}
 
-This command precedes a citation with ``Reprinted in'' and then skips
-the author's position and the work's title. This is useful for citing
-a reprint of a work after citing the original:
-
-\begin{citebib}
-\item \cite{frankfurt1969} \citerp[1--10]{frankfurt1988.1}
-\end{citebib}
-
-\noindent The output above results from:
-
-\begin{verbatim}
-   \cite{frankfurt1969} \citerp[1--10]{frankfurt1988.1}
-\end{verbatim}
+Windy City uses this command internally when cross-reference a
+previously cited \bibtype{collection}. You could use it in a text, but
+it's only output is a work's \bibfield{labelname} and
+\bibfield{labeltitle}, separated by a comma and a space.
 
 \cmditem{footcite*}[prenote][postnote]{key}
 
@@ -549,6 +540,22 @@ The source for the passage above contains:
 
 Similar to \cmd{bibentry}, this command prints the reference list
 entry of a work. It, too, has no effect on citation tracking.
+
+\cmditem{reprint}[postnote]{key}
+
+This command precedes a citation with ``Reprinted in'' and then skips
+the author's position and the work's title. This is useful for citing
+a reprint of a work after citing the original:
+
+\begin{citebib}
+\item \cite{frankfurt1969} \reprint[1--10]{frankfurt1988.1}
+\end{citebib}
+
+\noindent The output above results from:
+
+\begin{verbatim}
+   \cite{frankfurt1969} \reprint[1--10]{frankfurt1988.1}
+\end{verbatim}
 
 \end{ltxsyntax}
 

@@ -1,4 +1,4 @@
-% Last modified: Mon 10 Dec 2018 10:33:58 AM CST
+% Last modified: Mon 10 Dec 2018 11:50:10 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1179,8 +1179,8 @@
     {\usebibmacro{incollections}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
-          {\citecrossref{\thefield{crossref}}%
-           \toggletrue{bibliography}% \citecrossref makes it false
+          {\crossref{\thefield{crossref}}%
+           \toggletrue{bibliography}% \crossref makes it false
            \usebibmacro{pages}}
           {\usebibmacro{incollections}}}
        {\listxadd{\crossreflist}{\thefield{crossref}}%
