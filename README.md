@@ -18,6 +18,36 @@ For more information, please see Windy City's
 here](https://s3.amazonaws.com/brianchase/windycity.zip
 "windycity.zip") (ZIP) to download the complete package.
 
+## Getting Started
+
+If you already know how to use
+[biblatex](http://www.ctan.org/pkg/biblatex), getting started with
+Windy City is easy. Locate
+[biblatex](http://www.ctan.org/pkg/biblatex) on your system, and copy
+Windy City's files into their respective directories:
+
+* .../biblatex/[windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx)
+* .../biblatex/bbx/[windycity.bbx](https://github.com/brianchase/windycity/blob/master/bbx/windycity.bbx)
+* .../biblatex/cbx/[windycity.cbx](https://github.com/brianchase/windycity/blob/master/cbx/windycity.cbx)
+* .../biblatex/lbx/[american-windycity.lbx](https://github.com/brianchase/windycity/blob/master/lbx/american-windycity.lbx)
+
+Next, tell [biblatex](http://www.ctan.org/pkg/biblatex) to load Windy
+City with the load-time option `style`:
+
+```
+\usepackage[style=windycity]{biblatex}
+```
+
+For some entries in your bibliography database, you may need to add
+fields or make other adjustments to get the right output. However,
+since Windy City relies as much as possible on standard BibTeX fields,
+and secondarily on [biblatex](http://www.ctan.org/pkg/biblatex)
+fields, you may not need to make major changes. The examples in this
+document and its accompanying bibliography database,
+[windycity.bib](https://github.com/brianchase/windycity/blob/master/doc/windycity.bib),
+should serve as a guide for how to manage your input for nearly every
+circumstance that the style is meant to handle.
+
 ## License
 
 Copyright (c) 2018 Brian Michael Chase. Under the terms of the [LaTeX
