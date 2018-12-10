@@ -1,4 +1,4 @@
-% Last modified: Sun 09 Dec 2018 03:28:33 PM CST
+% Last modified: Mon 10 Dec 2018 10:33:58 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1035,6 +1035,12 @@
   \usebibmacro{ed+vol+part+etc}%
   \usebibmacro{doi+finentry+etc}}%
 
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+title+ed}%
+  \usebibmacro{ed+vol+part+etc}%
+  \usebibmacro{doi+finentry+etc}}%
+
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
   \usebibmacro{test:multivolume}%
@@ -1189,7 +1195,7 @@
     {\nopunct\printfield{editoraddon}}}
 
 \newbibmacro*{reviews}{%
-% Unsigned reviews have no plausible place to put the publication year
+% Unsigned reviews have no plausible place for the publication year
 % but where the default format would put it. Perhaps best to use the
 % default format from here.
   \ifnameundef{author}
@@ -1246,21 +1252,19 @@
        {\usebibmacro{longtitle+titleaddon}}}}
 
 \newbibmacro*{review+title}{%
-  \ifentrytype{review}
-    {\iftoggle{noauth}
-       {\bibcpstring{reviewnoauth}}%
-       {\bibstring{review}}%
-     \space
-     \usebibmacro{test:title+booktitle}%
-     \usebibmacro{title+labelyear}%
-     \iftoggle{firstshort}
-       {\clearfield{booktitle}}
-       {\setunit{\addcomma\space}%
-        \togglefalse{noauth}%
-        \renewcommand*{\pluga}{\bibstring{by}\space}%
-        \renewcommand*{\cbx@namelist}{bookauthor}%
-        \usebibmacro{printnames+etc}}}
-    {}}
+  \iftoggle{noauth}
+    {\bibcpstring{reviewnoauth}}%
+    {\bibstring{review}}%
+  \space
+  \usebibmacro{test:title+booktitle}%
+  \usebibmacro{title+labelyear}%
+  \iftoggle{firstshort}
+    {\clearfield{booktitle}}
+    {\setunit{\addcomma\space}%
+     \togglefalse{noauth}%
+     \renewcommand*{\pluga}{\bibstring{by}\space}%
+     \renewcommand*{\cbx@namelist}{bookauthor}%
+     \usebibmacro{printnames+etc}}}
 
 \newbibmacro*{test:bookauthor}{%
   \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}

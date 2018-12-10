@@ -1,4 +1,4 @@
-% Last modified: Sun 09 Dec 2018 03:29:31 PM CST
+% Last modified: Mon 10 Dec 2018 10:35:05 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -2127,32 +2127,25 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 \item \cite{brehm2015}
 \end{citebib}
 
-%\setcounter{subsubsection}{203}
-%\subsubsection{Unsigned reviews}
+\setcounter{subsubsection}{203}
+\subsubsection{Unsigned reviews}
 % 14.204 Unsigned reviews
 
-%This example fails to match \textit{CMS}. The date should appear
-%immediately after the newspaper's title and not in parentheses. The
-%problem stems from the style using many of the same macros to format
-%every article, regardless of whether its source is a journal,
-%magazine, or newspaper.
+This example fails to match \textit{CMS}. The date should appear
+immediately after the newspaper's title and not in parentheses.
+Presumably, \textit{CMS} puts the date first because the date is a
+more important part of a magazine's or newspaper's citation.
+Nevertheless, the format below is consistent with many other types of
+articles.
 
-%For reference lists, unsigned reviews have no plausible place to put
-%the publication year but where the default format would put it. The
-%easiest solution is to give unsigned reviews the same format in
-%reference lists and bibliographies.
+For reference lists, unsigned reviews have no plausible place for the
+publication year but where the default format would put it. The
+easiest solution is to give unsigned reviews the same format in
+reference lists as in bibliographies.
 
-% FIX: Unsigned reviews don't work with the \opt{short} or
-% \opt{firstshort} preamble options. In the default format, only the
-% first citation close to correct.
-
-% FIX: Presumably, CMS places 'nos. 23–24' after the date because the
-% date is a more important part of a magazine's or newspaper's
-% citation.
-
-%\begin{citebib}
-%\item \cite{zeitung1828}
-%\end{citebib}
+\begin{citebib}
+\item \cite{zeitung1828}
+\end{citebib}
 
 \setcounter{subsection}{6}
 \subsection{Papers, Contracts, and Reports}

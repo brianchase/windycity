@@ -1,4 +1,4 @@
-% Last modified: Mon 10 Dec 2018 09:23:03 AM CST
+% Last modified: Mon 10 Dec 2018 09:56:02 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -271,20 +271,43 @@
          {\global\toggletrue{cbx@loccit}}%
          {\usebibmacro{cite:vol+page}}}}
     {\global\toggletrue{cbx@short}%
-     \printtext[bibhyperref]{%
-       \usebibmacro{author+bookauthor+etc}%
-       \iftoggle{noauth}
-         {\usebibmacro{title+labelyear}}%
-         {}% needs this '%'
-       \usebibmacro{cite:vol+page}}}}
+     \ifentrytype{review}
+       {\printtext[bibhyperref]{%
+          \usebibmacro{cite:ibid:review}}}
+       {\printtext[bibhyperref]{%
+          \usebibmacro{author+bookauthor+etc}%
+          \iftoggle{noauth}
+            {\usebibmacro{title+labelyear}}%
+            {}% needs this '%'
+         \usebibmacro{cite:vol+page}}}}}
+
+\newbibmacro*{cite:ibid:review}{%
+  \ifnameundef{author}
+    {\bibcpstring{reviewnoauth}%
+     \space
+     \usebibmacro{title+labelyear}}%
+    {\usebibmacro{author+bookauthor+etc}}%
+  \usebibmacro{cite:vol+page}}%
 
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx@short}%
-  \printtext[bibhyperref]{%
-    \usebibmacro{author+bookauthor+etc}%
-    \usebibmacro{review+title}%
-    \usebibmacro{title+labelyear}%
-    \usebibmacro{cite:vol+page}}}
+  \ifentrytype{review}
+    {\printtext[bibhyperref]{%
+       \usebibmacro{cite:short:review}}}
+    {\printtext[bibhyperref]{%
+       \usebibmacro{author+bookauthor+etc}%
+       \usebibmacro{title+labelyear}%
+       \usebibmacro{cite:vol+page}}}}
+
+\newbibmacro*{cite:short:review}{%
+  \ifnameundef{author}
+    {\bibcpstring{reviewnoauth}}%
+    {\usebibmacro{author+bookauthor+etc}%
+     \bibstring{review}}%
+  \space
+  \usebibmacro{test:title+booktitle}%
+  \usebibmacro{title+labelyear}%
+  \usebibmacro{cite:vol+page}}%
 
 \newbibmacro*{cite:shorthand}{%
   \printtext[bibhyperref]{\printfield{shorthand}}}
