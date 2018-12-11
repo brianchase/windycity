@@ -1,4 +1,4 @@
-% Last modified: Mon 10 Dec 2018 11:51:54 AM CST
+% Last modified: Tue 11 Dec 2018 03:34:51 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1931,8 +1931,27 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 \subsubsection{Books consulted online}
 % 14.161 Books consulted online
 
+The first and third notes below present a challenge: If a bibliography
+database entry contains an address for a work, such as a DOI, Windy
+City prints it in the work's first, long citation. Such is the case
+with the second note below. To cite an address for just part of a
+work, but print one for the whole work in the bibliography, you need
+to override the style's default behavior. The first and third notes do
+this with a command that temporarily clears the work's DOI from its
+bibliography database entry. Here's an example from the source:
+
+\begin{verbatim}
+   \AtNextCitekey{\clearfield{doi}}
+   \item \cite[chap. 3, \url{https://doi.org/10.1093/acprof:
+               oso/9780199343638.003.0004}]{bonds2014}
+\end{verbatim}
+
 \begin{citebib}
+\AtNextCitekey{\clearfield{doi}}
+\item \cite[chap. 3, \url{https://doi.org/10.1093/acprof:oso/9780199343638.003.0004}]{bonds2014}
 \item \cite[59]{lystra2004}
+\AtNextCitekey{\clearfield{doi}}
+\item \cite[chap. 11, \url{https://doi.org/10.1093/acprof:oso/9780199343638.003.0012}]{bonds2014}
 \item \cite[60--61]{lystra2004}
 \end{citebib}
 

@@ -1450,7 +1450,7 @@
 % 14.146 Forthcoming publications
 
 @Book{author,
-  options = {skipbib},
+  keywords = {notinbib,notinref},% print in example bib only
   author = {Author, Jane Q.},
   title = {Book Title},
   address = {Place},
@@ -1458,7 +1458,7 @@
   year = {forthcoming}
 }
 @Book{writer,
-  options = {skipbib},
+  keywords = {notinbib,notinref},% print in example bib only
   author = {Writer, John J.},
   title = {Another Book Title},
   address = {Place},
@@ -1466,13 +1466,13 @@
   year = {forthcoming}
 }
 @InCollection{contributor,
-  options = {skipbib},
+  keywords = {notinbib,notinref},% print in example bib only
   author = {Contributor, Anna},
   title = {Contribution},
   crossref = {editor}
 }
 @Collection{editor,
-  options = {skipbib},
+  keywords = {notinbib,notinref},% print in example bib only
   title = {Edited Volume},
   editor = {Editor, Ellen},
   address = {Place},
@@ -1494,6 +1494,15 @@
 
 % 14.161 Books consulted online
 
+@Book{bonds2014,
+  author = {Bonds, Mark Evan},
+  title = {Absolute Music},
+  subtitle = {The History of an Idea},
+  address = {New York},
+  publisher = {Oxford University Press},
+  year = {2014},
+  doi = {https://doi.org/10.1093/acprof:oso/9780199343638.001.0001}
+}
 @Book{lystra2004,
   author = {Lystra, Karen},
   title = {Dangerous Intimacy},
