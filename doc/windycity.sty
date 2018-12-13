@@ -1,4 +1,4 @@
-% Last modified: Fri 07 Dec 2018 01:33:44 PM CST
+% Last modified: Thu 13 Dec 2018 04:23:57 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -96,12 +96,13 @@
    \printbibliography[env=bib,heading=none,segment=\therefsegment]
    \endrefsegment}%
 \newenvironment{citeref}
-  {\begin{enumerate}[%
-     before=\RaggedRight\citereset\newrefsegment\small,
-     itemindent=2.2em,
-     labelsep=0.2em,
-     leftmargin=1.1em]}%
-  {\end{enumerate}
+  {\if@nobreak\else\vspace{\topsep}\fi
+   \begin{enumerate*}[%
+     afterlabel=,
+     before=\citereset\newrefsegment\small\noindent,
+     itemjoin={{, }},
+     label=]}%
+  {\end{enumerate*}
    \printbibliography[env=ref,heading=none,segment=\therefsegment]
    \endrefsegment}%
 \newenvironment{citeonly}
@@ -205,7 +206,7 @@
 \newcommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
   T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
 
-\usepackage[
+\usepackage[%
   anchorcolor=,
   breaklinks=true,
   citecolor=,
