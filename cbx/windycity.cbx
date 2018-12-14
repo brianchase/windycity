@@ -1,4 +1,4 @@
-% Last modified: Thu 13 Dec 2018 05:24:57 PM CST
+% Last modified: Thu 13 Dec 2018 06:28:43 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -169,6 +169,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{parencite}{%
+  \usebibmacro{pcite:test:crossref}%
   \ifciteseen
     {\ifboolexpr{ test \ifciteibid
                   and togl {short}
@@ -179,6 +180,16 @@
            \usebibmacro{pcite:labelyear+extradate}}%
           {\usebibmacro{cite:shorthand}}}}
     {\usebibmacro{pcite:long}}}
+
+\newbibmacro*{pcite:test:crossref}{%
+  \iffieldundef{crossref}
+    {}
+    {\xifinlist{\thefield{crossref}}{\crossreflist}
+       {\stepcounter{\thefield{crossref}}}
+       {\listxadd{\crossreflist}{\thefield{crossref}}%
+        \ifcsdef{c@\thefield{crossref}}
+          {\setcounter{\thefield{crossref}}{0}}%
+          {\newcounter{\thefield{crossref}}}}}}
 
 \newbibmacro*{pcite:labelyear+etc}{%
   \iffieldundef{postnote}
