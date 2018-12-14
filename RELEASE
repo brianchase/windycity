@@ -1,6 +1,8 @@
 
 INTERIM
 
+* fixed \parencite for unsigned articles
+* fixed \parencite for cross-referencing
 * fixed formatting of reviews
 
 RELEASE NOTES FOR VERSION 2018.12.09
