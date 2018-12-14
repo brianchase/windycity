@@ -1,4 +1,4 @@
-% Last modified: Thu 13 Dec 2018 04:23:57 PM CST
+% Last modified: Thu 13 Dec 2018 06:50:33 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -96,6 +96,16 @@
    \printbibliography[env=bib,heading=none,segment=\therefsegment]
    \endrefsegment}%
 \newenvironment{citeref}
+  {\if@nobreak\else\vspace{\topsep}\fi
+   \begin{enumerate}[%
+     before=\RaggedRight\citereset\newrefsegment\small,
+     itemindent=2.2em,
+     labelsep=0.2em,
+     leftmargin=1.1em]}%
+  {\end{enumerate}
+   \printbibliography[env=ref,heading=none,segment=\therefsegment]
+   \endrefsegment}%
+\newenvironment{citeref:test}
   {\if@nobreak\else\vspace{\topsep}\fi
    \begin{enumerate*}[%
      afterlabel=,
