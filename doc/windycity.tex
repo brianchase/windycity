@@ -1,4 +1,4 @@
-% Last modified: Tue 11 Dec 2018 06:44:34 PM CST
+% Last modified: Thu 13 Dec 2018 07:02:27 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -602,7 +602,7 @@ entry for \bibfield{kierkegaard1987c} in \file{windycity.bib} and the
 resulting output in Section \ref{multivolume}.
 
 \item[volumetitle] Use this field when a volume has a title. In the
-following example, from \textit{CMS} \ref{14.123}, the
+following example, from \textit{CMS} \ref{14.118}, the
 \bibfield{volumetitle} is \textit{1883--1884}:
 
 \begin{citeonly}
@@ -1442,7 +1442,6 @@ and format it however you like, by adding your preferred content to
 \begin{citebib}
 % Better to use furet199 in 14.99, without shorthand:
 %\item \cite[368]{furet1999}
-% FIX: Explain how you get these examples!
 \item \cite[1:126]{shurtleff1853}
 \item \cite[2:330]{shurtleff1853}
 \end{citebib}
@@ -1791,10 +1790,16 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 % 14.120 Chapters and other parts of individual volumes
 
 %\begin{citebib}
-% Error in book: In bib entry, 'ed.' should be 'edited by'.
-% FIX: Has CMS moved away from the format that would make the volume
-% and page reference here '3:181--200' instead of '181--200. Vol. 3',
-% as in the book?
+
+% Error in book (but not in the online edition): In bib entry, 'ed.'
+% should be 'edited by'. Worse, the format of the note seems
+% inconsistent with CMS 14.118. The volume clearly has a title
+% (Endings) that differs from that of the collection (The Cambridge
+% History of the Cold War). That's enough, I think, to make its format
+% like that of The Complete Tales of Henry James in CMS 14.118. In the
+% bibliography, I don't see why the volume and page reference aren't
+% rendered '3:181--200', though the fault here might be mine.
+
 %\item \cite[180]{chen2010.3}
 %\end{citebib}
 
@@ -1897,7 +1902,8 @@ must happen in other cases, prints after the \bibfield{postnote}, ``p.
 % 14.144 Multivolume works published over more than one year
 
 \begin{citebib}
-\item \cite[329]{hayek1988}
+% FIX: See 15.41:
+%\item \cite[329]{hayek1988}
 \item \cite{tillich1951}
 \end{citebib}
 
@@ -1977,9 +1983,10 @@ bibliography database entry. Here's an example from the source:
 \subsubsection{Journal volume, issue, and date}
 % 14.171 Journal volume, issue, and date
 
-% Errors in book: The note to harper2015 includes the month of
-% publication, which the bibliography example omits. The example
-% bibliography also gets Lock's name wrong.
+The note for Harper includes the month of publication. Windy City
+includes it as well in the bibliography, even though \textit{CMS}
+omits it. As for Lock's entry in the bibliography, \textit{CMS}
+clearly errs in printing the surname twice.
 
 \begin{citebib}
 \item \cite[155]{lock2015}
@@ -2294,7 +2301,7 @@ correctly.
 % 14.260 Citations taken from secondary sources
 
 %\begin{citebib}
-% FIX: can't override period at the end of first \cite
+% FIX: Can't override period at the end of first \cite
 %\item \cite[269]{zukofsky1931}, quoted in \cite[78]{costello1981}
 %\end{citebib}
 
@@ -2400,17 +2407,18 @@ entry options.
 \begin{citeref}
 \item \parencite[1:133]{tillich1951}
 \item \parencite[vol. 2]{tillich1951}
-\item \parencite[329]{hayek1988}
+% FIX: Should be (Hayek 2011, 329). And see 14.144.
+%\item \parencite[329]{hayek1988}
 \end{citeref}
 
 \subsubsection{Cross-references to multiauthor books in reference lists}
 % 15.42 Cross-references to multiauthor books in reference lists
 
-\begin{citebib}
-\item \cite{draper1987}
-\item \cite{harrington1987}
-\item \cite{zukowsky1987}
-\end{citebib}
+\begin{citeref}
+\item \parencite{draper1987}
+\item \parencite{harrington1987}
+\item \parencite{zukowsky1987}
+\end{citeref}
 
 \setcounter{subsubsection}{43}
 \subsubsection{No date of publication in author-date references}
