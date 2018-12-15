@@ -1,4 +1,4 @@
-% Last modified: Thu 13 Dec 2018 06:28:43 PM CST
+% Last modified: Fri 14 Dec 2018 06:12:53 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -34,6 +34,8 @@
 %%%%%%%%%%%%%%%%%%%
 
 \InitializeCitationStyle{\let\crossreflist\empty}%
+\DeclareAutoPunctuation{.,;:!?}
+\DeclareCitePunctuationPosition{cite}{d}
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{multicite}%
@@ -90,7 +92,7 @@
   {\usebibmacro{citeindex}%
    \toggletrue{noauth}%
    \toggletrue{reprinted}%
-   \bibsentence\bibstring{reprinted}\space
+   \bibstring{reprinted}\space
    \usebibmacro{cite}%
    \togglefalse{reprinted}}%
   {\multicitedelim}%
@@ -340,6 +342,11 @@
     {\let\cbx@keyhash\empty}%
     {\savefield{crossref}{\cbx@keyhash}}}
 
+% By default, idemtracker is 'false'. As such, '\ifciteidem' returns
+% false. With idemtracker set to 'true' (or to some value that implies
+% 'true') the test below will print 'labelname' if it matches that of
+% the previous citation.
+
 \newbibmacro*{deflabel}{%
   \ifboolexpr{ test {\ifciteidem}
                or togl {firstshort}}
@@ -386,15 +393,23 @@
       {\usebibmacro{cite:long}}}}
 
 \newbibmacro*{cite:postnote}{%
+  \usebibmacro{postnote+etc}%
+  \usebibmacro{postpunct+etc}}%
+
+\newbibmacro*{postnote+etc}{%
   \ifboolexpr{ togl {cbx@loccit}
                and togl {ibid}}
     {}
     {\iftoggle{cbx@first}
        {\usebibmacro{postnote:first}%
         \usebibmacro{shorthand+intro}}%
-       {\usebibmacro{postnote}}}
+       {\usebibmacro{postnote}}}}
+
+\newbibmacro*{postpunct+etc}{%
   \iflastcitekey
-    {\addperiod}%
+    {\iffieldundef{postpunct}
+       {\addperiod}%
+       {\unspace\printfield{postpunct}}}
     {}}
 
 \renewbibmacro*{postnote}{%
