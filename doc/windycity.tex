@@ -1,4 +1,4 @@
-% Last modified: Thu 13 Dec 2018 07:02:27 PM CST
+% Last modified: Fri 14 Dec 2018 06:03:39 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -210,13 +210,15 @@ Compare that with the style's default output:
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-In the short format, a work's first citation is much shorter than in
-the default, and consecutive citations of a work may omit the title.
-To use this format, start \biblatex with the preamble option
-\opt{short}. See Section \ref{preops} for more information.
+\noindent In the short format, a work's first citation gives shortened
+names and titles and omits all other publication information.
+Consecutive citations of a work may omit the title or, as in the
+eleventh note, where the title is the key mark of distinction, the
+author's name. To use this format, start \biblatex with the preamble
+option \opt{short}. See Section \ref{preops} for more information.
 
-\textit{CMS} \ref{14.34} also shows how to render the passage with
-\textit{ibid.} Unlike previous editions of \textit{CMS}, the 17th
+\textit{CMS} \ref{14.34} also shows how to render the passage above
+with \textit{ibid.} Unlike previous editions of \textit{CMS}, the 17th
 edition discourages its use. As such, \textit{ibid.} is no longer part
 of Windy City's default format. Enable it with the preamble option
 \opt{ibid} (again, see Section \ref{preops}). The combination of
@@ -251,16 +253,18 @@ options \opt{short} and \opt{ibid} yield the following:
 
 There are still other ways to save space: With the default format, you
 can use the preamble option \opt{firstshort} to swap long first
-citations for short ones (see Section \ref{preops}). The entry option
-\opt{noauth} prints a citation without the author's position (see
+citations for short ones (see Section \ref{preops}). Also with the
+default format, you can shorten the author's name in the first
+citation if the previous citation is of the same author. To do that,
+use the preamble option \opt{idemtracker} (see Section \ref{preops}).
+The entry option \opt{noauth} omits the author's name altogether (see
 Section \ref{entryops}). And the field \bibfield{shorthand} allows you
-to specify an abbreviation to stand in place of the author's name, the
-work's title, and other elements that ordinarily appear in citations
-(see \ref{14.59}).
+to set an abbreviation to stand in place of the author's name, the
+work's title, and other elements of a citation (see \ref{14.59}).
 
 In total, Windy City allows a fair amount of control over the format
 of notes and bibliographies, consistent with \textit{CMS}. The
-remainder of this section, and the next few section thereafter,
+remainder of this section, and the next few sections thereafter,
 describe these and other features of the style in a more systematic
 way.
 
@@ -281,6 +285,23 @@ without an additional \opt{=true}. In other words, using the option
    \usepackage[annotate,style=windycity]{biblatex}
    \usepackage[annotate=true,style=windycity]{biblatex}
 \end{verbatim}
+
+Bear in mind that Windy City uses many preamble options native to
+\biblatex, a few of which you may want to change. These options are
+set in \file{windycity.bbx}. In particular, the style sets
+\opt{idemtracker} to \opt{false}. If you set it to \opt{true} (or to
+some value that implies \opt{true}), Windy City will detect when the
+first citation of a work follows another citation of a work by the
+same author and print a shortened form of the author's name. Recall
+the previous section with examples citing Toni Morrison's \textit{Song
+of Solomon} after \textit{Beloved}. In contexts like those, do you
+really need to remind readers of the author's full name? If you think
+not, change \opt{idemtracker} to an appropriate value (see Section
+3.1.2.3 of the user guide for \biblatex).\footnote{\textit{CMS} seems
+to have no policy on this point. In the 16th edition, however, Figure
+14.3 shows consecutive citations of works by the same author. Both
+citations give the author's full name.} Using \opt{idemtracker} has no
+other effect on the style's output.
 
 \begin{optionlist}
 
@@ -375,9 +396,8 @@ either the title minus the subtitle or the \bibfield{shorttitle}, if
 present in the bibliography database. In those situations, the short
 format is no different from the default.
 
-As noted earlier, \opt{short} implies \opt{firstshort}, so using them
-together has no affect beyond using \opt{short} by itself. However,
-recall from Section \ref{short} that you can combine \opt{short} and
+As noted earlier, \opt{short} implies \opt{firstshort}. But recall
+from Section \ref{short} that you can combine \opt{short} and
 \opt{ibid} for even more concise notes.
 
 \end{optionlist}
@@ -543,18 +563,18 @@ entry of a work. It, too, has no effect on citation tracking.
 
 \cmditem{reprint}[postnote]{key}
 
-This command precedes a citation with ``Reprinted in'' and then skips
+This command precedes a citation with ``reprinted in'' and then skips
 the author's position and the work's title. This is useful for citing
 a reprint of a work after citing the original:
 
 \begin{citebib}
-\item \cite{frankfurt1969} \reprint[1--10]{frankfurt1988.1}
+\item \cite{frankfurt1969}; \reprint[1--10]{frankfurt1988.1}
 \end{citebib}
 
 \noindent The output above results from:
 
 \begin{verbatim}
-   \cite{frankfurt1969} \reprint[1--10]{frankfurt1988.1}
+   \cite{frankfurt1969}; \reprint[1--10]{frankfurt1988.1}
 \end{verbatim}
 
 \end{ltxsyntax}
@@ -2264,8 +2284,7 @@ Section \ref{entrytypes} for more information.
 % 14.234 Citing individual reference entries by author
 
 Reference works like the following have the same format as articles in
-collections. Otherwise, Windy City doesn't quite format them
-correctly.
+collections. Otherwise, Windy City formats them incorrectly.
 
 \begin{citebib}
 \item \cite{isaacson2005}
@@ -2296,14 +2315,13 @@ correctly.
 \item \cite{iizuka1986}
 \end{citebib}
 
-%\setcounter{subsubsection}{259}
-%\subsubsection{Citations taken from secondary sources}
+\setcounter{subsubsection}{259}
+\subsubsection{Citations taken from secondary sources}
 % 14.260 Citations taken from secondary sources
 
-%\begin{citebib}
-% FIX: Can't override period at the end of first \cite
-%\item \cite[269]{zukofsky1931}, quoted in \cite[78]{costello1981}
-%\end{citebib}
+\begin{citebib}
+\item \cite[269]{zukofsky1931}, quoted in \cite[78]{costello1981}
+\end{citebib}
 
 \section{Examples from \emph{CMS} Chap. 15, ``Author-Date
 References''}
