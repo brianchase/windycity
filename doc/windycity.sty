@@ -1,4 +1,4 @@
-% Last modified: Thu 13 Dec 2018 08:31:56 PM CST
+% Last modified: Fri 14 Dec 2018 10:45:06 AM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -96,13 +96,14 @@
    \printbibliography[env=bib,heading=none,segment=\therefsegment]
    \endrefsegment}%
 \newenvironment{citeref}
-  {\if@nobreak\hspace{\parindent}\else\vspace{\topsep}\fi
-   \begin{enumerate*}[%
+  {\begin{itemize}[label=,labelsep=0.2em,leftmargin=1.1em]
+   \item\begin{enumerate*}[%
      afterlabel=,
-     before=\citereset\newrefsegment\small,
+     before=\citereset\newrefsegment\small\noindent,
      itemjoin={{, }},
      label=]}%
   {\end{enumerate*}
+   \end{itemize}
    \printbibliography[env=ref,heading=none,segment=\therefsegment]
    \endrefsegment}%
 \newenvironment{citeonly}
