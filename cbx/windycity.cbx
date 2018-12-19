@@ -1,4 +1,4 @@
-% Last modified: Fri 14 Dec 2018 06:12:53 PM CST
+% Last modified: Wed 19 Dec 2018 01:18:01 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -204,17 +204,21 @@
     {\ifboolexpr{ test {\ifnameundef{labelname}}
                   or test {\iffieldundef{labelyear}}}
        {\iffieldundef{label}
-          {\ifentrytype{article}
-            {\renewcommand*{\xtitle}{journal}%
-             \usebibmacro{longtitle}}%
-            {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}}
-          {\printtext[bibhyperref]{\printfield{label}}}% needs these '%'
-        \setunit{\space}}%
+          {\usebibmacro{pcite:journalfirst}}%
+          {\printtext[bibhyperref]{\printfield{label}}}}
        {\global\toggletrue{cbx@short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
         \clearfield{nameaddon}%
-        \usebibmacro{author+bookauthor+etc}%
-        \setunit{\space}}}}
+        \usebibmacro{author+bookauthor+etc}}%
+     \setunit{\space}}}
+
+\newbibmacro*{pcite:journalfirst}{%
+  {\ifentrytype{article}
+    {\iffieldundef{shortjournal}
+       {\renewcommand*{\xtitle}{journal}%
+        \usebibmacro{longtitle}}%
+       {\printfield[journal]{shortjournal}}}
+    {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}}}
 
 \newbibmacro*{pcite:labelyear+extradate}{%
   \iffieldundef{labelyear}

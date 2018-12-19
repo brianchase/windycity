@@ -4,6 +4,12 @@ INTERIM
 * fixed \parencite for unsigned articles
 * fixed \parencite for cross-referencing
 * fixed formatting of reviews
+* support 'autopunct' option and 'postpunct' field for better handling
+  of punctuation after citation commands (e.g. '\cite{something}' will
+  end with a period, while '\cite{something};' will end with a
+  semicolon)
+* support 'shortjournal' field for parenthetical citations
+* in light of the previous, changed \reprint command
 
 RELEASE NOTES FOR VERSION 2018.12.09
 
