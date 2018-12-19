@@ -1,4 +1,4 @@
-% Last modified: Fri 14 Dec 2018 06:03:39 PM CST
+% Last modified: Wed 19 Dec 2018 04:15:54 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1550,6 +1550,7 @@ to indicate that a name is a pseudonym, put 'pseud.' in
 
 \subsubsection{Organization as author}
 % 14.84 Organization as author
+\label{14.84}
 
 If an organization is the work's author, remember to add an extra pair
 of brackets around the name of the organization in your bibliography
@@ -1641,7 +1642,7 @@ database.
 \setcounter{subsection}{14}
 
 \setcounter{subsubsection}{100}
-\subsubsection{Form of author’s name and title of book in source citations}
+\subsubsection{Form of author's name and title of book in source citations}
 % 14.101 Form of author’s name and title of book in source citations
 
 \begin{citebib}
@@ -2330,8 +2331,9 @@ References''}
 Examples in this section reproduce those in \textit{CMS} Chapter 15.
 To help with cross-checking, subsection numbers and headings are from
 \textit{CMS}. Since parenthetical citations are relatively simple, and
-since the format of references lists is derivative of the default, the
-examples below are more selective than those in the previous section.
+since the format of references lists is derivative of the default,
+the examples below are more selective than those in the previous
+section.
 
 \subsection{Basic Format, With Examples and Variations}
 \setcounter{subsection}{15}
@@ -2341,8 +2343,7 @@ examples below are more selective than those in the previous section.
 % 15.9 Author-date references—examples and variations
 
 \begin{citeref}
-\item \parencite[87-88]{strayed2012}
-\item \parencite[261, 265]{strayed2012}
+\item \parencite[87--88]{strayed2012}
 \item \parencite[32]{daum2015}
 \item \parencite[188]{grazer2015}
 \item \parencite[242--55]{garcia1988}
@@ -2350,6 +2351,10 @@ examples below are more selective than those in the previous section.
 \item \parencite[484--85]{bagley2015}
 \item \parencite[312]{liu2015}
 \end{citeref}
+
+\setcounter{subsection}{1}
+\subsection{Reference Lists and Text Citations}
+\setcounter{subsection}{15}
 
 \setcounter{subsubsection}{13}
 \subsubsection{Placement of dates in reference list entries}
@@ -2369,7 +2374,22 @@ examples below are more selective than those in the previous section.
 \item \parencite[45--46]{fogel2004a}
 \end{citeref}
 
-\setcounter{subsection}{1}
+\setcounter{subsubsection}{26}
+\subsubsection{Several references to the same source}
+% 15.27 Several references to the same source
+
+\begin{quote} Complexion figures prominently in Morgan's descriptions.
+When Jasper compliments his mother's choice of car (a twelve-cylinder
+Mediterranean roadster with leather and wood-grained interior), ``his
+cheeks blotch indignantly, painted by jealousy and rage''
+\parencite[47]{chaston2000}. On the other hand, his mother's mask
+never changes, her ``even-tanned good looks''
+\parencite[56]{chaston2000}, ``burnished visage''
+\parencite[101]{chaston2000}, and ``air-brushed confidence''
+\parencite[211]{chaston2000} providing the foil to the drama in her
+midst. \end{quote}
+
+\setcounter{subsection}{2}
 \subsection{Author-Date References: Special Cases}
 \setcounter{subsection}{15}
 
@@ -2405,8 +2425,10 @@ entry options.
 \subsubsection{Organization as author in author-date references}
 % 15.37 Organization as author in author-date references
 
+In the reference list, \textit{CMS} errs in printing `:1997' after
+`ISO 4'. Compare it with the nearly identical example in \ref{14.84}.
+
 \begin{citeref}
-% Error in book: '4:1997' shouldn't be part of the citation
 \item \parencite{iso1997.ref}
 \end{citeref}
 
