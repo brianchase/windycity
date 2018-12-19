@@ -1,4 +1,4 @@
-% Last modified: Wed 19 Dec 2018 01:18:01 PM CST
+% Last modified: Wed 19 Dec 2018 03:45:55 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -172,15 +172,9 @@
 
 \newbibmacro*{parencite}{%
   \usebibmacro{pcite:test:crossref}%
-  \ifciteseen
-    {\ifboolexpr{ test \ifciteibid
-                  and togl {short}
-                  and not test \iffirstonpage}
-       {\usebibmacro{pcite:labelyear+etc}}%
-       {\iffieldundef{shorthand}
-          {\usebibmacro{pcite:labelname+labeltitle}%
-           \usebibmacro{pcite:labelyear+extradate}}%
-          {\usebibmacro{cite:shorthand}}}}
+  \ifboolexpr{ test \ifciteibid
+               and not test \iffirstonpage}
+    {\usebibmacro{pcite:labelyear+etc}}%
     {\usebibmacro{pcite:long}}}
 
 \newbibmacro*{pcite:test:crossref}{%
@@ -233,8 +227,10 @@
        \printfield{extradate}}}}
 
 \newbibmacro*{pcite:long}{%
-  \global\toggletrue{cbx@first}%
-  \usebibmacro{pcite:labelname+labeltitle}%
+  \iffieldundef{shorthand}
+    {\usebibmacro{pcite:labelname+labeltitle}}%
+    {\usebibmacro{cite:shorthand}%
+     \space}%
   \usebibmacro{pcite:labelyear+extradate}}%
 
 \newbibmacro*{pcite:origyear}{%
@@ -245,17 +241,8 @@
 
 \newbibmacro*{pcite:postnote}{%
   \newunit
-  \usebibmacro{cite:vol+page}%
-  \iftoggle{cbx@first}
-    {\usebibmacro{cite:pages}%
-     \usebibmacro{postnote}%
-     \iffieldundef{shorthand}
-       {}
-       {\setunit{\addsemicolon\space}%
-        \bibstring{citedas}%
-        \addcomma\space
-        \usebibmacro{cite:shorthand}}}
-    {\usebibmacro{postnote}}}
+  \usebibmacro{cite:volume}%
+  \usebibmacro{postnote}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citations in Notes  %%
@@ -289,7 +276,7 @@
        \bibcpstring{ibidem}%
        \ifloccit
          {\global\toggletrue{cbx@loccit}}%
-         {\usebibmacro{cite:vol+page}}}}
+         {\usebibmacro{cite:volume}}}}
     {\global\toggletrue{cbx@short}%
      \ifentrytype{review}
        {\printtext[bibhyperref]{%
@@ -299,7 +286,7 @@
           \iftoggle{noauth}
             {\usebibmacro{title+labelyear}}%
             {}% needs this '%'
-         \usebibmacro{cite:vol+page}}}}}
+         \usebibmacro{cite:volume}}}}}
 
 \newbibmacro*{cite:ibid:review}{%
   \ifnameundef{author}
@@ -307,7 +294,7 @@
      \space
      \usebibmacro{title+labelyear}}%
     {\usebibmacro{author+bookauthor+etc}}%
-  \usebibmacro{cite:vol+page}}%
+  \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx@short}%
@@ -317,7 +304,7 @@
     {\printtext[bibhyperref]{%
        \usebibmacro{author+bookauthor+etc}%
        \usebibmacro{title+labelyear}%
-       \usebibmacro{cite:vol+page}}}}
+       \usebibmacro{cite:volume}}}}
 
 \newbibmacro*{cite:short:review}{%
   \ifnameundef{author}
@@ -327,7 +314,7 @@
   \space
   \usebibmacro{test:title+booktitle}%
   \usebibmacro{title+labelyear}%
-  \usebibmacro{cite:vol+page}}%
+  \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:shorthand}{%
   \printtext[bibhyperref]{\printfield{shorthand}}}
@@ -433,7 +420,7 @@
      \usebibmacro{postnote}%
      \usebibmacro{doi+url+etc}}}
 
-\newbibmacro*{cite:vol+page}{%
+\newbibmacro*{cite:volume}{%
   \ifboolexpr{ test {\ifentrytype{book}}
                or test {\ifentrytype{bookinbook}}
                or test {\ifentrytype{inbook}}
