@@ -1,4 +1,4 @@
-% Last modified: Wed 19 Dec 2018 04:15:54 PM CST
+% Last modified: Wed 19 Dec 2018 06:18:42 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1340,7 +1340,7 @@ Examples in this section reproduce those in \textit{CMS} Chapter 14.
 To help with cross-checking, subsection numbers and headings are from
 \textit{CMS}.
 
-\subsection{Basic Format, With Examples and Variations}
+\subsection{Basic Format, with Examples and Variations}
 \setcounter{subsection}{14}
 
 \setcounter{subsubsection}{22}
@@ -2335,7 +2335,7 @@ since the format of references lists is derivative of the default,
 the examples below are more selective than those in the previous
 section.
 
-\subsection{Basic Format, With Examples and Variations}
+\subsection{Basic Format, with Examples and Variations}
 \setcounter{subsection}{15}
 
 \setcounter{subsubsection}{8}
@@ -2378,16 +2378,18 @@ section.
 \subsubsection{Several references to the same source}
 % 15.27 Several references to the same source
 
-\begin{quote} Complexion figures prominently in Morgan's descriptions.
-When Jasper compliments his mother's choice of car (a twelve-cylinder
-Mediterranean roadster with leather and wood-grained interior), ``his
+\begin{citeref}% 'wood\-grained' prevents wood--[break]grained
+\item Complexion figures prominently in Morgan's descriptions. When
+Jasper compliments his mother's choice of car (a twelve-cylinder
+Mediterranean roadster with leather and wood\-grained interior), ``his
 cheeks blotch indignantly, painted by jealousy and rage''
 \parencite[47]{chaston2000}. On the other hand, his mother's mask
 never changes, her ``even-tanned good looks''
 \parencite[56]{chaston2000}, ``burnished visage''
 \parencite[101]{chaston2000}, and ``air-brushed confidence''
 \parencite[211]{chaston2000} providing the foil to the drama in her
-midst. \end{quote}
+midst.
+\end{citeref}
 
 \setcounter{subsection}{2}
 \subsection{Author-Date References: Special Cases}
@@ -2505,6 +2507,15 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 
 \begin{citeref}
 \item \parencite{iizuka1986}
+\end{citeref}
+
+\subsubsection{``Quoted in'' in author-date references}
+% 15.56 “Quoted in” in author-date references
+
+\begin{citeref}
+\item In Louis Zukofsky’s ``Sincerity and Objectification,''
+from the February 1931 issue of \textit{Poetry} magazine
+\parencite[quoted in][]{costello1981}\ldots
 \end{citeref}
 
 \defbibnote{sh}{This section shows the output of
