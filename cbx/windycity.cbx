@@ -1,4 +1,4 @@
-% Last modified: Wed 19 Dec 2018 03:45:55 PM CST
+% Last modified: Sat 29 Dec 2018 01:14:47 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -224,7 +224,8 @@
       {\addcomma}%
      \printtext[bibhyperref]{%
        \printfield{labelyear}%
-       \printfield{extradate}}}}
+       \printfield{extradate}%
+       \newunit}}}
 
 \newbibmacro*{pcite:long}{%
   \iffieldundef{shorthand}
@@ -240,8 +241,9 @@
      \space}}%
 
 \newbibmacro*{pcite:postnote}{%
-  \newunit
-  \usebibmacro{cite:volume}%
+  \iftoggle{multivolume}
+    {\usebibmacro{cite:volume}}%
+    {}% needs this '%'
   \usebibmacro{postnote}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -250,7 +252,6 @@
 
 \newbibmacro*{cite}{%
   \usebibmacro{test:multicite}%
-  \usebibmacro{test:multivolume}%
   \ifciteseen
     {\renewcommand*{\cbx@deflabel}{labelname}%
      \iffieldundef{shorthand}
@@ -322,11 +323,9 @@
 \newbibmacro*{cite:new}{%
   \global\toggletrue{cbx@first}%
   \usebibmacro{deflabel}%
-  \iftoggle{multivolume}
-    {\usebibmacro{crossref+short+long}}%
-    {\iftoggle{firstshort}
-      {\usebibmacro{cite:short}}%
-      {\usebibmacro{crossref+long}}}}
+  \iftoggle{firstshort}
+    {\usebibmacro{cite:short}}%
+    {\usebibmacro{crossref+long}}}
 
 \newbibmacro*{savefields}{%
   \iffieldundef{crossref}
@@ -364,24 +363,6 @@
     \usedriver
       {\DeclareNameAlias{sortname}{default}}%
       {cite:\thefield{entrytype}}}}
-
-\newbibmacro*{crossref+short+long}{%
-  \xifinlist{\thefield{crossref}}{\crossreflist}
-    {\stepcounter{\thefield{crossref}}%
-     \global\togglefalse{cbx@first}%
-     \renewcommand*{\cbx@deflabel}{labelname}%
-     \ifboolexpr{ test {\iffieldequals{crossref}{\cbx@keyhash}}
-                  and togl {short}
-                  and not test \iffirstonpage}
-       {\usebibmacro{cite:ibid}}%
-       {\usebibmacro{cite:short}}}
-    {\listxadd{\crossreflist}{\thefield{crossref}}%
-     \ifcsdef{c@\thefield{crossref}}
-       {\setcounter{\thefield{crossref}}{0}}%
-       {\newcounter{\thefield{crossref}}}
-     \iftoggle{firstshort}
-      {\usebibmacro{cite:short}}%
-      {\usebibmacro{cite:long}}}}
 
 \newbibmacro*{cite:postnote}{%
   \usebibmacro{postnote+etc}%
@@ -485,36 +466,6 @@
                      and test {\iffieldundef{volume}}}
           {\newunit}%
           {\setunit{\addcolon\space}}}}}
-
-% The next two macros determine whether to treat a multivolume
-% collection as a single work when you cite an InBook entry that
-% cross-references a Collection entry. In those cases, citing pages
-% prints the volume and pages together, separated by a colon, as in
-% '4:243'. Following CMS 14.118, 17th ed., what matters is whether all
-% volumes in the collection have the same publication date and title.
-% To match apparent exceptions, like the second example in 14.59, cite
-% the Collection entry and enter the volume and page in the postnote,
-% such as '1:126'.
-
-\newbibmacro*{test:multivolume}{%
-  \ifentrytype{inbook}
-    {\usebibmacro{test:multivolume:years}%
-     \iffieldsequal{title}{booktitle}
-       {\iffieldundef{volumetitle}
-          {}
-          {\global\togglefalse{multivolume}}}
-       {\global\togglefalse{multivolume}}}
-    {}}
-
-\newbibmacro*{test:multivolume:years}{%
-  \iffieldsequal{year}{bookyear}
-    {\ifboolexpr{ test {\iffieldundef{endyear}}
-                  and test {\iffieldundef{endbookyear}}}
-       {\global\toggletrue{multivolume}}%
-       {\iffieldsequal{endyear}{endbookyear}
-          {\global\toggletrue{multivolume}}%
-          {}}}
-     {}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers for Notes  %%

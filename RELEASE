@@ -1,6 +1,8 @@
 
 INTERIM
 
+* rolled back previous handling of multivolume works, in large
+  part; changed documentation accordingly
 * fixed \parencite for unsigned articles
 * fixed \parencite for cross-referencing
 * fixed formatting of reviews
@@ -11,6 +13,9 @@ INTERIM
 * in light of the previous, changed \reprint command
 * added support for 'shortjournal' field for parenthetical citations
 * simplified 'parencite' and related macros
+* improved handling of 'year', 'endyear', 'bookyear', and
+  'endbookyear' fields, ensuring that the publication date of the last
+  mentioned work gets printed in bibliographies and reference lists
 
 RELEASE NOTES FOR VERSION 2018.12.09
 

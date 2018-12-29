@@ -1,4 +1,4 @@
-% Last modified: Tue 25 Dec 2018 12:38:35 PM CST
+% Last modified: Sat 29 Dec 2018 01:56:01 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -336,7 +336,6 @@
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
-  \global\togglefalse{multivolume}%
   \global\togglefalse{cbx@short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
@@ -1044,7 +1043,6 @@
 
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{test:multivolume}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{test:crossref}%
   \usebibmacro{doi+finentry+etc}}%
@@ -1174,9 +1172,9 @@
         \usebibmacro{chap+in}}%
        {\usebibmacro{aft+fore+intro}}}}
 
+% FIX: removed test for 'multivolume'
 \newbibmacro*{test:crossref}{%
-  \ifboolexpr{ test {\iffieldundef{crossref}}
-               or togl {multivolume}}
+  \iffieldundef{crossref}
     {\usebibmacro{incollections}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
@@ -1466,14 +1464,21 @@
           {\setunit{\addcolon\space}%
            \printfield{pages}}}}}
 
+% Print the number of volumes in bibliographies and reference lists.
+% In notes, users must cite a volume number when they cite particular
+% pages, chapters, and so on.
+
 \newbibmacro*{volumes}{%
   \iffieldundef{volumes}
     {}
-    {\iffieldundef{bookyear}
+    {\ifboolexpr{ not test {\iftoggle{bibliography}}
+                  and not test {\iffieldundef{postnote}}
+                  and test {\iffieldundef{bookyear}}}
+       {}
        {\newunit
-        \printfield{volumes}}%
-       {}}}
+        \printfield{volumes}}}}
 
+% FIX: Removed test for 'multivolume':
 \newbibmacro*{volume}{%
   \iffieldundef{volume}
     {}
@@ -1485,11 +1490,7 @@
            \clearfield{pages}%
            \usebibmacro{volumetitle}%
            \usebibmacro{part}}}
-       {\iffieldundef{postnote}
-          {\usebibmacro{volume+title+part}}%
-          {\iftoggle{multivolume}
-             {}
-             {\usebibmacro{volume+title+part}}}}}}
+       {\usebibmacro{volume+title+part}}}}
 
 \newbibmacro*{pages}{%
   \iffieldundef{pages}
