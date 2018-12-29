@@ -1,4 +1,4 @@
-% Last modified: Fri 14 Dec 2018 05:50:22 PM CST
+% Last modified: Tue 25 Dec 2018 12:38:35 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -626,7 +626,7 @@
     {}}%
 
 \newbibmacro*{author+bookauthor+etc}{%
-  \iftoggle{noauth}% true by entry option
+  \iftoggle{noauth}% true by entry option or citation command
     {\usebibmacro{authpos+deflabel}}%
     {\usebibmacro{author+namelist}%
      \ifnameundef{\cbx@namelist}
@@ -1642,27 +1642,36 @@
     {\bibstring{noplace}}%
     {\printlist[location][#1-#1]{location}}}
 
+% Per CMS, 17th ed., 14.119, print the publication year of the ``last-mentioned
+% title.'' If 'bookyear' is defined, that's the correct field.
+
 \newbibmacro*{year+bookyear}{%
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
-    {}
-    {\iffieldundef{year}
-       {\iffieldundef{bookyear}
+    {\ifboolexpr{ test {\iffieldundef{bookyear}}
+                  or test {\iffieldsequal{labelyear}{bookyear}}}
+       {}
+       {\printfield{bookyear}%
+        \clearfield{bookyear}%
+        \usebibmacro{endyear+endbookyear}}}
+    {\iffieldundef{bookyear}
+       {\iffieldundef{year}
           {\bibstring{nodate}}%
-          {\printfield{bookyear}%
+          {\printfield{year}%
            \usebibmacro{endyear+endbookyear}}}
-       {\printfield{year}%
+       {\printfield{bookyear}%
+        \clearfield{bookyear}%
         \usebibmacro{endyear+endbookyear}}}}
 
 \newbibmacro*{endyear+endbookyear}{%
-  \iffieldundef{endyear}
-    {\ifboolexpr{ test {\iffieldundef{endbookyear}}
-                  or test {\iffieldsequal{bookyear}{endbookyear}}}
+  \iffieldundef{endbookyear}
+    {\ifboolexpr{ test {\iffieldundef{endyear}}
+                  or test {\iffieldsequal{year}{endyear}}}
        {}
-       {\textendash\printfield{endbookyear}}}
-    {\iffieldsequal{year}{endyear}
+       {\textendash\printfield{endyear}}}
+    {\iffieldsequal{bookyear}{endbookyear}
        {}
-       {\textendash\printfield{endyear}}}}
+       {\textendash\printfield{endbookyear}}}}
 
 \newbibmacro*{origtitle}{%
   \iffieldundef{origtitle}
