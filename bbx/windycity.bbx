@@ -1,4 +1,4 @@
-% Last modified: Sat 29 Dec 2018 01:56:01 PM CST
+% Last modified: Sat 29 Dec 2018 06:34:00 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -1172,7 +1172,6 @@
         \usebibmacro{chap+in}}%
        {\usebibmacro{aft+fore+intro}}}}
 
-% FIX: removed test for 'multivolume'
 \newbibmacro*{test:crossref}{%
   \iffieldundef{crossref}
     {\usebibmacro{incollections}}%
@@ -1180,7 +1179,7 @@
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
           {\crossref{\thefield{crossref}}%
            \toggletrue{bibliography}% \crossref makes it false
-           \usebibmacro{pages}}
+           \usebibmacro{pages}}%
           {\usebibmacro{incollections}}}
        {\listxadd{\crossreflist}{\thefield{crossref}}%
         \ifcsdef{c@\thefield{crossref}}
@@ -1202,7 +1201,6 @@
      \togglefalse{reflist}}%
     {}%
   \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{title+labelyear}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{note}%
   \usebibmacro{review+title}%
@@ -1478,7 +1476,6 @@
        {\newunit
         \printfield{volumes}}}}
 
-% FIX: Removed test for 'multivolume':
 \newbibmacro*{volume}{%
   \iffieldundef{volume}
     {}
