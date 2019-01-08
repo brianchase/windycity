@@ -1,4 +1,4 @@
-% Last modified: Mon 07 Jan 2019 07:25:36 PM CST
+% Last modified: Tue 08 Jan 2019 12:49:49 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -322,8 +322,8 @@ individual works and print only an entry for the whole collection, use
 \opt{collsonly}. It has no effect on many \bibtype{incollection}
 entries, such as articles in books, which need (or ought to have) a
 place in the bibliography, but does filter out chapters of books and
-volumes of collections. For discussion of collections and multivolume
-works, see Section \ref{multivolume}.
+volumes of collections. For discussion of multivolume works, see
+Section \ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
@@ -409,27 +409,23 @@ from Section \ref{short} that you can combine \opt{short} and
 
 \optitem[false]{volfirst}{\opt{true}, \opt{false}}
 
-In some examples, \textit{CMS} shows two ways of citing works that
-belong to collections: with publication information for the volume
-preceding that of the collection or \textit{vice versa}. (See especially
-\textit{CMS} \ref{14.119}, \ref{14.121}, and \ref{14.122}, and
-compare \ref{14.144} and \ref{15.41}.) In the standard format, it's
-unclear whether \textit{CMS} has a preference. But the examples
-suggest that, if one must be the default, it's to give priority to the
-collection. For the alternative, use \opt{volfirst}. The preamble
-option \opt{volfirst} has a global effect. It changes the format of
-all relevant citations. The entry option \opt{volfirst} changes the
-format on a case-by-case basis (see Section \ref{entryops}).
-
-Bear in mind, some works need this option. Those cases are limited to
-citations of volumes in collections in which different volumes have
-different authors. Not using \opt{volfirst} in such a case would
-create the impression that the author of the volume is also the author
-of the collection. For an example, see \textit{CMS} \ref{14.122}.
+In some examples, \textit{CMS} shows two ways of citing works from
+collections: with publication information for the volume preceding
+that of the collection or \textit{vice versa}. (See especially
+\textit{CMS} \ref{14.119}, \ref{14.121}, and \ref{14.122}, and compare
+\ref{14.144} and \ref{15.41}.) In the standard format, it's unclear
+whether \textit{CMS} has a preference. But the examples suggest that,
+if one must be the default, it's to give priority to the collection.
+For the alternative, use \opt{volfirst}. The preamble option
+\opt{volfirst} has a global effect. It changes the format of all
+relevant citations. The entry option \opt{volfirst} changes the format
+on a case-by-case basis (see Section \ref{entryops}).
 
 As mentioned above, \textit{CMS} \ref{15.41} makes clear that
 \opt{volfirst} should be the default for reference lists. As such,
 \opt{reflist} implies \opt{volfirst}.
+
+For more information, see Section \ref{collorder}.
 
 \end{optionlist}
 
@@ -503,10 +499,18 @@ changes the format of a work in a collection so that, in
 bibliographies and long citations, publication information for the
 volume precedes that of the collection.
 
+Some works need this option. Those cases are limited to citations of
+volumes in collections in which different volumes have different
+authors. Not using \opt{volfirst} would create the impression that the
+author of the volume is also the author of the collection. For an
+example, see \textit{CMS} \ref{14.122}.
+
 As mentioned in Section \ref{preops}, the preamble option
 \opt{reflist} implies the preamble option \opt{volfirst}. As an entry
 option, then, \opt{volfirst} is for changing particular standard
 citations.
+
+For more information, see Section \ref{collorder}.
 
 \end{optionlist}
 
@@ -840,14 +844,13 @@ Windy City offers significant control over the handling of editors,
 translators, and compilers. This section shows how to take advantage
 of it.
 
-\subsection{Placing Editors, Translators, and Compilers}
+\subsection{Switching Places and Roles}
 \label{edtranspos}
 
-Normally, the style prints editors' names first. But if translators
+Normally, Windy City prints editors' names first. But if translators
 are listed first on a work's title page (or in some other relevant
 place), you may want to reverse the order and print the translators'
-names first. For that, use the entry option \opt{transfirst} (see
-Section \ref{entryops}). Compare:
+names first. For that, use the entry option \opt{transfirst}. Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -855,17 +858,17 @@ Section \ref{entryops}). Compare:
 \end{citebib}
 
 If a work has no author, but has an editor, the style will print the
-name of the editor in the author's position. A similar switch happens
-if a work has no author but has a translator. The following are
-examples from \textit{CMS} \ref{14.103}:
+name of the editor in the author's position. The same happens if a
+work has no author but has a translator. The following are examples
+from \textit{CMS} \ref{14.103}:
 
 \begin{citebib}
 \item \cite[100]{egan2014}
 \item \cite[34]{silverstein1974}
 \end{citebib}
 
-What happens if a work has no author but has editors and translators?
-Since the style gives priority to editors, it defaults to printing the
+What if a work has no author but has editors and translators? Since
+Windy City gives priority to editors, it defaults to printing the
 editors' names in the author's position:
 
 \begin{citebib}
@@ -881,27 +884,29 @@ editors' names in the author's position:
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in, ``Edited and
 translated by\ldots'' Using \opt{transfirst} reverses them. Here's an
-example of that from \textit{CMS} \ref{14.104}:
+example from \textit{CMS} \ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
 \end{citebib}
 
 Since the style treats a compiler as a kind of editor, the comments
-above apply to compilers, too: If a work has compilers and
-translators, the style will print compilers' names first, unless you
+above also apply to compilers: If a work has compilers and
+translators, Windy City will print compilers' names first, unless you
 use \opt{transfirst}. For more on compilers, see Section
 \ref{edtransnames}.
 
 \subsection{Types of Editors, Translators, and Compilers}
 \label{edtransnames}
 
-Windy City associates the \bibfield{editor} and \bibfield{translator}
-fields with the lowest level title within the scope of an entry. For
-most sources, then, no more work is necessary than just populating the
-\bibfield{editor} and \bibfield{translator} fields of a database
+For the most part, Windy City associates the \bibfield{editor} and
+\bibfield{translator} fields with the lowest level title within the
+scope of an entry.\footnote{For \bibfield{editor}, exceptions are
+possible with the use of \bibfield{editortype}.} For most sources,
+then, you can assign editors and translators simply by adding the
+\bibfield{editor} and \bibfield{translator} fields to a database
 entry. Below is the entry for an example in \textit{CMS} \ref{14.104},
-printed in the previous section:
+shown in the previous section:
 
 \begin{verbatim}
    @Book{menchu1999,
@@ -1067,7 +1072,164 @@ that rule of thumb, as well as examples in \file{windycity.bib}, you
 won't need to worry about editors' names appearing where they don't
 belong.
 
-\section{Collections as Single Works}
+\section{Collections}
+
+Before you cite a collection or one of its volumes, you need to
+consider how you want the citation to look and even what type of
+collection it is. These issues have implications for how you structure
+entries in your bibliography database and how you use citation
+commands.
+
+\subsection{The Order of Publication Data}
+\label{collorder}
+
+A work in a collection usually has a title and perhaps other
+publication data distinct from that of the collection. When preparing
+your bibliography database, the most basic choice to make about such a
+work is which publication data has priority, the volume's or the
+collection's. Consider an example from \textit{CMS} \ref{14.119}:
+
+\begin{citebib}
+\item \cite{armstrong2014}
+\end{citebib}
+
+\noindent The editor and title of the collection precedes that of the
+volume. In notes and bibliographies in the default format,
+\textit{CMS} gives you the option of reversing this order. So does
+Windy City. You can reverse the order on a case-by-case or global
+basis with the entry or preamble option \opt{volfirst}.
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite{armstrong2014}
+\AtNextBibliography{\toggletrue{volfirst}}
+\end{citebib}
+
+In contexts where information for just one title appears (certain
+short citations), the one with priority determines which one
+identifies the work. By default, as you can see in the second note
+below, that's the collection.
+
+\begin{citeonly}
+\item \cite{armstrong2014}
+\item \cite[45]{armstrong2014}
+\end{citeonly}
+
+\noindent Whereas, using \opt{volfirst}:
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite{armstrong2014}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite[45]{armstrong2014}
+\end{citeonly}
+
+Aside from the change in editors and titles, notice that the volume
+number is missing from the second note in the passage above. When the
+collection has priority, so that the collection's title identifies the
+work, the volume number should appear in the citation. There are
+enough examples in \textit{CMS} to make that clear. But when the
+volume has priority, the volume number seems optional. It might even
+cause confusion, since the collection is what comes in volumes, not
+the volumes themselves. In any event, Windy City prints the volume
+number in the first case but not in the second.
+
+Sometimes, you may always want the publication data for volumes to
+have priority. If so, compile your documents with the \opt{volfirst}
+preamble option, which will affect all collections. More likely,
+though, it will make sense in some cases to give priority to the
+volume and in others to the collection. That's why there's a
+\opt{volfirst} entry option for changing particular citations. In
+fact, as touched on in Section \ref{entryops}, some works need the
+entry option. Here's an example from \textit{CMS} \ref{14.122}:
+
+\begin{citebib}
+\item \cite{barrows1959}
+\end{citebib}
+
+Without \opt{volfirst}, the resulting entry would place the author's
+name before the collection's title, which could give the impression
+that the author wrote every volume of the collection, among them the
+one cited above. \textit{CMS} does suggest a format that would give
+priority to the collection, placing the editor's name first and the
+author's name after the volume's title. But Windy City doesn't support
+it. Perhaps someday. For now, be aware that, in rare cases, the
+style's default format isn't always the right or best choice.
+
+How does Windy City determine which entries in a bibliography database
+are affected by \opt{volfirst}? Below are the entries for the first
+example above:
+
+\begin{verbatim}
+   @InBook{armstrong2014,
+     editor = {Armstrong, Tenisha},
+     title = {To Save the Soul of America, January 1961–August
+              1962},
+     shorttitle = {To Save the Soul of America},
+     volume = {7},
+     year = {2014},
+     crossref = {carson1992}
+   }
+   @Collection{carson1992,
+     editor = {Carson, Clayborne},
+     title = {The Papers of Martin Luther King, Jr.},
+     address = {Berkeley},
+     publisher = {University of California Press},
+     year = {1992–}
+   }
+\end{verbatim}
+
+An \bibtype{inbook} entry, which should always be cross-referenced to
+a \bibtype{collection} entry, is subject to \opt{volfirst} if it has a
+\bibfield{volume} field and lacks certain fields that a volume of a
+collection of this sort shouldn't have. You can find the exact details
+in \file{windycity.bbx}. With one exception, you can get the same
+results with a \bibtype{book} entry:
+
+\begin{verbatim}
+   @Book{carson2014,
+     editor = {Armstrong, Tenisha},
+     title = {To Save the Soul of America, January 1961–August
+              1962},
+     volume = {7},
+     maintitle = {The Papers of Martin Luther King, Jr.},
+     editora = {Carson, Clayborne},
+     editoratype = {maintitle},
+     address = {Berkeley},
+     publisher = {University of California Press},
+     year = {2014}
+   }
+\end{verbatim}
+
+A \bibtype{book} is subject to \opt{volfirst} if it has
+\bibfield{volume} and \bibfield{maintitle} fields. You may prefer a
+\bibtype{book} entry if you have no interest in citing the associated
+\bibtype{collection} and only intend to cite the volume. The problem
+is if the volumes of the collection have different publication dates,
+as they do for \textit{The Papers of Martin Luther King, Jr}. If the
+publication data for the volume go last, the bibliography and long
+citation should list the publication date as 2014. If the publication
+data for the collection go last, that date is 1992–. A \bibtype{book}
+entry, however, has just one field for a publication date, so using
+\opt{volfirst} on \bibfield{carson2014} prints 2014 when the correct
+date is 1992–. Otherwise, the \bibtype{book} and \bibtype{inbook}
+entries listed above are interchangeable. You can find more examples
+of both approaches in \file{windycity.bib}.
+
+As mentioned in Sections \ref{preops} and \ref{entryops}, reference
+lists give priority to a volume's publication data (see
+\textit{CMS} \ref{15.41}). Although that may seem a bit arbitrary,
+Windy City follows along by making the \opt{reflist} preamble option
+imply \opt{volfirst}. Remember that when a volume and a collection
+have different publication dates, a reference list entry prints both
+dates, which in turn requires you to use the \bibtype{inbook} approach
+described above.
+
+\begin{refonly}
+\nocite{armstrong2014}
+\end{refonly}
+
+\subsection{Collections as Single Works}
 \label{multivolume}
 
 Although its discussion is a bit obscure, \textit{CMS} treats some
@@ -1730,10 +1892,10 @@ example of the bibliography.
 \label{14.122}
 
 The work by Barrows is an example of one that seems to need the entry
-option \opt{volfirst} (see Section \ref{entryops}). Without it, the
+option \opt{volfirst} (see Section \ref{collorder}). Without it, the
 resulting entry would give the impression that he wrote every volume
-in the collection, among them the first. With Donne, on the other
-hand, you may choose one format or the other.
+in the collection. With Donne, on the other hand, you may choose one
+format or the other.
 
 \begin{citebib}
 \item \cite{barrows1959}
