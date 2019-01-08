@@ -1,4 +1,4 @@
-% Last modified: Sat 29 Dec 2018 08:55:14 PM CST
+% Last modified: Mon 07 Jan 2019 07:25:36 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,13 +8,13 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2018.12.09}
+\version{2019.01.07}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 
 \section{Introduction}
 
-\nfootnote{Copyright \textcopyright\ 2018 Brian Michael Chase. Under
+\nfootnote{Copyright \textcopyright\ 2019 Brian Michael Chase. Under
 the terms of the \LaTeX\ Project Public License, version 1.3,
 permission is granted to copy, distribute, or modify this software.
 See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}.}
@@ -24,7 +24,7 @@ bibliographies, parenthetical citations, and reference lists according
 to the \textit{The Chicago Manual of Style}
 (\textit{CMS}).\footnote{\cite{chicago2017}} It accurately handles a
 wide range of citations in different formats and includes a set of
-options and commands to accommodate special circumstances. It also has
+options and commands to support special circumstances. It also has
 extensive support for citing and arranging different kinds of editors,
 translators, and compilers within a single citation. These features
 make Windy City especially suitable for academic work.
@@ -100,8 +100,8 @@ For a first set of examples, consider this passage from \textit{CMS}
 The output shows Windy City's default format. The first citation of a
 work is similar to its entry in the bibliography. It includes all or
 most of its bibliographic information. Subsequent citations are
-shorter, usually consisting of a shortened form of the author's name
-and a shortened form of the work's title.
+shorter, usually consisting of a short form of the author's name and a
+short form of the work's title.
 
 Windy City supports variations on this format. For information on
 short forms of citation, including the use of \textit{ibid.}, see
@@ -210,7 +210,7 @@ Compare that with the style's default output:
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-\noindent In the short format, a work's first citation gives shortened
+\noindent In the short format, a work's first citation gives short
 names and titles and omits all other publication information.
 Consecutive citations of a work may omit the title or, as in the
 eleventh note, where the title is the key mark of distinction, the
@@ -292,14 +292,14 @@ set in \file{windycity.bbx}. In particular, the style sets
 \opt{idemtracker} to \opt{false}. If you set it to \opt{true} (or to
 some value that implies \opt{true}), Windy City will detect when the
 first citation of a work follows another citation of a work by the
-same author and print a shortened form of the author's name. Recall
-the previous section with examples citing Toni Morrison's \textit{Song
-of Solomon} after \textit{Beloved}. In contexts like those, do you
-really need to remind readers of the author's full name? If you think
-not, change \opt{idemtracker} to an appropriate value (see Section
-3.1.2.3 of the user guide for \biblatex).\footnote{\textit{CMS} seems
-to have no policy on this point. In the 16th edition, however, Figure
-14.3 shows consecutive citations of works by the same author. Both
+same author and print a short form of the author's name. Recall the
+previous section with examples citing Toni Morrison's \textit{Song of
+Solomon} after \textit{Beloved}. In contexts like those, do you really
+need to remind readers of the author's full name? If you think not,
+change \opt{idemtracker} to an appropriate value (see Section 3.1.2.3
+of the user guide for \biblatex).\footnote{\textit{CMS} seems to have
+no policy on this point. In the 16th edition, however, Figure 14.3
+shows consecutive citations of works by the same author. Both
 citations give the author's full name.} Using \opt{idemtracker} has no
 other effect on the style's output.
 
@@ -327,10 +327,10 @@ works, see Section \ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
-\noindent Use this option to print a shortened form of the first
-citation of each work. The resulting citation consists mainly of the
-author's name and the work's title. According to \textit{CMS}, this
-approach is optional for documents with complete
+\noindent Use this option to print a short form of the first citation
+of each work. The resulting citation consists mainly of the author's
+name and the work's title. According to \textit{CMS}, this approach is
+optional for documents with complete
 bibliographies.\footnote{\textit{CMS} \ref{14.23}. See also
 14.29--14.36.} You may use this option in conjunction with \opt{ibid}.
 However, \opt{firstshort} adds nothing to \opt{short}. The latter
@@ -370,11 +370,18 @@ avoid duplication with the output of \cmd{printshorthands}, use
 \noindent Use this option to print a reference list, that is, a
 bibliography in the author-date format. If you choose parenthetical
 citations over notes, you should consider using \opt{reflist} to
-maintain consistency with \textit{CMS}. As mentioned in Section
-\ref{overview}, this is one of two ways to print reference lists with
-Windy City. The other is to use the \opt{env} option of
+maintain consistency with \textit{CMS}.
+
+As mentioned in Section \ref{overview}, another way to print a
+reference list is to use the \opt{reflist} \opt{env} option of
 \cmd{printbibliography}. See Section \ref{overview} for more
 information.
+
+In line with \textit{CMS} \ref{15.41}, the choice of \opt{reflist}
+affects the format of works in collections. Those works should give
+publication information for the volume first, followed by publication
+information for the collection. To that end, \opt{reflist} implies the
+preamble option \opt{volfirst} (see below).
 
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
@@ -391,14 +398,38 @@ determine which title a citation refers to.
 
 In contexts where \opt{short} would drop a title from a citation, but
 where no name occupies the author's position, it will print the work's
-\bibfield{labeltitle}. This can be a shortened form of the title,
-either the title minus the subtitle or the \bibfield{shorttitle}, if
-present in the bibliography database. In those situations, the short
-format is no different from the default.
+\bibfield{labeltitle}. This can be a short form of the title, either
+the title minus the subtitle or the \bibfield{shorttitle}, if present
+in the bibliography database. In those situations, the short format is
+no different from the default.
 
 As noted earlier, \opt{short} implies \opt{firstshort}. But recall
 from Section \ref{short} that you can combine \opt{short} and
 \opt{ibid} for even more concise notes.
+
+\optitem[false]{volfirst}{\opt{true}, \opt{false}}
+
+In some examples, \textit{CMS} shows two ways of citing works that
+belong to collections: with publication information for the volume
+preceding that of the collection or \textit{vice versa}. (See especially
+\textit{CMS} \ref{14.119}, \ref{14.121}, and \ref{14.122}, and
+compare \ref{14.144} and \ref{15.41}.) In the standard format, it's
+unclear whether \textit{CMS} has a preference. But the examples
+suggest that, if one must be the default, it's to give priority to the
+collection. For the alternative, use \opt{volfirst}. The preamble
+option \opt{volfirst} has a global effect. It changes the format of
+all relevant citations. The entry option \opt{volfirst} changes the
+format on a case-by-case basis (see Section \ref{entryops}).
+
+Bear in mind, some works need this option. Those cases are limited to
+citations of volumes in collections in which different volumes have
+different authors. Not using \opt{volfirst} in such a case would
+create the impression that the author of the volume is also the author
+of the collection. For an example, see \textit{CMS} \ref{14.122}.
+
+As mentioned above, \textit{CMS} \ref{15.41} makes clear that
+\opt{volfirst} should be the default for reference lists. As such,
+\opt{reflist} implies \opt{volfirst}.
 
 \end{optionlist}
 
@@ -463,6 +494,19 @@ first. If a work's translators and editors are identical, using
 \textit{edited and translated by} to \textit{translated and edited
 by}. For more on this option, with examples, see Section
 \ref{edtranspos}.
+
+\optitem[false]{volfirst}{\opt{true}, \opt{false}}
+
+As an entry option, \opt{volfirst} does on a case-by-case basis what
+the \opt{volfirst} preamble option does globally: When set to true, it
+changes the format of a work in a collection so that, in
+bibliographies and long citations, publication information for the
+volume precedes that of the collection.
+
+As mentioned in Section \ref{preops}, the preamble option
+\opt{reflist} implies the preamble option \opt{volfirst}. As an entry
+option, then, \opt{volfirst} is for changing particular standard
+citations.
 
 \end{optionlist}
 
@@ -613,73 +657,17 @@ examples, see \ref{14.126} and \ref{14.184}.
 \bibfield{booktitle}, just as \bibfield{shorttitle} is for
 \bibfield{title}. Nevertheless, its use is internal. You never need to
 use it in a bibliography database. Instead, always use
-\bibfield{shorttitle}. For more information on how the style handles
-titles, see Section \ref{authtitles}.
+\bibfield{shorttitle}.
 
-\item[volumetitle] Use this field when a volume has a title. In the
-following example, from \textit{CMS} \ref{14.118}, the
-\bibfield{volumetitle} is \textit{1883--1884}:
-
-\begin{citeonly}
-\item \cite*[32--33]{james1963.5}
-\end{citeonly}
+\item[shortmaintitle] This field is for the short form of a
+\bibfield{maintitle}. Use it in a bibliography database when a work's
+\bibfield{maintitle} may occupy the position of a regular title in a
+short citation and needs a short form. This should only happen with
+certain works in collections. See, for example, the citation of
+\textit{The Complete Tales of Henry James} in Section
+\ref{multivolume}.
 
 \end{marglist}
-
-\subsection{Data Fields for Authors and Titles}
-\label{authtitles}
-
-The style allows for some flexibility over how you designate authors
-and titles in a bibliography database. In particular, some standard
-data fields are optional: \bibfield{bookauthor}, \bibfield{booktitle},
-and \bibfield{booksubtitle}. No bibliography database entry needs
-them, though using them causes no harm. As such, you may designate a
-book's author, title, and subtitle in one of three ways:
-
-\begin{verbatim}
-   ...
-   author = {Doe, Jane},
-   title = {A Book's Title},
-   subtitle = {A Book's Subtitle},
-   ...
-   bookauthor = {Doe, Jane},
-   booktitle = {A Book's Title},
-   booksubtitle = {A Book's Subtitle},
-   ...
-   bookauthor = {Doe, Jane},
-   title = {A Book's Title},
-   subtitle = {A Book's Subtitle},
-   ...
-   author = {Doe, Jane},
-   booktitle = {A Book's Title},
-   booksubtitle = {A Book's Subtitle},
-   ...
-\end{verbatim}
-
-\noindent Note that a \bibfield{subtitle} must go with a
-\bibfield{title} and a \bibfield{booksubtitle} must go with a
-\bibfield{booktitle}. Also, a work may cross-reference another while
-both retain their own \bibfield{author}, \bibfield{title}, and
-\bibfield{subtitle}. For example:
-
-\begin{verbatim}
-   @InCollection{doe2014a,
-     author = {Doe, Jane},
-     title = {An Article's Title},
-     subtitle = {An Article's Subtitle},
-     crossref = {doe2014}
-     ...
-   }
-   @Collection{doe2014,
-     author = {Doe, Jane and Doe, John},
-     title = {A Book's Title},
-     subtitle = {A Book's Subtitle},
-     ...
-   }
-\end{verbatim}
-
-\noindent Much the same holds for editors and translators. See Section
-\ref{edtrans}.
 
 \subsection{Data Fields for Series}
 
@@ -848,18 +836,18 @@ reference list entry.
 \section{Editors, Translators, and Compilers}
 \label{edtrans}
 
-The style offers a wide range of different classifications of editors
-and some flexibility over the handling of translators and compilers.
-This section explains how to use these features.
+Windy City offers significant control over the handling of editors,
+translators, and compilers. This section shows how to take advantage
+of it.
 
-\subsection{Basic Placement of Editors, Translators, and Compilers}
+\subsection{Placing Editors, Translators, and Compilers}
 \label{edtranspos}
 
-Normally, the style prints editors' names first. However, if
-translators are listed first on a work's title page (or in some other
-relevant place), you may want to reverse the order and print the
-translators' names first. For that, use the entry option
-\opt{transfirst} (see Section \ref{entryops}). Compare:
+Normally, the style prints editors' names first. But if translators
+are listed first on a work's title page (or in some other relevant
+place), you may want to reverse the order and print the translators'
+names first. For that, use the entry option \opt{transfirst} (see
+Section \ref{entryops}). Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -867,22 +855,17 @@ translators' names first. For that, use the entry option
 \end{citebib}
 
 If a work has no author, but has an editor, the style will print the
-name of the editor in the author's position, as in this example from
-\textit{CMS} \ref{14.103}:
+name of the editor in the author's position. A similar switch happens
+if a work has no author but has a translator. The following are
+examples from \textit{CMS} \ref{14.103}:
 
 \begin{citebib}
 \item \cite[100]{egan2014}
-\end{citebib}
-
-\noindent A similar switch happens if a work has no author but has a
-translator:
-
-\begin{citebib}
 \item \cite[34]{silverstein1974}
 \end{citebib}
 
-Again, the style prints editors' names first, so if a work has no
-author but has editors and translators, the style will print the
+What happens if a work has no author but has editors and translators?
+Since the style gives priority to editors, it defaults to printing the
 editors' names in the author's position:
 
 \begin{citebib}
@@ -897,8 +880,8 @@ editors' names in the author's position:
 
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in, ``Edited and
-translated by\ldots'' Use \opt{transfirst} to reverse them, as in this
-example from \textit{CMS} \ref{14.104}:
+translated by\ldots'' Using \opt{transfirst} reverses them. Here's an
+example of that from \textit{CMS} \ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
@@ -913,23 +896,12 @@ use \opt{transfirst}. For more on compilers, see Section
 \subsection{Types of Editors, Translators, and Compilers}
 \label{edtransnames}
 
-The style recognizes five kinds of editors, those of a
-\bibfield{title}, \bibfield{booktitle}, \bibfield{maintitle},
-\bibfield{issuetitle}, or \bibfield{series}. The style recognizes two
-kinds of translators, those of a \bibfield{title} or
-\bibfield{booktitle}. Although the style treats compilers as a kind of
-editor, it recognizes just two types of them, those of a
-\bibfield{title} or \bibfield{booktitle}.\footnote{As will become
-clear soon, indicate a compiler by giving the value \textit{compiler}
-to the appropriate \bibfield{editortype}.}
-
-As confusing as all this may seem, the assignments of editors and
-translators are often automatic. The style's default is to associate
-\bibfield{editor} and \bibfield{translator} with the lowest level
-title within the scope of an entry. For most sources, then, no more
-work is necessary than just adding \bibfield{editor} and
-\bibfield{translator} fields to a database entry. For example, this
-entry shows data for \ref{14.104}:
+Windy City associates the \bibfield{editor} and \bibfield{translator}
+fields with the lowest level title within the scope of an entry. For
+most sources, then, no more work is necessary than just populating the
+\bibfield{editor} and \bibfield{translator} fields of a database
+entry. Below is the entry for an example in \textit{CMS} \ref{14.104},
+printed in the previous section:
 
 \begin{verbatim}
    @Book{menchu1999,
@@ -952,74 +924,38 @@ first. See Section \ref{entryops}.}
 Cross-referencing introduces a bit more complexity, but the principle
 remains the same: Within the scope of an entry, the style associates
 \bibfield{editor} and \bibfield{translator} with the lowest level
-title. In this example, which shows an essay cross-referenced to a
-collection, \bibfield{editor} appears within the collection's database
-entry:
+title. In this example from \textit{CMS} \ref{14.30}, an essay is
+cross-referenced to a collection:
 
 \begin{verbatim}
-   @InCollection{thoreau2007.7,
-     title = {Walking},
-     pages = {185--222},
-     crossref = {thoreau2007}
+   @InCollection{kaiser1964,
+     author = {Kaiser, Ernest},
+     title = {The Literature of Harlem},
+     shorttitle = {Literature of Harlem},
+     crossref = {clarke1964}
    }
-   @Collection{thoreau2007,
-     author = {Thoreau, Henry David},
-     title = {Excursions},
-     editor = {Moldenhauer, Joseph J.},
-     series = {The Writings of Henry D. Thoreau},
-     publisher = {Princeton University Press},
-     address = {Princeton, NJ},
-     year = {2009}
+   @Collection{clarke1964,
+     editor = {Clarke, J. H.},
+     title = {Harlem},
+     subtitle = {A Community in Transition},
+     address = {New York},
+     publisher = {Citadel Press},
+     year = {1964}
    }
 \end{verbatim}
 
 \begin{citebib}
-\item \cite{thoreau2007.7}
+\item \cite{kaiser1964}
 \end{citebib}
 
-\noindent As a result, the style identifies Joseph Moldenhauer as the
-editor of \textit{Excursions}. If you moved \bibfield{editor} from
-\bibtype{collection} to \bibtype{incollection}, the
-style would identify him as the editor of ``Walking.'' If instead you
-want him as the editor of the series, leave \bibfield{editor} in
-\bibtype{collection} but add a line to the entry:
+\noindent Since \bibfield{editor} appears within the
+\bibtype{collection} entry, Windy City associates the editor's name
+with the title of that entry, \textit{Harlem}. If you moved
+\bibfield{editor} from \bibtype{collection} to \bibtype{incollection},
+the association would change to the \bibfield{title} of that entry,
+\textit{The Literature of Harlem}.
 
-\begin{verbatim}
-   editortype = {series},
-\end{verbatim}
-
-Other values of \bibfield{editortype} are \textit{maintitle},
-\textit{issuetitle}, and \textit{compiler}. So, to add a compiler to
-an entry, add the compiler's name to \bibfield{editor}, then add
-\bibfield{editortype} with the value \textit{compiler}.\footnote{Of
-course, if \bibfield{editor} is occupied, do the same for
-\bibfield{editora} and \bibfield{editoratype}, and so on.}
-
-\begin{verbatim}
-   @InCollection{orwell2009.17,
-     title = {Politics and the English Language},
-     pages = {270--86},
-     crossref = {orwell2009}
-   }
-   @Collection{orwell2009,
-     author = {Orwell, George},
-     title = {All Art is Propaganda},
-     subtitle = {Critical Essays},
-     editor = {Packer, George},
-     editortype = {compiler},
-     address = {Boston},
-     publisher = {Mariner Books},
-     year = {2009}
-   }
-\end{verbatim}
-
-\begin{citebib}
-\item \cite{orwell2009.17}
-\end{citebib}
-
-As already mentioned, this way of handling editors and translators
-allows you to assign them to particular works in a collection. This is
-most often useful for citing translators, as in the following:
+Consider another example, this one of an essay in a collection:
 
 \begin{citebib}
 \item \cite{petrarca1948}
@@ -1027,8 +963,8 @@ most often useful for citing translators, as in the following:
 
 \noindent Hans Nachod translated ``The Ascent of Mont Ventoux,'' among
 other works in the collection, but not \textit{every} work in the
-entire collection. Thus, \bibfield{translator} must fall within the
-scope of \bibtype{incollection}:
+collection. Thus, \bibfield{translator} must fall within the scope of
+\bibtype{incollection}:
 
 \begin{verbatim}
    @InCollection{petrarca1948,
@@ -1039,23 +975,79 @@ scope of \bibtype{incollection}:
      crossref = {cassirer1948}
    }
    @Collection{cassirer1948,
-     title = {The Renaissance Philosophy of Man},
      editor = {Cassirer, Ernst and Kristeller, Paul Oskar and
                Randall, Jr., John Herman},
+     title = {The Renaissance Philosophy of Man},
      address = {Chicago},
      publisher = ucp,
      year = {1948}
    }
 \end{verbatim}
 
-\noindent By the same token, since \bibfield{editor} falls within
-\bibtype{collection}, the style assigns it to \textit{The Renaissance
-Philosophy of Man}.
+\noindent By the same token, since \bibfield{editor} falls within the
+scope of \bibtype{collection}, the style associates it with the
+collection, \textit{The Renaissance Philosophy of Man}, not with the
+essay.
+
+Sometimes, you need to designate the role of an editor with the field
+\bibfield{editortype}. The values of \bibfield{editortype} are
+\textit{maintitle}, \textit{series}, \textit{issuetitle}, and
+\textit{compiler}.\footnote{You could use \textit{title} but may omit
+it.} As for \textit{compiler}, remember that it's a kind of editor.
+So, if you need to add a compiler to an entry, add the compiler's name
+to an \bibfield{editor} field, assuming it's free, then add an
+\bibfield{editortype} field with the value \textit{compiler}. It may
+help to see the bibliography database entry for an example in
+\textit{CMS} \ref{14.103}:
+
+\begin{verbatim}
+   @Book{schechter2011,
+    editor = {Schechter, Harold, and Kurt Brown},
+    editortype = {compiler},
+    title = {Killer Verse},
+    subtitle = {Poems of Murder and Mayhem},
+    address = {London},
+    publisher = {Everyman Paperback Classics},
+    year = {2011}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{schechter2011}
+\end{citebib}
+
+Follow the same pattern for editors of a \bibfield{maintitle},
+\bibfield{series}, or \bibfield{issuetitle}. Here's an example from
+\textit{CMS} \ref{14.118}:
+
+\begin{verbatim}
+   @Book{james1963.5,
+     author = {James, Henry},
+     title = {1883–1884},
+     volume = {5},
+     maintitle = {The Complete Tales of Henry James},
+     shortmaintitle = {Complete Tales of Henry James},
+     editor = {Edel, Leon},
+     editortype = {maintitle},
+     address = {London},
+     publisher = {Rupert Hart-Davis},
+     year = {1963}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{james1963.5}
+\end{citebib}
+
+\noindent If there were no \bibfield{editortype} associating the
+editor with the collection, the style would associate the editor with
+the volume.
 
 One complication remains: There are other name lists for editors than
 \bibfield{editor}. The style also uses \bibfield{editora},
-\bibfield{editorb}, and \bibfield{editorc}.\footnote{The style also
-uses \bibfield{translatora}, though only for internal purposes.}
+\bibfield{editorb}, and \bibfield{editorc}.\footnote{The style uses
+\bibfield{translatora} when it processes cross-referenced works. In a
+bibliography database, only use \bibfield{translator}.}
 
 Designate editors much like you designate titles. Reserve
 \bibfield{editor} for the lowest level title in a work that you wish
@@ -1066,42 +1058,17 @@ Remember to include the appropriate \bibfield{type} field to indicate
 an editor's role. These fields are \bibfield{editortype} (for
 \bibfield{editor}), \bibfield{editoratype} (for \bibfield{editora}),
 \bibfield{editorbtype} (for \bibfield{editorb}), and
-\bibfield{editorctype} (for \bibfield{editorc}). For example:
+\bibfield{editorctype} (for \bibfield{editorc}).
 
-\begin{citebib}
-\item \cite{smith1981}
-\end{citebib}
+As it happens, Windy City puts a lot of effort into sorting out where
+to print the names of editors and translators, so it's a bit more
+clever than the previous paragraph would suggest. But if you follow
+that rule of thumb, as well as examples in \file{windycity.bib}, you
+won't need to worry about editors' names appearing where they don't
+belong.
 
-\noindent Since the work above has two sets of editors, the database
-entry needs to use \bibfield{editor} and \bibfield{editora}:
-
-\begin{verbatim}
-   @Book{smith1981,
-     author = {Smith, Adam},
-     title = {An Inquiry into the Nature and Causes of the
-              Wealth of Nations},
-     shorttitle = {The Wealth of Nations},
-     editor = {Todd, W. B.},
-     volumes = {2},
-     volume = {2},
-     maintitle = {The Glasgow Edition of the Works and
-                  Correspondence of Adam Smith},
-     editora = {Campbell, R. H. and Skinner, A. S.},
-     editoratype = {maintitle},
-     address = {Indianapolis},
-     publisher = {Liberty Fund},
-     year = {1981},
-     origlocation = {Oxford},
-     origpublisher = {Oxford University Press},
-     origdate = {1976}
-   }
-\end{verbatim}
-
-\section{Multivolume Works}
+\section{Collections as Single Works}
 \label{multivolume}
-
-%\subsection{Collections as Single Works}
-%\label{onemulti}
 
 Although its discussion is a bit obscure, \textit{CMS} treats some
 multivolume collections as single works---but only, it seems, if every
@@ -1158,7 +1125,7 @@ citation of \textit{The Lisle Letters}:
 \noindent To cite a volume by itself, without a page reference, or to
 cite chapters, sections, and other parts of the work, remember to use
 the appropriate abbreviations (for some examples, see \textit{CMS}
-14.120, 15.23, and 15.41):
+\ref{14.120}, 15.23, and \ref{15.41}):
 
 \begin{verbatim}
    \cite[vol. 3, chap. 9]{byrne1981}
@@ -1185,11 +1152,12 @@ in \textit{CMS} \ref{14.118}:
 \begin{verbatim}
    @Book{james1963.5,
      author = {James, Henry},
-     title = {The Complete Tales of Henry James},
-     shorttitle = {Complete Tales of Henry James},
+     maintitle = {The Complete Tales of Henry James},
+     shortmaintitle = {Complete Tales of Henry James},
      editor = {Edel, Leon},
+     editortype = {maintitle},
      volume = {5},
-     volumetitle = {1883–1884},
+     title = {1883–1884},
      address = {London},
      publisher = {Rupert Hart-Davis},
      year = {1963}
@@ -1622,6 +1590,11 @@ database.
 \subsubsection{Introductions, prefaces, afterwords, and the like}
 % 14.110 Introductions, prefaces, afterwords, and the like
 
+% The bibliography database entry for Toni Morrison's foreword to
+% \textit{Song of Solomon} doesn't list a page range. Unlike the
+% second example, which shows an introduction by authors different
+% than that of the main text, it doesn't need to.
+
 \begin{citebib}
 \item \cite{morrison2004b.f}
 \item \cite{mansfield2000}
@@ -1701,44 +1674,80 @@ For a discussion of how to handle these types of works, see Section
 
 \subsubsection{Citing a particular volume in a bibliography}
 % 14.119 Citing a particular volume in a bibliography
+\label{14.119}
 
 \begin{citebib}
 \item \cite{armstrong2014}
 \end{citebib}
 
-%\subsubsection{Chapters and other parts of individual volumes}
+\noindent With preamble or entry option \opt{volfirst}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite{armstrong2014}
+\AtNextBibliography{\toggletrue{volfirst}}
+\end{citebib}
+
+\subsubsection{Chapters and other parts of individual volumes}
 % 14.120 Chapters and other parts of individual volumes
+\label{14.120}
 
-% Error in book (but not in the online edition): In bib entry, 'ed.'
-% should be 'edited by'. Worse, the format of the note seems
-% inconsistent with CMS 14.118. The volume clearly has a title
-% (Endings) that differs from that of the collection (The Cambridge
-% History of the Cold War). That's enough, I think, to make its format
-% like that of The Complete Tales of Henry James in CMS 14.118. In the
-% bibliography, I don't see why the volume and page reference aren't
-% rendered '3:181--200', though the fault here might be mine. Finally,
-% why is the author's name 'Chen Jian' in both the note and
-% bibliography?
+There are some peculiarities with this example. In the book, but not
+online, \textit{CMS} errs in printing `.ed' rather than `editeb by' in
+the bibliography and neglects to invert the author's name. More
+worrisome are the striking differences between the note and
+bibliography. They may represent alternative ways of formatting the
+data, as other examples do. But the note seems inconsistent with
+\textit{CMS} \ref{14.118}, and so doesn't make much sense as an
+alternative. Windy City ignores it and in both cases follows the
+example of the bibliography.
 
-%\begin{citebib}
-%\item \cite[180]{chen2010.3}
-%\end{citebib}
+\begin{citebib}
+\item \cite[180]{chen2010.3}
+\end{citebib}
 
-\setcounter{subsubsection}{120}
 \subsubsection{One volume in two or more books}
 % 14.121 One volume in two or more books
+\label{14.121}
 
 \begin{citebib}
 \item \cite[351]{lach1977}
 \item \cite{harley1994}
 \end{citebib}
 
+\noindent With preamble or entry option \opt{volfirst}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite[351]{lach1977}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite{harley1994}
+\AtNextBibliography{\toggletrue{volfirst}}
+\end{citebib}
+
 \subsubsection{Authors and editors of multivolume works}
 % 14.122 Authors and editors of multivolume works
+\label{14.122}
+
+The work by Barrows is an example of one that seems to need the entry
+option \opt{volfirst} (see Section \ref{entryops}). Without it, the
+resulting entry would give the impression that he wrote every volume
+in the collection, among them the first. With Donne, on the other
+hand, you may choose one format or the other.
 
 \begin{citebib}
 \item \cite{barrows1959}
+\item \cite*{donne1995}
+\end{citebib}
+
+\noindent
+
+Citing Donne with the preamble or entry option \opt{volfirst}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{volfirst}}
 \item \cite{donne1995}
+\AtNextBibliography{\toggletrue{volfirst}}
 \end{citebib}
 
 \subsubsection{Series titles, numbers, and editors}
@@ -1821,11 +1830,20 @@ For a discussion of how to handle these types of works, see Section
 \setcounter{subsubsection}{143}
 \subsubsection{Multivolume works published over more than one year}
 % 14.144 Multivolume works published over more than one year
+\label{14.144}
 
 \begin{citebib}
-% FIX: See 15.41:
-%\item \cite[329]{hayek1988}
+\item \cite*[329]{hayek2011}
 \item \cite{tillich1951}
+\end{citebib}
+
+\noindent Citing Hayek with the preamble or entry option
+\opt{volfirst}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite[329]{hayek2011}
+\AtNextBibliography{\toggletrue{volfirst}}
 \end{citebib}
 
 \subsubsection{No date of publication}
@@ -2345,12 +2363,12 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 
 \subsubsection{Multivolume works published over more than one year}
 % 15.41 Multivolume works published over more than one year
+\label{15.41}
 
 \begin{citeref}
 \item \parencite[1:133]{tillich1951}
 %\item \parencite[vol. 2]{tillich1951}
-% FIX: Should be (Hayek 2011, 329). And see 14.144.
-%\item \parencite[329]{hayek1988}
+\item \parencite[329]{hayek2011}
 \end{citeref}
 
 \subsubsection{Cross-references to multiauthor books in reference lists}

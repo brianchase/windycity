@@ -1,6 +1,6 @@
-% Last modified: Sat 29 Dec 2018 01:14:47 PM CST
+% Last modified: Mon 07 Jan 2019 07:28:15 PM CST
 
-% Copyright (c) 2018 Brian Michael Chase.
+% Copyright (c) 2019 Brian Michael Chase.
 %
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.12.09 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019.01.07 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -171,6 +171,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{parencite}{%
+  \usebibmacro{cite:test:collection}%
   \usebibmacro{pcite:test:crossref}%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
@@ -223,7 +224,7 @@
       {}
       {\addcomma}%
      \printtext[bibhyperref]{%
-       \printfield{labelyear}%
+       \usebibmacro{labeldate+endyear}%
        \printfield{extradate}%
        \newunit}}}
 
@@ -252,6 +253,7 @@
 
 \newbibmacro*{cite}{%
   \usebibmacro{test:multicite}%
+  \usebibmacro{cite:test:collection}%
   \ifciteseen
     {\renewcommand*{\cbx@deflabel}{labelname}%
      \iffieldundef{shorthand}
@@ -270,6 +272,12 @@
                and togl {short}}
    {\toggletrue{noauth}}%
    {}}
+
+\newbibmacro*{cite:test:collection}{%
+  \ifboolexpr{ test {\ifentrytype{book}}
+               or test {\ifentrytype{inbook}}}
+    {\usebibmacro{test:collection}}%
+    {}}
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
@@ -406,17 +414,26 @@
                or test {\ifentrytype{bookinbook}}
                or test {\ifentrytype{inbook}}
                or test {\ifentrytype{incollection}}}
-    {\usebibmacro{vol+page}}%
+    {\ifboolexpr{ togl {collection}
+                  and togl {volfirst}}
+       {\newunit}%
+       {\usebibmacro{volume+page}}}
     {\newunit}}%
 
-\newbibmacro*{vol+page}{%
+\newbibmacro*{volume+page}{%
   \iffieldundef{volume}
     {}
     {\newunit
      \iffieldpages{postnote}
        {\global\toggletrue{multivolume}%
-        \usebibmacro{vol+colon}}%
+        \usebibmacro{volume+colon}}%
        {\printfield{volume}}}}
+
+\newbibmacro*{volume+colon}{%
+  \setunit{\addcomma\space}%
+  \printfield[noformat]{volume}%
+  \clearfield{volume}%
+  \addcolon}%
 
 % If the postnote is empty, print the page ranges of journal articles.
 % See CMS, 17th ed., 14.153, 14.167, and 14.174. As for incollection
@@ -477,9 +494,8 @@
   \usebibmacro{colon}}%
 
 \DeclareBibliographyDriver{cite:book}{%
-  \usebibmacro{author+title+ed}%
-  \usebibmacro{ed+vol+part+etc}%
-  \usebibmacro{vol+page}}%
+  \usebibmacro{author+collection+etc}%
+  \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:crossref}{%
   \usebibmacro{author+title+etc}%
@@ -487,15 +503,16 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
+  \usebibmacro{test:collection}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
-  \usebibmacro{vol+page}}%
+  \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:letter}{%
   \toggletrue{noauth}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
-  \usebibmacro{vol+page}}%
+  \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:misc}{%
   \usebibmacro{author+bookauthor+etc}%

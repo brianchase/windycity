@@ -7,7 +7,7 @@ that formats notes, bibliographies, parenthetical citations, and
 reference lists according to [The Chicago Manual of
 Style](http://www.chicagomanualofstyle.org/home.html). It accurately
 handles a wide range of citations and includes a set of options and
-commands to accommodate special circumstances. It also has extensive
+commands to support special circumstances. It also has extensive
 support for citing and arranging different kinds of editors,
 translators, and compilers within a single citation. These features
 make Windy City especially suitable for academic work.
@@ -50,7 +50,7 @@ circumstance that the style is meant to handle.
 
 ## License
 
-Copyright (c) 2018 Brian Michael Chase. Under the terms of the [LaTeX
+Copyright (c) 2019 Brian Michael Chase. Under the terms of the [LaTeX
 Project Public License](http://www.latex-project.org/lppl.txt),
 version 1.3, permission is granted to copy, distribute, or modify this
 software.

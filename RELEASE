@@ -1,8 +1,7 @@
 
-INTERIM
+RELEASE NOTES FOR VERSION 2019.01.07
 
-* rolled back previous handling of multivolume works, in large
-  part; changed documentation accordingly
+* major additions and changes for processing collections
 * fixed \parencite for unsigned articles
 * fixed \parencite for cross-referencing
 * fixed formatting of reviews
@@ -16,6 +15,7 @@ INTERIM
 * improved handling of 'year', 'endyear', 'bookyear', and
   'endbookyear' fields, ensuring that the publication date of the last
   mentioned work gets printed in bibliographies and reference lists
+* many bug fixes
 
 RELEASE NOTES FOR VERSION 2018.12.09
 

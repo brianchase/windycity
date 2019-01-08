@@ -1,6 +1,6 @@
-% Last modified: Sat 29 Dec 2018 06:34:00 PM CST
+% Last modified: Mon 07 Jan 2019 07:28:07 PM CST
 
-% Copyright (c) 2018 Brian Michael Chase.
+% Copyright (c) 2019 Brian Michael Chase.
 %
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2018.12.09 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019.01.07 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -34,14 +34,14 @@
   \ifstrequal{#1}{true}
     {\renewcommand*{\anona}{\bibopenbracket}%
      \renewcommand*{\anonb}{\bibclosebracket}}%
-    {}}%
+    {}}
 
 \providetoggle{anonqauth}
 \DeclareEntryOption{anonqauth}[true]{%
   \ifstrequal{#1}{true}
     {\renewcommand*{\anona}{\bibopenbracket}%
      \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
-    {}}%
+    {}}
 
 \providetoggle{annotate}
 \DeclareBibliographyOption{annotate}[true]{%
@@ -54,7 +54,7 @@
     {\ExecuteBibliographyOptions{mincrossrefs=1}%
      \ExecuteBibliographyOptions{minxrefs=1}%
      \AtBeginBibliography{\blx@key@bibcheck{collsonly}}}
-    {}}%
+    {}}
 
 \providetoggle{firstshort}
 \DeclareBibliographyOption{firstshort}[true]{%
@@ -88,12 +88,19 @@
 \DeclareBibliographyOption{nolos}[true]{%
   \ifstrequal{#1}{true}
     {\AtBeginBibliography{\blx@key@bibcheck{nolos}}}
-    {}}%
+    {}}
 
 \providetoggle{reflist}
 \DeclareBibliographyOption{reflist}[true]{%
   \ifstrequal{#1}{true}
     {\global\toggletrue{reflist}%
+     \global\toggletrue{volfirst}% See CMS, 17th ed., 15.41
+     \DeclareLabeldate{%
+       \field{date}
+       \field{year}
+       \field{origdate}
+       \field{urldate}
+       \literal{nodate}}
      \ExecuteBibliographyOptions{%
        autocite=inline,
        sorting=nyt}}%
@@ -114,6 +121,16 @@
   \ifstrequal{#1}{true}
     {\toggletrue{transfirst}}%
     {\togglefalse{transfirst}}}
+
+\providetoggle{volfirst}
+\DeclareBibliographyOption{volfirst}[true]{%
+  \ifstrequal{#1}{true}
+    {\global\toggletrue{volfirst}}%
+    {\global\togglefalse{volfirst}}}
+\DeclareEntryOption{volfirst}[true]{%
+  \ifstrequal{#1}{true}
+    {\toggletrue{volfirst}}%
+    {\togglefalse{volfirst}}}
 
 % For setting 'minnames' and 'maxnames', see CMS, 17th ed., 14.76.
 
@@ -151,22 +168,20 @@
   usetranslator=true}
 
 \DeclareLanguageMapping{english}{american-windycity}
-\DeclareLabeldate{%
+\DeclareLabeldate{% 'reflist' preamble option loads an alternative
+  \field{bookyear}
   \field{date}
   \field{year}
-  \field{bookyear}
   \field{origdate}
   \field{urldate}
-  \literal{nodate}
-}
+  \literal{nodate}}
 \DeclareLabelname{%
   \field{shortauthor}
   \field{author}
   \field{editor}
   \field{translator}
   \field{editora}
-  \field{translatora}
-}
+  \field{translatora}}
 \DeclareLabelname[inbook,incollection]{%
   \field{shortauthor}
   \field{author}
@@ -174,16 +189,11 @@
   \field{editor}
   \field{translator}
   \field{editora}
-  \field{translatora}
-}
-\DeclareSortingTemplate{nty}{
-  \sort{
-    \field{presort}
-  }
-  \sort[final]{
-    \field{sortkey}
-  }
-  \sort{
+  \field{translatora}}
+\DeclareSortingTemplate{nty}{%
+  \sort{\field{presort}}
+  \sort[final]{\field{sortkey}}
+  \sort{%
     \field{sortname}
     \field{author}
     \field{bookauthor}
@@ -193,31 +203,22 @@
     \field{sorttitle}
     \field{title}
     \field{booktitle}
-    \field{bookbooktitle}
-  }
-  \sort{
+    \field{bookbooktitle}}
+  \sort{%
     \field{sorttitle}
     \field{title}
-    \field{booktitle}
-  }
-  \sort{
+    \field{booktitle}}
+  \sort{%
     \field{sortyear}
     \field{year}
-    \field{labelyear}
-  }
-  \sort{
+    \field{labelyear}}
+  \sort{%
     \field[padside=left,padwidth=4,padchar=0]{volume}
-    \literal{0000}
-  }
-}
-\DeclareSortingTemplate{nyt}{
-  \sort{
-    \field{presort}
-  }
-  \sort[final]{
-    \field{sortkey}
-  }
-  \sort{
+    \literal{0000}}}
+\DeclareSortingTemplate{nyt}{%
+  \sort{\field{presort}}
+  \sort[final]{\field{sortkey}}
+  \sort{%
     \field{sortname}
     \field{author}
     \field{bookauthor}
@@ -227,24 +228,19 @@
     \field{sorttitle}
     \field{title}
     \field{booktitle}
-    \field{bookbooktitle}
-  }
-  \sort{
+    \field{bookbooktitle}}
+  \sort{%
     \field{sortyear}
     \field{origyear}
     \field{labelyear}
-    \field{year}
-  }
-  \sort{
+    \field{year}}
+  \sort{%
     \field{sorttitle}
     \field{title}
-    \field{booktitle}
-  }
-  \sort{
+    \field{booktitle}}
+  \sort{%
     \field[padside=left,padwidth=4,padchar=0]{volume}
-    \literal{0000}
-  }
-}
+    \literal{0000}}}
 
 \defbibcheck{collsonly}{%
   \ifentrytype{inbook}
@@ -274,7 +270,7 @@
 
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
 \DeclareDataInheritance{*}{%
-  incollection,inbook,bookinbook,inproceedings,letter,suppbook,review}{
+  incollection,inbook,bookinbook,inproceedings,letter,suppbook,review}{%
   \inherit{author}{bookauthor}
   \inherit{editor}{editora}
   \inherit{editora}{editorb}
@@ -287,15 +283,12 @@
   \inherit{subtitle}{booksubtitle}
   \inherit{titleaddon}{booktitleaddon}
   \inherit{shorttitle}{shortbooktitle}
-  \inherit{options}{options}
-}
-\DeclareDataInheritance{collection}{collection,inbook,bookinbook}{
+  \inherit{options}{options}}
+\DeclareDataInheritance{collection}{collection,inbook,bookinbook}{%
   \inherit{year}{bookyear}
-  \inherit{endyear}{endbookyear}
-}
-\DeclareDataInheritance{collection}{collection}{
-  \inherit{title}{bookbooktitle}
-}
+  \inherit{endyear}{endbookyear}}
+\DeclareDataInheritance{collection}{collection}{%
+  \inherit{title}{bookbooktitle}}
 
 %%%%%%%%%%%%%%%%%%%
 %%  Preliminary  %%
@@ -317,6 +310,7 @@
 
 \providetoggle{authposition}
 \providetoggle{bibliography}
+\providetoggle{collection}
 \providetoggle{journalfirst}
 \providetoggle{multicite}
 \providetoggle{multivolume}
@@ -324,7 +318,7 @@
 \providetoggle{cbx@loccit}
 \providetoggle{cbx@short}
 
-\providetoggle{booktitle}
+\providetoggle{edshift}
 \providetoggle{noed}
 \providetoggle{notrans}
 
@@ -336,6 +330,7 @@
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
+  \global\togglefalse{collection}%
   \global\togglefalse{cbx@short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
@@ -347,13 +342,15 @@
 
 \defbibenvironment{reflist}
   {\global\toggletrue{reflist}%
+   \global\toggletrue{volfirst}% See CMS, 17th ed., 15.41
    \list{}{%
      \leftmargin\bibhang
      \itemindent-\leftmargin
      \itemsep\bibitemsep
      \parsep\bibparsep}}
   {\endlist
-   \global\togglefalse{reflist}}
+   \global\togglefalse{reflist}%
+   \global\togglefalse{volfirst}}%
   {\item}
 
 % Index names only.
@@ -361,12 +358,12 @@
 \renewbibmacro*{bibindex}{%
   \ifbibindex
     {\indexnames{labelname}}%
-    {}}%
+    {}}
 
 \renewbibmacro*{citeindex}{%
   \ifciteindex
     {\indexnames{labelname}}%
-    {}}%
+    {}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Field Formats for Names  %%
@@ -491,7 +488,6 @@
     {\iftoggle{cbx@short}
        {\mkbibquote{#1}}%
        {\mkbibquote{#1}\nopunct}}}
-\DeclareFieldFormat{volumetitle}{\mkbibemph{#1}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Other Field Formats  %%
@@ -583,38 +579,6 @@
 \DeclareBibliographyAlias{*}{book}
 \DeclareBibliographyAlias{cite:*}{cite:book}
 
-%%%%%%%%%%%%%%%%%%%%%%%
-%%  Reference Lists  %%
-%%%%%%%%%%%%%%%%%%%%%%%
-
-\newbibmacro*{a:labelyear+extradate}{%
-  \iftoggle{noauth}
-    {}
-    {\usebibmacro{labelyear+extradate}}}
-
-\newbibmacro*{labelyear+extradate}{%
-  \iftoggle{reflist}
-    {\newunit
-     \iffieldundef{origyear}
-       {}
-       {\printtext[parens]{\usebibmacro{origyear+origendyear}}%
-        \clearfield{origyear}%
-        \clearfield{origendyear}%
-        \space}%
-     \printfield{labelyear}%
-     \usebibmacro{endyear+endbookyear}%
-     \iffieldundef{extradate}
-       {}
-       {\mknumalph{\thefield{extradate}}}
-     \newunit}%
-    {}}%
-
-\newbibmacro*{b:labelyear+extradate}{%
-  \ifboolexpr{ togl {noauth}
-               and not togl {journalfirst}}
-    {\usebibmacro{labelyear+extradate}}%
-    {}}%
-
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Author's Position %%
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -622,7 +586,7 @@
 \renewcommand*{\revsdnamedelim}{%
   \iftoggle{bibliography}
     {\addcomma}%
-    {}}%
+    {}}% needs this '%'?
 
 \newbibmacro*{author+bookauthor+etc}{%
   \iftoggle{noauth}% true by entry option or citation command
@@ -649,6 +613,8 @@
        {\renewcommand*{\cbx@namelist}{author}}%
        {\renewcommand*{\cbx@namelist}{shortauthor}}}}
 
+% When 'journaltitle' goes in the author's position.
+
 \newbibmacro*{journalfirst}{%
   \usebibmacro{authpos+deflabel}%
   \ifboolexpr{ test {\ifentrytype{article}}
@@ -668,14 +634,16 @@
   \usebibmacro{authpos+deflabel}%
   \newunit}%
 
-\renewbibmacro*{bybookauthor}{%
+\renewbibmacro*{bybookauthor+pages}{%
   \ifnameundef{bookauthor}
-       {}
-       {\setunit{\addcomma\space}%
-        \renewcommand*{\pluga}{\bibstring{by}\space}%
-        \renewcommand*{\cbx@namelist}{bookauthor}%
-        \usebibmacro{printnames+etc}%
-        \setunit{\addcomma\space}}}% necessary before editor's position
+    {}
+    {\setunit{\addcomma\space}%
+     \renewcommand*{\pluga}{\bibstring{by}\space}%
+     \renewcommand*{\cbx@namelist}{bookauthor}%
+     \usebibmacro{printnames+etc}%
+     \setunit{\addcomma\space}
+     \usebibmacro{pages}%
+     \newunit}}%
 
 \newbibmacro*{aft+fore+intro}{%
   \ifnameundef{afterword}
@@ -685,10 +653,9 @@
        {\renewcommand*{\cbx@namelist}{foreword}%
         \renewcommand*{\cbx@bibstring}{foreword}}}
     {\renewcommand*{\cbx@namelist}{afterword}%
-     \renewcommand*{\cbx@bibstring}{foreword}}%
-  \usebibmacro{printnames+etc}%
-  \usebibmacro{authpos+deflabel}%
-  \newunit
+     \renewcommand*{\cbx@bibstring}{afterword}}%
+  \renewcommand*{\plugb}{\newunitpunct}%
+  \usebibmacro{namehash+etc}%
   \bibstring{\cbx@bibstring}\space}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -707,13 +674,12 @@
   \global\togglefalse{noed}%
   \global\togglefalse{notrans}%
   \usebibmacro{test:trans}%
-  \usebibmacro{test:ed}%
   \usebibmacro{test:notrans}%
-  \usebibmacro{test:noed}}%
+  \usebibmacro{test:ed}}%
 
 \newbibmacro*{test:trans}{%
   \usebibmacro{test:transdupes}%
-  \iftoggle{booktitle}
+  \iftoggle{edshift}
     {\renewcommand*{\yeditor}{translatora}}%
     {\iftoggle{authposition}
        {\ifnameundef{translator}
@@ -726,15 +692,22 @@
     {\clearname{translatora}}%
     {}}
 
+\newbibmacro*{test:notrans}{%
+  \ifnameundef{\yeditor}
+    {\global\toggletrue{notrans}}%
+    {}}
+
 \newbibmacro*{test:ed}{%
   \usebibmacro{test:eddupes}%
-  \iftoggle{booktitle}
+  \iftoggle{edshift}
     {\usebibmacro{eda+edb+edc}}%
-    {\iftoggle{authposition}
-       {\ifnameundef{editor}
-          {\renewcommand*{\xeditor}{editora}}%
-          {\renewcommand*{\xeditor}{editor}}}
-       {\renewcommand*{\xeditor}{editor}}}}
+    {\ifnameundef{editor}
+       {\usebibmacro{editora+noed}}%
+       {\usebibmacro{editor+noed}%
+        \iftoggle{noed}
+          {\global\togglefalse{noed}%
+           \usebibmacro{editora+noed}}%
+          {}}}}
 
 \newbibmacro*{test:eddupes}{%
   \ifnamesequal{editor}{editora}
@@ -745,24 +718,87 @@
     {}}
 
 \newbibmacro*{eda+edb+edc}{%
-  \ifnameundef{editora}
-    {\ifnameundef{editorb}
-       {\renewcommand*{\xeditor}{editorc}}%
-       {\renewcommand*{\xeditor}{editorb}}}
-    {\renewcommand*{\xeditor}{editora}}}
+  \ifnameundef{editor}
+    {\ifnameundef{editora}
+       {\ifnameundef{editorb}
+          {\renewcommand*{\xeditor}{editorc}}%
+          {\renewcommand*{\xeditor}{editorb}}%
+        \iffieldequalstr{\xeditor type}{maintitle}
+          {\global\toggletrue{noed}}%
+          {\usebibmacro{test:noed:a}}}%
+       {\usebibmacro{editora+noed}}}
+    {\usebibmacro{editor+noed}%
+     \iftoggle{noed}
+       {\global\togglefalse{noed}%
+        \usebibmacro{editora+noed}}%
+       {}}}
 
-\newbibmacro*{test:notrans}{%
-  \ifnameundef{\yeditor}
-    {\global\toggletrue{notrans}}%
-    {}}
+\newbibmacro*{editora+noed}{%
+  \renewcommand*{\xeditor}{editora}%
+  \usebibmacro{test:noed:a}%
+  \iftoggle{noed}
+    {}
+    {\usebibmacro{test:noed:b}%
+     \ifboolexpr{ test {\ifdefempty{\xtitle}}
+                  and not togl {authposition}
+                  and ( test {\ifentrytype{inbook}}
+                  or test {\ifentrytype{incollection}}
+                  or test {\ifentrytype{letter}} )}
+       {\global\toggletrue{noed}}%
+       {}}}
 
-\newbibmacro*{test:noed}{%
+\newbibmacro*{editor+noed}{%
+  \renewcommand*{\xeditor}{editor}%
+  \usebibmacro{test:noed:a}%
+  \iftoggle{noed}
+    {}
+    {\usebibmacro{test:noed:b}%
+     \iftoggle{authposition}
+       {\ifboolexpr{ test {\ifentrytype{inbook}}
+                     and togl {collection}
+                     and not togl {volfirst}
+                     and not test {\ifnameundef{editora}}}
+          {\global\toggletrue{noed}}%
+          {}}
+       {\ifdefstring{\xtitle}{book}
+          {\global\toggletrue{noed}}%
+          {}}}}
+
+\newbibmacro*{test:noed:a}{%
   \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{issuetitle}}
-               or test {\iffieldequalstr{\xeditor type}{maintitle}}
                or test {\iffieldequalstr{\xeditor type}{series}}
                or test {\ifnameundef{\xeditor}}}
     {\global\toggletrue{noed}}%
     {}}
+
+\newbibmacro*{test:noed:b}{%
+  \iftoggle{authposition}
+    {\iffieldequalstr{\xeditor type}{maintitle}
+       {\ifentrytype{book}
+          {\iftoggle{collection}
+             {\iftoggle{volfirst}
+                {\global\toggletrue{noed}}%
+                {}}
+             {\global\toggletrue{noed}}}
+          {\global\toggletrue{noed}}}
+       {\ifboolexpr{ test {\ifentrytype{book}}
+                     and togl {collection}
+                     and not togl {volfirst}}
+          {\global\toggletrue{noed}}%
+          {}}}
+    {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{maintitle}}
+                  and not test {\ifdefstring{\xtitle}{main}}}
+      {\global\toggletrue{noed}}%
+      {\ifboolexpr{ not test {\iffieldequalstr{\xeditor type}{maintitle}}
+                    and test {\ifdefstring{\xtitle}{main}}}
+         {\global\toggletrue{noed}}%
+         {\ifdefempty{\xtitle}
+            {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
+                          or test {\iffieldequalstr{\xeditor type}{title}}
+                          or test {\iffieldundef{\xeditor type}}}
+               {}
+               {\global\toggletrue{noed}}}
+            {}}}}}
 
 \newbibmacro*{transcombos}{%
   \renewcommand*{\cbx@namelist}{\yeditor}%
@@ -814,27 +850,21 @@
   \iftoggle{notrans}
     {}
     {\usebibmacro{transcombos}%
-     \usebibmacro{edposition}}}
+     \usebibmacro{pluga+etc}}}
 
 \newbibmacro*{edcombos+etc}{%
   \usebibmacro{prep:edtrans}%
   \iftoggle{noed}
     {}
     {\usebibmacro{edcombos}%
-     \usebibmacro{edposition}}}
+     \usebibmacro{pluga+etc}}}
 
 \newbibmacro*{b:edtrans}{%
-  \global\toggletrue{booktitle}%
+  \global\toggletrue{edshift}%
   \usebibmacro{a:edtrans}%
-  \global\togglefalse{booktitle}%
-  \setunit{\addcomma\space}}%
-
-\newbibmacro*{edposition}{%
-  \ifdefstring{\xtitle}{book}
-    {\iftoggle{booktitle}
-       {\usebibmacro{pluga+etc}}%
-       {}}
-    {\usebibmacro{pluga+etc}}}
+  \global\togglefalse{edshift}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{editoraddon}}%
 
 \newbibmacro*{edtranspunct}{%
   \ifboolexpr{ test {\ifdefstring{\xtitle}{book}}
@@ -855,16 +885,18 @@
 % 'maintitle', or 'series'. The '\midsentence' below prevents a maintitle
 % ending with punctuation from causing the start of a new sentence.
 
-\newbibmacro*{xeditor+yeditor}[1]{%
+\newbibmacro*{xeditor+yeditor}[2]{%
   \ifboolexpr{ test {\iffieldequalstr{editortype}{#1}}
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
                or test {\iffieldequalstr{editorctype}{#1}}}
-    {\midsentence\setunit{\addcomma\space}%
+    {\ifstrequal{#2}{newunit}
+       {\newunit}%
+       {\midsentence\setunit{\addcomma\space}}%
      \renewcommand*{\cbx@bibstring}{editor}%
      \usebibmacro{editorlists}{#1}%
      \usebibmacro{pluga+printnames}}%
-    {}}%
+    {}}
 
 \newbibmacro*{editorlists}[1]{%
   \iffieldequalstr{editortype}{#1}
@@ -874,6 +906,14 @@
        {\iffieldequalstr{editorbtype}{#1}
           {\renewcommand*{\cbx@namelist}{editorb}}%
           {\renewcommand*{\cbx@namelist}{editorc}}}}}
+
+% A catchall for additional editorial information about a 'title'.
+
+\newbibmacro*{editoraddon}{%
+  \iffieldundef{editoraddon}
+    {}
+    {\nopunct\printfield{editoraddon}%
+     \clearfield{editoraddon}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Printing Names and Dashes  %%
@@ -927,6 +967,19 @@
 \renewcommand*{\bibnamedash}{%
   \vrule height 2pt depth -1.6pt width 3em\hspace{1pt}}%
 
+% When 'journaltitle' goes in the author's position.
+
+\newbibmacro*{bibjournaldash}{%
+  \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
+               and not test \iffirstonpage}
+    {\bibnamedash\newunitpunct
+     \clearfield{journaltitle}%
+     \clearlist{location}}%
+    {\savefield{journaltitle}{\bbx@lasthash}%
+     \renewcommand*{\xtitle}{journal}%
+     \usebibmacro{longtitle+titleaddon}%
+     \let\xtitle\empty}}%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Titles and Subtitles  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -963,22 +1016,39 @@
     {\addspace% '\space' has issues with quotation marks
      \printfield[brackets]{\xtitle titleaddon}}}
 
+\newbibmacro*{title+labelyear}{%
+  \iftoggle{bibliography}
+    {\usebibmacro{longtitle+titleaddon}%
+     \usebibmacro{b:labelyear+extradate}}%
+    {\ifboolexpr{ test {\ifciteseen}
+                  or togl {firstshort}}
+       {\usebibmacro{shorttitle}}%
+       {\usebibmacro{longtitle+titleaddon}}}}
+
 \newbibmacro*{shorttitle}{%
-  \ifboolexpr{ test {\iffieldundef{title}}
-               and test {\iffieldundef{shorttitle}}}
-    {\iffieldundef{booktitle}
-       {}
+  \ifboolexpr{ togl {collection}
+               and not togl {volfirst}}
+    {\ifentrytype{book}
+       {\iffieldundef{shortmaintitle}
+         {\printfield[title]{maintitle}}%
+         {\printfield[title]{shortmaintitle}}}
        {\iffieldundef{shortbooktitle}
-          {\printfield{booktitle}}%
-          {\printfield{shortbooktitle}}}}
+         {\printfield[title]{booktitle}}%
+         {\printfield[title]{shortbooktitle}}}}
     {\printfield[\thefield{entrytype}]{labeltitle}}}
 
-\renewbibmacro*{booktitle}{%
-  \iffieldundef{booktitle}
-    {}
-    {\renewcommand*{\xtitle}{book}%
-     \usebibmacro{longtitle+titleaddon}%
-     \setunit{\addcomma\space}}}
+\newbibmacro*{test:title+booktitle}{%
+  \ifboolexpr{ test {\iffieldundef{title}}
+               and test {\iffieldundef{booktitle}}}
+    {\renewcommand*{\xtitle}{bookbook}}%
+    {\iffieldundef{title}
+       {\renewcommand*{\xtitle}{book}}%
+       {\ifboolexpr{ togl {collection}
+                     and not togl {volfirst}}
+          {\ifentrytype{book}
+             {\renewcommand*{\xtitle}{main}}%
+             {\renewcommand*{\xtitle}{book}}}
+          {}}}}
 
 \newbibmacro*{bookbooktitle}{%
   \iffieldundef{bookbooktitle}
@@ -986,7 +1056,14 @@
     {\bibstring{in}\space
      \renewcommand*{\xtitle}{bookbook}%
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\addcomma\space}}}
+     \midsentence\setunit{\addcomma\space}}}
+
+\newbibmacro*{maintitle+editor}{%
+  \iffieldundef{maintitle}
+    {}
+    {\renewcommand*{\xtitle}{main}%
+     \usebibmacro{longtitle+titleaddon}%
+     \usebibmacro{xeditor+yeditor}{maintitle}{}}}
 
 \newbibmacro*{issuetitle}{%
   \iffieldundef{issuetitle}
@@ -996,17 +1073,246 @@
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \usebibmacro{xeditor+yeditor}{issuetitle}}%
+        \usebibmacro{xeditor+yeditor}{issuetitle}{}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
-\newbibmacro*{test:title+booktitle}{%
-  \ifboolexpr{ test {\iffieldundef{title}}
-               and test {\iffieldundef{booktitle}}}
-    {\renewcommand*{\xtitle}{bookbook}}%
-    {\iffieldundef{title}
-       {\renewcommand*{\xtitle}{book}}%
-       {}}}
+\newbibmacro*{origtitle}{%
+  \iffieldundef{origtitle}
+    {}
+    {\newunit
+     \bibstring{origpub}%
+     \space
+     \renewcommand*{\xtitle}{orig}%
+     \usebibmacro{longtitle+titleaddon}%
+     \setunit{\addspace}% not '\setunit{\space}'
+     \printtext[parens]{%
+       \usebibmacro{origlocation}%
+       \usebibmacro{origpublisher}%
+       \usebibmacro{origyear+origendyear}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%  Dates and Times  %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{issue+month+etc}{%
+  \iffieldundef{year}
+    {\iffieldundef{month}
+       {}
+       {\setunit{\space}%
+        \printtext[parens]{\usebibmacro{month+endmonth}}}}
+    {\ifboolexpr{ test {\iffieldundef{volume}}
+                  and test {\iffieldundef{number}}}
+       {\iffieldundef{journal}
+          {}
+          {\setunit{\addcomma\space}}%
+        \iffieldundef{month}
+          {\usebibmacro{issue+season+year}}%
+          {\usebibmacro{month+day+year}}}
+       {\setunit{\space}%
+        \iffieldundef{month}
+          {\usebibmacro{reflist+issue+season+year}}%
+          {\printtext[parens]{%
+             \usebibmacro{month+day+year}}}}}}
+
+\newbibmacro*{month+day+year}{%
+  \usebibmacro{month+endmonth}%
+  \usebibmacro{reflist+day+year}}%
+
+\newbibmacro*{month+endmonth}{%
+  \iffieldundef{month}
+    {}
+    {\printfield{month}%
+     \ifboolexpr{ test {\iffieldundef{endmonth}}
+                  or test {\iffieldsequal{month}{endmonth}}}
+       {}
+       {\addslash\printfield{endmonth}}}}
+
+\newbibmacro*{reflist+day+year}{%
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}}
+    {\iffieldundef{day}
+       {}
+       {\usebibmacro{day+endday+year}}}
+    {\iffieldundef{day}
+       {\addspace
+        \printfield{year}}%
+       {\usebibmacro{day+endday+year}}}}
+
+\newbibmacro*{day+endday+year}{%
+  \usebibmacro{day+endday}%
+  \addcomma\space
+  \printfield{year}%
+  \usebibmacro{hour+minute+timezone}}%
+
+\newbibmacro*{day+endday}{%
+  \iffieldundef{day}
+    {}
+    {\addspace
+     \stripzeros{\thefield{day}}%
+     \iffieldundef{endday}
+       {}
+       {\textendash\stripzeros{\thefield{endday}}}}}
+
+\newbibmacro*{hour+minute+timezone}{%
+  \iffieldundef{hour}
+    {}
+    {\addcomma\space
+     \printtime}}%
+
+\newbibmacro*{reflist+issue+season+year}{%
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}
+               and test {\iffieldundef{issue}}
+               and test {\iffieldundef{season}}}
+      {}
+      {\setunit{\space}%
+       \printtext[parens]{\usebibmacro{issue+season+year}}}}
+
+% Treat 'season' as an alternative for 'issue'.
+
+\newbibmacro*{issue+season+year}{%
+  \ifboolexpr{ test {\iffieldundef{issue}}
+               and test {\iffieldundef{season}}}
+    {\printfield{year}}%
+    {\iffieldundef{issue}
+      {\printfield{season}%
+       \space
+       \printfield{year}}%
+      {\printfield{issue}%
+       \space
+       \printfield{year}}}}
+
+% Per CMS, 17th ed., 14.119, print the publication year of the
+% last-mentioned title.
+
+\newbibmacro*{year+bookyear}{%
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}}
+    {\ifboolexpr{ test {\iffieldundef{bookyear}}
+                  or test {\iffieldundef{year}}
+                  or test {\iffieldsequal{year}{bookyear}}
+                  or not test {\iffieldequalstr{labeldatesource}{bookyear}}}
+       {}
+       {\printfield{bookyear}%
+        \usebibmacro{endbookyear}}}
+    {\ifboolexpr{ test {\iffieldundef{year}}
+                  and test {\iffieldundef{bookyear}}}
+       {\bibstring{nodate}}%
+       {\iffieldundef{bookyear}
+          {\printfield{year}%
+           \usebibmacro{endyear}}%
+          {\ifboolexpr{ togl {collection}
+                        and not togl {volfirst}
+                        and not test {\iffieldundef{year}}}
+             {\printfield{year}%
+              \usebibmacro{endyear}}%
+             {\printfield{bookyear}%
+              \usebibmacro{endbookyear}}}}}}
+
+\newbibmacro*{endyear}{%
+  \iffieldundef{endyear}
+    {}
+    {\iffieldsequal{year}{endyear}
+       {}
+       {\textendash\printfield{endyear}}}}
+
+\newbibmacro*{endbookyear}{%
+  \iffieldundef{endbookyear}
+    {}
+    {\iffieldsequal{bookyear}{endbookyear}
+       {}
+       {\textendash\printfield{endbookyear}}}}
+
+\newbibmacro*{origyear+origendyear}{%
+  \iffieldundef{origyear}
+    {}
+    {\printfield{origyear}%
+     \ifboolexpr{ test {\iffieldundef{endorigyear}}
+                  or test {\iffieldsequal{origyear}{endorigyear}}}
+       {}
+       {\textendash\printfield{endorigyear}}}}
+
+% For reference lists.
+
+\newbibmacro*{a:labelyear+extradate}{%
+  \iftoggle{noauth}
+    {}
+    {\usebibmacro{labelyear+extradate}}}
+
+\newbibmacro*{b:labelyear+extradate}{%
+  \ifboolexpr{ togl {noauth}
+               and not togl {journalfirst}}
+    {\usebibmacro{labelyear+extradate}}%
+    {}}% needs this '%'?
+
+% FIX: Figure out placement of units so as to avoid '\ifterm'.
+\newbibmacro*{labelyear+extradate}{%
+  \iftoggle{reflist}
+    {\ifterm{}{\newunit}% mainly for '\bibnamedash\newunitpunct'
+     \usebibmacro{reflist:origyear}%
+     \usebibmacro{labeldate+endyear}%
+     \printfield{extradate}%
+     \newunit}%
+    {}}% needs this '%'?
+
+\newbibmacro*{reflist:origyear}{%
+  \iffieldundef{origyear}
+    {}
+    {\printtext[parens]{\usebibmacro{origyear+origendyear}}%
+     \clearfield{origyear}%
+     \clearfield{origendyear}%
+     \space}}%
+
+% The next macro helps bib environments that use the 'reflist' toggle
+% (see the 'reflist' bib environment set elsewhere in this file).
+% Since they can't use the 'reflist' preamble option, they can't load
+% the DeclareLabeldate for reference lists. The macro below makes the
+% output consistent in those cases but can cause problems with
+% sorting. Resolve them with '\sortyear'. Also, end dates go here. See
+% CMS, 17th ed., 15.37 and 15.41. Although '\printlabeldate' prints
+% them, the workaround needs to run 'endyear', which can cause
+% problems not only with sorting but with 'extralabeldate'.
+
+\newbibmacro*{labeldate+endyear}{%
+  \iffieldequalstr{labeldatesource}{bookyear}
+    {\iffieldundef{year}
+       {\printlabeldate}%
+       {\printfield{year}%
+        \usebibmacro{endyear}}}
+     {\printlabeldate}}%
+
+%%%%%%%%%%%%%%%%%
+%%  Locations  %%
+%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{loc+pub+year}{%
+  \usebibmacro{loc+pub}{1}%
+  \ifnumgreater{\value{publisher}}{1}
+    {\setunit{\addsemicolon\space}%
+     \usebibmacro{loc+pub}{2}}%
+    {}
+  \setunit{\addcomma\space}%
+  \usebibmacro{year+bookyear}}%
+
+\newbibmacro*{loc+pub}[1]{%
+  \usebibmacro{location}{#1}%
+  \setunit{\addcolon\space}%
+  \printlist[publisher][#1-#1]{publisher}}%
+
+\newbibmacro*{location}[1]{%
+  \ifboolexpr{ test {\iflistundef{location}}
+               and test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{url}}
+               and test {\iffieldundef{doi}}}
+    {\bibstring{noplace}}%
+    {\printlist[location][#1-#1]{location}}}
+
+\newbibmacro*{origlocation}{%
+  \iflistundef{origlocation}
+    {}
+    {\printlist{origlocation}%
+     \setunit{\addcolon\space}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers  %%
@@ -1031,20 +1337,14 @@
 
 \DeclareBibliographyDriver{book}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{author+title+ed}%
-  \usebibmacro{ed+vol+part+etc}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{book}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{author+title+ed}%
-  \usebibmacro{ed+vol+part+etc}%
+  \usebibmacro{author+collection+etc}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
+  \usebibmacro{test:collection}%
   \usebibmacro{author+title+etc}%
-  \usebibmacro{test:crossref}%
+  \usebibmacro{crossref+incollections}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{misc}{%
@@ -1140,26 +1440,44 @@
            \printfield{pages}}}
        {\usebibmacro{colon+pages}}}}
 
-\newbibmacro*{edition}{%
-  \iffieldundef{edition}
-    {}
-    {\newunit
-     \printfield{edition}}}
+\newbibmacro*{doi+finentry+etc}{%
+  \usebibmacro{doi+url+etc}%
+  \usebibmacro{isbn}%
+  \usebibmacro{pageref+finentry}}%
 
-\newbibmacro*{ed+vol+part+etc}{%
-  \usebibmacro{b:edtrans}%
-  \usebibmacro{editoraddon}%
-  \usebibmacro{note}%
-  \usebibmacro{edition}%
-  \usebibmacro{volumes}%
-  \usebibmacro{volume}%
-  \usebibmacro{pages}%
-  \usebibmacro{bookseries}%
-  \usebibmacro{book:number}%
-  \usebibmacro{part}%
-  \usebibmacro{maintitle}%
-  \usebibmacro{publishers}%
-  \usebibmacro{origtitle}}%
+\newbibmacro*{test:collection}{%
+  \iffieldundef{volume}
+    {}
+    {\ifboolexpr{ test {\ifentrytype{book}}
+                  and not test {\iffieldundef{maintitle}}}
+       {\global\toggletrue{collection}}%
+       {\ifboolexpr{ test {\ifentrytype{inbook}}
+                     and test {\iffieldundef{maintitle}}
+                     and not test {\iffieldundef{title}}
+                     and not test {\iffieldundef{booktitle}}}
+          {\global\toggletrue{collection}}%
+          {}}}}
+
+\newbibmacro*{author+collection+etc}{%
+  \usebibmacro{test:collection}%
+  \usebibmacro{author+title+ed}%
+  \ifdefstring{\xtitle}{main}
+    {\usebibmacro{volumes+series+etc}%
+     \let\xtitle\empty
+     \usebibmacro{longtitle+titleaddon}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{b:edtrans}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}%
+     \usebibmacro{publishers}%
+     \usebibmacro{origtitle}}%
+    {\usebibmacro{b:edtrans}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}%
+     \usebibmacro{volumes+series+etc}%
+     \usebibmacro{maintitle+editor}%
+     \usebibmacro{publishers}%
+     \usebibmacro{origtitle}}}
 
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{test:bookauthor}%
@@ -1169,10 +1487,11 @@
                   and test {\ifnameundef{foreword}}
                   and test {\ifnameundef{introduction}}}
        {\usebibmacro{author+title+ed}%
-        \usebibmacro{chap+in}}%
+        \usebibmacro{chapter}%
+        \usebibmacro{in}}%
        {\usebibmacro{aft+fore+intro}}}}
 
-\newbibmacro*{test:crossref}{%
+\newbibmacro*{crossref+incollections}{%
   \iffieldundef{crossref}
     {\usebibmacro{incollections}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
@@ -1186,11 +1505,6 @@
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}
         \usebibmacro{incollections}}}}
-
-\newbibmacro*{editoraddon}{%
-  \iffieldundef{editoraddon}
-    {}
-    {\nopunct\printfield{editoraddon}}}
 
 \newbibmacro*{reviews}{%
 % Unsigned reviews have no plausible place for the publication year
@@ -1224,9 +1538,9 @@
   \setunit{\addcomma\space}%
   \usebibmacro{month+day+year}}%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Third and Higher Tier Macros  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Third Tier Macros  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewbibmacro*{annotation}{%
   \iftoggle{annotate}
@@ -1238,55 +1552,6 @@
     {}
     {\newunit
      \printfield{note}}}
-
-\newbibmacro*{title+labelyear}{%
-  \iftoggle{bibliography}
-    {\usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{b:labelyear+extradate}}%
-    {\ifboolexpr{ test {\ifciteseen}
-                  or togl {firstshort}}
-       {\usebibmacro{shorttitle}}%
-       {\usebibmacro{longtitle+titleaddon}}}}
-
-\newbibmacro*{review+title}{%
-  \iftoggle{noauth}
-    {\bibcpstring{reviewnoauth}}%
-    {\bibstring{review}}%
-  \space
-  \usebibmacro{test:title+booktitle}%
-  \usebibmacro{title+labelyear}%
-  \iftoggle{firstshort}
-    {\clearfield{booktitle}}
-    {\setunit{\addcomma\space}%
-     \togglefalse{noauth}%
-     \renewcommand*{\pluga}{\bibstring{by}\space}%
-     \renewcommand*{\cbx@namelist}{bookauthor}%
-     \usebibmacro{printnames+etc}}}
-
-\newbibmacro*{test:bookauthor}{%
-  \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
-               or test {\ifnamesequal{afterword}{bookauthor}}
-               or test {\ifnamesequal{foreword}{bookauthor}}
-               or test {\ifnamesequal{introduction}{bookauthor}}}
-    {\clearname{bookauthor}}%
-    {\iftoggle{noauth}
-       {\clearname{bookauthor}}%
-       {}}}
-
-\newbibmacro*{chap+in}{%
-  \iffieldundef{booktitle}
-    {}
-    {\newunit
-     \iffieldundef{chapter}
-       {\bibstring{in}\space}%
-       {\printfield{chapter}\space
-        \bibstring{in}\space}}}
-
-\newbibmacro*{incollections}{%
-  \usebibmacro{booktitle}%
-  \usebibmacro{bookbooktitle}%
-  \usebibmacro{bybookauthor}%
-  \usebibmacro{ed+vol+part+etc}}%
 
 \newbibmacro*{part}{%
   \iffieldundef{part}
@@ -1308,19 +1573,8 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}%
+     \usebibmacro{xeditor+yeditor}{series}{}%
      \newunit}}%
-
-\newbibmacro*{bibjournaldash}{%
-  \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
-               and not test \iffirstonpage}
-    {\bibnamedash\newunitpunct
-     \clearfield{journaltitle}%
-     \clearlist{location}}%
-    {\savefield{journaltitle}{\bbx@lasthash}%
-     \renewcommand*{\xtitle}{journal}%
-     \usebibmacro{longtitle+titleaddon}%
-     \let\xtitle\empty}}%
 
 \newbibmacro*{journallocation}{%
   \iflistundef{location}
@@ -1334,116 +1588,6 @@
     {\setunit{\addcomma\space}}%
   \usebibmacro{periodical:number}%
   \usebibmacro{issue+month+etc}}%
-
-% On how to format the issue number for periodicals, see CMS, 17th
-% ed., 14.171 and 15.47.
-
-\newbibmacro*{periodical:number}{%
-  \iffieldundef{number}
-    {}
-    {\ifboolexpr{ togl {bibliography}
-                  and togl {reflist}
-                  and test {\iffieldundef{issue}}
-                  and test {\iffieldundef{season}}
-                  and test {\iffieldundef{month}}
-                  and not test {\iffieldundef{volume}}}
-       {\setunit{\space}%
-        \printfield[parens]{number}}%
-       {\setunit{\addcomma\space}%
-        \printfield[journum]{number}}}}
-
-\newbibmacro*{issue+month+etc}{%
-  \iffieldundef{year}
-    {\iffieldundef{month}
-       {}
-       {\setunit{\space}%
-        \printtext[parens]{\usebibmacro{month+endmonth}}}}
-    {\ifboolexpr{ test {\iffieldundef{volume}}
-                  and test {\iffieldundef{number}}}
-       {\iffieldundef{journal}
-          {}
-          {\setunit{\addcomma\space}}%
-        \iffieldundef{month}
-          {\usebibmacro{issue+season+year}}%
-          {\usebibmacro{month+day+year}}}
-       {\setunit{\space}%
-        \iffieldundef{month}
-          {\usebibmacro{reflist+issue+season+year}}%
-          {\printtext[parens]{%
-             \usebibmacro{month+day+year}}}}}}
-
-\newbibmacro*{month+day+year}{%
-  \usebibmacro{month+endmonth}%
-  \usebibmacro{reflist+day+year}}%
-
-\newbibmacro*{month+endmonth}{%
-  \iffieldundef{month}
-    {}
-    {\printfield{month}%
-     \ifboolexpr{ test {\iffieldundef{endmonth}}
-                  or test {\iffieldsequal{month}{endmonth}}}
-       {}
-       {\addslash\printfield{endmonth}}}}
-
-\newbibmacro*{reflist+day+year}{%
-  \ifboolexpr{ togl {bibliography}
-               and togl {reflist}}
-    {\iffieldundef{day}
-       {}
-       {\usebibmacro{day+endday+year}}}
-    {\iffieldundef{day}
-       {\addspace
-        \printfield{year}}%
-       {\usebibmacro{day+endday+year}}}}
-
-\newbibmacro*{day+endday+year}{%
-  \usebibmacro{day+endday}%
-  \addcomma\space
-  \printfield{year}%
-  \usebibmacro{hour+minute+timezone}}%
-
-\newbibmacro*{day+endday}{%
-  \iffieldundef{day}
-    {}
-    {\addspace
-     \stripzeros{\thefield{day}}%
-     \iffieldundef{endday}
-       {}
-       {\textendash\stripzeros{\thefield{endday}}}}}
-
-\newbibmacro*{hour+minute+timezone}{%
-  \iffieldundef{hour}
-    {}
-    {\addcomma\space
-     \printtime}}%
-
-\newbibmacro*{reflist+issue+season+year}{%
-  \ifboolexpr{ togl {bibliography}
-               and togl {reflist}
-               and test {\iffieldundef{issue}}
-               and test {\iffieldundef{season}}}
-      {}
-      {\setunit{\space}%
-       \printtext[parens]{\usebibmacro{issue+season+year}}}}
-
-% Treat 'season' as an alternative for 'issue'.
-
-\newbibmacro*{issue+season+year}{%
-  \ifboolexpr{ test {\iffieldundef{issue}}
-               and test {\iffieldundef{season}}}
-    {\printfield{year}}%
-    {\iffieldundef{issue}
-      {\printfield{season}%
-       \space
-       \printfield{year}}%
-      {\printfield{issue}%
-       \space
-       \printfield{year}}}}
-
-\newbibmacro*{doi+finentry+etc}{%
-  \usebibmacro{doi+url+etc}%
-  \usebibmacro{isbn}%
-  \usebibmacro{pageref+finentry}}%
 
 \newbibmacro*{colon+pages}{%
   \ifboolexpr{ test {\iffieldundef{month}}
@@ -1462,6 +1606,131 @@
           {\setunit{\addcolon\space}%
            \printfield{pages}}}}}
 
+\newbibmacro*{doi+url+etc}{%
+  \ifboolexpr{ test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{url}}
+               and test {\iffieldundef{doi}}
+               and test {\iffieldundef{addendum}}
+               or ( togl {firstshort} and not togl {bibliography} )}
+    {}
+    {\usebibmacro{eid}%
+     \newunit
+     \printfield{howpublished}%
+     \newunit
+     \printurldate
+     \newunit
+     \printfield[noformat]{version}%
+     \newunit
+     \printfield{url}%
+     \newunit
+     \printfield{doi}%
+     \newunit
+     \printfield{addendum}}}
+
+\newbibmacro*{isbn}{%
+  \iffieldundef{isbn}
+    {}
+    {\iftoggle{bibliography}
+       {\iftoggle{isbn}
+          {\newunit
+           \printfield{isbn}}%
+          {}}
+       {}}}
+
+\newbibmacro*{chapter}{%
+  \iffieldundef{chapter}
+    {}
+    {\newunit
+     \printfield{chapter}\space}}%
+
+\newbibmacro*{in}{%
+  \iftoggle{collection}
+    {}
+    {\bibstring{in}\space}}%
+
+\newbibmacro*{incollections}{%
+  \iffieldundef{booktitle}
+    {\usebibmacro{pages+volume+part}%
+     \let\xtitle\empty
+     \usebibmacro{longtitle+titleaddon}%
+     \midsentence\setunit{\addcomma\space}%
+     \usebibmacro{bybookauthor+pages}%
+     \usebibmacro{b:edtrans}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}}%
+    {\iftoggle{collection}
+       {\usebibmacro{note}%
+        \usebibmacro{edition}%
+        \usebibmacro{pages+volume+part}}%
+       {}% needs this '%'
+     \renewcommand*{\xtitle}{book}%
+     \usebibmacro{longtitle+titleaddon}%
+     \midsentence\setunit{\addcomma\space}%
+     \usebibmacro{bybookauthor+pages}%
+     \usebibmacro{b:edtrans}%
+     \iftoggle{collection}
+       {}% needs this '%'
+       {\usebibmacro{note}%
+        \usebibmacro{edition}}}% needs this '%'
+  \usebibmacro{volumes+series+etc}%
+  \usebibmacro{maintitle+editor}%
+  \usebibmacro{bookbooktitle}% FIX: move?
+%  \usebibmacro{b:edtrans}% FIX: for bookbooktitle?
+  \usebibmacro{publishers}%
+  \usebibmacro{origtitle}}%
+
+\newbibmacro*{pages}{%
+  \iffieldundef{pages}
+    {}
+    {\iftoggle{bibliography}
+       {\setunit{\addcomma\space}% sometimes necessary
+        \printfield{pages}%
+        \clearfield{pages}}%
+       {}}}
+
+\newbibmacro*{review+title}{%
+  \iftoggle{noauth}
+    {\bibcpstring{reviewnoauth}}%
+    {\bibstring{review}}%
+  \space
+  \usebibmacro{test:title+booktitle}%
+  \usebibmacro{title+labelyear}%
+  \iftoggle{firstshort}
+    {\clearfield{booktitle}}
+    {\setunit{\addcomma\space}%
+     \togglefalse{noauth}%
+     \renewcommand*{\pluga}{\bibstring{by}\space}%
+     \renewcommand*{\cbx@namelist}{bookauthor}%
+     \usebibmacro{printnames+etc}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Fourth and Higher Tier Macros  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{volumes+series+etc}{%
+  \usebibmacro{volumes}%
+  \usebibmacro{bookseries}%
+  \usebibmacro{pages+volume+part}%
+  \usebibmacro{pages}%
+  \usebibmacro{book:number}%
+  \usebibmacro{part}}%
+
+\newbibmacro*{test:bookauthor}{%
+  \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
+               or test {\ifnamesequal{afterword}{bookauthor}}
+               or test {\ifnamesequal{foreword}{bookauthor}}
+               or test {\ifnamesequal{introduction}{bookauthor}}}
+    {\clearname{bookauthor}}%
+    {\iftoggle{noauth}
+       {\clearname{bookauthor}}%
+       {}}}
+
+\newbibmacro*{edition}{%
+  \iffieldundef{edition}
+    {}
+    {\newunit
+     \printfield{edition}}}
+
 % Print the number of volumes in bibliographies and reference lists.
 % In notes, users must cite a volume number when they cite particular
 % pages, chapters, and so on.
@@ -1476,57 +1745,60 @@
        {\newunit
         \printfield{volumes}}}}
 
-\newbibmacro*{volume}{%
+\newbibmacro*{pages+volume+part}{%
   \iffieldundef{volume}
     {}
     {\iftoggle{bibliography}
-       {\iffieldundef{pages}
-          {\usebibmacro{volume+title+part}}%
-          {\usebibmacro{vol+colon}%
-           \printfield{pages}%
-           \clearfield{pages}%
-           \usebibmacro{volumetitle}%
-           \usebibmacro{part}}}
-       {\usebibmacro{volume+title+part}}}}
+       {\printfield{pages}%
+        \clearfield{pages}%
+        \usebibmacro{volume+part}}%
+       {\usebibmacro{volume+part}}}}
 
-\newbibmacro*{pages}{%
-  \iffieldundef{pages}
-    {}
-    {\iftoggle{bibliography}
-       {\setunit{\addcomma\space}% sometimes necessary
-        \printfield{pages}%
-        \clearfield{pages}}%
-       {}}}
-
-\newbibmacro*{volume+title+part}{%
+\newbibmacro*{volume+part+old}{%
   \newunit
   \iffieldnum{volume}
     {\printfield{volume}}%
     {\bibstring{volumes}\space
      \printfield[noformat]{volume}}%
   \clearfield{volume}%
-  \usebibmacro{volumetitle}%
-  \usebibmacro{part}}%
+  \usebibmacro{part}%
+  \ifboolexpr{ togl {collection}
+               and not togl {volfirst}}
+    {\addcomma\space}%
+    {\space\bibstring{of}\space}}%
 
-\newbibmacro*{volumetitle}{%
-  \iffieldundef{volumetitle}
-    {}
-    {\setunit{\addcomma\space}%
-     \printfield{volumetitle}}}
-
-\newbibmacro*{vol+colon}{%
-  \setunit{\addcomma\space}%
-  \printfield[noformat]{volume}%
+% FIX: Find better solution to \newunit below:
+\newbibmacro*{volume+part}{%
+  \iffieldundef{series}
+    {\newunit}%
+    {\setunit{\addcomma\space}}%
+  \iffieldnum{volume}
+    {\printfield{volume}%
+     \iffieldundef{number}
+       {}
+       {\addcomma\space
+        \printfield[journum]{number}%
+        \clearfield{number}}}
+    {\bibstring{volumes}\space
+     \printfield[noformat]{volume}}%
   \clearfield{volume}%
-  \addcolon}%
+  \usebibmacro{part}%
+  \iftoggle{collection}
+    {\iftoggle{volfirst}
+       {\space\bibstring{of}\space}%
+       {\addcomma\space}}%
+    {\iffieldundef{maintitle}
+       {}
+       {\space\bibstring{of}\space}}}
 
 \newbibmacro*{bookseries}{%
   \iffieldundef{series}
     {}
-    {\newunit
+    {\usebibmacro{pages}%
+     \newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}%
+     \usebibmacro{xeditor+yeditor}{series}{}%
      \setunit{\addcomma\space}}}
 
 \newbibmacro*{seriesaddon}{%
@@ -1535,6 +1807,23 @@
     {\addcomma\space%
      \printfield{seriesaddon}%
      \isdot\addcomma}}%
+
+% On how to format the issue number of periodicals, see CMS, 17th ed.,
+% 14.171 and 15.47.
+
+\newbibmacro*{periodical:number}{%
+  \iffieldundef{number}
+    {}
+    {\ifboolexpr{ togl {bibliography}
+                  and togl {reflist}
+                  and test {\iffieldundef{issue}}
+                  and test {\iffieldundef{season}}
+                  and test {\iffieldundef{month}}
+                  and not test {\iffieldundef{volume}}}
+       {\setunit{\space}%
+        \printfield[parens]{number}}%
+       {\setunit{\addcomma\space}%
+        \printfield[journum]{number}}}}
 
 \newbibmacro*{book:number}{%
   \iffieldundef{number}
@@ -1559,33 +1848,13 @@
     {\setunit{\addspace}% '\addspace' not '\space'
      \printfield{number}}}
 
-\renewbibmacro*{maintitle}{%
-  \iffieldundef{maintitle}
-    {}
-    {\usebibmacro{volumea}%
-     \space\bibstring{of}\space
-     \renewcommand*{\xtitle}{main}%
-     \usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{xeditor+yeditor}{maintitle}}}
-
-\newbibmacro*{volumea}{%
-  \iffieldundef{volumea}
-    {}
-    {\newunit
-     \iffieldnum{volumea}
-       {\bibstring{volume}\space
-        \printfield{volumea}}%
-       {\bibstring{volumes}\space
-        \printfield[noformat]{volumea}}}}
-
 \newbibmacro*{publishers}{%
   \iffieldundef{origtitle}
     {\iftoggle{bibliography}
        {\newunit
         \usebibmacro{orig+etc}}%
        {\setunit{\addspace}% not '\setunit{\space}'
-        \printtext[parens]{%
-          \usebibmacro{orig+etc}}}}
+        \printtext[parens]{\usebibmacro{orig+etc}}}}
     {\newunit
      \usebibmacro{loc+pub+year}}}
 
@@ -1595,12 +1864,6 @@
   \usebibmacro{origyear+origendyear}%
   \usebibmacro{reprint}%
   \usebibmacro{loc+pub+year}}%
-
-\newbibmacro*{origlocation}{%
-  \iflistundef{origlocation}
-    {}
-    {\printlist{origlocation}%
-     \setunit{\addcolon\space}}}
 
 \newbibmacro*{origpublisher}{%
   \iflistundef{origpublisher}
@@ -1618,103 +1881,6 @@
      \bibstring{reprint}%
      \addcomma\space}}%
 
-\newbibmacro*{loc+pub+year}{%
-  \usebibmacro{loc+pub}{1}%
-  \ifnumgreater{\value{publisher}}{1}
-    {\setunit{\addsemicolon\space}%
-     \usebibmacro{loc+pub}{2}}%
-    {}
-  \setunit{\addcomma\space}%
-  \usebibmacro{year+bookyear}}%
-
-\newbibmacro*{loc+pub}[1]{%
-  \usebibmacro{location}{#1}%
-  \setunit{\addcolon\space}%
-  \printlist[publisher][#1-#1]{publisher}}%
-
-\newbibmacro*{location}[1]{%
-  \ifboolexpr{ test {\iflistundef{location}}
-               and test {\iffieldundef{howpublished}}
-               and test {\iffieldundef{url}}
-               and test {\iffieldundef{doi}}}
-    {\bibstring{noplace}}%
-    {\printlist[location][#1-#1]{location}}}
-
-% Per CMS, 17th ed., 14.119, print the publication year of the ``last-mentioned
-% title.'' If 'bookyear' is defined, that's the correct field.
-
-\newbibmacro*{year+bookyear}{%
-  \ifboolexpr{ togl {bibliography}
-               and togl {reflist}}
-    {\ifboolexpr{ test {\iffieldundef{bookyear}}
-                  or test {\iffieldsequal{labelyear}{bookyear}}}
-       {}
-       {\printfield{bookyear}%
-        \clearfield{bookyear}%
-        \usebibmacro{endyear+endbookyear}}}
-    {\iffieldundef{bookyear}
-       {\iffieldundef{year}
-          {\bibstring{nodate}}%
-          {\printfield{year}%
-           \usebibmacro{endyear+endbookyear}}}
-       {\printfield{bookyear}%
-        \clearfield{bookyear}%
-        \usebibmacro{endyear+endbookyear}}}}
-
-\newbibmacro*{endyear+endbookyear}{%
-  \iffieldundef{endbookyear}
-    {\ifboolexpr{ test {\iffieldundef{endyear}}
-                  or test {\iffieldsequal{year}{endyear}}}
-       {}
-       {\textendash\printfield{endyear}}}
-    {\iffieldsequal{bookyear}{endbookyear}
-       {}
-       {\textendash\printfield{endbookyear}}}}
-
-\newbibmacro*{origtitle}{%
-  \iffieldundef{origtitle}
-    {}
-    {\newunit
-     \bibstring{origpub}%
-     \space
-     \renewcommand*{\xtitle}{orig}%
-     \usebibmacro{longtitle+titleaddon}%
-     \setunit{\addspace}% not '\setunit{\space}'
-     \printtext[parens]{%
-       \usebibmacro{origlocation}%
-       \usebibmacro{origpublisher}%
-       \usebibmacro{origyear+origendyear}}}}
-
-\newbibmacro*{origyear+origendyear}{%
-  \iffieldundef{origyear}
-    {}
-    {\printfield{origyear}%
-     \ifboolexpr{ test {\iffieldundef{endorigyear}}
-                  or test {\iffieldsequal{origyear}{endorigyear}}}
-       {}
-       {\textendash\printfield{endorigyear}}}}
-
-\newbibmacro*{doi+url+etc}{%
-  \ifboolexpr{ test {\iffieldundef{howpublished}}
-               and test {\iffieldundef{url}}
-               and test {\iffieldundef{doi}}
-               and test {\iffieldundef{addendum}}
-               or ( togl {firstshort} and not togl {bibliography} )}
-    {}
-    {\usebibmacro{eid}%
-     \newunit
-     \printfield{howpublished}%
-     \newunit
-     \printurldate
-     \newunit
-     \printfield[noformat]{version}%
-     \newunit
-     \printfield{url}%
-     \newunit
-     \printfield{doi}%
-     \newunit
-     \printfield{addendum}}}
-
 \newbibmacro*{eid}{%
   \iffieldundef{eid}
     {}
@@ -1722,15 +1888,5 @@
        {\setunit{\addcolon\space}}%
        {\newunit}%
      \printfield{eid}}}
-
-\newbibmacro*{isbn}{%
-  \iffieldundef{isbn}
-    {}
-    {\iftoggle{bibliography}
-       {\iftoggle{isbn}
-          {\newunit
-           \printfield{isbn}}%
-          {}}
-       {}}}
 
 \endinput
