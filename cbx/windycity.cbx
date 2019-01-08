@@ -1,4 +1,4 @@
-% Last modified: Mon 07 Jan 2019 07:28:15 PM CST
+% Last modified: Tue 08 Jan 2019 02:28:25 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -395,7 +395,9 @@
 \renewbibmacro*{postnote}{%
   \iffieldundef{postnote}
     {}
-    {\iftoggle{multivolume}
+    {\ifboolexpr{ togl {multivolume}
+                  or test {\ifentrytype{article}}
+                  or test {\ifentrytype{review}}}
        {}
        {\newunit}%
      \printfield{postnote}}}
@@ -447,8 +449,7 @@
     {\ifboolexpr{ test {\ifentrytype{article}}
                   or test {\ifentrytype{review}}}
        {\iffieldundef{postnote}
-          {\newunit
-           \printfield{pages}}%
+          {\printfield{pages}}%
           {}}
        {}}}
 
