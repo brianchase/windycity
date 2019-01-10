@@ -1,4 +1,4 @@
-% Last modified: Thu 10 Jan 2019 02:09:58 PM CST
+% Last modified: Thu 10 Jan 2019 03:23:36 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -175,8 +175,11 @@
   \usebibmacro{pcite:test:crossref}%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
-    {\usebibmacro{pcite:labelyear+etc}}%
-    {\usebibmacro{pcite:long}}}
+    {\iffieldundef{postnote}
+       {\printtext[bibhyperref]{%
+          \usebibmacro{pcite:labelyear+extradate}}}
+       {}}
+    {\printtext[bibhyperref]{\usebibmacro{pcite:long}}}}
 
 \newbibmacro*{pcite:test:crossref}{%
   \iffieldundef{crossref}
@@ -188,11 +191,6 @@
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}}}}
 
-\newbibmacro*{pcite:labelyear+etc}{%
-  \iffieldundef{postnote}
-    {\usebibmacro{pcite:labelyear+extradate}}%
-    {}}
-
 \newbibmacro*{pcite:labelname+labeltitle}{%
   \iftoggle{noauth}
     {}
@@ -200,7 +198,7 @@
                   or test {\iffieldundef{labelyear}}}
        {\iffieldundef{label}
           {\usebibmacro{pcite:journalfirst}}%
-          {\printtext[bibhyperref]{\printfield{label}}}}
+          {\printfield{label}}}
        {\global\toggletrue{cbx@short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
         \clearfield{nameaddon}%
@@ -213,7 +211,7 @@
        {\renewcommand*{\xtitle}{journal}%
         \usebibmacro{longtitle}}%
        {\printfield[journal]{shortjournal}}}
-    {\printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}}}}
+    {\printfield[citetitle]{labeltitle}}}}
 
 \newbibmacro*{pcite:labelyear+extradate}{%
   \iffieldundef{labelyear}
@@ -221,18 +219,16 @@
     {\usebibmacro{pcite:origyear}%
      \ifboolexpr{ test {\iffieldnum{year}}
                   or test {\iffieldnums{year}}}
-      {}
-      {\addcomma}%
-     \printtext[bibhyperref]{%
-       \usebibmacro{labeldate+endyear}%
-       \printfield{extradate}%
-       \newunit}}}
+       {}
+       {\addcomma}%
+     \usebibmacro{labeldate+endyear}%
+     \printfield{extradate}%
+     \newunit}}%
 
 \newbibmacro*{pcite:long}{%
   \iffieldundef{shorthand}
     {\usebibmacro{pcite:labelname+labeltitle}}%
-    {\usebibmacro{cite:shorthand}%
-     \space}%
+    {\printfield{shorthand}\space}%
   \usebibmacro{pcite:labelyear+extradate}}%
 
 \newbibmacro*{pcite:origyear}{%
@@ -258,10 +254,11 @@
        {\ifboolexpr{ test \ifciteibid
                      and togl {short}
                      and not test \iffirstonpage}
-          {\usebibmacro{cite:ibid}}%
-          {\usebibmacro{cite:short}}}
-       {\usebibmacro{cite:shorthand}}}
-    {\usebibmacro{cite:new}}%
+          {\printtext[bibhyperref]{\usebibmacro{cite:ibid}}}
+          {\printtext[bibhyperref]{\usebibmacro{cite:short}}}}
+       {\printtext[bibhyperref]{\printfield{shorthand}}}}
+    {\printtext[bibhyperref]{%
+       \usebibmacro{cite:new}}}% needs this '%'
   \usebibmacro{savefields}}%
 
 \newbibmacro*{test:multicite}{%
@@ -279,21 +276,18 @@
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
-    {\printtext[bibhyperref]{%
-       \bibcpstring{ibidem}%
-       \ifloccit
-         {\global\toggletrue{cbx@loccit}}%
-         {\usebibmacro{cite:volume}}}}
+    {\bibcpstring{ibidem}%
+     \ifloccit
+       {\global\toggletrue{cbx@loccit}}%
+       {\usebibmacro{cite:volume}}}
     {\global\toggletrue{cbx@short}%
      \ifentrytype{review}
-       {\printtext[bibhyperref]{%
-          \usebibmacro{cite:ibid:review}}}
-       {\printtext[bibhyperref]{%
-          \usebibmacro{author+bookauthor+etc}%
-          \iftoggle{noauth}
-            {\usebibmacro{title+labelyear}}%
-            {}% needs this '%'
-         \usebibmacro{cite:volume}}}}}
+       {\usebibmacro{cite:ibid:review}}%
+       {\usebibmacro{author+bookauthor+etc}%
+        \iftoggle{noauth}
+          {\usebibmacro{title+labelyear}}%
+          {}% needs this '%'
+        \usebibmacro{cite:volume}}}}
 
 \newbibmacro*{cite:ibid:review}{%
   \ifnameundef{author}
@@ -306,12 +300,10 @@
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx@short}%
   \ifentrytype{review}
-    {\printtext[bibhyperref]{%
-       \usebibmacro{cite:short:review}}}
-    {\printtext[bibhyperref]{%
-       \usebibmacro{author+bookauthor+etc}%
-       \usebibmacro{title+labelyear}%
-       \usebibmacro{cite:volume}}}}
+    {\usebibmacro{cite:short:review}}%
+    {\usebibmacro{author+bookauthor+etc}%
+     \usebibmacro{title+labelyear}%
+     \usebibmacro{cite:volume}}}
 
 \newbibmacro*{cite:short:review}{%
   \ifnameundef{author}
@@ -322,9 +314,6 @@
   \usebibmacro{test:title+booktitle}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{cite:volume}}%
-
-\newbibmacro*{cite:shorthand}{%
-  \printtext[bibhyperref]{\printfield{shorthand}}}
 
 \newbibmacro*{cite:new}{%
   \global\toggletrue{cbx@first}%
@@ -398,7 +387,8 @@
                   or test {\ifentrytype{review}}}
        {}
        {\newunit}%
-     \printfield{postnote}}}
+     \printtext[bibhyperref]{%
+       \printfield{postnote}}}}
 
 \newbibmacro*{postnote:first}{%
   \ifboolexpr{ test {\iffieldundef{postnote}}
@@ -430,7 +420,7 @@
        {\printfield{volume}}}}
 
 \newbibmacro*{volume+colon}{%
-  \setunit{\addcomma\space}%
+%  \setunit{\addcomma\space}%
   \printfield[noformat]{volume}%
   \clearfield{volume}%
   \addcolon}%
@@ -447,7 +437,7 @@
     {\ifboolexpr{ test {\ifentrytype{article}}
                   or test {\ifentrytype{review}}}
        {\iffieldundef{postnote}
-          {\printfield{pages}}%
+          {\printtext[bibhyperref]{\printfield{pages}}}
           {}}
        {}}}
 
@@ -461,7 +451,7 @@
        {\setunit{\addspace}%
         \printtext[parens]{%
           \bibstring{citedas}\space
-          \usebibmacro{cite:shorthand}}}
+          \printfield{shorthand}}}
        {\setunit{\addspace}%
         \printfield{shorthandintro}}}}
 
