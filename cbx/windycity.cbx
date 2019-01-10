@@ -1,4 +1,4 @@
-% Last modified: Tue 08 Jan 2019 02:28:25 PM CST
+% Last modified: Thu 10 Jan 2019 02:09:58 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -242,9 +242,7 @@
      \space}}%
 
 \newbibmacro*{pcite:postnote}{%
-  \iftoggle{multivolume}
-    {\usebibmacro{cite:volume}}%
-    {}% needs this '%'
+  \usebibmacro{cite:volume}%
   \usebibmacro{postnote}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
