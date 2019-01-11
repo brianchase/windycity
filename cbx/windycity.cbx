@@ -1,4 +1,4 @@
-% Last modified: Thu 10 Jan 2019 03:23:36 PM CST
+% Last modified: Fri 11 Jan 2019 03:15:23 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -39,7 +39,6 @@
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{multicite}%
-  \global\togglefalse{multivolume}%
   \global\togglefalse{cbx@first}%
   \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
@@ -56,6 +55,11 @@
   \bibsentence#1}%
 \renewcommand{\bibendnotewrapper}[1]{%
   \bibsentence#1}%
+
+% Protect commas against abbreviation dots and terminal punctuation
+% marks. Note '\addspace'. Using '\space' there causes problems.
+
+\renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citation Commands  %%
@@ -144,7 +148,7 @@
   {\usebibmacro{citeindex}%
    \usebibmacro{parencite}}%
   {\multicitedelim}%
-  {\usebibmacro{pcite:postnote}}%
+  {\usebibmacro{postnote}}%
 
 \DeclareCiteCommand*{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}%
@@ -152,7 +156,7 @@
    \toggletrue{noauth}%
    \usebibmacro{parencite}}%
   {\multicitedelim}%
-  {\usebibmacro{pcite:postnote}}%
+  {\usebibmacro{postnote}}%
 
 \DeclareCiteCommand{\refentry}
   {}
@@ -171,17 +175,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{parencite}{%
-  \usebibmacro{cite:test:collection}%
-  \usebibmacro{pcite:test:crossref}%
+  \usebibmacro{test:collection}%
+  \usebibmacro{test:crossref}%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
     {\iffieldundef{postnote}
        {\printtext[bibhyperref]{%
-          \usebibmacro{pcite:labelyear+extradate}}}
+          \usebibmacro{parencite:date}%
+          \usebibmacro{cite:volume}}}
        {}}
-    {\printtext[bibhyperref]{\usebibmacro{pcite:long}}}}
+    {\printtext[bibhyperref]{%
+       \usebibmacro{parencite:long}%
+       \usebibmacro{cite:volume}}}}
 
-\newbibmacro*{pcite:test:crossref}{%
+\newbibmacro*{test:crossref}{%
   \iffieldundef{crossref}
     {}
     {\xifinlist{\thefield{crossref}}{\crossreflist}
@@ -191,21 +198,44 @@
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}}}}
 
-\newbibmacro*{pcite:labelname+labeltitle}{%
+\newbibmacro*{parencite:date}{%
+  \iffieldundef{labelyear}
+    {}
+    {\usebibmacro{parencite:origyear}%
+     \ifboolexpr{ test {\iffieldnum{year}}
+                  or test {\iffieldnums{year}}}
+       {}
+       {\addcomma}%
+     \usebibmacro{labeldate+endyear}%
+     \printfield{extradate}}}
+
+\newbibmacro*{parencite:origyear}{%
+  \iffieldundef{origyear}
+    {}
+    {\printfield[brackets]{origyear}%
+     \space}}%
+
+\newbibmacro*{parencite:long}{%
+  \iffieldundef{shorthand}
+    {\usebibmacro{parencite:auth+title}}%
+    {\printfield{shorthand}}%
+  \setunit{\addspace}% not '\space'
+  \usebibmacro{parencite:date}}%
+
+\newbibmacro*{parencite:auth+title}{%
   \iftoggle{noauth}
     {}
     {\ifboolexpr{ test {\ifnameundef{labelname}}
                   or test {\iffieldundef{labelyear}}}
        {\iffieldundef{label}
-          {\usebibmacro{pcite:journalfirst}}%
+          {\usebibmacro{parencite:journal}}%
           {\printfield{label}}}
        {\global\toggletrue{cbx@short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
         \clearfield{nameaddon}%
-        \usebibmacro{author+bookauthor+etc}}%
-     \setunit{\space}}}
+        \usebibmacro{author+bookauthor+etc}}}}
 
-\newbibmacro*{pcite:journalfirst}{%
+\newbibmacro*{parencite:journal}{%
   {\ifentrytype{article}
     {\iffieldundef{shortjournal}
        {\renewcommand*{\xtitle}{journal}%
@@ -213,52 +243,17 @@
        {\printfield[journal]{shortjournal}}}
     {\printfield[citetitle]{labeltitle}}}}
 
-\newbibmacro*{pcite:labelyear+extradate}{%
-  \iffieldundef{labelyear}
-    {}
-    {\usebibmacro{pcite:origyear}%
-     \ifboolexpr{ test {\iffieldnum{year}}
-                  or test {\iffieldnums{year}}}
-       {}
-       {\addcomma}%
-     \usebibmacro{labeldate+endyear}%
-     \printfield{extradate}%
-     \newunit}}%
-
-\newbibmacro*{pcite:long}{%
-  \iffieldundef{shorthand}
-    {\usebibmacro{pcite:labelname+labeltitle}}%
-    {\printfield{shorthand}\space}%
-  \usebibmacro{pcite:labelyear+extradate}}%
-
-\newbibmacro*{pcite:origyear}{%
-  \iffieldundef{origyear}
-    {}
-    {\printfield[brackets]{origyear}%
-     \space}}%
-
-\newbibmacro*{pcite:postnote}{%
-  \usebibmacro{cite:volume}%
-  \usebibmacro{postnote}}%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citations in Notes  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{cite}{%
   \usebibmacro{test:multicite}%
-  \usebibmacro{cite:test:collection}%
+  \usebibmacro{test:collection}%
   \ifciteseen
     {\renewcommand*{\cbx@deflabel}{labelname}%
-     \iffieldundef{shorthand}
-       {\ifboolexpr{ test \ifciteibid
-                     and togl {short}
-                     and not test \iffirstonpage}
-          {\printtext[bibhyperref]{\usebibmacro{cite:ibid}}}
-          {\printtext[bibhyperref]{\usebibmacro{cite:short}}}}
-       {\printtext[bibhyperref]{\printfield{shorthand}}}}
-    {\printtext[bibhyperref]{%
-       \usebibmacro{cite:new}}}% needs this '%'
+     \printtext[bibhyperref]{\usebibmacro{cite:seen}}}
+    {\printtext[bibhyperref]{\usebibmacro{cite:new}}}% needs '%'
   \usebibmacro{savefields}}%
 
 \newbibmacro*{test:multicite}{%
@@ -268,11 +263,15 @@
    {\toggletrue{noauth}}%
    {}}
 
-\newbibmacro*{cite:test:collection}{%
-  \ifboolexpr{ test {\ifentrytype{book}}
-               or test {\ifentrytype{inbook}}}
-    {\usebibmacro{test:collection}}%
-    {}}
+\newbibmacro*{cite:seen}{%
+  \iffieldundef{shorthand}
+    {\ifboolexpr{ test \ifciteibid
+                  and togl {short}
+                  and not test \iffirstonpage}
+       {\usebibmacro{cite:ibid}}%
+       {\usebibmacro{cite:short}}}
+    {\printfield{shorthand}%
+     \usebibmacro{cite:volume}}}
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
@@ -282,14 +281,14 @@
        {\usebibmacro{cite:volume}}}
     {\global\toggletrue{cbx@short}%
      \ifentrytype{review}
-       {\usebibmacro{cite:ibid:review}}%
+       {\usebibmacro{ibid:review}}%
        {\usebibmacro{author+bookauthor+etc}%
         \iftoggle{noauth}
           {\usebibmacro{title+labelyear}}%
-          {}% needs this '%'
+          {}% needs '%'
         \usebibmacro{cite:volume}}}}
 
-\newbibmacro*{cite:ibid:review}{%
+\newbibmacro*{ibid:review}{%
   \ifnameundef{author}
     {\bibcpstring{reviewnoauth}%
      \space
@@ -300,12 +299,12 @@
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx@short}%
   \ifentrytype{review}
-    {\usebibmacro{cite:short:review}}%
+    {\usebibmacro{short:review}}%
     {\usebibmacro{author+bookauthor+etc}%
      \usebibmacro{title+labelyear}%
      \usebibmacro{cite:volume}}}
 
-\newbibmacro*{cite:short:review}{%
+\newbibmacro*{short:review}{%
   \ifnameundef{author}
     {\bibcpstring{reviewnoauth}}%
     {\usebibmacro{author+bookauthor+etc}%
@@ -315,17 +314,32 @@
   \usebibmacro{title+labelyear}%
   \usebibmacro{cite:volume}}%
 
+\newbibmacro*{cite:volume}{%
+  \newunit
+  \ifboolexpr{ test {\ifentrytype{book}}
+               or test {\ifentrytype{bookinbook}}
+               or test {\ifentrytype{inbook}}
+               or test {\ifentrytype{incollection}}}
+    {\ifboolexpr{ togl {collection}
+                  and togl {volfirst}}
+       {}
+       {\usebibmacro{volume+page}}}
+    {}}
+
+\newbibmacro*{volume+page}{%
+  \iffieldundef{volume}
+    {}
+    {\iffieldpages{postnote}
+       {\printfield[noformat]{volume}%
+        \addcolon}%
+       {\printfield{volume}}}}
+
 \newbibmacro*{cite:new}{%
   \global\toggletrue{cbx@first}%
   \usebibmacro{deflabel}%
   \iftoggle{firstshort}
     {\usebibmacro{cite:short}}%
     {\usebibmacro{crossref+long}}}
-
-\newbibmacro*{savefields}{%
-  \iffieldundef{crossref}
-    {\let\cbx@keyhash\empty}%
-    {\savefield{crossref}{\cbx@keyhash}}}
 
 % By default, idemtracker is 'false'. As such, '\ifciteidem' returns
 % false. With idemtracker set to 'true' (or to some value that implies
@@ -359,6 +373,15 @@
       {\DeclareNameAlias{sortname}{default}}%
       {cite:\thefield{entrytype}}}}
 
+\newbibmacro*{savefields}{%
+  \iffieldundef{crossref}
+    {\let\cbx@keyhash\empty}%
+    {\savefield{crossref}{\cbx@keyhash}}}
+
+%%%%%%%%%%%%%%%%
+%%  Postnote  %%
+%%%%%%%%%%%%%%%%
+
 \newbibmacro*{cite:postnote}{%
   \usebibmacro{postnote+etc}%
   \usebibmacro{postpunct+etc}}%
@@ -372,24 +395,6 @@
         \usebibmacro{shorthand+intro}}%
        {\usebibmacro{postnote}}}}
 
-\newbibmacro*{postpunct+etc}{%
-  \iflastcitekey
-    {\iffieldundef{postpunct}
-       {\addperiod}%
-       {\unspace\printfield{postpunct}}}
-    {}}
-
-\renewbibmacro*{postnote}{%
-  \iffieldundef{postnote}
-    {}
-    {\ifboolexpr{ togl {multivolume}
-                  or test {\ifentrytype{article}}
-                  or test {\ifentrytype{review}}}
-       {}
-       {\newunit}%
-     \printtext[bibhyperref]{%
-       \printfield{postnote}}}}
-
 \newbibmacro*{postnote:first}{%
   \ifboolexpr{ test {\iffieldundef{postnote}}
                and test {\iffieldundef{pages}}
@@ -398,32 +403,6 @@
     {\usebibmacro{cite:pages}%
      \usebibmacro{postnote}%
      \usebibmacro{doi+url+etc}}}
-
-\newbibmacro*{cite:volume}{%
-  \ifboolexpr{ test {\ifentrytype{book}}
-               or test {\ifentrytype{bookinbook}}
-               or test {\ifentrytype{inbook}}
-               or test {\ifentrytype{incollection}}}
-    {\ifboolexpr{ togl {collection}
-                  and togl {volfirst}}
-       {\newunit}%
-       {\usebibmacro{volume+page}}}
-    {\newunit}}%
-
-\newbibmacro*{volume+page}{%
-  \iffieldundef{volume}
-    {}
-    {\newunit
-     \iffieldpages{postnote}
-       {\global\toggletrue{multivolume}%
-        \usebibmacro{volume+colon}}%
-       {\printfield{volume}}}}
-
-\newbibmacro*{volume+colon}{%
-%  \setunit{\addcomma\space}%
-  \printfield[noformat]{volume}%
-  \clearfield{volume}%
-  \addcolon}%
 
 % If the postnote is empty, print the page ranges of journal articles.
 % See CMS, 17th ed., 14.153, 14.167, and 14.174. As for incollection
@@ -441,6 +420,11 @@
           {}}
        {}}}
 
+\renewbibmacro*{postnote}{%
+  \iffieldundef{postnote}
+    {}
+    {\printtext[bibhyperref]{\printfield{postnote}}}}
+
 % Use 'shorthandintro' to introduce a shorthand in whatever format you
 % want. See the example in windycity.bib.
 
@@ -455,12 +439,20 @@
        {\setunit{\addspace}%
         \printfield{shorthandintro}}}}
 
-% Protect commas against abbreviation dots and terminal punctuation
-% marks. Note '\addspace'. Using '\space' there causes problems.
+\newbibmacro*{postpunct+etc}{%
+  \iflastcitekey
+    {\iffieldundef{postpunct}
+       {\addperiod}%
+       {\unspace\printfield{postpunct}}}
+    {}}
 
-\renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Macros for Bibliography Drivers  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newbibmacro*{colon}{%
+% See CMS, 17th ed., 14.174, 14.177, 14.185, and 14.188.
+
+\newbibmacro*{colon+comma+etc}{%
   \ifboolexpr{ test {\iffieldundef{pages}}
                and test {\iffieldundef{postnote}}}
     {}
@@ -480,10 +472,11 @@
 \DeclareBibliographyDriver{cite:article}{%
   \usebibmacro{author+title+ed+note}%
   \usebibmacro{articles}%
-  \usebibmacro{colon}}%
+  \usebibmacro{colon+comma+etc}}%
 
 \DeclareBibliographyDriver{cite:book}{%
   \usebibmacro{author+collection+etc}%
+  \newunit
   \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:crossref}{%
@@ -492,15 +485,16 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
-  \usebibmacro{test:collection}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
+  \newunit
   \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:letter}{%
   \toggletrue{noauth}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
+  \newunit
   \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:misc}{%
@@ -551,7 +545,7 @@
 \DeclareBibliographyDriver{cite:review}{%
   \usebibmacro{reviews}%
   \usebibmacro{articles}%
-  \usebibmacro{colon}}%
+  \usebibmacro{colon+comma+etc}}%
 
 \DeclareBibliographyDriver{cite:thesis}{%
   \usebibmacro{author+title+ed+note}%

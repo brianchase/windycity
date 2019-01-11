@@ -1,4 +1,4 @@
-% Last modified: Mon 07 Jan 2019 07:28:07 PM CST
+% Last modified: Fri 11 Jan 2019 11:53:45 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -313,7 +313,6 @@
 \providetoggle{collection}
 \providetoggle{journalfirst}
 \providetoggle{multicite}
-\providetoggle{multivolume}
 \providetoggle{cbx@first}
 \providetoggle{cbx@loccit}
 \providetoggle{cbx@short}
@@ -586,7 +585,7 @@
 \renewcommand*{\revsdnamedelim}{%
   \iftoggle{bibliography}
     {\addcomma}%
-    {}}% needs this '%'?
+    {}}% needs '%'?
 
 \newbibmacro*{author+bookauthor+etc}{%
   \iftoggle{noauth}% true by entry option or citation command
@@ -1244,7 +1243,7 @@
   \ifboolexpr{ togl {noauth}
                and not togl {journalfirst}}
     {\usebibmacro{labelyear+extradate}}%
-    {}}% needs this '%'?
+    {}}% needs '%'?
 
 % FIX: Figure out placement of units so as to avoid '\ifterm'.
 \newbibmacro*{labelyear+extradate}{%
@@ -1254,7 +1253,7 @@
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}%
      \newunit}%
-    {}}% needs this '%'?
+    {}}% needs '%'?
 
 \newbibmacro*{reflist:origyear}{%
   \iffieldundef{origyear}
@@ -1445,18 +1444,23 @@
   \usebibmacro{isbn}%
   \usebibmacro{pageref+finentry}}%
 
+% Check for entrytypes due to its use in 'cite' and 'parencite'.
+
 \newbibmacro*{test:collection}{%
-  \iffieldundef{volume}
-    {}
-    {\ifboolexpr{ test {\ifentrytype{book}}
-                  and not test {\iffieldundef{maintitle}}}
-       {\global\toggletrue{collection}}%
-       {\ifboolexpr{ test {\ifentrytype{inbook}}
-                     and test {\iffieldundef{maintitle}}
-                     and not test {\iffieldundef{title}}
-                     and not test {\iffieldundef{booktitle}}}
+  \ifboolexpr{ test {\ifentrytype{book}}
+               or test {\ifentrytype{inbook}}}
+    {\iffieldundef{volume}
+       {}
+       {\ifboolexpr{ test {\ifentrytype{book}}
+                     and not test {\iffieldundef{maintitle}}}
           {\global\toggletrue{collection}}%
-          {}}}}
+          {\ifboolexpr{ test {\ifentrytype{inbook}}
+                        and test {\iffieldundef{maintitle}}
+                        and not test {\iffieldundef{title}}
+                        and not test {\iffieldundef{booktitle}}}
+             {\global\toggletrue{collection}}%
+             {}}}}
+    {}}
 
 \newbibmacro*{author+collection+etc}{%
   \usebibmacro{test:collection}%
@@ -1662,16 +1666,16 @@
        {\usebibmacro{note}%
         \usebibmacro{edition}%
         \usebibmacro{pages+volume+part}}%
-       {}% needs this '%'
+       {}% needs '%'
      \renewcommand*{\xtitle}{book}%
      \usebibmacro{longtitle+titleaddon}%
      \midsentence\setunit{\addcomma\space}%
      \usebibmacro{bybookauthor+pages}%
      \usebibmacro{b:edtrans}%
      \iftoggle{collection}
-       {}% needs this '%'
+       {}% needs '%'
        {\usebibmacro{note}%
-        \usebibmacro{edition}}}% needs this '%'
+        \usebibmacro{edition}}}% needs '%'
   \usebibmacro{volumes+series+etc}%
   \usebibmacro{maintitle+editor}%
   \usebibmacro{bookbooktitle}% FIX: move?

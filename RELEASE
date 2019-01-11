@@ -2,6 +2,9 @@
 INTERIM
 
 * fixed punctuation before 'postnote' of articles and reviews (ugh!)
+* changed processing of spacing and punctuation around 'postnote' for
+  all citations
+* other bug fixes
 
 RELEASE NOTES FOR VERSION 2019.01.07
 
