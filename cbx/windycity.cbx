@@ -1,4 +1,4 @@
-% Last modified: Fri 11 Jan 2019 07:00:13 PM CST
+% Last modified: Sat 12 Jan 2019 09:29:31 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -318,7 +318,6 @@
   \usebibmacro{title+labelyear}%
   \usebibmacro{cite:volume}}%
 
-% HERE
 \newbibmacro*{cite:volume}{%
   \newunit
   \ifboolexpr{ test {\ifentrytype{book}}
@@ -382,6 +381,21 @@
   \iffieldundef{crossref}
     {\let\cbx@keyhash\empty}%
     {\savefield{crossref}{\cbx@keyhash}}}
+
+% See CMS, 17th ed., 14.174, 14.177, 14.185, and 14.188.
+
+\newbibmacro*{colon+comma+etc}{%
+  \ifboolexpr{ test {\iffieldundef{pages}}
+               and test {\iffieldundef{postnote}}}
+    {}
+    {\ifboolexpr{ test {\iffieldundef{year}}
+                  and test {\iffieldundef{month}}
+                  and test {\iffieldundef{issue}}}
+       {\setunit{\addcolon}}%
+       {\ifboolexpr{ test {\iffieldundef{number}}
+                     and test {\iffieldundef{volume}}}
+          {\newunit}%
+          {\setunit{\addcolon\space}}}}}
 
 %%%%%%%%%%%%%%%%
 %%  Postnote  %%
@@ -450,25 +464,6 @@
        {\addperiod}%
        {\unspace\printfield{postpunct}}}
     {}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Macros for Bibliography Drivers  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% See CMS, 17th ed., 14.174, 14.177, 14.185, and 14.188.
-
-\newbibmacro*{colon+comma+etc}{%
-  \ifboolexpr{ test {\iffieldundef{pages}}
-               and test {\iffieldundef{postnote}}}
-    {}
-    {\ifboolexpr{ test {\iffieldundef{year}}
-                  and test {\iffieldundef{month}}
-                  and test {\iffieldundef{issue}}}
-       {\setunit{\addcolon}}%
-       {\ifboolexpr{ test {\iffieldundef{number}}
-                     and test {\iffieldundef{volume}}}
-          {\newunit}%
-          {\setunit{\addcolon\space}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers for Notes  %%
