@@ -1,4 +1,4 @@
-% Last modified: Fri 11 Jan 2019 03:15:23 PM CST
+% Last modified: Fri 11 Jan 2019 07:00:13 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -60,6 +60,10 @@
 % marks. Note '\addspace'. Using '\space' there causes problems.
 
 \renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
+
+% Prevents errant space after colon.
+
+\renewcommand*{\multicitedelim}{\setunit{\addsemicolon\space}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citation Commands  %%
@@ -314,6 +318,7 @@
   \usebibmacro{title+labelyear}%
   \usebibmacro{cite:volume}}%
 
+% HERE
 \newbibmacro*{cite:volume}{%
   \newunit
   \ifboolexpr{ test {\ifentrytype{book}}
