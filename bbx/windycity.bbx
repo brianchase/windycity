@@ -1,4 +1,4 @@
-% Last modified: Fri 11 Jan 2019 06:21:45 PM CST
+% Last modified: Sat 12 Jan 2019 03:57:16 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -132,7 +132,8 @@
     {\toggletrue{volfirst}}%
     {\togglefalse{volfirst}}}
 
-% For setting 'minnames' and 'maxnames', see CMS, 17th ed., 14.76.
+% For setting 'minbibnames' and such, see CMS, 17th ed., 14.76 and
+% 15.29.
 
 \ExecuteBibliographyOptions{%
   abbreviate=true,
@@ -148,8 +149,10 @@
   indexing=true,
   labeldateparts=true,
   loccittracker=constrict,
-  minnames=7,
-  maxnames=10,
+  minbibnames=7,
+  maxbibnames=10,
+  mincitenames=1,
+  maxcitenames=3,
 % Remember, if 'mincrossrefs' is greater than 1, and you cite just one
 % entrykey in a document (or refsection, etc), the field 'crossref' is
 % undefined.
@@ -940,13 +943,8 @@
 \newbibmacro*{printnames}{%
   \ifnameundef{\cbx@namelist}
     {}
-    {\iftoggle{bibliography}
-       {\anona\pluga\printnames[\cbx@deflabel]{\cbx@namelist}\plugb\anonb}%
-       {\ifnumgreater{\value{\cbx@namelist}}{3}
-          {\anona\pluga\printnames[\cbx@deflabel][-1]{\cbx@namelist}%
-           \plugb\anonb}%
-          {\anona\pluga\printnames[\cbx@deflabel]{\cbx@namelist}%
-           \plugb\anonb}}}}
+    {\anona\pluga\printnames[\cbx@deflabel]{%
+       \cbx@namelist}\plugb\anonb}}%
 
 \newbibmacro*{nameaddon}{%
   \iffieldundef{nameaddon}
