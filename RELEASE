@@ -4,8 +4,10 @@ INTERIM
 * fixed punctuation before 'postnote' of articles and reviews (ugh!)
 * changed processing of spacing and punctuation around 'postnote' for
   all citations
+* added support for swapping the place of an author with an editor or
+  translator, as in CMS 14.104, and updated documentation accordingly
 * improved hanlding of name lists
-* other bug fixes
+* other bug fixes and minor changes
 
 RELEASE NOTES FOR VERSION 2019.01.07
 

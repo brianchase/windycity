@@ -1,4 +1,4 @@
-% Last modified: Sat 12 Jan 2019 03:52:46 PM CST
+% Last modified: Mon 14 Jan 2019 04:08:08 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -478,6 +478,21 @@ title's position. Below is an example from \textit{CMS} \ref{14.105}:
 \noindent To bypass the author's position in a single note, use
 \cmd{cite*} or \cmd{footcite*}. See Section \ref{citecmds}.
 
+\optitem[false]{swapauth}{\opt{true}, \opt{false}}
+
+To swap the places of a book's author with an editor or translator,
+use \opt{swapauth}. An example appears in \textit{CMS} \ref{14.104}:
+
+\begin{citebib}
+\item \cite{pound1953}
+\end{citebib}
+
+\noindent This option works with the \bibtype{book},
+\bibtype{collection}, and \bibtype{inbook} entry types. To put a
+translator in the author's position when a book also has an editor,
+use \opt{swapauth} with \opt{transfirst}. For more information, see
+Section \ref{edtranspos}.
+
 \optitem[false]{transfirst}{\opt{true}, \opt{false}}
 
 \noindent According to \textit{CMS}, if a work has both an editor and
@@ -488,8 +503,7 @@ the style lists editors first. Entries with the option
 first. If a work's translators and editors are identical, using
 \bibfield{transfirst} reverses the order of their roles, say, from
 \textit{edited and translated by} to \textit{translated and edited
-by}. For more on this option, with examples, see Section
-\ref{edtranspos}.
+by}. For more information, see Section \ref{edtranspos}.
 
 \optitem[false]{volfirst}{\opt{true}, \opt{false}}
 
@@ -841,8 +855,193 @@ reference list entry.
 \label{edtrans}
 
 Windy City offers significant control over the handling of editors,
-translators, and compilers. This section shows how to take advantage
-of it.
+translators, and compilers. Taking advantage of it, however, may not
+seem intuitive at first. This section covers the options and issues
+that you need to grasp in order to master this aspect of the style.
+
+\subsection{Types of Editors, Translators, and Compilers}
+\label{edtransnames}
+
+For the most part, Windy City associates the \bibfield{editor} and
+\bibfield{translator} fields with the lowest level title within the
+scope of an entry. In most cases, then, you can assign editors and
+translators simply by adding the \bibfield{editor} and
+\bibfield{translator} fields to a database entry. Below is the entry
+for an example in \textit{CMS} \ref{14.104}:
+
+\begin{verbatim}
+   @Collection{adorno1999,
+     author = {Adorno, Theodor W. and Benjamin, Walter},
+     title = {The Complete Correspondence, 1928–1940},
+     editor = {Lonitz, Henri},
+     translator = {Walker, Nicholas},
+     address = {Cambridge, MA},
+     publisher = {Harvard University Press},
+     year = {1999}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{adorno1999}
+\end{citebib}
+
+\noindent When the style processes this entry, it identifies the
+editor and translator of the work with the names, respectively, in the
+\bibfield{editor} and \bibfield{translator} fields. Since the entry
+doesn't use the  \opt{transfirst} entry option (see Section
+\ref{edtranspos}), the resulting output list the editor and
+translator, in that order, after the authors and title.
+
+Cross-referencing introduces a bit more complexity, though the
+principle is the same: Within the scope of an entry, the style
+associates \bibfield{editor} and \bibfield{translator} with the lowest
+level title. In this example from \textit{CMS} \ref{14.30}, an essay
+is cross-referenced to a collection:
+
+\begin{verbatim}
+   @InCollection{kaiser1964,
+     author = {Kaiser, Ernest},
+     title = {The Literature of Harlem},
+     shorttitle = {Literature of Harlem},
+     crossref = {clarke1964}
+   }
+   @Collection{clarke1964,
+     editor = {Clarke, J. H.},
+     title = {Harlem},
+     subtitle = {A Community in Transition},
+     address = {New York},
+     publisher = {Citadel Press},
+     year = {1964}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{kaiser1964}
+\end{citebib}
+
+\noindent Since \bibfield{editor} appears within the
+\bibtype{collection} entry, Windy City associates the editor's name
+with the title of that entry, \textit{Harlem}. If you moved
+\bibfield{editor} from \bibtype{collection} to \bibtype{incollection},
+the association would change to the \bibfield{title} of that entry,
+\textit{The Literature of Harlem}.
+
+Consider another example, this one of an essay in a collection:
+
+\begin{citebib}
+\item \cite{petrarca1948}
+\end{citebib}
+
+\noindent Hans Nachod translated ``The Ascent of Mont Ventoux,'' among
+other works in the collection, but not \textit{every} work in the
+collection. Thus, the \bibfield{translator} field must fall within the
+scope of the \bibtype{incollection} entry:
+
+\begin{verbatim}
+   @InCollection{petrarca1948,
+     author = {Petrarca, Francesco},
+     title = {The Ascent of Mont Ventoux},
+     translator = {Nachod, Hans},
+     pages = {36–46},
+     crossref = {cassirer1948}
+   }
+   @Collection{cassirer1948,
+     editor = {Cassirer, Ernst and Kristeller, Paul Oskar and
+               Randall, Jr., John Herman},
+     title = {The Renaissance Philosophy of Man},
+     address = {Chicago},
+     publisher = ucp,
+     year = {1948}
+   }
+\end{verbatim}
+
+\noindent By the same token, since \bibfield{editor} falls within the
+scope of \bibtype{collection}, the style associates it with the
+\bibfield{title} of that entry, \textit{The Renaissance Philosophy of
+Man}.
+
+Sometimes, you need to designate the role of an editor with the field
+\bibfield{editortype}. The values of \bibfield{editortype} are
+\textit{maintitle}, \textit{series}, \textit{issuetitle}, and
+\textit{compiler}.\footnote{You could use \textit{title} but may omit
+it.} As for the latter, Windy City treats \textit{compiler} as a kind
+of editor. So, if you need to add a compiler to an entry, add the
+compiler's name to an available field for an editor, then add an
+appropriate \bibfield{editortype} field with the value
+\textit{compiler}. It may help to see the bibliography database entry
+for an example in \textit{CMS} \ref{14.103}:
+
+\begin{verbatim}
+   @Book{schechter2011,
+    editor = {Schechter, Harold, and Kurt Brown},
+    editortype = {compiler},
+    title = {Killer Verse},
+    subtitle = {Poems of Murder and Mayhem},
+    address = {London},
+    publisher = {Everyman Paperback Classics},
+    year = {2011}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{schechter2011}
+\end{citebib}
+
+Follow the same pattern for editors of a \bibfield{maintitle},
+\bibfield{series}, or \bibfield{issuetitle}. Here's an example from
+\textit{CMS} \ref{14.118}:
+
+\begin{verbatim}
+   @Book{james1963.5,
+     author = {James, Henry},
+     title = {1883–1884},
+     volume = {5},
+     maintitle = {The Complete Tales of Henry James},
+     shortmaintitle = {Complete Tales of Henry James},
+     editor = {Edel, Leon},
+     editortype = {maintitle},
+     address = {London},
+     publisher = {Rupert Hart-Davis},
+     year = {1963}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{james1963.5}
+\end{citebib}
+
+\noindent If there were no \bibfield{editortype} assigning the
+\bibfield{editor} to the \bibfield{maintitle}, the style would
+associate it with the volume. In short, for any title at a higher
+level than \bibfield{title}, you need to use \bibfield{editortype} to
+assign an editor to it.
+
+One complication remains: There are other name lists for editors than
+\bibfield{editor}. The style also uses \bibfield{editora},
+\bibfield{editorb}, and \bibfield{editorc}.\footnote{The style uses
+\bibfield{translatora} when it processes cross-referenced works. In a
+bibliography database, only use \bibfield{translator}.}
+
+Reserve \bibfield{editor} for the lowest level title in a bibliography
+database entry. That should be the \bibfield{title} field. The next
+level up, as it were, is for \bibfield{editora}, followed by
+\bibfield{editorb}, and so on. Remember to include the appropriate
+\bibfield{type} field to indicate an editor's role. These fields are
+\bibfield{editortype} (for \bibfield{editor}),
+\bibfield{editoratype} (for \bibfield{editora}),
+\bibfield{editorbtype} (for \bibfield{editorb}), and
+\bibfield{editorctype} (for \bibfield{editorc}).
+
+As it happens, Windy City puts a lot of effort into sorting out where
+to print the names of editors and translators, so it's a bit more
+clever than the previous paragraph would suggest. In particular, if
+you use \bibfield{editortype} to assign an \bibfield{editor} to a
+\bibfield{maintitle} or some other higher level title, and have an
+\bibfield{editora} with no corresponding \bibfield{editoratype}, Windy
+City will assume that \bibfield{editora} is the editor of the
+\bibfield{title}. Regardless, the best practice is the follow the rule
+of thumb described above, reserving \bibfield{editor} for
+\bibfield{title} and working up from there.
 
 \subsection{Switching Places and Roles}
 \label{edtranspos}
@@ -891,186 +1090,47 @@ example from \textit{CMS} \ref{14.104}:
 \end{citebib}
 
 Since the style treats a compiler as a kind of editor, the comments
-above also apply to compilers: If a work has compilers and
-translators, Windy City will print compilers' names first, unless you
-use \opt{transfirst}. For more on compilers, see Section
-\ref{edtransnames}.
+above apply to compilers: If a work has compilers and translators,
+Windy City will print compilers' names first, unless you use
+\opt{transfirst}.
 
-\subsection{Types of Editors, Translators, and Compilers}
-\label{edtransnames}
+In rare cases, you may want to swap the position of an author and an
+editor or translator. \textit{CMS} gives this example in \ref{14.104}:
 
-For the most part, Windy City associates the \bibfield{editor} and
-\bibfield{translator} fields with the lowest level title within the
-scope of an entry.\footnote{For \bibfield{editor}, exceptions are
-possible with the use of \bibfield{editortype}.} For most sources,
-then, you can assign editors and translators simply by adding the
-\bibfield{editor} and \bibfield{translator} fields to a database
-entry. Below is the entry for an example in \textit{CMS} \ref{14.104},
-shown in the previous section:
+\begin{citebib}
+\item \cite{pound1953}
+\end{citebib}
+
+\noindent You can accomplish this effect with the entry option
+\opt{swapauth}. But beware: Windy City doesn't look ahead to see if
+there really is an editor or translator to take the author's place. If
+it doesn't find one, it will still print the author's name after the
+title, leaving the author's position empty. Also, if it finds both an
+editor and a translator, and they're not the same person, it will
+print the editor's name in the author's position---again, giving
+priority to editors. If you want the translator's name in the author's
+position, use \opt{swapauth} with \opt{transfirst}.
+
+Another caveat: For correct sorting in a bibliography or reference
+list, a work that uses \opt{swapauth} needs a field like
+\bibfield{sortname} to sort it by the name of the editor or translator
+whose name will occupy the author's position. It would be nice if
+Windy City could do this for you, but at present no feature of
+\biblatex seems to allow on-the-fly changes to sorting. Below
+is the entry for the example above:
 
 \begin{verbatim}
-   @Book{menchu1999,
-     options = {transfirst},
-     author = {Menchú, Rigoberta},
-     title = {Crossing Borders},
-     editor = {Wright, Ann},
-     translator = {Wright, Ann},
+   @Book{pound1953,
+     options = {swapauth},
+     author = {Pound, Ezra},
+     title = {Literary Essays},
+     editor = {Eliot, T. S.},
+     sortname = {Eliot, T. S.},
      address = {New York},
-     publisher = {Verso},
-     year = {1999}
+     publisher = {New Directions},
+     year = {1953}
    }
 \end{verbatim}
-
-\noindent When the style processes this entry, it identifies Ann
-Wright as the book's translator and editor.\footnote{The entry option
-\opt{transfirst} ensures that her role as translator is mentioned
-first. See Section \ref{entryops}.}
-
-Cross-referencing introduces a bit more complexity, but the principle
-remains the same: Within the scope of an entry, the style associates
-\bibfield{editor} and \bibfield{translator} with the lowest level
-title. In this example from \textit{CMS} \ref{14.30}, an essay is
-cross-referenced to a collection:
-
-\begin{verbatim}
-   @InCollection{kaiser1964,
-     author = {Kaiser, Ernest},
-     title = {The Literature of Harlem},
-     shorttitle = {Literature of Harlem},
-     crossref = {clarke1964}
-   }
-   @Collection{clarke1964,
-     editor = {Clarke, J. H.},
-     title = {Harlem},
-     subtitle = {A Community in Transition},
-     address = {New York},
-     publisher = {Citadel Press},
-     year = {1964}
-   }
-\end{verbatim}
-
-\begin{citebib}
-\item \cite{kaiser1964}
-\end{citebib}
-
-\noindent Since \bibfield{editor} appears within the
-\bibtype{collection} entry, Windy City associates the editor's name
-with the title of that entry, \textit{Harlem}. If you moved
-\bibfield{editor} from \bibtype{collection} to \bibtype{incollection},
-the association would change to the \bibfield{title} of that entry,
-\textit{The Literature of Harlem}.
-
-Consider another example, this one of an essay in a collection:
-
-\begin{citebib}
-\item \cite{petrarca1948}
-\end{citebib}
-
-\noindent Hans Nachod translated ``The Ascent of Mont Ventoux,'' among
-other works in the collection, but not \textit{every} work in the
-collection. Thus, \bibfield{translator} must fall within the scope of
-\bibtype{incollection}:
-
-\begin{verbatim}
-   @InCollection{petrarca1948,
-     author = {Petrarca, Francesco},
-     title = {The Ascent of Mont Ventoux},
-     translator = {Nachod, Hans},
-     pages = {36--46},
-     crossref = {cassirer1948}
-   }
-   @Collection{cassirer1948,
-     editor = {Cassirer, Ernst and Kristeller, Paul Oskar and
-               Randall, Jr., John Herman},
-     title = {The Renaissance Philosophy of Man},
-     address = {Chicago},
-     publisher = ucp,
-     year = {1948}
-   }
-\end{verbatim}
-
-\noindent By the same token, since \bibfield{editor} falls within the
-scope of \bibtype{collection}, the style associates it with the
-collection, \textit{The Renaissance Philosophy of Man}, not with the
-essay.
-
-Sometimes, you need to designate the role of an editor with the field
-\bibfield{editortype}. The values of \bibfield{editortype} are
-\textit{maintitle}, \textit{series}, \textit{issuetitle}, and
-\textit{compiler}.\footnote{You could use \textit{title} but may omit
-it.} As for \textit{compiler}, remember that it's a kind of editor.
-So, if you need to add a compiler to an entry, add the compiler's name
-to an \bibfield{editor} field, assuming it's free, then add an
-\bibfield{editortype} field with the value \textit{compiler}. It may
-help to see the bibliography database entry for an example in
-\textit{CMS} \ref{14.103}:
-
-\begin{verbatim}
-   @Book{schechter2011,
-    editor = {Schechter, Harold, and Kurt Brown},
-    editortype = {compiler},
-    title = {Killer Verse},
-    subtitle = {Poems of Murder and Mayhem},
-    address = {London},
-    publisher = {Everyman Paperback Classics},
-    year = {2011}
-   }
-\end{verbatim}
-
-\begin{citebib}
-\item \cite{schechter2011}
-\end{citebib}
-
-Follow the same pattern for editors of a \bibfield{maintitle},
-\bibfield{series}, or \bibfield{issuetitle}. Here's an example from
-\textit{CMS} \ref{14.118}:
-
-\begin{verbatim}
-   @Book{james1963.5,
-     author = {James, Henry},
-     title = {1883–1884},
-     volume = {5},
-     maintitle = {The Complete Tales of Henry James},
-     shortmaintitle = {Complete Tales of Henry James},
-     editor = {Edel, Leon},
-     editortype = {maintitle},
-     address = {London},
-     publisher = {Rupert Hart-Davis},
-     year = {1963}
-   }
-\end{verbatim}
-
-\begin{citebib}
-\item \cite{james1963.5}
-\end{citebib}
-
-\noindent If there were no \bibfield{editortype} associating the
-editor with the collection, the style would associate the editor with
-the volume.
-
-One complication remains: There are other name lists for editors than
-\bibfield{editor}. The style also uses \bibfield{editora},
-\bibfield{editorb}, and \bibfield{editorc}.\footnote{The style uses
-\bibfield{translatora} when it processes cross-referenced works. In a
-bibliography database, only use \bibfield{translator}.}
-
-Designate editors much like you designate titles. Reserve
-\bibfield{editor} for the lowest level title in a work that you wish
-to cite, say, an essay in a collection or a single volume in a
-multivolume work. The next level up, as it were, is for
-\bibfield{editora}, followed by \bibfield{editorb}, and so on.
-Remember to include the appropriate \bibfield{type} field to indicate
-an editor's role. These fields are \bibfield{editortype} (for
-\bibfield{editor}), \bibfield{editoratype} (for \bibfield{editora}),
-\bibfield{editorbtype} (for \bibfield{editorb}), and
-\bibfield{editorctype} (for \bibfield{editorc}).
-
-As it happens, Windy City puts a lot of effort into sorting out where
-to print the names of editors and translators, so it's a bit more
-clever than the previous paragraph would suggest. But if you follow
-that rule of thumb, as well as examples in \file{windycity.bib}, you
-won't need to worry about editors' names appearing where they don't
-belong.
 
 \section{Collections}
 
@@ -1699,8 +1759,7 @@ database.
 \item \cite{bonnefoy1995}
 \item \cite{menchu1999}
 \item \cite{adorno1999}
-% FIX: Requires a new option!
-%\item \cite{pound1953}
+\item \cite{pound1953}
 \end{citebib}
 
 \subsubsection{Other contributors listed on the title page}

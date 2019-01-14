@@ -1,4 +1,4 @@
-% Last modified: Sat 12 Jan 2019 03:57:16 PM CST
+% Last modified: Sun 13 Jan 2019 06:58:17 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -115,6 +115,12 @@
     {\global\toggletrue{short}%
      \global\toggletrue{firstshort}}%
     {\global\togglefalse{short}}}
+
+\providetoggle{swapauth}
+\DeclareEntryOption{swapauth}[true]{%
+  \ifstrequal{#1}{true}
+    {\toggletrue{swapauth}}%
+    {\togglefalse{swapauth}}}
 
 \providetoggle{transfirst}
 \DeclareEntryOption{transfirst}[true]{%
@@ -608,12 +614,17 @@
   \renewcommand*{\cbx@deflabel}{default}}%
 
 \newbibmacro*{author+namelist}{%
-  \ifnameundef{author}
-    {\renewcommand*{\cbx@namelist}{bookauthor}}%
-    {\ifboolexpr{ test {\ifnameundef{shortauthor}}
-                  or togl {bibliography}}
-       {\renewcommand*{\cbx@namelist}{author}}%
-       {\renewcommand*{\cbx@namelist}{shortauthor}}}}
+  \ifboolexpr{ togl {swapauth}
+               and ( test {\ifentrytype{book}}
+               or test {\ifentrytype{collection}}
+               or test {\ifentrytype{inbook}} )}
+    {}
+    {\ifnameundef{author}
+       {\renewcommand*{\cbx@namelist}{bookauthor}}%
+       {\ifboolexpr{ test {\ifnameundef{shortauthor}}
+                     or togl {bibliography}}
+          {\renewcommand*{\cbx@namelist}{author}}%
+          {\renewcommand*{\cbx@namelist}{shortauthor}}}}}
 
 % When 'journaltitle' goes in the author's position.
 
@@ -635,17 +646,6 @@
   \savefield{namehash}{\bbx@lasthash}%
   \usebibmacro{authpos+deflabel}%
   \newunit}%
-
-\renewbibmacro*{bybookauthor+pages}{%
-  \ifnameundef{bookauthor}
-    {}
-    {\setunit{\addcomma\space}%
-     \renewcommand*{\pluga}{\bibstring{by}\space}%
-     \renewcommand*{\cbx@namelist}{bookauthor}%
-     \usebibmacro{printnames+etc}%
-     \setunit{\addcomma\space}
-     \usebibmacro{pages}%
-     \newunit}}%
 
 \newbibmacro*{aft+fore+intro}{%
   \ifnameundef{afterword}
@@ -1047,6 +1047,7 @@
              {\renewcommand*{\xtitle}{book}}}
           {}}}}
 
+% FIX: not in use
 \newbibmacro*{bookbooktitle}{%
   \iffieldundef{bookbooktitle}
     {}
@@ -1395,15 +1396,12 @@
   \finentry}%
 
 \newbibmacro*{author+title+ed+note}{%
-  \usebibmacro{author+title+ed}%
-  \usebibmacro{note}}%
-
-\newbibmacro*{author+title+ed}{%
   \usebibmacro{author+bookauthor+etc}%
   \usebibmacro{test:title+booktitle}%
   \usebibmacro{title+labelyear}%
   \newunit
-  \usebibmacro{a:edtrans}}%
+  \usebibmacro{a:edtrans}%
+  \usebibmacro{note}}%
 
 \newbibmacro*{articles}{%
   \newunit
@@ -1415,7 +1413,11 @@
   \setunit{\space}%
   \usebibmacro{journallocation}%
   \printfield[noformat]{volume}%
-  \usebibmacro{number+issue+month+etc}}%
+  \iftoggle{journalfirst}
+    {\newunit}%
+    {\setunit{\addcomma\space}}%
+  \usebibmacro{periodical:number}%
+  \usebibmacro{issue+month+etc}}%
 
 % If an article has an electronic article ID, don't print its page
 % range in the bibliography. See CMS, 17th ed., 14.174.
@@ -1440,6 +1442,37 @@
   \usebibmacro{isbn}%
   \usebibmacro{pageref+finentry}}%
 
+\newbibmacro*{author+collection+etc}{%
+  \usebibmacro{test:collection}%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{test:title+booktitle}%
+  \usebibmacro{title+labelyear}%
+  \ifdefstring{\xtitle}{main}
+    {\newunit
+     \usebibmacro{a:edtrans}%
+     \usebibmacro{volumes+series+etc}%
+     \let\xtitle\empty
+     \usebibmacro{longtitle+titleaddon}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{byauthor}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{b:edtrans}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}%
+     \usebibmacro{publishers}%
+     \usebibmacro{origtitle}}%
+    {\newunit
+     \usebibmacro{byauthor}%
+     \newunit
+     \usebibmacro{a:edtrans}%
+     \usebibmacro{b:edtrans}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}%
+     \usebibmacro{volumes+series+etc}%
+     \usebibmacro{maintitle+editor}%
+     \usebibmacro{publishers}%
+     \usebibmacro{origtitle}}}
+
 % Check for entrytypes due to its use in 'cite' and 'parencite'.
 
 \newbibmacro*{test:collection}{%
@@ -1458,27 +1491,6 @@
              {}}}}
     {}}
 
-\newbibmacro*{author+collection+etc}{%
-  \usebibmacro{test:collection}%
-  \usebibmacro{author+title+ed}%
-  \ifdefstring{\xtitle}{main}
-    {\usebibmacro{volumes+series+etc}%
-     \let\xtitle\empty
-     \usebibmacro{longtitle+titleaddon}%
-     \setunit{\addcomma\space}%
-     \usebibmacro{b:edtrans}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{publishers}%
-     \usebibmacro{origtitle}}%
-    {\usebibmacro{b:edtrans}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes+series+etc}%
-     \usebibmacro{maintitle+editor}%
-     \usebibmacro{publishers}%
-     \usebibmacro{origtitle}}}
-
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{test:bookauthor}%
   \iftoggle{reprinted}
@@ -1486,9 +1498,21 @@
     {\ifboolexpr{ test {\ifnameundef{afterword}}
                   and test {\ifnameundef{foreword}}
                   and test {\ifnameundef{introduction}}}
-       {\usebibmacro{author+title+ed}%
-        \usebibmacro{chapter}%
-        \usebibmacro{in}}%
+       {\usebibmacro{author+bookauthor+etc}%
+        \usebibmacro{test:title+booktitle}%
+        \usebibmacro{title+labelyear}%
+        \newunit
+        \ifdefstring{\xtitle}{book}
+          {\usebibmacro{bybookauthor+pages}%
+           \newunit
+           \usebibmacro{a:edtrans}}%
+          {\ifentrytype{inbook}
+             {\usebibmacro{byauthor}%
+              \newunit
+              \usebibmacro{a:edtrans}}%
+             {\usebibmacro{a:edtrans}%
+              \usebibmacro{chapter}}%
+           \usebibmacro{in}}}
        {\usebibmacro{aft+fore+intro}}}}
 
 \newbibmacro*{crossref+incollections}{%
@@ -1582,12 +1606,22 @@
     {\nopunct\printtext[parens]{%
        \printlist{location}}\space}}%
 
-\newbibmacro*{number+issue+month+etc}{%
-  \iftoggle{journalfirst}
-    {\newunit}%
-    {\setunit{\addcomma\space}}%
-  \usebibmacro{periodical:number}%
-  \usebibmacro{issue+month+etc}}%
+% On how to format the issue number of periodicals, see CMS, 17th ed.,
+% 14.171 and 15.47.
+
+\newbibmacro*{periodical:number}{%
+  \iffieldundef{number}
+    {}
+    {\ifboolexpr{ togl {bibliography}
+                  and togl {reflist}
+                  and test {\iffieldundef{issue}}
+                  and test {\iffieldundef{season}}
+                  and test {\iffieldundef{month}}
+                  and not test {\iffieldundef{volume}}}
+       {\setunit{\space}%
+        \printfield[parens]{number}}%
+       {\setunit{\addcomma\space}%
+        \printfield[journum]{number}}}}
 
 \newbibmacro*{colon+pages}{%
   \ifboolexpr{ test {\iffieldundef{month}}
@@ -1637,6 +1671,59 @@
           {}}
        {}}}
 
+\newbibmacro*{volumes+series+etc}{%
+  \usebibmacro{volumes}%
+  \usebibmacro{bookseries}%
+  \usebibmacro{pages+volume+part}%
+  \usebibmacro{pages}%
+  \usebibmacro{book:number}%
+  \usebibmacro{part}}%
+
+\newbibmacro*{byauthor}{%
+  \ifboolexpr{ test {\ifnameundef{author}}
+               or togl {noauth}}
+    {}
+    {\renewcommand*{\pluga}{\bibstring{by}\space}%
+     \renewcommand*{\cbx@namelist}{author}%
+     \usebibmacro{printnames+etc}}}
+
+\newbibmacro*{edition}{%
+  \iffieldundef{edition}
+    {}
+    {\newunit
+     \printfield{edition}}}
+
+\newbibmacro*{publishers}{%
+  \iffieldundef{origtitle}
+    {\iftoggle{bibliography}
+       {\newunit
+        \usebibmacro{orig+etc}}%
+       {\setunit{\addspace}% not '\setunit{\space}'
+        \printtext[parens]{\usebibmacro{orig+etc}}}}
+    {\newunit
+     \usebibmacro{loc+pub+year}}}
+
+\newbibmacro*{test:bookauthor}{%
+  \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
+               or test {\ifnamesequal{afterword}{bookauthor}}
+               or test {\ifnamesequal{foreword}{bookauthor}}
+               or test {\ifnamesequal{introduction}{bookauthor}}}
+    {\clearname{bookauthor}}%
+    {\iftoggle{noauth}
+       {\clearname{bookauthor}}%
+       {}}}
+
+\newbibmacro*{bybookauthor+pages}{%
+  \ifnameundef{bookauthor}
+    {}
+    {\renewcommand*{\pluga}{\bibstring{by}\space}%
+     \renewcommand*{\cbx@namelist}{bookauthor}%
+     \usebibmacro{printnames+etc}%
+     \ifentrytype{incollection}
+       {\usebibmacro{pages}%
+        \newunit}%
+       {\setunit{\addcomma\space}}}}
+
 \newbibmacro*{chapter}{%
   \iffieldundef{chapter}
     {}
@@ -1649,12 +1736,13 @@
     {\bibstring{in}\space}}%
 
 \newbibmacro*{incollections}{%
-  \iffieldundef{booktitle}
+  \ifdefstring{\xtitle}{book}
     {\usebibmacro{pages+volume+part}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \midsentence\setunit{\addcomma\space}%
-     \usebibmacro{bybookauthor+pages}%
+     \usebibmacro{byauthor}%
+     \setunit{\addcomma\space}%
      \usebibmacro{b:edtrans}%
      \usebibmacro{note}%
      \usebibmacro{edition}}%
@@ -1674,7 +1762,7 @@
         \usebibmacro{edition}}}% needs '%'
   \usebibmacro{volumes+series+etc}%
   \usebibmacro{maintitle+editor}%
-  \usebibmacro{bookbooktitle}% FIX: move?
+%  \usebibmacro{bookbooktitle}% FIX: not in use
 %  \usebibmacro{b:edtrans}% FIX: for bookbooktitle?
   \usebibmacro{publishers}%
   \usebibmacro{origtitle}}%
@@ -1683,7 +1771,7 @@
   \iffieldundef{pages}
     {}
     {\iftoggle{bibliography}
-       {\setunit{\addcomma\space}% sometimes necessary
+       {\setunit{\addcomma\space}%
         \printfield{pages}%
         \clearfield{pages}}%
        {}}}
@@ -1707,29 +1795,13 @@
 %%  Fourth and Higher Tier Macros  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newbibmacro*{volumes+series+etc}{%
-  \usebibmacro{volumes}%
-  \usebibmacro{bookseries}%
-  \usebibmacro{pages+volume+part}%
-  \usebibmacro{pages}%
-  \usebibmacro{book:number}%
-  \usebibmacro{part}}%
-
-\newbibmacro*{test:bookauthor}{%
-  \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
-               or test {\ifnamesequal{afterword}{bookauthor}}
-               or test {\ifnamesequal{foreword}{bookauthor}}
-               or test {\ifnamesequal{introduction}{bookauthor}}}
-    {\clearname{bookauthor}}%
-    {\iftoggle{noauth}
-       {\clearname{bookauthor}}%
-       {}}}
-
-\newbibmacro*{edition}{%
-  \iffieldundef{edition}
+\newbibmacro*{eid}{%
+  \iffieldundef{eid}
     {}
-    {\newunit
-     \printfield{edition}}}
+    {\iftoggle{bibliography}
+       {\setunit{\addcolon\space}}%
+       {\newunit}%
+     \printfield{eid}}}
 
 % Print the number of volumes in bibliographies and reference lists.
 % In notes, users must cite a volume number when they cite particular
@@ -1745,6 +1817,23 @@
        {\newunit
         \printfield{volumes}}}}
 
+\newbibmacro*{bookseries}{%
+  \iffieldundef{series}
+    {}
+    {\usebibmacro{pages}%
+     \newunit
+     \printfield{series}%
+     \usebibmacro{seriesaddon}%
+     \usebibmacro{xeditor+yeditor}{series}{}%
+     \setunit{\addcomma\space}}}
+
+\newbibmacro*{seriesaddon}{%
+  \iffieldundef{seriesaddon}
+    {}
+    {\addcomma\space%
+     \printfield{seriesaddon}%
+     \isdot\addcomma}}%
+
 \newbibmacro*{pages+volume+part}{%
   \iffieldundef{volume}
     {}
@@ -1754,20 +1843,6 @@
         \usebibmacro{volume+part}}%
        {\usebibmacro{volume+part}}}}
 
-\newbibmacro*{volume+part+old}{%
-  \newunit
-  \iffieldnum{volume}
-    {\printfield{volume}}%
-    {\bibstring{volumes}\space
-     \printfield[noformat]{volume}}%
-  \clearfield{volume}%
-  \usebibmacro{part}%
-  \ifboolexpr{ togl {collection}
-               and not togl {volfirst}}
-    {\addcomma\space}%
-    {\space\bibstring{of}\space}}%
-
-% FIX: Find better solution to \newunit below:
 \newbibmacro*{volume+part}{%
   \iffieldundef{series}
     {\newunit}%
@@ -1790,40 +1865,6 @@
     {\iffieldundef{maintitle}
        {}
        {\space\bibstring{of}\space}}}
-
-\newbibmacro*{bookseries}{%
-  \iffieldundef{series}
-    {}
-    {\usebibmacro{pages}%
-     \newunit
-     \printfield{series}%
-     \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}{}%
-     \setunit{\addcomma\space}}}
-
-\newbibmacro*{seriesaddon}{%
-  \iffieldundef{seriesaddon}
-    {}
-    {\addcomma\space%
-     \printfield{seriesaddon}%
-     \isdot\addcomma}}%
-
-% On how to format the issue number of periodicals, see CMS, 17th ed.,
-% 14.171 and 15.47.
-
-\newbibmacro*{periodical:number}{%
-  \iffieldundef{number}
-    {}
-    {\ifboolexpr{ togl {bibliography}
-                  and togl {reflist}
-                  and test {\iffieldundef{issue}}
-                  and test {\iffieldundef{season}}
-                  and test {\iffieldundef{month}}
-                  and not test {\iffieldundef{volume}}}
-       {\setunit{\space}%
-        \printfield[parens]{number}}%
-       {\setunit{\addcomma\space}%
-        \printfield[journum]{number}}}}
 
 \newbibmacro*{book:number}{%
   \iffieldundef{number}
@@ -1848,16 +1889,6 @@
     {\setunit{\addspace}% '\addspace' not '\space'
      \printfield{number}}}
 
-\newbibmacro*{publishers}{%
-  \iffieldundef{origtitle}
-    {\iftoggle{bibliography}
-       {\newunit
-        \usebibmacro{orig+etc}}%
-       {\setunit{\addspace}% not '\setunit{\space}'
-        \printtext[parens]{\usebibmacro{orig+etc}}}}
-    {\newunit
-     \usebibmacro{loc+pub+year}}}
-
 \newbibmacro*{orig+etc}{%
   \usebibmacro{origlocation}%
   \usebibmacro{origpublisher}%
@@ -1880,13 +1911,5 @@
        {\setunit{\addsemicolon\space}}%
      \bibstring{reprint}%
      \addcomma\space}}%
-
-\newbibmacro*{eid}{%
-  \iffieldundef{eid}
-    {}
-    {\iftoggle{bibliography}
-       {\setunit{\addcolon\space}}%
-       {\newunit}%
-     \printfield{eid}}}
 
 \endinput
