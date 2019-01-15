@@ -1,4 +1,4 @@
-% Last modified: Mon 14 Jan 2019 04:08:08 PM CST
+% Last modified: Tue 15 Jan 2019 04:28:50 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1102,14 +1102,16 @@ editor or translator. \textit{CMS} gives this example in \ref{14.104}:
 \end{citebib}
 
 \noindent You can accomplish this effect with the entry option
-\opt{swapauth}. But beware: Windy City doesn't look ahead to see if
-there really is an editor or translator to take the author's place. If
-it doesn't find one, it will still print the author's name after the
-title, leaving the author's position empty. Also, if it finds both an
-editor and a translator, and they're not the same person, it will
-print the editor's name in the author's position---again, giving
-priority to editors. If you want the translator's name in the author's
-position, use \opt{swapauth} with \opt{transfirst}.
+\opt{swapauth}, which works for \bibtype{book}, \bibtype{collection},
+and \bibtype{inbook} entry types. But beware: Windy City doesn't look
+ahead to see if there really is an editor or translator to take the
+author's place. If it doesn't find one, it will still print the
+author's name after the title, leaving the author's position empty.
+Also, if it finds both an editor and a translator, and they're not the
+same person, it will print the editor's name in the author's
+position---again, giving priority to editors. If you want the
+translator's name in the author's position, use \opt{swapauth} with
+\opt{transfirst}.
 
 Another caveat: For correct sorting in a bibliography or reference
 list, a work that uses \opt{swapauth} needs a field like
