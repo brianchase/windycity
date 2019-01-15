@@ -8,5 +8,7 @@
   seriesaddon,
   shortbooktitle,
   shortmaintitle}
-\DeclareDatamodelFields[type=list,datatype=name]{translatora}
+\DeclareDatamodelFields[type=list,datatype=name]{%
+  shortbookauthor,
+  translatora}
 

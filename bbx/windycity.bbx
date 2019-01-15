@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Jan 2019 06:58:17 PM CST
+% Last modified: Tue 15 Jan 2019 04:25:56 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -185,14 +185,12 @@
   \field{urldate}
   \literal{nodate}}
 \DeclareLabelname{%
-  \field{shortauthor}
   \field{author}
   \field{editor}
   \field{translator}
   \field{editora}
   \field{translatora}}
 \DeclareLabelname[inbook,incollection]{%
-  \field{shortauthor}
   \field{author}
   \field{bookauthor}
   \field{editor}
@@ -281,6 +279,7 @@
 \DeclareDataInheritance{*}{%
   incollection,inbook,bookinbook,inproceedings,letter,suppbook,review}{%
   \inherit{author}{bookauthor}
+  \inherit{shortauthor}{shortbookauthor}
   \inherit{editor}{editora}
   \inherit{editora}{editorb}
   \inherit{editorb}{editorc}
@@ -306,7 +305,6 @@
 \let\cbx@bibstring\empty
 \let\cbx@deflabel\empty
 \let\cbx@keyhash\empty
-\let\cbx@namelist\empty
 \let\cbx@namelist\empty
 \let\anona\empty
 \let\anonb\empty
@@ -599,7 +597,7 @@
 \newbibmacro*{author+bookauthor+etc}{%
   \iftoggle{noauth}% true by entry option or citation command
     {\usebibmacro{authpos+deflabel}}%
-    {\usebibmacro{author+namelist}%
+    {\usebibmacro{author+bookauthor}%
      \ifnameundef{\cbx@namelist}
        {\usebibmacro{a:authpos+edtrans}%
         \ifnameundef{\cbx@namelist}
@@ -613,18 +611,27 @@
   \global\togglefalse{authposition}%
   \renewcommand*{\cbx@deflabel}{default}}%
 
-\newbibmacro*{author+namelist}{%
+\newbibmacro*{author+bookauthor}{%
   \ifboolexpr{ togl {swapauth}
                and ( test {\ifentrytype{book}}
                or test {\ifentrytype{collection}}
                or test {\ifentrytype{inbook}} )}
     {}
     {\ifnameundef{author}
-       {\renewcommand*{\cbx@namelist}{bookauthor}}%
-       {\ifboolexpr{ test {\ifnameundef{shortauthor}}
-                     or togl {bibliography}}
-          {\renewcommand*{\cbx@namelist}{author}}%
-          {\renewcommand*{\cbx@namelist}{shortauthor}}}}}
+       {\usebibmacro{bookauthor+namelist}}%
+       {\usebibmacro{author+namelist}}}}
+
+\newbibmacro*{author+namelist}{%
+  \ifboolexpr{ test {\ifnameundef{shortauthor}}
+               or togl {bibliography}}
+    {\renewcommand*{\cbx@namelist}{author}}%
+    {\renewcommand*{\cbx@namelist}{shortauthor}}}
+
+\newbibmacro*{bookauthor+namelist}{%
+  \ifboolexpr{ test {\ifnameundef{shortbookauthor}}
+               or togl {bibliography}}
+    {\renewcommand*{\cbx@namelist}{bookauthor}}%
+    {\renewcommand*{\cbx@namelist}{shortbookauthor}}}
 
 % When 'journaltitle' goes in the author's position.
 
