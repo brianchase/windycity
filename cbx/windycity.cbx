@@ -1,4 +1,4 @@
-% Last modified: Sat 12 Jan 2019 09:29:31 AM CST
+% Last modified: Wed 16 Jan 2019 11:19:41 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -69,16 +69,6 @@
 %%  Citation Commands  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareCiteCommand{\bibentry}
-  {}
-  {\citetrackerfalse
-   \AtBeginLists
-   \usedriver
-     {\DeclareNameAlias{author}{sortname}}%
-     {\thefield{entrytype}}%
-   \finentry}%
-  {}{}
-
 \DeclareCiteCommand{\cite}
   {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
@@ -91,18 +81,6 @@
   {\usebibmacro{citeindex}%
    \toggletrue{noauth}%
    \usebibmacro{cite}}%
-  {\multicitedelim}%
-  {\usebibmacro{cite:postnote}}%
-
-\providetoggle{reprinted}
-\DeclareCiteCommand{\reprint}
-  {}
-  {\usebibmacro{citeindex}%
-   \toggletrue{noauth}%
-   \toggletrue{reprinted}%
-   \bibstring{reprinted}\space
-   \usebibmacro{cite}%
-   \togglefalse{reprinted}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
 
@@ -128,25 +106,6 @@
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
 
-\DeclareCiteCommand{\fullcite}
-  {\usebibmacro{prenote}}%
-  {\citetrackerfalse
-   \usebibmacro{citeindex}%
-   \global\toggletrue{cbx@first}%
-   \usebibmacro{cite:long}}%
-  {\multicitedelim}%
-  {\usebibmacro{cite:postnote}}%
-
-\DeclareCiteCommand*{\fullcite}
-  {\usebibmacro{prenote}}%
-  {\citetrackerfalse
-   \usebibmacro{citeindex}%
-   \global\toggletrue{cbx@first}%
-   \toggletrue{noauth}%
-   \usebibmacro{cite:long}}%
-  {\multicitedelim}%
-  {\usebibmacro{cite:postnote}}%
-
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
@@ -162,17 +121,17 @@
   {\multicitedelim}%
   {\usebibmacro{postnote}}%
 
-\DeclareCiteCommand{\refentry}
+\providetoggle{reprinted}
+\DeclareCiteCommand{\reprint}
   {}
-  {\citetrackerfalse
-   \AtBeginLists
-   \global\toggletrue{reflist}%
-   \usedriver
-     {\DeclareNameAlias{author}{sortname}}%
-     {\thefield{entrytype}}%
-   \global\togglefalse{reflist}%
-   \finentry}%
-  {}{}
+  {\usebibmacro{citeindex}%
+   \toggletrue{noauth}%
+   \toggletrue{reprinted}%
+   \bibstring{reprinted}\space
+   \usebibmacro{cite}%
+   \togglefalse{reprinted}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Parenthetical Citations  %%
