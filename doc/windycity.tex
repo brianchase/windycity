@@ -1,4 +1,4 @@
-% Last modified: Wed 16 Jan 2019 05:35:56 PM CST
+% Last modified: Thu 17 Jan 2019 11:42:38 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -557,13 +557,6 @@ work's title. From \textit{CMS} \ref{14.78}:
 \item \cite*[234]{franklin1868}
 \end{citebib}
 
-\cmditem{crossref}{key}
-
-Windy City uses this command internally when cross-reference a
-previously cited \bibtype{collection}. You could use it in a text, but
-it's only output is a work's \bibfield{labelname} and
-\bibfield{labeltitle}, separated by a comma and a space.
-
 \cmditem{footcite*}[prenote][postnote]{key}
 
 Like \cmd{cite*}, this command suppresses the author's position of a
@@ -616,8 +609,9 @@ Windy City uses several data fields that are not available with
 
 \begin{marglist}
 
-\item[bookbooktitle] This field is for the style's internal use. Do
-not use it in a bibliography database.
+% Not in use:
+%\item[bookbooktitle] This field is for the style's internal use. Do
+%not use it in a bibliography database.
 
 \item[bookyear] Also for the style's internal use. Do not use it in a
 bibliography database.
@@ -635,8 +629,12 @@ intervening punctuation. Again, in the bibliography, the result is:
 \end{bibonly}
 
 \item[seriesaddon] This field is for additional information about a
-book's series, such as \textit{2nd ser.} and \textit{n.s.}. For
-examples, see \ref{14.126} and \ref{14.184}.
+book's series. That includes information about the run of a series,
+such as \textit{2nd ser.} and \textit{n.s.}. For examples, see
+\textit{CMS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
+journals, which occasionally have a series but no series name,
+information like \textit{2nd ser.} and \textit{n.s.} go in the
+\bibfield{series} field.
 
 \item[shortbooktitle] This field is for the short form of a
 \bibfield{booktitle}, just as \bibfield{shorttitle} is for
@@ -653,35 +651,6 @@ certain works in collections. See, for example, the citation of
 \ref{multivolume}.
 
 \end{marglist}
-
-\subsection{Data Fields for Series}
-
-Often, the only question about a book's series is whether to count it
-as a series at all, rather than as the title of a multivolume work.
-After that, the most common question is how to format a series number.
-Sometimes, the number appears alone, with no preceding abbreviation.
-But it may also appear with \textit{vol.} or
-\textit{no.}\footnote{\textit{CMS} \ref{14.123}}.
-
-In order to avoid using multiple fields for essentially the same task,
-the style uses \bibfield{number} for all of them. By default, it
-places no abbreviation before the number. Add abbreviations to the
-field as necessary. In the database entry for the example below,
-\bibfield{number} contains \textit{vol. 6}:
-
-\begin{citebib}
-\item \cite{cochrane1987}
-\end{citebib}
-
-To indicate the run of a series, such as \textit{2nd ser.} or
-\textit{n.s.}, use \bibfield{seriesaddon} (see Section
-\ref{datafields}). However, this does not apply to journals, where
-such labels usually modify a journal's title. For them, use
-\bibfield{series}, as in this example from \ref{14.184}:
-
-\begin{citebib}
-\item \cite{moraes1950}
-\end{citebib}
 
 \subsection{Entry Types}
 \label{entrytypes}
@@ -1195,8 +1164,8 @@ bibliography or reference list without help, such as by adding
 Otherwise, Windy City will sort them by the author's name. Recall that
 the entry option \opt{swapauth} has the same problem (see Section
 \ref{edtranspos}). Here, too, there's seemingly no way in \biblatex
-for an entry option to determine the sort order of a work or for a
-single sorting template to anticipate every format that's possible
+for macros or entry options to determine the sort order of a work or
+for a one sorting template to anticipate every format that's possible
 under this style.
 
 How does Windy City determine which entries in a bibliography database
@@ -1987,6 +1956,14 @@ For issues surrounding the first example below, see Section
 
 \subsubsection{Series or multivolume work?}
 % 14.124 Series or multivolume work?
+
+In the second example, \textit{vol. 6} refers to the book's series,
+Readings in Western Civilization. Usually, the number of a series
+isn't recorded as a volume, so Windy City doesn't use the
+\bibfield{volume} field for them. Instead, it uses the
+\bibfield{number} field, which it prints with no preceding
+abbreviation. Add one to the field as necessary. The \bibfield{number}
+field for the second example below contains \textit{vol. 6}.
 
 \begin{citebib}
 \item \cite{boyer1986}
