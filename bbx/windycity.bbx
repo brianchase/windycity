@@ -1,4 +1,4 @@
-% Last modified: Tue 15 Jan 2019 04:25:56 PM CST
+% Last modified: Wed 16 Jan 2019 12:56:35 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -617,9 +617,13 @@
                or test {\ifentrytype{collection}}
                or test {\ifentrytype{inbook}} )}
     {}
-    {\ifnameundef{author}
-       {\usebibmacro{bookauthor+namelist}}%
-       {\usebibmacro{author+namelist}}}}
+    {\ifboolexpr{ togl {collection}
+                  and not togl {volfirst}
+                  and test {\ifentrytype{inbook}}}
+      {\usebibmacro{bookauthor+namelist}}%
+      {\ifnameundef{author}
+         {\usebibmacro{bookauthor+namelist}}%
+         {\usebibmacro{author+namelist}}}}}
 
 \newbibmacro*{author+namelist}{%
   \ifboolexpr{ test {\ifnameundef{shortauthor}}
@@ -650,9 +654,11 @@
 
 \newbibmacro*{namehash+etc}{%
   \usebibmacro{printnames+etc}%
-  \savefield{namehash}{\bbx@lasthash}%
-  \usebibmacro{authpos+deflabel}%
-  \newunit}%
+  \iftoggle{authposition}% false in 'crossref' macro
+    {\savefield{namehash}{\bbx@lasthash}%
+     \usebibmacro{authpos+deflabel}%
+     \newunit}
+    {\setunit{\addcomma\space}}}
 
 \newbibmacro*{aft+fore+intro}{%
   \ifnameundef{afterword}
@@ -1527,8 +1533,9 @@
     {\usebibmacro{incollections}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
-          {\crossref{\thefield{crossref}}%
-           \toggletrue{bibliography}% \crossref makes it false
+          {\usebibmacro{crossref}%
+%           \crossref{\thefield{crossref}}% alternative to above
+%           \toggletrue{bibliography}% \crossref makes it false
            \usebibmacro{pages}}%
           {\usebibmacro{incollections}}}
        {\listxadd{\crossreflist}{\thefield{crossref}}%
@@ -1770,9 +1777,17 @@
   \usebibmacro{volumes+series+etc}%
   \usebibmacro{maintitle+editor}%
 %  \usebibmacro{bookbooktitle}% FIX: not in use
-%  \usebibmacro{b:edtrans}% FIX: for bookbooktitle?
+%  \usebibmacro{b:edtrans}% for bookbooktitle
   \usebibmacro{publishers}%
   \usebibmacro{origtitle}}%
+
+\newbibmacro*{crossref}{%
+  \renewcommand*{\cbx@deflabel}{labelname}%
+  \global\toggletrue{cbx@short}%
+  \entrydata{\thefield{crossref}}{%
+    \usebibmacro{author+bookauthor+etc}%
+    \usebibmacro{shorttitle}%
+    \usebibmacro{cite:volume}}}
 
 \newbibmacro*{pages}{%
   \iffieldundef{pages}

@@ -1,4 +1,4 @@
-% Last modified: Wed 16 Jan 2019 11:19:41 AM CST
+% Last modified: Wed 16 Jan 2019 11:44:48 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -83,13 +83,6 @@
    \usebibmacro{cite}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
-
-\DeclareCiteCommand{\crossref}
-  {}
-  {\printnames{labelname}%
-   \setunit{\addcomma\space}%
-   \printfield{labeltitle}}%
-  {}{}%
 
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
   {\bibsentence\usebibmacro{prenote}}%
@@ -320,10 +313,8 @@
     {\usebibmacro{cite:long}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\stepcounter{\thefield{crossref}}%
-        \printtext{%
-          \usedriver
-            {\DeclareNameAlias{sortname}{default}}%
-            {cite:crossref}}}
+        \usebibmacro{author+title+etc}%
+        \usebibmacro{crossref}}%
        {\listxadd{\crossreflist}{\thefield{crossref}}%
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
@@ -385,8 +376,10 @@
 % If the postnote is empty, print the page ranges of journal articles.
 % See CMS, 17th ed., 14.153, 14.167, and 14.174. As for incollection
 % and inbook entries, 14.106 seems to suggest the same, but the
-% example in 14.30 suggests otherwise For magazines, the range can be
-% left out. To do so, simply omit it from your bibliography database.
+% example in 14.30 suggests otherwise. The examples in 14.108 only
+% muddy the waters further. For magazines, CMS is clear that the range
+% can be left out. To do so, simply omit it from your bibliography
+% database.
 
 \newbibmacro*{cite:pages}{%
   \iffieldundef{pages}
@@ -437,11 +430,6 @@
   \usebibmacro{author+collection+etc}%
   \newunit
   \usebibmacro{volume+page}}%
-
-\DeclareBibliographyDriver{cite:crossref}{%
-  \usebibmacro{author+title+etc}%
-  \crossref{\thefield{crossref}}%
-  \newunit}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
   \usebibmacro{author+title+etc}%

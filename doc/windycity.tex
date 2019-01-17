@@ -1,4 +1,4 @@
-% Last modified: Tue 15 Jan 2019 04:28:50 PM CST
+% Last modified: Wed 16 Jan 2019 05:35:56 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -513,16 +513,10 @@ changes the format of a work in a collection so that, in
 bibliographies and long citations, publication information for the
 volume precedes that of the collection.
 
-Some works need this option. Those cases are limited to citations of
-volumes in collections in which different volumes have different
-authors. Not using \opt{volfirst} would create the impression that the
-author of the volume is also the author of the collection. For an
-example, see \textit{CMS} \ref{14.122}.
-
 As mentioned in Section \ref{preops}, the preamble option
 \opt{reflist} implies the preamble option \opt{volfirst}. As an entry
-option, then, \opt{volfirst} is for changing particular standard
-citations.
+option, then, \opt{volfirst} is for changing individual citations in
+the default format.
 
 For more information, see Section \ref{collorder}.
 
@@ -551,13 +545,6 @@ particular works. Use it with an asterisk to add every work in every
 
 \begin{ltxsyntax}
 
-\cmditem{bibentry}{key}
-
-This command prints the bibliography entry of a work. Although mainly
-for testing, you might use a series of these commands to print a
-reading list, as for a syllabus. It has no effect on citation
-tracking.
-
 \cmditem{cite*}[prenote][postnote]{key}
 
 Use this command to cite a work without printing anything in the
@@ -582,21 +569,6 @@ it's only output is a work's \bibfield{labelname} and
 Like \cmd{cite*}, this command suppresses the author's position of a
 note but otherwise functions like \cmd{footcite}.
 
-\cmditem{fullcite}[prenote][postnote]{key}
-
-Mainly for testing, this command prints the first, long citation of a
-work in the default format, regardless of whether the preamble options
-\opt{short} or \opt{firstshort} are true. Like \cmd{bibentry}, it has
-no effect on citation tracking.
-
-\cmditem{fullcite*}[prenote][postnote]{key}
-
-Like \cmd{fullcite}, this command prints the first, long citation of a
-work in the default format but, like \cmd{cite*}, skips the author's
-position. Also like \cmd{cite*}, the corresponding entry in the
-bibliography retains the author's position. It has no effect on
-citation tracking.
-
 \cmditem{parencite*}[prenote][postnote]{key}
 
 Use this command to print a parenthetical citation without the
@@ -617,11 +589,6 @@ The source for the passage above contains:
    Fischer and Hout \parencite*{fischer2006}... Abramowitz
    and Saunders \parencite*{abramowitz2005}... \end{quote}
 \end{verbatim}
-
-\cmditem{refentry}{key}
-
-Similar to \cmd{bibentry}, this command prints the reference list
-entry of a work. It, too, has no effect on citation tracking.
 
 \cmditem{reprint}[postnote]{key}
 
@@ -1196,31 +1163,45 @@ cause confusion, since the collection is what comes in volumes, not
 the volumes themselves. In any event, Windy City prints the volume
 number in the first case but not in the second.
 
-Sometimes, you may always want the publication data for volumes to
-have priority. If so, compile your documents with the \opt{volfirst}
-preamble option, which will affect all collections. More likely,
-though, it will make sense in some cases to give priority to the
-volume and in others to the collection. That's why there's a
-\opt{volfirst} entry option for changing particular citations. In
-fact, as touched on in Section \ref{entryops}, some works need the
-entry option. Here's an example from \textit{CMS} \ref{14.122}:
+Sometimes, you may want the publication data for volumes to have
+priority in every case. If so, compile your documents with the
+\opt{volfirst} preamble option, which will affect all collections.
+More likely, though, you'll want to give priority to the volume when
+citing some works but not others. That's why there's a \opt{volfirst}
+entry option for changing individual citations. A good candidate for
+that is this example from \textit{CMS} \ref{14.122}:
 
 \begin{citebib}
 \item \cite{barrows1959}
 \end{citebib}
 
-Without \opt{volfirst}, the resulting entry would place the author's
-name before the collection's title, which could give the impression
-that the author wrote every volume of the collection, among them the
-one cited above. \textit{CMS} does suggest a format that would give
-priority to the collection, placing the editor's name first and the
-author's name after the volume's title. But Windy City doesn't support
-it. Perhaps someday. For now, be aware that, in rare cases, the
-style's default format isn't always the right or best choice.
+Having the editor's name first and the author's name after the
+volume's title looks odd. But it's not wrong. The volume's author
+apparently didn't write every volume of the collection. As such, if
+the default is to give priority to the collection, the first position
+should go to the collection's editor, not the volume's author. With
+\opt{volfirst}, on the other hand, the format looks more familiar:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{volfirst}}
+\item \cite{barrows1959}
+\AtNextBibliography{\toggletrue{volfirst}}
+\end{citebib}
+
+Another reason to prefer \opt{volfirst} with a work like Barrow's is
+that, in the default format, they don't sort correctly in a
+bibliography or reference list without help, such as by adding
+\bibfield{sortname} fields to their bibliography database entries.
+Otherwise, Windy City will sort them by the author's name. Recall that
+the entry option \opt{swapauth} has the same problem (see Section
+\ref{edtranspos}). Here, too, there's seemingly no way in \biblatex
+for an entry option to determine the sort order of a work or for a
+single sorting template to anticipate every format that's possible
+under this style.
 
 How does Windy City determine which entries in a bibliography database
-are affected by \opt{volfirst}? Below are the entries for the first
-example above:
+are affected by \opt{volfirst}? Below are the entries for an earlier
+example:
 
 \begin{verbatim}
    @InBook{armstrong2014,
@@ -1757,6 +1738,9 @@ database.
 % 14.104 Editor or translator in addition to author
 \label{14.104}
 
+For issues surrounding the last example below, see Section
+\ref{edtranspos}.
+
 \begin{citebib}
 \item \cite{bonnefoy1995}
 \item \cite{menchu1999}
@@ -1796,11 +1780,21 @@ database.
 \subsubsection{Several contributions to the same multiauthor book}
 % 14.108 Several contributions to the same multiauthor book
 
+% Due to 'mincrossrefs=2', angle1968 and zukowsky1987 would be
+% automatically added to the bibliography at the end of the document
+% because each is referenced twice below. However, they wouldn't
+% appear in the refsegment below without using \nocite.
+
+% Unlike article entries, incollection entries don't automatically
+% print page ranges. That seems right, though CMS isn't entirely clear
+% on this point. See note for 'cite:pages' in windycity.cbx.
+
 \begin{citebib}
 \item \cite[84--87]{keating1968}
 \item \cite[362--70]{lippincott1968}
-\item \cite{draper1987}
-\item \cite{harrington1987}
+\item \cite[107--19]{draper1987}
+\item \cite[189--207]{harrington1987}
+\nocite{angle1968,zukowsky1987}
 \end{citebib}
 
 \subsubsection{Book-length work within a book}
@@ -1953,26 +1947,32 @@ example of the bibliography.
 % 14.122 Authors and editors of multivolume works
 \label{14.122}
 
-The work by Barrows is an example of one that seems to need the entry
-option \opt{volfirst} (see Section \ref{collorder}). Without it, the
-resulting entry would give the impression that he wrote every volume
-in the collection. With Donne, on the other hand, you may choose one
-format or the other.
+For issues surrounding the first example below, see Section
+\ref{collorder}.
 
 \begin{citebib}
 \item \cite{barrows1959}
 \item \cite*{donne1995}
 \end{citebib}
 
-\noindent
+\noindent With preamble or entry option \opt{volfirst}:
 
-Citing Donne with the preamble or entry option \opt{volfirst}:
+% The point of '\newrefcontext' below is to work around the 'sortname'
+% for barrows1959. As explained in \ref{collorder}, works like
+% barrows1959 sort incorrectly in the default format but correctly
+% with the option 'volfirst'. The problem with setting 'volfirst' is
+% that you can't work around it to demonstrate the default format in a
+% bibliography.
 
 \begin{citebib}
 \AtNextCitekey{\toggletrue{volfirst}}
+\item \cite{barrows1959}
+\AtNextCitekey{\toggletrue{volfirst}}
 \item \cite{donne1995}
+\newrefcontext[sorting=none]
 \AtNextBibliography{\toggletrue{volfirst}}
 \end{citebib}
+\newrefcontext[sorting=nty]
 
 \subsubsection{Series titles, numbers, and editors}
 % 14.123 Series titles, numbers, and editors

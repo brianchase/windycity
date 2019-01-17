@@ -6,7 +6,9 @@ INTERIM
   all citations
 * added support for swapping the place of an author with an editor or
   translator, as in CMS 14.104, and updated documentation accordingly
-* improved hanlding of name lists
+* extended the previous to cover a similar case in CMS 14.122
+* improved hanlding of name lists and cross-referencing
+* removed no longer maintained citation commands
 * other bug fixes and minor changes
 
 RELEASE NOTES FOR VERSION 2019.01.07
