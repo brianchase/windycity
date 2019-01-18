@@ -1,4 +1,4 @@
-% Last modified: Wed 16 Jan 2019 11:44:48 AM CST
+% Last modified: Fri 18 Jan 2019 04:27:26 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019.01.07 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019.01.18 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -277,9 +277,9 @@
                or test {\ifentrytype{inbook}}
                or test {\ifentrytype{incollection}}}
     {\ifboolexpr{ togl {collection}
-                  and togl {volfirst}}
-       {}
-       {\usebibmacro{volume+page}}}
+                  and togl {swapvol}}
+       {\usebibmacro{volume+page}}%
+       {}}
     {}}
 
 \newbibmacro*{volume+page}{%

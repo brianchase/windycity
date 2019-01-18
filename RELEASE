@@ -1,15 +1,18 @@
 
-INTERIM
+RELEASE NOTES FOR VERSION 2019.01.18
 
+* reversed default for collections, printing information for volumes
+  first; the option to reverse this is called 'swapvol'
+* changed option name 'transfirst' to 'swaptrans'
 * fixed punctuation before 'postnote' of articles and reviews (ugh!)
 * changed processing of spacing and punctuation around 'postnote' for
   all citations
 * added support for swapping the place of an author with an editor or
-  translator, as in CMS 14.104, and updated documentation accordingly
+  translator, as in CMS 14.104
 * extended the previous to cover a similar case in CMS 14.122
 * improved hanlding of name lists and cross-referencing
 * removed no longer maintained citation commands
-* other bug fixes and minor changes
+* other bug fixes and housekeeping
 
 RELEASE NOTES FOR VERSION 2019.01.07
 

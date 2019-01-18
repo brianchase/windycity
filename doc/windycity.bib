@@ -46,7 +46,7 @@
   year = {2010}
 }
 @Book{doe2010b,
-  options = {skipbib,transfirst},
+  options = {skipbib,swaptrans},
   author = {Doe, Jane},
   title = {A Book's Title},
   editor = {Smith, John},
@@ -65,7 +65,7 @@
   year = {2002}
 }
 @Book{smith2002b,
-  options = {skipbib,transfirst},
+  options = {skipbib,swaptrans},
   title = {A Book's Title},
   editor = {Smith, John},
   translator = {Doe, Jane},
@@ -618,7 +618,7 @@
   year = {1995}
 }
 @Book{menchu1999,
-  options = {transfirst},
+  options = {swaptrans},
   author = {Menchú, Rigoberta},
   title = {Crossing Borders},
   editor = {Wright, Ann},
@@ -837,7 +837,7 @@
   crossref = {tocqueville2000}
 }
 @Book{tocqueville2000,
-  options = {transfirst},
+  options = {swaptrans},
   author = {Tocqueville, Alexis de},
   title = {Democracy in America},
   editor = {Mansfield, Harvey, and Delba Winthrop},
@@ -1003,6 +1003,7 @@
 % 14.118 Citing a particular volume in a note
 
 @Book{james1963.5,
+  options = {swapvol},
   author = {James, Henry},
   title = {1883–1884},
   volume = {5},
@@ -1092,9 +1093,7 @@
 % 14.122 Authors and editors of multivolume works
 
 @InBook{barrows1959,
-  keywords = {notinref},% see notes in windycity.tex
   author = {Barrows, Herbert},
-  sortname = {Ray, Gordon N.},
   title = {Reading the Short Story},
   volume = {1},
   crossref = {gordon1959}
@@ -1722,7 +1721,6 @@
   date = {2008-07/2008-08}
 }
 @Article{gourmet2000,
-  sortname = {Gourmet},
   journal = {Gourmet},
   note = {Kitchen Notebook},
   date = {2000-05}
@@ -1731,7 +1729,6 @@
 % 14.191 Basic citation format for newspaper articles
 
 @Article{editorial1990,
-  sortname = {{Philadelphia Inquirer}},
   journal = {Philadelphia Inquirer},
   note = {Editorial},
   date = {1990-07-30}
@@ -1744,7 +1741,6 @@
 }
 @Article{forester2000,
   sortname = {{Lake Forester}},
-  sorttitle = {Pushcarts Evolve to Trendy Kiosks},
   title = {Pushcarts Evolve to Trendy Kiosks},
   journal = {Lake Forester},
   address = {Lake Forest, IL},

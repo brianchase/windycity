@@ -1,4 +1,4 @@
-% Last modified: Wed 16 Jan 2019 12:56:35 PM CST
+% Last modified: Fri 18 Jan 2019 04:29:37 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019.01.07 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019.01.18 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -94,7 +94,6 @@
 \DeclareBibliographyOption{reflist}[true]{%
   \ifstrequal{#1}{true}
     {\global\toggletrue{reflist}%
-     \global\toggletrue{volfirst}% See CMS, 17th ed., 15.41
      \DeclareLabeldate{%
        \field{date}
        \field{year}
@@ -122,21 +121,21 @@
     {\toggletrue{swapauth}}%
     {\togglefalse{swapauth}}}
 
-\providetoggle{transfirst}
-\DeclareEntryOption{transfirst}[true]{%
+\providetoggle{swaptrans}
+\DeclareEntryOption{swaptrans}[true]{%
   \ifstrequal{#1}{true}
-    {\toggletrue{transfirst}}%
-    {\togglefalse{transfirst}}}
+    {\toggletrue{swaptrans}}%
+    {\togglefalse{swaptrans}}}
 
-\providetoggle{volfirst}
-\DeclareBibliographyOption{volfirst}[true]{%
+\providetoggle{swapvol}
+\DeclareBibliographyOption{swapvol}[true]{%
   \ifstrequal{#1}{true}
-    {\global\toggletrue{volfirst}}%
-    {\global\togglefalse{volfirst}}}
-\DeclareEntryOption{volfirst}[true]{%
+    {\global\toggletrue{swapvol}}%
+    {\global\togglefalse{swapvol}}}
+\DeclareEntryOption{swapvol}[true]{%
   \ifstrequal{#1}{true}
-    {\toggletrue{volfirst}}%
-    {\togglefalse{volfirst}}}
+    {\toggletrue{swapvol}}%
+    {\togglefalse{swapvol}}}
 
 % For setting 'minbibnames' and such, see CMS, 17th ed., 14.76 and
 % 15.29.
@@ -210,11 +209,13 @@
     \field{sorttitle}
     \field{title}
     \field{booktitle}
-    \field{bookbooktitle}}
+    \field{bookbooktitle}
+    \field{journaltitle}}
   \sort{%
     \field{sorttitle}
     \field{title}
-    \field{booktitle}}
+    \field{booktitle}
+    \field{journaltitle}}
   \sort{%
     \field{sortyear}
     \field{year}
@@ -348,15 +349,13 @@
 
 \defbibenvironment{reflist}
   {\global\toggletrue{reflist}%
-   \global\toggletrue{volfirst}% See CMS, 17th ed., 15.41
    \list{}{%
      \leftmargin\bibhang
      \itemindent-\leftmargin
      \itemsep\bibitemsep
      \parsep\bibparsep}}
   {\endlist
-   \global\togglefalse{reflist}%
-   \global\togglefalse{volfirst}}%
+   \global\togglefalse{reflist}}%
   {\item}
 
 % Index names only.
@@ -618,7 +617,7 @@
                or test {\ifentrytype{inbook}} )}
     {}
     {\ifboolexpr{ togl {collection}
-                  and not togl {volfirst}
+                  and togl {swapvol}
                   and test {\ifentrytype{inbook}}}
       {\usebibmacro{bookauthor+namelist}}%
       {\ifnameundef{author}
@@ -657,7 +656,7 @@
   \iftoggle{authposition}% false in 'crossref' macro
     {\savefield{namehash}{\bbx@lasthash}%
      \usebibmacro{authpos+deflabel}%
-     \newunit}
+     \newunit}%
     {\setunit{\addcomma\space}}}
 
 \newbibmacro*{aft+fore+intro}{%
@@ -670,7 +669,9 @@
     {\renewcommand*{\cbx@namelist}{afterword}%
      \renewcommand*{\cbx@bibstring}{afterword}}%
   \renewcommand*{\plugb}{\newunitpunct}%
-  \usebibmacro{namehash+etc}%
+  \usebibmacro{printnames+etc}%
+  \savefield{namehash}{\bbx@lasthash}%
+  \usebibmacro{authpos+deflabel}%
   \bibstring{\cbx@bibstring}\space}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -681,7 +682,7 @@
   \usebibmacro{prep:edtrans}%
   \iftoggle{noed}
     {\usebibmacro{transcombos}}%
-    {\iftoggle{transfirst}
+    {\iftoggle{swaptrans}
        {\usebibmacro{transcombos}}%
        {\usebibmacro{edcombos}}}}
 
@@ -771,7 +772,7 @@
      \iftoggle{authposition}
        {\ifboolexpr{ test {\ifentrytype{inbook}}
                      and togl {collection}
-                     and not togl {volfirst}
+                     and togl {swapvol}
                      and not test {\ifnameundef{editora}}}
           {\global\toggletrue{noed}}%
           {}}
@@ -791,14 +792,14 @@
     {\iffieldequalstr{\xeditor type}{maintitle}
        {\ifentrytype{book}
           {\iftoggle{collection}
-             {\iftoggle{volfirst}
-                {\global\toggletrue{noed}}%
-                {}}
+             {\iftoggle{swapvol}
+                {}
+                {\global\toggletrue{noed}}}
              {\global\toggletrue{noed}}}
           {\global\toggletrue{noed}}}
        {\ifboolexpr{ test {\ifentrytype{book}}
                      and togl {collection}
-                     and not togl {volfirst}}
+                     and togl {swapvol}}
           {\global\toggletrue{noed}}%
           {}}}
     {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{maintitle}}
@@ -843,7 +844,7 @@
        \addcomma\space\bibsstring{\cbx@bibstring}}}}
 
 \newbibmacro*{eds+comps}{%
-  \iftoggle{transfirst}
+  \iftoggle{swaptrans}
     {}
     {\ifnameundef{editor}
        {\ifnumgreater{\value{editora}}{1}
@@ -854,7 +855,7 @@
           {}}}}
 
 \newbibmacro*{a:edtrans}{%
-  \iftoggle{transfirst}
+  \iftoggle{swaptrans}
     {\usebibmacro{transcombos+etc}%
      \usebibmacro{edcombos+etc}}%
     {\usebibmacro{edcombos+etc}%
@@ -1037,7 +1038,7 @@
 
 \newbibmacro*{shorttitle}{%
   \ifboolexpr{ togl {collection}
-               and not togl {volfirst}}
+               and togl {swapvol}}
     {\ifentrytype{book}
        {\iffieldundef{shortmaintitle}
          {\printfield[title]{maintitle}}%
@@ -1054,7 +1055,7 @@
     {\iffieldundef{title}
        {\renewcommand*{\xtitle}{book}}%
        {\ifboolexpr{ togl {collection}
-                     and not togl {volfirst}}
+                     and togl {swapvol}}
           {\ifentrytype{book}
              {\renewcommand*{\xtitle}{main}}%
              {\renewcommand*{\xtitle}{book}}}
@@ -1214,7 +1215,7 @@
           {\printfield{year}%
            \usebibmacro{endyear}}%
           {\ifboolexpr{ togl {collection}
-                        and not togl {volfirst}
+                        and togl {swapvol}
                         and not test {\iffieldundef{year}}}
              {\printfield{year}%
               \usebibmacro{endyear}}%
@@ -1534,20 +1535,18 @@
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
           {\usebibmacro{crossref}%
-%           \crossref{\thefield{crossref}}% alternative to above
-%           \toggletrue{bibliography}% \crossref makes it false
            \usebibmacro{pages}}%
           {\usebibmacro{incollections}}}
        {\listxadd{\crossreflist}{\thefield{crossref}}%
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
-          {\newcounter{\thefield{crossref}}}
+          {\newcounter{\thefield{crossref}}}% needs '%'
         \usebibmacro{incollections}}}}
 
 \newbibmacro*{reviews}{%
 % Unsigned reviews have no plausible place for the publication year
-% but where the default format would put it. Perhaps best to use the
-% default format from here.
+% except where the default format would put it. Perhaps best to use
+% the default format from here.
   \ifnameundef{author}
     {\toggletrue{noauth}%
      \togglefalse{reflist}}%
@@ -1881,9 +1880,9 @@
   \clearfield{volume}%
   \usebibmacro{part}%
   \iftoggle{collection}
-    {\iftoggle{volfirst}
-       {\space\bibstring{of}\space}%
-       {\addcomma\space}}%
+    {\iftoggle{swapvol}
+       {\addcomma\space}%
+       {\space\bibstring{of}\space}}%
     {\iffieldundef{maintitle}
        {}
        {\space\bibstring{of}\space}}}

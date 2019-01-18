@@ -1,4 +1,4 @@
-% Last modified: Thu 17 Jan 2019 02:22:28 PM CST
+% Last modified: Fri 18 Jan 2019 01:16:00 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -133,7 +133,6 @@
   {\item}
 \defbibenvironment{ref}
   {\global\toggletrue{reflist}%
-   \global\toggletrue{volfirst}% See CMS, 17th ed., 15.41
    \list{}{%
      \small
      \setlength{\leftmargin}{2.2em}%
@@ -141,10 +140,12 @@
      \itemsep 0\baselineskip
      \parsep 0\baselineskip}}
   {\endlist
-   \global\togglefalse{reflist}%
-   \global\togglefalse{volfirst}}%
+   \global\togglefalse{reflist}}%
   {\item}
 \defbibheading{none}{}%
+
+\DeclareSortingTemplate{reverse}{%
+  \sort[direction=descending]{\citeorder}}%
 
 \newcounter{sh}
 \renewcommand{\thesh}{Abbreviations}%

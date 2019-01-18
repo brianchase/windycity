@@ -1,4 +1,4 @@
-% Last modified: Thu 17 Jan 2019 11:42:38 AM CST
+% Last modified: Fri 18 Jan 2019 05:21:44 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019.01.07}
+\version{2019.01.18}
 \maketitle
 \tableofcontents\markboth{Contents}{Contents}
 
@@ -164,7 +164,7 @@ Aside from parenthetical citations, which \textit{CMS} covers in
 Chapter 15, alternative formats receive scant documentation.
 Nevertheless, \textit{CMS} does give options. Consider this example
 from \textit{CMS} \ref{14.34}:\footnote{Switching formats within a
-document isn't a feature of the style and isn't at all convenient.}
+document isn't a feature of the style and isn't recommended.}
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
@@ -377,12 +377,6 @@ reference list is to use the \opt{reflist} \opt{env} option of
 \cmd{printbibliography}. See Section \ref{overview} for more
 information.
 
-In line with \textit{CMS} \ref{15.41}, the choice of \opt{reflist}
-affects the format of works in collections. Those works should give
-publication information for the volume first, followed by publication
-information for the collection. To that end, \opt{reflist} implies the
-preamble option \opt{volfirst} (see below).
-
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
 \noindent As shown in Section \ref{short}, this option prints
@@ -407,25 +401,13 @@ As noted earlier, \opt{short} implies \opt{firstshort}. But recall
 from Section \ref{short} that you can combine \opt{short} and
 \opt{ibid} for even more concise notes.
 
-\optitem[false]{volfirst}{\opt{true}, \opt{false}}
+\optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
-In some examples, \textit{CMS} shows two ways of citing works from
-collections: with publication information for the volume preceding
-that of the collection or \textit{vice versa}. (See especially
-\textit{CMS} \ref{14.119}, \ref{14.121}, and \ref{14.122}, and compare
-\ref{14.144} and \ref{15.41}.) In the standard format, it's unclear
-whether \textit{CMS} has a preference. But the examples suggest that,
-if one must be the default, it's to give priority to the collection.
-For the alternative, use \opt{volfirst}. The preamble option
-\opt{volfirst} has a global effect. It changes the format of all
-relevant citations. The entry option \opt{volfirst} changes the format
-on a case-by-case basis (see Section \ref{entryops}).
-
-As mentioned above, \textit{CMS} \ref{15.41} makes clear that
-\opt{volfirst} should be the default for reference lists. As such,
-\opt{reflist} implies \opt{volfirst}.
-
-For more information, see Section \ref{collorder}.
+In bibliographies and long citations, works in collections may place
+publication information for the volume before that of the collection
+or \textit{vice versa}. Windy City gives priority to the volume. To
+reverse this for all relevant citations, use \opt{swapvol}. For more
+information, see Section \ref{collorder}.
 
 \end{optionlist}
 
@@ -442,7 +424,8 @@ For options that affect the format of every work, see Section
 \optitem[false]{anonauth}{\opt{true}, \opt{false}}
 
 \noindent This option prints the author's name of an anonymously
-published work in brackets, as shown in \textit{CMS} \ref{14.79}:
+published work in brackets, as in this example from \textit{CMS}
+\ref{14.79}:
 
 \begin{citebib}
 \item \cite{horsley1796}
@@ -450,9 +433,8 @@ published work in brackets, as shown in \textit{CMS} \ref{14.79}:
 
 \optitem[false]{anonqauth}{\opt{true}, \opt{false}}
 
-\noindent This option is similar to the previous but adds a question
-mark after the author's name, indicating doubt about the authorship.
-The following example is from \ref{14.79}:
+\noindent Similar to the previous but adds a question mark after the
+author's name, as in this example from \textit{CMS} \ref{14.79}:
 
 \begin{citebib}
 \item \cite{hawkes1834}
@@ -475,50 +457,37 @@ title's position. Below is an example from \textit{CMS} \ref{14.105}:
 \item \cite{chaucer1966}
 \end{citebib}
 
-\noindent To bypass the author's position in a single note, use
-\cmd{cite*} or \cmd{footcite*}. See Section \ref{citecmds}.
+\noindent To bypass the author's position in a single note, and
+without affecting the bibliography, use \cmd{cite*} or
+\cmd{footcite*}.
 
 \optitem[false]{swapauth}{\opt{true}, \opt{false}}
 
-To swap the places of a book's author with an editor or translator,
-use \opt{swapauth}. An example appears in \textit{CMS} \ref{14.104}:
+\noindent To swap the places of a book's author with an editor or
+translator, use \opt{swapauth}. This option works with the
+\bibtype{book}, \bibtype{collection}, and \bibtype{inbook} entry
+types. For more information, see Section \ref{edtranspos}.
 
-\begin{citebib}
-\item \cite{pound1953}
-\end{citebib}
-
-\noindent This option works with the \bibtype{book},
-\bibtype{collection}, and \bibtype{inbook} entry types. To put a
-translator in the author's position when a book also has an editor,
-use \opt{swapauth} with \opt{transfirst}. For more information, see
-Section \ref{edtranspos}.
-
-\optitem[false]{transfirst}{\opt{true}, \opt{false}}
+\optitem[false]{swaptrans}{\opt{true}, \opt{false}}
 
 \noindent According to \textit{CMS}, if a work has both an editor and
 a translator, their names should appear in citations in the order in
 which they appear on the work's title page (\ref{14.104}). By default,
 the style lists editors first. Entries with the option
-\bibfield{transfirst} reverse this order: Their translators print
+\bibfield{swaptrans} reverse this order: Their translators print
 first. If a work's translators and editors are identical, using
-\bibfield{transfirst} reverses the order of their roles, say, from
+\bibfield{swaptrans} reverses the order of their roles, say, from
 \textit{edited and translated by} to \textit{translated and edited
 by}. For more information, see Section \ref{edtranspos}.
 
-\optitem[false]{volfirst}{\opt{true}, \opt{false}}
+\optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
-As an entry option, \opt{volfirst} does on a case-by-case basis what
-the \opt{volfirst} preamble option does globally: When set to true, it
-changes the format of a work in a collection so that, in
+\noindent As an entry option, \opt{swapvol} does on a case-by-case
+basis what the \opt{swapvol} preamble option does globally: When set
+to true, it changes the format of a work in a collection so that, in
 bibliographies and long citations, publication information for the
-volume precedes that of the collection.
-
-As mentioned in Section \ref{preops}, the preamble option
-\opt{reflist} implies the preamble option \opt{volfirst}. As an entry
-option, then, \opt{volfirst} is for changing individual citations in
-the default format.
-
-For more information, see Section \ref{collorder}.
+collection precedes that of the volume. For more information, see
+Section \ref{collorder}.
 
 \end{optionlist}
 
@@ -593,7 +562,7 @@ a reprint of a work after citing the original:
 \item \cite{frankfurt1969}; \reprint[1--10]{frankfurt1988.1}
 \end{citebib}
 
-\noindent The output above results from:
+\noindent The output above derives from:
 
 \begin{verbatim}
    \cite{frankfurt1969}; \reprint[1--10]{frankfurt1988.1}
@@ -824,7 +793,7 @@ for an example in \textit{CMS} \ref{14.104}:
 \noindent When the style processes this entry, it identifies the
 editor and translator of the work with the names, respectively, in the
 \bibfield{editor} and \bibfield{translator} fields. Since the entry
-doesn't use the  \opt{transfirst} entry option (see Section
+doesn't use the \opt{swaptrans} entry option (see Section
 \ref{edtranspos}), the resulting output list the editor and
 translator, in that order, after the authors and title.
 
@@ -899,13 +868,12 @@ Man}.
 Sometimes, you need to designate the role of an editor with the field
 \bibfield{editortype}. The values of \bibfield{editortype} are
 \textit{maintitle}, \textit{series}, \textit{issuetitle}, and
-\textit{compiler}.\footnote{You could use \textit{title} but may omit
-it.} As for the latter, Windy City treats \textit{compiler} as a kind
-of editor. So, if you need to add a compiler to an entry, add the
-compiler's name to an available field for an editor, then add an
-appropriate \bibfield{editortype} field with the value
-\textit{compiler}. It may help to see the bibliography database entry
-for an example in \textit{CMS} \ref{14.103}:
+\textit{compiler}. As for the latter, Windy City treats
+\textit{compiler} as a kind of editor. So, if you need to add a
+compiler to an entry, add the compiler's name to an available field
+for an editor, then add an appropriate \bibfield{editortype} field
+with the value \textit{compiler}. It may help to see the bibliography
+database entry for an example in \textit{CMS} \ref{14.103}:
 
 \begin{verbatim}
    @Book{schechter2011,
@@ -925,32 +893,30 @@ for an example in \textit{CMS} \ref{14.103}:
 
 Follow the same pattern for editors of a \bibfield{maintitle},
 \bibfield{series}, or \bibfield{issuetitle}. Here's an example from
-\textit{CMS} \ref{14.118}:
+\textit{CMS} \ref{14.123}:
 
 \begin{verbatim}
-   @Book{james1963.5,
-     author = {James, Henry},
-     title = {1883–1884},
-     volume = {5},
-     maintitle = {The Complete Tales of Henry James},
-     shortmaintitle = {Complete Tales of Henry James},
-     editor = {Edel, Leon},
-     editortype = {maintitle},
-     address = {London},
-     publisher = {Rupert Hart-Davis},
-     year = {1963}
+   @Book{allen2009,
+     author = {Allen, Judith A.},
+     title = {The Feminism of Charlotte Perkins Gilman},
+     subtitle = {Sexualities, Histories, Progressivism},
+     series = {Women in Culture and Society},
+     editor = {Stimpson, Catharine R.},
+     editortype = {series},
+     address = {Chicago},
+     publisher = ucp,
+     year = {2009}
    }
 \end{verbatim}
 
 \begin{citebib}
-\item \cite{james1963.5}
+\item \cite{allen2009}
 \end{citebib}
 
-\noindent If there were no \bibfield{editortype} assigning the
-\bibfield{editor} to the \bibfield{maintitle}, the style would
-associate it with the volume. In short, for any title at a higher
-level than \bibfield{title}, you need to use \bibfield{editortype} to
-assign an editor to it.
+\noindent If there were no \bibfield{editortype} assigning the editor
+to the series, Windy City would assume that she's the book's editor.
+In short, for any title at a higher level than \bibfield{title}, you
+need to use \bibfield{editortype} to assign an editor to it.
 
 One complication remains: There are other name lists for editors than
 \bibfield{editor}. The style also uses \bibfield{editora},
@@ -985,7 +951,7 @@ of thumb described above, reserving \bibfield{editor} for
 Normally, Windy City prints editors' names first. But if translators
 are listed first on a work's title page (or in some other relevant
 place), you may want to reverse the order and print the translators'
-names first. For that, use the entry option \opt{transfirst}. Compare:
+names first. For that, use the entry option \opt{swaptrans}. Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -1010,7 +976,7 @@ editors' names in the author's position:
 \item \cite{smith2002a}
 \end{citebib}
 
-\noindent Use \opt{transfirst} to reverse them:
+\noindent Use \opt{swaptrans} to reverse them:
 
 \begin{citebib}
 \item \cite{smith2002b}
@@ -1018,7 +984,7 @@ editors' names in the author's position:
 
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in, ``Edited and
-translated by\ldots'' Using \opt{transfirst} reverses them. Here's an
+translated by\ldots'' Using \opt{swaptrans} reverses them. Here's an
 example from \textit{CMS} \ref{14.104}:
 
 \begin{citebib}
@@ -1028,7 +994,7 @@ example from \textit{CMS} \ref{14.104}:
 Since the style treats a compiler as a kind of editor, the comments
 above apply to compilers: If a work has compilers and translators,
 Windy City will print compilers' names first, unless you use
-\opt{transfirst}.
+\opt{swaptrans}.
 
 In rare cases, you may want to swap the position of an author and an
 editor or translator. \textit{CMS} gives this example in \ref{14.104}:
@@ -1047,15 +1013,15 @@ Also, if it finds both an editor and a translator, and they're not the
 same person, it will print the editor's name in the author's
 position---again, giving priority to editors. If you want the
 translator's name in the author's position, use \opt{swapauth} with
-\opt{transfirst}.
+\opt{swaptrans}.
 
-Another caveat: For correct sorting in a bibliography or reference
-list, a work that uses \opt{swapauth} needs a field like
-\bibfield{sortname} to sort it by the name of the editor or translator
-whose name will occupy the author's position. It would be nice if
-Windy City could do this for you, but at present no feature of
-\biblatex seems to allow on-the-fly changes to sorting. Below
-is the entry for the example above:
+Another caveat: For correct sorting in a bibliography, a work that
+uses \opt{swapauth} needs a field like \bibfield{sortname} to sort it
+by the name of the editor or translator whose name will occupy the
+author's position. It would be nice if Windy City could do this for
+you, but at present no feature of \biblatex seems to allow the kind of
+on-the-fly changes to sorting that \opt{swapauth} requires. Below is
+the entry for the example above:
 
 \begin{verbatim}
    @Book{pound1953,
@@ -1078,98 +1044,90 @@ collection it is. These issues have implications for how you structure
 entries in your bibliography database and how you use citation
 commands.
 
-\subsection{The Order of Publication Data}
+\subsection{The Structure of Citations}
 \label{collorder}
 
 A work in a collection usually has a title and perhaps other
-publication data distinct from that of the collection. When preparing
-your bibliography database, the most basic choice to make about such a
-work is which publication data has priority, the volume's or the
-collection's. Consider an example from \textit{CMS} \ref{14.119}:
+publication information that differs from the collection's. When
+preparing your bibliography database, the most basic choice to make
+about a work in a collection is which publication information has
+priority, the collection's or the volume's. Consider an example from
+\textit{CMS} \ref{14.119}:
 
 \begin{citebib}
 \item \cite{armstrong2014}
 \end{citebib}
 
-\noindent The editor and title of the collection precedes that of the
-volume. In notes and bibliographies in the default format,
-\textit{CMS} gives you the option of reversing this order. So does
-Windy City. You can reverse the order on a case-by-case or global
-basis with the entry or preamble option \opt{volfirst}.
+\noindent The editor and title of the volume precedes that of the
+collection. In notes and bibliographies in the default format,
+\textit{CMS} gives you the option of reversing this order. (See
+especially \textit{CMS} \ref{14.119}, \ref{14.121}, and \ref{14.122},
+and compare \ref{14.144} and \ref{15.41}.) Windy City does as well,
+with the entry or preamble option \opt{swapvol}.
 
 \begin{citebib}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite{armstrong2014}
-\AtNextBibliography{\toggletrue{volfirst}}
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
 In contexts where information for just one title appears (certain
 short citations), the one with priority determines which one
 identifies the work. By default, as you can see in the second note
-below, that's the collection.
+below, the volume has priority:
 
 \begin{citeonly}
 \item \cite{armstrong2014}
 \item \cite[45]{armstrong2014}
 \end{citeonly}
 
-\noindent Whereas, using \opt{volfirst}:
+\noindent Whereas with \opt{swapvol}:
 
 \begin{citeonly}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite{armstrong2014}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite[45]{armstrong2014}
 \end{citeonly}
 
-Aside from the change in editors and titles, notice that the volume
-number is missing from the second note in the passage above. When the
-collection has priority, so that the collection's title identifies the
-work, the volume number should appear in the citation. There are
+Notice the appearance of the volume number in the second note above,
+separated from the page citation with a colon. When the collection has
+priority, the volume number should appear in the citation. There are
 enough examples in \textit{CMS} to make that clear. But when the
-volume has priority, the volume number seems optional. It might even
-cause confusion, since the collection is what comes in volumes, not
-the volumes themselves. In any event, Windy City prints the volume
-number in the first case but not in the second.
+volume has priority, the volume number is at best optional but
+probably incorrect. (It could cause confusion, since the collection is
+what comes in volumes, not the volumes themselves.) In any event,
+Windy City prints the volume number only when the collection has
+priority, that is, when \opt{swapvol} is \textit{true}.
 
-Sometimes, you may want the publication data for volumes to have
-priority in every case. If so, compile your documents with the
-\opt{volfirst} preamble option, which will affect all collections.
-More likely, though, you'll want to give priority to the volume when
-citing some works but not others. That's why there's a \opt{volfirst}
-entry option for changing individual citations. A good candidate for
-that is this example from \textit{CMS} \ref{14.122}:
+Sometimes, you may want collections to have priority in every case. If
+so, compile your documents with the \opt{swapvol} preamble option,
+which acts globally, affecting all relevant citations. More likely,
+though, you'll want to give priority to the collection when citing
+some works but not others. That's why there's a \opt{swapvol} entry
+option for changing individual citations.
 
-\begin{citebib}
-\item \cite{barrows1959}
-\end{citebib}
-
-Having the editor's name first and the author's name after the
-volume's title looks odd. But it's not wrong. The volume's author
-apparently didn't write every volume of the collection. As such, if
-the default is to give priority to the collection, the first position
-should go to the collection's editor, not the volume's author. With
-\opt{volfirst}, on the other hand, the format looks more familiar:
+A good candidate for the entry option is this example from
+\textit{CMS} \ref{14.118}:
 
 \begin{citebib}
-\AtNextCitekey{\toggletrue{volfirst}}
-\item \cite{barrows1959}
-\AtNextBibliography{\toggletrue{volfirst}}
+\item \cite*{james1963.5}
 \end{citebib}
 
-Another reason to prefer \opt{volfirst} with a work like Barrow's is
-that, in the default format, they don't sort correctly in a
-bibliography or reference list without help, such as by adding
-\bibfield{sortname} fields to their bibliography database entries.
-Otherwise, Windy City will sort them by the author's name. Recall that
-the entry option \opt{swapauth} has the same problem (see Section
-\ref{edtranspos}). Here, too, there's seemingly no way in \biblatex
-for macros or entry options to determine the sort order of a work or
-for a one sorting template to anticipate every format that's possible
-under this style.
+\noindent The volume's title merely indicates a portion of the
+collection, somewhat like the volume of an encyclopedia with the title
+\textit{D–F}. There's nothing wrong with putting it first. But putting
+it second seems more intuitive.
+
+One drawback of \opt{swapvol} is that some works changed by it won't
+sort correctly in a bibliography without help. The affected works
+include those without listed authors and those in which the volume has
+an author but the collection as a whole doesn't---and possibly others.
+You can fix them by adding a \bibfield{sortname} field to their
+bibliography database entries.
 
 How does Windy City determine which entries in a bibliography database
-are affected by \opt{volfirst}? Below are the entries for an earlier
+are affected by \opt{swapvol}? Below are the entries for an earlier
 example:
 
 \begin{verbatim}
@@ -1192,7 +1150,7 @@ example:
 \end{verbatim}
 
 An \bibtype{inbook} entry, which should always be cross-referenced to
-a \bibtype{collection} entry, is subject to \opt{volfirst} if it has a
+a \bibtype{collection} entry, is subject to \opt{swapvol} if it has a
 \bibfield{volume} field and lacks certain fields that a volume of a
 collection of this sort shouldn't have. You can find the exact details
 in \file{windycity.bbx}. With one exception, you can get the same
@@ -1213,28 +1171,28 @@ results with a \bibtype{book} entry:
    }
 \end{verbatim}
 
-A \bibtype{book} is subject to \opt{volfirst} if it has
+A \bibtype{book} is subject to \opt{swapvol} if it has
 \bibfield{volume} and \bibfield{maintitle} fields. You may prefer a
 \bibtype{book} entry if you have no interest in citing the associated
-\bibtype{collection} and only intend to cite the volume. The problem
-is if the volumes of the collection have different publication dates,
-as they do for \textit{The Papers of Martin Luther King, Jr}. If the
-publication data for the volume go last, the bibliography and long
-citation should list the publication date as 2014. If the publication
-data for the collection go last, that date is 1992–. A \bibtype{book}
-entry, however, has just one field for a publication date, so using
-\opt{volfirst} on \bibfield{carson2014} prints 2014 when the correct
-date is 1992–. Otherwise, the \bibtype{book} and \bibtype{inbook}
+\bibtype{collection} and only intend to cite one volume. But you risk
+trouble if the volumes of the collection have different publication
+dates, as they do for \textit{The Papers of Martin Luther King, Jr}.
+If the publication information for the volume goes last, the
+bibliography and long citation should list the publication date as
+\textit{2014}. If the publication information for the collection goes
+last, that date is \textit{1992–}. A \bibtype{book} entry, however,
+has just one field for a publication date, so using \opt{swapvol} on
+\bibfield{carson2014} would print \textit{2014} when the correct date
+is \textit{1992–}. Otherwise, the \bibtype{book} and \bibtype{inbook}
 entries listed above are interchangeable. You can find more examples
 of both approaches in \file{windycity.bib}.
 
-As mentioned in Sections \ref{preops} and \ref{entryops}, reference
-lists give priority to a volume's publication data (see
-\textit{CMS} \ref{15.41}). Although that may seem a bit arbitrary,
-Windy City follows along by making the \opt{reflist} preamble option
-imply \opt{volfirst}. Remember that when a volume and a collection
-have different publication dates, a reference list entry prints both
-dates, which in turn requires you to use the \bibtype{inbook} approach
+As mentioned in \textit{CMS} \ref{15.41}, reference lists should give
+priority to the volume, not the collection. Nevertheless, Windy City
+doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
+Either way, remember that when a volume and a collection have
+different publication dates, a reference list entry prints both dates,
+which in turn requires you to use the \bibtype{inbook} approach
 described above.
 
 \begin{refonly}
@@ -1325,6 +1283,7 @@ in \textit{CMS} \ref{14.118}:
 
 \begin{verbatim}
    @Book{james1963.5,
+     options = {swapvol},
      author = {James, Henry},
      maintitle = {The Complete Tales of Henry James},
      shortmaintitle = {Complete Tales of Henry James},
@@ -1823,15 +1782,23 @@ For issues surrounding the last example below, see Section
 \subsubsection{Microform editions}
 % 14.115 Microform editions
 
-The citation of Farwell comes close to \textit{CMS} but isn't an exact
-match. The problem is with the field \bibfield{howpublished}, which
-seems like the best choice to contain ``microfiche'' but which, as
-must happen in other cases, prints after the \bibfield{postnote}, ``p.
-67, 3C12.''
+The problem Farwell's citation is with the field
+\bibfield{howpublished}, which seems like the best choice to contain
+\textit{microfiche} but which, as must happen in other cases, prints
+after the \bibfield{postnote}, \textit{p. 67, 3C12}.
 
 \begin{citebib}
 \item \cite[p. 67, 3C12]{farwell1997}
 \item \cite{tauber1958}
+\end{citebib}
+
+\noindent Citing Farwell with the preamble or entry option
+\opt{swapvol}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite[p. 67, 3C12]{farwell1997}
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
 \setcounter{subsubsection}{116}
@@ -1867,12 +1834,12 @@ For a discussion of how to handle these types of works, see Section
 \item \cite{armstrong2014}
 \end{citebib}
 
-\noindent With preamble or entry option \opt{volfirst}:
+\noindent With preamble or entry option \opt{swapvol}:
 
 \begin{citebib}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite{armstrong2014}
-\AtNextBibliography{\toggletrue{volfirst}}
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
 \subsubsection{Chapters and other parts of individual volumes}
@@ -1902,14 +1869,14 @@ example of the bibliography.
 \item \cite{harley1994}
 \end{citebib}
 
-\noindent With preamble or entry option \opt{volfirst}:
+\noindent With preamble or entry option \opt{swapvol}:
 
 \begin{citebib}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite[351]{lach1977}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite{harley1994}
-\AtNextBibliography{\toggletrue{volfirst}}
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
 \subsubsection{Authors and editors of multivolume works}
@@ -1921,25 +1888,23 @@ For issues surrounding the first example below, see Section
 
 \begin{citebib}
 \item \cite{barrows1959}
-\item \cite*{donne1995}
+\item \cite{donne1995}
 \end{citebib}
 
-\noindent With preamble or entry option \opt{volfirst}:
+\noindent With preamble or entry option \opt{swapvol}:
 
-% The point of '\newrefcontext' below is to work around the 'sortname'
-% for barrows1959. As explained in \ref{collorder}, works like
-% barrows1959 sort incorrectly in the default format but correctly
-% with the option 'volfirst'. The problem with setting 'volfirst' is
-% that you can't work around it to demonstrate the default format in a
-% bibliography.
+% As explained in \ref{collorder}, works like barrows1959 sort
+% correctly in the default format but incorrectly with the option
+% 'swapvol'. The point of '\newrefcontext' below is to work around
+% this problem.
 
 \begin{citebib}
-\AtNextCitekey{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
 \item \cite{barrows1959}
-\AtNextCitekey{\toggletrue{volfirst}}
-\item \cite{donne1995}
-\newrefcontext[sorting=none]
-\AtNextBibliography{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite*{donne1995}
+\newrefcontext[sorting=reverse]
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 \newrefcontext[sorting=nty]
 
@@ -2034,17 +1999,17 @@ field for the second example below contains \textit{vol. 6}.
 \label{14.144}
 
 \begin{citebib}
-\item \cite*[329]{hayek2011}
+\item \cite[329]{hayek2011}
 \item \cite{tillich1951}
 \end{citebib}
 
 \noindent Citing Hayek with the preamble or entry option
-\opt{volfirst}:
+\opt{swapvol}:
 
 \begin{citebib}
-\AtNextCitekey{\toggletrue{volfirst}}
-\item \cite[329]{hayek2011}
-\AtNextBibliography{\toggletrue{volfirst}}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite*[329]{hayek2011}
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
 \subsubsection{No date of publication}
@@ -2313,9 +2278,12 @@ Nevertheless, the format below is consistent with many other types of
 articles.
 
 For reference lists, unsigned reviews have no plausible place for the
-publication year but where the default format would put it. The
+publication year except where the default format would put it. The
 easiest solution is to give unsigned reviews the same format in
 reference lists as in bibliographies.
+
+Finally, an unsigned review won't sort correctly in a bibliography or
+reference list without adding, say, a \bibfield{sortname} field.
 
 \begin{citebib}
 \item \cite{zeitung1828}
