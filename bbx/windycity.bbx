@@ -1,4 +1,4 @@
-% Last modified: Fri 18 Jan 2019 04:29:37 PM CST
+% Last modified: Sat 19 Jan 2019 05:59:38 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -209,7 +209,6 @@
     \field{sorttitle}
     \field{title}
     \field{booktitle}
-    \field{bookbooktitle}
     \field{journaltitle}}
   \sort{%
     \field{sorttitle}
@@ -235,8 +234,7 @@
     \field{editora}
     \field{sorttitle}
     \field{title}
-    \field{booktitle}
-    \field{bookbooktitle}}
+    \field{booktitle}}
   \sort{%
     \field{sortyear}
     \field{origyear}
@@ -292,12 +290,11 @@
   \inherit{subtitle}{booksubtitle}
   \inherit{titleaddon}{booktitleaddon}
   \inherit{shorttitle}{shortbooktitle}
+  \inherit{booktitle}{bookbooktitle}
   \inherit{options}{options}}
 \DeclareDataInheritance{collection}{collection,inbook,bookinbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}}
-\DeclareDataInheritance{collection}{collection}{%
-  \inherit{title}{bookbooktitle}}
 
 %%%%%%%%%%%%%%%%%%%
 %%  Preliminary  %%
@@ -1061,7 +1058,6 @@
              {\renewcommand*{\xtitle}{book}}}
           {}}}}
 
-% FIX: not in use
 \newbibmacro*{bookbooktitle}{%
   \iffieldundef{bookbooktitle}
     {}
@@ -1768,6 +1764,7 @@
      \usebibmacro{longtitle+titleaddon}%
      \midsentence\setunit{\addcomma\space}%
      \usebibmacro{bybookauthor+pages}%
+     \usebibmacro{bookbooktitle}%
      \usebibmacro{b:edtrans}%
      \iftoggle{collection}
        {}% needs '%'
@@ -1775,8 +1772,6 @@
         \usebibmacro{edition}}}% needs '%'
   \usebibmacro{volumes+series+etc}%
   \usebibmacro{maintitle+editor}%
-%  \usebibmacro{bookbooktitle}% FIX: not in use
-%  \usebibmacro{b:edtrans}% for bookbooktitle
   \usebibmacro{publishers}%
   \usebibmacro{origtitle}}%
 
@@ -1851,7 +1846,7 @@
 \newbibmacro*{seriesaddon}{%
   \iffieldundef{seriesaddon}
     {}
-    {\addcomma\space%
+    {\addcomma\space
      \printfield{seriesaddon}%
      \isdot\addcomma}}%
 
@@ -1859,7 +1854,8 @@
   \iffieldundef{volume}
     {}
     {\iftoggle{bibliography}
-       {\printfield{pages}%
+       {\setunit{\addcomma\space}%
+        \printfield{pages}%
         \clearfield{pages}%
         \usebibmacro{volume+part}}%
        {\usebibmacro{volume+part}}}}
