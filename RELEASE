@@ -1,4 +1,8 @@
 
+INTERIM
+
+* added 'listvols' option
+
 RELEASE NOTES FOR VERSION 2019.01.18
 
 * reversed default for collections, printing information for volumes

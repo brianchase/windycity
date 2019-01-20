@@ -1,4 +1,4 @@
-% Last modified: Sun 20 Jan 2019 10:57:52 AM CST
+% Last modified: Sun 20 Jan 2019 03:30:06 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -78,6 +78,12 @@
   \ifstrequal{#1}{true}
     {\toggletrue{isbn}}%
     {\togglefalse{isbn}}}
+
+\providetoggle{listvols}
+\DeclareEntryOption{listvols}[true]{%
+  \ifstrequal{#1}{true}
+    {\toggletrue{listvols}}%
+    {\togglefalse{listvols}}}
 
 \providetoggle{noauth}
 \DeclareEntryOption{noauth}[true]{%
@@ -594,7 +600,7 @@
 \renewcommand*{\revsdnamedelim}{%
   \iftoggle{bibliography}
     {\addcomma}%
-    {}}% needs '%'?
+    {}}
 
 \newbibmacro*{author+bookauthor+etc}{%
   \iftoggle{noauth}% true by entry option or citation command
@@ -1258,7 +1264,7 @@
   \ifboolexpr{ togl {noauth}
                and not togl {journalfirst}}
     {\usebibmacro{labelyear+extradate}}%
-    {}}% needs '%'?
+    {}}
 
 % FIX: Figure out placement of units so as to avoid '\ifterm'.
 \newbibmacro*{labelyear+extradate}{%
@@ -1268,7 +1274,7 @@
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}%
      \newunit}%
-    {}}% needs '%'?
+    {}}
 
 \newbibmacro*{reflist:origyear}{%
   \iffieldundef{origyear}
@@ -1825,16 +1831,22 @@
        {\newunit}%
      \printfield{eid}}}
 
-% Print the number of volumes in bibliographies and reference lists.
-% In notes, users must cite a volume number when they cite particular
-% pages, chapters, and so on.
-
-\newbibmacro*{volumes}{%
+\newbibmacro*{volumes+old}{%
   \iffieldundef{volumes}
     {}
     {\ifboolexpr{ not test {\iftoggle{bibliography}}
                   and not test {\iffieldundef{postnote}}
                   and test {\iffieldundef{bookyear}}}
+       {}
+       {\newunit
+        \printfield{volumes}}}}
+
+\newbibmacro*{volumes}{%
+  \iffieldundef{volumes}
+    {}
+    {\ifboolexpr{ not togl {bibliography}
+                  and not test {\iffieldundef{postnote}}
+                  and not togl {listvols}}
        {}
        {\newunit
         \printfield{volumes}}}}
@@ -1870,16 +1882,13 @@
   \iffieldundef{series}
     {\newunit}%
     {\setunit{\addcomma\space}}%
-  \iffieldnum{volume}
-    {\printfield{volume}%
-     \iffieldundef{number}
-       {}
-       {\addcomma\space
-        \printfield[journum]{number}%
-        \clearfield{number}}}
-    {\bibstring{volumes}\space
-     \printfield[noformat]{volume}}%
+  \printfield{volume}%
   \clearfield{volume}%
+  \iffieldundef{number}
+    {}
+    {\addcomma\space
+     \printfield[journum]{number}%
+     \clearfield{number}}%
   \usebibmacro{part}%
   \iftoggle{collection}
     {\iftoggle{swapvol}

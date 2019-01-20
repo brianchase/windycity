@@ -1,4 +1,4 @@
-% Last modified: Fri 18 Jan 2019 05:21:44 PM CST
+% Last modified: Sun 20 Jan 2019 03:19:00 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -447,6 +447,23 @@ bibliography. The ISBN will appear at the end of the work's entry but
 before an annotation. To print ISBNs of every work, see the
 \bibfield{isbn} preamble option in Section \ref{preops}.
 
+\optitem[false]{listvols}{\opt{true}, \opt{false}}
+
+\noindent Whereas entries in a bibliography always give a collection's
+total number of volumes, doing so in notes is optional (see
+\textit{CMS} \ref{14.118}). In long citations, Windy City prints the
+total in a note when the \bibfield{postnote} field is empty. This
+approach is necessary to give the full form of a citation to
+correspond with that given in the bibliography. But when the
+\bibfield{postnote} contains information, such as a page reference,
+Windy City's default is not to print the total number of volumes. Use
+\opt{listvols} when you want it to. Below is an example from
+\textit{CMS} \ref{14.59}:
+
+\begin{citeonly}
+\item \cite[1:126]{shurtleff1853}
+\end{citeonly}
+
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
 
 \noindent This option tells the style to bypass the author's position
@@ -573,17 +590,16 @@ a reprint of a work after citing the original:
 \subsection{Additional Data Fields}
 \label{datafields}
 
-Windy City uses several data fields that are not available with
-\biblatex.
+Windy City uses several data fields that aren't available with
+\biblatex. Some of them are for Windy City's internal use in
+cross-referencing and aren't listed below, as they're not meant for
+use in a bibliography database. The fields below are different: You
+can use them to store information in a bibliography database that you
+want to appear in citations. Several citations in this document won't
+match their counterparts in \textit{CMS} without the help of these
+fields.
 
 \begin{marglist}
-
-% Not in use:
-%\item[bookbooktitle] This field is for the style's internal use. Do
-%not use it in a bibliography database.
-
-\item[bookyear] Also for the style's internal use. Do not use it in a
-bibliography database.
 
 \item[editoraddon] Use this field to include additional editorial
 information about a work. In Section \ref{entryops}, an example from
@@ -1119,6 +1135,27 @@ collection, somewhat like the volume of an encyclopedia with the title
 \textit{D–F}. There's nothing wrong with putting it first. But putting
 it second seems more intuitive.
 
+By contrast, here's an example of a case when using \opt{swapvol}
+might not seem desirable:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite{barrows1959}
+\AtNextBibliography{\toggletrue{swapvol}}
+\end{citebib}
+
+\noindent Having the editor's name first and the author's name after
+the volume's title looks odd. But it's not wrong. The volume's author
+apparently didn't write every volume of the collection. As such, if
+you choose to give priority to the collection, the first position
+should go to the collection's editor, not to the volume's author. The
+default format, on the other hand, looks more familiar and so is
+perhaps less likely to raise questions:
+
+\begin{citebib}
+\item \cite{barrows1959}
+\end{citebib}
+
 One drawback of \opt{swapvol} is that some works changed by it won't
 sort correctly in a bibliography without help. The affected works
 include those without listed authors and those in which the volume has
@@ -1448,17 +1485,18 @@ format and the use of \textit{ibid.} First, the short format:
 % 14.59 Abbreviations for frequently cited works
 \label{14.59}
 
-In the first note below, \textit{CMS} prints the total number of
-volumes. To call it a mistake is perhaps too strong, but it's
-inconsistent with \ref{14.118}, which is Windy City's guiding example
-for this type of citation.
-
 You may override the default announcement of a \bibfield{shorthand} by
-adding your preferred content to \bibfield{shorthandintro}. In
-\file{windycity.bib}, see \bibfield{chicago2017}.
+adding your preferred content to \bibfield{shorthandintro}. For an
+example---one that prints the announcement in a separate
+sentence---see the first citation of \textit{CMS} in this document's
+introduction.
 
 \begin{citebib}
-% Better to use furet199 in 14.99, without shorthand:
+% There's no way to suppress these fields in the bibliography:
+%\AtNextCitekey{\clearfield{origtitle}%
+%  \clearlist{origlocation}%
+%  \clearlist{origpublisher}%
+%  \clearfield{origyear}}
 %\item \cite[368]{furet1999}
 \item \cite[1:126]{shurtleff1853}
 \item \cite[2:330]{shurtleff1853}
@@ -1632,6 +1670,7 @@ database.
 %\item \cite[includes a summary in German]{wereszycki1977}
 \item \cite[272]{kern1938}
 \item \cite{pirumova1977b}
+\AtNextCitekey{\clearfield{shorthand}}
 \item \cite{furet1999}
 \end{citebib}
 
