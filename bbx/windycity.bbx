@@ -1,4 +1,4 @@
-% Last modified: Sun 20 Jan 2019 03:30:06 PM CST
+% Last modified: Mon 21 Jan 2019 12:30:31 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -705,7 +705,9 @@
 \newbibmacro*{test:trans}{%
   \usebibmacro{test:transdupes}%
   \iftoggle{edshift}
-    {\renewcommand*{\yeditor}{translatora}}%
+    {\ifnameundef{translator}
+       {\renewcommand*{\yeditor}{translatora}}%
+       {\renewcommand*{\yeditor}{translator}}}
     {\iftoggle{authposition}
        {\ifnameundef{translator}
           {\renewcommand*{\yeditor}{translatora}}%
@@ -720,7 +722,13 @@
 \newbibmacro*{test:notrans}{%
   \ifnameundef{\yeditor}
     {\global\toggletrue{notrans}}%
-    {}}
+    {\ifboolexpr{ test {\ifdefstring{\yeditor}{translator}}
+                  and togl {collection}
+                  and togl {swapvol}
+                  and ( test {\ifdefstring{\xtitle}{book}}
+                  or test {\ifdefstring{\xtitle}{main}} )}
+       {\global\toggletrue{notrans}}%
+       {}}}
 
 \newbibmacro*{test:ed}{%
   \usebibmacro{test:eddupes}%
