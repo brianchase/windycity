@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Jan 2019 12:30:31 PM CST
+% Last modified: Mon 21 Jan 2019 02:02:57 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1480,7 +1480,7 @@
   \ifdefstring{\xtitle}{main}
     {\newunit
      \usebibmacro{a:edtrans}%
-     \usebibmacro{volumes+series+etc}%
+     \usebibmacro{pages+volume+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \setunit{\addcomma\space}%
@@ -1489,6 +1489,7 @@
      \usebibmacro{b:edtrans}%
      \usebibmacro{note}%
      \usebibmacro{edition}%
+     \usebibmacro{volumes+series+etc}%
      \usebibmacro{publishers}%
      \usebibmacro{origtitle}}%
     {\newunit
@@ -1703,7 +1704,7 @@
 \newbibmacro*{volumes+series+etc}{%
   \usebibmacro{volumes}%
   \usebibmacro{bookseries}%
-  \usebibmacro{pages+volume+part}%
+  \usebibmacro{pages+volume+etc}%
   \usebibmacro{pages}%
   \usebibmacro{book:number}%
   \usebibmacro{part}}%
@@ -1766,7 +1767,7 @@
 
 \newbibmacro*{incollections}{%
   \ifdefstring{\xtitle}{book}
-    {\usebibmacro{pages+volume+part}%
+    {\usebibmacro{pages+volume+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \midsentence\setunit{\addcomma\space}%
@@ -1778,7 +1779,8 @@
     {\iftoggle{collection}
        {\usebibmacro{note}%
         \usebibmacro{edition}%
-        \usebibmacro{pages+volume+part}}%
+        \usebibmacro{volumes}%
+        \usebibmacro{pages+volume+etc}}%
        {}% needs '%'
      \renewcommand*{\xtitle}{book}%
      \usebibmacro{longtitle+titleaddon}%
@@ -1839,16 +1841,6 @@
        {\newunit}%
      \printfield{eid}}}
 
-\newbibmacro*{volumes+old}{%
-  \iffieldundef{volumes}
-    {}
-    {\ifboolexpr{ not test {\iftoggle{bibliography}}
-                  and not test {\iffieldundef{postnote}}
-                  and test {\iffieldundef{bookyear}}}
-       {}
-       {\newunit
-        \printfield{volumes}}}}
-
 \newbibmacro*{volumes}{%
   \iffieldundef{volumes}
     {}
@@ -1857,7 +1849,8 @@
                   and not togl {listvols}}
        {}
        {\newunit
-        \printfield{volumes}}}}
+        \printfield{volumes}%
+        \clearfield{volumes}}}}
 
 \newbibmacro*{bookseries}{%
   \iffieldundef{series}
@@ -1876,27 +1869,26 @@
      \printfield{seriesaddon}%
      \isdot\addcomma}}%
 
-\newbibmacro*{pages+volume+part}{%
+\newbibmacro*{pages+volume+etc}{%
   \iffieldundef{volume}
     {}
     {\iftoggle{bibliography}
        {\setunit{\addcomma\space}%
         \printfield{pages}%
         \clearfield{pages}%
-        \usebibmacro{volume+part}}%
-       {\usebibmacro{volume+part}}}}
+        \usebibmacro{volume+number+etc}}%
+       {\usebibmacro{volume+number+etc}}}}
 
-\newbibmacro*{volume+part}{%
+\newbibmacro*{volume+number+etc}{%
   \iffieldundef{series}
     {\newunit}%
     {\setunit{\addcomma\space}}%
-  \printfield{volume}%
+  \iffieldnum{volume}
+    {\printfield{volume}%
+     \usebibmacro{volume:number}}%
+    {\bibstring{volumes}\space
+     \printfield[noformat]{volume}}%
   \clearfield{volume}%
-  \iffieldundef{number}
-    {}
-    {\addcomma\space
-     \printfield[journum]{number}%
-     \clearfield{number}}%
   \usebibmacro{part}%
   \iftoggle{collection}
     {\iftoggle{swapvol}
@@ -1905,6 +1897,13 @@
     {\iffieldundef{maintitle}
        {}
        {\space\bibstring{of}\space}}}
+
+\newbibmacro*{volume:number}{%
+  \iffieldundef{number}
+    {}
+    {\addcomma\space
+     \printfield[journum]{number}%
+     \clearfield{number}}}
 
 \newbibmacro*{book:number}{%
   \iffieldundef{number}
