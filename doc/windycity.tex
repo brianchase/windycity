@@ -1,4 +1,4 @@
-% Last modified: Sun 20 Jan 2019 03:19:00 PM CST
+% Last modified: Tue 22 Jan 2019 06:34:27 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -449,20 +449,15 @@ before an annotation. To print ISBNs of every work, see the
 
 \optitem[false]{listvols}{\opt{true}, \opt{false}}
 
-\noindent Whereas entries in a bibliography always give a collection's
-total number of volumes, doing so in notes is optional (see
-\textit{CMS} \ref{14.118}). In long citations, Windy City prints the
-total in a note when the \bibfield{postnote} field is empty. This
-approach is necessary to give the full form of a citation to
-correspond with that given in the bibliography. But when the
-\bibfield{postnote} contains information, such as a page reference,
-Windy City's default is not to print the total number of volumes. Use
-\opt{listvols} when you want it to. Below is an example from
-\textit{CMS} \ref{14.59}:
-
-\begin{citeonly}
-\item \cite[1:126]{shurtleff1853}
-\end{citeonly}
+\noindent \textit{CMS} offers some flexibility over whether a long
+citation gives a work's total number of volumes (see \textit{CMS}
+\ref{14.118}). Windy City replicates this in a roundabout way: By
+default, it prints the \bibfield{volumes} field in long citations only
+if the \bibfield{postnote} field is empty. This does better job of
+matching examples in \textit{CMS} than a simpler policy would. For the
+rest, use \opt{listvols}. It prints the \bibfield{volumes} field in
+long citations no matter what the \bibfield{postnote} contains. For
+more information, see Section \ref{collorder}.
 
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
 
@@ -602,16 +597,11 @@ fields.
 \begin{marglist}
 
 \item[editoraddon] Use this field to include additional editorial
-information about a work. In Section \ref{entryops}, an example from
-\textit{CMS} \ref{14.105} uses it: In the work's database entry,
-\bibfield{editoraddon} contains ``from materials compiled by John M.
+information about a work. An example from \textit{CMS} \ref{14.105}
+stores the following text there: ``from materials compiled by John M.
 Manly and Edith Richert, with the assistance of Lilian J. Redstone et
-al.'' This content prints after the editor's position, without
-intervening punctuation. Again, in the bibliography, the result is:
-
-\begin{bibonly}
-\nocite{chaucer1966}
-\end{bibonly}
+al.'' This prints after the editor's position without intervening
+punctuation. See Section \ref{entryops} for the resulting output.
 
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
@@ -948,7 +938,10 @@ level up, as it were, is for \bibfield{editora}, followed by
 \bibfield{editortype} (for \bibfield{editor}),
 \bibfield{editoratype} (for \bibfield{editora}),
 \bibfield{editorbtype} (for \bibfield{editorb}), and
-\bibfield{editorctype} (for \bibfield{editorc}).
+\bibfield{editorctype} (for \bibfield{editorc}).\footnote{For an
+example of a bibliography database entry with \bibfield{editora}, see
+Section \ref{collorder} and \bibfield{carson2014} in
+\file{windycity.bib}.}
 
 As it happens, Windy City puts a lot of effort into sorting out where
 to print the names of editors and translators, so it's a bit more
@@ -1055,12 +1048,13 @@ the entry for the example above:
 \section{Collections}
 
 Before you cite a collection or one of its volumes, you need to
-consider how you want the citation to look and even what type of
-collection it is. These issues have implications for how you structure
+consider how you want the citation to look (\textit{CMS} gives you
+options) and whether the collection should count as a single work or
+as a composite. These issues have implications for how you structure
 entries in your bibliography database and how you use citation
 commands.
 
-\subsection{The Structure of Citations}
+\subsection{Structuring Citations}
 \label{collorder}
 
 A work in a collection usually has a title and perhaps other
@@ -1235,6 +1229,36 @@ described above.
 \begin{refonly}
 \nocite{armstrong2014}
 \end{refonly}
+
+A final issue concerns whether you want long citations to give a
+work's total number of volumes by printing the \bibfield{volumes}
+field. Whereas entries in a bibliography always give the total, doing
+so in notes is optional (see \textit{CMS} \ref{14.118}).
+
+Windy City prints the \bibfield{volumes} field in long citations only
+if the \bibfield{postnote} field is empty. That's not a requirement of
+\textit{CMS}. But there are several reasons for preferring this
+approach: If the \bibfield{postnote} is empty, printing the total
+preserves the correspondence between the long citation and its entry
+in the bibliography. This prevents the appearance that something has
+gone wrong when an element in one is missing from the other. If the
+\bibfield{postnote} isn't empty, it likely contains information that,
+as with page references, should also include a volume number (see
+Section \ref{multivolume}). The point then is to cite a specific
+volume, not the whole collection, so the total seems less important
+and omitting it cuts down on clutter. The main benefit, anyway, is
+that Windy City's approach is consistent with citations of \textit{The
+Lisle Letters} in \textit{CMS} \ref{14.117} and \ref{14.118}. No
+simpler rule would be.
+
+If you want to print a work's total number of volumes without regard
+to the \bibfield{postnote}, use the entry option \opt{listvols}. Some
+examples in \textit{CMS} need it for Windy City to match them. Here's
+one from \textit{CMS} \ref{14.59}:
+
+\begin{citeonly}
+\item \cite[1:126]{shurtleff1853}
+\end{citeonly}
 
 \subsection{Collections as Single Works}
 \label{multivolume}
@@ -1501,6 +1525,14 @@ introduction.
 \item \cite[1:126]{shurtleff1853}
 \item \cite[2:330]{shurtleff1853}
 \end{citebib}
+
+\setcounter{subsubsection}{67}
+\subsubsection{The 3–em dash for one repeated name}
+% 14.68 The 3–em dash for one repeated name
+
+\begin{bibonly}
+\nocite{judt1996,judt2008,judt1989,squire1983,squire1987}
+\end{bibonly}
 
 \setcounter{subsection}{2}
 \subsection{Author's Name}
