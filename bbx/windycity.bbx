@@ -1,4 +1,4 @@
-% Last modified: Wed 23 Jan 2019 03:18:54 PM CST
+% Last modified: Wed 23 Jan 2019 03:10:14 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -265,7 +265,8 @@
     \literal{0000}}}
 
 \defbibcheck{collsonly}{%
-  \ifentrytype{inbook}
+  \ifboolexpr{ test {\ifentrytype{bookinbook}}
+               or test {\ifentrytype{inbook}}}
     {\iffieldundef{crossref}
        {}
        {\skipentry}}%
@@ -332,6 +333,8 @@
 \providetoggle{authposition}
 \providetoggle{bibliography}
 \providetoggle{collection}
+\providetoggle{collection:book}
+\providetoggle{collection:inbook}
 \providetoggle{journalfirst}
 \providetoggle{multicite}
 \providetoggle{cbx@first}
@@ -351,6 +354,8 @@
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
   \global\togglefalse{collection}%
+  \global\togglefalse{collection:book}%
+  \global\togglefalse{collection:inbook}%
   \global\togglefalse{cbx@short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
@@ -787,7 +792,7 @@
     {\usebibmacro{test:noed:b}%
      \ifboolexpr{ test {\ifdefempty{\xtitle}}
                   and not togl {authposition}
-                  and ( test {\ifentrytype{inbook}}
+                  and ( togl {collection:inbook}
                   or test {\ifentrytype{incollection}}
                   or test {\ifentrytype{letter}} )}
        {\global\toggletrue{noed}}%
@@ -800,8 +805,7 @@
     {}
     {\usebibmacro{test:noed:b}%
      \iftoggle{authposition}
-       {\ifboolexpr{ test {\ifentrytype{inbook}}
-                     and togl {collection}
+       {\ifboolexpr{ togl {collection:inbook}
                      and togl {swapvol}
                      and not test {\ifnameundef{editora}}}
           {\global\toggletrue{noed}}%
@@ -820,15 +824,12 @@
 \newbibmacro*{test:noed:b}{%
   \iftoggle{authposition}
     {\iffieldequalstr{\xeditor type}{maintitle}
-       {\ifentrytype{book}
-          {\iftoggle{collection}
-             {\iftoggle{swapvol}
-                {}
-                {\global\toggletrue{noed}}}
+       {\iftoggle{collection:book}
+          {\iftoggle{swapvol}
+             {}
              {\global\toggletrue{noed}}}
           {\global\toggletrue{noed}}}
-       {\ifboolexpr{ test {\ifentrytype{book}}
-                     and togl {collection}
+       {\ifboolexpr{ togl {collection:book}
                      and togl {swapvol}}
           {\global\toggletrue{noed}}%
           {}}}
@@ -1082,7 +1083,7 @@
 \newbibmacro*{shorttitle}{%
   \ifboolexpr{ togl {collection}
                and togl {swapvol}}
-    {\ifentrytype{book}
+    {\iftoggle{collection:book}
        {\iffieldundef{shortmaintitle}
          {\printfield[title]{maintitle}}%
          {\printfield[title]{shortmaintitle}}}
@@ -1099,7 +1100,7 @@
        {\renewcommand*{\xtitle}{book}}%
        {\ifboolexpr{ togl {collection}
                      and togl {swapvol}}
-          {\ifentrytype{book}
+          {\iftoggle{collection:book}
              {\renewcommand*{\xtitle}{main}}%
              {\renewcommand*{\xtitle}{book}}}
           {}}}}
@@ -1531,17 +1532,23 @@
 
 \newbibmacro*{test:collection}{%
   \ifboolexpr{ test {\ifentrytype{book}}
+               or test {\ifentrytype{bookinbook}}
+               or test {\ifentrytype{collection}}
                or test {\ifentrytype{inbook}}}
     {\iffieldundef{volume}
        {}
-       {\ifboolexpr{ test {\ifentrytype{book}}
+       {\ifboolexpr{ ( test {\ifentrytype{book}}
+                     or test {\ifentrytype{collection}} )
                      and not test {\iffieldundef{maintitle}}}
-          {\global\toggletrue{collection}}%
-          {\ifboolexpr{ test {\ifentrytype{inbook}}
+          {\global\toggletrue{collection}%
+           \global\toggletrue{collection:book}}%
+          {\ifboolexpr{ ( test {\ifentrytype{bookinbook}}
+                        or test {\ifentrytype{inbook}} )
                         and test {\iffieldundef{maintitle}}
                         and not test {\iffieldundef{title}}
                         and not test {\iffieldundef{booktitle}}}
-             {\global\toggletrue{collection}}%
+             {\global\toggletrue{collection}%
+              \global\toggletrue{collection:inbook}}%
              {}}}}
     {}}
 
@@ -1560,7 +1567,8 @@
           {\usebibmacro{bybookauthor+pages}%
            \newunit
            \usebibmacro{a:edtrans}}%
-          {\ifentrytype{inbook}
+          {\ifboolexpr{ test {\ifentrytype{bookinbook}}
+                        or test {\ifentrytype{inbook}}}
              {\usebibmacro{byauthor}%
               \newunit
               \usebibmacro{a:edtrans}}%
@@ -1794,7 +1802,7 @@
      \printfield{chapter}\space}}%
 
 \newbibmacro*{in}{%
-  \iftoggle{collection}
+  \iftoggle{collection:inbook}
     {}
     {\bibstring{in}\space}}%
 
@@ -1809,7 +1817,7 @@
      \usebibmacro{b:edtrans}%
      \usebibmacro{note}%
      \usebibmacro{edition}}%
-    {\iftoggle{collection}
+    {\iftoggle{collection:inbook}
        {\usebibmacro{note}%
         \usebibmacro{edition}%
         \usebibmacro{volumes}%
@@ -1821,7 +1829,7 @@
      \usebibmacro{bybookauthor+pages}%
      \usebibmacro{bookbooktitle}%
      \usebibmacro{b:edtrans}%
-     \iftoggle{collection}
+     \iftoggle{collection:inbook}
        {}% needs '%'
        {\usebibmacro{note}%
         \usebibmacro{edition}}}% needs '%'
