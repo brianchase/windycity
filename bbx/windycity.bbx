@@ -1,4 +1,4 @@
-% Last modified: Wed 23 Jan 2019 01:14:31 PM CST
+% Last modified: Wed 23 Jan 2019 03:18:54 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -627,12 +627,13 @@
 \newbibmacro*{author+bookauthor}{%
   \ifboolexpr{ togl {swapauth}
                and ( test {\ifentrytype{book}}
+               or test {\ifentrytype{bookinbook}}
                or test {\ifentrytype{collection}}
-               or test {\ifentrytype{inbook}} )}
+               or test {\ifentrytype{inbook}}
+               or test {\ifentrytype{incollection}} )}
     {}
-    {\ifboolexpr{ togl {collection}
-                  and togl {swapvol}
-                  and test {\ifentrytype{inbook}}}
+    {\ifboolexpr{ togl {collection:inbook}
+                  and togl {swapvol}}
       {\usebibmacro{bookauthor+namelist}}%
       {\ifnameundef{author}
          {\usebibmacro{bookauthor+namelist}}%
