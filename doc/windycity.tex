@@ -1,4 +1,4 @@
-% Last modified: Tue 22 Jan 2019 06:34:27 PM CST
+% Last modified: Wed 23 Jan 2019 03:13:59 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -476,9 +476,10 @@ without affecting the bibliography, use \cmd{cite*} or
 \optitem[false]{swapauth}{\opt{true}, \opt{false}}
 
 \noindent To swap the places of a book's author with an editor or
-translator, use \opt{swapauth}. This option works with the
-\bibtype{book}, \bibtype{collection}, and \bibtype{inbook} entry
-types. For more information, see Section \ref{edtranspos}.
+translator, use \opt{swapauth}. This option works for \bibtype{book},
+\bibtype{bookinbook}, \bibtype{collection}, \bibtype{inbook}, and
+\bibtype{incollection} entry types. For more information, see Section
+\ref{edtranspos}.
 
 \optitem[false]{swaptrans}{\opt{true}, \opt{false}}
 
@@ -1013,16 +1014,16 @@ editor or translator. \textit{CMS} gives this example in \ref{14.104}:
 \end{citebib}
 
 \noindent You can accomplish this effect with the entry option
-\opt{swapauth}, which works for \bibtype{book}, \bibtype{collection},
-and \bibtype{inbook} entry types. But beware: Windy City doesn't look
-ahead to see if there really is an editor or translator to take the
-author's place. If it doesn't find one, it will still print the
-author's name after the title, leaving the author's position empty.
-Also, if it finds both an editor and a translator, and they're not the
-same person, it will print the editor's name in the author's
-position---again, giving priority to editors. If you want the
-translator's name in the author's position, use \opt{swapauth} with
-\opt{swaptrans}.
+\opt{swapauth}, which works for \bibtype{book}, \bibtype{bookinbook},
+\bibtype{collection}, \bibtype{inbook}, and \bibtype{incollection}
+entry types. But beware: Windy City doesn't look ahead to see if there
+really is an editor or translator to take the author's place. If it
+doesn't find one, it will still print the author's name after the
+title, leaving the author's position empty. Also, if it finds both an
+editor and a translator, and they're not the same person, it will
+print the editor's name in the author's position---again, giving
+priority to editors. If you want the translator's name in the author's
+position, use \opt{swapauth} with \opt{swaptrans}.
 
 Another caveat: For correct sorting in a bibliography, a work that
 uses \opt{swapauth} needs a field like \bibfield{sortname} to sort it
@@ -1180,15 +1181,16 @@ example:
    }
 \end{verbatim}
 
-An \bibtype{inbook} entry, which should always be cross-referenced to
-a \bibtype{collection} entry, is subject to \opt{swapvol} if it has a
-\bibfield{volume} field and lacks certain fields that a volume of a
-collection of this sort shouldn't have. You can find the exact details
-in \file{windycity.bbx}. With one exception, you can get the same
-results with a \bibtype{book} entry:
+A \bibtype{bookinbook} or \bibtype{inbook} entry, which should always
+be cross-referenced to a \bibtype{collection} entry, is subject to
+\opt{swapvol} if it has a \bibfield{volume} field and lacks certain
+fields that a volume of a collection of this sort shouldn't have. You
+can find the exact details in \file{windycity.bbx}. With one
+exception, you can get the same output with a \bibtype{book} or
+\bibtype{collection} entry:
 
 \begin{verbatim}
-   @Book{carson2014,
+   @Collection{carson2014,
      editor = {Armstrong, Tenisha},
      title = {To Save the Soul of America, January 1961–August
               1962},
@@ -1202,20 +1204,20 @@ results with a \bibtype{book} entry:
    }
 \end{verbatim}
 
-A \bibtype{book} is subject to \opt{swapvol} if it has
-\bibfield{volume} and \bibfield{maintitle} fields. You may prefer a
-\bibtype{book} entry if you have no interest in citing the associated
-\bibtype{collection} and only intend to cite one volume. But you risk
-trouble if the volumes of the collection have different publication
-dates, as they do for \textit{The Papers of Martin Luther King, Jr}.
-If the publication information for the volume goes last, the
-bibliography and long citation should list the publication date as
-\textit{2014}. If the publication information for the collection goes
-last, that date is \textit{1992–}. A \bibtype{book} entry, however,
-has just one field for a publication date, so using \opt{swapvol} on
-\bibfield{carson2014} would print \textit{2014} when the correct date
-is \textit{1992–}. Otherwise, the \bibtype{book} and \bibtype{inbook}
-entries listed above are interchangeable. You can find more examples
+A \bibtype{book} or \bibtype{collection} entry is subject to
+\opt{swapvol} if it has \bibfield{volume} and \bibfield{maintitle}
+fields. You may prefer these entry types if you only intend to cite
+one volume of the collection and have no need to cite the collection
+as a whole. But you risk trouble if the volumes of the collection have
+different publication dates, as they do for \textit{The Papers of
+Martin Luther King, Jr}. If the publication information for this
+volume goes last, the bibliography and long citation should list the
+publication date as \textit{2014}. If the publication information for
+the collection goes last, that date is \textit{1992–}. A
+\bibtype{book} or \bibtype{collection} entry, however, has just one
+field for a publication date, so using \opt{swapvol} on
+\bibfield{carson2014} would print \textit{2014}, not \textit{1992–}.
+Otherwise, the entry types are interchangeable. You can find examples
 of both approaches in \file{windycity.bib}.
 
 As mentioned in \textit{CMS} \ref{15.41}, reference lists should give
@@ -1223,8 +1225,8 @@ priority to the volume, not the collection. Nevertheless, Windy City
 doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
 Either way, remember that when a volume and a collection have
 different publication dates, a reference list entry prints both dates,
-which in turn requires you to use the \bibtype{inbook} approach
-described above.
+which in turn requires you to use the \bibtype{bookinbook} or
+\bibtype{inbook} approach described above.
 
 \begin{refonly}
 \nocite{armstrong2014}
@@ -1343,7 +1345,7 @@ in your bibliography database. Here's the entry for the volume cited
 in \textit{CMS} \ref{14.118}:
 
 \begin{verbatim}
-   @Book{james1963.5,
+   @Collection{james1963.5,
      options = {swapvol},
      author = {James, Henry},
      maintitle = {The Complete Tales of Henry James},
@@ -2361,6 +2363,25 @@ reference list without adding, say, a \bibfield{sortname} field.
 \end{citebib}
 
 \setcounter{subsection}{6}
+\subsection{Websites, Blogs, and Social Media}
+\setcounter{subsection}{14}
+
+\setcounter{subsubsection}{207}
+\subsubsection{Citing blog posts and blogs}
+% 14.208 Citing blog posts and blogs
+
+For now, the \bibtype{online} entry type is exclusively for citing
+blogs. See below, \ref{14.233}, for examples of online reference
+works.
+
+\begin{citebib}
+\item \cite{germano2017}
+\item \cite{amlen2015}
+\item \cite{amlen}
+\item \cite{linguafranca}
+\end{citebib}
+
+\setcounter{subsection}{7}
 \subsection{Papers, Contracts, and Reports}
 \setcounter{subsection}{14}
 
@@ -2399,7 +2420,7 @@ reference list without adding, say, a \bibfield{sortname} field.
 \item \cite[¶2,620]{standardtax1996}
 \end{citebib}
 
-\setcounter{subsection}{7}
+\setcounter{subsection}{8}
 \subsection{Special Types of References}
 \setcounter{subsection}{14}
 
@@ -2426,6 +2447,7 @@ bibliographies and reference lists.
 
 \subsubsection{Reference works consulted online}
 % 14.233 Reference works consulted online
+\label{14.233}
 
 Like some of the reference works in the previous section, the ones
 below need the \bibtype{reference} or \bibtype{inreference} entry
@@ -2683,6 +2705,14 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 
 \begin{citeref}
 \item \parencite{nytimes2002}
+\end{citeref}
+
+\setcounter{subsubsection}{50}
+\subsubsection{Citing blogs in author-date format}
+% 15.51 Citing blogs in author-date format
+
+\begin{citeref}
+\item \parencite{germano2017}
 \end{citeref}
 
 \setcounter{subsubsection}{54}
