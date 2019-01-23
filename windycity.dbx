@@ -1,5 +1,6 @@
 
 \DeclareDatamodelFields[type=field,datatype=literal]{%
+  blogtitle,
   bookbooktitle,
   bookvolume,
   bookyear,

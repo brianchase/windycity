@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Jan 2019 02:02:57 PM CST
+% Last modified: Wed 23 Jan 2019 01:14:31 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -216,12 +216,14 @@
     \field{title}
     \field{booktitle}
     \field{bookbooktitle}
+    \field{blogtitle}
     \field{journaltitle}}
   \sort{%
     \field{sorttitle}
     \field{title}
     \field{booktitle}
     \field{bookbooktitle}
+    \field{blogtitle}
     \field{journaltitle}}
   \sort{%
     \field{sortyear}
@@ -242,8 +244,9 @@
     \field{editora}
     \field{sorttitle}
     \field{title}
-    \field{bookbooktitle}
     \field{booktitle}
+    \field{bookbooktitle}
+    \field{blogtitle}
     \field{journaltitle}}
   \sort{%
     \field{sortyear}
@@ -255,6 +258,7 @@
     \field{title}
     \field{booktitle}
     \field{bookbooktitle}
+    \field{blogtitle}
     \field{journaltitle}}
   \sort{%
     \field[padside=left,padwidth=4,padchar=0]{volume}
@@ -484,6 +488,7 @@
 \DeclareIndexFieldAlias[inbook]{indextitle}{indextitle}
 \DeclareFieldAlias[book]{origtitle}{title}
 
+\DeclareFieldFormat{blogtitle}{\mkbibemph{#1}\space\mkbibparens{blog}}
 \DeclareFieldFormat{issuetitle}{%
   \ifcapital
     {\MakeCapital{#1}}%
@@ -645,7 +650,7 @@
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
     {\renewcommand*{\cbx@namelist}{shortbookauthor}}}
 
-% When 'journaltitle' goes in the author's position.
+% When 'journaltitle' or 'blogtitle' goes in the author's position.
 
 \newbibmacro*{journalfirst}{%
   \usebibmacro{authpos+deflabel}%
@@ -658,7 +663,14 @@
      \clearlist{location}%
      \usebibmacro{labelyear+extradate}%
      \newunit}%
-    {}}
+    {\ifboolexpr{ test {\ifentrytype{online}}
+                  and togl {bibliography}}
+       {\toggletrue{journalfirst}%
+        \usebibmacro{bibblogdash}%
+        \setunit{\space}%
+        \usebibmacro{labelyear+extradate}%
+        \newunit}%
+       {}}}
 
 \newbibmacro*{namehash+etc}{%
   \usebibmacro{printnames+etc}%
@@ -1005,6 +1017,19 @@
      \clearlist{location}}%
     {\savefield{journaltitle}{\bbx@lasthash}%
      \renewcommand*{\xtitle}{journal}%
+     \usebibmacro{longtitle+titleaddon}%
+     \let\xtitle\empty}}%
+
+% When 'blogtitle' goes in the author's position. This should only
+% apply when a blog has changed urls or host organizations.
+
+\newbibmacro*{bibblogdash}{%
+  \ifboolexpr{ test {\iffieldequals{blogtitle}{\bbx@lasthash}}
+               and not test \iffirstonpage}
+    {\bibnamedash\newunitpunct
+     \clearfield{blogtitle}}%
+    {\savefield{blogtitle}{\bbx@lasthash}%
+     \renewcommand*{\xtitle}{blog}%
      \usebibmacro{longtitle+titleaddon}%
      \let\xtitle\empty}}%
 
@@ -1385,10 +1410,7 @@
 
 \DeclareBibliographyDriver{online}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{author+title+ed+note}%
-  \printlist{institution}%
-  \newunit
-  \printlist{organization}%
+  \usebibmacro{blogs}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{patent}{%
@@ -1559,6 +1581,16 @@
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}% needs '%'
         \usebibmacro{incollections}}}}
+
+\newbibmacro*{blogs}{%
+  \usebibmacro{author+title+ed+note}%
+  \renewcommand*{\xtitle}{blog}%
+  \usebibmacro{longtitle+titleaddon}%
+  \newunit
+  \renewcommand*{\xtitle}{journal}%
+  \usebibmacro{longtitle+titleaddon}%
+  \newunit
+  \usebibmacro{issue+month+etc}}%
 
 \newbibmacro*{reviews}{%
 % Unsigned reviews have no plausible place for the publication year
