@@ -1,4 +1,4 @@
-% Last modified: Fri 18 Jan 2019 04:27:26 PM CST
+% Last modified: Wed 23 Jan 2019 11:20:55 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -274,6 +274,7 @@
   \newunit
   \ifboolexpr{ test {\ifentrytype{book}}
                or test {\ifentrytype{bookinbook}}
+               or test {\ifentrytype{collection}}
                or test {\ifentrytype{inbook}}
                or test {\ifentrytype{incollection}}}
     {\ifboolexpr{ togl {collection}
@@ -453,7 +454,6 @@
 
 \DeclareBibliographyDriver{cite:online}{%
   \usebibmacro{author+title+ed+note}%
-  \usebibmacro{note}%
   \printlist{institution}%
   \newunit
   \printlist{organization}%
@@ -461,7 +461,6 @@
 
 \DeclareBibliographyDriver{cite:patent}{%
   \usebibmacro{author+title+ed+note}%
-  \usebibmacro{note}%
   \printfield{number}%
   \newunit}%
 
