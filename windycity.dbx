@@ -1,12 +1,14 @@
 
 \DeclareDatamodelFields[type=field,datatype=literal]{%
   blogtitle,
+  blogtitleaddon,
   bookbooktitle,
   bookvolume,
   bookyear,
   endbookyear,
   editoraddon,
   seriesaddon,
+  handle,
   shortbooktitle,
   shortmaintitle}
 \DeclareDatamodelFields[type=list,datatype=name]{%

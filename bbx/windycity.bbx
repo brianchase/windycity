@@ -1,4 +1,4 @@
-% Last modified: Thu 24 Jan 2019 07:10:25 PM CST
+% Last modified: Thu 24 Jan 2019 07:00:32 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -469,14 +469,19 @@
 %%  Field Formats for Titles  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareFieldFormat{title}{\mkbibemph{#1}}
+\DeclareFieldFormat{blogtitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{labeltitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{title}{\mkbibemph{#1}}
+
 \DeclareIndexFieldFormat{indextitle}{%
   \usebibmacro{index:title}{\index}{\mkbibemph{#1}}}
-\DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
 \renewbibmacro*{index:title}[2]{%
   \usebibmacro{index:field}{#1}{\thefield{indexsorttitle}}{#2}}%
+
+\DeclareFieldFormat{blogtitleaddon}{\mkbibparens{#1}}
+\DeclareFieldFormat{titleaddon}{\mkbibbrackets{#1}}
 
 \DeclareFieldFormat[%
   article,incollection,inreference,inproceedings,online,reference,review]
@@ -493,7 +498,6 @@
 \DeclareIndexFieldAlias[inbook]{indextitle}{indextitle}
 \DeclareFieldAlias[book]{origtitle}{title}
 
-\DeclareFieldFormat{blogtitle}{\mkbibemph{#1}\space\mkbibparens{blog}}
 \DeclareFieldFormat{issuetitle}{%
   \ifcapital
     {\MakeCapital{#1}}%
@@ -972,6 +976,7 @@
     {\usebibmacro{bibnamedash+printnames}%
      \usebibmacro{a:labelyear+extradate}}%
     {\usebibmacro{printnames}%
+     \usebibmacro{handle}%
      \usebibmacro{nameaddon}}%
   \usebibmacro{clearnames+empty}}%
 
@@ -983,6 +988,7 @@
        {\bibnamedash\plugb}%
        {\bibnamedash\newunitpunct}}%
     {\usebibmacro{printnames}%
+     \usebibmacro{handle}%
      \usebibmacro{nameaddon}}}
 
 \newbibmacro*{printnames}{%
@@ -990,6 +996,15 @@
     {}
     {\anona\pluga\printnames[\cbx@deflabel]{%
        \cbx@namelist}\plugb\anonb}}%
+
+% A screen name should precede 'nameaddon'. See CMS, 17th ed., 14.208.
+
+\newbibmacro*{handle}{%
+  \iffieldundef{handle}
+    {}
+    {\space
+     \printfield[parens]{handle}%
+     \clearfield{handle}}}
 
 \newbibmacro*{nameaddon}{%
   \iffieldundef{nameaddon}
@@ -1069,7 +1084,7 @@
   \iffieldundef{\xtitle titleaddon}
     {}
     {\addspace% '\space' has issues with quotation marks
-     \printfield[brackets]{\xtitle titleaddon}}}
+     \printfield{\xtitle titleaddon}}}
 
 \newbibmacro*{title+labelyear}{%
   \iftoggle{bibliography}
@@ -1412,7 +1427,11 @@
 
 \DeclareBibliographyDriver{online}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{blogs}%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{title+labelyear}%
+  \setunit*{\newunitpunct}% needs '*'
+  \usebibmacro{websites}%
+  \usebibmacro{issue+month+etc}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{patent}{%
@@ -1591,15 +1610,19 @@
           {\newcounter{\thefield{crossref}}}% needs '%'
         \usebibmacro{incollections}}}}
 
-\newbibmacro*{blogs}{%
-  \usebibmacro{author+title+ed+note}%
-  \renewcommand*{\xtitle}{blog}%
-  \usebibmacro{longtitle+titleaddon}%
-  \newunit
-  \renewcommand*{\xtitle}{journal}%
-  \usebibmacro{longtitle+titleaddon}%
-  \newunit
-  \usebibmacro{issue+month+etc}}%
+\newbibmacro*{websites}{%
+  \ifboolexpr{ test {\iffieldundef{blogtitle}}
+               and test {\iffieldundef{journaltitle}}
+               and test {\iflistundef{organization}}}
+    {}
+    {\renewcommand*{\xtitle}{blog}%
+     \usebibmacro{longtitle+titleaddon}%
+     \newunit
+     \renewcommand*{\xtitle}{journal}%
+     \usebibmacro{longtitle+titleaddon}%
+     \newunit
+     \printlist{organization}%
+     \setunit{\addcomma\space}}}
 
 \newbibmacro*{reviews}{%
 % Unsigned reviews have no plausible place for the publication year

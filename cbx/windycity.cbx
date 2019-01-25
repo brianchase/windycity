@@ -1,4 +1,4 @@
-% Last modified: Wed 23 Jan 2019 01:07:17 PM CST
+% Last modified: Thu 24 Jan 2019 05:25:41 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -188,6 +188,7 @@
           {\printfield{label}}}
        {\global\toggletrue{cbx@short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
+        \clearfield{handle}%
         \clearfield{nameaddon}%
         \usebibmacro{author+bookauthor+etc}}}}
 
@@ -453,7 +454,12 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:online}{%
-  \usebibmacro{blogs}%
+%  \usebibmacro{author+title+ed+note}%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{title+labelyear}%
+  \setunit*{\newunitpunct}%
+  \usebibmacro{websites}%
+  \usebibmacro{issue+month+etc}%
   \newunit}%
 
 \DeclareBibliographyDriver{cite:patent}{%
