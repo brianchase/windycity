@@ -1,4 +1,4 @@
-% Last modified: Thu 24 Jan 2019 05:25:41 PM CST
+% Last modified: Fri 25 Jan 2019 04:26:14 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -175,7 +175,7 @@
   \iffieldundef{shorthand}
     {\usebibmacro{parencite:auth+title}}%
     {\printfield{shorthand}}%
-  \setunit{\addspace}% not '\space'
+  \setunit{\addspace}% not '\setunit{\space}'
   \usebibmacro{parencite:date}}%
 
 \newbibmacro*{parencite:auth+title}{%
@@ -419,6 +419,21 @@
        {\unspace\printfield{postpunct}}}
     {}}
 
+\newbibmacro*{refworks}{%
+  \ifboolexpr{ test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{year}}}
+    {}
+    {\setunit{\addspace}%
+     \iffieldundef{howpublished}
+       {\printtext[parens]{\printfield{year}}}
+       {\global\togglefalse{cbx@first}%
+        \printtext[parens]{%
+          \printfield{howpublished}%
+          \newunit
+          \printfield{version}%
+          \newunit
+          \printfield{year}}}}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers for Notes  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -454,35 +469,22 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:online}{%
-%  \usebibmacro{author+title+ed+note}%
-  \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{title+labelyear}%
-  \setunit*{\newunitpunct}%
+  \usebibmacro{author+title+ed+note}%
+  \setunit*{\newunitpunct}% needs '*'
   \usebibmacro{websites}%
   \usebibmacro{issue+month+etc}%
   \newunit}%
 
 \DeclareBibliographyDriver{cite:patent}{%
   \usebibmacro{author+title+ed+note}%
+  \newunit
   \printfield{number}%
   \newunit}%
 
 \DeclareBibliographyDriver{cite:reference}{%
   \printlist{organization}%
   \usebibmacro{edition}%
-  \ifboolexpr{ test {\iffieldundef{howpublished}}
-               and test {\iffieldundef{year}}}
-    {}
-    {\space
-     \iffieldundef{howpublished}
-       {\printtext[parens]{\printfield{year}}}
-       {\global\togglefalse{cbx@first}%
-        \printtext[parens]{%
-          \printfield{howpublished}%
-          \newunit
-          \printfield{version}%
-          \newunit
-          \printfield{year}}}}
+  \usebibmacro{refworks}%
   \newunit
   \bibstring{subverbo}\space
   \usebibmacro{longtitle+titleaddon}%
@@ -498,10 +500,8 @@
 
 \DeclareBibliographyDriver{cite:thesis}{%
   \usebibmacro{author+title+ed+note}%
-  \printtext[parens]{%
-    \printfield{type}%
-    \newunit
-    \usebibmacro{inst+loc+date}}%
+  \setunit{\addspace}% not '\setunit{\space}'
+  \printtext[parens]{\usebibmacro{inst+loc+date}}%
   \newunit}%
 
 \endinput

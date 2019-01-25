@@ -1,4 +1,4 @@
-% Last modified: Thu 24 Jan 2019 07:00:32 PM CST
+% Last modified: Fri 25 Jan 2019 04:45:25 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -914,36 +914,39 @@
   \global\toggletrue{edshift}%
   \usebibmacro{a:edtrans}%
   \global\togglefalse{edshift}%
-  \setunit{\addcomma\space}%
   \usebibmacro{editoraddon}}%
 
-\newbibmacro*{edtranspunct}{%
-  \ifboolexpr{ test {\ifdefstring{\xtitle}{book}}
-               and not test {\iffieldundef{title}}}
-    {\setunit{\addcomma\space}}%
-    {\newunit}}%
-
 \newbibmacro*{pluga+etc}{%
+  \usebibmacro{a:edtranspunct}%
   \usebibmacro{pluga+printnames}%
-  \usebibmacro{edtranspunct}}%
+  \usebibmacro{b:edtranspunct}}%
+
+\newbibmacro*{a:edtranspunct}{%
+  \ifboolexpr{ togl {authposition}
+               or togl {edshift}}
+    {}
+    {\newunit}}%
 
 \newbibmacro*{pluga+printnames}{%
   \renewcommand*{\pluga}{%
     \bibstring{\cbx@bibstring}\space}%
   \usebibmacro{printnames+etc}}%
 
-% For editors and translators whose names belong after 'issuetitle',
-% 'maintitle', or 'series'. The '\midsentence' below prevents a maintitle
-% ending with punctuation from causing the start of a new sentence.
+\newbibmacro*{b:edtranspunct}{%
+  \ifboolexpr{ test {\ifdefstring{\xtitle}{book}}
+               and not test {\iffieldundef{title}}}
+    {\setunit{\addcomma\space}}%
+    {\newunit}}%
 
-\newbibmacro*{xeditor+yeditor}[2]{%
+% For editors and translators whose names belong after 'issuetitle',
+% 'maintitle', or 'series'.
+
+\newbibmacro*{xeditor+yeditor}[1]{%
   \ifboolexpr{ test {\iffieldequalstr{editortype}{#1}}
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
                or test {\iffieldequalstr{editorctype}{#1}}}
-    {\ifstrequal{#2}{newunit}
-       {\newunit}%
-       {\midsentence\setunit{\addcomma\space}}%
+    {\setunit{\addcomma\space}%
      \renewcommand*{\cbx@bibstring}{editor}%
      \usebibmacro{editorlists}{#1}%
      \usebibmacro{pluga+printnames}}%
@@ -1133,7 +1136,7 @@
     {}
     {\renewcommand*{\xtitle}{main}%
      \usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{xeditor+yeditor}{maintitle}{}}}
+     \usebibmacro{xeditor+yeditor}{maintitle}}}
 
 \newbibmacro*{issuetitle}{%
   \iffieldundef{issuetitle}
@@ -1143,7 +1146,7 @@
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \usebibmacro{xeditor+yeditor}{issuetitle}{}}%
+        \usebibmacro{xeditor+yeditor}{issuetitle}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
@@ -1427,9 +1430,8 @@
 
 \DeclareBibliographyDriver{online}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{title+labelyear}%
-  \setunit*{\newunitpunct}% needs '*'
+  \usebibmacro{author+title+ed+note}%
+  \newunit
   \usebibmacro{websites}%
   \usebibmacro{issue+month+etc}%
   \usebibmacro{doi+finentry+etc}}%
@@ -1437,6 +1439,7 @@
 \DeclareBibliographyDriver{patent}{%
   \usebibmacro{bibindex}%
   \usebibmacro{author+title+ed+note}%
+  \newunit
   \printfield{number}%
   \newunit
   \printfield{addendum}%
@@ -1452,8 +1455,7 @@
 \DeclareBibliographyDriver{thesis}{%
   \usebibmacro{bibindex}%
   \usebibmacro{author+title+ed+note}%
-  \usebibmacro{type}%
-  \setunit{\addcomma\space}%
+  \newunit
   \usebibmacro{inst+loc+date}%
   \usebibmacro{doi+finentry+etc}}%
 
@@ -1472,7 +1474,6 @@
   \usebibmacro{author+bookauthor+etc}%
   \usebibmacro{test:title+booktitle}%
   \usebibmacro{title+labelyear}%
-  \newunit
   \usebibmacro{a:edtrans}%
   \usebibmacro{note}}%
 
@@ -1521,23 +1522,19 @@
   \usebibmacro{test:title+booktitle}%
   \usebibmacro{title+labelyear}%
   \ifdefstring{\xtitle}{main}
-    {\newunit
-     \usebibmacro{a:edtrans}%
+    {\usebibmacro{a:edtrans}%
      \usebibmacro{pages+volume+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\addcomma\space}%
-     \usebibmacro{byauthor}%
-     \setunit{\addcomma\space}%
+     \midsentence\setunit{\addcomma\space}%
+     \usebibmacro{byauthor}{}%
      \usebibmacro{b:edtrans}%
      \usebibmacro{note}%
      \usebibmacro{edition}%
      \usebibmacro{volumes+series+etc}%
      \usebibmacro{publishers}%
      \usebibmacro{origtitle}}%
-    {\newunit
-     \usebibmacro{byauthor}%
-     \newunit
+    {\usebibmacro{byauthor}{newunit}%
      \usebibmacro{a:edtrans}%
      \usebibmacro{b:edtrans}%
      \usebibmacro{note}%
@@ -1581,19 +1578,13 @@
        {\usebibmacro{author+bookauthor+etc}%
         \usebibmacro{test:title+booktitle}%
         \usebibmacro{title+labelyear}%
-        \newunit
         \ifdefstring{\xtitle}{book}
-          {\usebibmacro{bybookauthor+pages}%
-           \newunit
+          {\usebibmacro{bybookauthor+pages}{newunit}%
            \usebibmacro{a:edtrans}}%
           {\ifboolexpr{ test {\ifentrytype{bookinbook}}
                         or test {\ifentrytype{inbook}}}
-             {\usebibmacro{byauthor}%
-              \newunit
-              \usebibmacro{a:edtrans}}%
-             {\usebibmacro{a:edtrans}%
-              \usebibmacro{chapter}}%
-           \usebibmacro{in}}}
+             {\usebibmacro{byauthor+ed+in}}%
+             {\usebibmacro{ed+chapter+in}}}}
        {\usebibmacro{aft+fore+intro}}}}
 
 \newbibmacro*{crossref+incollections}{%
@@ -1641,13 +1632,9 @@
     {}
     {\usebibmacro{b:edtrans}}}
 
-\newbibmacro*{type}{%
-  \iffieldundef{type}
-    {}
-    {\newunit
-     \printfield{type}}}
-
 \newbibmacro*{inst+loc+date}{%
+  \printfield{type}%
+  \setunit{\addcomma\space}%
   \iflistundef{institution}
     {\printfield{venue}}%
     {\printlist{institution}}%
@@ -1691,7 +1678,7 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}{}%
+     \usebibmacro{xeditor+yeditor}{series}%
      \newunit}}%
 
 \newbibmacro*{journallocation}{%
@@ -1773,11 +1760,13 @@
   \usebibmacro{book:number}%
   \usebibmacro{part}}%
 
-\newbibmacro*{byauthor}{%
+\newbibmacro*{byauthor}[1]{%
   \ifboolexpr{ test {\ifnameundef{author}}
                or togl {noauth}}
     {}
-    {\renewcommand*{\pluga}{\bibstring{by}\space}%
+    {\ifstrequal{#1}{newunit}
+       {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
+       {\renewcommand*{\pluga}{\bibstring{by}\space}}%
      \renewcommand*{\cbx@namelist}{author}%
      \usebibmacro{printnames+etc}}}
 
@@ -1807,27 +1796,34 @@
        {\clearname{bookauthor}}%
        {}}}
 
-\newbibmacro*{bybookauthor+pages}{%
+\newbibmacro*{bybookauthor+pages}[1]{%
   \ifnameundef{bookauthor}
     {}
-    {\renewcommand*{\pluga}{\bibstring{by}\space}%
+    {\ifstrequal{#1}{newunit}
+       {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
+       {\renewcommand*{\pluga}{\bibstring{by}\space}}%
      \renewcommand*{\cbx@namelist}{bookauthor}%
      \usebibmacro{printnames+etc}%
-     \ifentrytype{incollection}
-       {\usebibmacro{pages}%
-        \newunit}%
-       {\setunit{\addcomma\space}}}}
+     \usebibmacro{pages}%
+      \ifdefstring{\xtitle}{book}
+        {\newunit}%
+        {}}}
 
-\newbibmacro*{chapter}{%
-  \iffieldundef{chapter}
-    {}
-    {\newunit
-     \printfield{chapter}\space}}%
-
-\newbibmacro*{in}{%
+\newbibmacro*{byauthor+ed+in}{%
+  \usebibmacro{byauthor}{newunit}%
+  \usebibmacro{a:edtrans}%
   \iftoggle{collection:inbook}
     {}
-    {\bibstring{in}\space}}%
+    {\newunit
+     \bibstring{in}\space}}%
+
+\newbibmacro*{ed+chapter+in}{%
+  \usebibmacro{a:edtrans}%
+  \newunit
+  \iffieldundef{chapter}
+    {\bibstring{in}\space}%
+    {\printfield{chapter}\space
+     \bibstring{in}\space}}%
 
 \newbibmacro*{incollections}{%
   \ifdefstring{\xtitle}{book}
@@ -1835,8 +1831,7 @@
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \midsentence\setunit{\addcomma\space}%
-     \usebibmacro{byauthor}%
-     \setunit{\addcomma\space}%
+     \usebibmacro{byauthor}{}%
      \usebibmacro{b:edtrans}%
      \usebibmacro{note}%
      \usebibmacro{edition}}%
@@ -1849,7 +1844,7 @@
      \renewcommand*{\xtitle}{book}%
      \usebibmacro{longtitle+titleaddon}%
      \midsentence\setunit{\addcomma\space}%
-     \usebibmacro{bybookauthor+pages}%
+     \usebibmacro{bybookauthor+pages}{}%
      \usebibmacro{bookbooktitle}%
      \usebibmacro{b:edtrans}%
      \iftoggle{collection:inbook}
@@ -1923,7 +1918,7 @@
      \newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}{}%
+     \usebibmacro{xeditor+yeditor}{series}%
      \setunit{\addcomma\space}}}
 
 \newbibmacro*{seriesaddon}{%
@@ -1989,7 +1984,7 @@
                or test {\iffieldequalstr{editorctype}{series}}}
     {\setunit{\addcomma\space}%
      \printfield{number}}%
-    {\setunit{\addspace}% '\addspace' not '\space'
+    {\setunit{\addspace}% not '\setunit{\space}'
      \printfield{number}}}
 
 \newbibmacro*{orig+etc}{%
