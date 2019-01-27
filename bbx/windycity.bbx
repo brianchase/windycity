@@ -1,4 +1,4 @@
-% Last modified: Fri 25 Jan 2019 07:56:36 PM CST
+% Last modified: Sun 27 Jan 2019 08:17:17 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -710,14 +710,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{a:authpos+edtrans}{%
-  \usebibmacro{prep:edtrans}%
+  \usebibmacro{test:edtrans}%
   \iftoggle{noed}
     {\usebibmacro{transcombos}}%
     {\iftoggle{swaptrans}
        {\usebibmacro{transcombos}}%
        {\usebibmacro{edcombos}}}}
 
-\newbibmacro*{prep:edtrans}{%
+\newbibmacro*{test:edtrans}{%
   \global\togglefalse{noed}%
   \global\togglefalse{notrans}%
   \usebibmacro{test:trans}%
@@ -730,11 +730,7 @@
     {\ifnameundef{translator}
        {\renewcommand*{\yeditor}{translatora}}%
        {\renewcommand*{\yeditor}{translator}}}
-    {\iftoggle{authposition}
-       {\ifnameundef{translator}
-          {\renewcommand*{\yeditor}{translatora}}%
-          {\renewcommand*{\yeditor}{translator}}}
-       {\renewcommand*{\yeditor}{translator}}}}
+    {\renewcommand*{\yeditor}{translator}}}
 
 \newbibmacro*{test:transdupes}{%
   \ifnamesequal{translator}{translatora}
@@ -897,14 +893,14 @@
      \usebibmacro{transcombos+etc}}}
 
 \newbibmacro*{transcombos+etc}{%
-  \usebibmacro{prep:edtrans}%
+  \usebibmacro{test:edtrans}%
   \iftoggle{notrans}
     {}
     {\usebibmacro{transcombos}%
      \usebibmacro{pluga+etc}}}
 
 \newbibmacro*{edcombos+etc}{%
-  \usebibmacro{prep:edtrans}%
+  \usebibmacro{test:edtrans}%
   \iftoggle{noed}
     {}
     {\usebibmacro{edcombos}%
