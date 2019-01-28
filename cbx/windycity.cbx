@@ -1,4 +1,4 @@
-% Last modified: Fri 25 Jan 2019 04:26:14 PM CST
+% Last modified: Sun 27 Jan 2019 05:28:19 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -144,8 +144,11 @@
        \usebibmacro{parencite:long}%
        \usebibmacro{cite:volume}}}}
 
+% See note for 'crossref+long'.
+
 \newbibmacro*{test:crossref}{%
-  \iffieldundef{crossref}
+  \ifboolexpr{ test {\iffieldundef{crossref}}
+               or test {\iffieldundef{title}}}
     {}
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\stepcounter{\thefield{crossref}}}
@@ -310,8 +313,13 @@
     {\renewcommand*{\cbx@deflabel}{labelname}}%
     {\renewcommand*{\cbx@deflabel}{default}}}
 
+% Checking for 'title' below helps if you cross-reference volumes to a
+% collection with entries containing just 'volume' and 'crossref'
+% fields. Perhaps justifiable in very rare cases.
+
 \newbibmacro*{crossref+long}{%
-  \iffieldundef{crossref}
+  \ifboolexpr{ test {\iffieldundef{crossref}}
+               or test {\iffieldundef{title}}}
     {\usebibmacro{cite:long}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\stepcounter{\thefield{crossref}}%
