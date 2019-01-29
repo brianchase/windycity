@@ -1,4 +1,4 @@
-% Last modified: Sun 27 Jan 2019 05:28:19 PM CST
+% Last modified: Tue 29 Jan 2019 01:02:18 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -35,7 +35,7 @@
 
 \InitializeCitationStyle{\let\crossreflist\empty}%
 \DeclareAutoPunctuation{.,;:!?}
-\DeclareCitePunctuationPosition{cite}{d}
+\DeclareCitePunctuationPosition{cite}{r}
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{multicite}%
@@ -424,7 +424,7 @@
   \iflastcitekey
     {\iffieldundef{postpunct}
        {\addperiod}%
-       {\unspace\printfield{postpunct}}}
+       {}}
     {}}
 
 \newbibmacro*{refworks}{%
