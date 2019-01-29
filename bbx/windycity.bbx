@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Jan 2019 12:29:16 PM CST
+% Last modified: Tue 29 Jan 2019 12:29:20 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -471,7 +471,10 @@
 
 \DeclareFieldFormat{blogtitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{journaltitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{labeltitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{maintitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{title}{\mkbibemph{#1}}
 
@@ -498,10 +501,8 @@
 \DeclareIndexFieldAlias[inbook]{indextitle}{indextitle}
 \DeclareFieldAlias[book]{origtitle}{title}
 
-\DeclareFieldFormat{issuetitle}{%
-  \ifcapital
-    {\MakeCapital{#1}}%
-    {#1}}%
+\DeclareFieldFormat{chapter}{\bibstring{chapter}\space #1}
+\DeclareFieldFormat{issuetitle}{\ifcapital{\MakeCapital{#1}}{#1}}
 \DeclareFieldFormat[letter,misc,patent]{title}{#1}
 \DeclareFieldFormat[letter,misc,patent]{labeltitle}{#1}
 \DeclareFieldFormat[thesis,unpublished]{title}{%
@@ -551,8 +552,7 @@
 
 % A shorthand is italicized if the title that it abbreviates is also
 % italicized. Set this in the bibliography database by enclosing the
-% shorthand with '\emph{}'. Otherwise, the shorthand takes the normal
-% font.
+% shorthand with '\emph{}' or '\mkbibemph{}'.
 
 \DeclareFieldFormat{shorthand}{#1}
 \DeclareFieldFormat{shorthandintro}{%
