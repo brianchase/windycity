@@ -1,11 +1,12 @@
 
 INTERIM
 
-* added support for citing web pages and social media content
+* added limited support for citing web pages and social media content
 * added 'listvols' option
 * updated documentation for previous two points
 * significant housekeeping for tighter control of punctuation
-* bug fixes
+* fixed printing of publication dates for some reports
+* other bug fixes
 
 RELEASE NOTES FOR VERSION 2019.01.18
 

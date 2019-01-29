@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Jan 2019 08:36:38 AM CST
+% Last modified: Tue 29 Jan 2019 12:29:16 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1526,7 +1526,7 @@
      \usebibmacro{note}%
      \usebibmacro{edition}%
      \usebibmacro{volumes+series+etc}%
-     \usebibmacro{publishers}%
+     \usebibmacro{date+loc+etc}%
      \usebibmacro{origtitle}}%
     {\usebibmacro{byauthor}{newunit}%
      \usebibmacro{a:edtrans}%
@@ -1535,7 +1535,7 @@
      \usebibmacro{edition}%
      \usebibmacro{volumes+series+etc}%
      \usebibmacro{maintitle+editor}%
-     \usebibmacro{publishers}%
+     \usebibmacro{date+loc+etc}%
      \usebibmacro{origtitle}}}
 
 % Check for entrytypes due to its use in 'cite' and 'parencite'.
@@ -1770,15 +1770,19 @@
     {\newunit
      \printfield{edition}}}
 
-\newbibmacro*{publishers}{%
-  \iffieldundef{origtitle}
-    {\iftoggle{bibliography}
-       {\newunit
-        \usebibmacro{orig+etc}}%
-       {\setunit{\addspace}% not '\setunit{\space}'
-        \printtext[parens]{\usebibmacro{orig+etc}}}}
+\newbibmacro*{date+loc+etc}{%
+  \ifboolexpr{ test {\iflistundef{location}}
+               and test {\iflistundef{publisher}}}
     {\newunit
-     \usebibmacro{loc+pub+year}}}
+     \usebibmacro{month+day+year}}%
+    {\iffieldundef{origtitle}
+       {\iftoggle{bibliography}
+          {\newunit
+           \usebibmacro{orig+etc}}%
+          {\setunit{\addspace}% not '\setunit{\space}'
+           \printtext[parens]{\usebibmacro{orig+etc}}}}
+       {\newunit
+        \usebibmacro{loc+pub+year}}}}
 
 \newbibmacro*{test:bookauthor}{%
   \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
@@ -1847,7 +1851,7 @@
         \usebibmacro{edition}}}% needs '%'
   \usebibmacro{volumes+series+etc}%
   \usebibmacro{maintitle+editor}%
-  \usebibmacro{publishers}%
+  \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
 \newbibmacro*{crossref}{%
