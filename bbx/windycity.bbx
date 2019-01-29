@@ -1,4 +1,4 @@
-% Last modified: Sun 27 Jan 2019 08:17:17 AM CST
+% Last modified: Tue 29 Jan 2019 08:36:38 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -699,10 +699,10 @@
         \renewcommand*{\cbx@bibstring}{foreword}}}
     {\renewcommand*{\cbx@namelist}{afterword}%
      \renewcommand*{\cbx@bibstring}{afterword}}%
-  \renewcommand*{\plugb}{\newunitpunct}%
   \usebibmacro{printnames+etc}%
   \savefield{namehash}{\bbx@lasthash}%
   \usebibmacro{authpos+deflabel}%
+  \newunit
   \bibstring{\cbx@bibstring}\space}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -984,8 +984,8 @@
                and not test \iffirstonpage}
     {\ifboolexpr{ test {\ifnameundef{author}}
                   and test {\ifnameundef{bookauthor}}}
-       {\bibnamedash\plugb}%
-       {\bibnamedash\newunitpunct}}%
+       {\bibstring{bibnamedash}\plugb}%
+       {\bibstring{bibnamedash}}}
     {\usebibmacro{printnames}%
      \usebibmacro{handle}%
      \usebibmacro{nameaddon}}}
@@ -1020,17 +1020,15 @@
   \let\pluga\empty
   \let\plugb\empty}%
 
-\renewcommand*{\bibnamedash}{%
-  \vrule height 2pt depth -1.6pt width 3em\hspace{1pt}}%
-
 % When 'journaltitle' goes in the author's position.
 
 \newbibmacro*{bibjournaldash}{%
   \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
                and not test \iffirstonpage}
-    {\bibnamedash\newunitpunct
+    {\bibstring{bibnamedash}%
      \clearfield{journaltitle}%
-     \clearlist{location}}%
+     \clearlist{location}%
+     \newunit}%
     {\savefield{journaltitle}{\bbx@lasthash}%
      \renewcommand*{\xtitle}{journal}%
      \usebibmacro{longtitle+titleaddon}%
@@ -1042,8 +1040,9 @@
 \newbibmacro*{bibblogdash}{%
   \ifboolexpr{ test {\iffieldequals{blogtitle}{\bbx@lasthash}}
                and not test \iffirstonpage}
-    {\bibnamedash\newunitpunct
-     \clearfield{blogtitle}}%
+    {\bibstring{bibnamedash}%
+     \clearfield{blogtitle}%
+     \newunit}%
     {\savefield{blogtitle}{\bbx@lasthash}%
      \renewcommand*{\xtitle}{blog}%
      \usebibmacro{longtitle+titleaddon}%
@@ -1315,10 +1314,9 @@
     {\usebibmacro{labelyear+extradate}}%
     {}}
 
-% FIX: Figure out placement of units so as to avoid '\ifterm'.
 \newbibmacro*{labelyear+extradate}{%
   \iftoggle{reflist}
-    {\ifterm{}{\newunit}% mainly for '\bibnamedash\newunitpunct'
+    {\newunit
      \usebibmacro{reflist:origyear}%
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}%

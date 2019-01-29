@@ -1,4 +1,4 @@
-% Last modified: Fri 18 Jan 2019 12:22:16 PM CST
+% Last modified: Tue 29 Jan 2019 08:31:29 AM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -39,6 +39,7 @@
       \mkbibtimezone{\thefield{#4}}}}%
 }
 
+\NewBibliographyString{bibnamedash}
 \NewBibliographyString{by}
 \NewBibliographyString{compiler}
 \NewBibliographyString{compiler+}
@@ -71,6 +72,7 @@
   afterword     = {{afterword to}{afterword to}},
   andothers     = {{et\addabbrvspace al\adddot}{et\addabbrvspace al\adddot}},
   by            = {{by}{by}},
+  bibnamedash   = {{\rule[2pt]{3em}{0.1pt}}{\rule[2pt]{3em}{0.1pt}}},
   bibliography  = {{Bibliography}{Bibliography}},
   chapter       = {{chap\adddot}{chap\adddot}},
   citedas       = {{hereafter cited as}{hereafter cited as}},
