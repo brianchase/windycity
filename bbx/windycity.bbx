@@ -1,4 +1,4 @@
-% Last modified: Wed 30 Jan 2019 05:04:23 PM CST
+% Last modified: Wed 30 Jan 2019 04:58:15 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019.01.18 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019.01.30 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -120,6 +120,12 @@
     {\global\toggletrue{short}%
      \global\toggletrue{firstshort}}%
     {\global\togglefalse{short}}}
+
+\providetoggle{skipdate}
+\DeclareEntryOption{skipdate}[true]{%
+  \ifstrequal{#1}{true}
+    {\toggletrue{skipdate}}%
+    {\togglefalse{skipdate}}}
 
 \providetoggle{swapauth}
 \DeclareEntryOption{swapauth}[true]{%
@@ -671,14 +677,14 @@
      \setunit{\space}%
      \usebibmacro{journallocation}%
      \clearlist{location}%
-     \usebibmacro{labelyear+extradate}%
+     \usebibmacro{labeldate+extradate}%
      \newunit}%
     {\ifboolexpr{ test {\ifentrytype{online}}
                   and togl {bibliography}}
        {\toggletrue{journalfirst}%
         \usebibmacro{bibblogdash}%
         \setunit{\space}%
-        \usebibmacro{labelyear+extradate}%
+        \usebibmacro{labeldate+extradate}%
         \newunit}%
        {}}}
 
@@ -1085,7 +1091,7 @@
 \newbibmacro*{title+labelyear}{%
   \iftoggle{bibliography}
     {\usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{b:labelyear+extradate}}%
+     \usebibmacro{b:labeldate+extradate}}%
     {\ifboolexpr{ test {\ifciteseen}
                   or togl {firstshort}}
        {\usebibmacro{shorttitle}}%
@@ -1301,19 +1307,20 @@
 
 % For reference lists.
 
-\newbibmacro*{a:labelyear+extradate}{%
+\newbibmacro*{a:labeldate+extradate}{%
   \iftoggle{noauth}
     {}
-    {\usebibmacro{labelyear+extradate}}}
+    {\usebibmacro{labeldate+extradate}}}
 
-\newbibmacro*{b:labelyear+extradate}{%
+\newbibmacro*{b:labeldate+extradate}{%
   \ifboolexpr{ togl {noauth}
                and not togl {journalfirst}}
-    {\usebibmacro{labelyear+extradate}}%
+    {\usebibmacro{labeldate+extradate}}%
     {}}
 
-\newbibmacro*{labelyear+extradate}{%
-  \iftoggle{reflist}
+\newbibmacro*{labeldate+extradate}{%
+  \ifboolexpr{ togl {reflist}
+               and not togl {skipdate}}
     {\newunit
      \usebibmacro{reflist:origyear}%
      \usebibmacro{labeldate+endyear}%

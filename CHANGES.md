@@ -4,13 +4,17 @@ See [Windy City](https://github.com/brianchase/windycity) for the
 latest changes. The version numbers below are fairly arbitrary
 milestones.
 
-## Latest
+## 2019.01.30
 
 * added limited support for citing web pages and social media content
-* added 'listvols' option (see documentation)
+* added 'listvols' entry option (see documentation)
+* added 'skipdate' entry option (see documentation)
 * significant changes for tighter control of punctuation, among
-  other things fixing the use previous use of 'postpunct'
+  other things fixing the previous use of 'postpunct'
 * fixed printing of publication dates for some reports
+* fixed 'nameaddon' not printing after a 3-em dash in bibliographies
+  (presumably, screen names should also print in this context; they do
+  now)
 * other bug fixes
 
 ## 2019.01.18
