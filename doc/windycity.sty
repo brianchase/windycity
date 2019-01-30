@@ -1,4 +1,4 @@
-% Last modified: Thu 24 Jan 2019 01:15:36 PM CST
+% Last modified: Wed 30 Jan 2019 11:59:12 AM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -61,7 +61,8 @@
 \usepackage{csquotes}
 \usepackage[style=windycity]{biblatex}
 \addbibresource{windycity.bib}
-\setcounter{biburlnumpenalty}{9000}% for obrien2015 in windycity.bib
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}
 
 \renewcommand\@makefntext[1]{%
   \parindent 1em%
@@ -204,13 +205,15 @@
   {\normalfont\it}}
 
 \AtBeginEnvironment{quote}{\small}
+\AtBeginEnvironment{verbatim}{\small}
 \newcommand{\biber}{%
   \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
 \newcommand{\biblatex}{%
-  \href{http://www.ctan.org/pkg/biblatex}{\texttt{biblatex}}\xspace}%
+  \href{http://www.ctan.org/pkg/biblatex}{biblatex}\xspace}%
 % From Oren Patashnik's documentation for bibtex:
 \newcommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
   T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
+\hyphenation{bib-er bib-la-tex Chi-ca-go}
 
 \usepackage[%
   anchorcolor=,
