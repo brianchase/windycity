@@ -1,4 +1,4 @@
-% Last modified: Sun 27 Jan 2019 03:32:07 PM CST
+% Last modified: Tue 29 Jan 2019 01:27:34 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1704,8 +1704,7 @@ database.
 % 14.99 Translated titles of cited works
 
 \begin{citebib}
-% Gives a comma before postnote, not a semicolon as in CMS:
-%\item \cite[includes a summary in German]{wereszycki1977}
+\item \cite{wereszycki1977}; includes a summary in German.
 \item \cite[272]{kern1938}
 \item \cite{pirumova1977b}
 \AtNextCitekey{\clearfield{shorthand}}
@@ -1859,10 +1858,11 @@ For issues surrounding the last example below, see Section
 \subsubsection{Microform editions}
 % 14.115 Microform editions
 
-The problem Farwell's citation is with the field
-\bibfield{howpublished}, which seems like the best choice to contain
-\textit{microfiche} but which, as must happen in other cases, prints
-after the \bibfield{postnote}, \textit{p. 67, 3C12}.
+Farwell's citation fails to match \textit{CMS} because the
+\bibfield{howpublished} field, which seems like the best choice to
+contain \textit{microfiche}, follows the \bibfield{postnote} field,
+which contains \textit{p. 67, 3C12}. This order is necessary
+elsewhere, such as in \textit{CMS} \ref{14.163}.
 
 \begin{citebib}
 \item \cite[p. 67, 3C12]{farwell1997}
@@ -2152,6 +2152,7 @@ bibliography database entry. Here's an example from the source:
 
 \subsubsection{Books on CD-ROM and other fixed media}
 % 14.163 Books on CD-ROM and other fixed media
+\label{14.163}
 
 \begin{citebib}
 \item \cite[1.4]{chicago2003}
@@ -2426,8 +2427,7 @@ reference list without adding, say, a \bibfield{sortname} field.
 
 \begin{citebib}
 \item \cite{lifestyles1996}
-% FIX: Printing date:
-%\item \cite{mcdonalds2014}
+\item \cite{mcdonalds2014}
 \item \cite[¶2,620]{standardtax1996}
 \end{citebib}
 
