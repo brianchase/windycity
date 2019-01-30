@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Jan 2019 12:29:20 PM CST
+% Last modified: Wed 30 Jan 2019 05:04:23 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -972,11 +972,11 @@
 \newbibmacro*{printnames+etc}{%
   \ifboolexpr{ togl {authposition}
                and togl {bibliography}}
-    {\usebibmacro{bibnamedash+printnames}%
-     \usebibmacro{a:labelyear+extradate}}%
-    {\usebibmacro{printnames}%
-     \usebibmacro{handle}%
-     \usebibmacro{nameaddon}}%
+    {\usebibmacro{bibnamedash+printnames}}%
+    {\usebibmacro{printnames}}%
+  \usebibmacro{handle}%
+  \usebibmacro{nameaddon}%
+  \usebibmacro{a:labeldate+extradate}%
   \usebibmacro{clearnames+empty}}%
 
 \newbibmacro*{bibnamedash+printnames}{%
@@ -986,9 +986,7 @@
                   and test {\ifnameundef{bookauthor}}}
        {\bibstring{bibnamedash}\plugb}%
        {\bibstring{bibnamedash}}}
-    {\usebibmacro{printnames}%
-     \usebibmacro{handle}%
-     \usebibmacro{nameaddon}}}
+    {\usebibmacro{printnames}}}
 
 \newbibmacro*{printnames}{%
   \ifnameundef{\cbx@namelist}
