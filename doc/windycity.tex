@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Jan 2019 01:27:34 PM CST
+% Last modified: Wed 30 Jan 2019 05:30:06 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,9 +8,12 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019.01.18}
+\version{2019.01.30}
 \maketitle
+\begingroup
+\hypersetup{linkcolor=black}
 \tableofcontents\markboth{Contents}{Contents}
+\endgroup
 
 \section{Introduction}
 
@@ -473,6 +476,12 @@ title's position. Below is an example from \textit{CMS} \ref{14.105}:
 without affecting the bibliography, use \cmd{cite*} or
 \cmd{footcite*}.
 
+\optitem[false]{skipdate}{\opt{true}, \opt{false}}
+
+\noindent On rare occasions, you may need an entry in a reference list
+to skip the \textit{date} of the author-date format. For examples, see
+Section \ref{entrytypes}.
+
 \optitem[false]{swapauth}{\opt{true}, \opt{false}}
 
 \noindent To swap the places of a book's author with an editor or
@@ -560,9 +569,9 @@ blue states and between churchgoers and secular voters. \end{quote}
 The source for the passage above contains:
 
 \begin{verbatim}
-   \begin{quote} Fiorina et al. \parencite*{fiorina2005}...
-   Fischer and Hout \parencite*{fischer2006}... Abramowitz
-   and Saunders \parencite*{abramowitz2005}... \end{quote}
+   \begin{quote} Fiorina et al. \parencite*{fiorina2005}... Fischer
+   and Hout \parencite*{fischer2006}... Abramowitz and Saunders
+   \parencite*{abramowitz2005}... \end{quote}
 \end{verbatim}
 
 \cmditem{reprint}[postnote]{key}
@@ -591,11 +600,19 @@ Windy City uses several data fields that aren't available with
 cross-referencing and aren't listed below, as they're not meant for
 use in a bibliography database. The fields below are different: You
 can use them to store information in a bibliography database that you
-want to appear in citations. Several citations in this document won't
-match their counterparts in \textit{CMS} without the help of these
-fields.
+want to appear in citations. Without these fields, quite a few
+citations in this document wouldn't match their counterparts in
+\textit{CMS}.
 
 \begin{marglist}
+
+\item[blogtitle/blogsubtitle]
+
+The name of a blog goes in \bibfield{blogtitle} and
+\bibfield{blogsubtitle}. It would have been preferable to use already
+exiting fields for this information. But since blog posts take the
+usual \bibfield{title} and \bibfield{subtitle} fields, and since blogs
+may have host names of different types, nothing else seemed suitable.
 
 \item[editoraddon] Use this field to include additional editorial
 information about a book. It's available for \bibtype{book},
@@ -699,7 +716,7 @@ example from \textit{CMS} \ref{14.232}:
 \end{citeonly}
 
 A bibliography database could have an \bibtype{inreference} entry for
-the article cross-referenced to a \bibtype{reference} entry for
+the article cross-ref\-er\-enc\-ed to a \bibtype{reference} entry for
 \textit{Encyclopaedia Britannica}:
 
 \begin{verbatim}
@@ -743,29 +760,53 @@ makes it a fallback for almost anything. The example below is from
 in \bibfield{usera} (for notes) and \bibfield{userb} (for
 bibliographies). In \bibfield{title}, the style needs manual
 formatting, since works of this type may have titles in italics or
-quotation marks. Some trickery with the year helps with formatting the
-reference list entry.
+quotation marks.
 
 \begin{verbatim}
    @Misc{roosevelt1959,
      author = {Roosevelt, Eleanor},
-     title = {\mkbibquote{Is America Facing World
-              Leadership?}},
-     usera = {convocation speech, Ball State Teacher's
-              College, May 6, \thefield{year}, radio
-              broadcast, reel-to-reel tape, MPEG copy,
-              1:12:49},
-     userb = {Convocation Speech. Ball State Teacher's
-              College. May 6, \thefield{year}. Radio
-              broadcast. Reel-to-reel tape. MPEG copy.
-              1:12:49},
-     url = {http://libx.bsu.edu/cdm4/singleitem/collection/
-            ElRoos/id/1},
+     title = {\mkbibquote{Is America Facing World Leadership?}},
+     usera = {convocation speech, Ball State Teacher's College,
+              May 6, \thefield{year}, radio broadcast, reel-to-reel
+              tape, MPEG copy, 1:12:49},
+     userb = {Convocation Speech. Ball State Teacher's College. May
+              6, \thefield{year}. Radio broadcast. Reel-to-reel
+              tape. MPEG copy. 1:12:49},
+     url = {http://libx.bsu.edu/cdm4/singleitem/collection/ElRoos/
+            id/1},
      year = {1959}
    }
 \end{verbatim}
 
-\noindent No other example in this document relies on \bibtype{misc}.
+You may also use the \bibtype{misc} entry type to cross-reference
+entries in a bibliography, as in \textit{CMS} \ref{14.81} and
+\ref{14.82}. Below are examples from the former:
+
+\begin{bibonly}
+\nocite{ashe,creasey1976,creasey1978,creasey1966,morton,york}
+\end{bibonly}
+
+For every cross-reference of this type that you want in your
+bibliography, add a \bibtype{misc} entry to your bibliography
+database. Here's one from the previous list:
+
+\begin{verbatim}
+   @Misc{ashe,
+     options = {skipdate},
+     author = {Ashe, Gordon},
+     userb = {\emph{See} Creasey, John}
+   }
+\end{verbatim}
+
+\noindent The option \opt{skipdate} is necessary only if you plan to
+format your bibliography as a reference list. It prevents Windy City
+from printing \textit{N.d.} (no date) after the name to indicate a
+missing publication date.
+
+With the \bibtype{misc} entries in place, use \cmd{nocite} to add them
+to your bibliography. Cite the remaining entries in the usual way. For
+examples of automatic cross-referencing in a bibliography see Section
+\ref{notes}, \ref{14.108}, and Section \ref{paren}, \ref{15.42}.
 
 \section{Editors, Translators, and Compilers}
 \label{edtrans}
@@ -930,10 +971,8 @@ In short, for any title at a higher level than \bibfield{title}, you
 need to use \bibfield{editortype} to assign an editor to it.
 
 One complication remains: There are other name lists for editors than
-\bibfield{editor}. The style also uses \bibfield{editora},
-\bibfield{editorb}, and \bibfield{editorc}.\footnote{The style uses
-\bibfield{translatora} when it processes cross-referenced works. In a
-bibliography database, only use \bibfield{translator}.}
+\bibfield{editor}. There's \bibfield{editora}, \bibfield{editorb}, and
+\bibfield{editorc}.
 
 Reserve \bibfield{editor} for the lowest level title in a bibliography
 database entry. That should be the \bibfield{title} field. The next
@@ -950,8 +989,8 @@ Section \ref{collorder} and \bibfield{carson2014} in
 
 As it happens, Windy City puts a lot of effort into sorting out where
 to print the names of editors and translators, so it's a bit more
-clever than the previous paragraph would suggest. In particular, if
-you use \bibfield{editortype} to assign an \bibfield{editor} to a
+clever than the previous paragraph suggests. In particular, if you use
+\bibfield{editortype} to assign an \bibfield{editor} to a
 \bibfield{maintitle} or some other higher level title, and have an
 \bibfield{editora} with no corresponding \bibfield{editoratype}, Windy
 City will assume that \bibfield{editora} is the editor of the
@@ -1533,8 +1572,8 @@ introduction.
 \end{citebib}
 
 \setcounter{subsubsection}{67}
-\subsubsection{The 3–em dash for one repeated name}
-% 14.68 The 3–em dash for one repeated name
+\subsubsection{The 3-em dash for one repeated name}
+% 14.68 The 3-em dash for one repeated name
 
 \begin{bibonly}
 \nocite{judt1996,judt2008,judt1989,squire1983,squire1987}
@@ -1604,17 +1643,36 @@ entry options.
 \subsubsection{Pseudonyms}
 % 14.80 Pseudonyms
 
-To print the author's real name in brackets after a pseudonym, use the
-\bibfield{nameaddon} field. If the real name is unknown, and you want
-to indicate that a name is a pseudonym, put 'pseud.' in
-\bibfield{nameaddon}.
-
 \begin{citebib}
+\item \cite{akmuckraker2008}
 \item \cite{carre1982}
 \item \cite{stendhal1925}
 \end{citebib}
 
-\setcounter{subsubsection}{82}
+\subsubsection{Cross-references for pseudonyms}
+% 14.81 Cross-references for pseudonyms
+\label{14.81}
+
+For information on how to add entries that cross-references others,
+like several of those below, see Section \ref{entrytypes}. For
+examples of automatic cross-referencing in a bibliography, see
+\ref{14.108}, below, and Section \ref{paren}, \ref{15.42}.
+
+\begin{bibonly}
+\nocite{ashe,creasey1976,creasey1978,creasey1966,morton,york}
+\end{bibonly}
+
+\subsubsection{Alternative real names}
+% 14.82 Alternative real names
+\label{14.82}
+
+For information on how to get the last entry below, see Section
+\ref{entrytypes}.
+
+\begin{bibonly}
+\nocite{doniger2000,oflaherty}
+\end{bibonly}
+
 \subsubsection{Authors known by a given name}
 % 14.83 Authors known by a given name
 
@@ -1783,6 +1841,7 @@ For issues surrounding the last example below, see Section
 
 \subsubsection{Several contributions to the same multiauthor book}
 % 14.108 Several contributions to the same multiauthor book
+\label{14.108}
 
 % Due to 'mincrossrefs=2', angle1968 and zukowsky1987 would be
 % automatically added to the bibliography at the end of the document
@@ -2130,8 +2189,8 @@ bibliography database entry. Here's an example from the source:
 
 \begin{verbatim}
    \AtNextCitekey{\clearfield{doi}}
-   \item \cite[chap. 3, \url{https://doi.org/10.1093/acprof:
-               oso/9780199343638.003.0004}]{bonds2014}
+   \item \cite[chap. 3, \url{https://doi.org/10.1093/acprof:oso/
+               9780199343638.003.0004}]{bonds2014}
 \end{verbatim}
 
 \begin{citebib}
@@ -2672,6 +2731,7 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 
 \subsubsection{Cross-references to multiauthor books in reference lists}
 % 15.42 Cross-references to multiauthor books in reference lists
+\label{15.42}
 
 \begin{citeref}
 \item \parencite{draper1987}
@@ -2747,27 +2807,23 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 % 15.56 “Quoted in” in author-date references
 
 \begin{citeref}
-\item In Louis Zukofsky’s ``Sincerity and Objectification,''
+\item In Louis Zukofsky's ``Sincerity and Objectification,''
 from the February 1931 issue of \textit{Poetry} magazine
 \parencite[quoted in][]{costello1981}\ldots
 \end{citeref}
 
 \defbibnote{sh}{This section shows the output of
-\cmd{printshorthands}. By default, works from this list also appear in
-bibliographies and reference lists. To exclude them, use the preamble
-option \opt{nolos} (see Section \ref{preops}). Note that the style
-does not automatically italicize a \bibfield{shorthand}. Whether you
-should italicize it depends on whether you should italicize the work's
-title (14.60).\\}%
+\cmd{printshorthands}. By default, works in this list also appear in
+bibliographies. To exclude them, use the preamble option \opt{nolos}.
+See Section \ref{preops} for more information.\\}%
 
 \defbibnote{bib}{This section shows the default output of
-\cmd{printbibliography}. In the next section, the same works appear in
-the author-date format.\\}%
+\cmd{printbibliography}. The next section shows output in the
+author-date format.\\}%
 
 \defbibnote{ref}{This section shows the output of
-\cmd{printbibliography} for a reference list (see \opt{reflist} in
-Section \ref{preops}). The works below are the same as those in the
-previous section but in the author-date format.\\}%
+\cmd{printbibliography} in the author-date format. For information on
+how to produce this output, see Section \ref{preops}.\\}%
 
 \printshorthands[prenote=sh]
 \refstepcounter{sh}\label{sh}

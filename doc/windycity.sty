@@ -1,4 +1,4 @@
-% Last modified: Wed 30 Jan 2019 11:59:12 AM CST
+% Last modified: Wed 30 Jan 2019 05:24:05 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -219,8 +219,8 @@
   anchorcolor=,
   breaklinks=true,
   citecolor=,
-  colorlinks=,
-  linkcolor=,
+  colorlinks=true,
+  linkcolor=blue,
   pdfauthor={Brian Michael Chase},
   pdftitle={Windy City for biblatex},
   urlcolor=]{hyperref}
@@ -236,6 +236,25 @@
      \setlength{\listparindent}{\parindent}%
      \renewcommand*{\makelabel}[1]{\hss\optionlistfont##1}}%
    \ltd@optionlist}
+  {\endlist}
+     \setlength{\itemsep}{0pt}%
+\renewenvironment*{typelist}
+  {\list{}{%
+     \setlength{\labelwidth}{\marglistwidth}%
+     \setlength{\labelsep}{\marglistsep}%
+     \setlength{\leftmargin}{0pt}%
+% Added next line for less vertical space:
+     \setlength{\itemsep}{0pt}%
+     \renewcommand*{\makelabel}[1]{\hss\marglistfont##1}}%
+   \def\typeitem##1{%
+     \item[{##1}]%
+     \ltd@pdfbookmark{##1}{##1}}%
+   \def\reqitem{%
+     \par\begingroup\itemsep0.5\itemsep\item
+     Required fields: \btd@fieldloop}
+   \def\optitem{%
+     \par\begingroup\itemsep0.5\itemsep\item
+     Optional fields: \btd@fieldloop}}
   {\endlist}
 \lstset{basicstyle=\small\ttfamily}
 \renewcommand{\bibfield}[1]{\emph{#1}}%
