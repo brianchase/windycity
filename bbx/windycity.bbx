@@ -1,4 +1,4 @@
-% Last modified: Thu 31 Jan 2019 01:37:26 PM CST
+% Last modified: Thu 31 Jan 2019 03:04:52 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1328,7 +1328,10 @@
      \usebibmacro{reflist:origyear}%
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}%
-     \newunit}%
+     \ifboolexpr{ test {\iffieldundef{year}}
+                  or test {\ifnumeral{\thefield{year}}}}
+       {\newunit}%
+       {\bibsentence\newunit}}% if date enclosed in brackets
     {}}
 
 \newbibmacro*{reflist:origyear}{%
