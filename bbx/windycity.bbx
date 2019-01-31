@@ -1,4 +1,4 @@
-% Last modified: Wed 30 Jan 2019 04:58:15 PM CST
+% Last modified: Thu 31 Jan 2019 11:23:38 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -556,9 +556,9 @@
 \DeclareListFormat{publisher}{#1}
 \DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
 
-% A shorthand is italicized if the title that it abbreviates is also
-% italicized. Set this in the bibliography database by enclosing the
-% shorthand with '\emph{}' or '\mkbibemph{}'.
+% A shorthand should be italicized if the title that it abbreviates is
+% also italicized. See CMS, 17th ed., 14.60. Set this in the
+% bibliography database with '\emph{}' or '\mkbibemph{}'.
 
 \DeclareFieldFormat{shorthand}{#1}
 \DeclareFieldFormat{shorthandintro}{%
@@ -1308,7 +1308,8 @@
 % For reference lists.
 
 \newbibmacro*{a:labeldate+extradate}{%
-  \iftoggle{noauth}
+  \ifboolexpr{ togl {noauth}
+               or not togl {authposition}}
     {}
     {\usebibmacro{labeldate+extradate}}}
 
