@@ -1,4 +1,4 @@
-% Last modified: Thu 31 Jan 2019 11:23:38 AM CST
+% Last modified: Thu 31 Jan 2019 01:19:56 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1161,7 +1161,9 @@
      \printtext[parens]{%
        \usebibmacro{origlocation}%
        \usebibmacro{origpublisher}%
-       \usebibmacro{origyear+origendyear}}}}
+       \iftoggle{reflist}
+         {}
+         {\usebibmacro{origyear+origendyear}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %%  Dates and Times  %%
@@ -1333,8 +1335,6 @@
   \iffieldundef{origyear}
     {}
     {\printtext[parens]{\usebibmacro{origyear+origendyear}}%
-     \clearfield{origyear}%
-     \clearfield{origendyear}%
      \space}}%
 
 % The next macro helps bib environments that use the 'reflist' toggle
@@ -1994,7 +1994,9 @@
 \newbibmacro*{orig+etc}{%
   \usebibmacro{origlocation}%
   \usebibmacro{origpublisher}%
-  \usebibmacro{origyear+origendyear}%
+  \iftoggle{reflist}
+    {}
+    {\usebibmacro{origyear+origendyear}}%
   \usebibmacro{reprint}%
   \usebibmacro{loc+pub+year}}%
 
