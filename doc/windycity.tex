@@ -1,4 +1,4 @@
-% Last modified: Wed 30 Jan 2019 05:30:06 PM CST
+% Last modified: Thu 31 Jan 2019 08:51:22 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019.01.30}
+\version{2019.01.31}
 \maketitle
 \begingroup
 \hypersetup{linkcolor=black}
@@ -319,14 +319,13 @@ the value of \cmd{bibitemsep}. Store the text of an annotation in the
 \optitem[false]{collsonly}{\opt{true}, \opt{false}}
 
 \noindent Citing individual works of a collection adds an entry for
-each work to the bibliography. This could result in needless clutter,
-especially after citing many volumes of a multivolume work. To exclude
-individual works and print only an entry for the whole collection, use
-\opt{collsonly}. It has no effect on many \bibtype{incollection}
-entries, such as articles in books, which need (or ought to have) a
-place in the bibliography, but does filter out chapters of books and
-volumes of collections. For discussion of multivolume works, see
-Section \ref{multivolume}.
+each work to the bibliography. To exclude them and print only an entry
+for the whole collection, use \opt{collsonly}. It has no effect on
+many \bibtype{incollection} entries, such as articles in books, which
+need (or ought to have) a place in the bibliography, but it does
+filter out chapters of books, books in books, and volumes of
+collections. For discussion of multivolume works, see Section
+\ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
@@ -365,18 +364,19 @@ particular work, see the \bibfield{isbn} entry option in Section
 
 \noindent By default, every work with a \bibfield{shorthand} receives
 an entry in the bibliography. If you wish to exclude them, say, to
-avoid duplication with the output of \cmd{printshorthands}, use
-\opt{nolos}.
+avoid duplication with the output of \cmd{printshorthands} and the
+like, use \opt{nolos}. Since \opt{collsonly} also excludes certain
+works from the bibliography, their results may overlap.
 
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
-\noindent Use this option to print a reference list, that is, a
-bibliography in the author-date format. If you choose parenthetical
-citations over notes, you should consider using \opt{reflist} to
+\noindent Use this option to print a bibliography in the author-date
+format---what \textit{CMS} calls a reference list. If you choose
+parenthetical citations over notes, consider using \opt{reflist} to
 maintain consistency with \textit{CMS}.
 
 As mentioned in Section \ref{overview}, another way to print a
-reference list is to use the \opt{reflist} \opt{env} option of
+reference list is to pass \opt{env=reflist} to
 \cmd{printbibliography}. See Section \ref{overview} for more
 information.
 
@@ -384,7 +384,7 @@ information.
 
 \noindent As shown in Section \ref{short}, this option prints
 citations in a short format (see \textit{CMS} \ref{14.34}). The use of
-\opt{short} has one feature in common with \opt{ibid}: Just as an
+\opt{short} has one feature in common with \opt{ibid}: Just as
 \textit{ibid.} appears only for consecutive citations of a work on the
 same page, and so never refers to a citation on a previous page,
 \opt{short} drops the title from consecutive citations of a work on
@@ -396,13 +396,13 @@ determine which title a citation refers to.
 In contexts where \opt{short} would drop a title from a citation, but
 where no name occupies the author's position, it will print the work's
 \bibfield{labeltitle}. This can be a short form of the title, either
-the title minus the subtitle or the \bibfield{shorttitle}, if present
-in the bibliography database. In those situations, the short format is
-no different from the default.
+the title minus the subtitle or the \bibfield{shorttitle}, if
+applicable. In those situations, the short format is no different from
+the default.
 
 As noted earlier, \opt{short} implies \opt{firstshort}. But recall
 from Section \ref{short} that you can combine \opt{short} and
-\opt{ibid} for even more concise notes.
+\opt{ibid} for more concise notes.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -800,7 +800,7 @@ database. Here's one from the previous list:
 
 \noindent The option \opt{skipdate} is necessary only if you plan to
 format your bibliography as a reference list. It prevents Windy City
-from printing \textit{N.d.} (no date) after the name to indicate a
+from printing \textit{n.d.} (no date) after the name to indicate a
 missing publication date.
 
 With the \bibtype{misc} entries in place, use \cmd{nocite} to add them
@@ -1556,9 +1556,13 @@ format and the use of \textit{ibid.} First, the short format:
 
 You may override the default announcement of a \bibfield{shorthand} by
 adding your preferred content to \bibfield{shorthandintro}. For an
-example---one that prints the announcement in a separate
-sentence---see the first citation of \textit{CMS} in this document's
-introduction.
+example, one that prints the announcement in a separate sentence, see
+the first citation of \textit{CMS} in this document's introduction.
+
+Note that Windy City doesn't automatically italicize a
+\bibfield{shorthand}. Per \textit{CMS} 14.60, a shorthand should be
+italicized if the title that it abbreviates is also italicized. Set
+this in the bibliography database with \cmd{emph} or \cmd{mkbibemph}.
 
 \begin{citebib}
 % There's no way to suppress these fields in the bibliography:
@@ -1656,7 +1660,7 @@ entry options.
 For information on how to add entries that cross-references others,
 like several of those below, see Section \ref{entrytypes}. For
 examples of automatic cross-referencing in a bibliography, see
-\ref{14.108}, below, and Section \ref{paren}, \ref{15.42}.
+\ref{14.108} and \ref{15.42}.
 
 \begin{bibonly}
 \nocite{ashe,creasey1976,creasey1978,creasey1966,morton,york}
@@ -1689,9 +1693,9 @@ of brackets around the name of the organization in your bibliography
 database.
 
 \begin{citebib}
+\item \cite{iso1997}
 \AtNextCitekey{\clearfield{shorthand}}
 \item \cite{chicago2017}
-\item \cite{iso1997}
 \end{citebib}
 
 \setcounter{subsection}{3}
@@ -1732,7 +1736,7 @@ database.
 % 14.94 Quoted titles and other terms within cited titles of works
 
 \begin{citebib}
-\item \cite{levitt2005}
+\item \cite{levitt2014}
 \item \cite{mchugh1980}
 \end{citebib}
 
@@ -1765,7 +1769,7 @@ database.
 \item \cite{wereszycki1977}; includes a summary in German.
 \item \cite[272]{kern1938}
 \item \cite{pirumova1977b}
-\AtNextCitekey{\clearfield{shorthand}}
+%\AtNextCitekey{\clearfield{shorthand}}
 \item \cite{furet1999}
 \end{citebib}
 
@@ -1800,7 +1804,7 @@ database.
 % 14.104 Editor or translator in addition to author
 \label{14.104}
 
-For issues surrounding the last example below, see Section
+On how to make an author and editor swap places, see Section
 \ref{edtranspos}.
 
 \begin{citebib}
@@ -1901,16 +1905,18 @@ For issues surrounding the last example below, see Section
 
 \subsubsection{Reprint editions and modern editions}
 % 14.114 Reprint editions and modern editions
+\label{14.114}
 
-% You can have at most one \bibfield{origdate} per entry. So, if the
-% citation is to a work in a collection, say, an article or book in an
+% You can have at most one \bibfield{origdate} per entry. So, if you
+% cite a work in a collection, say, an article or book in an
 % anthology, the style assumes that \bibfield{origdate} is for the
 % collection, not for the individual work.
 
 \begin{citebib}
 \item \cite[152--53]{barzun1994}
 \item \cite{bahadur2014}
-\item \cite{emerson1985}
+% CMS prints the original date in the wrong place:
+%\item \cite{emerson1985}
 \item \cite{schweitzer1966}
 \end{citebib}
 
@@ -2205,8 +2211,13 @@ bibliography database entry. Here's an example from the source:
 \subsubsection{Freely available electronic editions of older works}
 % 14.162 Freely available electronic editions of older works
 
+The first example comes close to \textit{CMS}, except that, consistent
+with \ref{14.114} and \ref{15.40}, it lists the edition by Project
+Gutenberg as a reprint.
+
 \begin{citebib}
-\item \cite{james2008}
+\item \cite[bk. 6, chap. 1]{james2008}
+\item \cite[1:243]{james1909}
 \end{citebib}
 
 \subsubsection{Books on CD-ROM and other fixed media}
@@ -2214,7 +2225,7 @@ bibliography database entry. Here's an example from the source:
 \label{14.163}
 
 \begin{citebib}
-\item \cite[1.4]{chicago2003}
+\item \cite*[1.4]{chicago2003}
 \end{citebib}
 
 \setcounter{subsection}{5}
@@ -2226,9 +2237,11 @@ bibliography database entry. Here's an example from the source:
 % 14.171 Journal volume, issue, and date
 
 The note for Harper includes the month of publication. Windy City
-includes it as well in the bibliography, even though \textit{CMS}
+includes it in the bibliography as well, even though \textit{CMS}
 omits it. As for Lock's entry in the bibliography, \textit{CMS}
-clearly errs in printing the surname twice.
+clearly errs in printing the surname twice. Another issue: For
+Wilder's article, Windy City prints \textit{nos.} before \textit{1/2},
+not \textit{no.}, as \textit{CMS} has it.
 
 \begin{citebib}
 \item \cite[155]{lock2015}
@@ -2433,6 +2446,7 @@ reference list without adding, say, a \bibfield{sortname} field.
 \setcounter{subsubsection}{207}
 \subsubsection{Citing blog posts and blogs}
 % 14.208 Citing blog posts and blogs
+\label{14.208}
 
 \begin{citebib}
 \item \cite{amlen2015}
@@ -2535,9 +2549,6 @@ Section \ref{entrytypes} for more information.
 \subsubsection{Citing individual reference entries by author}
 % 14.234 Citing individual reference entries by author
 
-Reference works like the following have the same format as articles in
-collections. Otherwise, Windy City formats them incorrectly.
-
 \begin{citebib}
 \item \cite{isaacson2005}
 \end{citebib}
@@ -2592,6 +2603,7 @@ section.
 \setcounter{subsubsection}{8}
 \subsubsection{Author-date references—examples and variations}
 % 15.9 Author-date references—examples and variations
+\label{15.9}
 
 \begin{citeref}
 \item \parencite[87--88]{strayed2012}
@@ -2610,6 +2622,7 @@ section.
 \setcounter{subsubsection}{13}
 \subsubsection{Placement of dates in reference list entries}
 % 15.14 Placement of dates in reference list entries
+\label{15.14}
 
 \begin{citeref}
 \item \parencite{pager2015}
@@ -2619,6 +2632,7 @@ section.
 \setcounter{subsubsection}{19}
 \subsubsection{Reference list entries with same author(s), same year}
 % 15.20 Reference list entries with same author(s), same year
+\label{15.20}
 
 \begin{citeref}
 \item \parencite[218]{fogel2004b}
@@ -2628,11 +2642,14 @@ section.
 \setcounter{subsubsection}{21}
 \subsubsection{Text citations---basic form}
 % 15.22 Text citations—basic form
+\label{15.22}
 
 Ignore the error in \textit{CMS}: In reference lists, a title goes
 after the year, not before.
 
 \begin{citeref}
+\item \parencite{hetherington2015}
+\item \parencite{grove2015}
 \item \parencite{hetherington2015,grove2015}
 \end{citeref}
 
@@ -2713,6 +2730,7 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 \setcounter{subsubsection}{39}
 \subsubsection{Reprint editions and modern editions—more than one date}
 % 15.40 Reprint editions and modern editions—more than one date
+\label{15.40}
 
 \begin{citeref}
 \item \parencite{austen2003}
@@ -2759,6 +2777,9 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 \subsubsection{Parentheses or comma with issue number}
 % 15.47 Parentheses or comma with issue number
 
+In the second example, Windy City prints a colon after the journal
+number. \textit{CMS} prints a comma there---likely an error.
+
 \begin{citeref}
 \item \parencite{glass2014}
 \item \parencite{meyerovitch1959}
@@ -2766,6 +2787,10 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 
 \subsubsection{Colon with volume number}
 % 15.48 Colon with volume number
+
+The example below shows the output when an article's publication month
+isn't included in the bibliography database and so doesn't come
+between a volume number and a page reference.
 
 \begin{citeref}
 \item \parencite{gunderson2015}
@@ -2782,12 +2807,17 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 \subsubsection{Citing blogs in author-date format}
 % 15.51 Citing blogs in author-date format
 
+\textit{CMS} seems mistaken in printing a period after
+\textit{Chronicle of Higher Education} instead of a comma. Compare
+with \ref{14.208} and \ref{15.42}.
+
 \begin{citeref}
 \item \parencite{germano2017}
 \end{citeref}
 
 \subsubsection{Citing social media content in author-date format}
 % 15.52 Citing social media content in author-date format
+\label{15.52}
 
 \begin{citeref}
 \item \parencite{diaz2016}
@@ -2812,10 +2842,11 @@ from the February 1931 issue of \textit{Poetry} magazine
 \parencite[quoted in][]{costello1981}\ldots
 \end{citeref}
 
-\defbibnote{sh}{This section shows the output of
-\cmd{printshorthands}. By default, works in this list also appear in
-bibliographies. To exclude them, use the preamble option \opt{nolos}.
-See Section \ref{preops} for more information.\\}%
+\defbibnote{sh}{This section shows the output of \cmd{printbiblist}
+with the argument \opt{shorthand}. Running \cmd{printshorthands}
+produces the same output. By default, works in this list also appear
+in bibliographies. To exclude them, use the preamble option
+\opt{nolos}. See Section \ref{preops} for more information.\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. The next section shows output in the
@@ -2825,7 +2856,7 @@ author-date format.\\}%
 \cmd{printbibliography} in the author-date format. For information on
 how to produce this output, see Section \ref{preops}.\\}%
 
-\printshorthands[prenote=sh]
+\printbiblist[prenote=sh]{shorthand}
 \refstepcounter{sh}\label{sh}
 \printbibliography[notkeyword=notinbib,prenote=bib]
 \refstepcounter{bib}\label{bib}
