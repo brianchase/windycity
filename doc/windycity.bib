@@ -493,6 +493,7 @@
   year = {2000}
 }
 @Misc{oflaherty,
+  keywords = {notinbib,notinref},% print in example bib only
   author = {Doniger, Wendy},
   sorttitle = {See also},
   userb = {\emph{See also} O'Flaherty, Wendy Doniger}
@@ -569,10 +570,10 @@
 
 % 14.94 Quoted titles and other terms within cited titles of works
 
-@Book{levitt2005,
+@Book{levitt2014,
   author = {Levitt, Steven D. and Dubner, Stephen J.},
   title = {Think Like a Freak},
-  subtitle = {The Authors of \mkbibquote{Freakonomics} Offer to Retrain Your Brain},
+  subtitle = {The Authors of \mkbibquote{Freak\-o\-nom\-ics} Offer to Retrain Your Brain},
   address = {New York},
   publisher = {William Morrow},
   year = {2014}
@@ -674,7 +675,7 @@
 @Book{furet1999,% see also 14.59
   author = {Furet, François},
   title = {The Passing of an Illusion},
-  shorthand = {\emph{PI}},
+%  shorthand = {\emph{PI}},
   shorthandintro = {\mkbibparens{hereafter cited in text as \printfield{shorthand}}},
   translator = {Furet, Deborah},
   address = {Chicago},
@@ -804,7 +805,7 @@
 @Collection{williams1990,
   author = {Williams, Joseph M.},
   title = {Style},
-  booksubtitle = {Toward Clarity and Grace},
+  subtitle = {Toward Clarity and Grace},
   note = {with two chapters coauthored by Gregory G. Colomb},
   address = {Chicago},
   publisher = ucp,
@@ -1531,6 +1532,16 @@
   origyear = {1909},
   url = {http://www.gutenberg.org/ebooks/432}
 }
+@Book{james1909,
+  options = {listvols},
+  author = {James, Henry},
+  title = {The Ambassadors},
+  volumes = {2},
+  address = {New York},
+  publisher = {Charles Scribner's Sons},
+  year = {1909},
+  url = {https://books.google.com/books?id=WYlUAAAAYAAJ}
+}
 
 % 14.163 Books on CD-ROM and other fixed media
 
@@ -1558,7 +1569,7 @@
 }
 @Article{wesoky2015,
   author = {Wesoky, Sharon R.},
-  title = {Bringing the Jia Back into Guojia},
+  title = {Bringing the \emph{Jia} Back into \emph{Guojia}},
   subtitle = {Engendering Chinese Intellectual Politics},
   journal = {Signs},
   volume = {40},
@@ -1585,7 +1596,8 @@
   journal = {Renaissance Drama},
   volume = {41},
   number = {1/2},
-  date = {2013-23},
+  issue = {Fall},% '2013-23' in date prints 'Autumn 2013'
+  year = {2013},
   pages = {60},
   url = {https://doi.org/10.1086/673907}
 }
@@ -1662,6 +1674,7 @@
 @Article{narr2015,
   author = {Narr, Charlotte F. and Krist, Amy C.},
   title = {Host Diet Alters Trematode Replication and Elemental Composition},
+  shorttitle = {Host Diet},
   journal = {Freshwater Science},
   volume = {34},
   number = {1},
@@ -1727,14 +1740,14 @@
 % 14.183 Translated or edited article
 
 @Article{authorb,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   author = {Author, Arthur Q.},
   title = {Article Title},
   translator = {Translator, Tim Z.},
   journal = {Journal Title...}
 }
 @Article{authorc,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   author = {Author, Arthur Q.},
   title = {Article Title},
   editor = {Editor, Edward A.},
@@ -2308,7 +2321,7 @@
   volume = {14},
   number = {2},
   pages = {217–21},
-  year = {2004},
+  date = {2004-06},
   doi = {https://doi.org/10.1007/s00191-004-0188-x}
 }
 
@@ -2440,16 +2453,16 @@
 % 15.44 No date of publication in author-date references
 
 @Book{nano1750,
-  options = {skipbib},
+  keywords = {notinbib,notinref},% print in example bib only
   author = {Nano, Jasmine L.},
-  title = {Title of Work...},
+  title = {Title of Work\ldots},
   year = {[1750?]},
   sortyear = {1750}
 }
 @Book{nano,
-  options = {skipbib},
+  keywords = {notinbib,notinref},% print in example bib only
   author = {Nano, Jasmine L.},
-  title = {Title of Another Work...},
+  title = {Title of Another Work\ldots},
   sortkey = {nodate}
 }
 
