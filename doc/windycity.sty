@@ -1,4 +1,4 @@
-% Last modified: Wed 30 Jan 2019 05:24:05 PM CST
+% Last modified: Fri 01 Feb 2019 10:24:12 AM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -13,7 +13,7 @@
   \usepackage{xunicode}
   \usepackage{fontspec}
   \PassOptionsToPackage{unicode,xetex}{hyperref}
-  \defaultfontfeatures{Ligatures=TeX,Numbers={OldStyle,Proportional},Scale=MatchLowercase}
+  \defaultfontfeatures{Ligatures=TeX,Numbers={OldStyle,Proportional}}
   \setmainfont[
     Extension=.otf,
     UprightFont=*-regular,
@@ -21,6 +21,8 @@
     ItalicFont=*-italic,
     BoldItalicFont=*-bolditalic]{texgyretermes}
   \setmonofont[
+    Scale=0.96,
+    Numbers=Lining,
     Extension=.otf,
     UprightFont=*mono10-regular,
     ItalicFont=*mono10-italic]{lm}
@@ -45,6 +47,7 @@
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
 \newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}%
 \newcommand{\version}[1]{\gdef\@version{Version \liningnums{#1}}}
+%\newcommand{\website}[1]{\gdef\@website{\textcolor{blue}{\url{#1}}}}
 \newcommand{\website}[1]{\gdef\@website{\url{#1}}}%
 
 \renewcommand\@maketitle{%
@@ -123,7 +126,6 @@
   {\citereset\newrefsegment\small}%
   {\printbibliography[env=ref,heading=none,segment=\therefsegment]
    \endrefsegment}%
-
 \defbibenvironment{bib}
   {\list{}{%
      \small
@@ -145,7 +147,6 @@
    \global\togglefalse{reflist}}%
   {\item}
 \defbibheading{none}{}%
-
 \DeclareSortingTemplate{reverse}{%
   \sort[direction=descending]{\citeorder}}%
 
@@ -206,15 +207,6 @@
 
 \AtBeginEnvironment{quote}{\small}
 \AtBeginEnvironment{verbatim}{\small}
-\newcommand{\biber}{%
-  \href{http://www.ctan.org/tex-archive/biblio/biber}{\texttt{biber}}\xspace}%
-\newcommand{\biblatex}{%
-  \href{http://www.ctan.org/pkg/biblatex}{biblatex}\xspace}%
-% From Oren Patashnik's documentation for bibtex:
-\newcommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-  T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
-\hyphenation{bib-er bib-la-tex Chi-ca-go}
-
 \usepackage[%
   anchorcolor=,
   breaklinks=true,
@@ -225,6 +217,12 @@
   pdftitle={Windy City for biblatex},
   urlcolor=]{hyperref}
 \urlstyle{rm}
+\newcommand{\biblatex}{%
+  \href{http://www.ctan.org/pkg/biblatex}{\textcolor{blue}{biblatex}}\xspace}%
+% From Oren Patashnik's documentation for bibtex:
+\newcommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+  T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}%
+\hyphenation{bib-er bib-la-tex Chi-ca-go}
 \usepackage{btxdockit}% For \bibfield, \bibtype, \cmd, marglist, optionlist, \op, etc.
 \renewenvironment*{optionlist}
   {\list{}{%

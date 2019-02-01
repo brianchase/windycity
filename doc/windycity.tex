@@ -1,10 +1,10 @@
-% Last modified: Thu 31 Jan 2019 08:51:22 PM CST
+% Last modified: Fri 01 Feb 2019 01:38:54 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
 \begin{document}
 \title{Windy City}
-\subtitle{A Chicago Style for \biblatex}
+\subtitle{A Chicago Style for \texttt{\biblatex}}
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
@@ -34,17 +34,17 @@ make Windy City especially suitable for academic work.
 
 The following sections assume familiarity with \textit{CMS} and
 \biblatex. Section \ref{overview} gives a brief overview of the
-style's features. Section \ref{edtrans} discusses the assignment of
-editors, translators, and compilers. Section \ref{multivolume}
-discusses several issues with multivolume works. Sections \ref{notes}
-and \ref{paren} reproduce examples from various parts of \textit{CMS}
-with a focus on notes and bibliographies. It will help to compare the
-results throughout these sections with the corresponding information
-in this document's bibliography database and \LaTeX\ file,
-\file{windycity.bib} and \file{windycity.tex}, respectively.
+style's features. Section \ref{edtrans} discusses the assignment and
+placement of editors, translators, and compilers. Section
+\ref{collections} discusses several issues with collections, including
+multivolume works. Sections \ref{notes} and \ref{paren} reproduce
+examples from various parts of \textit{CMS} with a focus on notes and
+bibliographies. It will help to compare the results throughout these
+sections with the corresponding passages in this document's
+bibliography database and \LaTeX\ file, \file{windycity.bib} and
+\file{windycity.tex}, respectively.
 
-Aside from \biber, which is necessary for a few options, Windy City
-has no requirements beyond those of \biblatex version 3.8 or later.
+Windy City requires \biblatex version 3.8 or later.
 
 \section{Overview}
 \label{overview}
@@ -62,7 +62,7 @@ If you already know how to use \biblatex, getting started with Windy
 City is easy. Locate \biblatex on your system, and copy Windy City's
 files into their respective directories:
 
-\begin{itemize}[label=]
+\begin{itemize}[before=\small,label=]
 \item \ldots\path{/biblatex/windycity.dbx}
 \item \ldots\path{/biblatex/bbx/windycity.bbx}
 \item \ldots\path{/biblatex/cbx/windycity.cbx}
@@ -88,7 +88,7 @@ style is meant to handle.
 \subsection{The Default Format}
 \label{default}
 
-For a first set of examples, consider this passage from \textit{CMS}
+For a first set of examples, consider a passage from \textit{CMS}
 \ref{14.30}:
 
 \begin{citeonly}
@@ -120,15 +120,15 @@ previously cited works:
 \nocite{kaiser1964,morley1995,schwartz1992}
 \end{bibonly}
 
-\noindent You may also print a bibliography in an author-date format,
+\noindent You may also print a bibliography in the author-date format,
 what \textit{CMS} calls a reference list:
 
 \begin{refonly}
 \nocite{kaiser1964,morley1995,schwartz1992}
 \end{refonly}
 
-To make every instance of \cmd{printbibliography} use the author-date
-format, load \biblatex with the preamble option \opt{reflist}:
+To make \cmd{printbibliography} use the author-date format, load
+\biblatex with Windy City's preamble option \opt{reflist}:
 
 \begin{verbatim}
    \usepackage[reflist,style=windycity]{biblatex}
@@ -141,11 +141,10 @@ format, load \biblatex with the preamble option \opt{reflist}:
 \end{verbatim}
 
 To use the author-date format on a case-by-case basis, run
-\cmd{printbibliography} with an appropriate \opt{env} option. In order
-to use Windy City's author-date format, a so-called ``bib
-environment'' must set the style's internal \opt{reflist} toggle to
-\opt{true}. Windy City's own such environment is called \opt{reflist},
-which you may use as follows:
+\cmd{printbibliography} with an appropriate \opt{env} option. With
+Windy City, a so-called ``bib environment'' must set the style's
+internal \opt{reflist} toggle to \opt{true}. Windy City's own such
+environment is called \opt{reflist}, which you may use as follows:
 
 \begin{verbatim}
    \printbibliography[env=reflist]
@@ -163,11 +162,12 @@ All bibliographic data resides in \file{windycity.bib}.
 \subsection{Short Citations}
 \label{short}
 
-Aside from parenthetical citations, which \textit{CMS} covers in
-Chapter 15, alternative formats receive scant documentation.
-Nevertheless, \textit{CMS} does give options. Consider this example
-from \textit{CMS} \ref{14.34}:\footnote{Switching formats within a
-document isn't a feature of the style and isn't recommended.}
+Aside from the author-date format, \textit{CMS} offers scant
+documentation of alternative formats. Nevertheless, there are
+alternatives. Consider this example from \textit{CMS}
+\ref{14.34}:\footnote{Switching formats within a document isn't a
+feature of the style. For demonstration purposes, however, it's
+possible.}
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
@@ -261,7 +261,7 @@ default format, you can shorten the author's name in the first
 citation if the previous citation is of the same author. To do that,
 use the preamble option \opt{idemtracker} (see Section \ref{preops}).
 The entry option \opt{noauth} omits the author's name altogether (see
-Section \ref{entryops}). And the field \bibfield{shorthand} allows you
+Section \ref{entryops}). And the \bibfield{shorthand} field allows you
 to set an abbreviation to stand in place of the author's name, the
 work's title, and other elements of a citation (see \ref{14.59}).
 
@@ -281,7 +281,7 @@ require them.
 
 All options described below are \opt{false} by default. Set them to
 \opt{true} by passing the name of the option to \biblatex, with or
-without an additional \opt{=true}. In other words, using the option
+without an additional \opt{=true}. In other words, using
 \opt{annotate} as an example, the following are equivalent:
 
 \begin{verbatim}
@@ -295,25 +295,25 @@ set in \file{windycity.bbx}. In particular, the style sets
 \opt{idemtracker} to \opt{false}. If you set it to \opt{true} (or to
 some value that implies \opt{true}), Windy City will detect when the
 first citation of a work follows another citation of a work by the
-same author and print a short form of the author's name. Recall the
-previous section with examples citing Toni Morrison's \textit{Song of
-Solomon} after \textit{Beloved}. In contexts like those, do you really
-need to remind readers of the author's full name? If you think not,
-change \opt{idemtracker} to an appropriate value (see Section 3.1.2.3
-of the user guide for \biblatex).\footnote{\textit{CMS} seems to have
-no policy on this point. In the 16th edition, however, Figure 14.3
-shows consecutive citations of works by the same author. Both
-citations give the author's full name.} Using \opt{idemtracker} has no
-other effect on the style's output.
+same author and print a short form of the author's name. Recall from
+the previous section the citation of Toni Morrison's \textit{Song of
+Solomon} immediately after a citation of her \textit{Beloved}. In a
+context like that, do you really need to remind readers of the
+author's full name? If you think not, change \opt{idemtracker} to an
+appropriate value (see Section 3.1.2.3 of the user guide for
+\biblatex).\footnote{\textit{CMS} seems to have no policy on this
+point. In the 16th edition, however, Figure 14.3 shows consecutive
+citations of works by the same author. Both citations give the
+author's full name.}
 
 \begin{optionlist}
 
 \optitem[false]{annotate}{\opt{true}, \opt{false}}
 
 \noindent This option is for printing annotated bibliographies.
-Annotations will appear in block paragraphs below their associated
-entries. To change the spacing between entries and annotations, change
-the value of \cmd{bibitemsep}. Store the text of an annotation in the
+Annotations will print in block paragraphs below entries. To change
+the spacing between entries and annotations, change the value of
+\cmd{bibitemsep}. Store the text of an annotation in the
 \bibfield{annotation} field of the work's bibliography database entry.
 
 \optitem[false]{collsonly}{\opt{true}, \opt{false}}
@@ -329,15 +329,14 @@ collections. For discussion of multivolume works, see Section
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
-\noindent Use this option to print a short form of the first citation
-of each work. The resulting citation consists mainly of the author's
-name and the work's title. According to \textit{CMS}, this approach is
-optional for documents with complete
-bibliographies.\footnote{\textit{CMS} \ref{14.23}. See also
-14.29--14.36.} You may use this option in conjunction with \opt{ibid}.
-However, \opt{firstshort} adds nothing to \opt{short}. The latter
-implies \opt{firstshort} but goes beyond it by giving a short format
-to subsequent citations of a work.
+\noindent Use this option to shorten the first citation of each work.
+
+The resulting format consists mainly of the author's name and the
+work's title. According to \textit{CMS}, this approach is optional for
+documents with complete bibliographies. (See \textit{CMS} \ref{14.23},
+also 14.29--14.36.) You may use \opt{firstshort} in conjunction with
+\opt{ibid} However, it adds nothing to \opt{short}, which has the same
+effect on first citations.
 
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
@@ -347,9 +346,9 @@ same page'' means that \textit{ibid.} always refers to a work cited on
 the current page without an \textit{ibid.} The latter is not a
 requirement of \textit{CMS} but seems reasonable, since it prevents
 readers from having to look at another page to determine the referent
-of an \textit{ibid.} For an example of its output, see Section
-\ref{short} or \ref{14.34}. Recall that, as of the 17th edition,
-\textit{CMS} discourages the use of \textit{ibid.} (see \ref{14.34}).
+of an \textit{ibid.} For examples of its output, see Section
+\ref{short} and \ref{14.34}. As of the 17th edition, \textit{CMS}
+discourages the use of \textit{ibid.} (see \ref{14.34}).
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
@@ -375,10 +374,9 @@ format---what \textit{CMS} calls a reference list. If you choose
 parenthetical citations over notes, consider using \opt{reflist} to
 maintain consistency with \textit{CMS}.
 
-As mentioned in Section \ref{overview}, another way to print a
-reference list is to pass \opt{env=reflist} to
-\cmd{printbibliography}. See Section \ref{overview} for more
-information.
+Again, another way to print a reference list is to pass
+\opt{env=reflist} to \cmd{printbibliography}. See Section
+\ref{overview} for more information.
 
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
@@ -400,9 +398,9 @@ the title minus the subtitle or the \bibfield{shorttitle}, if
 applicable. In those situations, the short format is no different from
 the default.
 
-As noted earlier, \opt{short} implies \opt{firstshort}. But recall
-from Section \ref{short} that you can combine \opt{short} and
-\opt{ibid} for more concise notes.
+As noted earlier, \opt{short} has the same effect on first citations
+as \opt{firstshort}. But recall from Section \ref{short} that you can
+combine \opt{short} and \opt{ibid} for more concise output.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -699,11 +697,10 @@ entry type \bibtype{thesis} or \bibtype{phdthesis}; the output is the
 same. An exception applies to books in collections: Every book in a
 one-volume or multivolume collection needs the \bibtype{inbook} or
 \bibtype{bookinbook} entry type.\footnote{Using \bibtype{inbook} for
-books in collections departs somewhat from the specifications of
-\BibTeX\ and \biblatex, though it seems harmless enough.} You may use
-either \bibtype{inbook} or \bibtype{bookinbook}. If an entry belongs
-to a type other than the ones listed above, the style processes it as
-a book.
+books in collections may depart somewhat from common usage but seems
+harmless enough.} You may use either \bibtype{inbook} or
+\bibtype{bookinbook}. If an entry belongs to a type other than the
+ones listed above, the style processes it as a book.
 
 One comment about \bibtype{reference} and \bibtype{inreference}
 entries: You may cross-reference \bibtype{inreference} entries to
@@ -732,7 +729,7 @@ the article cross-ref\-er\-enc\-ed to a \bibtype{reference} entry for
 \end{verbatim}
 
 \noindent This approach makes sense if you plan to cite more than one
-article from the source.\footnote{Incidentally, reference work's don't
+article from the source.\footnote{Incidentally, reference works don't
 always have titles in italics. As a result, you need to handle it in
 your bibliography database.} But you could also have a single entry of
 either type with the same data, like this:
@@ -766,14 +763,14 @@ quotation marks.
    @Misc{roosevelt1959,
      author = {Roosevelt, Eleanor},
      title = {\mkbibquote{Is America Facing World Leadership?}},
-     usera = {convocation speech, Ball State Teacher's College,
-              May 6, \thefield{year}, radio broadcast, reel-to-reel
-              tape, MPEG copy, 1:12:49},
-     userb = {Convocation Speech. Ball State Teacher's College. May
-              6, \thefield{year}. Radio broadcast. Reel-to-reel
-              tape. MPEG copy. 1:12:49},
-     url = {http://libx.bsu.edu/cdm4/singleitem/collection/ElRoos/
-            id/1},
+     usera = {convocation speech, Ball State Teacher's College, May 6,
+              \thefield{year}, radio broadcast, reel-to-reel tape,
+              MPEG copy, 1:12:49},
+     userb = {Convocation Speech. Ball State Teacher's College. May 6,
+              \thefield{year}. Radio broadcast. Reel-to-reel tape.
+              MPEG copy. 1:12:49},
+     url = {http://libx.bsu.edu/cdm4/singleitem/collection/ElRoos/id
+            /1},
      year = {1959}
    }
 \end{verbatim}
@@ -903,8 +900,8 @@ scope of the \bibtype{incollection} entry:
      crossref = {cassirer1948}
    }
    @Collection{cassirer1948,
-     editor = {Cassirer, Ernst and Kristeller, Paul Oskar and
-               Randall, Jr., John Herman},
+     editor = {Cassirer, Ernst and Kristeller, Paul Oskar and Randall,
+               Jr., John Herman},
      title = {The Renaissance Philosophy of Man},
      address = {Chicago},
      publisher = ucp,
@@ -982,10 +979,7 @@ level up, as it were, is for \bibfield{editora}, followed by
 \bibfield{editortype} (for \bibfield{editor}),
 \bibfield{editoratype} (for \bibfield{editora}),
 \bibfield{editorbtype} (for \bibfield{editorb}), and
-\bibfield{editorctype} (for \bibfield{editorc}).\footnote{For an
-example of a bibliography database entry with \bibfield{editora}, see
-Section \ref{collorder} and \bibfield{carson2014} in
-\file{windycity.bib}.}
+\bibfield{editorctype} (for \bibfield{editorc}).
 
 As it happens, Windy City puts a lot of effort into sorting out where
 to print the names of editors and translators, so it's a bit more
@@ -1090,6 +1084,7 @@ the entry for the example above:
 \end{verbatim}
 
 \section{Collections}
+\label{collections}
 
 Before you cite a collection or one of its volumes, you need to
 consider how you want the citation to look (\textit{CMS} gives you
@@ -2239,9 +2234,9 @@ Gutenberg as a reprint.
 The note for Harper includes the month of publication. Windy City
 includes it in the bibliography as well, even though \textit{CMS}
 omits it. As for Lock's entry in the bibliography, \textit{CMS}
-clearly errs in printing the surname twice. Another issue: For
-Wilder's article, Windy City prints \textit{nos.} before \textit{1/2},
-not \textit{no.}, as \textit{CMS} has it.
+clearly errs in printing the surname twice. Also, for Wilder's
+article, Windy City prints \textit{nos.} before \textit{1/2}, not
+\textit{no.}, as \textit{CMS} has it.
 
 \begin{citebib}
 \item \cite[155]{lock2015}
@@ -2662,18 +2657,17 @@ after the year, not before.
 \subsubsection{Several references to the same source}
 % 15.27 Several references to the same source
 
-\begin{citeref}% 'wood\-grained' prevents wood--[break]grained
+\begin{citeref}% 'even\-tanned' prevents even--[break]tanned
 \item Complexion figures prominently in Morgan's descriptions. When
 Jasper compliments his mother's choice of car (a twelve-cylinder
-Mediterranean roadster with leather and wood\-grained interior), ``his
+Mediterranean roadster with leather and wood-grained interior), ``his
 cheeks blotch indignantly, painted by jealousy and rage''
 \parencite[47]{chaston2000}. On the other hand, his mother's mask
-never changes, her ``even-tanned good looks''
+never changes, her ``even\-tanned good looks''
 \parencite[56]{chaston2000}, ``burnished visage''
 \parencite[101]{chaston2000}, and ``air-brushed confidence''
 \parencite[211]{chaston2000} providing the foil to the drama in her
-midst.
-\end{citeref}
+midst. \end{citeref}
 
 \setcounter{subsubsection}{28}
 \subsubsection{Text citations of works with more than three authors}
