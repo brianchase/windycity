@@ -4,7 +4,7 @@ See [Windy City](https://github.com/brianchase/windycity) for the
 latest changes. The version numbers below are fairly arbitrary
 milestones.
 
-## 2019.01.30
+## 2019.01.31
 
 * added limited support for citing web pages and social media content
 * added 'listvols' entry option (see documentation)
@@ -15,6 +15,9 @@ milestones.
 * fixed 'nameaddon' not printing after a 3-em dash in bibliographies
   (presumably, screen names should also print in this context; they do
   now)
+* fixed a show-stopping bug in reference lists caused by the
+  previous fix to 'nameaddon'
+* fixed reprints, cross-referencing in reference lists
 * other bug fixes
 
 ## 2019.01.18

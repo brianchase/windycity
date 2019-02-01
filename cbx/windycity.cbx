@@ -1,4 +1,4 @@
-% Last modified: Wed 30 Jan 2019 09:02:24 AM CST
+% Last modified: Thu 31 Jan 2019 08:30:49 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -19,7 +19,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019.01.30 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019.01.31 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -161,10 +161,10 @@
   \iffieldundef{labelyear}
     {}
     {\usebibmacro{parencite:origyear}%
-     \ifboolexpr{ test {\iffieldnum{year}}
-                  or test {\iffieldnums{year}}}
-       {}
+     \ifboolexpr{ test {\iffieldundef{year}}
+                  or test {\iffieldequalstr{year}{forthcoming}}}
        {\addcomma}%
+       {}% needs '%'
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}}}
 
