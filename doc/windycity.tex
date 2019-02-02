@@ -1,4 +1,4 @@
-% Last modified: Fri 01 Feb 2019 01:38:54 PM CST
+% Last modified: Sat 02 Feb 2019 11:47:15 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -24,7 +24,7 @@ See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}.}
 
 Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
-to the \textit{The Chicago Manual of Style}
+to the 17th edition of \textit{The Chicago Manual of Style}
 (\textit{CMS}).\footnote{\cite{chicago2017}} It accurately handles a
 wide range of citations in different formats and includes a set of
 options and commands to support special circumstances. It also has
@@ -37,12 +37,10 @@ The following sections assume familiarity with \textit{CMS} and
 style's features. Section \ref{edtrans} discusses the assignment and
 placement of editors, translators, and compilers. Section
 \ref{collections} discusses several issues with collections, including
-multivolume works. Sections \ref{notes} and \ref{paren} reproduce
-examples from various parts of \textit{CMS} with a focus on notes and
-bibliographies. It will help to compare the results throughout these
-sections with the corresponding passages in this document's
-bibliography database and \LaTeX\ file, \file{windycity.bib} and
-\file{windycity.tex}, respectively.
+options for formatting citations of individual volumes. Sections
+\ref{notes} and \ref{paren} reproduce examples from \textit{CMS}
+Chapters 14 and 15, respectively, with occasional commentary and
+references to earlier sections.
 
 Windy City requires \biblatex version 3.8 or later.
 
@@ -166,7 +164,7 @@ Aside from the author-date format, \textit{CMS} offers scant
 documentation of alternative formats. Nevertheless, there are
 alternatives. Consider this example from \textit{CMS}
 \ref{14.34}:\footnote{Switching formats within a document isn't a
-feature of the style. For demonstration purposes, however, it's
+feature of the style. For demonstration purposes, though, it's
 possible.}
 
 \begin{citeonly}
@@ -196,7 +194,7 @@ possible.}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-Compare that with the style's default output:
+\noindent Compare that with the style's default output:
 
 \begin{citeonly}
 \item \cite[3]{morrison2004a}
@@ -224,8 +222,8 @@ option \opt{short}. See Section \ref{preops} for more information.
 with \textit{ibid.} Unlike previous editions of \textit{CMS}, the 17th
 edition discourages its use. As such, \textit{ibid.} is no longer part
 of Windy City's default format. Enable it with the preamble option
-\opt{ibid} (again, see Section \ref{preops}). The combination of
-options \opt{short} and \opt{ibid} yield the following:
+\opt{ibid} (again, see Section \ref{preops}). Options \opt{short} and
+\opt{ibid} together give the following:
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
