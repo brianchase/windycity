@@ -5,12 +5,12 @@
 Windy City is a style for [biblatex](http://www.ctan.org/pkg/biblatex)
 that formats notes, bibliographies, parenthetical citations, and
 reference lists according to the 17th edition of [The Chicago Manual
-of Style](http://www.chicagomanualofstyle.org/home.html). It
-accurately handles a wide range of citations and includes a set of
-options and commands to support special circumstances. It also has
-extensive support for citing and arranging different kinds of editors,
-translators, and compilers within a single citation. These features
-make Windy City especially suitable for academic work.
+of Style](http://www.chicagomanualofstyle.org/). It accurately handles
+a wide range of citations and includes a set of options and commands
+to support special circumstances. It also has extensive support for
+citing and arranging different kinds of editors, translators, and
+compilers within a single citation. These features make Windy City
+especially suitable for academic work.
 
 For more information, please see Windy City's
 [documentation](https://s3.amazonaws.com/brianchase/windycity.pdf
