@@ -1,4 +1,4 @@
-% Last modified: Sat 02 Feb 2019 11:47:15 AM CST
+% Last modified: Mon 04 Feb 2019 01:30:41 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -40,7 +40,7 @@ placement of editors, translators, and compilers. Section
 options for formatting citations of individual volumes. Sections
 \ref{notes} and \ref{paren} reproduce examples from \textit{CMS}
 Chapters 14 and 15, respectively, with occasional commentary and
-references to earlier sections.
+references to other sections.
 
 Windy City requires \biblatex version 3.8 or later.
 
@@ -2228,13 +2228,17 @@ Gutenberg as a reprint.
 \setcounter{subsubsection}{170}
 \subsubsection{Journal volume, issue, and date}
 % 14.171 Journal volume, issue, and date
+\label{14.171}
 
 The note for Harper includes the month of publication. Windy City
 includes it in the bibliography as well, even though \textit{CMS}
 omits it. As for Lock's entry in the bibliography, \textit{CMS}
 clearly errs in printing the surname twice. Also, for Wilder's
 article, Windy City prints \textit{nos.} before \textit{1/2}, not
-\textit{no.}, as \textit{CMS} has it.
+\textit{no.}, as \textit{CMS} has it. To print the correct season,
+Wilder's entry in the bibliography database includes \textit{Fall} in
+the \bibfield{issue} field. Using the \bibfield{date} field with
+\textit{2013-23} would give \textit{Autumn 2013}.
 
 \begin{citebib}
 \item \cite[155]{lock2015}
@@ -2375,6 +2379,7 @@ article, Windy City prints \textit{nos.} before \textit{1/2}, not
 
 \begin{citebib}
 \item \cite{jaffe2015}
+\item \cite{editorial2015}
 \end{citebib}
 
 \setcounter{subsubsection}{196}
@@ -2404,8 +2409,14 @@ article, Windy City prints \textit{nos.} before \textit{1/2}, not
 \subsubsection{Book reviews}
 % 14.202 Book reviews
 
+At present, Windy City has no place to print information about a
+section or edition of a newspaper or magazine. Thus, ``Sunday Book
+Review'' is missing from the second example. It does, however, show
+success at formatting a review with a title.
+
 \begin{citebib}
 \item \cite[B13--B14]{ratliff1999}
+\item \cite{kamp2006}
 \item \cite{brehm2015}
 \end{citebib}
 
@@ -2413,20 +2424,10 @@ article, Windy City prints \textit{nos.} before \textit{1/2}, not
 \subsubsection{Unsigned reviews}
 % 14.204 Unsigned reviews
 
-This example fails to match \textit{CMS}. The date should appear
-immediately after the newspaper's title and not in parentheses.
-Presumably, \textit{CMS} puts the date first because the date is a
-more important part of a magazine's or newspaper's citation.
-Nevertheless, the format below is consistent with many other types of
-articles.
-
-For reference lists, unsigned reviews have no plausible place for the
-publication year except where the default format would put it. The
-easiest solution is to give unsigned reviews the same format in
-reference lists as in bibliographies.
-
-Finally, an unsigned review won't sort correctly in a bibliography or
-reference list without adding, say, a \bibfield{sortname} field.
+The date below should appear immediately after the newspaper's title
+and not in parentheses. Nevertheless, it's consistent with other types
+of articles. In particular, see the citation of Beattie in
+\ref{14.171}.
 
 \begin{citebib}
 \item \cite{zeitung1828}
