@@ -1,8 +1,20 @@
 # Release Notes
 
-See [Windy City](https://github.com/brianchase/windycity) for the
-latest changes. The version numbers below are fairly arbitrary
-milestones.
+Versions of Windy City are indicated by release date. The most recent
+date below is the current version, which is available on
+[CTAN](https://www.ctan.org/pkg/windycity "CTAN"). Changes since then,
+if any, are listed below under "Latest" and indicate updates to [Windy
+City's repository](https://github.com/brianchase/windycity "GitHub:
+brianchase/windycity") on [GitHub](https://github.com "GitHub").
+
+## Latest
+
+* fixed reviews with titles
+* much improved format of unsigned reviews in bibliographies and
+  reference lists (in part, restoring previous work set aside)
+* [updated
+  documentation](https://s3.amazonaws.com/brianchase/windycity.pdf
+  "windycity-dev.pdf") (PDF)
 
 ## 2019.01.31
 
