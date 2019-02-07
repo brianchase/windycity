@@ -12,6 +12,8 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * fixed reviews with titles
 * much improved format of unsigned reviews in bibliographies and
   reference lists (in part, restoring previous work set aside)
+* added support for \iffieldbibstring in processing 'edition' and
+  'type' fields
 * [updated
   documentation](https://s3.amazonaws.com/brianchase/windycity.pdf
   "windycity-dev.pdf") (PDF)

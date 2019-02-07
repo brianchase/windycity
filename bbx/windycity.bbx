@@ -1,4 +1,4 @@
-% Last modified: Thu 07 Feb 2019 09:40:25 AM CST
+% Last modified: Thu 07 Feb 2019 09:34:31 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -540,8 +540,8 @@
 \DeclareFieldFormat{issue}{\MakeCapital{#1}}% always capitalize
 \DeclareFieldFormat{journum}{%
   \ifnumeral{#1}
-   {no\adddotspace\printfield{number}}%
-   {nos\adddotspace\printfield{number}}}
+    {no\adddotspace\printfield{number}}%
+    {nos\adddotspace\printfield{number}}}
 \DeclareFieldFormat{labelyear}{%
   \ifboolexpr{ test {\iffieldundef{year}}
                and test {\iffieldundef{bookyear}}}
@@ -1642,7 +1642,7 @@
     {\usebibmacro{b:edtrans}}}
 
 \newbibmacro*{inst+loc+date}{%
-  \printfield{type}%
+  \usebibmacro{type}%
   \setunit{\addcomma\space}%
   \iflistundef{institution}
     {\printfield{venue}}%
@@ -1783,7 +1783,9 @@
   \iffieldundef{edition}
     {}
     {\newunit
-     \printfield{edition}}}
+     \iffieldbibstring{edition}
+       {\bibstring{\thefield{edition}}}
+       {\printfield{edition}}}}
 
 \newbibmacro*{date+loc+etc}{%
   \ifboolexpr{ test {\iflistundef{location}}
@@ -1904,6 +1906,13 @@
      \renewcommand*{\pluga}{\bibstring{by}\space}%
      \renewcommand*{\cbx@namelist}{bookauthor}%
      \usebibmacro{printnames+etc}}}
+
+\newbibmacro*{type}{%
+  \iffieldundef{type}
+    {}
+    {\iffieldbibstring{type}
+       {\bibstring{\thefield{type}}}
+       {\printfield{type}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%
