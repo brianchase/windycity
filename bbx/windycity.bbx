@@ -1,4 +1,4 @@
-% Last modified: Thu 07 Feb 2019 09:34:31 AM CST
+% Last modified: Thu 07 Feb 2019 12:31:29 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -78,6 +78,16 @@
   \ifstrequal{#1}{true}
     {\toggletrue{isbn}}%
     {\togglefalse{isbn}}}
+
+\providetoggle{library}
+\DeclareBibliographyOption{library}[true]{%
+  \ifstrequal{#1}{true}
+    {\global\toggletrue{library}}%
+    {\global\togglefalse{library}}}
+\DeclareEntryOption{library}[true]{%
+  \ifstrequal{#1}{true}
+    {\toggletrue{library}}%
+    {\togglefalse{library}}}
 
 \providetoggle{listvols}
 \DeclareEntryOption{listvols}[true]{%
@@ -1522,6 +1532,7 @@
 \newbibmacro*{doi+finentry+etc}{%
   \usebibmacro{doi+url+etc}%
   \usebibmacro{isbn}%
+  \usebibmacro{library}%
   \usebibmacro{pageref+finentry}}%
 
 \newbibmacro*{author+collection+etc}{%
@@ -1758,6 +1769,16 @@
        {\iftoggle{isbn}
           {\newunit
            \printfield{isbn}}%
+          {}}
+       {}}}
+
+\newbibmacro*{library}{%
+  \iffieldundef{library}
+    {}
+    {\iftoggle{bibliography}
+       {\iftoggle{library}
+          {\newunit
+           \printfield{library}}%
           {}}
        {}}}
 

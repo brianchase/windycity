@@ -12,6 +12,8 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * fixed reviews with titles
 * much improved format of unsigned reviews in bibliographies and
   reference lists (in part, restoring previous work set aside)
+* added 'library' entry and preamble options to support the 'library'
+  field (see documentation)
 * added support for \iffieldbibstring in processing 'edition' and
   'type' fields
 * [updated
@@ -45,7 +47,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * added support for swapping the place of an author with an editor or
   translator, as in CMS 14.104
 * extended the previous to cover a similar case in CMS 14.122
-* improved hanlding of name lists and cross-referencing
+* improved handling of name lists and cross-referencing
 * removed no longer maintained citation commands
 * other bug fixes and housekeeping
 
@@ -113,7 +115,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * fixed 'type' field format
 * fixed double printing of year for theses and dissertations in
   the author-date system
-* fixed punctation after 'Special issue' in bibliographies
+* fixed punctuation after 'Special issue' in bibliographies
 * fixed obscure punctuation issue with *notewrapper commands
 * added support for shorthandintro and improved handling of shorthands
 * updated field format for DOIs
@@ -130,18 +132,17 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
 * finally got a handle on the author-date format for periodicals,
   rolling back some recent changes (ugh!)
-* put back bibliography options 'useeditor' and 'usetranslator', which
+* put back preamble options 'useeditor' and 'usetranslator', which
   are necessary after all (double ugh!)
 * more readable and arguably simpler date processing for periodicals
-* added bibliography (or preamble) option 'ibid' to prepare for the
-  17th edition of CMS
+* added preamble option 'ibid' to prepare for the 17th edition of CMS
 * updated windycity.tex to reflect the last point, also to make use of
   optionlist
 * remove unused entries from windycity.bib for the 15th edition of CMS
 
 ## 2018.11.13
 
-* fixed spacing of date for periodicals (resuling from recent support
+* fixed spacing of date for periodicals (resulting from recent support
   for endday field)
 * fixed spacing between volumes and pages in author-date system for
   periodicals
@@ -152,30 +153,30 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
 * for articles etc., limited support for 'season' field
 * limited support for 'endyear' and 'endorigyear' fields
-* removed unused bibliography options and commented code
-* fix inreference bibliography alias
+* removed unused preamble options and commented code
+* fix 'inreference' bibliography alias
 
 ## 2018.11.02
 
 * fixed author-date system printing the year of many articles twice
 * fixed author-date system printing the year between an author's name
   and the field 'nameaddon'
-* fixed bibliography driver for shorhands that caused it to print just
-  titles, rather than full entries
+* fixed bibliography driver for shorthands that caused it to print
+  just titles, rather than full entries
 * added support for 'endday' field
 * 'addendum' field prints only in bibliographies and reference
   lists, not in notes
-* set parentracker bibliography option
-* set minxrefs bibliography option
-* collsonly bibliography option sets 'minxrefs=1'
-* changed pagetracker bibliography option from 'true' to 'page'
+* set 'parentracker' bibliography option
+* set minxrefs preamble option
+* 'collsonly' preamble option sets 'minxrefs=1'
+* changed 'pagetracker' bibliography option from 'true' to 'page'
 * edits and fixes to windycity.sty and windycity.tex
 
 ## 2018.10.20
 
 * fixed broken date formatting in author-date citations
 * changed \DeclareSortingScheme to \DeclareSortingTemplate
-* changed bibliography option labeldate to labeldateparts
+* changed preamble option 'labeldate' to 'labeldateparts'
 * changed special field 'extrayear' to 'extradate'
 * bumped minimum compatible release to biblatex 3.8
 * other minor changes for the version bump
