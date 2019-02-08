@@ -1,4 +1,4 @@
-% Last modified: Thu 07 Feb 2019 12:31:29 PM CST
+% Last modified: Fri 08 Feb 2019 10:12:57 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -369,9 +369,6 @@
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
-  \global\togglefalse{collection}%
-  \global\togglefalse{collection:book}%
-  \global\togglefalse{collection:inbook}%
   \global\togglefalse{cbx@short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
@@ -1575,15 +1572,15 @@
        {\ifboolexpr{ ( test {\ifentrytype{book}}
                      or test {\ifentrytype{collection}} )
                      and not test {\iffieldundef{maintitle}}}
-          {\global\toggletrue{collection}%
-           \global\toggletrue{collection:book}}%
+          {\toggletrue{collection}%
+           \toggletrue{collection:book}}%
           {\ifboolexpr{ ( test {\ifentrytype{bookinbook}}
                         or test {\ifentrytype{inbook}} )
                         and test {\iffieldundef{maintitle}}
                         and not test {\iffieldundef{title}}
                         and not test {\iffieldundef{booktitle}}}
-             {\global\toggletrue{collection}%
-              \global\toggletrue{collection:inbook}}%
+             {\toggletrue{collection}%
+              \toggletrue{collection:inbook}}%
              {}}}}
     {}}
 
