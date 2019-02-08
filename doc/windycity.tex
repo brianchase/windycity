@@ -1,4 +1,4 @@
-% Last modified: Mon 04 Feb 2019 01:30:41 PM CST
+% Last modified: Fri 08 Feb 2019 09:08:34 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -351,11 +351,19 @@ discourages the use of \textit{ibid.} (see \ref{14.34}).
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print ISBNs in bibliographies. A work's
-ISBN belongs in the \bibfield{isbn} field of its database entry. With
-this option, the style will print ISBNs at the end of every entry in
-the bibliography, though before annotations. To print the ISBN of a
-particular work, see the \bibfield{isbn} entry option in Section
-\ref{entryops}.
+ISBN goes in the \bibfield{isbn} field of its bibliography database
+entry. With this option, the style will print ISBNs at the end of
+every entry in the bibliography, before annotations. To print the ISBN
+of a particular work, use the \opt{isbn} entry option.
+
+\optitem[false]{library}{\opt{true}, \opt{false}}
+
+\noindent Like \opt{isbn}, this option prints the \bibfield{library}
+field of every work in the bibliography. Use it to print information
+about libraries, call numbers, and the like. If you use it with the
+\opt{isbn} and \opt{annotation} options, it will print after the
+former but before the latter. To print this information for selected
+works, use the \opt{library} entry option.
 
 \optitem[false]{nolos}{\opt{true}, \opt{false}}
 
@@ -442,9 +450,17 @@ author's name, as in this example from \textit{CMS} \ref{14.79}:
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print the ISBN of a particular work in a
-bibliography. The ISBN will appear at the end of the work's entry but
-before an annotation. To print ISBNs of every work, see the
-\bibfield{isbn} preamble option in Section \ref{preops}.
+bibliography. The ISBN will appear at the end of the work's entry but,
+if applicable, before an annotation. To print ISBNs of every work in
+the bibliography, see the \bibfield{isbn} preamble option.
+
+\optitem[false]{library}{\opt{true}, \opt{false}}
+
+\noindent This option prints the \bibfield{library} field of a work's
+bibliography database entry. This information prints at the end of the
+work's entry, though, like an ISBN, before an annotation. To print the
+\bibfield{library} field of every work in the bibliography, use the
+\opt{library} preamble option.
 
 \optitem[false]{listvols}{\opt{true}, \opt{false}}
 
