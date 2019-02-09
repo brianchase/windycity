@@ -1,4 +1,4 @@
-% Last modified: Fri 08 Feb 2019 10:12:57 AM CST
+% Last modified: Fri 08 Feb 2019 09:00:59 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -599,7 +599,6 @@
 \DeclareBibliographyAlias{conference}{incollection}
 \DeclareBibliographyAlias{inbook}{incollection}
 \DeclareBibliographyAlias{inproceedings}{incollection}
-\DeclareBibliographyAlias{inreference}{reference}
 \DeclareBibliographyAlias{letter}{incollection}
 \DeclareBibliographyAlias{suppbook}{incollection}
 \DeclareBibliographyAlias{suppcollection}{incollection}
@@ -607,7 +606,6 @@
 \DeclareBibliographyAlias{cite:conference}{cite:incollection}
 \DeclareBibliographyAlias{cite:inbook}{cite:incollection}
 \DeclareBibliographyAlias{cite:inproceedings}{cite:incollection}
-\DeclareBibliographyAlias{cite:inreference}{cite:reference}
 \DeclareBibliographyAlias{cite:letter}{cite:incollection}
 \DeclareBibliographyAlias{cite:suppbook}{cite:incollection}
 \DeclareBibliographyAlias{cite:suppcollection}{cite:incollection}
@@ -618,6 +616,9 @@
 \DeclareBibliographyAlias{cite:mastersthesis}{cite:thesis}
 \DeclareBibliographyAlias{cite:phdthesis}{cite:thesis}
 \DeclareBibliographyAlias{cite:unpublished}{cite:thesis}
+
+\DeclareBibliographyAlias{inreference}{reference}
+\DeclareBibliographyAlias{cite:inreference}{cite:reference}
 
 \DeclareBibliographyAlias{*}{book}
 \DeclareBibliographyAlias{cite:*}{cite:book}
@@ -958,7 +959,7 @@
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
                or test {\iffieldequalstr{editorctype}{#1}}}
-    {\setunit{\addcomma\space}%
+    {\midsentence\setunit{\addcomma\space}%
      \renewcommand*{\cbx@bibstring}{editor}%
      \usebibmacro{editorlists}{#1}%
      \usebibmacro{pluga+printnames}}%
@@ -1102,7 +1103,7 @@
   \iftoggle{bibliography}
     {\usebibmacro{longtitle+titleaddon}%
      \usebibmacro{b:labeldate+extradate}}%
-    {\ifboolexpr{ test {\ifciteseen}
+    {\ifboolexpr{ test \ifciteseen
                   or togl {firstshort}}
        {\usebibmacro{shorttitle}}%
        {\usebibmacro{longtitle+titleaddon}}}}

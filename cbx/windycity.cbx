@@ -1,4 +1,4 @@
-% Last modified: Mon 04 Feb 2019 10:12:51 AM CST
+% Last modified: Fri 08 Feb 2019 08:58:26 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -457,13 +457,9 @@
   \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
-  \usebibmacro{author+title+etc}%
-  \usebibmacro{incollections}%
-  \newunit
-  \usebibmacro{volume+page}}%
-
-\DeclareBibliographyDriver{cite:letter}{%
-  \toggletrue{noauth}%
+  \ifentrytype{letter}
+    {\toggletrue{noauth}}%
+    {}% needs '%'
   \usebibmacro{author+title+etc}%
   \usebibmacro{incollections}%
   \newunit
