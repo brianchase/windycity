@@ -1,4 +1,4 @@
-% Last modified: Sat 09 Feb 2019 07:51:28 PM CST
+% Last modified: Sun 10 Feb 2019 02:17:19 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1800,7 +1800,7 @@
   \usebibmacro{book:number}%
   \usebibmacro{part}}%
 
-\newbibmacro*{byauthor}[1]{%
+\renewbibmacro*{byauthor}[1]{%
   \ifboolexpr{ test {\ifnameundef{author}}
                or togl {noauth}}
     {}
