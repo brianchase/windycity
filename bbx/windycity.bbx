@@ -1,4 +1,4 @@
-% Last modified: Mon 11 Feb 2019 02:15:31 PM CST
+% Last modified: Mon 11 Feb 2019 03:11:39 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -44,10 +44,8 @@
     {}}
 
 \providetoggle{annotate}
-\DeclareBibliographyOption{annotate}[true]{%
-  \ifstrequal{#1}{true}
-    {\global\toggletrue{annotate}}%
-    {\global\togglefalse{annotate}}}
+\DeclareBibliographyOption[boolean]{annotate}[true]{%
+  \global\settoggle{annotate}{#1}}%
 
 \DeclareBibliographyOption{collsonly}[true]{%
   \ifstrequal{#1}{true}
@@ -57,10 +55,8 @@
     {}}
 
 \providetoggle{firstshort}
-\DeclareBibliographyOption{firstshort}[true]{%
-  \ifstrequal{#1}{true}
-    {\global\toggletrue{firstshort}}%
-    {\global\togglefalse{firstshort}}}
+\DeclareBibliographyOption[boolean]{firstshort}[true]{%
+  \global\settoggle{firstshort}{#1}}%
 
 \providetoggle{ibid}
 \DeclareBibliographyOption{ibid}[true]{%
@@ -70,36 +66,24 @@
     {\global\togglefalse{ibid}}}
 
 \providetoggle{isbn}
-\DeclareBibliographyOption{isbn}[true]{%
-  \ifstrequal{#1}{true}
-    {\global\toggletrue{isbn}}%
-    {\global\togglefalse{isbn}}}
-\DeclareEntryOption{isbn}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{isbn}}%
-    {\togglefalse{isbn}}}
+\DeclareBibliographyOption[boolean]{isbn}[true]{%
+  \global\settoggle{isbn}{#1}}%
+\DeclareEntryOption[boolean]{isbn}[true]{%
+  \settoggle{isbn}{#1}}%
 
 \providetoggle{library}
-\DeclareBibliographyOption{library}[true]{%
-  \ifstrequal{#1}{true}
-    {\global\toggletrue{library}}%
-    {\global\togglefalse{library}}}
-\DeclareEntryOption{library}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{library}}%
-    {\togglefalse{library}}}
+\DeclareBibliographyOption[boolean]{library}[true]{%
+  \global\settoggle{library}{#1}}%
+\DeclareEntryOption[boolean]{library}[true]{%
+  \settoggle{library}{#1}}%
 
 \providetoggle{listvols}
-\DeclareEntryOption{listvols}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{listvols}}%
-    {\togglefalse{listvols}}}
+\DeclareEntryOption[boolean]{listvols}[true]{%
+  \settoggle{listvols}{#1}}%
 
 \providetoggle{noauth}
-\DeclareEntryOption{noauth}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{noauth}}%
-    {\togglefalse{noauth}}}
+\DeclareEntryOption[boolean]{noauth}[true]{%
+  \settoggle{noauth}{#1}}%
 
 \DeclareBibliographyOption{nolos}[true]{%
   \ifstrequal{#1}{true}
@@ -132,32 +116,22 @@
     {\global\togglefalse{short}}}
 
 \providetoggle{skipdate}
-\DeclareEntryOption{skipdate}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{skipdate}}%
-    {\togglefalse{skipdate}}}
+\DeclareEntryOption[boolean]{skipdate}[true]{%
+  \settoggle{skipdate}{#1}}%
 
 \providetoggle{swapauth}
-\DeclareEntryOption{swapauth}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{swapauth}}%
-    {\togglefalse{swapauth}}}
+\DeclareEntryOption[boolean]{swapauth}[true]{%
+  \settoggle{swapauth}{#1}}%
 
 \providetoggle{swaptrans}
-\DeclareEntryOption{swaptrans}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{swaptrans}}%
-    {\togglefalse{swaptrans}}}
+\DeclareEntryOption[boolean]{swaptrans}[true]{%
+  \settoggle{swaptrans}{#1}}%
 
 \providetoggle{swapvol}
-\DeclareBibliographyOption{swapvol}[true]{%
-  \ifstrequal{#1}{true}
-    {\global\toggletrue{swapvol}}%
-    {\global\togglefalse{swapvol}}}
-\DeclareEntryOption{swapvol}[true]{%
-  \ifstrequal{#1}{true}
-    {\toggletrue{swapvol}}%
-    {\togglefalse{swapvol}}}
+\DeclareBibliographyOption[boolean]{swapvol}[true]{%
+  \global\settoggle{swapvol}{#1}}%
+\DeclareEntryOption[boolean]{swapvol}[true]{%
+  \settoggle{swapvol}{#1}}%
 
 % For setting 'minbibnames' and such, see CMS, 17th ed., 14.76 and
 % 15.29.
