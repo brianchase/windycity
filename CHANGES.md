@@ -12,6 +12,8 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * fixed reviews with titles
 * much improved format of unsigned reviews in bibliographies and
   reference lists (in part, restoring previous work set aside)
+* extended 'swapvol' option to support letter and incollection entries
+  (see documentation)
 * added 'library' entry and preamble options to support the 'library'
   field (see documentation)
 * added support for \iffieldbibstring in processing 'edition' and
@@ -19,6 +21,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * [updated
   documentation](https://s3.amazonaws.com/brianchase/windycity.pdf
   "windycity-dev.pdf") (PDF)
+* other bug fixes
 
 ## 2019.01.31
 

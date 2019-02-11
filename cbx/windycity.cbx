@@ -1,4 +1,4 @@
-% Last modified: Mon 11 Feb 2019 03:21:13 PM CST
+% Last modified: Mon 11 Feb 2019 03:23:49 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -14,7 +14,6 @@
 % purpose.
 
 \ProvidesFile{windycity.cbx}[Windy City style for biblatex]
-
 \@ifpackagelater{biblatex}{2017/11/04}
    {}
    {\PackageError{biblatex}
@@ -130,7 +129,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{parencite}{%
-  \usebibmacro{test:collection}%
+  \usebibmacro{test:collection:a}%
   \usebibmacro{test:crossref}%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
@@ -209,7 +208,7 @@
 \newbibmacro*{cite}{%
   \usebibmacro{test:multicite}%
   \ifciteseen
-    {\usebibmacro{test:collection}%
+    {\usebibmacro{test:collection:a}%
      \renewcommand*{\cbx@deflabel}{labelname}%
      \printtext[bibhyperref]{\usebibmacro{cite:seen}}}
     {\printtext[bibhyperref]{\usebibmacro{cite:new}}}% needs '%'
@@ -451,18 +450,18 @@
   \usebibmacro{colon+comma+etc}}%
 
 \DeclareBibliographyDriver{cite:book}{%
-  \usebibmacro{test:collection}%
+  \usebibmacro{test:collection:a}%
   \usebibmacro{author+collection+etc}%
   \newunit
   \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
-  \usebibmacro{test:collection}%
+  \usebibmacro{test:collection:a}%
   \ifentrytype{letter}
     {\toggletrue{noauth}}%
     {}% needs '%'
   \usebibmacro{author+title+etc}%
-  \usebibmacro{incollections}%
+  \usebibmacro{incollections:a}%
   \newunit
   \usebibmacro{volume+page}}%
 
