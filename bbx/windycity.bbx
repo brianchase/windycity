@@ -1,4 +1,4 @@
-% Last modified: Sun 10 Feb 2019 02:17:19 PM CST
+% Last modified: Mon 11 Feb 2019 02:07:53 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1960,9 +1960,10 @@
 \newbibmacro*{volumes}{%
   \iffieldundef{volumes}
     {}
-    {\ifboolexpr{ not togl {bibliography}
-                  and not test {\iffieldundef{postnote}}
-                  and not togl {listvols}}
+    {\ifboolexpr{ togl {collection}
+                  or ( not togl {bibliography}
+                  and not togl {listvols}
+                  and not test {\iffieldundef{postnote}} )}
        {}
        {\newunit
         \printfield{volumes}%
