@@ -1,4 +1,4 @@
-% Last modified: Sat 09 Feb 2019 06:02:24 PM CST
+% Last modified: Mon 11 Feb 2019 05:29:48 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -467,12 +467,13 @@ work's entry, though, like an ISBN, before an annotation. To print the
 \noindent \textit{CMS} offers some flexibility over whether a long
 citation gives a work's total number of volumes (see \textit{CMS}
 \ref{14.118}). Windy City replicates this in a roundabout way: By
-default, it prints the \bibfield{volumes} field in long citations only
-if the \bibfield{postnote} field is empty. This does better job of
-matching examples in \textit{CMS} than a simpler policy would. For the
-rest, use \opt{listvols}. It prints the \bibfield{volumes} field in
-long citations no matter what the \bibfield{postnote} contains. For
-more information, see Section \ref{collorder}.
+default, it prints the \bibfield{volumes} field in certain long
+citations only if the \bibfield{postnote} field is empty. This does a
+better job of matching examples in \textit{CMS} than a simpler policy
+would. For the rest, use \opt{listvols}. It prints the
+\bibfield{volumes} field in those citations no matter what the
+\bibfield{postnote} contains. For more information, see Section
+\ref{collorder}.
 
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
 
@@ -1211,9 +1212,29 @@ an author but the collection as a whole doesn't---and possibly others.
 You can fix them by adding a \bibfield{sortname} field to their
 bibliography database entries.
 
+This drawback shouldn't affect \bibfield{incollection} or
+\bibfield{letter} entries when they're cross-referenced to works that
+are changed by \opt{swapvol}. They should have their own authors or
+titles that Windy City can use to sort them correctly. Regardless,
+\opt{swapvol} affects them, too. In \textit{CMS}, \ref{14.120} gives
+an example of one:
+
+\begin{citebib}
+\item \cite[169--71]{king2014}
+\end{citebib}
+
+\noindent Here's the output with the preamble or entry option
+\opt{swapvol}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite[169--71]{king2014}
+\AtNextBibliography{\toggletrue{swapvol}}
+\end{citebib}
+
 How does Windy City determine which entries in a bibliography database
-are affected by \opt{swapvol}? Below are the entries for an earlier
-example:
+work with \opt{swapvol}? Below is the entry (or entries) for an
+earlier example:
 
 \begin{verbatim}
    @InBook{armstrong2014,
@@ -1228,18 +1249,26 @@ example:
    @Collection{carson1992,
      editor = {Carson, Clayborne},
      title = {The Papers of Martin Luther King, Jr.},
+     volumes = {14},
      address = {Berkeley},
      publisher = {University of California Press},
      year = {1992–}
    }
 \end{verbatim}
 
-A \bibtype{bookinbook} or \bibtype{inbook} entry, which should always
-be cross-referenced to a \bibtype{collection} entry, is subject to
-\opt{swapvol} if it has a \bibfield{volume} field and lacks certain
+A \bibtype{bookinbook} or \bibtype{inbook} entry works with
+\opt{swapvol} if is has a \bibfield{volume} field and lacks certain
 fields that a volume of a collection of this sort shouldn't have. You
-can find the exact details in \file{windycity.bbx}. With one
-exception, you can get the same output with a \bibtype{book} or
+can find the exact details in \file{windycity.bbx}. Just remember that
+entries of these types should always be cross-referenced to a
+\bibtype{collection} entry. Since Windy City treats them the same, it
+makes no difference whether you designate an entry as
+\bibtype{bookinbook} or \bibtype{inbook}.
+
+With one exception, you can get the same output with a \bibtype{book},
+\bibtype{collection}, \bibtype{mvbook}, or \bibtype{mvcollection}
+entry. As before, the choice of entry type is arbitrary. All four are
+equivalent. Here's a counterpart to the previous example using a
 \bibtype{collection} entry:
 
 \begin{verbatim}
@@ -1251,27 +1280,54 @@ exception, you can get the same output with a \bibtype{book} or
      maintitle = {The Papers of Martin Luther King, Jr.},
      editora = {Carson, Clayborne},
      editoratype = {maintitle},
+     volumes = {14},
      address = {Berkeley},
      publisher = {University of California Press},
      year = {2014}
    }
 \end{verbatim}
 
-A \bibtype{book} or \bibtype{collection} entry is subject to
-\opt{swapvol} if it has \bibfield{volume} and \bibfield{maintitle}
-fields. You may prefer these entry types if you only intend to cite
-one volume of the collection and have no need to cite the collection
-as a whole. But you risk trouble if the volumes of the collection have
-different publication dates, as they do for \textit{The Papers of
-Martin Luther King, Jr}. If the publication information for this
-volume goes last, the bibliography and long citation should list the
-publication date as \textit{2014}. If the publication information for
-the collection goes last, that date is \textit{1992–}. A
-\bibtype{book} or \bibtype{collection} entry, however, has just one
-field for a publication date, so using \opt{swapvol} on
-\bibfield{carson2014} would print \textit{2014}, not \textit{1992–}.
-Otherwise, the entry types are interchangeable. You can find examples
-of both approaches in \file{windycity.bib}.
+These entry types work with \opt{swapvol} if they have
+\bibfield{volume} and \bibfield{maintitle} fields. You may prefer them
+over \bibfield{bookinbook} or \bibfield{inbook} entries if you only
+intend to cite one volume of the collection and have no need to cite
+the collection as a whole. You risk trouble, though, if the volumes of
+the collection have different publication dates, as they do for
+\textit{The Papers of Martin Luther King, Jr}. If the publication
+information for this volume goes last, the bibliography and long
+citation should list the publication date as \textit{2014}. If the
+publication information for the collection goes last, that date is
+\textit{1992–}. A \bibtype{book} or \bibtype{collection} entry,
+however, has just one field for a publication date, so using
+\opt{swapvol} on \bibfield{carson2014} would print \textit{2014}, not
+\textit{1992–}. Otherwise, the entry types are interchangeable. You
+can find examples of both approaches in \file{windycity.bib}.
+
+An \bibtype{incollection} or \bibtype{letter} entry works with
+\opt{swapvol} if it passes one or both tests for the previous types.
+This means you may choose either approach mentioned above:
+
+\begin{verbatim}
+   @Letter{king2014,
+     author = {King, Jr., Martin Luther},
+     title = {Unpublished letter to the editor of the
+              \emph{Afro-American} (Washington, DC)},
+%     crossref = {carson2014}
+     crossref = {armstrong2014}
+   }
+\end{verbatim}
+
+\noindent In other words, you may cross-reference King's letter to
+\bibfield{armstrong2014} or \bibfield{carson2014}. The only difference
+is that, with \opt{swapvol}, cross-referencing to
+\bibfield{carson2014} once more gives the wrong publication date for
+the collection. With many other collections, this wouldn't be an
+issue. Convenience, then, is perhaps the only consideration in
+choosing how you do it. If you plan to cite more than one volume of a
+collection, and different works in those volumes or the collection as
+a whole, cross-referencing to \bibtype{bookinbook} or \bibtype{inbook}
+entries is probably simpler. The other way is simpler if you plan to
+cite just one work in one volume.
 
 As mentioned in \textit{CMS} \ref{15.41}, reference lists should give
 priority to the volume, not the collection. Nevertheless, Windy City
@@ -1279,37 +1335,39 @@ doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
 Either way, remember that when a volume and a collection have
 different publication dates, a reference list entry prints both dates,
 which in turn requires you to use the \bibtype{bookinbook} or
-\bibtype{inbook} approach described above.
+\bibtype{inbook} approach.
 
 \begin{refonly}
 \nocite{armstrong2014}
 \end{refonly}
 
 A final issue concerns whether you want long citations to give a
-work's total number of volumes by printing the \bibfield{volumes}
-field. Whereas entries in a bibliography always give the total, doing
-so in notes is optional (see \textit{CMS} \ref{14.118}).
+work's total number of volumes. Whereas entries in a bibliography
+almost always give that number (the exceptions are those that work
+with \opt{swapvol}), doing so in notes is optional (per \textit{CMS}
+\ref{14.118}).
 
-Windy City prints the \bibfield{volumes} field in long citations only
-if the \bibfield{postnote} field is empty. That's not a requirement of
-\textit{CMS}. But there are several reasons for preferring this
-approach: If the \bibfield{postnote} is empty, printing the total
-preserves the correspondence between the long citation and its entry
-in the bibliography. This prevents the appearance that something has
-gone wrong when an element in one is missing from the other. If the
-\bibfield{postnote} isn't empty, it likely contains information that,
-as with page references, should also include a volume number (see
-Section \ref{multivolume}). The point then is to cite a specific
-volume, not the whole collection, so the total seems less important
-and omitting it cuts down on clutter. The main benefit, anyway, is
-that Windy City's approach is consistent with citations of \textit{The
-Lisle Letters} in \textit{CMS} \ref{14.117} and \ref{14.118}. No
-simpler rule would be.
+Here's what Windy City does: Apart from entries that work with
+\opt{swapvol}, it prints the \bibfield{volumes} field in long
+citations only if the \bibfield{postnote} field is empty. That's not a
+requirement of \textit{CMS}. But there are several reasons for
+preferring this approach. If the \bibfield{postnote} is empty,
+printing the total preserves the correspondence between the long
+citation and its entry in the bibliography. This prevents the
+appearance that something has gone wrong when an element in one is
+missing from the other. If the \bibfield{postnote} isn't empty, it
+likely contains information that, as with page references, should also
+include a volume number (see Section \ref{multivolume}). Including a
+volume number makes it less important, arguably, to include the total
+number of volumes. The main benefit, anyway, is that Windy City's
+approach is consistent with citations of \textit{The Lisle Letters} in
+\textit{CMS} \ref{14.117} and \ref{14.118}. No simpler rule would be.
 
-If you want to print a work's total number of volumes without regard
-to the \bibfield{postnote}, use the entry option \opt{listvols}. Some
-examples in \textit{CMS} need it for Windy City to match them. Here's
-one from \textit{CMS} \ref{14.59}:
+Confused? All you need to know is that, barring exceptions for
+\opt{swapvol}, if you want to print a work's total number of volumes
+without regard to the \bibfield{postnote}, use the entry option
+\opt{listvols}. Windy City uses it to match some examples in
+\textit{CMS}, such as in \ref{14.59}:
 
 \begin{citeonly}
 \item \cite[1:126]{shurtleff1853}
@@ -1401,12 +1459,13 @@ in \textit{CMS} \ref{14.118}:
    @Collection{james1963.5,
      options = {swapvol},
      author = {James, Henry},
+     title = {1883–1884},
+     volume = {5},
      maintitle = {The Complete Tales of Henry James},
      shortmaintitle = {Complete Tales of Henry James},
      editor = {Edel, Leon},
      editortype = {maintitle},
-     volume = {5},
-     title = {1883–1884},
+     volumes = {12},
      address = {London},
      publisher = {Rupert Hart-Davis},
      year = {1963}
@@ -1998,9 +2057,9 @@ For a discussion of how to handle these types of works, see Section
 % 14.120 Chapters and other parts of individual volumes
 \label{14.120}
 
-There are some peculiarities with this example. In the book, but not
-online, \textit{CMS} errs in printing `.ed' rather than `editeb by' in
-the bibliography and neglects to invert the author's name. More
+There are some peculiarities with the first example. In the book, but
+not online, \textit{CMS} errs in printing `.ed' rather than `editeb
+by' in the bibliography and neglects to invert the author's name. More
 worrisome are the striking differences between the note and
 bibliography. They may represent alternative ways of formatting the
 data, as other examples do. But the note seems inconsistent with
@@ -2010,6 +2069,16 @@ example of the bibliography.
 
 \begin{citebib}
 \item \cite[180]{chen2010.3}
+\item \cite[169--71]{king2014}
+\end{citebib}
+
+\noindent Citing King with the preamble or entry option
+\opt{swapvol}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite[169--71]{king2014}
+\AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
 \subsubsection{One volume in two or more books}
