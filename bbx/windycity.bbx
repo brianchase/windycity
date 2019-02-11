@@ -1,4 +1,4 @@
-% Last modified: Mon 11 Feb 2019 02:07:53 PM CST
+% Last modified: Mon 11 Feb 2019 02:15:31 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -961,7 +961,7 @@
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
                or test {\iffieldequalstr{editorctype}{#1}}}
-    {\midsentence\setunit{\addcomma\space}%
+    {\setunit{\unspace,\addspace}%
      \renewcommand*{\cbx@bibstring}{editor}%
      \usebibmacro{editorlists}{#1}%
      \usebibmacro{pluga+printnames}}%
@@ -1141,7 +1141,7 @@
     {\bibstring{in}\space
      \renewcommand*{\xtitle}{bookbook}%
      \usebibmacro{longtitle+titleaddon}%
-     \midsentence\setunit{\addcomma\space}}}
+     \setunit{\unspace,\addspace}}}
 
 \newbibmacro*{maintitle+editor}{%
   \iffieldundef{maintitle}
@@ -1545,7 +1545,7 @@
      \usebibmacro{pages+volume+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
-     \midsentence\setunit{\addcomma\space}%
+     \setunit{\unspace,\addspace}%
      \usebibmacro{byauthor}{}%
      \usebibmacro{edtrans:b}%
      \usebibmacro{note}%
@@ -1876,7 +1876,7 @@
     {\usebibmacro{pages+volume+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
-     \midsentence\setunit{\addcomma\space}%
+     \setunit{\unspace,\addspace}%
      \usebibmacro{byauthor}{}%
      \usebibmacro{edtrans:b}%
      \usebibmacro{note}%
@@ -1889,7 +1889,7 @@
        {}% needs '%'
      \renewcommand*{\xtitle}{book}%
      \usebibmacro{longtitle+titleaddon}%
-     \midsentence\setunit{\addcomma\space}%
+     \setunit{\unspace,\addspace}%
      \usebibmacro{bybookauthor+pages}{}%
      \usebibmacro{bookbooktitle}%
      \usebibmacro{edtrans:b}%
