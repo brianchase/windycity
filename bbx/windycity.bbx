@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Feb 2019 11:07:44 AM CST
+% Last modified: Tue 12 Feb 2019 12:06:53 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -952,8 +952,7 @@
   \usebibmacro{printnames+etc}}%
 
 \newbibmacro*{edtranspunct:b}{%
-  \ifboolexpr{ test {\ifdefstring{\xtitle}{book}}
-               and not test {\iffieldundef{title}}}
+  \iftoggle{edshift}
     {\setunit{\addcomma\space}}%
     {\newunit}}%
 
