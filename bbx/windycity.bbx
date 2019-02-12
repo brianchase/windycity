@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Feb 2019 12:06:53 PM CST
+% Last modified: Tue 12 Feb 2019 12:20:30 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -2072,20 +2072,20 @@
   \iftoggle{swapvol}
     {\usebibmacro{bookbooktitle}{}%
      \usebibmacro{edtrans:b}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}
      \usebibmacro{volumes+series+etc}%
      \usebibmacro{booktitle}%
      \usebibmacro{bybookauthor+pages}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}}%
+     \usebibmacro{edtrans:b}}%
     {\usebibmacro{booktitle}%
      \usebibmacro{bybookauthor+pages}{}%
      \usebibmacro{edtrans:b}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
      \usebibmacro{volumes+series+etc}%
      \usebibmacro{bookbooktitle}{}%
-     \usebibmacro{edtrans:b}}%
+     \usebibmacro{edtrans:b}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}}%
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
