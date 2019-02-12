@@ -1,4 +1,4 @@
-% Last modified: Mon 11 Feb 2019 03:26:56 PM CST
+% Last modified: Tue 12 Feb 2019 11:07:44 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -291,6 +291,7 @@
   \inherit{editoratype}{editorbtype}
   \inherit{editorbtype}{editorctype}
   \inherit{translator}{translatora}
+  \inherit{translatora}{translatorb}
   \inherit{title}{booktitle}
   \inherit{subtitle}{booksubtitle}
   \inherit{titleaddon}{booktitleaddon}
@@ -719,31 +720,40 @@
 
 \newbibmacro*{test:trans}{%
   \usebibmacro{test:transdupes}%
-  \iftoggle{edshift}
-    {\ifnameundef{translator}
-       {\renewcommand*{\yeditor}{translatora}}%
-       {\renewcommand*{\yeditor}{translator}}}
+  \ifnameundef{translator}
+    {\ifnameundef{translatora}
+       {\renewcommand*{\yeditor}{translatorb}}%
+       {\renewcommand*{\yeditor}{translatora}}}
     {\renewcommand*{\yeditor}{translator}}}
 
 \newbibmacro*{test:transdupes}{%
   \ifnamesequal{translator}{translatora}
     {\clearname{translatora}}%
-    {}}
+    {\ifnamesequal{translatora}{translatorb}}
+       {\clearname{translatorb}}%
+       {}}
 
 \newbibmacro*{test:notrans}{%
   \ifnameundef{\yeditor}
     {\global\toggletrue{notrans}}%
-    {\ifboolexpr{ togl {collection}
-                  and togl {swapvol}}
-       {\ifboolexpr{ test {\ifdefstring{\yeditor}{translator}}
-                     and ( test {\ifdefstring{\xtitle}{book}}
-                     or test {\ifdefstring{\xtitle}{main}} )}
+    {\ifdefstring{\yeditor}{translatorb}
+       {\ifboolexpr{ test {\ifdefempty{\xtitle}}
+                     or test {\ifdefstring{\xtitle}{book}}
+                     or test {\ifdefstring{\xtitle}{main}}}
           {\global\toggletrue{notrans}}%
-          {\ifboolexpr{ test {\ifdefstring{\yeditor}{translatora}}
-                        and test {\ifdefstring{\xtitle}{bookbook}}}
+          {}}
+       {\ifdefstring{\yeditor}{translatora}
+          {\ifboolexpr{ test {\ifdefempty{\xtitle}}
+                        or test {\ifdefstring{\xtitle}{bookbook}}}
              {\global\toggletrue{notrans}}%
-             {}}}
-       {}}}
+             {}}
+           {\ifboolexpr{ togl {collection}
+                         and togl {swapvol}}
+               {\ifboolexpr{ test {\ifdefstring{\xtitle}{book}}
+                             or test {\ifdefstring{\xtitle}{main}}}
+                  {\global\toggletrue{notrans}}%
+                  {}}
+               {}}}}}
 
 \newbibmacro*{test:ed}{%
   \usebibmacro{test:eddupes}%

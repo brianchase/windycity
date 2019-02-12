@@ -14,5 +14,6 @@
   shortmaintitle}
 \DeclareDatamodelFields[type=list,datatype=name]{%
   shortbookauthor,
-  translatora}
+  translatora,
+  translatorb}
 
