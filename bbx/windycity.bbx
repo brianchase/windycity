@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Feb 2019 12:20:30 PM CST
+% Last modified: Tue 12 Feb 2019 08:38:58 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1594,24 +1594,28 @@
   \usebibmacro{title+labelyear}%
   \ifdefstring{\xtitle}{main}
     {\usebibmacro{edtrans:a}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}%
      \usebibmacro{pages+volume+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \setunit{\unspace,\addspace}%
      \usebibmacro{byauthor}{}%
      \usebibmacro{edtrans:b}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
      \usebibmacro{volumes+series+etc}%
      \usebibmacro{date+loc+etc}%
      \usebibmacro{origtitle}}%
     {\usebibmacro{byauthor}{newunit}%
      \usebibmacro{edtrans:a}%
      \usebibmacro{editoraddon}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes+series+etc}%
-     \usebibmacro{maintitle+editor}%
+     \iffieldundef{maintitle}
+       {\usebibmacro{note}%
+        \usebibmacro{edition}%
+        \usebibmacro{volumes+series+etc}}%
+       {\usebibmacro{volumes+series+etc}%
+        \usebibmacro{maintitle+editor}%
+        \usebibmacro{note}%
+        \usebibmacro{edition}}%
      \usebibmacro{date+loc+etc}%
      \usebibmacro{origtitle}}}
 
