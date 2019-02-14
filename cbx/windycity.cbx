@@ -1,4 +1,4 @@
-% Last modified: Thu 14 Feb 2019 09:01:14 AM CST
+% Last modified: Thu 14 Feb 2019 09:02:57 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -275,9 +275,9 @@
 \newbibmacro*{cite:volume}{%
   \newunit
   \ifboolexpr{ togl {collection}
+               and togl {swapvol}
                and not togl {collection:icbk}
-               and not togl {collection:icib}
-               and togl {swapvol}}
+               and not togl {collection:icib}}
     {\usebibmacro{volume+page}}%
     {}}
 
