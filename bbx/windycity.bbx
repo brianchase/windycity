@@ -1,4 +1,4 @@
-% Last modified: Wed 13 Feb 2019 06:18:25 PM CST
+% Last modified: Wed 13 Feb 2019 07:10:39 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -302,6 +302,11 @@
 \DeclareDataInheritance{collection}{collection,inbook,bookinbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}}
+\DeclareDataInheritance{bookinbook,inbook,incollection}{%
+  bookinbook,inbook,incollection}{%
+  \inherit{volume}{bookvolume}}
+\DeclareDataInheritance{collection}{bookinbook,inbook}{%
+  \inherit{volume}{bookvolume}}
 
 %%%%%%%%%%%%%%%%%%%
 %%  Preliminary  %%
