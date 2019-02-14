@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Feb 2019 08:38:58 PM CST
+% Last modified: Wed 13 Feb 2019 06:18:25 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -279,6 +279,7 @@
 %%  Data Inheritance  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+\ResetDataInheritance
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
 \DeclareDataInheritance{*}{%
   incollection,inbook,bookinbook,inproceedings,letter,suppbook,review}{%
@@ -568,6 +569,8 @@
 \DeclareBibliographyAlias{cite:booklet}{cite:book}
 \DeclareBibliographyAlias{cite:collection}{cite:book}
 \DeclareBibliographyAlias{cite:manual}{cite:book}
+\DeclareBibliographyAlias{cite:mvbook}{cite:book}
+\DeclareBibliographyAlias{cite:mvcollection}{cite:book}
 \DeclareBibliographyAlias{cite:proceedings}{cite:book}
 \DeclareBibliographyAlias{cite:report}{cite:book}
 \DeclareBibliographyAlias{cite:techreport}{cite:book}
