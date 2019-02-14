@@ -12,10 +12,12 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * fixed reviews with titles
 * much improved format of unsigned reviews in bibliographies and
   reference lists (in part, restoring previous work set aside)
-* extended 'swapvol' option to support letter and incollection entries
-  (see documentation)
+* extended 'swapvol' option to support 'letter' and 'incollection'
+  entries
+* improved handling of editors and translators, including support for
+  translators of a 'maintitle'
 * added 'library' entry and preamble options to support the 'library'
-  field (see documentation)
+  field
 * added support for \iffieldbibstring in processing 'edition' and
   'type' fields
 * [updated

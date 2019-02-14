@@ -8,10 +8,12 @@
   bookyear,
   endbookyear,
   editoraddon,
-  seriesaddon,
   handle,
+  seriesaddon,
   shortbooktitle,
-  shortmaintitle}
+  shortmaintitle,
+  translatortype,
+  translatoratype}
 \DeclareDatamodelFields[type=list,datatype=name]{%
   shortbookauthor,
   translatora,
