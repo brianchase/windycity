@@ -1,4 +1,4 @@
-% Last modified: Wed 13 Feb 2019 07:25:14 PM CST
+% Last modified: Thu 14 Feb 2019 09:07:15 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1160,7 +1160,9 @@
 
 \newbibmacro*{shorttitle}{%
   \ifboolexpr{ togl {collection}
-               and togl {swapvol}}
+               and togl {swapvol}
+               and not togl {collection:icbk}
+               and not togl {collection:icib}}
     {\iftoggle{collection:bk}
        {\iffieldundef{shortmaintitle}
          {\printfield[title]{maintitle}}%
