@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Feb 2019 10:30:11 PM CST
+% Last modified: Thu 14 Feb 2019 09:01:14 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -274,15 +274,11 @@
 
 \newbibmacro*{cite:volume}{%
   \newunit
-  \ifboolexpr{ test {\ifentrytype{book}}
-               or test {\ifentrytype{bookinbook}}
-               or test {\ifentrytype{collection}}
-               or test {\ifentrytype{inbook}}
-               or test {\ifentrytype{incollection}}}
-    {\ifboolexpr{ togl {collection}
-                  and togl {swapvol}}
-       {\usebibmacro{volume+page}}%
-       {}}
+  \ifboolexpr{ togl {collection}
+               and not togl {collection:icbk}
+               and not togl {collection:icib}
+               and togl {swapvol}}
+    {\usebibmacro{volume+page}}%
     {}}
 
 \newbibmacro*{volume+page}{%
