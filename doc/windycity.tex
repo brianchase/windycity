@@ -1,4 +1,4 @@
-% Last modified: Mon 11 Feb 2019 05:29:48 PM CST
+% Last modified: Thu 14 Feb 2019 04:04:01 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -983,6 +983,11 @@ to the series, Windy City would assume that she's the book's editor.
 In short, for any title at a higher level than \bibfield{title}, you
 need to use \bibfield{editortype} to assign an editor to it.
 
+Windy City's support for translators is more limited. Unless a work's
+bibliography database entry has a \bibfield{translatortype} field with
+the value \textit{maintitle}, Windy City associates the names in
+\bibfield{translator} with the entry's lowest level title.
+
 One complication remains: There are other name lists for editors than
 \bibfield{editor}. There's \bibfield{editora}, \bibfield{editorb}, and
 \bibfield{editorc}.
@@ -1123,12 +1128,12 @@ priority, the collection's or the volume's. Consider an example from
 \item \cite{armstrong2014}
 \end{citebib}
 
-\noindent The editor and title of the volume precedes that of the
-collection. In notes and bibliographies in the default format,
-\textit{CMS} gives you the option of reversing this order. (See
-especially \textit{CMS} \ref{14.119}, \ref{14.121}, and \ref{14.122},
-and compare \ref{14.144} and \ref{15.41}.) Windy City does as well,
-with the entry or preamble option \opt{swapvol}.
+\noindent The editor and title of the volume precede the editor and
+title of the collection. In notes and bibliographies in the default
+format, \textit{CMS} gives you the option of reversing this order.
+(See especially \textit{CMS} \ref{14.119}, \ref{14.121}, and
+\ref{14.122}, and compare \ref{14.144} and \ref{15.41}.) Windy City
+does as well, with the entry or preamble option \opt{swapvol}.
 
 \begin{citebib}
 \AtNextCitekey{\toggletrue{swapvol}}
@@ -1184,8 +1189,8 @@ collection, somewhat like the volume of an encyclopedia with the title
 \textit{D–F}. There's nothing wrong with putting it first. But putting
 it second seems more intuitive.
 
-By contrast, here's an example of a case when using \opt{swapvol}
-might not seem desirable:
+By contrast, here's a case where \opt{swapvol} might not seem
+desirable:
 
 \begin{citebib}
 \AtNextCitekey{\toggletrue{swapvol}}
@@ -1935,6 +1940,7 @@ On how to make an author and editor swap places, see Section
 
 \subsubsection{Book-length work within a book}
 % 14.109 Book-length work within a book
+\label{14.109}
 
 \begin{citebib}
 \item \cite{bernard1990a}
