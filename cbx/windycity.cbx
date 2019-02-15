@@ -1,4 +1,4 @@
-% Last modified: Thu 14 Feb 2019 09:02:57 AM CST
+% Last modified: Thu 14 Feb 2019 06:37:41 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -129,7 +129,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{parencite}{%
-  \usebibmacro{test:collection:a}%
+  \usebibmacro{test:collection}%
   \usebibmacro{test:crossref}%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
@@ -208,7 +208,7 @@
 \newbibmacro*{cite}{%
   \usebibmacro{test:multicite}%
   \ifciteseen
-    {\usebibmacro{test:collection:a}%
+    {\usebibmacro{test:collection}%
      \renewcommand*{\cbx@deflabel}{labelname}%
      \printtext[bibhyperref]{\usebibmacro{cite:seen}}}
     {\printtext[bibhyperref]{\usebibmacro{cite:new}}}% needs '%'
@@ -268,7 +268,7 @@
     {\usebibmacro{author+bookauthor+etc}%
      \bibstring{review}}%
   \space
-  \usebibmacro{test:title+booktitle}%
+  \renewcommand*{\xtitle}{book}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{cite:volume}}%
 
@@ -446,13 +446,11 @@
   \usebibmacro{colon+comma+etc}}%
 
 \DeclareBibliographyDriver{cite:book}{%
-  \usebibmacro{test:collection:a}%
   \usebibmacro{author+collection+etc}%
   \newunit
   \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:incollection}{%
-  \usebibmacro{test:collection:a}%
   \ifentrytype{letter}
     {\toggletrue{noauth}}%
     {}% needs '%'

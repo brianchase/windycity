@@ -1,4 +1,4 @@
-% Last modified: Thu 14 Feb 2019 09:07:15 AM CST
+% Last modified: Thu 14 Feb 2019 06:38:37 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -303,9 +303,6 @@
 \DeclareDataInheritance{collection}{bookinbook,collection,inbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}
-  \inherit{volume}{bookvolume}}
-\DeclareDataInheritance{bookinbook,inbook,incollection}{%
-  bookinbook,inbook,incollection}{%
   \inherit{volume}{bookvolume}}
 
 %%%%%%%%%%%%%%%%%%%
@@ -618,7 +615,7 @@
     {}}
 
 \newbibmacro*{author+bookauthor+etc}{%
-  \iftoggle{noauth}% true by entry option or citation command
+  \iftoggle{noauth}
     {\usebibmacro{authpos+deflabel}}%
     {\usebibmacro{author+bookauthor}%
      \ifnameundef{\cbx@namelist}
@@ -761,32 +758,26 @@
                 {}
                 {\global\toggletrue{notrans}}}
              {}}}
-       {\usebibmacro{test:notrans:b}}}}
+       {\iffieldequalstr{\yeditor type}{maintitle}
+          {\global\toggletrue{notrans}}%
+          {\usebibmacro{test:notrans:b}}}}}
 
 \newbibmacro*{test:notrans:b}{%
   \ifdefstring{\yeditor}{translatorb}
     {\ifboolexpr{ test {\ifdefempty{\xtitle}}
-                  or test {\ifdefstring{\xtitle}{book}}
-                  or test {\ifdefstring{\xtitle}{main}}}
+                  or test {\ifdefstring{\xtitle}{book}}}
        {\global\toggletrue{notrans}}%
        {}}
     {\ifdefstring{\yeditor}{translatora}
        {\ifboolexpr{ test {\ifdefempty{\xtitle}}
                      or test {\ifdefstring{\xtitle}{bookbook}}}
           {\global\toggletrue{notrans}}%
-          {\iffieldequalstr{translatoratype}{maintitle}
-             {\global\toggletrue{notrans}}%
-             {}}}
-        {\ifboolexpr{ test {\iffieldequalstr{translatortype}{maintitle}}
-                      and not test {\ifdefstring{\xtitle}{main}}}
-           {\global\toggletrue{notrans}}%
-           {\ifboolexpr{ togl {collection}
-                         and togl {swapvol}
-                         and not test {\iffieldequalstr{translatortype}{maintitle}}
-                         and ( test {\ifdefstring{\xtitle}{book}}
-                         or test {\ifdefstring{\xtitle}{main}} )}
-                  {\global\toggletrue{notrans}}%
-                  {}}}}}
+          {}}
+       {\ifboolexpr{ togl {collection}
+                     and togl {swapvol}
+                     and test {\ifdefstring{\xtitle}{book}}}
+          {\global\toggletrue{notrans}}%
+          {}}}}
 
 \newbibmacro*{test:ed}{%
   \usebibmacro{test:eddupes}%
@@ -833,49 +824,46 @@
   \usebibmacro{test:noed:a}%
   \iftoggle{noed}
     {}
-    {\usebibmacro{test:noed:b}%
-     \iftoggle{noed}
-       {}
-       {\iftoggle{authposition}
-          {\ifboolexpr{ togl {collection:ib}
-                        and not togl {swapvol}
-                        and test {\ifnameundef{editor}}}
+    {\iftoggle{authposition}
+       {\ifboolexpr{ togl {collection:ib}
+                     and not togl {swapvol}
+                     and test {\ifnameundef{editor}}}
+          {\global\toggletrue{noed}}%
+          {}}
+       {\ifdefstring{\xtitle}{bookbook}
+          {\global\toggletrue{noed}}%
+          {\ifboolexpr{ test {\ifdefempty{\xtitle}}
+                        and ( togl {collection:ib}
+                        or togl {collection:icbk}
+                        or togl {collection:icib}
+                        or not togl {collection} )}
              {\global\toggletrue{noed}}%
-             {}}
-          {\ifdefstring{\xtitle}{bookbook}
-             {\global\toggletrue{noed}}%
-             {\ifboolexpr{ test {\ifdefempty{\xtitle}}
-                           and ( togl {collection:ib}
-                           or togl {collection:icbk}
-                           or togl {collection:icib}
-                           or not togl {collection} )}
-                {\global\toggletrue{noed}}%
-                {}}}}}}
+             {}}}}}
 
 \newbibmacro*{editor+noed}{%
   \renewcommand*{\xeditor}{editor}%
   \usebibmacro{test:noed:a}%
   \iftoggle{noed}
     {}
-    {\usebibmacro{test:noed:b}%
-     \iftoggle{noed}
-       {}
-       {\iftoggle{authposition}
-          {\ifboolexpr{ togl {collection:ib}
-                        and togl {swapvol}
-                        and not test {\ifnameundef{editora}}}
-             {\global\toggletrue{noed}}%
-             {}}
-          {\ifdefstring{\xtitle}{book}
-             {\global\toggletrue{noed}}%
-             {}}}}}
+    {\iftoggle{authposition}
+       {\ifboolexpr{ togl {collection:ib}
+                     and togl {swapvol}
+                     and not test {\ifnameundef{editora}}}
+          {\global\toggletrue{noed}}%
+          {}}
+       {\ifdefstring{\xtitle}{book}
+          {\global\toggletrue{noed}}%
+          {}}}}
 
 \newbibmacro*{test:noed:a}{%
-  \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{issuetitle}}
-               or test {\iffieldequalstr{\xeditor type}{series}}
-               or test {\ifnameundef{\xeditor}}}
+  \ifboolexpr{ test {\ifnameundef{\xeditor}}
+               or test {\iffieldequalstr{\xeditor type}{issuetitle}}
+               or test {\iffieldequalstr{\xeditor type}{series}}}
     {\global\toggletrue{noed}}%
-    {}}
+    {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{maintitle}}
+                  and not togl {authposition}}
+       {\global\toggletrue{noed}}%
+       {\usebibmacro{test:noed:b}}}}
 
 \newbibmacro*{test:noed:b}{%
   \iftoggle{authposition}
@@ -889,19 +877,13 @@
                      and togl {swapvol}}
           {\global\toggletrue{noed}}%
           {}}}
-    {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{maintitle}}
-                  and not test {\ifdefstring{\xtitle}{main}}}
-      {\global\toggletrue{noed}}%
-      {\ifboolexpr{ not test {\iffieldequalstr{\xeditor type}{maintitle}}
-                    and test {\ifdefstring{\xtitle}{main}}}
-         {\global\toggletrue{noed}}%
-         {\ifdefempty{\xtitle}
-            {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
-                          or test {\iffieldequalstr{\xeditor type}{title}}
-                          or test {\iffieldundef{\xeditor type}}}
-               {}
-               {\global\toggletrue{noed}}}
-            {}}}}}
+    {\ifdefempty{\xtitle}
+       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
+                     or test {\iffieldequalstr{\xeditor type}{title}}
+                     or test {\iffieldundef{\xeditor type}}}
+          {}
+          {\global\toggletrue{noed}}}
+       {}}}
 
 \newbibmacro*{transcombos}{%
   \renewcommand*{\cbx@namelist}{\yeditor}%
@@ -996,11 +978,18 @@
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
                or test {\iffieldequalstr{editorctype}{#1}}}
-    {\setunit{\unspace,\addspace}%
+    {\usebibmacro{edtranspunct:c}%
      \renewcommand*{\cbx@bibstring}{editor}%
      \usebibmacro{editorlists}{#1}%
      \usebibmacro{pluga+printnames}}%
     {}}
+
+\newbibmacro*{edtranspunct:c}{%
+  \ifboolexpr{ togl {collection:bk}
+               and togl {swapvol}
+               and not togl {collection:icbk}}
+    {\newunit}%
+    {\setunit{\unspace,\addspace}}}
 
 \newbibmacro*{editorlists}[1]{%
   \iffieldequalstr{editortype}{#1}
@@ -1016,7 +1005,7 @@
 \newbibmacro*{translatortypes}{%
   \ifboolexpr{ test {\iffieldequalstr{translatortype}{maintitle}}
                or test {\iffieldequalstr{translatoratype}{maintitle}}}
-    {\setunit{\unspace,\addspace}%
+    {\usebibmacro{edtranspunct:c}%
      \renewcommand*{\cbx@bibstring}{translator}%
      \iffieldequalstr{translatortype}{maintitle}
        {\renewcommand*{\cbx@namelist}{translator}}%
@@ -1172,29 +1161,18 @@
          {\printfield[title]{shortbooktitle}}}}
     {\printfield[\thefield{entrytype}]{labeltitle}}}
 
-\newbibmacro*{test:title+booktitle}{%
-  \ifboolexpr{ test {\iffieldundef{title}}
-               and test {\iffieldundef{booktitle}}}
-    {\renewcommand*{\xtitle}{bookbook}}%
-    {\iffieldundef{title}
-       {\renewcommand*{\xtitle}{book}}%
-       {\ifboolexpr{ togl {collection}
-                     and togl {swapvol}
-                     and not togl {collection:icbk}
-                     and not togl {collection:icib}}
-          {\iftoggle{collection:bk}
-             {\renewcommand*{\xtitle}{main}}%
-             {\renewcommand*{\xtitle}{book}}}
-          {}}}}
-
-\renewbibmacro*{booktitle}{%
+\newbibmacro*{booktitle+editor}[1]{%
   \iffieldundef{booktitle}
     {}
     {\renewcommand*{\xtitle}{book}%
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\unspace,\addspace}}}
+     \setunit{\unspace,\addspace}%
+     \usebibmacro{bybookauthor+pages}%
+     \ifstrequal{#1}{a}
+       {\usebibmacro{edtrans:a}}%
+       {\usebibmacro{edtrans:b}}}}
 
-\newbibmacro*{bookbooktitle}[1]{%
+\newbibmacro*{bookbooktitle+editor}[1]{%
   \iffieldundef{bookbooktitle}
     {}
     {\ifstrequal{#1}{in}
@@ -1202,7 +1180,8 @@
        {}% needs '%'
      \renewcommand*{\xtitle}{bookbook}%
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\unspace,\addspace}}}
+     \setunit{\unspace,\addspace}%
+     \usebibmacro{edtrans:b}}}
 
 \newbibmacro*{maintitle+editor}{%
   \iffieldundef{maintitle}
@@ -1493,13 +1472,11 @@
 
 \DeclareBibliographyDriver{book}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{test:collection:a}%
   \usebibmacro{author+collection+etc}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{incollection}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{test:collection:a}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{crossref+incollections}%
   \usebibmacro{doi+finentry+etc}}%
@@ -1556,7 +1533,6 @@
 
 \newbibmacro*{author+title+ed+note}{%
   \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{test:title+booktitle}%
   \usebibmacro{title+labelyear}%
   \usebibmacro{edtrans:a}%
   \usebibmacro{note}}%
@@ -1601,50 +1577,49 @@
   \usebibmacro{library}%
   \usebibmacro{pageref+finentry}}%
 
-\newbibmacro*{test:collection:a}{%
+\newbibmacro*{test:collection}{%
   \ifboolexpr{ test {\ifentrytype{book}}
                or test {\ifentrytype{collection}}
                or test {\ifentrytype{mvbook}}
                or test {\ifentrytype{mvcollection}}}
-    {\usebibmacro{test:collection:b}}%
+    {\usebibmacro{test:collection:bk}}%
     {\ifboolexpr{ test {\ifentrytype{bookinbook}}
                   or test {\ifentrytype{inbook}}}
-       {\usebibmacro{test:collection:c}%
-        \iftoggle{collection}
-          {\toggletrue{collection:ib}}%
-          {}}
+       {\usebibmacro{test:collection:ib}}%
        {\ifboolexpr{ test {\ifentrytype{incollection}}
                      or test {\ifentrytype{letter}}}
-          {\usebibmacro{test:collection:b}%
+          {\usebibmacro{test:collection:bk}%
            \iftoggle{collection}
              {\toggletrue{collection:icbk}}%
-             {\usebibmacro{test:collection:c}%
+             {\usebibmacro{test:collection:ib}%
               \iftoggle{collection}
-                {\toggletrue{collection:icib}}%
+                {\toggletrue{collection:icib}%
+                 \togglefalse{collection:ib}}%
                 {}}}
           {}}}}
 
-\newbibmacro*{test:collection:b}{%
+\newbibmacro*{test:collection:bk}{%
   \ifboolexpr{ test {\iffieldundef{maintitle}}
                or test {\iffieldundef{volume}}}
     {}
     {\toggletrue{collection}%
      \toggletrue{collection:bk}}}
 
-\newbibmacro*{test:collection:c}{%
+\newbibmacro*{test:collection:ib}{%
   \ifboolexpr{ test {\iffieldundef{maintitle}}
                and not test {\iffieldundef{title}}
                and not test {\iffieldundef{booktitle}}
                and not test {\iffieldundef{volume}}}
-    {\toggletrue{collection}}%
+    {\toggletrue{collection}%
+     \toggletrue{collection:ib}}%
     {}}
 
 \newbibmacro*{author+collection+etc}{%
+  \usebibmacro{test:collection}%
   \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{test:title+booktitle}%
-  \usebibmacro{title+labelyear}%
-  \ifdefstring{\xtitle}{main}
-    {\usebibmacro{edtrans:a}%
+  \ifboolexpr{ togl {collection}
+               and togl {swapvol}}
+    {\usebibmacro{maintitle+editor}%
      \usebibmacro{note}%
      \usebibmacro{edition}%
      \usebibmacro{volume+number+etc}%
@@ -1657,20 +1632,13 @@
      \usebibmacro{bookseries}%
      \usebibmacro{volume+number+etc}%
      \usebibmacro{book:number}%
-     \usebibmacro{part}%
-     \usebibmacro{date+loc+etc}%
-     \usebibmacro{origtitle}}%
-    {\usebibmacro{byauthor}{newunit}%
+     \usebibmacro{part}}%
+    {\usebibmacro{title+labelyear}%
+     \usebibmacro{byauthor}{newunit}%
      \usebibmacro{edtrans:a}%
      \usebibmacro{editoraddon}%
      \iffieldundef{maintitle}
-       {\usebibmacro{note}%
-        \usebibmacro{edition}%
-        \usebibmacro{volumes}%
-        \usebibmacro{bookseries}%
-        \usebibmacro{volume+number+etc}%
-        \usebibmacro{book:number}%
-        \usebibmacro{part}}%
+       {\usebibmacro{note+edition+etc}}%
        {\usebibmacro{volumes}%
         \usebibmacro{bookseries}%
         \usebibmacro{volume+number+etc}%
@@ -1678,11 +1646,12 @@
         \usebibmacro{part}%
         \usebibmacro{maintitle+editor}%
         \usebibmacro{note}%
-        \usebibmacro{edition}}%
-     \usebibmacro{date+loc+etc}%
-     \usebibmacro{origtitle}}}
+        \usebibmacro{edition}}}
+  \usebibmacro{date+loc+etc}%
+  \usebibmacro{origtitle}}%
 
 \newbibmacro*{author+title+etc}{%
+  \usebibmacro{test:collection}%
   \usebibmacro{test:bookauthor}%
   \iftoggle{reprinted}
     {}
@@ -1690,12 +1659,15 @@
                   and test {\ifnameundef{foreword}}
                   and test {\ifnameundef{introduction}}}
        {\usebibmacro{author+bookauthor+etc}%
-        \usebibmacro{test:title+booktitle}%
-        \usebibmacro{title+labelyear}%
-        \ifdefstring{\xtitle}{book}
-          {\usebibmacro{bybookauthor+pages}{newunit}%
-           \usebibmacro{edtrans:a}}%
-          {\usebibmacro{byauthor+ed+chapter}}}
+        \iffieldundef{title}
+          {\usebibmacro{booktitle+editor}{a}}%
+          {\ifboolexpr{ togl {collection}
+                        and togl {swapvol}
+                        and not togl {collection:icbk}
+                        and not togl {collection:icib}}
+             {\usebibmacro{booktitle+editor}{a}}%
+             {\usebibmacro{title+labelyear}%
+              \usebibmacro{byauthor+ed+chapter}}}}
        {\usebibmacro{aft+fore+intro}}}}
 
 \newbibmacro*{crossref+incollections}{%
@@ -1938,18 +1910,14 @@
        {\clearname{bookauthor}}%
        {}}}
 
-\newbibmacro*{bybookauthor+pages}[1]{%
+\newbibmacro*{bybookauthor+pages}{%
   \ifnameundef{bookauthor}
     {}
-    {\ifstrequal{#1}{newunit}
-       {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
-       {\renewcommand*{\pluga}{\bibstring{by}\space}}%
+    {\renewcommand*{\pluga}{\bibstring{by}\space}%
      \renewcommand*{\cbx@namelist}{bookauthor}%
      \usebibmacro{printnames+etc}%
      \usebibmacro{pages}%
-      \ifdefstring{\xtitle}{book}
-        {\newunit}%
-        {}}}
+     \newunit}}%
 
 \newbibmacro*{byauthor+ed+chapter}{%
   \usebibmacro{byauthor}{newunit}%
@@ -1963,25 +1931,21 @@
         \bibstring{in}\space}}}
 
 \newbibmacro*{incollections}{%
-  \iftoggle{collection:icbk}
-    {\usebibmacro{incollections:icbk}}%
-    {\iftoggle{collection:icib}
-       {\usebibmacro{incollections:icib}}%
-       {\iftoggle{collection:ib}
-          {\usebibmacro{incollections:ib}}%
-          {\usebibmacro{booktitle}%
-           \usebibmacro{bybookauthor+pages}{}%
-           \usebibmacro{edtrans:b}%
-           \usebibmacro{volumes}%
-           \usebibmacro{bookseries}%
-           \usebibmacro{pages}%
-           \usebibmacro{book:number}%
-           \usebibmacro{part}%
-           \usebibmacro{bookbooktitle}{in}%
-           \usebibmacro{edtrans:b}%
-           \usebibmacro{note}%
-           \usebibmacro{edition}%
-           \usebibmacro{bookvolume}}}}
+  \iftoggle{collection:ib}
+    {\usebibmacro{incollections:ib}}%
+    {\ifboolexpr{ togl {collection:icbk}
+                  or togl {collection:icib}}
+      {\usebibmacro{incollections:ic}}%
+      {\usebibmacro{booktitle+editor}{}%
+       \usebibmacro{volumes}%
+       \usebibmacro{bookseries}%
+       \usebibmacro{pages}%
+       \usebibmacro{book:number}%
+       \usebibmacro{part}%
+       \usebibmacro{bookbooktitle+editor}{in}%
+       \usebibmacro{note}%
+       \usebibmacro{edition}%
+       \usebibmacro{bookvolume}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
@@ -2009,7 +1973,7 @@
     {\bibcpstring{reviewnoauth}}%
     {\bibstring{review}}%
   \space
-  \usebibmacro{test:title+booktitle}%
+  \renewcommand*{\xtitle}{book}%
   \usebibmacro{title+labelyear}%
   \iftoggle{firstshort}
     {\clearfield{booktitle}}%
@@ -2130,88 +2094,42 @@
      \bibstring{reprint}%
      \addcomma\space}}%
 
-\newbibmacro*{incollections:icbk}{%
-  \iftoggle{swapvol}
-    {\usebibmacro{maintitle+editor}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes}%
-     \usebibmacro{bookseries}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{book:number}%
-     \usebibmacro{part}%
-     \usebibmacro{booktitle}%
-     \usebibmacro{byauthor}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{pages}}%
-    {\usebibmacro{booktitle}%
-     \usebibmacro{byauthor}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{maintitle+editor}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes}%
-     \usebibmacro{bookseries}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{pages}%
-     \usebibmacro{book:number}%
-     \usebibmacro{part}}}
-
-\newbibmacro*{incollections:icib}{%
-  \iftoggle{swapvol}
-    {\usebibmacro{bookbooktitle}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes}%
-     \usebibmacro{bookseries}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{book:number}%
-     \usebibmacro{part}%
-     \usebibmacro{booktitle}%
-     \usebibmacro{bybookauthor+pages}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{pages}}%
-    {\usebibmacro{booktitle}%
-     \usebibmacro{bybookauthor+pages}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{bookbooktitle}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes}%
-     \usebibmacro{bookseries}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{book:number}%
-     \usebibmacro{part}}}
-
 \newbibmacro*{incollections:ib}{%
   \iftoggle{swapvol}
-    {\usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes}%
-     \usebibmacro{bookseries}%
-     \usebibmacro{volume+number+etc}%
-     \usebibmacro{book:number}%
-     \usebibmacro{part}%
+    {\usebibmacro{note+edition+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \setunit{\unspace,\addspace}%
      \usebibmacro{byauthor}{}%
      \usebibmacro{edtrans:b}}%
     {\usebibmacro{volume+number+etc}%
-     \usebibmacro{booktitle}%
-     \usebibmacro{byauthor}{}%
-     \usebibmacro{edtrans:b}%
-     \usebibmacro{note}%
-     \usebibmacro{edition}%
-     \usebibmacro{volumes}%
-     \usebibmacro{bookseries}%
+     \usebibmacro{booktitle+editor}{}%
+     \usebibmacro{note+edition+etc}}}
+
+\newbibmacro*{note+edition+etc}{%
+  \usebibmacro{note}%
+  \usebibmacro{edition}%
+  \usebibmacro{volumes}%
+  \usebibmacro{bookseries}%
+  \usebibmacro{pages}%
+  \usebibmacro{volume+number+etc}%
+  \usebibmacro{book:number}%
+  \usebibmacro{part}}%
+
+\newbibmacro*{incollections:ic}{%
+  \iftoggle{swapvol}
+    {\iftoggle{collection:icbk}
+       {\usebibmacro{maintitle+editor}}%
+       {\usebibmacro{bookbooktitle+editor}{}}%
+     \usebibmacro{note+edition+etc}%
+     \usebibmacro{booktitle+editor}{}%
+     \usebibmacro{pages}}%
+    {\usebibmacro{booktitle+editor}{}%
      \usebibmacro{volume+number+etc}%
-     \usebibmacro{book:number}%
-     \usebibmacro{part}}}
+     \iftoggle{collection:icbk}
+       {\usebibmacro{maintitle+editor}}%
+       {\usebibmacro{bookbooktitle+editor}{}}%
+     \usebibmacro{note+edition+etc}}}
 
 \newbibmacro*{bookvolume}{%
   \iffieldundef{bookvolume}
