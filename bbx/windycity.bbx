@@ -1,4 +1,4 @@
-% Last modified: Thu 14 Feb 2019 06:38:37 PM CST
+% Last modified: Fri 15 Feb 2019 02:53:29 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -986,8 +986,7 @@
 
 \newbibmacro*{edtranspunct:c}{%
   \ifboolexpr{ togl {collection:bk}
-               and togl {swapvol}
-               and not togl {collection:icbk}}
+               and togl {swapvol}}
     {\newunit}%
     {\setunit{\unspace,\addspace}}}
 
@@ -1148,18 +1147,17 @@
        {\usebibmacro{longtitle+titleaddon}}}}
 
 \newbibmacro*{shorttitle}{%
-  \ifboolexpr{ togl {collection}
-               and togl {swapvol}
-               and not togl {collection:icbk}
-               and not togl {collection:icib}}
-    {\iftoggle{collection:bk}
-       {\iffieldundef{shortmaintitle}
-         {\printfield[title]{maintitle}}%
-         {\printfield[title]{shortmaintitle}}}
+  \ifboolexpr{ togl {collection:bk}
+               and togl {swapvol}}
+    {\iffieldundef{shortmaintitle}
+       {\printfield[title]{maintitle}}%
+       {\printfield[title]{shortmaintitle}}}
+    {\ifboolexpr{ togl {collection:ib}
+                  and togl {swapvol}}
        {\iffieldundef{shortbooktitle}
          {\printfield[title]{booktitle}}%
-         {\printfield[title]{shortbooktitle}}}}
-    {\printfield[\thefield{entrytype}]{labeltitle}}}
+         {\printfield[title]{shortbooktitle}}}
+       {\printfield[\thefield{entrytype}]{labeltitle}}}}
 
 \newbibmacro*{booktitle+editor}[1]{%
   \iffieldundef{booktitle}
@@ -1589,10 +1587,11 @@
        {\ifboolexpr{ test {\ifentrytype{incollection}}
                      or test {\ifentrytype{letter}}}
           {\usebibmacro{test:collection:bk}%
-           \iftoggle{collection}
-             {\toggletrue{collection:icbk}}%
+           \iftoggle{collection:bk}
+             {\toggletrue{collection:icbk}%
+              \togglefalse{collection:bk}}%
              {\usebibmacro{test:collection:ib}%
-              \iftoggle{collection}
+              \iftoggle{collection:ib}
                 {\toggletrue{collection:icib}%
                  \togglefalse{collection:ib}}%
                 {}}}
@@ -1617,7 +1616,7 @@
 \newbibmacro*{author+collection+etc}{%
   \usebibmacro{test:collection}%
   \usebibmacro{author+bookauthor+etc}%
-  \ifboolexpr{ togl {collection}
+  \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
     {\usebibmacro{maintitle+editor}%
      \usebibmacro{note}%
@@ -1661,9 +1660,8 @@
        {\usebibmacro{author+bookauthor+etc}%
         \iffieldundef{title}
           {\usebibmacro{booktitle+editor}{a}}%
-          {\ifboolexpr{ togl {collection}
+          {\ifboolexpr{ togl {collection:ib}
                         and togl {swapvol}
-                        and not togl {collection:icbk}
                         and not togl {collection:icib}}
              {\usebibmacro{booktitle+editor}{a}}%
              {\usebibmacro{title+labelyear}%
