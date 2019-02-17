@@ -1,4 +1,4 @@
-% Last modified: Fri 15 Feb 2019 04:14:47 PM CST
+% Last modified: Sun 17 Feb 2019 11:22:24 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1159,6 +1159,19 @@
          {\printfield[title]{shortbooktitle}}}
        {\printfield[\thefield{entrytype}]{labeltitle}}}}
 
+\newbibmacro*{shorttitle+crossref}{%
+  \ifboolexpr{ togl {collection:icbk}
+               and togl {swapvol}}
+    {\iffieldundef{shortmaintitle}
+       {\printfield[title]{maintitle}}%
+       {\printfield[title]{shortmaintitle}}}
+    {\ifboolexpr{ togl {collection:icib}
+                  and togl {swapvol}}
+       {\iffieldundef{shortbooktitle}
+         {\printfield[title]{booktitle}}%
+         {\printfield[title]{shortbooktitle}}}
+       {\printfield[\thefield{entrytype}]{labeltitle}}}}
+
 \newbibmacro*{booktitle+editor}[1]{%
   \iffieldundef{booktitle}
     {}
@@ -1954,7 +1967,7 @@
     \iftoggle{reflist}
       {\usebibmacro{parencite:long}}%
       {\usebibmacro{author+bookauthor+etc}%
-       \usebibmacro{shorttitle}}%
+       \usebibmacro{shorttitle+crossref}}%
     \usebibmacro{cite:volume}}}
 
 \newbibmacro*{pages}{%
