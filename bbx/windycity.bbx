@@ -1,4 +1,4 @@
-% Last modified: Fri 15 Feb 2019 02:53:29 PM CST
+% Last modified: Fri 15 Feb 2019 04:14:47 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -973,7 +973,7 @@
 
 % For editors of an 'issuetitle', 'maintitle', or 'series'.
 
-\newbibmacro*{xeditor+yeditor}[1]{%
+\newbibmacro*{editortypes}[1]{%
   \ifboolexpr{ test {\iffieldequalstr{editortype}{#1}}
                or test {\iffieldequalstr{editoratype}{#1}}
                or test {\iffieldequalstr{editorbtype}{#1}}
@@ -1174,7 +1174,7 @@
   \iffieldundef{bookbooktitle}
     {}
     {\ifstrequal{#1}{in}
-       {\bibstring{in}\space}%
+       {\newunit\bibstring{in}\space}%
        {}% needs '%'
      \renewcommand*{\xtitle}{bookbook}%
      \usebibmacro{longtitle+titleaddon}%
@@ -1188,8 +1188,8 @@
      \usebibmacro{longtitle+titleaddon}%
      \iftoggle{swaptrans}
        {\usebibmacro{translatortypes}%
-        \usebibmacro{xeditor+yeditor}{maintitle}}%
-       {\usebibmacro{xeditor+yeditor}{maintitle}%
+        \usebibmacro{editortypes}{maintitle}}%
+       {\usebibmacro{editortypes}{maintitle}%
         \usebibmacro{translatortypes}}}}
 
 \newbibmacro*{issuetitle}{%
@@ -1200,7 +1200,7 @@
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \usebibmacro{xeditor+yeditor}{issuetitle}}%
+        \usebibmacro{editortypes}{issuetitle}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
@@ -1760,7 +1760,7 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}%
+     \usebibmacro{editortypes}{series}%
      \newunit}}%
 
 \newbibmacro*{journallocation}{%
@@ -2021,7 +2021,7 @@
      \newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \usebibmacro{xeditor+yeditor}{series}%
+     \usebibmacro{editortypes}{series}%
      \setunit{\addcomma\space}}}
 
 \newbibmacro*{seriesaddon}{%
