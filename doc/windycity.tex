@@ -1,4 +1,4 @@
-% Last modified: Thu 14 Feb 2019 04:04:01 PM CST
+% Last modified: Sun 17 Feb 2019 12:11:12 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -980,13 +980,26 @@ Follow the same pattern for editors of a \bibfield{maintitle},
 
 \noindent If there were no \bibfield{editortype} assigning the editor
 to the series, Windy City would assume that she's the book's editor.
-In short, for any title at a higher level than \bibfield{title}, you
-need to use \bibfield{editortype} to assign an editor to it.
+In short, for a title's compilers and for any title at a higher level
+than the \bibfield{title} field, you need to use
+\bibfield{editortype}. Combined with Windy City's support for citing
+articles, chapters, and books within books, this scheme allows for
+several different levels of editors, although it does limit you to one
+set of compilers per work.
 
-Windy City's support for translators is more limited. Unless a work's
-bibliography database entry has a \bibfield{translatortype} field with
-the value \textit{maintitle}, Windy City associates the names in
-\bibfield{translator} with the entry's lowest level title.
+Windy City's support for translators falls between its support for
+editors and compilers. Unless a work's bibliography database entry has
+a \bibfield{translatortype} field with the value \textit{maintitle},
+Windy City associates the names in \bibfield{translator} with the
+entry's lowest level title. (Recall ``The Ascent of Mont Ventoux''
+above.) You should rarely, and perhaps never, need more than one set
+of translators per work. But if you do, Windy City lets you assign as
+many as three, if you cross-reference a title with a translator to a
+collection with \bibfield{title} and \bibfield{maintitle} translators.
+Does any such work exist? Probably not. Support for it is something of
+an accident, stemming from how the style supports multiple
+cross-references, as when you cross-reference an article to a volume
+that cross-references a collection.
 
 One complication remains: There are other name lists for editors than
 \bibfield{editor}. There's \bibfield{editora}, \bibfield{editorb}, and
@@ -1089,7 +1102,7 @@ by the name of the editor or translator whose name will occupy the
 author's position. It would be nice if Windy City could do this for
 you, but at present no feature of \biblatex seems to allow the kind of
 on-the-fly changes to sorting that \opt{swapauth} requires. Below is
-the entry for the example above:
+the entry for the previous example:
 
 \begin{verbatim}
    @Book{pound1953,
@@ -1189,8 +1202,8 @@ collection, somewhat like the volume of an encyclopedia with the title
 \textit{D–F}. There's nothing wrong with putting it first. But putting
 it second seems more intuitive.
 
-By contrast, here's a case where \opt{swapvol} might not seem
-desirable:
+For other works, \opt{swapvol} may seem like a poor choice, even if
+its output is formally correct:
 
 \begin{citebib}
 \AtNextCitekey{\toggletrue{swapvol}}
@@ -1200,11 +1213,11 @@ desirable:
 
 \noindent Having the editor's name first and the author's name after
 the volume's title looks odd. But it's not wrong. The volume's author
-apparently didn't write every volume of the collection. As such, if
-you choose to give priority to the collection, the first position
-should go to the collection's editor, not to the volume's author. The
-default format, on the other hand, looks more familiar and so is
-perhaps less likely to raise questions:
+didn't write every volume of the collection. In giving priority to the
+collection, then, the first position, where an author's name normally
+goes, should go to the collection's editor, not to the volume's
+author. By contrast, the default format looks more familiar and so is
+perhaps less likely to raise eyebrows:
 
 \begin{citebib}
 \item \cite{barrows1959}
@@ -1220,9 +1233,9 @@ bibliography database entries.
 This drawback shouldn't affect \bibfield{incollection} or
 \bibfield{letter} entries when they're cross-referenced to works that
 are changed by \opt{swapvol}. They should have their own authors or
-titles that Windy City can use to sort them correctly. Regardless,
-\opt{swapvol} affects them, too. In \textit{CMS}, \ref{14.120} gives
-an example of one:
+titles that Windy City can use to sort the works correctly.
+Regardless, \opt{swapvol} affects them, too. \textit{CMS} \ref{14.120}
+gives an example:
 
 \begin{citebib}
 \item \cite[169--71]{king2014}
@@ -1238,8 +1251,7 @@ an example of one:
 \end{citebib}
 
 How does Windy City determine which entries in a bibliography database
-work with \opt{swapvol}? Below is the entry (or entries) for an
-earlier example:
+work with \opt{swapvol}? Below are the entries for an earlier example:
 
 \begin{verbatim}
    @InBook{armstrong2014,
@@ -1509,6 +1521,59 @@ entry:
    }
 \end{verbatim}
 
+\subsection{Works \textit{in} Volumes or \textit{as} Volumes}
+
+Many examples so far show the use of the \bibfield{volume} field. What
+they don't quite show is that, as with editors and translators, Windy
+City associates \bibfield{volume} with an entry's lowest level title.
+Usually, this doesn't require any thought when preparing a
+bibliography database. The \bibfield{volume} field goes where you'd
+expect it to. But if you're not careful, you could end up with errors,
+especially when citing books in collections.
+
+\begin{verbatim}
+   @InBook{spinoza1900.1.1,
+     title = {A Theological-Political Treatise},
+     crossref = {spinoza1900.1}
+   }
+   @Collection{spinoza1900.1,
+     author = {Spinoza, Benedict de},
+     title = {The Chief Works of Benedict de Spinoza},
+     edition = {revised},
+     translator = {Elwes, R. H. M.},
+     volume = {1},
+     address = {London},
+     publisher = {George Bell {and} Sons},
+     year = {1900}
+   }
+\end{verbatim}
+
+In the entries above, Windy City associates \bibfield{volume} with
+\textit{The Chief Works of Benedict de Spinoza}, not with \textit{A
+Theological-Political Treatise}. The latter, it assumes, isn't volume
+one of the collection but a work contained \textit{in} volume one,
+presumably with other works. Windy City formats the citation
+accordingly:
+
+\begin{citebib}
+\item \cite{spinoza1900.1.1}
+\end{citebib}
+
+\noindent If instead \bibfield{volume} were within the scope of
+\bibfield{spinoza1900.1.1}, Windy City would assume that \textit{A
+Theological-Political Treatise} is volume one of \textit{The Chief
+Works of Benedict de Spinoza}, that it's a volume of a collection,
+like other works in this section. The same error would occur if you
+put all the data for the citation into, say, a \bibfield{collection}
+entry. Windy City would associate \bibfield{volume} with
+\bibfield{title}, not \bibfield{maintitle}. The upshot is that
+correctly citing a work like this requires cross-referencing an
+\bibtype{inbook} or \bibtype{bookinbook} entry to a
+\bibtype{collection}, \bibtype{book}, \bibtype{mvbook}, or
+\bibtype{mvcollection} entry. (Again, the alternatives give the same
+output.) Only then would Windy City associate \bibfield{volume} with
+the right \bibfield{title}.
+
 \section{Examples from \emph{CMS} Chap. 14, ``Notes and
 Bibliography''}
 \label{notes}
@@ -1622,6 +1687,16 @@ format and the use of \textit{ibid.} First, the short format:
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
+
+\setcounter{subsubsection}{53}
+\subsubsection{Source notes for previously published material}
+% 14.54 Source notes for previously published material
+
+\begin{citebib}
+\item \cite[Reprinted with permission from][15–64]{shapin1996}
+\item \cite*[Originally published as][22–69, © 1992 by The University of
+Chicago. All rights reserved. Reprinted by permission]{manet1992}
+\end{citebib}
 
 \setcounter{subsubsection}{58}
 \subsubsection{Abbreviations for frequently cited works}
