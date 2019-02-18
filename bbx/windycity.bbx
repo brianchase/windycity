@@ -1,4 +1,4 @@
-% Last modified: Sun 17 Feb 2019 08:23:04 PM CST
+% Last modified: Mon 18 Feb 2019 01:33:23 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1277,7 +1277,7 @@
     {\ifboolexpr{ test {\ifentrytype{bookinbook}}
                   or test {\ifentrytype{inbook}}}
        {\usebibmacro{test:collection:ib}}%
-       {\usebibmacro{test:collection:icib}}}}
+       {}}}
 
 \newbibmacro*{test:collection:ib}{%
   \ifboolexpr{ test {\iffieldundef{maintitle}}
