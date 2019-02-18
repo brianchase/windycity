@@ -1,4 +1,4 @@
-% Last modified: Sun 17 Feb 2019 11:22:24 AM CST
+% Last modified: Sun 17 Feb 2019 08:23:04 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -299,11 +299,12 @@
   \inherit{titleaddon}{booktitleaddon}
   \inherit{shorttitle}{shortbooktitle}
   \inherit{booktitle}{bookbooktitle}
+  \inherit{volume}{bookvolume}
+  \inherit{bookvolume}{bookbookvolume}
   \inherit{options}{options}}
 \DeclareDataInheritance{collection}{bookinbook,collection,inbook}{%
   \inherit{year}{bookyear}
-  \inherit{endyear}{endbookyear}
-  \inherit{volume}{bookvolume}}
+  \inherit{endyear}{endbookyear}}
 
 %%%%%%%%%%%%%%%%%%%
 %%  Preliminary  %%
@@ -321,6 +322,7 @@
 \let\xeditor\empty
 \let\yeditor\empty
 \let\xtitle\empty
+\let\xvolume\empty
 
 \providetoggle{authposition}
 \providetoggle{bibliography}
@@ -1233,6 +1235,74 @@
          {}
          {\usebibmacro{origyear+origendyear}}}}}
 
+%%%%%%%%%%%%%%%%%%%
+%%  Collections  %%
+%%%%%%%%%%%%%%%%%%%
+
+\newbibmacro*{test:collection}{%
+  \ifboolexpr{ test {\ifentrytype{book}}
+               or test {\ifentrytype{collection}}
+               or test {\ifentrytype{mvbook}}
+               or test {\ifentrytype{mvcollection}}}
+    {\usebibmacro{test:collection:bk}}%
+    {\ifboolexpr{ test {\ifentrytype{bookinbook}}
+                  or test {\ifentrytype{inbook}}
+                  or test {\ifentrytype{incollection}}
+                  or test {\ifentrytype{letter}}}
+       {\usebibmacro{test:collection:icbk+etc}}%
+       {}}}
+
+\newbibmacro*{test:collection:bk}{%
+  \ifboolexpr{ test {\iffieldundef{booktitle}}
+               and test {\iffieldundef{bookbooktitle}}
+               and test {\iffieldundef{bookvolume}}
+               and test {\iffieldundef{bookbookvolume}}
+               and not test {\iffieldundef{title}}
+               and not test {\iffieldundef{maintitle}}
+               and not test {\iffieldundef{volume}}}
+    {\toggletrue{collection}%
+     \toggletrue{collection:bk}}%
+    {}}
+
+\newbibmacro*{test:collection:icbk+etc}{%
+  \ifboolexpr{ test {\iffieldundef{bookbooktitle}}
+               and test {\iffieldundef{volume}}
+               and test {\iffieldundef{bookbookvolume}}
+               and not test {\iffieldundef{title}}
+               and not test {\iffieldundef{booktitle}}
+               and not test {\iffieldundef{maintitle}}
+               and not test {\iffieldundef{bookvolume}}}
+    {\toggletrue{collection}%
+     \toggletrue{collection:icbk}}%
+    {\ifboolexpr{ test {\ifentrytype{bookinbook}}
+                  or test {\ifentrytype{inbook}}}
+       {\usebibmacro{test:collection:ib}}%
+       {\usebibmacro{test:collection:icib}}}}
+
+\newbibmacro*{test:collection:ib}{%
+  \ifboolexpr{ test {\iffieldundef{maintitle}}
+               and test {\iffieldundef{bookbooktitle}}
+               and test {\iffieldundef{bookvolume}}
+               and test {\iffieldundef{bookbookvolume}}
+               and not test {\iffieldundef{title}}
+               and not test {\iffieldundef{booktitle}}
+               and not test {\iffieldundef{volume}}}
+    {\toggletrue{collection}%
+     \toggletrue{collection:ib}}%
+    {}}
+
+\newbibmacro*{test:collection:icib}{%
+  \ifboolexpr{ test {\iffieldundef{maintitle}}
+               and test {\iffieldundef{volume}}
+               and test {\iffieldundef{bookbookvolume}}
+               and not test {\iffieldundef{title}}
+               and not test {\iffieldundef{booktitle}}
+               and not test {\iffieldundef{bookbooktitle}}
+               and not test {\iffieldundef{bookvolume}}}
+    {\toggletrue{collection}%
+     \toggletrue{collection:icib}}%
+    {}}
+
 %%%%%%%%%%%%%%%%%%%%%%%
 %%  Dates and Times  %%
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -1588,44 +1658,6 @@
   \usebibmacro{library}%
   \usebibmacro{pageref+finentry}}%
 
-\newbibmacro*{test:collection}{%
-  \ifboolexpr{ test {\ifentrytype{book}}
-               or test {\ifentrytype{collection}}
-               or test {\ifentrytype{mvbook}}
-               or test {\ifentrytype{mvcollection}}}
-    {\usebibmacro{test:collection:bk}}%
-    {\ifboolexpr{ test {\ifentrytype{bookinbook}}
-                  or test {\ifentrytype{inbook}}}
-       {\usebibmacro{test:collection:ib}}%
-       {\ifboolexpr{ test {\ifentrytype{incollection}}
-                     or test {\ifentrytype{letter}}}
-          {\usebibmacro{test:collection:bk}%
-           \iftoggle{collection:bk}
-             {\toggletrue{collection:icbk}%
-              \togglefalse{collection:bk}}%
-             {\usebibmacro{test:collection:ib}%
-              \iftoggle{collection:ib}
-                {\toggletrue{collection:icib}%
-                 \togglefalse{collection:ib}}%
-                {}}}
-          {}}}}
-
-\newbibmacro*{test:collection:bk}{%
-  \ifboolexpr{ test {\iffieldundef{maintitle}}
-               or test {\iffieldundef{volume}}}
-    {}
-    {\toggletrue{collection}%
-     \toggletrue{collection:bk}}}
-
-\newbibmacro*{test:collection:ib}{%
-  \ifboolexpr{ test {\iffieldundef{maintitle}}
-               and not test {\iffieldundef{title}}
-               and not test {\iffieldundef{booktitle}}
-               and not test {\iffieldundef{volume}}}
-    {\toggletrue{collection}%
-     \toggletrue{collection:ib}}%
-    {}}
-
 \newbibmacro*{author+collection+etc}{%
   \usebibmacro{test:collection}%
   \usebibmacro{author+bookauthor+etc}%
@@ -1858,18 +1890,18 @@
        {}}}
 
 \newbibmacro*{volume+number+etc}{%
-  \iffieldundef{volume}
+  \iffieldundef{\xvolume volume}
     {}
     {\usebibmacro{swapvol+pages}%
      \iffieldundef{series}
        {\newunit}%
        {\setunit{\addcomma\space}}%
-     \iffieldnum{volume}
-       {\printfield{volume}%
+     \iffieldnum{\xvolume volume}
+       {\printfield[volume]{\xvolume volume}%
         \usebibmacro{volume:number}}%
        {\bibstring{volumes}\space
-        \printfield[noformat]{volume}}%
-     \clearfield{volume}%
+        \printfield[noformat]{\xvolume volume}}%
+     \clearfield{\xvolume volume}%
      \usebibmacro{part}%
      \iftoggle{collection}
        {\iftoggle{swapvol}
@@ -1948,15 +1980,13 @@
                   or togl {collection:icib}}
       {\usebibmacro{incollections:ic}}%
       {\usebibmacro{booktitle+editor}{}%
-       \usebibmacro{volumes}%
-       \usebibmacro{bookseries}%
-       \usebibmacro{pages}%
-       \usebibmacro{book:number}%
-       \usebibmacro{part}%
        \usebibmacro{bookbooktitle+editor}{in}%
-       \usebibmacro{note}%
-       \usebibmacro{edition}%
-       \usebibmacro{bookvolume}}}
+       \iffieldundef{volume}
+         {\iffieldundef{bookvolume}%
+            {\renewcommand*{\xvolume}{bookbook}}%
+            {\renewcommand*{\xvolume}{book}}%
+          \usebibmacro{note+edition+etc}}%
+         {\usebibmacro{note+edition+etc}}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
@@ -2132,20 +2162,23 @@
     {\iftoggle{collection:icbk}
        {\usebibmacro{maintitle+editor}}%
        {\usebibmacro{bookbooktitle+editor}{}}%
+     \renewcommand*{\xvolume}{book}%
      \usebibmacro{note+edition+etc}%
      \usebibmacro{booktitle+editor}{}%
      \usebibmacro{pages}}%
     {\usebibmacro{booktitle+editor}{}%
+     \renewcommand*{\xvolume}{book}%
      \usebibmacro{volume+number+etc}%
      \iftoggle{collection:icbk}
        {\usebibmacro{maintitle+editor}}%
        {\usebibmacro{bookbooktitle+editor}{}}%
+     \renewcommand*{\xvolume}{book}%
      \usebibmacro{note+edition+etc}}}
 
-\newbibmacro*{bookvolume}{%
-  \iffieldundef{bookvolume}
+\newbibmacro*{volume}{%
+  \iffieldundef{\xvolume volume}
     {}
     {\newunit
-     \printfield[volume]{bookvolume}}}
+     \printfield[volume]{\xvolume volume}}}
 
 \endinput

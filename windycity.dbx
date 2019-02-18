@@ -5,6 +5,7 @@
   blogtitleaddon,
   bookbooktitle,
   bookvolume,
+  bookbookvolume,
   bookyear,
   endbookyear,
   editoraddon,
