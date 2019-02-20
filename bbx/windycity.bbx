@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 12:44:58 PM CST
+% Last modified: Wed 20 Feb 2019 04:22:17 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1353,7 +1353,7 @@
           {\usebibmacro{month+day+year}}}
        {\setunit{\space}%
         \iffieldundef{month}
-          {\usebibmacro{reflist+issue+season+year}}%
+          {\usebibmacro{reflist+issue+season}}%
           {\printtext[parens]{%
              \usebibmacro{month+day+year}}}}}}
 
@@ -1402,14 +1402,20 @@
     {\addcomma\space
      \printtime}}%
 
-\newbibmacro*{reflist+issue+season+year}{%
+% Treat 'season' as an alternative for 'issue'.
+
+\newbibmacro*{reflist+issue+season}{%
   \ifboolexpr{ togl {bibliography}
-               and togl {reflist}
-               and test {\iffieldundef{issue}}
-               and test {\iffieldundef{season}}}
-      {}
-      {\setunit{\space}%
-       \printtext[parens]{\usebibmacro{issue+season+year}}}}
+               and togl {reflist}}
+    {\ifboolexpr{ test {\iffieldundef{issue}}
+                  and test {\iffieldundef{season}}}
+       {}
+       {\setunit{\space}%
+        \iffieldundef{issue}
+           {\printtext[parens]{\printfield{season}}}
+           {\printtext[parens]{\printfield{issue}}}}}
+    {\setunit{\space}%
+     \printtext[parens]{\usebibmacro{issue+season+year}}}}
 
 % Treat 'season' as an alternative for 'issue'.
 
@@ -1493,7 +1499,7 @@
   \ifboolexpr{ togl {reflist}
                and not togl {skipdate}}
     {\newunit
-     \usebibmacro{reflist:origyear}%
+     \usebibmacro{reflist+origyear}%
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}%
      \ifboolexpr{ test {\iffieldundef{year}}
@@ -1502,7 +1508,7 @@
        {\bibsentence\newunit}}% if year enclosed in brackets
     {}}
 
-\newbibmacro*{reflist:origyear}{%
+\newbibmacro*{reflist+origyear}{%
   \iffieldundef{origyear}
     {}
     {\printtext[parens]{\usebibmacro{origyear+origendyear}}%
