@@ -28,7 +28,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
   "windycity-dev.pdf") (PDF)
 * other bug fixes
 
-## 2019.01.31
+## 2019-01-31
 
 * added limited support for citing web pages and social media content
 * added 'listvols' entry option (see documentation)
@@ -44,7 +44,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * fixed reprints, cross-referencing in reference lists
 * other bug fixes
 
-## 2019.01.18
+## 2019-01-18
 
 * reversed default for collections, printing information for volumes
   first; the option to reverse this is called 'swapvol'
@@ -59,7 +59,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * removed no longer maintained citation commands
 * other bug fixes and housekeeping
 
-## 2019.01.07
+## 2019-01-07
 
 * major additions and changes for processing collections
 * fixed \parencite for unsigned articles
@@ -77,7 +77,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
   mentioned work gets printed in bibliographies and reference lists
 * many bug fixes
 
-## 2018.12.09
+## 2018-12-09
 
 * simpler processing of author's position
 * added support for common reference works, such as dictionaries and
@@ -87,7 +87,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * some fixes, though incomplete, for reviews
 * other fixes for spacing and punctuation
 
-## 2018.12.05
+## 2018-12-05
 
 * added much better support for cross-referencing collections in notes
   and bibliographies, including enhanced support for treating multivolume
@@ -103,7 +103,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * many bug fixes (mainly spacing, punctuation, and toggles)
 * new documentation
 
-## 2018.11.26
+## 2018-11-26
 
 * fixed 'noauth' entry option (it should only affect notes)
 * fixed 'inst+loc+date'
@@ -115,7 +115,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * limited support for publication times
 * added '\footcite*' command and updated documentation
 
-## 2018.11.23
+## 2018-11-23
 
 * improved and in some cases fixed processing of numbers,
   dates, and issues of periodicals
@@ -129,14 +129,14 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * updated field format for DOIs
 * update name formatting for affixes like 'Jr.'
 
-## 2018.11.17
+## 2018-11-17
 
 * replaced \ifthenelse with commands from etoolbox
 * better handling of editors for a series, maintitle, or issuetitle
 * limited support for 'endmonth' field for periodicals
 * fixed extra space from multicitedelim
 
-## 2018.11.14
+## 2018-11-14
 
 * finally got a handle on the author-date format for periodicals,
   rolling back some recent changes (ugh!)
@@ -148,7 +148,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
   optionlist
 * remove unused entries from windycity.bib for the 15th edition of CMS
 
-## 2018.11.13
+## 2018-11-13
 
 * fixed spacing of date for periodicals (resulting from recent support
   for endday field)
@@ -157,14 +157,14 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * support names of anonymous authors as in CMS 14.80 (16th edition)
   and CMS 14.79 (17th edition)
 
-## 2018.11.09
+## 2018-11-09
 
 * for articles etc., limited support for 'season' field
 * limited support for 'endyear' and 'endorigyear' fields
 * removed unused preamble options and commented code
 * fix 'inreference' bibliography alias
 
-## 2018.11.02
+## 2018-11-02
 
 * fixed author-date system printing the year of many articles twice
 * fixed author-date system printing the year between an author's name
@@ -180,7 +180,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * changed 'pagetracker' bibliography option from 'true' to 'page'
 * edits and fixes to windycity.sty and windycity.tex
 
-## 2018.10.20
+## 2018-10-20
 
 * fixed broken date formatting in author-date citations
 * changed \DeclareSortingScheme to \DeclareSortingTemplate
@@ -189,12 +189,12 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * bumped minimum compatible release to biblatex 3.8
 * other minor changes for the version bump
 
-## 2015.12.28
+## 2015-12-28
 
 * added missing \setunit for when bybookauthor prints an author's name
   and the collection has an editor, translator, or compiler
 
-## 2015.07.08
+## 2015-07-08
 
 * removed an unused bibmacro
 * minor edits and fixes to windycity.sty and windycity.tex
@@ -202,7 +202,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * removed an empty line from windycity.bib
 * changed the version number format to match the release date
 
-## 2014.03.21
+## 2014-03-21
 
 * improved and fixed cross-referencing of collections to other collections
 * fixed missing publication year in notes under option 'reflist'
@@ -210,7 +210,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * minor fixes
 * updated documentation
 
-## 2014.03.02
+## 2014-03-02
 
 * greatly simplified the handling of editors and translators
 * changes and fixes to 'incollections', 'ed+vol+part+etc', and
@@ -223,7 +223,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * other minor changes and fixes
 * updated windycity.tex and windycity.bib
 
-## 2014.02.26
+## 2014-02-26
 
 * initial release
 
