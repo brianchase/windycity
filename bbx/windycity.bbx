@@ -1,4 +1,4 @@
-% Last modified: Tue 19 Feb 2019 10:26:58 AM CST
+% Last modified: Wed 20 Feb 2019 12:26:08 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1299,27 +1299,28 @@
   \ifboolexpr{ test {\iffieldundef{bookbooktitle}}
                and test {\iffieldundef{volume}}
                and test {\iffieldundef{bookbookvolume}}
+               and not test {\iffieldundef{title}}
                and not test {\iffieldundef{booktitle}}
                and not test {\iffieldundef{maintitle}}
                and not test {\iffieldundef{bookvolume}}}
     {\toggletrue{collection}%
      \toggletrue{collection:icbk}}%
     {\ifboolexpr{ test {\ifentrytype{bookinbook}}
-                  or test {\ifentrytype{inbook}}
-                  or test {\ifentrytype{letter}}}
+                  or test {\ifentrytype{inbook}}}
        {\usebibmacro{test:collection:ib}}%
-       {}}}
+       {\usebibmacro{test:collection:icib}}}}
 
 \newbibmacro*{test:collection:ib}{%
   \ifboolexpr{ test {\iffieldundef{maintitle}}
                and test {\iffieldundef{bookbooktitle}}
                and test {\iffieldundef{bookvolume}}
                and test {\iffieldundef{bookbookvolume}}
+               and not test {\iffieldundef{title}}
                and not test {\iffieldundef{booktitle}}
                and not test {\iffieldundef{volume}}}
     {\toggletrue{collection}%
      \toggletrue{collection:ib}}%
-    {\usebibmacro{test:collection:icib}}}
+    {}}
 
 \newbibmacro*{test:collection:icib}{%
   \ifboolexpr{ test {\iffieldundef{maintitle}}
