@@ -57,7 +57,8 @@ for nearly every circumstance that the style is meant to handle.
 Copyright (c) 2019 Brian Michael Chase. Under the terms of the [LaTeX
 Project Public License](http://www.latex-project.org/lppl.txt
 "lppl.txt"), version 1.3, permission is granted to copy, distribute,
-or modify this software.
+or modify this software. See also
+<https://www.latex-project.org/lppl/>.
 
 This software is provided as is, without warranty of any kind, either
 expressed or implied, including, but not limited to, the implied
