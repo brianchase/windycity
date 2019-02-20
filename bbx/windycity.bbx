@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 04:22:17 PM CST
+% Last modified: Wed 20 Feb 2019 04:52:02 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1733,21 +1733,19 @@
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{test:collection}%
   \usebibmacro{test:bookauthor}%
-  \iftoggle{reprinted}
-    {}
-    {\ifboolexpr{ test {\ifnameundef{afterword}}
-                  and test {\ifnameundef{foreword}}
-                  and test {\ifnameundef{introduction}}}
-       {\usebibmacro{author+bookauthor+etc}%
-        \iffieldundef{title}
+  \ifboolexpr{ test {\ifnameundef{afterword}}
+               and test {\ifnameundef{foreword}}
+               and test {\ifnameundef{introduction}}}
+    {\usebibmacro{author+bookauthor+etc}%
+     \iffieldundef{title}
+       {\usebibmacro{booktitle+editor}{a}}%
+       {\ifboolexpr{ togl {collection:ib}
+                     and togl {swapvol}
+                     and not togl {collection:icib}}
           {\usebibmacro{booktitle+editor}{a}}%
-          {\ifboolexpr{ togl {collection:ib}
-                        and togl {swapvol}
-                        and not togl {collection:icib}}
-             {\usebibmacro{booktitle+editor}{a}}%
-             {\usebibmacro{title+labelyear}%
-              \usebibmacro{byauthor+ed+chapter}}}}
-       {\usebibmacro{aft+fore+intro}}}}
+          {\usebibmacro{title+labelyear}%
+           \usebibmacro{byauthor+ed+chapter}}}}
+    {\usebibmacro{aft+fore+intro}}}
 
 \newbibmacro*{crossref+incollections}{%
   \iffieldundef{crossref}

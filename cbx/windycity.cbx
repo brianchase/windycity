@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 12:45:09 PM CST
+% Last modified: Wed 20 Feb 2019 04:51:38 PM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -111,18 +111,6 @@
    \usebibmacro{parencite}}%
   {\multicitedelim}%
   {\usebibmacro{postnote}}%
-
-\providetoggle{reprinted}
-\DeclareCiteCommand{\reprint}
-  {}
-  {\usebibmacro{citeindex}%
-   \toggletrue{noauth}%
-   \toggletrue{reprinted}%
-   \bibstring{reprinted}\space
-   \usebibmacro{cite}%
-   \togglefalse{reprinted}}%
-  {\multicitedelim}%
-  {\usebibmacro{cite:postnote}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Parenthetical Citations  %%
