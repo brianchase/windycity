@@ -1,4 +1,4 @@
-% Last modified: Tue 19 Feb 2019 11:53:11 AM CST
+% Last modified: Wed 20 Feb 2019 06:50:47 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019.01.31}
+\version{2019-01-31}
 \maketitle
 \begingroup
 \hypersetup{linkcolor=black}
@@ -20,7 +20,8 @@
 \nfootnote{Copyright \textcopyright\ 2019 Brian Michael Chase. Under
 the terms of the \LaTeX\ Project Public License, version 1.3,
 permission is granted to copy, distribute, or modify this software.
-See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}.}
+See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}
+or \url{https://www.latex-project.org/lppl/}.}
 
 Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
@@ -263,12 +264,6 @@ Section \ref{entryops}). And the \bibfield{shorthand} field allows you
 to set an abbreviation to stand in place of the author's name, the
 work's title, and other elements of a citation (see \ref{14.59}).
 
-In total, Windy City allows a fair amount of control over the format
-of notes and bibliographies, consistent with \textit{CMS}. The
-remainder of this section, and the next few sections thereafter,
-describe these and other features of the style in a more systematic
-way.
-
 \subsection{Preamble Options}
 \label{preops}
 
@@ -298,11 +293,11 @@ the previous section the citation of Toni Morrison's \textit{Song of
 Solomon} immediately after a citation of her \textit{Beloved}. In a
 context like that, do you really need to remind readers of the
 author's full name? If you think not, change \opt{idemtracker} to an
-appropriate value (see Section 3.1.2.3 of the user guide for
-\biblatex).\footnote{\textit{CMS} seems to have no policy on this
-point. In the 16th edition, however, Figure 14.3 shows consecutive
-citations of works by the same author. Both citations give the
-author's full name.}
+appropriate value (see Section 3.1.2.3 of \biblatex's user
+guide).\footnote{\textit{CMS} seems to have no policy on this point.
+In the 16th edition, however, Figure 14.3 shows consecutive citations
+of works by the same author, both of which give the author's full
+name.}
 
 \begin{optionlist}
 
@@ -328,13 +323,12 @@ collections. For discussion of multivolume works, see Section
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
 \noindent Use this option to shorten the first citation of each work.
-
 The resulting format consists mainly of the author's name and the
 work's title. According to \textit{CMS}, this approach is optional for
 documents with complete bibliographies. (See \textit{CMS} \ref{14.23},
 also 14.29--14.36.) You may use \opt{firstshort} in conjunction with
-\opt{ibid} However, it adds nothing to \opt{short}, which has the same
-effect on first citations.
+\opt{ibid}. However, it adds nothing to \opt{short}, which has the
+same effect on first citations.
 
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
@@ -587,22 +581,6 @@ The source for the passage above contains:
    \parencite*{abramowitz2005}... \end{quote}
 \end{verbatim}
 
-\cmditem{reprint}[postnote]{key}
-
-This command precedes a citation with ``reprinted in'' and then skips
-the author's position and the work's title. This is useful for citing
-a reprint of a work after citing the original:
-
-\begin{citebib}
-\item \cite{frankfurt1969}; \reprint[1--10]{frankfurt1988.1}
-\end{citebib}
-
-\noindent The output above derives from:
-
-\begin{verbatim}
-   \cite{frankfurt1969}; \reprint[1--10]{frankfurt1988.1}
-\end{verbatim}
-
 \end{ltxsyntax}
 
 \subsection{Additional Data Fields}
@@ -708,15 +686,10 @@ Aliases: \bibtype{mastersthesis}, \bibtype{phdthesis},
 \end{typelist}
 
 \noindent For the most part, you may assign every work to the basic
-entry types listed above. A PhD thesis, for example, may have the
-entry type \bibtype{thesis} or \bibtype{phdthesis}; the output is the
-same. An exception applies to books in collections: Every book in a
-one-volume or multivolume collection needs the \bibtype{inbook} or
-\bibtype{bookinbook} entry type.\footnote{Using \bibtype{inbook} for
-books in collections may depart somewhat from common usage but seems
-harmless enough.} You may use either \bibtype{inbook} or
-\bibtype{bookinbook}. If an entry belongs to a type other than the
-ones listed above, the style processes it as a book.
+entry types listed above. A PhD thesis, for example, may have a
+\bibtype{thesis} or \bibtype{phdthesis} entry type. The output is the
+same. If an entry has a type other than the ones listed above, Windy
+City processes it as a book.
 
 One comment about \bibtype{reference} and \bibtype{inreference}
 entries: You may cross-reference \bibtype{inreference} entries to
@@ -996,8 +969,8 @@ above.) You should rarely, and perhaps never, need more than one set
 of translators per work. But if you do, Windy City lets you assign as
 many as three, if you cross-reference a work with one set of
 translators to another with two. Does any such work exist? Probably
-not. Anyway, support for it is something of an accident, stemming from
-how the style handles cross-referencing with editors.
+not. Anyway, support for it is something of an accident, stemming in
+large part from how the style handles cross-referencing with editors.
 
 One complication remains: There are other name lists for editors than
 \bibfield{editor}. There's \bibfield{editora}, \bibfield{editorb}, and
@@ -1063,20 +1036,19 @@ editors' names in the author's position:
 
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in, ``Edited and
-translated by\ldots'' Using \opt{swaptrans} reverses them. Here's an
+translated by\ldots'' Reverse them with \opt{swaptrans}. Here's an
 example from \textit{CMS} \ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
 \end{citebib}
 
-Since the style treats a compiler as a kind of editor, the comments
+Since Windy City treats a compiler as a kind of editor, the comments
 above apply to compilers: If a work has compilers and translators,
-Windy City will print compilers' names first, unless you use
-\opt{swaptrans}.
+compilers' names will print first, unless you use \opt{swaptrans}.
 
 In rare cases, you may want to swap the position of an author and an
-editor or translator. \textit{CMS} gives this example in \ref{14.104}:
+editor or translator. \textit{CMS} \ref{14.104} gives an example:
 
 \begin{citebib}
 \item \cite{pound1953}
@@ -1085,9 +1057,9 @@ editor or translator. \textit{CMS} gives this example in \ref{14.104}:
 \noindent You can accomplish this effect with the entry option
 \opt{swapauth}, which works for \bibtype{book}, \bibtype{bookinbook},
 \bibtype{collection}, \bibtype{inbook}, and \bibtype{incollection}
-entry types. But beware: Windy City doesn't look ahead to see if there
-really is an editor or translator to take the author's place. If it
-doesn't find one, it will still print the author's name after the
+entry types. But beware: Windy City doesn't look ahead to see if
+there's really an editor or translator to take the author's place. If
+it doesn't find one, it will still print the author's name after the
 title, leaving the author's position empty. Also, if it finds both an
 editor and a translator, and they're not the same person, it will
 print the editor's name in the author's position---again, giving
@@ -1201,7 +1173,7 @@ collection, somewhat like the volume of an encyclopedia with the title
 it second seems more intuitive.
 
 For other works, \opt{swapvol} may seem like a poor choice, even if
-its output is formally correct:
+the output is formally correct:
 
 \begin{citebib}
 \AtNextCitekey{\toggletrue{swapvol}}
@@ -1228,15 +1200,16 @@ an author but the collection as a whole doesn't---and possibly others.
 You can fix them by adding a \bibfield{sortname} field to their
 bibliography database entries.
 
-This drawback shouldn't affect \bibfield{incollection} or
-\bibfield{letter} entries when they're cross-referenced to works that
-are changed by \opt{swapvol}. They should have their own authors or
-titles that Windy City can use to sort the works correctly.
-Regardless, \opt{swapvol} affects them, too. \textit{CMS} \ref{14.120}
-gives an example:
+This drawback shouldn't affect \bibfield{bookinbook},
+\bibfield{inbook}, \bibfield{incollection}, or \bibfield{letter}
+entries when they're cross-referenced to works that are changed by
+\opt{swapvol}. They should have their own authors or titles that Windy
+City can use for proper sorting. As for examples, it seems that
+\textit{CMS} gives exactly one in \ref{14.120}:
 
 \begin{citebib}
 \item \cite[169--71]{king2014}
+\item \cite[170]{king2014}
 \end{citebib}
 
 \noindent Here's the output with the preamble or entry option
@@ -1245,11 +1218,46 @@ gives an example:
 \begin{citebib}
 \AtNextCitekey{\toggletrue{swapvol}}
 \item \cite[169--71]{king2014}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite[170]{king2014}
 \AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
+In the second set of examples above, Windy City doesn't print the
+volume number before the page reference. That's because, with or
+without \opt{swapvol}, the citation is directly to the work's title,
+not to the collection. The same goes for articles, chapters, books,
+and other works of this type. Further, consistent with \textit{CMS}
+\ref{14.108} and \ref{15.42}, Windy City cross-references previously
+cited volumes.
+
+% Due to 'mincrossrefs=2', smith2018 would be added automatically to
+% the bibliography at the end of the document because it's referenced
+% twice below. However, it wouldn't appear in the refsegment without
+% using \nocite.
+
+\begin{citebib}
+\item \cite[56]{doe2018}
+\item \cite[128]{edwards2018}
+\nocite{smith2018}
+\end{citebib}
+
+\noindent Now with \opt{swapvol}:
+
+\begin{citebib}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite[56]{doe2018}
+\AtNextCitekey{\toggletrue{swapvol}}
+\item \cite[128]{edwards2018}
+\AtNextBibliography{\toggletrue{swapvol}}
+\nocite{smith2018}
+\end{citebib}
+
 How does Windy City determine which entries in a bibliography database
-work with \opt{swapvol}? Below are the entries for an earlier example:
+work with \opt{swapvol}? There's more than one way to do it. To keep
+things simple, let's focus on individual volumes of a collection,
+rather than works collected in them, like articles and chapters. Below
+are the entries for an earlier example:
 
 \begin{verbatim}
    @InBook{armstrong2014,
@@ -1271,20 +1279,22 @@ work with \opt{swapvol}? Below are the entries for an earlier example:
    }
 \end{verbatim}
 
-A \bibtype{bookinbook} or \bibtype{inbook} entry works with
-\opt{swapvol} if is has a \bibfield{volume} field and lacks certain
-fields that a volume of a collection of this sort shouldn't have. You
-can find the exact details in \file{windycity.bbx}. Just remember that
-entries of these types should always be cross-referenced to a
-\bibtype{collection} entry. Since Windy City treats them the same, it
-makes no difference whether you designate an entry as
+A \bibtype{bookinbook} or \bibtype{inbook} entry for a volume works
+with \opt{swapvol} if is has a \bibfield{volume} field and lacks
+certain fields that a volume of a collection of this sort shouldn't
+have, such as a \bibfield{maintitle} field or a \bibfield{volume}
+field inherited from the cross-referenced entry. You can find the
+exact details in \file{windycity.bbx}. Just remember that entries like
+these should always be cross-referenced to a \bibtype{collection} or
+one of its aliases. Since Windy City treats them the same, it makes no
+difference whether you designate entries for volumes as
 \bibtype{bookinbook} or \bibtype{inbook}.
 
 With one exception, you can get the same output with a \bibtype{book},
 \bibtype{collection}, \bibtype{mvbook}, or \bibtype{mvcollection}
 entry. As before, the choice of entry type is arbitrary. All four are
-equivalent. Here's a counterpart to the previous example using a
-\bibtype{collection} entry:
+equivalent. Here's a counterpart to the previous example using
+\bibtype{collection}:
 
 \begin{verbatim}
    @Collection{carson2014,
@@ -1302,13 +1312,13 @@ equivalent. Here's a counterpart to the previous example using a
    }
 \end{verbatim}
 
-These entry types work with \opt{swapvol} if they have
-\bibfield{volume} and \bibfield{maintitle} fields. You may prefer them
-over \bibfield{bookinbook} or \bibfield{inbook} entries if you only
-intend to cite one volume of the collection and have no need to cite
-the collection as a whole. You risk trouble, though, if the volumes of
-the collection have different publication dates, as they do for
-\textit{The Papers of Martin Luther King, Jr}. If the publication
+These entries work with \opt{swapvol} if they have \bibfield{volume}
+and \bibfield{maintitle} fields, among other conditions. You may
+prefer them over \bibfield{bookinbook} or \bibfield{inbook} entries if
+you only intend to cite one volume of the collection and have no need
+to cite the collection as a whole. You risk trouble, though, if the
+volumes of the collection have different publication dates, as they do
+for \textit{The Papers of Martin Luther King, Jr}. If the publication
 information for this volume goes last, the bibliography and long
 citation should list the publication date as \textit{2014}. If the
 publication information for the collection goes last, that date is
@@ -1345,8 +1355,8 @@ entries is probably simpler. The other way is simpler if you plan to
 cite just one work in one volume.
 
 As mentioned in \textit{CMS} \ref{15.41}, reference lists should give
-priority to the volume, not the collection. Nevertheless, Windy City
-doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
+priority to the volume, not to the collection. Nevertheless, Windy
+City doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
 Either way, remember that when a volume and a collection have
 different publication dates, a reference list entry prints both dates,
 which in turn requires you to use the \bibtype{bookinbook} or
@@ -1564,7 +1574,7 @@ Works of Benedict de Spinoza}, that it's a volume of a collection,
 like other works in this section. The same error would occur if you
 put all the data for the citation into, say, a \bibfield{collection}
 entry. Windy City would associate \bibfield{volume} with
-\bibfield{title}, not \bibfield{maintitle}. The upshot is that
+\bibfield{title}, not with \bibfield{maintitle}. The upshot is that
 correctly citing a work like this requires cross-referencing an
 \bibtype{inbook} or \bibtype{bookinbook} entry to a
 \bibtype{collection}, \bibtype{book}, \bibtype{mvbook}, or
@@ -1994,10 +2004,10 @@ On how to make an author and editor swap places, see Section
 % 14.108 Several contributions to the same multiauthor book
 \label{14.108}
 
-% Due to 'mincrossrefs=2', angle1968 and zukowsky1987 would be
-% automatically added to the bibliography at the end of the document
-% because each is referenced twice below. However, they wouldn't
-% appear in the refsegment below without using \nocite.
+% Due to 'mincrossrefs=2', angle1968 and zukowsky1987 would be added
+% automatically to the bibliography at the end of the document because
+% each is referenced twice below. However, they wouldn't appear in the
+% refsegment without using \nocite.
 
 % Unlike article entries, incollection entries don't automatically
 % print page ranges. That seems right, though CMS isn't entirely clear
@@ -2397,13 +2407,13 @@ Gutenberg as a reprint.
 
 The note for Harper includes the month of publication. Windy City
 includes it in the bibliography as well, even though \textit{CMS}
-omits it. As for Lock's entry in the bibliography, \textit{CMS}
-clearly errs in printing the surname twice. Also, for Wilder's
-article, Windy City prints \textit{nos.} before \textit{1/2}, not
-\textit{no.}, as \textit{CMS} has it. To print the correct season,
-Wilder's entry in the bibliography database includes \textit{Fall} in
-the \bibfield{issue} field. Using the \bibfield{date} field with
-\textit{2013-23} would give \textit{Autumn 2013}.
+omits it. As for Lock's entry, \textit{CMS} clearly errs in printing
+the surname twice. Also, for Wilder's article, Windy City prints
+\textit{nos.} before \textit{1/2}, not \textit{no.}, as \textit{CMS}
+has it. To print the correct season, Wilder's entry in the
+bibliography database includes \textit{Fall} in the \bibfield{issue}
+field. Using the \bibfield{date} field with \textit{2013-23} would
+give \textit{Autumn 2013}.
 
 \begin{citebib}
 \item \cite[155]{lock2015}
@@ -2456,6 +2466,10 @@ the \bibfield{issue} field. Using the \bibfield{date} field with
 \setcounter{subsubsection}{179}
 \subsubsection{Articles published in installments}
 % 14.180 Articles published in installments
+
+By default, Windy City will print each installment as a separate
+entry. To get the format for the series, you'd need to use the
+\bibtype{misc} entry type.
 
 \begin{citebib}
 \item \cite[312]{brown1978}
@@ -2575,9 +2589,9 @@ the \bibfield{issue} field. Using the \bibfield{date} field with
 % 14.202 Book reviews
 
 At present, Windy City has no place to print information about a
-section or edition of a newspaper or magazine. Thus, ``Sunday Book
-Review'' is missing from the second example. It does, however, show
-success at formatting a review with a title.
+section or edition of a newspaper or magazine. Thus, \textit{Sunday
+Book Review} is missing from the second example. It does, however,
+show success at formatting a review with a title.
 
 \begin{citebib}
 \item \cite[B13--B14]{ratliff1999}
@@ -2606,6 +2620,11 @@ of articles. In particular, see the citation of Beattie in
 \subsubsection{Citing blog posts and blogs}
 % 14.208 Citing blog posts and blogs
 \label{14.208}
+
+In \textit{CMS}, one citation refers to \textit{The Chronicle of
+Higher Education} and another to \textit{Chronicle of Higher
+Education}. The latter appears in \ref{15.51}, so it's probably
+correct.
 
 \begin{citebib}
 \item \cite{amlen2015}
@@ -2964,6 +2983,7 @@ between a volume number and a page reference.
 \setcounter{subsubsection}{50}
 \subsubsection{Citing blogs in author-date format}
 % 15.51 Citing blogs in author-date format
+\label{15.51}
 
 \textit{CMS} seems mistaken in printing a period after
 \textit{Chronicle of Higher Education} instead of a comma. Compare
