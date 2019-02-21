@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 04:51:38 PM CST
+% Last modified: Thu 21 Feb 2019 09:35:25 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -18,7 +18,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019-01-31 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019-02-21 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -46,8 +46,8 @@
 % '\addperiod' (see cite:postnote). This makes '\footcite{something}'
 % and '\footnote{\cite{something}}' functionally equivalent. To
 % prevent an extra period from printing in very rare cases, as when
-% the text of '\footcite{something}' ends with a capital letter,
-% remove '\addperiod' from the commands below:
+% '\footcite{something}' ends with a capital letter, remove
+% '\addperiod' from the commands below:
 
 \renewcommand{\bibfootnotewrapper}[1]{%
   \bibsentence#1}%
@@ -59,7 +59,7 @@
 
 \renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
 
-% Prevents errant space after colon.
+% Prevents errant space after a colon.
 
 \renewcommand*{\multicitedelim}{\setunit{\addsemicolon\space}}%
 
@@ -387,9 +387,6 @@
   \iffieldundef{postnote}
     {}
     {\printtext[bibhyperref]{\printfield{postnote}}}}
-
-% Use 'shorthandintro' to introduce a shorthand in whatever format you
-% want. See the example in windycity.bib.
 
 \newbibmacro*{shorthand+intro}{%
   \iffieldundef{shorthand}
