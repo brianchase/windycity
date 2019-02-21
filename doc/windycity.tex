@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 06:50:47 PM CST
+% Last modified: Thu 21 Feb 2019 03:04:32 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019-01-31}
+\version{2019-02-21}
 \maketitle
 \begingroup
 \hypersetup{linkcolor=black}
@@ -148,6 +148,11 @@ environment is called \opt{reflist}, which you may use as follows:
 \begin{verbatim}
    \printbibliography[env=reflist]
 \end{verbatim}
+
+\noindent Unfortunately, while the \opt{env} option allows you to have
+differently formatted bibliographies within the same document, the
+reference lists may have problems with sorting. For best results, use
+the \opt{reflist} preamble option.
 
 As you proceed through the text, note that all examples of citations
 and bibliographies are outputs of the style from commands that you can
@@ -315,10 +320,9 @@ the spacing between entries and annotations, change the value of
 each work to the bibliography. To exclude them and print only an entry
 for the whole collection, use \opt{collsonly}. It has no effect on
 many \bibtype{incollection} entries, such as articles in books, which
-need (or ought to have) a place in the bibliography, but it does
-filter out chapters of books, books in books, and volumes of
-collections. For discussion of multivolume works, see Section
-\ref{multivolume}.
+need or ought to have a place in the bibliography, but it does filter
+out chapters of books, books in books, and volumes of collections. For
+discussion of multivolume works, see Section \ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
@@ -363,20 +367,19 @@ works, use the \opt{library} entry option.
 
 \noindent By default, every work with a \bibfield{shorthand} receives
 an entry in the bibliography. If you wish to exclude them, say, to
-avoid duplication with the output of \cmd{printshorthands} and the
-like, use \opt{nolos}. Since \opt{collsonly} also excludes certain
-works from the bibliography, their results may overlap.
+avoid duplication with the output of \cmd{printshorthands}, use
+\opt{nolos}. Since \opt{collsonly} also excludes works from the
+bibliography, their results may overlap.
 
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print a bibliography in the author-date
-format---what \textit{CMS} calls a reference list. If you choose
+format, what \textit{CMS} calls a reference list. If you choose
 parenthetical citations over notes, consider using \opt{reflist} to
-maintain consistency with \textit{CMS}.
-
-Again, another way to print a reference list is to pass
-\opt{env=reflist} to \cmd{printbibliography}. See Section
-\ref{overview} for more information.
+maintain consistency with \textit{CMS}. Again, another way to print a
+reference list is to pass \opt{env=reflist} to
+\cmd{printbibliography}. See Section \ref{overview} for more
+information.
 
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
@@ -404,11 +407,11 @@ combine \opt{short} and \opt{ibid} for more concise output.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
-In bibliographies and long citations, works in collections may place
-publication information for the volume before that of the collection
-or \textit{vice versa}. Windy City gives priority to the volume. To
-reverse this for all relevant citations, use \opt{swapvol}. For more
-information, see Section \ref{collorder}.
+\noindent In bibliographies and long citations, works in collections
+may place publication information for the volume before that of the
+collection or \textit{vice versa}. Windy City gives priority to the
+volume. To reverse this for all relevant citations, use \opt{swapvol}.
+For more information, see Section \ref{collorder}.
 
 \end{optionlist}
 
@@ -479,9 +482,8 @@ title's position. Below is an example from \textit{CMS} \ref{14.105}:
 \item \cite{chaucer1966}
 \end{citebib}
 
-\noindent To bypass the author's position in a single note, and
-without affecting the bibliography, use \cmd{cite*} or
-\cmd{footcite*}.
+\noindent To bypass the author's position in a single note, without
+affecting the bibliography, use \cmd{cite*} or \cmd{footcite*}.
 
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
@@ -499,8 +501,8 @@ translator, use \opt{swapauth}. This option works for \bibtype{book},
 
 \optitem[false]{swaptrans}{\opt{true}, \opt{false}}
 
-\noindent According to \textit{CMS}, if a work has both an editor and
-a translator, their names should appear in citations in the order in
+\noindent According to \textit{CMS}, if a work has an editor and a
+translator, their names should appear in citations in the order in
 which they appear on the work's title page (\ref{14.104}). By default,
 the style lists editors first. Entries with the option
 \bibfield{swaptrans} reverse this order: Their translators print
@@ -536,19 +538,18 @@ The most important citation commands are already familiar from
 
 \noindent Insert notes with \cmd{cite} and \cmd{footcite}. Insert
 parenthetical citations with \cmd{parencite}. Use \cmd{nocite} to add
-works to bibliographies without citing them in the text. Use
-\cmd{nocite} with a comma-separated list of entry keys to add
-particular works. Use it with an asterisk to add every work in every
-\file{bib} file listed in \cmd{bibliography}.
+works to bibliographies without citing them in the text. Use it with a
+comma-separated list of entry keys to add particular works. Use it
+with an asterisk to add every work in every \file{bib} file that
+you've loaded with \biblatex.
 
 \begin{ltxsyntax}
 
 \cmditem{cite*}[prenote][postnote]{key}
 
 Use this command to cite a work without printing anything in the
-author's position. It comes in handy when the context of a citation
-makes the author's name clear, such as when the name appears in the
-work's title. From \textit{CMS} \ref{14.78}:
+author's position. It comes in handy when the context makes the
+author's name clear. From \textit{CMS} \ref{14.78}:
 
 \begin{citebib}
 \item \cite*[233]{franklin1868}
@@ -563,9 +564,9 @@ note but otherwise functions like \cmd{footcite}.
 \cmditem{parencite*}[prenote][postnote]{key}
 
 Use this command to print a parenthetical citation without the
-author's position. The most likely context for this is a sentence in
+author's position. The most likely contexts for this are passages in
 which the author receives explicit mention. Here's an example from
-\textit{CMS} 15.25:
+\textit{CMS} \ref{15.25}:
 
 \begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
 Hout \parencite*{fischer2006} reach more or less the same conclusions.
@@ -600,8 +601,8 @@ citations in this document wouldn't match their counterparts in
 \item[blogtitle/blogsubtitle]
 
 The name of a blog goes in \bibfield{blogtitle} and
-\bibfield{blogsubtitle}. It would have been preferable to use already
-exiting fields for this information. But since blog posts take the
+\bibfield{blogsubtitle}. Using already existing fields for this
+information would have been preferable. But since blog posts take the
 usual \bibfield{title} and \bibfield{subtitle} fields, and since blogs
 may have host names of different types, nothing else seemed suitable.
 
@@ -623,12 +624,6 @@ such as \textit{2nd ser.} and \textit{n.s.}. For examples, see
 journals, which occasionally have a series but no series name,
 information like \textit{2nd ser.} and \textit{n.s.} go in the
 \bibfield{series} field.
-
-\item[shortbooktitle] This field is for the short form of a
-\bibfield{booktitle}, just as \bibfield{shorttitle} is for
-\bibfield{title}. Nevertheless, its use is internal. You never need to
-use it in a bibliography database. Instead, always use
-\bibfield{shorttitle}.
 
 \item[shortmaintitle] This field is for the short form of a
 \bibfield{maintitle}. Use it in a bibliography database when a work's
@@ -732,8 +727,8 @@ either type with the same data, like this:
    }
 \end{verbatim}
 
-For unusually complicated ci\-ta\-tions---or those just not supported
-by the style---consider using the \bibtype{misc} entry type. The style
+For unusually complicated citations, or those just not supported by
+the style, consider using the \bibtype{misc} entry type. The style
 formats these entries with a small number of fields but in way that
 makes it a fallback for almost anything. The example below is from
 \textit{CMS} 14.264:
@@ -766,15 +761,14 @@ quotation marks.
 
 You may also use the \bibtype{misc} entry type to cross-reference
 entries in a bibliography, as in \textit{CMS} \ref{14.81} and
-\ref{14.82}. Below are examples from the former:
+\ref{14.82}.
 
 \begin{bibonly}
 \nocite{ashe,creasey1976,creasey1978,creasey1966,morton,york}
 \end{bibonly}
 
-For every cross-reference of this type that you want in your
-bibliography, add a \bibtype{misc} entry to your bibliography
-database. Here's one from the previous list:
+\noindent Here's the \bibtype{misc} entry for one of the
+cross-references above:
 
 \begin{verbatim}
    @Misc{ashe,
@@ -787,12 +781,12 @@ database. Here's one from the previous list:
 \noindent The option \opt{skipdate} is necessary only if you plan to
 format your bibliography as a reference list. It prevents Windy City
 from printing \textit{n.d.} (no date) after the name to indicate a
-missing publication date.
-
-With the \bibtype{misc} entries in place, use \cmd{nocite} to add them
-to your bibliography. Cite the remaining entries in the usual way. For
-examples of automatic cross-referencing in a bibliography see Section
-\ref{notes}, \ref{14.108}, and Section \ref{paren}, \ref{15.42}.
+missing publication date. After adding the \bibtype{misc} entries, use
+\cmd{nocite} with their entry keys to add them to your bibliography,
+and cite the remaining entries in the usual way. For examples of
+automatic cross-referencing in notes and bibliographies see Section
+\ref{notes}, \ref{14.108}; Section \ref{paren}, \ref{15.42}; and
+Section \ref{collections}.
 
 \section{Editors, Translators, and Compilers}
 \label{edtrans}
@@ -832,7 +826,7 @@ for an example in \textit{CMS} \ref{14.104}:
 editor and translator of the work with the names, respectively, in the
 \bibfield{editor} and \bibfield{translator} fields. Since the entry
 doesn't use the \opt{swaptrans} entry option (see Section
-\ref{edtranspos}), the resulting output list the editor and
+\ref{edtranspos}), the resulting output lists the editor and
 translator, in that order, after the authors and title.
 
 Cross-referencing introduces a bit more complexity, though the
@@ -864,12 +858,11 @@ is cross-referenced to a collection:
 
 \noindent Since \bibfield{editor} appears within the
 \bibtype{collection} entry, Windy City associates the editor's name
-with the title of that entry, \textit{Harlem}. If you moved
-\bibfield{editor} from \bibtype{collection} to \bibtype{incollection},
-the association would change to the \bibfield{title} of that entry,
-\textit{The Literature of Harlem}.
+with \textit{Harlem}. If you moved \bibfield{editor} from
+\bibtype{collection} to \bibtype{incollection}, the association would
+change to \textit{The Literature of Harlem}.
 
-Consider another example, this one of an essay in a collection:
+Consider another example, this one an essay in a collection:
 
 \begin{citebib}
 \item \cite{petrarca1948}
@@ -899,9 +892,8 @@ scope of the \bibtype{incollection} entry:
 \end{verbatim}
 
 \noindent By the same token, since \bibfield{editor} falls within the
-scope of \bibtype{collection}, the style associates it with the
-\bibfield{title} of that entry, \textit{The Renaissance Philosophy of
-Man}.
+scope of \bibtype{collection}, the style associates it with
+\textit{The Renaissance Philosophy of Man}.
 
 Sometimes, you need to designate the role of an editor with the field
 \bibfield{editortype}. The values of \bibfield{editortype} are
@@ -956,9 +948,9 @@ to the series, Windy City would assume that she's the book's editor.
 In short, for a title's compilers and for any title at a higher level
 than the \bibfield{title} field, you need to use
 \bibfield{editortype}. Combined with Windy City's support for citing
-articles, chapters, and books within books, this scheme allows for
-several different levels of editors, although it does limit you to one
-set of compilers per work.
+articles, chapters, books, and other works within books, this scheme
+allows for several sets of editors per work, although it does limit
+you to just one set of compilers.
 
 Windy City's support for translators falls between its support for
 editors and compilers. Unless a work's bibliography database entry has
@@ -1000,10 +992,10 @@ of thumb described above, reserving \bibfield{editor} for
 \subsection{Switching Places and Roles}
 \label{edtranspos}
 
-Normally, Windy City prints editors' names first. But if translators
-are listed first on a work's title page (or in some other relevant
-place), you may want to reverse the order and print the translators'
-names first. For that, use the entry option \opt{swaptrans}. Compare:
+Normally, Windy City lists editors first. But if translators are
+listed first on a work's title page (or in some other relevant place),
+you may want to reverse the order. For that, use the entry option
+\opt{swaptrans}. Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -1011,9 +1003,9 @@ names first. For that, use the entry option \opt{swaptrans}. Compare:
 \end{citebib}
 
 If a work has no author, but has an editor, the style will print the
-name of the editor in the author's position. The same happens if a
-work has no author but has a translator. The following are examples
-from \textit{CMS} \ref{14.103}:
+editor's name in the author's position. The same happens if a work has
+no author but has a translator. The following are examples from
+\textit{CMS} \ref{14.103}:
 
 \begin{citebib}
 \item \cite[100]{egan2014}
@@ -1021,8 +1013,8 @@ from \textit{CMS} \ref{14.103}:
 \end{citebib}
 
 What if a work has no author but has editors and translators? Since
-Windy City gives priority to editors, it defaults to printing the
-editors' names in the author's position:
+Windy City gives priority to editors, it defaults to listing editors
+in the author's position:
 
 \begin{citebib}
 \item \cite{smith2002a}
@@ -1035,9 +1027,9 @@ editors' names in the author's position:
 \end{citebib}
 
 Similarly, if a work's editors and translators are identical, the
-style will print the editors' role first, as in, ``Edited and
-translated by\ldots'' Reverse them with \opt{swaptrans}. Here's an
-example from \textit{CMS} \ref{14.104}:
+style will print the editors' role first, as in \textit{edited and
+translated by}\ldots Reverse them with \opt{swaptrans}. From
+\textit{CMS} \ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
@@ -1054,17 +1046,18 @@ editor or translator. \textit{CMS} \ref{14.104} gives an example:
 \item \cite{pound1953}
 \end{citebib}
 
-\noindent You can accomplish this effect with the entry option
+\noindent You can get this effect with the entry option
 \opt{swapauth}, which works for \bibtype{book}, \bibtype{bookinbook},
-\bibtype{collection}, \bibtype{inbook}, and \bibtype{incollection}
-entry types. But beware: Windy City doesn't look ahead to see if
-there's really an editor or translator to take the author's place. If
-it doesn't find one, it will still print the author's name after the
-title, leaving the author's position empty. Also, if it finds both an
-editor and a translator, and they're not the same person, it will
-print the editor's name in the author's position---again, giving
-priority to editors. If you want the translator's name in the author's
-position, use \opt{swapauth} with \opt{swaptrans}.
+\bibtype{collection}, \bibtype{inbook}, \bibtype{incollection},
+\bibtype{mvbook}, and \bibtype{mvcollection} entry types. But beware:
+Windy City doesn't look ahead to see if there's really an editor or
+translator to take the author's place. If it doesn't find one, it will
+still print the author's name after the title, leaving the author's
+position empty. Also, if it finds both an editor and a translator, and
+they're not the same person, it will print the editor's name in the
+author's position---again, giving priority to editors. If you want the
+translator's name in the author's position, use \opt{swapauth} with
+\opt{swaptrans}.
 
 Another caveat: For correct sorting in a bibliography, a work that
 uses \opt{swapauth} needs a field like \bibfield{sortname} to sort it
@@ -1254,10 +1247,10 @@ cited volumes.
 \end{citebib}
 
 How does Windy City determine which entries in a bibliography database
-work with \opt{swapvol}? There's more than one way to do it. To keep
-things simple, let's focus on individual volumes of a collection,
-rather than works collected in them, like articles and chapters. Below
-are the entries for an earlier example:
+work with \opt{swapvol}? To keep things simple, let's focus on
+individual volumes of a collection, rather than works collected in
+them, like articles and chapters. Below are the entries for an earlier
+example:
 
 \begin{verbatim}
    @InBook{armstrong2014,
@@ -1280,15 +1273,16 @@ are the entries for an earlier example:
 \end{verbatim}
 
 A \bibtype{bookinbook} or \bibtype{inbook} entry for a volume works
-with \opt{swapvol} if is has a \bibfield{volume} field and lacks
-certain fields that a volume of a collection of this sort shouldn't
-have, such as a \bibfield{maintitle} field or a \bibfield{volume}
-field inherited from the cross-referenced entry. You can find the
-exact details in \file{windycity.bbx}. Just remember that entries like
-these should always be cross-referenced to a \bibtype{collection} or
-one of its aliases. Since Windy City treats them the same, it makes no
-difference whether you designate entries for volumes as
-\bibtype{bookinbook} or \bibtype{inbook}.
+with \opt{swapvol} if it has a \bibfield{title}, a \bibfield{volume},
+and another \bibfield{title} inherited from a cross-referenced entry,
+and if it lacks certain fields that it shouldn't have, such as a
+\bibfield{maintitle} field or a \bibfield{volume} field inherited from
+the cross-referenced entry. You can find the exact details in
+\file{windycity.bbx}. Just remember that entries like these should
+always be cross-referenced to a \bibtype{collection} or one of its
+aliases. Since Windy City treats them the same, it makes no difference
+whether you designate entries for volumes as \bibtype{bookinbook} or
+\bibtype{inbook}.
 
 With one exception, you can get the same output with a \bibtype{book},
 \bibtype{collection}, \bibtype{mvbook}, or \bibtype{mvcollection}
@@ -1328,9 +1322,10 @@ however, has just one field for a publication date, so using
 \textit{1992–}. Otherwise, the entry types are interchangeable. You
 can find examples of both approaches in \file{windycity.bib}.
 
-An \bibtype{incollection} or \bibtype{letter} entry works with
-\opt{swapvol} if it passes one or both tests for the previous types.
-This means you may choose either approach mentioned above:
+Certain entries cross-referenced to entries that work with
+\opt{swapvol} also work with it. Those enty types are limited to
+\bibtype{bookinbook}, \bibtype{inbook}, \bibtype{incollection}, or
+\bibtype{letter}. For the letter cited above:
 
 \begin{verbatim}
    @Letter{king2014,
@@ -1342,7 +1337,7 @@ This means you may choose either approach mentioned above:
    }
 \end{verbatim}
 
-\noindent In other words, you may cross-reference King's letter to
+\noindent You may cross-reference this entry to
 \bibfield{armstrong2014} or \bibfield{carson2014}. The only difference
 is that, with \opt{swapvol}, cross-referencing to
 \bibfield{carson2014} once more gives the wrong publication date for
@@ -1464,11 +1459,10 @@ the appropriate abbreviations (for some examples, see \textit{CMS}
 
 What if you leave the \bibfield{postnote} empty? In that case, Windy
 City assumes that you mean to cite the collection as a whole. As such,
-the first, long citation of the work will print the total number of
-volumes in the collection. Subsequent entries will indicate the
-collection in whatever short form corresponds to the preamble options.
-The following shows the default output for two such citations of the
-collection:
+the first, long citation of the work will print the collection's total
+number of volumes. Subsequent entries will indicate the collection in
+whatever short form corresponds to the preamble options. The following
+shows the default output for two such citations of the collection:
 
 \begin{citeonly}
 \item \cite{byrne1981}
@@ -1477,8 +1471,8 @@ collection:
 
 For collections like \textit{The Complete Tales of Henry James}, which
 don't count as single works, every volume needs to have its own entry
-in your bibliography database. Here's the entry for the volume cited
-in \textit{CMS} \ref{14.118}:
+in the bibliography database. Here's the entry for the volume cited in
+\textit{CMS} \ref{14.118}:
 
 \begin{verbatim}
    @Collection{james1963.5,
@@ -1499,7 +1493,7 @@ in \textit{CMS} \ref{14.118}:
 
 Since the volume number is part of the entry and needs to print in
 different places depending on the context, don't include it in the
-\bibfield{postnote}. Let Windy City handle it. Here's the source for
+\bibfield{postnote}. Let Windy City handle it. Below is the source for
 the first citation of \textit{The Complete Tales Henry James}:
 
 \begin{verbatim}
@@ -1510,11 +1504,11 @@ Neither type of collection uses cross-referencing in the bibliography
 database. For \textit{The Lisle Letters}, cross-referencing would
 introduce needless complexity. A single work should have a single
 entry, not multiple, cross-referenced entries. For \textit{The
-Complete Tales Henry James}, cross-referencing would result in errors.
-That's because, with different titles and publication dates, not all
-data for the collection is true of particular volumes. To cite the
-collection as a whole, as in \textit{CMS} \ref{14.117}, add a separate
-entry:
+Complete Tales Henry James}, cross-referencing would result in errors
+because, with different titles and publication dates, not all
+publication data for the collection is true of each volume. To cite
+the collection as a whole, as in \textit{CMS} \ref{14.117}, add a
+separate entry:
 
 \begin{verbatim}
    @Collection{james1962,
@@ -2836,6 +2830,17 @@ after the year, not before.
 \item \parencite{doershuk2016}
 \end{citeref}
 
+\setcounter{subsubsection}{24}
+\subsubsection{Text citations in relation to surrounding text and punctuation}
+% 15.25 Text citations in relation to surrounding text and punctuation
+\label{15.25}
+
+\begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
+Hout \parencite*{fischer2006} reach more or less the same conclusions.
+In contrast, Abramowitz and Saunders \parencite*{abramowitz2005}
+suggest that the mass public is deeply divided between red states and
+blue states and between churchgoers and secular voters. \end{quote}
+
 \setcounter{subsubsection}{26}
 \subsubsection{Several references to the same source}
 % 15.27 Several references to the same source
@@ -3032,7 +3037,10 @@ author-date format.\\}%
 
 \defbibnote{ref}{This section shows the output of
 \cmd{printbibliography} in the author-date format. For information on
-how to produce this output, see Section \ref{preops}.\\}%
+how to produce this output, see Section \ref{preops}. Issues with
+sorting in this section are mentioned there. Creating a reference list
+in the preferred way, with the \opt{reflist} preamble option, should
+prevent those issues.\\}%
 
 \printbiblist[prenote=sh]{shorthand}
 \refstepcounter{sh}\label{sh}
