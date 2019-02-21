@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 04:52:02 PM CST
+% Last modified: Thu 21 Feb 2019 09:27:06 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -18,7 +18,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019-01-31 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019-02-21 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -639,7 +639,9 @@
                or test {\ifentrytype{bookinbook}}
                or test {\ifentrytype{collection}}
                or test {\ifentrytype{inbook}}
-               or test {\ifentrytype{incollection}} )}
+               or test {\ifentrytype{incollection}}
+               or test {\ifentrytype{mvbook}}
+               or test {\ifentrytype{mvcollection}} )}
     {}
     {\ifboolexpr{ togl {collection:ib}
                   and togl {swapvol}}
@@ -1416,8 +1418,6 @@
            {\printtext[parens]{\printfield{issue}}}}}
     {\setunit{\space}%
      \printtext[parens]{\usebibmacro{issue+season+year}}}}
-
-% Treat 'season' as an alternative for 'issue'.
 
 \newbibmacro*{issue+season+year}{%
   \ifboolexpr{ test {\iffieldundef{issue}}
