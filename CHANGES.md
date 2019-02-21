@@ -7,11 +7,12 @@ if any, are listed below under "Latest" and indicate updates to [Windy
 City's repository](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
-## Latest
+## 2019-02-21
 
 * fixed reviews with titles
+* in reference lists, fixed 'year' printing with 'season' or 'issue'
 * much improved format of unsigned reviews in bibliographies and
-  reference lists (in part, restoring previous work set aside)
+  reference lists, in part restoring previous work set aside
 * extended 'swapvol' option to work with 'letter', 'incollection',
   'inbook', and 'bookinbook' entries that are cross-referenced to
   entries that work with 'swapvol' (in effect, you can use 'swapvol' not
@@ -21,11 +22,9 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
   translators of a 'maintitle'
 * added 'library' entry and preamble options to support the 'library'
   field
+* extended 'swapauth' to work with 'mvbook' and 'mvcollection' entries
 * added support for \iffieldbibstring in processing 'edition' and
   'type' fields
-* [updated
-  documentation](https://s3.amazonaws.com/brianchase/windycity.pdf
-  "windycity-dev.pdf") (PDF)
 * other bug fixes
 
 ## 2019-01-31
