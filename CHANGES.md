@@ -7,6 +7,11 @@ if any, are listed below under "Latest" and indicate updates to [Windy
 City's repository](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
+## Latest
+
+* fixed a bug that could prevent names in the 'editora' field from
+  printing in the author's position
+
 ## 2019-02-21
 
 * fixed reviews with titles
@@ -52,8 +57,8 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * changed processing of spacing and punctuation around 'postnote' for
   all citations
 * added support for swapping the place of an author with an editor or
-  translator, as in CMS 14.104
-* extended the previous to cover a similar case in CMS 14.122
+  translator, as in CMOS 14.104
+* extended the previous to cover a similar case in CMOS 14.122
 * improved handling of name lists and cross-referencing
 * removed no longer maintained citation commands
 * other bug fixes and housekeeping
@@ -106,7 +111,7 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
 * fixed 'noauth' entry option (it should only affect notes)
 * fixed 'inst+loc+date'
-* following CMS, made 'cite:short' print just a work's title without
+* following CMOS, made 'cite:short' print just a work's title without
   the name of the collection
 * fixed name formatting for affixes like 'Jr.' in notes (no comma
   before them, unlike in bibliographies, where names are inverted)
@@ -142,10 +147,11 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 * put back preamble options 'useeditor' and 'usetranslator', which
   are necessary after all (double ugh!)
 * more readable and arguably simpler date processing for periodicals
-* added preamble option 'ibid' to prepare for the 17th edition of CMS
+* added preamble option 'ibid' to prepare for the 17th edition of CMOS
 * updated windycity.tex to reflect the last point, also to make use of
   optionlist
-* remove unused entries from windycity.bib for the 15th edition of CMS
+* remove unused entries from windycity.bib for the 15th edition of
+  CMOS
 
 ## 2018-11-13
 
@@ -153,8 +159,8 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
   for endday field)
 * fixed spacing between volumes and pages in author-date system for
   periodicals
-* support names of anonymous authors as in CMS 14.80 (16th edition)
-  and CMS 14.79 (17th edition)
+* support names of anonymous authors as in CMOS 14.80 (16th edition)
+  and CMOS 14.79 (17th edition)
 
 ## 2018-11-09
 

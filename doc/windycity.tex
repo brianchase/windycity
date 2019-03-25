@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Feb 2019 03:04:32 PM CST
+% Last modified: Mon 25 Mar 2019 12:47:37 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -26,20 +26,20 @@ or \url{https://www.latex-project.org/lppl/}.}
 Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
 to the 17th edition of \textit{The Chicago Manual of Style}
-(\textit{CMS}).\footnote{\cite{chicago2017}} It accurately handles a
+(\textit{CMOS}).\footnote{\cite{chicago2017}} It accurately handles a
 wide range of citations in different formats and includes a set of
 options and commands to support special circumstances. It also has
 extensive support for citing and arranging different kinds of editors,
 translators, and compilers within a single citation. These features
 make Windy City especially suitable for academic work.
 
-The following sections assume familiarity with \textit{CMS} and
+The following sections assume familiarity with \textit{CMOS} and
 \biblatex. Section \ref{overview} gives a brief overview of the
 style's features. Section \ref{edtrans} discusses the assignment and
 placement of editors, translators, and compilers. Section
 \ref{collections} discusses several issues with collections, including
 options for formatting citations of individual volumes. Sections
-\ref{notes} and \ref{paren} reproduce examples from \textit{CMS}
+\ref{notes} and \ref{paren} reproduce examples from \textit{CMOS}
 Chapters 14 and 15, respectively, with occasional commentary and
 references to other sections.
 
@@ -87,7 +87,7 @@ style is meant to handle.
 \subsection{The Default Format}
 \label{default}
 
-For a first set of examples, consider a passage from \textit{CMS}
+For a first set of examples, consider a passage from \textit{CMOS}
 \ref{14.30}:
 
 \begin{citeonly}
@@ -120,7 +120,7 @@ previously cited works:
 \end{bibonly}
 
 \noindent You may also print a bibliography in the author-date format,
-what \textit{CMS} calls a reference list:
+what \textit{CMOS} calls a reference list:
 
 \begin{refonly}
 \nocite{kaiser1964,morley1995,schwartz1992}
@@ -166,9 +166,9 @@ All bibliographic data resides in \file{windycity.bib}.
 \subsection{Short Citations}
 \label{short}
 
-Aside from the author-date format, \textit{CMS} offers scant
+Aside from the author-date format, \textit{CMOS} offers scant
 documentation of alternative formats. Nevertheless, there are
-alternatives. Consider this example from \textit{CMS}
+alternatives. Consider this example from \textit{CMOS}
 \ref{14.34}:\footnote{Switching formats within a document isn't a
 feature of the style. For demonstration purposes, though, it's
 possible.}
@@ -224,12 +224,12 @@ eleventh note, where the title is the key mark of distinction, the
 author's name. To use this format, start \biblatex with the preamble
 option \opt{short}. See Section \ref{preops} for more information.
 
-\textit{CMS} \ref{14.34} also shows how to render the passage above
-with \textit{ibid.} Unlike previous editions of \textit{CMS}, the 17th
-edition discourages its use. As such, \textit{ibid.} is no longer part
-of Windy City's default format. Enable it with the preamble option
-\opt{ibid} (again, see Section \ref{preops}). Options \opt{short} and
-\opt{ibid} together give the following:
+\textit{CMOS} \ref{14.34} also shows how to render the passage above
+with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
+17th edition discourages its use. As such, \textit{ibid.} is no longer
+part of Windy City's default format. Enable it with the preamble
+option \opt{ibid} (again, see Section \ref{preops}). Options
+\opt{short} and \opt{ibid} together give the following:
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
@@ -299,7 +299,7 @@ Solomon} immediately after a citation of her \textit{Beloved}. In a
 context like that, do you really need to remind readers of the
 author's full name? If you think not, change \opt{idemtracker} to an
 appropriate value (see Section 3.1.2.3 of \biblatex's user
-guide).\footnote{\textit{CMS} seems to have no policy on this point.
+guide).\footnote{\textit{CMOS} seems to have no policy on this point.
 In the 16th edition, however, Figure 14.3 shows consecutive citations
 of works by the same author, both of which give the author's full
 name.}
@@ -328,11 +328,11 @@ discussion of multivolume works, see Section \ref{multivolume}.
 
 \noindent Use this option to shorten the first citation of each work.
 The resulting format consists mainly of the author's name and the
-work's title. According to \textit{CMS}, this approach is optional for
-documents with complete bibliographies. (See \textit{CMS} \ref{14.23},
-also 14.29--14.36.) You may use \opt{firstshort} in conjunction with
-\opt{ibid}. However, it adds nothing to \opt{short}, which has the
-same effect on first citations.
+work's title. According to \textit{CMOS}, this approach is optional
+for documents with complete bibliographies. (See \textit{CMOS}
+\ref{14.23}, also 14.29--14.36.) You may use \opt{firstshort} in
+conjunction with \opt{ibid}. However, it adds nothing to \opt{short},
+which has the same effect on first citations.
 
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
@@ -340,10 +340,10 @@ same effect on first citations.
 on the same page receive an \textit{ibid}. The qualification ``on the
 same page'' means that \textit{ibid.} always refers to a work cited on
 the current page without an \textit{ibid.} The latter is not a
-requirement of \textit{CMS} but seems reasonable, since it prevents
+requirement of \textit{CMOS} but seems reasonable, since it prevents
 readers from having to look at another page to determine the referent
 of an \textit{ibid.} For examples of its output, see Section
-\ref{short} and \ref{14.34}. As of the 17th edition, \textit{CMS}
+\ref{short} and \ref{14.34}. As of the 17th edition, \textit{CMOS}
 discourages the use of \textit{ibid.} (see \ref{14.34}).
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
@@ -374,9 +374,9 @@ bibliography, their results may overlap.
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print a bibliography in the author-date
-format, what \textit{CMS} calls a reference list. If you choose
+format, what \textit{CMOS} calls a reference list. If you choose
 parenthetical citations over notes, consider using \opt{reflist} to
-maintain consistency with \textit{CMS}. Again, another way to print a
+maintain consistency with \textit{CMOS}. Again, another way to print a
 reference list is to pass \opt{env=reflist} to
 \cmd{printbibliography}. See Section \ref{overview} for more
 information.
@@ -384,13 +384,13 @@ information.
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
 \noindent As shown in Section \ref{short}, this option prints
-citations in a short format (see \textit{CMS} \ref{14.34}). The use of
-\opt{short} has one feature in common with \opt{ibid}: Just as
+citations in a short format (see \textit{CMOS} \ref{14.34}). The use
+of \opt{short} has one feature in common with \opt{ibid}: Just as
 \textit{ibid.} appears only for consecutive citations of a work on the
 same page, and so never refers to a citation on a previous page,
 \opt{short} drops the title from consecutive citations of a work on
 the same page, never in reference to a citation on a previous page. As
-with \textit{ibid.}, this feature isn't required by \textit{CMS}, but
+with \textit{ibid.}, this feature isn't required by \textit{CMOS}, but
 it prevents readers from having to look at a previous page to
 determine which title a citation refers to.
 
@@ -428,7 +428,7 @@ For options that affect the format of every work, see Section
 \optitem[false]{anonauth}{\opt{true}, \opt{false}}
 
 \noindent This option prints the author's name of an anonymously
-published work in brackets, as in this example from \textit{CMS}
+published work in brackets, as in this example from \textit{CMOS}
 \ref{14.79}:
 
 \begin{citebib}
@@ -438,7 +438,7 @@ published work in brackets, as in this example from \textit{CMS}
 \optitem[false]{anonqauth}{\opt{true}, \opt{false}}
 
 \noindent Similar to the previous but adds a question mark after the
-author's name, as in this example from \textit{CMS} \ref{14.79}:
+author's name, as in this example from \textit{CMOS} \ref{14.79}:
 
 \begin{citebib}
 \item \cite{hawkes1834}
@@ -461,12 +461,12 @@ work's entry, though, like an ISBN, before an annotation. To print the
 
 \optitem[false]{listvols}{\opt{true}, \opt{false}}
 
-\noindent \textit{CMS} offers some flexibility over whether a long
-citation gives a work's total number of volumes (see \textit{CMS}
+\noindent \textit{CMOS} offers some flexibility over whether a long
+citation gives a work's total number of volumes (see \textit{CMOS}
 \ref{14.118}). Windy City replicates this in a roundabout way: By
 default, it prints the \bibfield{volumes} field in certain long
 citations only if the \bibfield{postnote} field is empty. This does a
-better job of matching examples in \textit{CMS} than a simpler policy
+better job of matching examples in \textit{CMOS} than a simpler policy
 would. For the rest, use \opt{listvols}. It prints the
 \bibfield{volumes} field in those citations no matter what the
 \bibfield{postnote} contains. For more information, see Section
@@ -476,7 +476,7 @@ would. For the rest, use \opt{listvols}. It prints the
 
 \noindent This option tells the style to bypass the author's position
 of a work in notes and bibliographies. Citations will begin with the
-title's position. Below is an example from \textit{CMS} \ref{14.105}:
+title's position. Below is an example from \textit{CMOS} \ref{14.105}:
 
 \begin{citebib}
 \item \cite{chaucer1966}
@@ -501,7 +501,7 @@ translator, use \opt{swapauth}. This option works for \bibtype{book},
 
 \optitem[false]{swaptrans}{\opt{true}, \opt{false}}
 
-\noindent According to \textit{CMS}, if a work has an editor and a
+\noindent According to \textit{CMOS}, if a work has an editor and a
 translator, their names should appear in citations in the order in
 which they appear on the work's title page (\ref{14.104}). By default,
 the style lists editors first. Entries with the option
@@ -549,7 +549,7 @@ you've loaded with \biblatex.
 
 Use this command to cite a work without printing anything in the
 author's position. It comes in handy when the context makes the
-author's name clear. From \textit{CMS} \ref{14.78}:
+author's name clear. From \textit{CMOS} \ref{14.78}:
 
 \begin{citebib}
 \item \cite*[233]{franklin1868}
@@ -566,7 +566,7 @@ note but otherwise functions like \cmd{footcite}.
 Use this command to print a parenthetical citation without the
 author's position. The most likely contexts for this are passages in
 which the author receives explicit mention. Here's an example from
-\textit{CMS} \ref{15.25}:
+\textit{CMOS} \ref{15.25}:
 
 \begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
 Hout \parencite*{fischer2006} reach more or less the same conclusions.
@@ -594,7 +594,7 @@ use in a bibliography database. The fields below are different: You
 can use them to store information in a bibliography database that you
 want to appear in citations. Without these fields, quite a few
 citations in this document wouldn't match their counterparts in
-\textit{CMS}.
+\textit{CMOS}.
 
 \begin{marglist}
 
@@ -620,7 +620,7 @@ Edith Richert, with the assistance of Lilian J. Redstone et al.''
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
 such as \textit{2nd ser.} and \textit{n.s.}. For examples, see
-\textit{CMS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
+\textit{CMOS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
 journals, which occasionally have a series but no series name,
 information like \textit{2nd ser.} and \textit{n.s.} go in the
 \bibfield{series} field.
@@ -690,7 +690,7 @@ One comment about \bibtype{reference} and \bibtype{inreference}
 entries: You may cross-reference \bibtype{inreference} entries to
 \bibtype{reference} entries, as with articles in books, but you can
 get the same output using one or the other entry type alone. Take an
-example from \textit{CMS} \ref{14.232}:
+example from \textit{CMOS} \ref{14.232}:
 
 \begin{citeonly}
 \item \cite{salvation1980}
@@ -731,7 +731,7 @@ For unusually complicated citations, or those just not supported by
 the style, consider using the \bibtype{misc} entry type. The style
 formats these entries with a small number of fields but in way that
 makes it a fallback for almost anything. The example below is from
-\textit{CMS} 14.264:
+\textit{CMOS} 14.264:
 
 \begin{citebib}
 \item \cite{roosevelt1959}
@@ -760,7 +760,7 @@ quotation marks.
 \end{verbatim}
 
 You may also use the \bibtype{misc} entry type to cross-reference
-entries in a bibliography, as in \textit{CMS} \ref{14.81} and
+entries in a bibliography, as in \textit{CMOS} \ref{14.81} and
 \ref{14.82}.
 
 \begin{bibonly}
@@ -804,7 +804,7 @@ For the most part, Windy City associates the \bibfield{editor} and
 scope of an entry. In most cases, then, you can assign editors and
 translators simply by adding the \bibfield{editor} and
 \bibfield{translator} fields to a database entry. Below is the entry
-for an example in \textit{CMS} \ref{14.104}:
+for an example in \textit{CMOS} \ref{14.104}:
 
 \begin{verbatim}
    @Collection{adorno1999,
@@ -832,7 +832,7 @@ translator, in that order, after the authors and title.
 Cross-referencing introduces a bit more complexity, though the
 principle is the same: Within the scope of an entry, the style
 associates \bibfield{editor} and \bibfield{translator} with the lowest
-level title. In this example from \textit{CMS} \ref{14.30}, an essay
+level title. In this example from \textit{CMOS} \ref{14.30}, an essay
 is cross-referenced to a collection:
 
 \begin{verbatim}
@@ -903,7 +903,7 @@ Sometimes, you need to designate the role of an editor with the field
 compiler to an entry, add the compiler's name to an available field
 for an editor, then add an appropriate \bibfield{editortype} field
 with the value \textit{compiler}. It may help to see the bibliography
-database entry for an example in \textit{CMS} \ref{14.103}:
+database entry for an example in \textit{CMOS} \ref{14.103}:
 
 \begin{verbatim}
    @Book{schechter2011,
@@ -923,7 +923,7 @@ database entry for an example in \textit{CMS} \ref{14.103}:
 
 Follow the same pattern for editors of a \bibfield{maintitle},
 \bibfield{series}, or \bibfield{issuetitle}. Here's an example from
-\textit{CMS} \ref{14.123}:
+\textit{CMOS} \ref{14.123}:
 
 \begin{verbatim}
    @Book{allen2009,
@@ -1005,7 +1005,7 @@ you may want to reverse the order. For that, use the entry option
 If a work has no author, but has an editor, the style will print the
 editor's name in the author's position. The same happens if a work has
 no author but has a translator. The following are examples from
-\textit{CMS} \ref{14.103}:
+\textit{CMOS} \ref{14.103}:
 
 \begin{citebib}
 \item \cite[100]{egan2014}
@@ -1029,7 +1029,7 @@ in the author's position:
 Similarly, if a work's editors and translators are identical, the
 style will print the editors' role first, as in \textit{edited and
 translated by}\ldots Reverse them with \opt{swaptrans}. From
-\textit{CMS} \ref{14.104}:
+\textit{CMOS} \ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
@@ -1040,7 +1040,7 @@ above apply to compilers: If a work has compilers and translators,
 compilers' names will print first, unless you use \opt{swaptrans}.
 
 In rare cases, you may want to swap the position of an author and an
-editor or translator. \textit{CMS} \ref{14.104} gives an example:
+editor or translator. \textit{CMOS} \ref{14.104} gives an example:
 
 \begin{citebib}
 \item \cite{pound1953}
@@ -1084,7 +1084,7 @@ the entry for the previous example:
 \label{collections}
 
 Before you cite a collection or one of its volumes, you need to
-consider how you want the citation to look (\textit{CMS} gives you
+consider how you want the citation to look (\textit{CMOS} gives you
 options) and whether the collection should count as a single work or
 as a composite. These issues have implications for how you structure
 entries in your bibliography database and how you use citation
@@ -1098,7 +1098,7 @@ publication information that differs from the collection's. When
 preparing your bibliography database, the most basic choice to make
 about a work in a collection is which publication information has
 priority, the collection's or the volume's. Consider an example from
-\textit{CMS} \ref{14.119}:
+\textit{CMOS} \ref{14.119}:
 
 \begin{citebib}
 \item \cite{armstrong2014}
@@ -1106,8 +1106,8 @@ priority, the collection's or the volume's. Consider an example from
 
 \noindent The editor and title of the volume precede the editor and
 title of the collection. In notes and bibliographies in the default
-format, \textit{CMS} gives you the option of reversing this order.
-(See especially \textit{CMS} \ref{14.119}, \ref{14.121}, and
+format, \textit{CMOS} gives you the option of reversing this order.
+(See especially \textit{CMOS} \ref{14.119}, \ref{14.121}, and
 \ref{14.122}, and compare \ref{14.144} and \ref{15.41}.) Windy City
 does as well, with the entry or preamble option \opt{swapvol}.
 
@@ -1139,7 +1139,7 @@ below, the volume has priority:
 Notice the appearance of the volume number in the second note above,
 separated from the page citation with a colon. When the collection has
 priority, the volume number should appear in the citation. There are
-enough examples in \textit{CMS} to make that clear. But when the
+enough examples in \textit{CMOS} to make that clear. But when the
 volume has priority, the volume number is at best optional but
 probably incorrect. (It could cause confusion, since the collection is
 what comes in volumes, not the volumes themselves.) In any event,
@@ -1154,7 +1154,7 @@ some works but not others. That's why there's a \opt{swapvol} entry
 option for changing individual citations.
 
 A good candidate for the entry option is this example from
-\textit{CMS} \ref{14.118}:
+\textit{CMOS} \ref{14.118}:
 
 \begin{citebib}
 \item \cite*{james1963.5}
@@ -1198,7 +1198,7 @@ This drawback shouldn't affect \bibfield{bookinbook},
 entries when they're cross-referenced to works that are changed by
 \opt{swapvol}. They should have their own authors or titles that Windy
 City can use for proper sorting. As for examples, it seems that
-\textit{CMS} gives exactly one in \ref{14.120}:
+\textit{CMOS} gives exactly one in \ref{14.120}:
 
 \begin{citebib}
 \item \cite[169--71]{king2014}
@@ -1220,7 +1220,7 @@ In the second set of examples above, Windy City doesn't print the
 volume number before the page reference. That's because, with or
 without \opt{swapvol}, the citation is directly to the work's title,
 not to the collection. The same goes for articles, chapters, books,
-and other works of this type. Further, consistent with \textit{CMS}
+and other works of this type. Further, consistent with \textit{CMOS}
 \ref{14.108} and \ref{15.42}, Windy City cross-references previously
 cited volumes.
 
@@ -1349,7 +1349,7 @@ a whole, cross-referencing to \bibtype{bookinbook} or \bibtype{inbook}
 entries is probably simpler. The other way is simpler if you plan to
 cite just one work in one volume.
 
-As mentioned in \textit{CMS} \ref{15.41}, reference lists should give
+As mentioned in \textit{CMOS} \ref{15.41}, reference lists should give
 priority to the volume, not to the collection. Nevertheless, Windy
 City doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
 Either way, remember that when a volume and a collection have
@@ -1364,13 +1364,13 @@ which in turn requires you to use the \bibtype{bookinbook} or
 A final issue concerns whether you want long citations to give a
 work's total number of volumes. Whereas entries in a bibliography
 almost always give that number (the exceptions are those that work
-with \opt{swapvol}), doing so in notes is optional (per \textit{CMS}
+with \opt{swapvol}), doing so in notes is optional (per \textit{CMOS}
 \ref{14.118}).
 
 Here's what Windy City does: Apart from entries that work with
 \opt{swapvol}, it prints the \bibfield{volumes} field in long
 citations only if the \bibfield{postnote} field is empty. That's not a
-requirement of \textit{CMS}. But there are several reasons for
+requirement of \textit{CMOS}. But there are several reasons for
 preferring this approach. If the \bibfield{postnote} is empty,
 printing the total preserves the correspondence between the long
 citation and its entry in the bibliography. This prevents the
@@ -1381,13 +1381,13 @@ include a volume number (see Section \ref{multivolume}). Including a
 volume number makes it less important, arguably, to include the total
 number of volumes. The main benefit, anyway, is that Windy City's
 approach is consistent with citations of \textit{The Lisle Letters} in
-\textit{CMS} \ref{14.117} and \ref{14.118}. No simpler rule would be.
+\textit{CMOS} \ref{14.117} and \ref{14.118}. No simpler rule would be.
 
 Confused? All you need to know is that, barring exceptions for
 \opt{swapvol}, if you want to print a work's total number of volumes
 without regard to the \bibfield{postnote}, use the entry option
 \opt{listvols}. Windy City uses it to match some examples in
-\textit{CMS}, such as in \ref{14.59}:
+\textit{CMOS}, such as in \ref{14.59}:
 
 \begin{citeonly}
 \item \cite[1:126]{shurtleff1853}
@@ -1396,11 +1396,11 @@ without regard to the \bibfield{postnote}, use the entry option
 \subsection{Collections as Single Works}
 \label{multivolume}
 
-Although its discussion is a bit obscure, \textit{CMS} treats some
+Although its discussion is a bit obscure, \textit{CMOS} treats some
 multivolume collections as single works---but only, it seems, if every
 volume of the collection has the same title and publication date. To
 illustrate the distinction between a collection that counts as a
-single work and one that doesn't, \textit{CMS} gives the following
+single work and one that doesn't, \textit{CMOS} gives the following
 examples in \ref{14.118}:
 
 \begin{citeonly}
@@ -1440,8 +1440,8 @@ as a whole. Here's the entry for \textit{The Lisle Letters}:
 
 To cite a particular volume of the collection, include the volume
 number in the citation's \bibfield{postnote}. For citations of pages,
-remember the format from \textit{CMS} \ref{14.118}: Volume numbers and
-pages are separated with a colon. Here's the source for the first
+remember the format from \textit{CMOS} \ref{14.118}: Volume numbers
+and pages are separated with a colon. Here's the source for the first
 citation of \textit{The Lisle Letters}:
 
 \begin{verbatim}
@@ -1450,7 +1450,7 @@ citation of \textit{The Lisle Letters}:
 
 \noindent To cite a volume by itself, without a page reference, or to
 cite chapters, sections, and other parts of the work, remember to use
-the appropriate abbreviations (for some examples, see \textit{CMS}
+the appropriate abbreviations (for some examples, see \textit{CMOS}
 \ref{14.120}, 15.23, and \ref{15.41}):
 
 \begin{verbatim}
@@ -1472,7 +1472,7 @@ shows the default output for two such citations of the collection:
 For collections like \textit{The Complete Tales of Henry James}, which
 don't count as single works, every volume needs to have its own entry
 in the bibliography database. Here's the entry for the volume cited in
-\textit{CMS} \ref{14.118}:
+\textit{CMOS} \ref{14.118}:
 
 \begin{verbatim}
    @Collection{james1963.5,
@@ -1507,7 +1507,7 @@ entry, not multiple, cross-referenced entries. For \textit{The
 Complete Tales Henry James}, cross-referencing would result in errors
 because, with different titles and publication dates, not all
 publication data for the collection is true of each volume. To cite
-the collection as a whole, as in \textit{CMS} \ref{14.117}, add a
+the collection as a whole, as in \textit{CMOS} \ref{14.117}, add a
 separate entry:
 
 \begin{verbatim}
@@ -1576,13 +1576,13 @@ correctly citing a work like this requires cross-referencing an
 output.) Only then would Windy City associate \bibfield{volume} with
 the right \bibfield{title}.
 
-\section{Examples from \emph{CMS} Chap. 14, ``Notes and
+\section{Examples from \emph{CMOS} Chap. 14, ``Notes and
 Bibliography''}
 \label{notes}
 
-Examples in this section reproduce those in \textit{CMS} Chapter 14.
+Examples in this section reproduce those in \textit{CMOS} Chapter 14.
 To help with cross-checking, subsection numbers and headings are from
-\textit{CMS}.
+\textit{CMOS}.
 
 \subsection{Basic Format, with Examples and Variations}
 \setcounter{subsection}{14}
@@ -1708,10 +1708,10 @@ Chicago. All rights reserved. Reprinted by permission]{manet1992}
 You may override the default announcement of a \bibfield{shorthand} by
 adding your preferred content to \bibfield{shorthandintro}. For an
 example, one that prints the announcement in a separate sentence, see
-the first citation of \textit{CMS} in this document's introduction.
+the first citation of \textit{CMOS} in this document's introduction.
 
 Note that Windy City doesn't automatically italicize a
-\bibfield{shorthand}. Per \textit{CMS} 14.60, a shorthand should be
+\bibfield{shorthand}. Per \textit{CMOS} 14.60, a shorthand should be
 italicized if the title that it abbreviates is also italicized. Set
 this in the bibliography database with \cmd{emph} or \cmd{mkbibemph}.
 
@@ -2004,8 +2004,8 @@ On how to make an author and editor swap places, see Section
 % refsegment without using \nocite.
 
 % Unlike article entries, incollection entries don't automatically
-% print page ranges. That seems right, though CMS isn't entirely clear
-% on this point. See note for 'cite:pages' in windycity.cbx.
+% print page ranges. That seems right, though CMOS isn't entirely
+% clear on this point. See note for 'cite:pages' in windycity.cbx.
 
 \begin{citebib}
 \item \cite[84--87]{keating1968}
@@ -2067,7 +2067,7 @@ On how to make an author and editor swap places, see Section
 \begin{citebib}
 \item \cite[152--53]{barzun1994}
 \item \cite{bahadur2014}
-% CMS prints the original date in the wrong place:
+% CMOS prints the original date in the wrong place:
 %\item \cite{emerson1985}
 \item \cite{schweitzer1966}
 \end{citebib}
@@ -2075,11 +2075,11 @@ On how to make an author and editor swap places, see Section
 \subsubsection{Microform editions}
 % 14.115 Microform editions
 
-Farwell's citation fails to match \textit{CMS} because the
+Farwell's citation fails to match \textit{CMOS} because the
 \bibfield{howpublished} field, which seems like the best choice to
 contain \textit{microfiche}, follows the \bibfield{postnote} field,
 which contains \textit{p. 67, 3C12}. This order is necessary
-elsewhere, such as in \textit{CMS} \ref{14.163}.
+elsewhere, such as in \textit{CMOS} \ref{14.163}.
 
 \begin{citebib}
 \item \cite[p. 67, 3C12]{farwell1997}
@@ -2141,12 +2141,12 @@ For a discussion of how to handle these types of works, see Section
 \label{14.120}
 
 There are some peculiarities with the first example. In the book, but
-not online, \textit{CMS} errs in printing `.ed' rather than `editeb
+not online, \textit{CMOS} errs in printing `.ed' rather than `editeb
 by' in the bibliography and neglects to invert the author's name. More
 worrisome are the striking differences between the note and
 bibliography. They may represent alternative ways of formatting the
 data, as other examples do. But the note seems inconsistent with
-\textit{CMS} \ref{14.118}, and so doesn't make much sense as an
+\textit{CMOS} \ref{14.118}, and so doesn't make much sense as an
 alternative. Windy City ignores it and in both cases follows the
 example of the bibliography.
 
@@ -2373,9 +2373,9 @@ bibliography database entry. Here's an example from the source:
 \subsubsection{Freely available electronic editions of older works}
 % 14.162 Freely available electronic editions of older works
 
-The first example comes close to \textit{CMS}, except that, consistent
-with \ref{14.114} and \ref{15.40}, it lists the edition by Project
-Gutenberg as a reprint.
+The first example comes close to \textit{CMOS}, except that,
+consistent with \ref{14.114} and \ref{15.40}, it lists the edition by
+Project Gutenberg as a reprint.
 
 \begin{citebib}
 \item \cite[bk. 6, chap. 1]{james2008}
@@ -2400,10 +2400,10 @@ Gutenberg as a reprint.
 \label{14.171}
 
 The note for Harper includes the month of publication. Windy City
-includes it in the bibliography as well, even though \textit{CMS}
-omits it. As for Lock's entry, \textit{CMS} clearly errs in printing
+includes it in the bibliography as well, even though \textit{CMOS}
+omits it. As for Lock's entry, \textit{CMOS} clearly errs in printing
 the surname twice. Also, for Wilder's article, Windy City prints
-\textit{nos.} before \textit{1/2}, not \textit{no.}, as \textit{CMS}
+\textit{nos.} before \textit{1/2}, not \textit{no.}, as \textit{CMOS}
 has it. To print the correct season, Wilder's entry in the
 bibliography database includes \textit{Fall} in the \bibfield{issue}
 field. Using the \bibfield{date} field with \textit{2013-23} would
@@ -2615,7 +2615,7 @@ of articles. In particular, see the citation of Beattie in
 % 14.208 Citing blog posts and blogs
 \label{14.208}
 
-In \textit{CMS}, one citation refers to \textit{The Chronicle of
+In \textit{CMOS}, one citation refers to \textit{The Chronicle of
 Higher Education} and another to \textit{Chronicle of Higher
 Education}. The latter appears in \ref{15.51}, so it's probably
 correct.
@@ -2689,7 +2689,7 @@ Some reference works show full publication information in the same way
 as books. Use the \bibtype{book} entry type for them. The first three
 citations below are different. They need the \bibtype{reference} or
 \bibtype{inreference} entry type. See Section \ref{entrytypes} for
-more information. Following the suggestion in \textit{CMS} 14.232,
+more information. Following the suggestion in \textit{CMOS} 14.232,
 \bibtype{reference} and \bibtype{inreference} works don't appear in
 bibliographies and reference lists.
 
@@ -2707,7 +2707,7 @@ bibliographies and reference lists.
 
 Like some of the reference works in the previous section, the ones
 below need the \bibtype{reference} or \bibtype{inreference} entry
-type. As odd as it may seem, but consistent with \textit{CMS}, they,
+type. As odd as it may seem, but consistent with \textit{CMOS}, they,
 too, aren't included in bibliographies and reference lists. See
 Section \ref{entrytypes} for more information.
 
@@ -2758,14 +2758,14 @@ Section \ref{entrytypes} for more information.
 \item \cite[269]{zukofsky1931}, quoted in \cite[78]{costello1981}
 \end{citebib}
 
-\section{Examples from \emph{CMS} Chap. 15, ``Author-Date
+\section{Examples from \emph{CMOS} Chap. 15, ``Author-Date
 References''}
 \label{paren}
 
-Examples in this section reproduce those in \textit{CMS} Chapter 15.
+Examples in this section reproduce those in \textit{CMOS} Chapter 15.
 To help with cross-checking, subsection numbers and headings are from
-\textit{CMS}. Since parenthetical citations are relatively simple, and
-since the format of references lists is derivative of the default,
+\textit{CMOS}. Since parenthetical citations are relatively simple,
+and since the format of references lists is derivative of the default,
 the examples below are more selective than those in the previous
 section.
 
@@ -2816,7 +2816,7 @@ section.
 % 15.22 Text citations—basic form
 \label{15.22}
 
-Ignore the error in \textit{CMS}: In reference lists, a title goes
+Ignore the error in \textit{CMOS}: In reference lists, a title goes
 after the year, not before.
 
 \begin{citeref}
@@ -2902,7 +2902,7 @@ entry options.
 \subsubsection{Organization as author in author-date references}
 % 15.37 Organization as author in author-date references
 
-In the reference list, \textit{CMS} errs in printing `:1997' after
+In the reference list, \textit{CMOS} errs in printing `:1997' after
 `ISO 4'. Compare it with the nearly identical example in \ref{14.84}.
 
 \begin{citeref}
@@ -2960,7 +2960,7 @@ In the reference list, \textit{CMS} errs in printing `:1997' after
 % 15.47 Parentheses or comma with issue number
 
 In the second example, Windy City prints a colon after the journal
-number. \textit{CMS} prints a comma there---likely an error.
+number. \textit{CMOS} prints a comma there---likely an error.
 
 \begin{citeref}
 \item \parencite{glass2014}
@@ -2990,7 +2990,7 @@ between a volume number and a page reference.
 % 15.51 Citing blogs in author-date format
 \label{15.51}
 
-\textit{CMS} seems mistaken in printing a period after
+\textit{CMOS} seems mistaken in printing a period after
 \textit{Chronicle of Higher Education} instead of a comma. Compare
 with \ref{14.208} and \ref{15.42}.
 

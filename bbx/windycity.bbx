@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Feb 2019 10:50:00 AM CST
+% Last modified: Mon 25 Mar 2019 04:10:38 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -131,7 +131,7 @@
 \DeclareEntryOption[boolean]{swapvol}[true]{%
   \settoggle{swapvol}{#1}}%
 
-% For setting 'minbibnames' and such, see CMS, 17th ed., 14.76 and
+% For setting 'minbibnames' and such, see CMOS, 17th ed., 14.76 and
 % 15.29.
 
 \ExecuteBibliographyOptions{%
@@ -409,7 +409,7 @@
 
 % Affixes like 'Jr.', should appear last, delimited with a comma, when
 % inverted, as in a bibliography, but not otherwise, as in a note. See
-% CMS, 17th ed., 6.43 and 16.41, as well as the example in 14.75.
+% CMOS, 17th ed., 6.43 and 16.41, as well as the example in 14.75.
 
 \renewbibmacro*{name:family-given}[4]{%
   \ifuseprefix
@@ -544,7 +544,7 @@
 \DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
 
 % A shorthand should be italicized if the title that it abbreviates is
-% also italicized. See CMS, 17th ed., 14.60. Set this in the
+% also italicized. See CMOS, 17th ed., 14.60. Set this in the
 % bibliography database with '\emph{}' or '\mkbibemph{}'.
 
 \DeclareFieldFormat{shorthand}{#1}
@@ -1088,7 +1088,7 @@
     {\anona\pluga\printnames[\cbx@deflabel]{%
        \cbx@namelist}\plugb\anonb}}%
 
-% A screen name should precede 'nameaddon'. See CMS, 17th ed., 14.208.
+% A screen name precedes 'nameaddon'. See CMOS, 17th ed., 14.208.
 
 \newbibmacro*{handle}{%
   \iffieldundef{handle}
@@ -1435,7 +1435,7 @@
        \space
        \printfield{year}}}}
 
-% Per CMS, 17th ed., 14.119, print the publication year of the
+% Per CMOS, 17th ed., 14.119, print the publication year of the
 % last-mentioned title.
 
 \newbibmacro*{year+bookyear}{%
@@ -1524,7 +1524,7 @@
 % the DeclareLabeldate for reference lists. The macro below makes the
 % output consistent in those cases but can cause problems with
 % sorting. Resolve them with '\sortyear'. Also, end dates go here. See
-% CMS, 17th ed., 15.37 and 15.41. Although '\printlabeldate' prints
+% CMOS, 17th ed., 15.37 and 15.41. Although '\printlabeldate' prints
 % them, the workaround needs to run 'endyear', which can cause
 % problems not only with sorting but with 'extralabeldate'.
 
@@ -1675,7 +1675,7 @@
   \usebibmacro{issue+month+etc}}%
 
 % If an article has an electronic article ID, don't print its page
-% range in the bibliography. See CMS, 17th ed., 14.174.
+% range in the bibliography. See CMOS, 17th ed., 14.174.
 
 \newbibmacro*{colon+pages+etc}{%
   \ifboolexpr{ test {\iffieldundef{pages}}
@@ -1852,8 +1852,8 @@
     {\nopunct\printtext[parens]{%
        \printlist{location}}\space}}%
 
-% On how to format the issue number of periodicals, see CMS, 17th ed.,
-% 14.171 and 15.47.
+% On how to format the issue number of periodicals, see CMOS, 17th
+% ed., 14.171 and 15.47.
 
 \newbibmacro*{periodical:number}{%
   \iffieldundef{number}
