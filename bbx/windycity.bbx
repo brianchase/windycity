@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Feb 2019 09:27:06 AM CST
+% Last modified: Thu 21 Feb 2019 10:50:00 AM CST
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -735,14 +735,12 @@
                and test {\ifnameundef{editora}}}
     {\toggletrue{noed}}%
     {\ifnameundef{editor}
-       {\renewcommand*{\xeditor}{editora}}%
-       {\renewcommand*{\xeditor}{editor}}%
-     \usebibmacro{test:xeditor:a}{ap}%
-     \iftoggle{noed}
-       {}
-       {\ifdefstring{\xeditor}{editor}
-          {\usebibmacro{test:editor:authpos}}%
-          {\usebibmacro{test:editora:authpos}}}}}
+       {\usebibmacro{test:editora:authpos}}%
+       {\usebibmacro{test:editor:authpos}%
+        \iftoggle{noed}
+          {\global\togglefalse{noed}%
+           \usebibmacro{test:editora:authpos}}%
+          {}}}}
 
 \newbibmacro*{test:xeditor:a}[1]{%
   \ifboolexpr{ test {\ifnameundef{\xeditor}}
@@ -771,24 +769,30 @@
           {}}}}
 
 \newbibmacro*{test:editor:authpos}{%
-  \ifboolexpr{ togl {collection:ib}
-               and togl {swapvol}
-               and not test {\ifnameundef{editora}}}
-    {\renewcommand*{\xeditor}{editora}%
-     \usebibmacro{test:editora:authpos}}%
-    {\ifboolexpr{ togl {swapvol}
-                  and ( togl {collection:icbk}
-                  or togl {collection:icib} )}
-       {\renewcommand*{\xeditor}{editora}%
-        \usebibmacro{test:editora:authpos}}%
-       {}}}
+  \renewcommand*{\xeditor}{editor}%
+  \usebibmacro{test:xeditor:a}{ap}%
+  \iftoggle{noed}
+    {}
+    {\ifboolexpr{ togl {collection:ib}
+                  and togl {swapvol}
+                  and not test {\ifnameundef{editora}}}
+       {\toggletrue{noed}}%
+       {\ifboolexpr{ togl {swapvol}
+                     and ( togl {collection:icbk}
+                     or togl {collection:icib} )}
+          {\toggletrue{noed}}%
+          {}}}}
 
 \newbibmacro*{test:editora:authpos}{%
-  \ifboolexpr{ togl {collection:ib}
-               and not togl {swapvol}
-               and test {\ifnameundef{editor}}}
-    {\toggletrue{noed}}%
-    {}}
+  \renewcommand*{\xeditor}{editora}%
+  \usebibmacro{test:xeditor:a}{ap}%
+  \iftoggle{noed}
+    {}
+    {\ifboolexpr{ togl {collection:ib}
+                  and not togl {swapvol}
+                  and test {\ifnameundef{editor}}}
+       {\toggletrue{noed}}%
+       {}}}
 
 \newbibmacro*{test:trans:authpos}{%
   \usebibmacro{trans+transa+transb}%
@@ -915,7 +919,7 @@
        {\usebibmacro{test:editora}}%
        {\usebibmacro{test:editor}%
         \iftoggle{noed}
-          {\global\togglefalse{noed}%
+          {\togglefalse{noed}%
            \usebibmacro{test:editora}}%
           {}}}}
 
@@ -928,13 +932,13 @@
         \usebibmacro{test:editorb}}%
        {\usebibmacro{test:editora}%
         \iftoggle{noed}
-          {\global\togglefalse{noed}%
+          {\togglefalse{noed}%
            \renewcommand*{\xeditor}{editorb}%
            \usebibmacro{test:editorb}}%
           {}}}
     {\usebibmacro{test:editor}%
      \iftoggle{noed}
-       {\global\togglefalse{noed}%
+       {\togglefalse{noed}%
         \usebibmacro{test:editora}}%
        {}}}
 
