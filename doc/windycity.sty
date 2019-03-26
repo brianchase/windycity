@@ -1,4 +1,4 @@
-% Last modified: Wed 20 Feb 2019 05:58:18 PM CST
+% Last modified: Tue 26 Mar 2019 05:26:40 PM CDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -225,6 +225,17 @@
 \emergencystretch=1em
 \hyphenation{bib-la-tex Chi-ca-go}
 \usepackage{btxdockit}% For \bibfield, \bibtype, \cmd, marglist, optionlist, \op, etc.
+\renewenvironment*{marglist}
+  {\list{}{%
+     \setlength{\labelwidth}{\marglistwidth}%
+% Commented next line for normal paragraphing:
+%     \setlength{\labelsep}{\marglistsep}%
+     \setlength{\leftmargin}{0pt}%
+% Added next line for normal paragraphing:
+     \setlength{\parsep}{0pt}%
+     \setlength{\listparindent}{\parindent}%
+     \renewcommand*{\makelabel}[1]{\hss\marglistfont##1}}}
+  {\endlist}
 \renewenvironment*{optionlist}
   {\list{}{%
      \setlength{\labelwidth}{\marglistwidth}%
@@ -236,7 +247,6 @@
      \renewcommand*{\makelabel}[1]{\hss\optionlistfont##1}}%
    \ltd@optionlist}
   {\endlist}
-     \setlength{\itemsep}{0pt}%
 \renewenvironment*{typelist}
   {\list{}{%
      \setlength{\labelwidth}{\marglistwidth}%
