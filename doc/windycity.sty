@@ -1,4 +1,4 @@
-% Last modified: Tue 26 Mar 2019 05:26:40 PM CDT
+% Last modified: Wed 27 Mar 2019 01:19:37 PM CDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -90,6 +90,11 @@
 \usepackage{ragged2e}
 \usepackage[inline]{enumitem}
 \setlist[enumerate,itemize]{noitemsep}
+
+% Allow line breaks in '\item[]':
+\newcommand{\tshortstack}{\@ifnextchar[\@tshortstack{\@tshortstack[c]}}%
+\let\@tshortstack\@shortstack
+\patchcmd\@tshortstack\vbox\vtop{}{}%
 
 \newenvironment{citebib}
   {\begin{enumerate}[%
