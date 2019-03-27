@@ -1,4 +1,4 @@
-% Last modified: Tue 26 Mar 2019 07:45:26 PM CDT
+% Last modified: Wed 27 Mar 2019 10:37:54 AM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -18,7 +18,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019-02-21 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019-03-27 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -1679,7 +1679,8 @@
     {\usebibmacro{issue+month+etc}{noparens}%
      \usebibmacro{periodical:number}}%
     {\usebibmacro{periodical:number}%
-     \usebibmacro{issue+month+etc}{}}}
+     \usebibmacro{issue+month+etc}{}}%
+  \usebibmacro{edition}{noformat}}%
 
 % If an article has an electronic article ID, don't print its page
 % range in the bibliography. See CMOS, 17th ed., 14.174.
@@ -1712,7 +1713,7 @@
                and togl {swapvol}}
     {\usebibmacro{maintitle+editor}%
      \usebibmacro{note}%
-     \usebibmacro{edition}%
+     \usebibmacro{edition}{}%
      \usebibmacro{volume+number+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
@@ -1737,7 +1738,7 @@
         \usebibmacro{part}%
         \usebibmacro{maintitle+editor}%
         \usebibmacro{note}%
-        \usebibmacro{edition}}}
+        \usebibmacro{edition}{}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
@@ -1966,13 +1967,16 @@
      \renewcommand*{\cbx@namelist}{author}%
      \usebibmacro{printnames+etc}}}
 
-\newbibmacro*{edition}{%
+\newbibmacro*{edition}[1]{%
   \iffieldundef{edition}
     {}
     {\newunit
      \iffieldbibstring{edition}
        {\bibstring{\thefield{edition}}}
-       {\printfield{edition}}}}
+       {\ifstrequal{#1}{noformat}
+          {\setunit{\addcomma\space}%
+           \printfield[noformat]{edition}}%
+          {\printfield{edition}}}}}
 
 \newbibmacro*{date+loc+etc}{%
   \ifboolexpr{ test {\iflistundef{location}}
@@ -2198,7 +2202,7 @@
 
 \newbibmacro*{note+edition+etc}{%
   \usebibmacro{note}%
-  \usebibmacro{edition}%
+  \usebibmacro{edition}{}%
   \usebibmacro{volumes}%
   \usebibmacro{bookseries}%
   \usebibmacro{pages}%

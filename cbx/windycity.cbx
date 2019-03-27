@@ -1,4 +1,4 @@
-% Last modified: Mon 25 Mar 2019 05:28:08 PM CDT
+% Last modified: Wed 27 Mar 2019 10:38:04 AM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -18,7 +18,7 @@
    {}
    {\PackageError{biblatex}
       {Outdated 'biblatex' package}
-      {Windy City 2019-02-21 is for biblatex v3.8 and above.\MessageBreak
+      {Windy City 2019-03-27 is for biblatex v3.8 and above.\MessageBreak
        You are using: '\csuse{ver@biblatex.sty}'.\MessageBreak
        This is a fatal error. I'm aborting now.}%
     \endinput}%
@@ -466,7 +466,7 @@
 
 \DeclareBibliographyDriver{cite:reference}{%
   \printlist{organization}%
-  \usebibmacro{edition}%
+  \usebibmacro{edition}{}%
   \usebibmacro{refworks}%
   \newunit
   \bibstring{subverbo}\space

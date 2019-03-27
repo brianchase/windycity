@@ -7,7 +7,7 @@ if any, are listed below under "Latest" and indicate updates to [Windy
 City's repository](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
-## Latest
+## 2019-03-27
 
 * fixed a bug that could prevent names in the 'editora' field from
   printing in the author's position
@@ -17,6 +17,8 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
   entry type needs it)
 * improved support for newspapers and magazines with issue numbers
   (see updated documentation on how to implement it)
+* added support for citing a newspaper's edition, such as 'Sunday Book
+  Review'
 
 ## 2019-02-21
 
