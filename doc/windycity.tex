@@ -1,4 +1,4 @@
-% Last modified: Mon 25 Mar 2019 12:47:37 PM CDT
+% Last modified: Tue 26 Mar 2019 07:45:00 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -58,8 +58,30 @@ might be of more immediate interest.
 \subsection{Getting Started}
 
 If you already know how to use \biblatex, getting started with Windy
-City is easy. Locate \biblatex on your system, and copy Windy City's
-files into their respective directories:
+City is easy. The first task is to confirm that \biblatex and Windy
+City are installed properly on your system. Since both are included in
+some distributions of \LaTeX, you might be able to skip this step.
+
+Either way, please consider downloading the most recent release of
+Windy City from \begingroup \hypersetup{urlcolor=blue}
+\href{https://www.ctan.org/pkg/windycity}{its home on CTAN}. More
+recent but potentially less reliable updates are available from Windy
+City's \href{https://github.com/brianchase/windycity}{repository on
+GitHub} \endgroup.
+
+Windy City consists of four files:
+
+\begin{itemize}[before=\small]
+\item \file{windycity.dbx}
+\item \file{windycity.bbx}
+\item \file{windycity.cbx}
+\item \file{american-windycity.lbx}
+\end{itemize}
+
+\noindent If you need to install Windy City on your system, you should
+have several options of where to put these files. One option is to
+locate \biblatex on your system and copy Windy City's files into their
+respective directories:
 
 \begin{itemize}[before=\small,label=]
 \item \ldots\path{/biblatex/windycity.dbx}
@@ -68,8 +90,25 @@ files into their respective directories:
 \item \ldots\path{/biblatex/lbx/american-windycity.lbx}
 \end{itemize}
 
-\noindent Next, tell \biblatex to load Windy City with the load-time
-option \opt{style}:
+If you prefer not to mix Windy City's files with \biblatex's, another
+option is to figure out where your distribution of \LaTeX keeps
+\biblatex's style files. Under
+\href{http://www.tug.org/texlive}{TeXLive}, the directory structure
+should look like this:
+
+\begin{itemize}[before=\small,label=]
+\item \ldots\path{/texmf-dist/tex/latex/windycity/windycity.dbx}
+\item \ldots\path{/texmf-dist/tex/latex/windycity/bbx/windycity.bbx}
+\item \ldots\path{/texmf-dist/tex/latex/windycity/cbx/windycity.cbx}
+\item \ldots\path{/texmf-dist/tex/latex/windycity/lbx/american-windycity.lbx}
+\end{itemize}
+
+\noindent Yet another option is to install Windy City in your local
+\textit{texmf}. Whatever location you choose, remember to update your
+\textit{texmf} file name database after copying in the files.
+
+Next, tell \biblatex to load Windy City with the load-time option
+\opt{style}:
 
 \begin{verbatim}
    \usepackage[style=windycity]{biblatex}
@@ -584,57 +623,6 @@ The source for the passage above contains:
 
 \end{ltxsyntax}
 
-\subsection{Additional Data Fields}
-\label{datafields}
-
-Windy City uses several data fields that aren't available with
-\biblatex. Some of them are for Windy City's internal use in
-cross-referencing and aren't listed below, as they're not meant for
-use in a bibliography database. The fields below are different: You
-can use them to store information in a bibliography database that you
-want to appear in citations. Without these fields, quite a few
-citations in this document wouldn't match their counterparts in
-\textit{CMOS}.
-
-\begin{marglist}
-
-\item[blogtitle/blogsubtitle]
-
-The name of a blog goes in \bibfield{blogtitle} and
-\bibfield{blogsubtitle}. Using already existing fields for this
-information would have been preferable. But since blog posts take the
-usual \bibfield{title} and \bibfield{subtitle} fields, and since blogs
-may have host names of different types, nothing else seemed suitable.
-
-\item[editoraddon] Use this field to include additional editorial
-information about a book. It's available for \bibtype{book},
-\bibtype{incollection}, and \bibfield{review} entry types and their
-aliases. (For information on aliases in Windy City, see Section
-\ref{entrytypes}.) When applicable, its content appears after the
-names of a book's editors and translators without intervening
-punctuation. For an example, see Section \ref{entryops}, where the
-citation of \textit{Chaucer Life-Records} prints this
-\bibfield{editoraddon}: ``from materials compiled by John M. Manly and
-Edith Richert, with the assistance of Lilian J. Redstone et al.''
-
-\item[seriesaddon] This field is for additional information about a
-book's series. That includes information about the run of a series,
-such as \textit{2nd ser.} and \textit{n.s.}. For examples, see
-\textit{CMOS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
-journals, which occasionally have a series but no series name,
-information like \textit{2nd ser.} and \textit{n.s.} go in the
-\bibfield{series} field.
-
-\item[shortmaintitle] This field is for the short form of a
-\bibfield{maintitle}. Use it in a bibliography database when a work's
-\bibfield{maintitle} may occupy the position of a regular title in a
-short citation and needs a short form. This should only happen with
-certain works in collections. See, for example, the citation of
-\textit{The Complete Tales of Henry James} in Section
-\ref{multivolume}.
-
-\end{marglist}
-
 \subsection{Entry Types}
 \label{entrytypes}
 
@@ -787,6 +775,124 @@ and cite the remaining entries in the usual way. For examples of
 automatic cross-referencing in notes and bibliographies see Section
 \ref{notes}, \ref{14.108}; Section \ref{paren}, \ref{15.42}; and
 Section \ref{collections}.
+
+For more information on entry types---specifically, on the use of
+certain data fields with them---see Section \ref{datafields}.
+
+\subsection{Data Fields}
+\label{datafields}
+
+As Windy City has grown to support more citations, it has had to rely
+on a growing number of data fields that aren't standard with \BibTeX
+or \biblatex. It also uses some standard fields in perhaps unexpected
+ways.
+
+\subsubsection{Additional Data Fields}
+\label{datafields}
+
+Some of the additional or nonstandard data fields that Windy City uses
+are for its internal handling of cross-referencing. Those fields
+aren't listed below, as they're not meant for use in a bibliography
+database. Users can ignore them. The rest store information that's
+crucial for correct formatting. Without them, quite a few citations in
+this document wouldn't match their counterparts in \textit{CMOS}.
+
+\begin{marglist}
+
+\item[blogtitle/blogsubtitle]
+
+The name of a blog goes in \bibfield{blogtitle} and
+\bibfield{blogsubtitle}. Using already existing fields for this
+information would have been preferable. But since blog posts take the
+usual \bibfield{title} and \bibfield{subtitle} fields, and since blogs
+may have host names of different types, nothing else seemed suitable.
+
+\item[editoraddon] Use this field to include additional editorial
+information about a book. It's available for \bibtype{book},
+\bibtype{incollection}, and \bibfield{review} entry types and their
+aliases. (For information on aliases in Windy City, see Section
+\ref{entrytypes}.) When applicable, its content appears after the
+names of a book's editors and translators without intervening
+punctuation. For an example, see Section \ref{entryops}, where the
+citation of \textit{Chaucer Life-Records} prints this
+\bibfield{editoraddon}: ``from materials compiled by John M. Manly and
+Edith Richert, with the assistance of Lilian J. Redstone et al.''
+
+\item[seriesaddon] This field is for additional information about a
+book's series. That includes information about the run of a series,
+such as \textit{2nd ser.} and \textit{n.s.}. For examples, see
+\textit{CMOS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
+journals, which occasionally have a series but no series name,
+information like \textit{2nd ser.} and \textit{n.s.} go in the
+\bibfield{series} field.
+
+\item[shortmaintitle] This field is for the short form of a
+\bibfield{maintitle}. Use it in a bibliography database when a work's
+\bibfield{maintitle} may occupy the position of a regular title in a
+short citation and needs a short form. This should only happen with
+certain works in collections. See, for example, the citation of
+\textit{The Complete Tales of Henry James} in Section
+\ref{multivolume}.
+
+\end{marglist}
+
+\subsubsection{Other Data Fields}
+\label{fieldscon}
+
+Windy City makes limited use of the fields \bibfield{issue} and
+\bibfield{type}, and how it uses them probably isn't obvious from
+entries in \file{windycity.bib}. A few comments should clear up
+confusion.
+
+\begin{marglist}
+
+\item[issue] Windy City uses this field with the \bibtype{article},
+\bibtype{online}, and \bibtype{review} entry types to record the
+season of publication (spring, summer, autumn/fall, winter). The
+\bibtype{date} field also records seasons---but the value \textit{23},
+for the third season, returns \textit{Autumn}. To print \textit{Fall},
+use an \bibfield{issue} field with that value. In other words, for the
+output \textit{Fall 2013}, a work's bibliography database entry should
+contain:
+
+\begin{verbatim}
+   issue = {Fall},
+   date = {2013},% alternatively, use the 'year' field
+\end{verbatim}
+
+\noindent Whereas for \textit{Autumn 2013}, use either:
+
+\begin{verbatim}
+   date = {2013-23},
+\end{verbatim}
+
+\noindent Or:
+
+\begin{verbatim}
+   issue = {Autumn},
+   date = {2013},% alternatively, use the 'year' field
+\end{verbatim}
+
+\item[type] With the \bibtype{thesis} entry type, Windy City uses the
+\bibfield{type} field to distinguish a Master's thesis from a PhD
+dissertation. For the latter, \bibtype{type} should have the value
+\textit{phdthesis}. For the former, use the value \textit{mathesis}.
+No \bibfield{type} field is needed for the \bibtype{mathesis} and
+\bibtype{phdthesis} entry types.
+
+In rare cases, the \bibfield{type} field is necessary for the
+\bibtype{article} and \bibtype{review} entry types when a work's
+bibliographic information doesn't allow Windy City to distinguish a
+journal article from a magazine or newspaper article. This happens
+when a magazine or newspaper article has an issue number. Normally,
+Windy City would respond by printing the issue number before the date
+and enclosing the date in parentheses. But the issue number needs to
+go first, and the date shouldn't be in parentheses. The workaround is
+to include a \bibfield{type} field with the value \textit{newsmag}.
+For an example, see \textit{CMOS} \ref{14.204} and compare it with the
+citation of Beattie in \ref{14.171}.
+
+\end{marglist}
 
 \section{Editors, Translators, and Compilers}
 \label{edtrans}
@@ -2596,11 +2702,10 @@ show success at formatting a review with a title.
 \setcounter{subsubsection}{203}
 \subsubsection{Unsigned reviews}
 % 14.204 Unsigned reviews
+\label{14.204}
 
-The date below should appear immediately after the newspaper's title
-and not in parentheses. Nevertheless, it's consistent with other types
-of articles. In particular, see the citation of Beattie in
-\ref{14.171}.
+On the use of the \bibfield{type} field to format this example
+correctly, see Section \ref{fieldscon}.
 
 \begin{citebib}
 \item \cite{zeitung1828}
