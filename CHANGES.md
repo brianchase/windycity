@@ -11,6 +11,12 @@ brianchase/windycity") on [GitHub](https://github.com "GitHub").
 
 * fixed a bug that could prevent names in the 'editora' field from
   printing in the author's position
+* fixed typos that broke the 'mathesis' entry type
+* fixed 'mathesis' and 'phdthesis' entry types so that they don't need
+  a 'type' field to distinguish the MA from the PhD (only the 'thesis'
+  entry type needs it)
+* improved support for newspapers and magazines with issue numbers
+  (see updated documentation on how to implement it)
 
 ## 2019-02-21
 

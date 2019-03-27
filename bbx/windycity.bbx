@@ -1,4 +1,4 @@
-% Last modified: Tue 26 Mar 2019 01:34:07 PM CDT
+% Last modified: Tue 26 Mar 2019 07:45:26 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1343,7 +1343,7 @@
 %%  Dates and Times  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\newbibmacro*{issue+month+etc}{%
+\newbibmacro*{issue+month+etc}[1]{%
   \iffieldundef{year}
     {\iffieldundef{month}
        {}
@@ -1357,11 +1357,15 @@
         \iffieldundef{month}
           {\usebibmacro{issue+season+year}}%
           {\usebibmacro{month+day+year}}}
-       {\setunit{\space}%
-        \iffieldundef{month}
-          {\usebibmacro{reflist+issue+season}}%
-          {\printtext[parens]{%
-             \usebibmacro{month+day+year}}}}}}
+       {\iffieldundef{month}
+          {\setunit{\space}%
+           \usebibmacro{reflist+issue+season}}%
+          {\ifstrequal{#1}{noparens}
+             {\newunit
+              \usebibmacro{month+day+year}}%
+             {\setunit{\space}%
+              \printtext[parens]{%
+                \usebibmacro{month+day+year}}}}}}}
 
 \newbibmacro*{month+day+year}{%
   \usebibmacro{month+endmonth}%
@@ -1615,7 +1619,7 @@
   \usebibmacro{author+title+ed+note}%
   \newunit
   \usebibmacro{websites}%
-  \usebibmacro{issue+month+etc}%
+  \usebibmacro{issue+month+etc}{}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{patent}{%
@@ -1671,8 +1675,11 @@
   \iftoggle{journalfirst}
     {\newunit}%
     {\setunit{\addcomma\space}}%
-  \usebibmacro{periodical:number}%
-  \usebibmacro{issue+month+etc}}%
+  \iffieldequalstr{type}{newsmag}
+    {\usebibmacro{issue+month+etc}{noparens}%
+     \usebibmacro{periodical:number}}%
+    {\usebibmacro{periodical:number}%
+     \usebibmacro{issue+month+etc}{}}}
 
 % If an article has an electronic article ID, don't print its page
 % range in the bibliography. See CMOS, 17th ed., 14.174.
@@ -1798,7 +1805,7 @@
     {\usebibmacro{edtrans:b}}}
 
 \newbibmacro*{inst+loc+date}{%
-  \usebibmacro{type}%
+  \usebibmacro{thesis+type}%
   \setunit{\addcomma\space}%
   \iflistundef{institution}
     {\printfield{venue}}%
@@ -2064,12 +2071,16 @@
      \renewcommand*{\cbx@namelist}{bookauthor}%
      \usebibmacro{printnames+etc}}}
 
-\newbibmacro*{type}{%
-  \iffieldundef{type}
-    {}
-    {\iffieldbibstring{type}
-       {\bibstring{\thefield{type}}}
-       {\printfield{type}}}}
+\newbibmacro*{thesis+type}{%
+  \ifentrytype{mathesis}
+    {\bibstring{mathesis}}%
+    {\ifentrytype{phdthesis}
+       {\bibstring{phdthesis}}%
+       {\iffieldundef{type}
+         {}
+         {\iffieldbibstring{type}
+            {\bibstring{\thefield{type}}}
+            {\printfield{type}}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%
