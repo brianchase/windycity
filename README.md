@@ -65,10 +65,10 @@ style files and proceed accordingly. Under [TeX
 Live](http://www.tug.org/texlive "TeX Live"), the directory structure
 should look like this:
 
-* ...[/texmf-dist/tex/latex/windycity/windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx "windycity.dbx")
-* ...[/texmf-dist/tex/latex/windycity/bbx/windycity.bbx](https://github.com/brianchase/windycity/blob/master/bbx/windycity.bbx "windycity.bbx")
-* ...[/texmf-dist/tex/latex/windycity/cbx/windycity.cbx](https://github.com/brianchase/windycity/blob/master/cbx/windycity.cbx "windycity.cbx")
-* ...[/texmf-dist/tex/latex/windycity/lbx/american-windycity.lbx](https://github.com/brianchase/windycity/blob/master/lbx/american-windycity.lbx "american-windycity.lbx")
+* .../texmf-dist/tex/latex/windycity/[windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx "windycity.dbx")
+* .../texmf-dist/tex/latex/windycity/bbx/[windycity.bbx](https://github.com/brianchase/windycity/blob/master/bbx/windycity.bbx "windycity.bbx")
+* .../texmf-dist/tex/latex/windycity/cbx/[windycity.cbx](https://github.com/brianchase/windycity/blob/master/cbx/windycity.cbx "windycity.cbx")
+* .../texmf-dist/tex/latex/windycity/lbx/[american-windycity.lbx](https://github.com/brianchase/windycity/blob/master/lbx/american-windycity.lbx "american-windycity.lbx")
 
 Yet another option is to install Windy City in your local `texmf`. Its
 location will depend on your system and preferences. For a one-off
@@ -118,6 +118,5 @@ warranties of merchantability and fitness for a particular purpose.
 
 ## Requirements
 
-* [TeX Live](http://www.tug.org/texlive "TeX Live")
 * [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 3.8 or higher
 
