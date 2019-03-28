@@ -61,9 +61,9 @@ If you prefer not to mix Windy City's files with
 option is to find where your distribution of
 [LaTeX](https://en.wikipedia.org/wiki/LaTeX "LaTeX") keeps
 [biblatex](http://www.ctan.org/pkg/biblatex "biblatex")'s third-party
-style files and proceed accordingly. Under
-[TeXLive](http://www.tug.org/texlive "TeXLive"), the directory
-structure should look like this:
+style files and proceed accordingly. Under [TeX
+Live](http://www.tug.org/texlive "TeX Live"), the directory structure
+should look like this:
 
 * ...[/texmf-dist/tex/latex/windycity/windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx "windycity.dbx")
 * ...[/texmf-dist/tex/latex/windycity/bbx/windycity.bbx](https://github.com/brianchase/windycity/blob/master/bbx/windycity.bbx "windycity.bbx")
