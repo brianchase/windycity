@@ -4,9 +4,9 @@ Versions of Windy City are indicated by release date. The most recent
 date below is the current version, which is available on
 [CTAN](https://www.ctan.org/pkg/windycity "CTAN: pkg/windycity").
 Changes since then, if any, are listed below under "Latest" and
-indicate updates to [Windy City's
-repository](https://github.com/brianchase/windycity "GitHub:
-brianchase/windycity") on [GitHub](https://github.com "GitHub").
+indicate updates to Windy City's [repository on
+GitHub](https://github.com/brianchase/windycity "GitHub:
+brianchase/windycity").
 
 ## 2019-03-27
 
