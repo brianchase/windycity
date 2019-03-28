@@ -1,4 +1,4 @@
-% Last modified: Wed 27 Mar 2019 08:16:49 PM CDT
+% Last modified: Thu 28 Mar 2019 09:28:40 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -91,29 +91,16 @@ copy its files to one of several places. One option is to locate
 
 If you prefer not to mix Windy City's files with \biblatex's, another
 option is to find where your distribution of \LaTeX\ keeps \biblatex's
-third-party style files and proceed accordingly. Under \begingroup
-\hypersetup{urlcolor=blue} \href{http://www.tug.org/texlive}{TeX
-Live}, \endgroup the directory structure should look like this:
-
-\begin{itemize}[before=\small,label=]
-\item \ldots\path{/texmf-dist/tex/latex/windycity/windycity.dbx}
-\item \ldots\path{/texmf-dist/tex/latex/windycity/bbx/windycity.bbx}
-\item \ldots\path{/texmf-dist/tex/latex/windycity/cbx/windycity.cbx}
-\item \ldots\path{/texmf-dist/tex/latex/windycity/lbx/american-windycity.lbx}
-\end{itemize}
-
-\noindent Yet another option is to install Windy City in your local
-\path{texmf}. Its location will depend on your system and preferences.
-For a one-off compilation, say, to give Windy City a trial run on a
-single document, you can copy Windy City's files to the document's
-root directory---no need for \path{bbx}, \path{cbx}, and \path{lbx}
-subdirectories.
+third-party style files and proceed accordingly. Yet another option is
+to install Windy City in your local \path{texmf}. Its location will
+depend on your system and preferences. For a one-off compilation, say,
+to give Windy City a trial run on a single document, you can copy
+Windy City's files to the document's root directory.
 
 After copying the files to one of those places---or another of your
 choosing---remember that for every option but the last (a document's
 root directory), you need to update your \path{texmf} file name
-database. How to do that will depend on your system and, perhaps,
-distribution of \LaTeX.
+database.
 
 To compile a document with Windy City, tell \biblatex to load it with
 the load-time option \opt{style}:
