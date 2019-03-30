@@ -8,6 +8,11 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* fixed '\parencite' from printing a work's publication year twice
+  under the preamble option 'reflist'
+
 ## 2019-03-27
 
 * fixed a bug that could prevent names in the 'editora' field from
@@ -188,10 +193,10 @@ brianchase/windycity").
 * added support for 'endday' field
 * 'addendum' field prints only in bibliographies and reference
   lists, not in notes
-* set 'parentracker' bibliography option
+* set 'parentracker' preamble option
 * set minxrefs preamble option
 * 'collsonly' preamble option sets 'minxrefs=1'
-* changed 'pagetracker' bibliography option from 'true' to 'page'
+* changed 'pagetracker' preamble option from 'true' to 'page'
 * edits and fixes to windycity.sty and windycity.tex
 
 ## 2018-10-20
