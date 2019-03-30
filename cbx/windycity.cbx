@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Mar 2019 11:38:57 AM CDT
+% Last modified: Sat 30 Mar 2019 06:46:28 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -84,14 +84,14 @@
   {\usebibmacro{cite:postnote}}%
 
 \DeclareCiteCommand{\footcite}[\mkbibfootnote]
-  {\bibsentence\usebibmacro{prenote}}%
+  {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}%
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
 
 \DeclareCiteCommand*{\footcite}[\mkbibfootnote]
-  {\bibsentence\usebibmacro{prenote}}%
+  {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
    \toggletrue{noauth}%
    \usebibmacro{cite}}%
