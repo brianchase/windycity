@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Mar 2019 02:21:48 PM CDT
+% Last modified: Sun 31 Mar 2019 05:06:50 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -100,12 +100,8 @@
        \field{urldate}
        \literal{nodate}}
      \ExecuteBibliographyOptions{%
-       autocite=inline,
        sorting=nyt}}%
-    {\global\togglefalse{reflist}%
-     \ExecuteBibliographyOptions{%
-       autocite=footnote,
-       sorting=nty}}}
+    {\global\togglefalse{reflist}}}
 
 \providetoggle{short}
 \DeclareBibliographyOption{short}[true]{%
@@ -137,6 +133,7 @@
 
 \ExecuteBibliographyOptions{%
   abbreviate=true,
+  autocite=footnote,
   autopunct=true,
   block=none,
   citetracker=constrict,
@@ -161,6 +158,7 @@
   pagetracker=page,
   parentracker=true,
   sortcites=false,
+  sorting=nty,
   time=12h,
   timezones=true,
   uniquelist=minyear,
