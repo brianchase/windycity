@@ -12,6 +12,9 @@ brianchase/windycity").
 
 * fixed '\parencite' from printing a work's publication year twice
   under the preamble option 'reflist'
+* fixed '\autocite'; it works with options 'footnote', 'inline', and
+  'plain', with a default value of 'footnote'
+* defined '\smartcite', '\smartcite*', and '\smartcites'
 
 ## 2019-03-27
 
