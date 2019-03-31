@@ -1,4 +1,4 @@
-% Last modified: Thu 28 Mar 2019 09:28:40 AM CDT
+% Last modified: Sun 31 Mar 2019 05:55:05 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -566,19 +566,39 @@ The most important citation commands are already familiar from
 \biblatex:
 
 \begin{ltxsyntax}
+\cmditem{autocite}[prenote][postnote]{key}
+\cmditem{autocites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
 \cmditem{cite}[prenote][postnote]{key}
+\cmditem{cites}[prenote][postnote]{key}
 \cmditem{footcite}[prenote][postnote]{key}
+\cmditem{footcites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
 \cmditem{nocite}{key}
 \cmditem*{nocite}|\{*\}|
 \cmditem{parencite}[prenote][postnote]{key}
+\cmditem{parencites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
+\cmditem{smartcite}[prenote][postnote]{key}
+\cmditem{smartcites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
 \end{ltxsyntax}
 
-\noindent Insert notes with \cmd{cite} and \cmd{footcite}. Insert
-parenthetical citations with \cmd{parencite}. Use \cmd{nocite} to add
-works to bibliographies without citing them in the text. Use it with a
-comma-separated list of entry keys to add particular works. Use it
-with an asterisk to add every work in every \file{bib} file that
-you've loaded with \biblatex.
+\noindent New users should get comfortable first with \cmd{cite} and
+\cmd{footcite} (for notes) and \cmd{parencite} (for parenthetical
+citations). Their multicite forms---\cmd{cites}, \cmd{footcites}, and
+\cmd{parencites}---take a comma-separated list of entry keys.
+
+Use \cmd{nocite} to add works to bibliographies without citing them in
+the text. Use it with a comma-separated list of entry keys to add
+those particular works. Use it with an asterisk to add every work in
+every \file{bib} file that you've loaded with \biblatex.
+
+By default, Windy City sets the \opt{autocite} preamble option to
+\opt{footnote}, which makes \cmd{autocite} equivalent to
+\cmd{smartcite}, which in turn functions like different citation
+commands depending on the context. In Windy City, \cmd{smartcite} is
+equivalent to \cmd{footcite} in a document's body and \cmd{cite} in
+footnotes and endnotes. Thus, \cmd{autocite} is, too. If you set the
+\opt{autocite} preamble option to \opt{inline}, \cmd{autocite} is
+equivalent to \cmd{parencite}. If you set it to \opt{plain},
+\cmd{autocite} is equivalent to \cmd{cite}.
 
 \begin{ltxsyntax}
 
