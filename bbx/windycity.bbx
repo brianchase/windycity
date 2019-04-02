@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Mar 2019 05:06:50 PM CDT
+% Last modified: Tue 02 Apr 2019 02:13:22 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -13,7 +13,7 @@
 % implied warranties of merchantability and fitness for a particular
 % purpose.
 
-\ProvidesFile{windycity.bbx}[2019/03/27 Windy City bibliography style
+\ProvidesFile{windycity.bbx}[2019/04/02 Windy City bibliography style
   for biblatex]
 \@ifpackagelater{biblatex}{2017/11/04}
   {}
@@ -1077,9 +1077,13 @@
                and not test \iffirstonpage}
     {\ifboolexpr{ test {\ifnameundef{author}}
                   and test {\ifnameundef{bookauthor}}}
-       {\bibstring{bibnamedash}\plugb}%
-       {\bibstring{bibnamedash}}}
+       {\bibnamedash\plugb}%
+       {\bibnamedash}}%
     {\usebibmacro{printnames}}}
+
+\renewcommand*{\bibnamedash}{%
+  \rule[2.4pt]{3em}{0.2pt}%
+  \global\toggletrue{blx@insert}}%
 
 \newbibmacro*{printnames}{%
   \ifnameundef{\cbx@namelist}
@@ -1116,7 +1120,7 @@
 \newbibmacro*{bibjournaldash}{%
   \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
                and not test \iffirstonpage}
-    {\bibstring{bibnamedash}%
+    {\bibnamedash
      \clearfield{journaltitle}%
      \clearlist{location}%
      \newunit}%
@@ -1131,7 +1135,7 @@
 \newbibmacro*{bibblogdash}{%
   \ifboolexpr{ test {\iffieldequals{blogtitle}{\bbx@lasthash}}
                and not test \iffirstonpage}
-    {\bibstring{bibnamedash}%
+    {\bibnamedash
      \clearfield{blogtitle}%
      \newunit}%
     {\savefield{blogtitle}{\bbx@lasthash}%

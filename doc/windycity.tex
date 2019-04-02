@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Mar 2019 06:11:58 PM CDT
+% Last modified: Tue 02 Apr 2019 01:31:48 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019-03-27}
+\version{2019-04-02}
 \maketitle
 \begingroup
 \hypersetup{linkcolor=black}
@@ -562,22 +562,20 @@ Section \ref{collorder}.
 \subsection{Citation Commands}
 \label{citecmds}
 
-The most important citation commands are already familiar from
-\biblatex:
+The most important citation commands are familiar from \biblatex:
 
 \begin{ltxsyntax}
 \cmditem{autocite}[prenote][postnote]{key}
-\cmditem{autocites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
+\cmditem{autocites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{cite}[prenote][postnote]{key}
 \cmditem{cites}[prenote][postnote]{key}
 \cmditem{footcite}[prenote][postnote]{key}
-\cmditem{footcites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
-\cmditem{nocite}{key}
-\cmditem*{nocite}|\{*\}|
+\cmditem{footcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{nocite}{key} \cmditem*{nocite}|\{*\}|
 \cmditem{parencite}[prenote][postnote]{key}
-\cmditem{parencites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
+\cmditem{parencites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{smartcite}[prenote][postnote]{key}
-\cmditem{smartcites}(multiprenote)(multipostnote)[prenote][postnote]{key}...[prenote][postnote]{key}
+\cmditem{smartcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \end{ltxsyntax}
 
 \noindent New users should get comfortable first with \cmd{cite} and
@@ -586,19 +584,22 @@ citations). Their multicite forms---\cmd{cites}, \cmd{footcites}, and
 \cmd{parencites}---take a comma-separated list of entry keys.
 
 Use \cmd{nocite} to add works to bibliographies without citing them in
-the text. Use it with a comma-separated list of entry keys to add
-those particular works. Use it with an asterisk to add every work in
-every \file{bib} file that you've loaded with \biblatex.
+the text. Use it with an asterisk to add every work in every
+\file{bib} file that you've loaded with \cmd{addbibresource} or
+\cmd{bibliography}.
 
-By default, Windy City sets the \opt{autocite} preamble option to
-\opt{footnote}, which makes \cmd{autocite} equivalent to
-\cmd{smartcite}, which in turn functions like different citation
-commands depending on the context. In Windy City, \cmd{smartcite} is
-equivalent to \cmd{footcite} in a document's body and \cmd{cite} in
-footnotes and endnotes. Thus, \cmd{autocite} is, too. If you set the
-\opt{autocite} preamble option to \opt{inline}, \cmd{autocite} is
-equivalent to \cmd{parencite}. If you set it to \opt{plain},
-\cmd{autocite} is equivalent to \cmd{cite}.
+Windy City sets the \opt{autocite} preamble option to \opt{footnote},
+which makes \cmd{autocite} equivalent to \cmd{smartcite}---which in
+turn behaves like different citation commands in different contexts.
+In Windy City, \cmd{smartcite} is equivalent to \cmd{footcite} in a
+document's body and \cmd{cite} in footnotes and endnotes.\footnote{In
+a \env{minipage} environment, \cmd{smartcite} is equivalent to
+\cmd{cite}. To use \cmd{smartcite} with endnotes, use the
+\sty{endnotes} package.} If you set the \opt{autocite} preamble option
+to \opt{inline}, \cmd{autocite} is equivalent to \cmd{parencite}. If
+you set it to \opt{plain}, \cmd{autocite} is equivalent to \cmd{cite}.
+
+Other citation commands:
 
 \begin{ltxsyntax}
 
@@ -641,18 +642,15 @@ The source for the passage above contains:
 
 \cmditem{smartcite*}[prenote][postnote]{key}
 
-Like \cmd{smartcite} but, like \cmd{cite*}, suppresses the author's
-position of a note.
+Like \cmd{smartcite} but suppresses the author's position of a note.
 
 \end{ltxsyntax}
 
 \subsection{Entry Types}
 \label{entrytypes}
 
-In a bibliography database, every entry has an entry type. The style
-recognizes the standard ones for \BibTeX, as well as some that are
-specific to \biblatex. A relatively small number of entry types are
-basic. The style treats the rest as aliases of the basic ones.
+Windy City recognizes every entry type from \BibTeX, as well as some
+that are specific to \biblatex.
 
 \begin{typelist}
 \RaggedRight
@@ -3166,8 +3164,8 @@ in bibliographies. To exclude them, use the preamble option
 \opt{nolos}. See Section \ref{preops} for more information.\\}%
 
 \defbibnote{bib}{This section shows the default output of
-\cmd{printbibliography}. The next section shows output in the
-author-date format.\\}%
+\cmd{printbibliography}. The next section shows the author-date
+format.\\}%
 
 \defbibnote{ref}{This section shows the output of
 \cmd{printbibliography} in the author-date format. For information on

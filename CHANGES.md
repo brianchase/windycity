@@ -8,12 +8,14 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2019-04-02
 
 * fixed '\parencite' from printing a work's publication year twice
   under the preamble option 'reflist'
-* fixed '\autocite'; it works with options 'footnote', 'inline', and
-  'plain', with a default value of 'footnote'
+* fixed the failure of the 3-em dash to print in bibliographies when
+  compiling with different languages
+* fixed '\autocite'; it should work for options 'footnote',
+  'inline', and 'plain' and with all preamble options
 * defined '\smartcite', '\smartcite*', and '\smartcites'
 
 ## 2019-03-27
