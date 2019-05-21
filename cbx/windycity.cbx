@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Apr 2019 11:43:21 AM CDT
+% Last modified: Tue 21 May 2019 06:11:53 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -42,13 +42,6 @@
   \global\togglefalse{cbx@loccit}%
   \AtEveryItem}%
 \AtEveryMultiCite{\toggletrue{multicite}}%
-
-% To facilitate uniform output, citations in notes always end with
-% '\addperiod' (see cite:postnote). This makes '\footcite{something}'
-% and '\footnote{\cite{something}}' functionally equivalent. To
-% prevent an extra period from printing in very rare cases, as when
-% '\footcite{something}' ends with a capital letter, remove
-% '\addperiod' from the commands below:
 
 \renewcommand{\bibfootnotewrapper}[1]{%
   \bibsentence#1}%
