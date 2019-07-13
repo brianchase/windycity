@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Apr 2019 01:31:48 PM CDT
+% Last modified: Sat 13 Jul 2019 06:04:16 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -562,13 +562,14 @@ Section \ref{collorder}.
 \subsection{Citation Commands}
 \label{citecmds}
 
-The most important citation commands are familiar from \biblatex:
+Windy City supports most of the citation commands familiar from
+\biblatex:
 
 \begin{ltxsyntax}
 \cmditem{autocite}[prenote][postnote]{key}
 \cmditem{autocites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{cite}[prenote][postnote]{key}
-\cmditem{cites}[prenote][postnote]{key}
+\cmditem{cites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{footcite}[prenote][postnote]{key}
 \cmditem{footcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{nocite}{key} \cmditem*{nocite}|\{*\}|
@@ -614,6 +615,11 @@ author's name clear. From \textit{CMOS} \ref{14.78}:
 \item \cite*[234]{franklin1868}
 \end{citebib}
 
+\cmditem{cites*}[prenote][postnote]{key}
+
+Like \cmd{cites} but, like \cmd{cite*}, suppresses the author's
+position of a note.
+
 \cmditem{footcite*}[prenote][postnote]{key}
 
 Like \cmd{cite*}, this command suppresses the author's position of a
@@ -643,6 +649,65 @@ The source for the passage above contains:
 \cmditem{smartcite*}[prenote][postnote]{key}
 
 Like \cmd{smartcite} but suppresses the author's position of a note.
+
+\cmditem{smartcites*}[prenote][postnote]{key}
+
+Like \cmd{smartcites} but, like \cmd{smartcite*}, suppresses the author's
+position of a note.
+
+\cmditem{textcite}[prenote][postnote]{key}
+
+Use \cmd{textcite} for in-text citations in the standard format.
+Here's an example from \textit{CMOS} 13.65:
+
+\begin{quote} ``If an astronaut falls into a black hole, its mass will
+increase, but eventually the energy equivalent of that extra mass will
+be returned to the universe in the form of radiation. Thus, in a
+sense, the astronaut will be {`recycled'}''
+\mkbibparens{\textcite[112]{hawking1988}}. \end{quote}
+
+The source for the passage above contains:
+
+\begin{verbatim}
+   \begin{quote} ``If an astronaut falls into a black hole...''
+   \mkbibparens{\textcite[112]{hawking1988}}. \end{quote}
+\end{verbatim}
+
+Note that \cmd{textcite} doesn't enclose citations in parentheses,
+since that's not always necessary, but does drop the final period that
+ends most standard citations. Enclosing the command in
+\cmd{mkbibparens} adds parentheses and switches internal parentheses
+to brackets.
+
+\cmditem{textcite*}[prenote][postnote]{key}
+
+Like \cmd{textcite} but suppresses the author's position of a note, as
+in this passage from \textit{CMOS} 13.65:
+
+\begin{quote} In their introduction to \textcite*{tocqueville1999},
+translators Harvey Mansfield and Delba Winthrop write that Tocqueville
+``shows that the people are sovereign, whether through the
+Constitution or despite it, and he warns of the tyranny of the
+majority'' \parencite[xvii]{tocqueville1999}. \end{quote}
+
+The source for the passage above contains:
+
+\begin{verbatim}
+   \begin{quote} In their introduction to \textcite*{tocqueville1999}
+   ...\parencite[xvii]{tocqueville1999}. \end{quote}
+\end{verbatim}
+
+\cmditem{textcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+
+Like \cmd{textcite} but, like \cmd{cites}, allows you to cite multiple
+sources with a \bibfield{prenote} and \bibfield{postnote} for each
+source, along with a \bibfield{prenote} and \bibfield{postnote} for
+the set.
+
+\cmditem{textcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+
+Like \cmd{textcites} but, like \cmd{textcite*}, suppresses the author's
+position of a note.
 
 \end{ltxsyntax}
 
