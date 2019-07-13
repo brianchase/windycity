@@ -8,6 +8,11 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* fixed always printing 'date' in an American format, rather than
+  in formats set in localization files
+
 ## 2019-04-02
 
 * fixed '\parencite' from printing a work's publication year twice

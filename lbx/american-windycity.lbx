@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Apr 2019 01:51:01 PM CDT
+% Last modified: Fri 12 Jul 2019 08:34:04 PM CDT
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -18,24 +18,106 @@
 \InheritBibliographyExtras{american}
 \InheritBibliographyStrings{american}
 
-% The code below comes from english.lbx. The only change is to remove
-% '\parentext{}' from '\mkbibtimezone{\thefield{#4}'.
-
 \DeclareBibliographyExtras{%
+% Slightly modified from english.lbx:
   \expandafter\protected\expandafter\def\csname mkbibtime12h\endcsname#1#2#3#4{%
-    \stripzeros{\mktimehh{\thefield{#1}}}%
+    \addcomma\space
+    \stripzeros{\mktimehh{\thefield{#1}}}% needs '%'
     \bibtimesep
     \forcezerosmdt{\thefield{#2}}%
     \iffieldundef{#3}{}
       {\bibtimesep
-       \forcezerosmdt{\thefield{#3}}}%
+       \forcezerosmdt{\thefield{#3}}}% needs '%'
      \space
      \ifnumless{\thefield{#1}}{12}
-       {\bibstring{am}}
+       {\bibstring{am}}%
        {\bibstring{pm}}%
     \iffieldundef{#4}{}
      {\space\bibtimezonesep
-      \mkbibtimezone{\thefield{#4}}}}%
+      \mkbibtimezone{\thefield{#4}}}}% needs '%'
+% Overrides version in windycity.bbx:
+  \protected\def\mkdaterangefull#1#2{%
+    \begingroup
+      \blx@metadateinfo{#2}%
+      \ifboolexpr{ test {\iffieldundef{#2year}}
+                   and test {\iffieldundef{#2month}}}
+        {\blx@nounit}%
+        {\ifboolexpr{ test {\iffieldundef{#2endyear}}
+                      and test {\iffieldundef{#2endmonth}}}
+           {\printtext[#2date]{%
+              \datecircaprint
+              \iffieldundef{#2season}
+                {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}%
+                 \blx@printtime{#2}{}}%
+                {\csuse{mkbibseasondate#1}{#2year}{#2season}}%
+              \dateuncertainprint
+              \dateeraprint{#2year}}}
+           {\iffieldundef{#2year}
+              {\iffieldundef{#2day}
+                 {\csuse{mkmonthrange}{#1}{#2}}%
+                 {\csuse{mkmonthdayrange}{#1}{#2}}}
+              {\iffieldsequal{#2year}{#2endyear}
+                 {\iffieldundef{#2day}
+                    {\csuse{mkmonthrange}{#1}{#2}}%
+                    {\csuse{mkmonthdayrange}{#1}{#2}}}
+                 {\csuse{mkmonthdayyearrange}{#1}{#2}}}}}% needs '%'
+    \endgroup}%
+% For ranges of months with no year (June--August) and months in the
+% same year (June--August 2001). Also applies to articles with
+% two-month publication dates, both with a year (June/July 2001) and
+% without (June/July).
+  \protected\def\mkmonthrange#1#2{%
+    \printtext[#2date]{%
+      \datecircaprint
+      \csuse{mkbibdate#1}{}{#2month}{}%
+      \dateuncertainprint
+      \ifboolexpr{ test {\ifentrytype{article}}
+                   and test {\ifstrequal{#2}{}}}
+        {\ifnumcomp{\thefield{#2endmonth} - \thefield{#2month}}{=}{1}
+          {\addslash}%
+          {\bibdaterangesep}}%
+        {\bibdaterangesep}%
+      \enddatecircaprint
+      \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{}%
+      \enddateuncertainprint
+      \dateeraprint{#2endyear}}}
+% For ranges of days and months with no year (June 3--July 1), days
+% in the same month and year (June 3--4, 2001), and days and months in
+% the same year (June 3--July 1, 2001):
+  \protected\def\mkmonthdayrange#1#2{%
+    \printtext[#2date]{%
+      \datecircaprint
+      \csuse{mkbibdate#1}{}{#2month}{#2day}%
+      \blx@printtime{#2}{}%
+      \dateuncertainprint
+      \bibdaterangesep
+      \enddatecircaprint
+      \iffieldsequal{#2month}{#2endmonth}
+        {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}%
+        {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}%
+      \blx@printtime{#2}{end}%
+      \enddateuncertainprint
+      \dateeraprint{#2endyear}}}
+% For ranges of days, months, and years (June 3, 2001--July 1, 2002):
+  \protected\def\mkmonthdayyearrange#1#2{%
+    \printtext[#2date]{%
+      \datecircaprint
+      \iffieldundef{#2season}
+        {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}%
+         \blx@printtime{#2}{}}%
+        {\csuse{mkbibseasondate#1}{#2year}{#2season}}%
+      \dateuncertainprint
+      \dateeraprint{#2year}%
+      \iffieldequalstr{#2endyear}{}
+        {\mbox{\bibdaterangesep}}%
+        {\bibdaterangesep
+         \enddatecircaprint
+         \iffieldundef{#2season}
+           {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}%
+            \blx@printtime{#2}{end}}%
+           {\csuse{mkbibseasondate#1}{#2endyear}{#2endseason}}%
+         \enddateuncertainprint
+         \dateeraprint{#2endyear}}}}
 }
 
 \NewBibliographyString{by}

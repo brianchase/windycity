@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Apr 2019 02:13:22 PM CDT
+% Last modified: Sat 13 Jul 2019 12:30:50 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -1346,12 +1346,45 @@
 %%  Dates and Times  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
+% The next command should work well enough for most languages but can
+% be overridden by lbx files. This happens when windycity.bbx loads
+% american-windycity.lbx.
+
+\renewcommand*{\mkdaterangefull}[2]{%
+  \begingroup
+    \blx@metadateinfo{#2}%
+    \ifboolexpr{ test {\iffieldundef{#2year}}
+                 and test {\iffieldundef{#2month}}}
+      {\blx@nounit}%
+      {\printtext[#2date]{%
+         \datecircaprint
+         \iffieldundef{#2season}
+           {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}%
+            \blx@printtime{#2}{}}%
+           {\csuse{mkbibseasondate#1}{#2year}{#2season}}%
+         \dateuncertainprint
+         \dateeraprint{#2year}%
+         \ifboolexpr{ test {\iffieldundef{#2endyear}}
+                      and test {\iffieldundef{#2endmonth}}}
+           {}
+           {\iffieldequalstr{#2endyear}{}
+              {\mbox{\bibdaterangesep}}%
+              {\bibdaterangesep
+               \enddatecircaprint
+               \iffieldundef{#2season}
+                 {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}%
+                  \blx@printtime{#2}{end}}%
+                 {\csuse{mkbibseasondate#1}{#2endyear}{#2endseason}}%
+               \enddateuncertainprint
+               \dateeraprint{#2endyear}}}}}% needs '%'
+  \endgroup}%
+
 \newbibmacro*{issue+month+etc}[1]{%
   \iffieldundef{year}
     {\iffieldundef{month}
        {}
        {\setunit{\space}%
-        \printtext[parens]{\usebibmacro{month+endmonth}}}}
+        \printtext[parens]{\printdate}}}
     {\ifboolexpr{ test {\iffieldundef{volume}}
                   and test {\iffieldundef{number}}}
        {\iffieldundef{journal}
@@ -1359,61 +1392,30 @@
           {\setunit{\addcomma\space}}%
         \iffieldundef{month}
           {\usebibmacro{issue+season+year}}%
-          {\usebibmacro{month+day+year}}}
+          {\usebibmacro{reflist+year+day}%
+           \printdate}}%
        {\iffieldundef{month}
           {\setunit{\space}%
            \usebibmacro{reflist+issue+season}}%
           {\ifstrequal{#1}{noparens}
-             {\newunit
-              \usebibmacro{month+day+year}}%
-             {\setunit{\space}%
-              \printtext[parens]{%
-                \usebibmacro{month+day+year}}}}}}}
+             {\usebibmacro{reflist+year+day}%
+              \newunit
+              \printdate}%
+             {\usebibmacro{reflist+year+day}%
+              \setunit{\space}%
+              \printtext[parens]{\printdate}}}}}}
 
-\newbibmacro*{month+day+year}{%
-  \usebibmacro{month+endmonth}%
-  \usebibmacro{reflist+day+year}}%
-
-\newbibmacro*{month+endmonth}{%
-  \iffieldundef{month}
-    {}
-    {\printfield{month}%
-     \ifboolexpr{ test {\iffieldundef{endmonth}}
-                  or test {\iffieldsequal{month}{endmonth}}}
-       {}
-       {\addslash\printfield{endmonth}}}}
-
-\newbibmacro*{reflist+day+year}{%
+\newbibmacro*{reflist+year+day}{%
   \ifboolexpr{ togl {bibliography}
-               and togl {reflist}}
-    {\iffieldundef{day}
-       {}
-       {\usebibmacro{day+endday+year}}}
-    {\iffieldundef{day}
-       {\addspace
-        \printfield{year}}%
-       {\usebibmacro{day+endday+year}}}}
-
-\newbibmacro*{day+endday+year}{%
-  \usebibmacro{day+endday}%
-  \addcomma\space
-  \printfield{year}%
-  \usebibmacro{hour+minute+timezone}}%
-
-\newbibmacro*{day+endday}{%
-  \iffieldundef{day}
-    {}
-    {\addspace
-     \stripzeros{\thefield{day}}%
-     \iffieldundef{endday}
-       {}
-       {\textendash\stripzeros{\thefield{endday}}}}}
-
-\newbibmacro*{hour+minute+timezone}{%
-  \iffieldundef{hour}
-    {}
-    {\addcomma\space
-     \printtime}}%
+               and togl {reflist}
+               and test {\iffieldundef{day}}}
+    {\iffieldundef{endyear}
+       {\clearfield{year}}%
+       {\iffieldsequal{year}{endyear}
+          {\clearfield{year}%
+           \clearfield{endyear}}%
+          {}}}
+    {}}
 
 % Treat 'season' as an alternative for 'issue'.
 
@@ -1818,7 +1820,8 @@
   \setunit{\addcomma\space}%
   \printlist{location}%
   \setunit{\addcomma\space}%
-  \usebibmacro{month+day+year}}%
+  \usebibmacro{reflist+year+day}%
+  \printdate}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Third Tier Macros  %%
@@ -1986,7 +1989,8 @@
   \ifboolexpr{ test {\iflistundef{location}}
                and test {\iflistundef{publisher}}}
     {\newunit
-     \usebibmacro{month+day+year}}%
+     \usebibmacro{reflist+year+day}%
+     \printdate}%
     {\iffieldundef{origtitle}
        {\iftoggle{bibliography}
           {\newunit
