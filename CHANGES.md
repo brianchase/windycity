@@ -12,6 +12,7 @@ brianchase/windycity").
 
 * fixed always printing 'date' in an American format, rather than
   in formats set in localization files
+* defined '\textcite', '\texcite*', '\textcites' and '\textcites*'
 
 ## 2019-04-02
 
@@ -21,7 +22,8 @@ brianchase/windycity").
   compiling with different languages
 * fixed '\autocite'; it should work for options 'footnote',
   'inline', and 'plain' and with all preamble options
-* defined '\smartcite', '\smartcite*', and '\smartcites'
+* defined '\smartcite', '\smartcite*', '\smartcites', and
+  '\smartcites*'
 
 ## 2019-03-27
 
