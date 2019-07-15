@@ -1,4 +1,4 @@
-% Last modified: Sat 13 Jul 2019 06:04:16 PM CDT
+% Last modified: Mon 15 Jul 2019 02:35:18 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -120,6 +120,32 @@ changes. The examples in this document and its accompanying
 bibliography database, \file{windycity.bib}, should serve as a guide
 for how to manage your input for nearly every circumstance that the
 style is meant to handle.
+
+The localization file \file{american-windycity.lbx} is responsible for
+Windy City's American-style punctuation and dates and many of the
+bibliography strings that appear in citations, such as \textit{edited
+by}. Windy City loads this file if \biblatex determines that your
+document's language is English---either due to settings in \sty{babel}
+or \sty{polyglossia} or because neither \sty{babel} nor
+\sty{polyglossia} has been loaded. You can prevent Windy City from
+loading \file{american-windycity.lbx} by commenting the following line
+in \file{windycity.bbx}:
+
+\begin{verbatim}
+   \DeclareLanguageMapping{english}{american-windycity}
+\end{verbatim}
+
+If you wish to use Windy City with a language other than English, set
+it accordingly with \sty{babel} or \sty{polyglossia} before loading
+\biblatex. Windy City will then try to load
+\file{<language>-windycity.lbx} and, if it's available, use it to
+override any other localization files that were loaded. This allows
+you to make your own localization files for Windy City without needing
+to edit other files. For example, if you load \sty{babel} with option
+\sty{german}, perhaps as the last in a list of languages, Windy City
+will try to load \file{german-windycity.lbx}. If it's available, it
+will override any other localization files that were loaded, including
+\biblatex's own \file{german.lbx}.
 
 \subsection{The Default Format}
 \label{default}
@@ -675,9 +701,9 @@ The source for the passage above contains:
 
 Note that \cmd{textcite} doesn't enclose citations in parentheses,
 since that's not always necessary, but does drop the final period that
-ends most standard citations. Enclosing the command in
-\cmd{mkbibparens} adds parentheses and switches internal parentheses
-to brackets.
+ends most standard citations. The parentheses come from
+\cmd{mkbibparens}, which also switches internal parentheses to
+brackets.
 
 \cmditem{textcite*}[prenote][postnote]{key}
 
