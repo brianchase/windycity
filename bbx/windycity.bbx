@@ -1,4 +1,4 @@
-% Last modified: Sat 13 Jul 2019 12:30:50 PM CDT
+% Last modified: Sun 14 Jul 2019 07:13:12 PM CDT
 
 % Copyright (c) 2019 Brian Michael Chase.
 %
@@ -168,7 +168,14 @@
   useprefix=false,
   usetranslator=true}
 
+% If a document's language is English, set by babel or polyglossia or
+% by biblatex when neither babel nor polyglossia has been loaded, use
+% 'american-windycity.lbx':
 \DeclareLanguageMapping{english}{american-windycity}
+% If the document's language isn't English, try to override
+% 'american-windycity.lbx' with '<language>-windycity.lbx':
+\DeclareLanguageMappingSuffix{-windycity}
+
 \DeclareLabeldate{% 'reflist' preamble option loads an alternative
   \field{bookyear}
   \field{date}
