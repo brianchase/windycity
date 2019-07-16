@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Jul 2019 02:35:18 PM CDT
+% Last modified: Mon 15 Jul 2019 05:49:29 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -112,15 +112,6 @@ the load-time option \opt{style}:
 \noindent Typically, this goes in a document's preamble or in one of
 its style files.
 
-For some entries in your bibliography database, you may need to add
-fields or make other adjustments to get the right output. But since
-Windy City relies as much as possible on standard \BibTeX\ fields, and
-secondarily on \biblatex fields, you may not need to make major
-changes. The examples in this document and its accompanying
-bibliography database, \file{windycity.bib}, should serve as a guide
-for how to manage your input for nearly every circumstance that the
-style is meant to handle.
-
 The localization file \file{american-windycity.lbx} is responsible for
 Windy City's American-style punctuation and dates and many of the
 bibliography strings that appear in citations, such as \textit{edited
@@ -146,6 +137,15 @@ to edit other files. For example, if you load \sty{babel} with option
 will try to load \file{german-windycity.lbx}. If it's available, it
 will override any other localization files that were loaded, including
 \biblatex's own \file{german.lbx}.
+
+For some entries in your bibliography database, you may need to add
+fields or make other adjustments to get the right output. But since
+Windy City relies as much as possible on standard \BibTeX\ fields, and
+secondarily on \biblatex fields, you may not need to make major
+changes. The examples in this document and its accompanying
+bibliography database, \file{windycity.bib}, should serve as a guide
+for how to manage your input for nearly every circumstance that the
+style is meant to handle.
 
 \subsection{The Default Format}
 \label{default}
@@ -1452,7 +1452,7 @@ and other works of this type. Further, consistent with \textit{CMOS}
 \ref{14.108} and \ref{15.42}, Windy City cross-references previously
 cited volumes.
 
-% Due to 'mincrossrefs=2', smith2018 would be added automatically to
+% Due to 'mincrossrefs=2', jones2018 would be added automatically to
 % the bibliography at the end of the document because it's referenced
 % twice below. However, it wouldn't appear in the refsegment without
 % using \nocite.
@@ -1460,7 +1460,7 @@ cited volumes.
 \begin{citebib}
 \item \cite[56]{doe2018}
 \item \cite[128]{edwards2018}
-\nocite{smith2018}
+\nocite{jones2018}
 \end{citebib}
 
 \noindent Now with \opt{swapvol}:
@@ -1471,7 +1471,7 @@ cited volumes.
 \AtNextCitekey{\toggletrue{swapvol}}
 \item \cite[128]{edwards2018}
 \AtNextBibliography{\toggletrue{swapvol}}
-\nocite{smith2018}
+\nocite{jones2018}
 \end{citebib}
 
 How does Windy City determine which entries in a bibliography database
