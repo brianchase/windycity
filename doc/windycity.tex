@@ -1,4 +1,4 @@
-% Last modified: Tue 16 Jul 2019 08:50:39 AM CDT
+% Last modified: Wed 17 Jul 2019 09:36:07 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -8,7 +8,7 @@
 \author{Brian Michael Chase}
 \email{brianmichaelchase@gmail.com}
 \website{https://github.com/brianchase/windycity}
-\version{2019-04-02}
+\version{2019-07-17}
 \maketitle
 \begingroup
 \hypersetup{linkcolor=black}
@@ -747,7 +747,7 @@ that are specific to \biblatex.
 
 \typeitem{article}
 
-Aliases: \bibtype{periodical}
+Alias: \bibtype{periodical}
 
 \typeitem{book}
 
@@ -768,7 +768,7 @@ Aliases: \bibtype{bookinbook}, \bibtype{conference},
 
 \typeitem{reference}
 
-Aliases: \bibtype{inreference}
+Alias: \bibtype{inreference}
 
 \typeitem{review} No aliases
 
@@ -2912,7 +2912,7 @@ citations below are different. They need the \bibtype{reference} or
 \bibtype{inreference} entry type. See Section \ref{entrytypes} for
 more information. Following the suggestion in \textit{CMOS} 14.232,
 \bibtype{reference} and \bibtype{inreference} works don't appear in
-bibliographies and reference lists.
+bibliographies or reference lists.
 
 \begin{citebib}
 \item \cite{salvation1980}
@@ -3180,8 +3180,9 @@ In the reference list, \textit{CMOS} errs in printing `:1997' after
 \subsubsection{Parentheses or comma with issue number}
 % 15.47 Parentheses or comma with issue number
 
-In the second example, Windy City prints a colon after the journal
-number. \textit{CMOS} prints a comma there---likely an error.
+In the second reference list entry below, Windy City prints a colon
+after the journal number. \textit{CMOS} prints a comma there---likely
+an error.
 
 \begin{citeref}
 \item \parencite{glass2014}
