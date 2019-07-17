@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Jul 2019 05:49:29 PM CDT
+% Last modified: Tue 16 Jul 2019 08:50:39 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -169,7 +169,7 @@ shorter, usually consisting of a short form of the author's name and a
 short form of the work's title.
 
 Windy City supports variations on this format. For information on
-short forms of citation, including the use of \textit{ibid.}, see
+short forms of citations, including the use of \textit{ibid.}, see
 Section \ref{short}. For options to skip parts of citations, change
 the order of editors and translators, and more, see Sections
 \ref{preops} and \ref{entryops}. For parenthetical citations, see
@@ -212,10 +212,11 @@ environment is called \opt{reflist}, which you may use as follows:
    \printbibliography[env=reflist]
 \end{verbatim}
 
-\noindent Unfortunately, while the \opt{env} option allows you to have
+\noindent Unfortunately, while the \opt{env} option allows for
 differently formatted bibliographies within the same document, the
-reference lists may have problems with sorting. For best results, use
-the \opt{reflist} preamble option.
+reference lists may have problems with sorting. (You'll notice some in
+\ref{ref}, at the end of this document.) For best results, use the
+\opt{reflist} preamble option.
 
 As you proceed through the text, note that all examples of citations
 and bibliographies are outputs of the style from commands that you can
@@ -546,7 +547,8 @@ title's position. Below is an example from \textit{CMOS} \ref{14.105}:
 \end{citebib}
 
 \noindent To bypass the author's position in a single note, without
-affecting the bibliography, use \cmd{cite*} or \cmd{footcite*}.
+affecting the bibliography, use starred versions of citation commands,
+such as \cmd{cite*} and \cmd{footcite*}.
 
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
@@ -569,7 +571,7 @@ translator, their names should appear in citations in the order in
 which they appear on the work's title page (\ref{14.104}). By default,
 the style lists editors first. Entries with the option
 \bibfield{swaptrans} reverse this order: Their translators print
-first. If a work's translators and editors are identical, using
+first. If a work's translators and editors are the same, using
 \bibfield{swaptrans} reverses the order of their roles, say, from
 \textit{edited and translated by} to \textit{translated and edited
 by}. For more information, see Section \ref{edtranspos}.
@@ -612,7 +614,7 @@ citations). Their multicite forms---\cmd{cites}, \cmd{footcites}, and
 
 Use \cmd{nocite} to add works to bibliographies without citing them in
 the text. Use it with an asterisk to add every work in every
-\file{bib} file that you've loaded with \cmd{addbibresource} or
+\file{bib} file that was loaded with \cmd{addbibresource} or
 \cmd{bibliography}.
 
 Windy City sets the \opt{autocite} preamble option to \opt{footnote},
@@ -648,15 +650,14 @@ position of a note.
 
 \cmditem{footcite*}[prenote][postnote]{key}
 
-Like \cmd{cite*}, this command suppresses the author's position of a
-note but otherwise functions like \cmd{footcite}.
+Like \cmd{footcite} but suppresses the author's position of a note.
 
 \cmditem{parencite*}[prenote][postnote]{key}
 
-Use this command to print a parenthetical citation without the
-author's position. The most likely contexts for this are passages in
-which the author receives explicit mention. Here's an example from
-\textit{CMOS} \ref{15.25}:
+Like \cmd{parencite} but suppresses the author's position of a
+parenthetical citation. This is useful in passages where the author
+receives explicit mention. Here's an example from \textit{CMOS}
+\ref{15.25}:
 
 \begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
 Hout \parencite*{fischer2006} reach more or less the same conclusions.
@@ -674,12 +675,13 @@ The source for the passage above contains:
 
 \cmditem{smartcite*}[prenote][postnote]{key}
 
-Like \cmd{smartcite} but suppresses the author's position of a note.
+Like \cmd{smartcite} but suppresses the author's position of a
+citation.
 
 \cmditem{smartcites*}[prenote][postnote]{key}
 
-Like \cmd{smartcites} but, like \cmd{smartcite*}, suppresses the author's
-position of a note.
+Like \cmd{smartcites} but, like \cmd{smartcite*}, suppresses the
+author's position of a citation.
 
 \cmditem{textcite}[prenote][postnote]{key}
 
@@ -699,11 +701,10 @@ The source for the passage above contains:
    \mkbibparens{\textcite[112]{hawking1988}}. \end{quote}
 \end{verbatim}
 
-Note that \cmd{textcite} doesn't enclose citations in parentheses,
-since that's not always necessary, but does drop the final period that
-ends most standard citations. The parentheses come from
-\cmd{mkbibparens}, which also switches internal parentheses to
-brackets.
+Note that \cmd{textcite} doesn't enclose citations in parentheses but
+does drop the final period that standard citations usually end with.
+The parentheses above come from \cmd{mkbibparens}, which also switches
+the note's internal parentheses to brackets.
 
 \cmditem{textcite*}[prenote][postnote]{key}
 
@@ -725,10 +726,8 @@ The source for the passage above contains:
 
 \cmditem{textcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 
-Like \cmd{textcite} but, like \cmd{cites}, allows you to cite multiple
-sources with a \bibfield{prenote} and \bibfield{postnote} for each
-source, along with a \bibfield{prenote} and \bibfield{postnote} for
-the set.
+Like \cmd{textcite} but for multiple sources in the same way as
+\cmd{cites} and \cmd{smartcites}.
 
 \cmditem{textcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 
@@ -839,9 +838,9 @@ makes it a fallback for almost anything. The example below is from
 
 \noindent The database entry for this work contains most of the format
 in \bibfield{usera} (for notes) and \bibfield{userb} (for
-bibliographies). In \bibfield{title}, the style needs manual
-formatting, since works of this type may have titles in italics or
-quotation marks.
+bibliographies). The \bibfield{title} field needs manual formatting,
+since works of this type may have titles in italics or quotation
+marks.
 
 \begin{verbatim}
    @Misc{roosevelt1959,
@@ -883,10 +882,10 @@ format your bibliography as a reference list. It prevents Windy City
 from printing \textit{n.d.} (no date) after the name to indicate a
 missing publication date. After adding the \bibtype{misc} entries, use
 \cmd{nocite} with their entry keys to add them to your bibliography,
-and cite the remaining entries in the usual way. For examples of
-automatic cross-referencing in notes and bibliographies see Section
-\ref{notes}, \ref{14.108}; Section \ref{paren}, \ref{15.42}; and
-Section \ref{collections}.
+and cite the remaining entries as usual. For examples of automatic
+cross-referencing in notes and bibliographies see Section \ref{notes},
+\ref{14.108}; Section \ref{paren}, \ref{15.42}; and Section
+\ref{collections}.
 
 For more information on entry types---specifically, on the use of
 certain data fields with them---see Section \ref{datafields}.
@@ -930,7 +929,7 @@ Edith Richert, with the assistance of Lilian J. Redstone et al.''
 
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
-such as \textit{2nd ser.} and \textit{n.s.}. For examples, see
+such as \textit{2nd ser.} and \textit{n.s.} For examples, see
 \textit{CMOS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
 journals, which occasionally have a series but no series name,
 information like \textit{2nd ser.} and \textit{n.s.} go in the
@@ -957,9 +956,9 @@ uses standard data fields. The list below discusses some of them.
 \item[edition] To indicate a numbered edition of a work, put the
 number of the edition in this field---for example, \textit{2} for a
 second edition. To indicate a revised edition, enter either
-\textit{revised} or \textit{rev. ed.}. Both options give the same
+\textit{revised} or \textit{rev. ed.} Both options give the same
 output. You may also use the field to indicate a newspaper's edition,
-such as\textit{Sunday Book Review} (see \textit{CMOS} \ref{14.202}).
+such as \textit{Sunday Book Review} (see \textit{CMOS} \ref{14.202}).
 
 \item[issue] Windy City uses this field with the \bibtype{article},
 \bibtype{online}, and \bibtype{review} entry types to record a work's
@@ -997,7 +996,7 @@ publication, you may use the classic \bibfield{year} field instead.
 \item[type] With the \bibtype{thesis} entry type, Windy City uses the
 \bibfield{type} field to distinguish a Master's thesis from a PhD
 dissertation. For the latter, \bibtype{type} should have the values
-\textit{phdthesis} or \textit{PhD diss.}. For the former, use
+\textit{phdthesis} or \textit{PhD diss.} For the former, use
 \textit{mathesis} or \textit{master's thesis}. No \bibfield{type}
 field is needed for the \bibtype{mathesis} and \bibtype{phdthesis}
 entry types.
@@ -1232,7 +1231,7 @@ you may want to reverse the order. For that, use the entry option
 
 If a work has no author, but has an editor, the style will print the
 editor's name in the author's position. The same happens if a work has
-no author but has a translator. The following are examples from
+no author but does have a translator. The following are examples from
 \textit{CMOS} \ref{14.103}:
 
 \begin{citebib}
@@ -1254,10 +1253,10 @@ in the author's position:
 \item \cite{smith2002b}
 \end{citebib}
 
-Similarly, if a work's editors and translators are identical, the
-style will print the editors' role first, as in \textit{edited and
-translated by}\ldots Reverse them with \opt{swaptrans}. From
-\textit{CMOS} \ref{14.104}:
+Similarly, if a work's editors and translators are the same, the style
+will print the editors' role first, as in \textit{edited and
+translated by}. Reverse them with \opt{swaptrans}. From \textit{CMOS}
+\ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
@@ -1287,13 +1286,13 @@ author's position---again, giving priority to editors. If you want the
 translator's name in the author's position, use \opt{swapauth} with
 \opt{swaptrans}.
 
-Another caveat: For correct sorting in a bibliography, a work that
-uses \opt{swapauth} needs a field like \bibfield{sortname} to sort it
-by the name of the editor or translator whose name will occupy the
-author's position. It would be nice if Windy City could do this for
-you, but at present no feature of \biblatex seems to allow the kind of
-on-the-fly changes to sorting that \opt{swapauth} requires. Below is
-the entry for the previous example:
+For correct sorting in a bibliography, a work that uses \opt{swapauth}
+needs a field like \bibfield{sortname} to sort it by the name of the
+editor or translator whose name will occupy the author's position. It
+would be nice if Windy City could do this for you, but at present no
+feature of \biblatex seems to allow the kind of on-the-fly changes to
+sorting that \opt{swapauth} requires. Below is the entry for the
+previous example:
 
 \begin{verbatim}
    @Book{pound1953,
@@ -1364,15 +1363,15 @@ below, the volume has priority:
 \item \cite[45]{armstrong2014}
 \end{citeonly}
 
-Notice the appearance of the volume number in the second note above,
-separated from the page citation by a colon. When the collection has
-priority, the volume number should appear in the citation. There are
-enough examples in \textit{CMOS} to make that clear. But when the
-volume has priority, the volume number is at best optional but
-probably incorrect. (It could cause confusion, since the collection is
-what comes in volumes, not the volumes themselves.) In any event,
-Windy City prints the volume number only when the collection has
-priority, that is, when \opt{swapvol} is \textit{true}.
+Notice the volume number in the second note above, separated from the
+page citation by a colon. When the collection has priority, the volume
+number should appear in the citation. There are enough examples in
+\textit{CMOS} to make that clear. But when the volume has priority,
+the volume number is at best optional but probably incorrect. (It
+could cause confusion, since the collection is what comes in volumes,
+not the volumes themselves.) In any event, Windy City prints the
+volume number only when the collection has priority, that is, when
+\opt{swapvol} is \textit{true}.
 
 Sometimes, you may want collections to have priority in every case. If
 so, compile documents with the \opt{swapvol} preamble option,
@@ -1407,8 +1406,7 @@ the volume's title looks odd. But it's not wrong. The volume's author
 didn't write every volume of the collection. In giving priority to the
 collection, then, the first position, where an author's name normally
 goes, should go to the collection's editor, not to the volume's
-author. By contrast, the default format looks more familiar and so is
-perhaps less likely to raise eyebrows:
+author. By contrast, the default format looks more familiar:
 
 \begin{citebib}
 \item \cite{barrows1959}
@@ -1444,11 +1442,11 @@ City can use for proper sorting. As for examples, it seems that
 \AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
-In the second set of examples above, Windy City doesn't print the
-volume number before the page reference. That's because, with or
-without \opt{swapvol}, the citation is directly to the work's title,
-not to the collection. The same goes for articles, chapters, books,
-and other works of this type. Further, consistent with \textit{CMOS}
+In neither set of examples does Windy City print the volume number
+before the page reference. That's because, with or without
+\opt{swapvol}, the citation is directly to the work's title, not to
+the collection. The same goes for articles, chapters, books, and other
+works of this type. Further, consistent with \textit{CMOS}
 \ref{14.108} and \ref{15.42}, Windy City cross-references previously
 cited volumes.
 
