@@ -1,4 +1,4 @@
-% Last modified: Sun 16 Feb 2020 08:24:03 PM CST
+% Last modified: Wed 19 Feb 2020 06:23:46 PM CST
 
 % Copyright (c) 2018 Brian Michael Chase.
 %
@@ -123,6 +123,8 @@
 \NewBibliographyString{by}
 \NewBibliographyString{compiler}
 \NewBibliographyString{compiler+}
+\NewBibliographyString{comprev}
+\NewBibliographyString{comprev+}
 \NewBibliographyString{comptrans}
 \NewBibliographyString{comptrans+}
 \NewBibliographyString{editor+}
@@ -133,12 +135,17 @@
 \NewBibliographyString{of}
 \NewBibliographyString{origpub}
 \NewBibliographyString{part}
-\NewBibliographyString{revised}
-\NewBibliographyString{review}
-\NewBibliographyString{reviewnoauth}
 \NewBibliographyString{reprint}
 \NewBibliographyString{reprinted}
+\NewBibliographyString{review}
+\NewBibliographyString{reviewnoauth}
+\NewBibliographyString{revcomp}
+\NewBibliographyString{revcomp+}
+\NewBibliographyString{revised}
 \NewBibliographyString{reviser}
+\NewBibliographyString{reviser+}
+\NewBibliographyString{revtrans}
+\NewBibliographyString{revtrans+}
 \NewBibliographyString{selfpub}
 \NewBibliographyString{special}
 \NewBibliographyString{subverbo}
@@ -147,6 +154,8 @@
 \NewBibliographyString{transcomp+}
 \NewBibliographyString{transed}
 \NewBibliographyString{transed+}
+\NewBibliographyString{transrev}
+\NewBibliographyString{transrev+}
 
 \DeclareBibliographyStrings{%
   am            = {{a\adddot m\adddot}{a\adddot m\adddot}},
@@ -158,6 +167,8 @@
   citedas       = {{hereafter cited as}{hereafter cited as}},
   compiler      = {{compiled by}{comp\adddot}},
   compiler+     = {{compiled by}{comps\adddot}},
+  comprev       = {{compiled and revised by}{comp\adddotspace and rev\adddot}},
+  comprev+      = {{compiled and revised by}{comps\adddotspace and revs\adddot}},
   comptrans     = {{compiled and translated by}{comp\adddotspace and trans\adddot}},
   comptrans+    = {{compiled and translated by}{comps\adddotspace and trans\adddot}},
   edition       = {{ed\adddot}{ed\adddot}},
@@ -183,10 +194,15 @@
   references    = {{Bibliography}{Bibliography}},
   reprint       = {{reprint}{repr\adddot}},
   reprinted     = {{reprinted in}{reprinted in}},
+  revcomp       = {{revised and compiled by}{rev\adddotspace and comp\adddot}},
+  revcomp+      = {{revised and compiled by}{revs\adddotspace and comps\adddot}},
   review        = {{review of}{review of}},
   reviewnoauth  = {{unsigned review of}{unsigned review of}},
   revised       = {{rev\adddotspace ed\adddot}{rev\adddotspace ed\adddot}},
   reviser       = {{revised by}{rev\adddot}},
+  reviser+      = {{revised by}{revs\adddot}},
+  revtrans      = {{revised and translated by}{rev\adddotspace and trans\adddot}},
+  revtrans+     = {{revised and translated by}{revs\adddotspace and trans\adddot}},
   selfpub       = {{Self-published}{self-pub\adddot}},
   special       = {{special issue}{special issue}},
   subverbo      = {{s\adddot v\adddot}{s\adddot v\adddot}},
@@ -196,6 +212,8 @@
   transed       = {{translated and edited by}{trans\adddotspace and ed\adddot}},
   transed+      = {{translated and edited by}{trans\adddotspace and eds\adddot}},
   translator    = {{translated by}{trans\adddot}},
+  transrev      = {{translated and revised by}{trans\adddotspace and rev\adddot}},
+  transrev+     = {{translated and revised by}{trans\adddotspace and revs\adddot}},
   part          = {{pt\adddot}{pt\adddot}},
   urlseen       = {{accessed}{accessed}},
   volume        = {{vol\adddot}{vol\adddot}},
