@@ -1,4 +1,4 @@
-% Last modified: Wed 19 Feb 2020 06:39:53 PM CST
+% Last modified: Sun 23 Feb 2020 12:02:35 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -849,15 +849,15 @@
        \addcomma\space\bibsstring{\cbx@bibstring}}}}
 
 \newbibmacro*{edscomps}{%
-  \iftoggle{swaptrans}
-    {}
-    {\ifnameundef{editor}
-       {\ifnumgreater{\value{editora}}{1}
+  \ifnameundef{\xeditor}
+    {\ifnameundef{\yeditor}
+       {}
+       {\ifnumgreater{\value{\yeditor}}{1}
           {\edef\cbx@bibstring{\cbx@bibstring +}}%
-          {}}
-       {\ifnumgreater{\value{editor}}{1}
-          {\edef\cbx@bibstring{\cbx@bibstring +}}%
-          {}}}}
+          {}}}
+    {\ifnumgreater{\value{\xeditor}}{1}
+       {\edef\cbx@bibstring{\cbx@bibstring +}}%
+       {}}}
 
 % For editors and translators not in the author's position.
 

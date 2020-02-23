@@ -8,6 +8,11 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* fixed printing `transcomp` and `transed` bibstrings in place of
+  `transcomp+` and `transed+`
+
 ## 2019-07-17
 
 * fixed always printing the `date` field in an American format, rather
