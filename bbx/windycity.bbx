@@ -1,4 +1,4 @@
-% Last modified: Sun 23 Feb 2020 12:02:35 PM CST
+% Last modified: Sun 23 Feb 2020 12:31:51 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -629,7 +629,7 @@
         \ifnameundef{\cbx@namelist}
           {\toggletrue{noauth}%
            \usebibmacro{journalfirst}}%
-          {\usebibmacro{edscomps:authpos}%
+          {\usebibmacro{addplus:authpos}%
            \usebibmacro{namehash+etc}}}%
        {\usebibmacro{namehash+etc}}}}
 
@@ -825,30 +825,44 @@
   \renewcommand*{\cbx@namelist}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
-     \iffieldequalstr{\xeditor type}{compiler}
+     \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
+                  or test {\iffieldequalstr{\xeditor type}{comprev}}}
        {\renewcommand*{\cbx@bibstring}{transcomp}}%
-       {\renewcommand*{\cbx@bibstring}{transed}}}
+       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
+                     or test {\iffieldequalstr{\xeditor type}{revcomp}}}
+          {\renewcommand*{\cbx@bibstring}{transrev}}%
+          {\renewcommand*{\cbx@bibstring}{transed}}}}
     {\renewcommand*{\cbx@bibstring}{translator}}}
 
 \newbibmacro*{edcombos}{%
   \renewcommand*{\cbx@namelist}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
-     \iffieldequalstr{\xeditor type}{compiler}
+     \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
+                  or test {\iffieldequalstr{\xeditor type}{comprev}}}
        {\renewcommand*{\cbx@bibstring}{comptrans}}%
-       {\renewcommand*{\cbx@bibstring}{edtrans}}}%
+       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
+                     or test {\iffieldequalstr{\xeditor type}{revcomp}}}
+          {\renewcommand*{\cbx@bibstring}{revtrans}}%
+          {\renewcommand*{\cbx@bibstring}{edtrans}}}}
     {\iffieldequalstr{\xeditor type}{compiler}
        {\renewcommand*{\cbx@bibstring}{compiler}}%
-       {\renewcommand*{\cbx@bibstring}{editor}}}}
+       {\iffieldequalstr{\xeditor type}{reviser}
+          {\renewcommand*{\cbx@bibstring}{reviser}}%
+          {\iffieldequalstr{\xeditor type}{revcomp}
+             {\renewcommand*{\cbx@bibstring}{revcomp}}%
+             {\iffieldequalstr{\xeditor type}{comprev}
+                {\renewcommand*{\cbx@bibstring}{comprev}}%
+                {\renewcommand*{\cbx@bibstring}{editor}}}}}}}
 
-\newbibmacro*{edscomps:authpos}{%
+\newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx@short}
     {}
-    {\usebibmacro{edscomps}%
+    {\usebibmacro{addplus}%
      \renewcommand*{\plugb}{%
        \addcomma\space\bibsstring{\cbx@bibstring}}}}
 
-\newbibmacro*{edscomps}{%
+\newbibmacro*{addplus}{%
   \ifnameundef{\xeditor}
     {\ifnameundef{\yeditor}
        {}
@@ -986,6 +1000,9 @@
    {\toggletrue{noed}}%
    {\ifdefempty{\xtitle}
       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
+                    or test {\iffieldequalstr{\xeditor type}{comprev}}
+                    or test {\iffieldequalstr{\xeditor type}{revcomp}}
+                    or test {\iffieldequalstr{\xeditor type}{reviser}}
                     or test {\iffieldequalstr{\xeditor type}{title}}
                     or test {\iffieldundef{\xeditor type}}}
          {}

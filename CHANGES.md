@@ -10,6 +10,8 @@ brianchase/windycity").
 
 ## Latest
 
+* added support for revisers with the following values for
+  `editortype`: `reviser`, `comprev`, and `revcomp`
 * fixed printing `transcomp` and `transed` bibstrings in place of
   `transcomp+` and `transed+`
 
