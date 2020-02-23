@@ -1,4 +1,4 @@
-% Last modified: Wed 19 Feb 2020 06:36:03 PM CST
+% Last modified: Sun 23 Feb 2020 11:45:42 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -119,48 +119,28 @@
 }
 
 \NewBibliographyString{by}
-\NewBibliographyString{compiler}
-\NewBibliographyString{compiler+}
-\NewBibliographyString{comprev}
-\NewBibliographyString{comprev+}
-\NewBibliographyString{comptrans}
-\NewBibliographyString{comptrans+}
-\NewBibliographyString{editor+}
-\NewBibliographyString{edtrans}
-\NewBibliographyString{edtrans+}
+\NewBibliographyString{compiler,compiler+,comprev,comprev+,comptrans,comptrans+}
+\NewBibliographyString{editor+,edtrans,edtrans+}
 \NewBibliographyString{expanded}
 \NewBibliographyString{noplace}
 \NewBibliographyString{of}
 \NewBibliographyString{origpub}
 \NewBibliographyString{part}
-\NewBibliographyString{reprint}
-\NewBibliographyString{reprinted}
-\NewBibliographyString{review}
-\NewBibliographyString{reviewnoauth}
-\NewBibliographyString{revcomp}
-\NewBibliographyString{revcomp+}
+\NewBibliographyString{reprint,reprinted}
+\NewBibliographyString{review,reviewnoauth}
+\NewBibliographyString{revcomp,revcomp+,reviser,reviser+,revtrans,revtrans+}
 \NewBibliographyString{revised}
-\NewBibliographyString{reviser}
-\NewBibliographyString{reviser+}
-\NewBibliographyString{revtrans}
-\NewBibliographyString{revtrans+}
 \NewBibliographyString{selfpub}
 \NewBibliographyString{special}
-\NewBibliographyString{subverbo}
-\NewBibliographyString{subverbos}
-\NewBibliographyString{transcomp}
-\NewBibliographyString{transcomp+}
-\NewBibliographyString{transed}
-\NewBibliographyString{transed+}
-\NewBibliographyString{transrev}
-\NewBibliographyString{transrev+}
+\NewBibliographyString{subverbo,subverbos}
+\NewBibliographyString{transcomp,transcomp+,transed,transed+,transrev,transrev+}
 
 \DeclareBibliographyStrings{%
   am            = {{a\adddot m\adddot}{a\adddot m\adddot}},
   afterword     = {{afterword to}{afterword to}},
   andothers     = {{et\addabbrvspace al\adddot}{et\addabbrvspace al\adddot}},
-  by            = {{by}{by}},
   bibliography  = {{Bibliography}{Bibliography}},
+  by            = {{by}{by}},
   chapter       = {{chap\adddot}{chap\adddot}},
   citedas       = {{hereafter cited as}{hereafter cited as}},
   compiler      = {{compiled by}{comp\adddot}},
@@ -177,9 +157,9 @@
   expanded      = {{exp\adddotspace ed\adddot}{exp\adddotspace ed\adddot}},
   foreword      = {{foreword to}{foreword to}},
   forthcoming   = {{forthcoming}{forthcoming}},
+  ibidem        = {{ibid\adddot}{ibid\adddot}},
   in            = {{in}{in}},
   introduction  = {{introduction to}{introduction to}},
-  ibidem        = {{ibid\adddot}{ibid\adddot}},
   mathesis      = {{master's thesis}{master's thesis}},
   nodate        = {{\lowercase{n}\adddot d\adddot}{\lowercase{n}\adddot d\adddot}},
   noplace       = {{N\adddot p\adddot}{n\adddot p\adddot}},
@@ -187,6 +167,7 @@
   origpub       = {{originally published as}{orig\adddotspace published as}},
   page          = {{Page}{Page}},   % assures proper case in 'pageref'
   pages         = {{Pages}{Pages}}, % assures proper case in 'pageref'
+  part          = {{pt\adddot}{pt\adddot}},
   phdthesis     = {{PhD diss\adddot}{PhD diss\adddot}},
   pm            = {{p\adddot m\adddot}{p\adddot m\adddot}},
   references    = {{Bibliography}{Bibliography}},
@@ -212,7 +193,6 @@
   translator    = {{translated by}{trans\adddot}},
   transrev      = {{translated and revised by}{trans\adddotspace and rev\adddot}},
   transrev+     = {{translated and revised by}{trans\adddotspace and revs\adddot}},
-  part          = {{pt\adddot}{pt\adddot}},
   urlseen       = {{accessed}{accessed}},
   volume        = {{vol\adddot}{vol\adddot}},
   volumes       = {{vols\adddot}{vols\adddot}}
