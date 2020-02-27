@@ -14,7 +14,7 @@
 % Examples not in CMOS
 
 @Book{doe2010a,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   author = {Doe, Jane},
   title = {A Book's Title},
   editor = {Smith, John},
@@ -24,7 +24,8 @@
   year = {2010}
 }
 @Book{doe2010b,
-  options = {skipbib,swaptrans},
+  keywords = {notinbib,notinref},
+  options = {swaptrans},
   author = {Doe, Jane},
   title = {A Book's Title},
   editor = {Smith, John},
@@ -34,7 +35,7 @@
   year = {2010}
 }
 @Book{smith2002a,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   title = {A Book's Title},
   editor = {Smith, John},
   translator = {Doe, Jane},
@@ -43,7 +44,8 @@
   year = {2002}
 }
 @Book{smith2002b,
-  options = {skipbib,swaptrans},
+  keywords = {notinbib,notinref},
+  options = {swaptrans},
   title = {A Book's Title},
   editor = {Smith, John},
   translator = {Doe, Jane},
@@ -556,7 +558,7 @@
   year = {2000}
 }
 @Misc{oflaherty,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   author = {Doniger, Wendy},
   sorttitle = {See also},
   userb = {\emph{See also} O'Flaherty, Wendy Doniger}
@@ -1519,16 +1521,16 @@
 % 14.145 No date of publication
 
 @Book{boston,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   address = {Boston}
 }
 @Book{edinburgh1750,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   address = {Edinburgh},
   year = {[1750?]}
 }
 @Book{edinburgh,
-  options = {skipbib},
+  keywords = {notinbib,notinref},
   address = {Edinburgh},
   year = {n.d., ca. 1750}
 }
@@ -1536,7 +1538,7 @@
 % 14.146 Forthcoming publications
 
 @Book{author,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   author = {Author, Jane Q.},
   title = {Book Title},
   address = {Place},
@@ -1544,7 +1546,7 @@
   year = {forthcoming}
 }
 @Book{writer,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   author = {Writer, John J.},
   title = {Another Book Title},
   address = {Place},
@@ -1552,13 +1554,13 @@
   year = {forthcoming}
 }
 @InCollection{contributor,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   author = {Contributor, Anna},
   title = {Contribution},
   crossref = {editor}
 }
 @Collection{editor,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   title = {Edited Volume},
   editor = {Editor, Ellen},
   address = {Place},
@@ -2557,14 +2559,14 @@
 % 15.44 No date of publication in author-date references
 
 @Book{nano1750,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   author = {Nano, Jasmine L.},
   title = {Title of Work\ldots},
   year = {[1750?]},
   sortyear = {1750}
 }
 @Book{nano,
-  keywords = {notinbib,notinref},% print in example bib only
+  keywords = {notinbib,notinref},
   author = {Nano, Jasmine L.},
   title = {Title of Another Work\ldots},
   sortkey = {nodate}

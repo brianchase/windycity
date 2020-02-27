@@ -1,4 +1,4 @@
-% Last modified: Wed 17 Jul 2019 09:36:07 AM CDT
+% Last modified: Wed 26 Feb 2020 07:33:16 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -2494,10 +2494,10 @@ field for the second example below contains \textit{vol. 6}.
 \subsubsection{No place of publication}
 % 14.132 No place of publication
 
-\begin{citebib}
+\begin{citeonly}
 \item \cite{windsor1910}
 \item \cite{vliet1890}
-\end{citebib}
+\end{citeonly}
 
 \setcounter{subsubsection}{136}
 \subsubsection{Self-published or privately published books}
@@ -2545,11 +2545,9 @@ field for the second example below contains \textit{vol. 6}.
 \subsubsection{No date of publication}
 % 14.145 No date of publication
 
-\begin{citebib}
-\item \cite{boston}
-\item \cite{edinburgh1750}
-\item \cite{edinburgh}
-\end{citebib}
+\begin{bibonly}
+\nocite{boston,edinburgh1750,edinburgh}
+\end{bibonly}
 
 \subsubsection{Forthcoming publications}
 % 14.146 Forthcoming publications
