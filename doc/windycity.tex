@@ -1,4 +1,4 @@
-% Last modified: Wed 26 Feb 2020 07:33:16 PM CST
+% Last modified: Sun 22 Mar 2020 10:36:26 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -2521,6 +2521,16 @@ field for the second example below contains \textit{vol. 6}.
 
 \begin{citebib}
 \item \cite{willke2007}
+\end{citebib}
+
+\subsubsection{Publication Date---General}
+% 14.142 Publication Date---General
+
+\begin{citebib}
+\AtNextCitekey{\clearfield{shorthand}}
+%\item \cite[6.56; cf. 16th ed. (2010), 6.54]{chicago2017}
+\item \cite*[6.56]{chicago2017}; cf. 16th ed. \parencite*{chicago2010}, 6.54.
+\item \cite{turabian2013}
 \end{citebib}
 
 \setcounter{subsubsection}{143}
