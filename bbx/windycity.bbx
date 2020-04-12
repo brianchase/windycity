@@ -1,4 +1,4 @@
-% Last modified: Mon 24 Feb 2020 12:49:13 PM CST
+% Last modified: Sun 12 Apr 2020 08:16:31 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2257,11 +2257,5 @@
        {\usebibmacro{bookbooktitle+editor}{}}%
      \renewcommand*{\xvolume}{book}%
      \usebibmacro{note+edition+etc}}}
-
-\newbibmacro*{volume}{%
-  \iffieldundef{\xvolume volume}
-    {}
-    {\newunit
-     \printfield[volume]{\xvolume volume}}}
 
 \endinput
