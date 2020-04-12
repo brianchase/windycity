@@ -1,4 +1,4 @@
-% Last modified: Sun 12 Apr 2020 08:16:31 AM CDT
+% Last modified: Sun 12 Apr 2020 09:46:32 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -466,14 +466,8 @@
 %%  Field Formats for Titles  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareFieldFormat{blogtitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{journaltitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{labeltitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{maintitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{title}{\mkbibemph{#1}}
+\DeclareFieldFormat{blogtitle,bookbooktitle,booktitle,journaltitle,
+  labeltitle,maintitle,shortbooktitle,title}{\mkbibemph{#1}}
 
 \DeclareIndexFieldFormat{indextitle}{%
   \usebibmacro{index:title}{\index}{\mkbibemph{#1}}}
@@ -1048,7 +1042,7 @@
   \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
     {\newunit}%
-    {\setunit{\unspace,\addspace}}}
+    {\setunit{\addcomma\space}}}
 
 \newbibmacro*{editorlists}[1]{%
   \iffieldequalstr{editortype}{#1}
@@ -1185,7 +1179,8 @@
     \iffieldundef{\xtitle subtitle}
       {}
       {\subtitlepunct
-       \printfield[noformat]{\xtitle subtitle}}}}
+       \printfield[noformat]{\xtitle subtitle}}%
+    \isdot}}%
 
 \newbibmacro*{test:titledupes}{%
   \iffieldsequal{title}{booktitle}
@@ -1214,34 +1209,34 @@
   \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
     {\iffieldundef{shortmaintitle}
-       {\printfield[title]{maintitle}}%
-       {\printfield[title]{shortmaintitle}}}
+       {\printfield[title]{maintitle}\isdot}%
+       {\printfield[title]{shortmaintitle}\isdot}}%
     {\ifboolexpr{ togl {collection:ib}
                   and togl {swapvol}}
        {\iffieldundef{shortbooktitle}
-         {\printfield[title]{booktitle}}%
-         {\printfield[title]{shortbooktitle}}}
-       {\printfield[\thefield{entrytype}]{labeltitle}}}}
+         {\printfield[title]{booktitle}\isdot}%
+         {\printfield[title]{shortbooktitle}\isdot}}%
+       {\printfield[\thefield{entrytype}]{labeltitle}\isdot}}}
 
 \newbibmacro*{shorttitle+crossref}{%
   \ifboolexpr{ togl {collection:icbk}
                and togl {swapvol}}
     {\iffieldundef{shortmaintitle}
-       {\printfield[title]{maintitle}}%
-       {\printfield[title]{shortmaintitle}}}
+       {\printfield[title]{maintitle}\isdot}%
+       {\printfield[title]{shortmaintitle}\isdot}}%
     {\ifboolexpr{ togl {collection:icib}
                   and togl {swapvol}}
        {\iffieldundef{shortbooktitle}
-         {\printfield[title]{booktitle}}%
-         {\printfield[title]{shortbooktitle}}}
-       {\printfield[\thefield{entrytype}]{labeltitle}}}}
+         {\printfield[title]{booktitle}\isdot}%
+         {\printfield[title]{shortbooktitle}\isdot}}%
+       {\printfield[\thefield{entrytype}]{labeltitle}\isdot}}}
 
 \newbibmacro*{booktitle+editor}[1]{%
   \iffieldundef{booktitle}
     {}
     {\renewcommand*{\xtitle}{book}%
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\unspace,\addspace}%
+     \setunit{\addcomma\space}%
      \usebibmacro{bybookauthor+pages}%
      \ifstrequal{#1}{a}
        {\usebibmacro{edtrans:a}}%
@@ -1255,7 +1250,7 @@
        {}% needs '%'
      \renewcommand*{\xtitle}{bookbook}%
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\unspace,\addspace}%
+     \setunit{\addcomma\space}%
      \usebibmacro{edtrans:b}}}
 
 \newbibmacro*{maintitle+editor}{%
@@ -1745,7 +1740,7 @@
      \usebibmacro{volume+number+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\unspace,\addspace}%
+     \setunit{\addcomma\space}%
      \usebibmacro{byauthor}{}%
      \usebibmacro{edtrans:b}%
      \usebibmacro{volumes}%
@@ -2223,7 +2218,7 @@
     {\usebibmacro{note+edition+etc}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
-     \setunit{\unspace,\addspace}%
+     \setunit{\addcomma\space}%
      \usebibmacro{byauthor}{}%
      \usebibmacro{edtrans:b}}%
     {\usebibmacro{volume+number+etc}%
