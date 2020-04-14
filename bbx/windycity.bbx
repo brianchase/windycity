@@ -1,4 +1,4 @@
-% Last modified: Sun 12 Apr 2020 09:46:32 AM CDT
+% Last modified: Mon 13 Apr 2020 07:21:27 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -466,8 +466,14 @@
 %%  Field Formats for Titles  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareFieldFormat{blogtitle,bookbooktitle,booktitle,journaltitle,
-  labeltitle,maintitle,shortbooktitle,title}{\mkbibemph{#1}}
+\DeclareFieldFormat{blogtitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{journaltitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{labeltitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{maintitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat{title}{\mkbibemph{#1}}
 
 \DeclareIndexFieldFormat{indextitle}{%
   \usebibmacro{index:title}{\index}{\mkbibemph{#1}}}
