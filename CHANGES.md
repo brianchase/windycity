@@ -12,6 +12,8 @@ brianchase/windycity").
 
 * added support for revisers with the following values for
   `editortype`: `reviser`, `comprev`, and `revcomp`
+* fixed placement of `edition` relative to editors, translators, and
+  such
 * fixed printing `transcomp` and `transed` bibstrings in place of
   `transcomp+` and `transed+`
 
