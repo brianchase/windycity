@@ -1,4 +1,4 @@
-% Last modified: Sun 23 Feb 2020 11:41:52 AM CST
+% Last modified: Tue 14 Apr 2020 08:12:42 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -119,8 +119,8 @@
 }
 
 \NewBibliographyString{by}
-\NewBibliographyString{compiler,compiler+,comprev,comprev+,comptrans,comptrans+}
-\NewBibliographyString{editor+,edtrans,edtrans+}
+\NewBibliographyString{comped,comped+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+}
+\NewBibliographyString{editor+,edcomp,edcomp+,edrev,edrev+,edtrans,edtrans+}
 \NewBibliographyString{expanded}
 \NewBibliographyString{noplace}
 \NewBibliographyString{of}
@@ -128,7 +128,7 @@
 \NewBibliographyString{part}
 \NewBibliographyString{reprint,reprinted}
 \NewBibliographyString{review,reviewnoauth}
-\NewBibliographyString{revcomp,revcomp+,reviser,reviser+,revtrans,revtrans+}
+\NewBibliographyString{revcomp,revcomp+,reved,reved+,reviser,reviser+,revtrans,revtrans+}
 \NewBibliographyString{revised}
 \NewBibliographyString{selfpub}
 \NewBibliographyString{special}
@@ -143,15 +143,21 @@
   by            = {{by}{by}},
   chapter       = {{chap\adddot}{chap\adddot}},
   citedas       = {{hereafter cited as}{hereafter cited as}},
+  comped        = {{compiled and edit\-ed by}{comp\adddotspace and ed\adddot}},
+  comped+       = {{compiled and edit\-ed by}{comps\adddotspace and eds\adddot}},
   compiler      = {{compiled by}{comp\adddot}},
   compiler+     = {{compiled by}{comps\adddot}},
   comprev       = {{compiled and revised by}{comp\adddotspace and rev\adddot}},
   comprev+      = {{compiled and revised by}{comps\adddotspace and revs\adddot}},
   comptrans     = {{compiled and translated by}{comp\adddotspace and trans\adddot}},
   comptrans+    = {{compiled and translated by}{comps\adddotspace and trans\adddot}},
+  edcomp        = {{edit\-ed and compiled by}{ed\adddotspace and comp\adddot}},
+  edcomp+       = {{edit\-ed and compiled by}{eds\adddotspace and comps\adddot}},
   edition       = {{ed\adddot}{ed\adddot}},
   editor        = {{edit\-ed by}{ed\adddot}},
   editor+       = {{edit\-ed by}{eds\adddot}},
+  edrev         = {{edit\-ed and revised by}{ed\adddotspace and rev\adddot}},
+  edrev+        = {{edit\-ed and revised by}{eds\adddotspace and revs\adddot}},
   edtrans       = {{edit\-ed and translated by}{ed\adddotspace and trans\adddot}},
   edtrans+      = {{edit\-ed and translated by}{eds\adddotspace and trans\adddot}},
   expanded      = {{exp\adddotspace ed\adddot}{exp\adddotspace ed\adddot}},
@@ -173,6 +179,8 @@
   references    = {{Bibliography}{Bibliography}},
   reprint       = {{reprint}{repr\adddot}},
   reprinted     = {{reprinted in}{reprinted in}},
+  reved         = {{revised and edit\-ed by}{rev\adddotspace and ed\adddot}},
+  reved+        = {{revised and edit\-ed by}{revs\adddotspace and eds\adddot}},
   revcomp       = {{revised and compiled by}{rev\adddotspace and comp\adddot}},
   revcomp+      = {{revised and compiled by}{revs\adddotspace and comps\adddot}},
   review        = {{review of}{review of}},
@@ -188,8 +196,8 @@
   subverbos     = {{s\adddot vv\adddot}{s\adddot vv\adddot}},
   transcomp     = {{translated and compiled by}{trans\adddotspace and comp\adddot}},
   transcomp+    = {{translated and compiled by}{trans\adddotspace and comps\adddot}},
-  transed       = {{translated and edited by}{trans\adddotspace and ed\adddot}},
-  transed+      = {{translated and edited by}{trans\adddotspace and eds\adddot}},
+  transed       = {{translated and edit\-ed by}{trans\adddotspace and ed\adddot}},
+  transed+      = {{translated and edit\-ed by}{trans\adddotspace and eds\adddot}},
   translator    = {{translated by}{trans\adddot}},
   translator+   = {{translated by}{trans\adddot}},
   transrev      = {{translated and revised by}{trans\adddotspace and rev\adddot}},
