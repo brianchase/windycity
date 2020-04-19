@@ -10,12 +10,30 @@ brianchase/windycity").
 
 ## Latest
 
-* added support for revisers with the following values for
-  `editortype`: `reviser`, `comprev`, and `revcomp`
+* added support for revisers and expanded combinations of editor and
+  translator types:
+
+  - compiled by, comp., comps.
+  - compiled and edited by, comp. and ed., comps. and eds.
+  - compiled and revised by, comp. and rev., comps. and revs.
+  - compiled and translated by, comp. and trans., comps. and trans.
+  - edited by, ed., eds.
+  - edited and compiled by, ed. and comp., eds. and comps.
+  - edited and revised by, ed. and rev., eds. and revs.
+  - edited and translated by, ed. and trans., eds. and trans.
+  - revised by, rev., revs.
+  - revised and compiled by, rev. and comp., revs. and comps.
+  - revised and edited by, rev. and ed., revs. and eds.
+  - revised and translated by, rev. and trans., revs. and trans.
+  - translated by, trans.
+  - translated and compiled by, trans. and comp., trans and comps.
+  - translated and edited by, trans. and ed., trans. and eds.
+  - translated and revised by, trans. and rev., trans. and revs.
+
 * fixed placement of `edition` relative to editors, translators, and
   such
-* fixed printing `transcomp` and `transed` bibstrings in place of
-  `transcomp+` and `transed+`
+* fixed printing `transcomp` and `transed` bibstrings when
+  `transcomp+` and `transed+` were needed
 
 ## 2019-07-17
 

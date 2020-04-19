@@ -1,4 +1,4 @@
-% Last modified: Mon 13 Apr 2020 07:30:39 PM CDT
+% Last modified: Sun 19 Apr 2020 02:52:47 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -826,10 +826,16 @@
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
      \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
-                  or test {\iffieldequalstr{\xeditor type}{comprev}}}
+                  or test {\iffieldequalstr{\xeditor type}{comped}}
+                  or test {\iffieldequalstr{\xeditor type}{comprev}}
+                  or test {\iffieldequalstr{\xeditor type}{comptrans}}
+                  or test {\iffieldequalstr{\xeditor type}{transcomp}}}
        {\renewcommand*{\cbx@bibstring}{transcomp}}%
        {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
-                     or test {\iffieldequalstr{\xeditor type}{revcomp}}}
+                     or test {\iffieldequalstr{\xeditor type}{revcomp}}
+                     or test {\iffieldequalstr{\xeditor type}{reved}}
+                     or test {\iffieldequalstr{\xeditor type}{revtrans}}
+                     or test {\iffieldequalstr{\xeditor type}{transrev}}}
           {\renewcommand*{\cbx@bibstring}{transrev}}%
           {\renewcommand*{\cbx@bibstring}{transed}}}}
     {\renewcommand*{\cbx@bibstring}{translator}}}
@@ -839,21 +845,35 @@
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
      \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
-                  or test {\iffieldequalstr{\xeditor type}{comprev}}}
+                  or test {\iffieldequalstr{\xeditor type}{comped}}
+                  or test {\iffieldequalstr{\xeditor type}{comprev}}
+                  or test {\iffieldequalstr{\xeditor type}{comptrans}}
+                  or test {\iffieldequalstr{\xeditor type}{transcomp}}}
        {\renewcommand*{\cbx@bibstring}{comptrans}}%
        {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
-                     or test {\iffieldequalstr{\xeditor type}{revcomp}}}
+                     or test {\iffieldequalstr{\xeditor type}{revcomp}}
+                     or test {\iffieldequalstr{\xeditor type}{reved}}
+                     or test {\iffieldequalstr{\xeditor type}{revtrans}}
+                     or test {\iffieldequalstr{\xeditor type}{transrev}}}
           {\renewcommand*{\cbx@bibstring}{revtrans}}%
           {\renewcommand*{\cbx@bibstring}{edtrans}}}}
     {\iffieldequalstr{\xeditor type}{compiler}
        {\renewcommand*{\cbx@bibstring}{compiler}}%
        {\iffieldequalstr{\xeditor type}{reviser}
           {\renewcommand*{\cbx@bibstring}{reviser}}%
-          {\iffieldequalstr{\xeditor type}{revcomp}
-             {\renewcommand*{\cbx@bibstring}{revcomp}}%
+          {\iffieldequalstr{\xeditor type}{comped}
+             {\renewcommand*{\cbx@bibstring}{comped}}%
              {\iffieldequalstr{\xeditor type}{comprev}
                 {\renewcommand*{\cbx@bibstring}{comprev}}%
-                {\renewcommand*{\cbx@bibstring}{editor}}}}}}}
+                {\iffieldequalstr{\xeditor type}{edcomp}
+                   {\renewcommand*{\cbx@bibstring}{edcomp}}%
+                   {\iffieldequalstr{\xeditor type}{edrev}
+                      {\renewcommand*{\cbx@bibstring}{edrev}}%
+                      {\iffieldequalstr{\xeditor type}{revcomp}
+                         {\renewcommand*{\cbx@bibstring}{revcomp}}%
+                         {\iffieldequalstr{\xeditor type}{reved}
+                            {\renewcommand*{\cbx@bibstring}{reved}}%
+                            {\renewcommand*{\cbx@bibstring}{editor}}}}}}}}}}}
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx@short}
@@ -997,9 +1017,20 @@
    {\toggletrue{noed}}%
    {\ifdefempty{\xtitle}
       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
+                    or test {\iffieldequalstr{\xeditor type}{comped}}
                     or test {\iffieldequalstr{\xeditor type}{comprev}}
-                    or test {\iffieldequalstr{\xeditor type}{revcomp}}
+                    or test {\iffieldequalstr{\xeditor type}{comptrans}}
+                    or test {\iffieldequalstr{\xeditor type}{editor}}
+                    or test {\iffieldequalstr{\xeditor type}{edcomp}}
+                    or test {\iffieldequalstr{\xeditor type}{edrev}}
+                    or test {\iffieldequalstr{\xeditor type}{edtrans}}
                     or test {\iffieldequalstr{\xeditor type}{reviser}}
+                    or test {\iffieldequalstr{\xeditor type}{revcomp}}
+                    or test {\iffieldequalstr{\xeditor type}{reved}}
+                    or test {\iffieldequalstr{\xeditor type}{revtrans}}
+                    or test {\iffieldequalstr{\xeditor type}{transcomp}}
+                    or test {\iffieldequalstr{\xeditor type}{transed}}
+                    or test {\iffieldequalstr{\xeditor type}{transrev}}
                     or test {\iffieldequalstr{\xeditor type}{title}}
                     or test {\iffieldundef{\xeditor type}}}
          {}
