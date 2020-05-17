@@ -100,5 +100,5 @@ warranties of merchantability and fitness for a particular purpose.
 
 ## Requirements
 
-* [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 3.8 or higher
+* [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") 3.13 or later
 

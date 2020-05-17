@@ -1,4 +1,4 @@
-% Last modified: Sun 19 Apr 2020 02:52:47 PM CDT
+% Last modified: Sun 17 May 2020 08:51:10 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -27,24 +27,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \providetoggle{anonauth}
-\DeclareEntryOption{anonauth}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{anonauth}[true]{%
   \ifstrequal{#1}{true}
     {\renewcommand*{\anona}{\bibopenbracket}%
      \renewcommand*{\anonb}{\bibclosebracket}}%
     {}}
 
 \providetoggle{anonqauth}
-\DeclareEntryOption{anonqauth}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{anonqauth}[true]{%
   \ifstrequal{#1}{true}
     {\renewcommand*{\anona}{\bibopenbracket}%
      \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
     {}}
 
 \providetoggle{annotate}
-\DeclareBibliographyOption[boolean]{annotate}[true]{%
-  \global\settoggle{annotate}{#1}}%
+\DeclareBiblatexOption{global}[boolean]{annotate}[true]{%
+  \settoggle{annotate}{#1}}%
 
-\DeclareBibliographyOption{collsonly}[true]{%
+\DeclareBiblatexOption{global}[boolean]{collsonly}[true]{%
   \ifstrequal{#1}{true}
     {\ExecuteBibliographyOptions{mincrossrefs=1}%
      \ExecuteBibliographyOptions{minxrefs=1}%
@@ -52,45 +52,41 @@
     {}}
 
 \providetoggle{firstshort}
-\DeclareBibliographyOption[boolean]{firstshort}[true]{%
-  \global\settoggle{firstshort}{#1}}%
+\DeclareBiblatexOption{global}[boolean]{firstshort}[true]{%
+  \settoggle{firstshort}{#1}}%
 
 \providetoggle{ibid}
-\DeclareBibliographyOption{ibid}[true]{%
+\DeclareBiblatexOption{global}[boolean]{ibid}[true]{%
   \ifstrequal{#1}{true}
-    {\global\toggletrue{ibid}%
-     \global\toggletrue{short}}%
-    {\global\togglefalse{ibid}}}
+    {\toggletrue{ibid}%
+     \toggletrue{short}}%
+    {\togglefalse{ibid}}}
 
 \providetoggle{isbn}
-\DeclareBibliographyOption[boolean]{isbn}[true]{%
-  \global\settoggle{isbn}{#1}}%
-\DeclareEntryOption[boolean]{isbn}[true]{%
+\DeclareBiblatexOption{entry,global}[boolean]{isbn}[true]{%
   \settoggle{isbn}{#1}}%
 
 \providetoggle{library}
-\DeclareBibliographyOption[boolean]{library}[true]{%
-  \global\settoggle{library}{#1}}%
-\DeclareEntryOption[boolean]{library}[true]{%
+\DeclareBiblatexOption{entry,global}[boolean]{library}[true]{%
   \settoggle{library}{#1}}%
 
 \providetoggle{listvols}
-\DeclareEntryOption[boolean]{listvols}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{listvols}[true]{%
   \settoggle{listvols}{#1}}%
 
 \providetoggle{noauth}
-\DeclareEntryOption[boolean]{noauth}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{noauth}[true]{%
   \settoggle{noauth}{#1}}%
 
-\DeclareBibliographyOption{nolos}[true]{%
+\DeclareBiblatexOption{global}[boolean]{nolos}[true]{%
   \ifstrequal{#1}{true}
     {\AtBeginBibliography{\blx@key@bibcheck{nolos}}}
     {}}
 
 \providetoggle{reflist}
-\DeclareBibliographyOption{reflist}[true]{%
+\DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
   \ifstrequal{#1}{true}
-    {\global\toggletrue{reflist}%
+    {\toggletrue{reflist}%
      \DeclareLabeldate{%
        \field{date}
        \field{year}
@@ -99,31 +95,29 @@
        \literal{nodate}}
      \ExecuteBibliographyOptions{%
        sorting=nyt}}%
-    {\global\togglefalse{reflist}}}
+    {\togglefalse{reflist}}}
 
 \providetoggle{short}
-\DeclareBibliographyOption{short}[true]{%
+\DeclareBiblatexOption{global}[boolean]{short}[true]{%
   \ifstrequal{#1}{true}
-    {\global\toggletrue{short}%
-     \global\toggletrue{firstshort}}%
-    {\global\togglefalse{short}}}
+    {\toggletrue{short}%
+     \toggletrue{firstshort}}%
+    {\togglefalse{short}}}
 
 \providetoggle{skipdate}
-\DeclareEntryOption[boolean]{skipdate}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{skipdate}[true]{%
   \settoggle{skipdate}{#1}}%
 
 \providetoggle{swapauth}
-\DeclareEntryOption[boolean]{swapauth}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{swapauth}[true]{%
   \settoggle{swapauth}{#1}}%
 
 \providetoggle{swaptrans}
-\DeclareEntryOption[boolean]{swaptrans}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans}[true]{%
   \settoggle{swaptrans}{#1}}%
 
 \providetoggle{swapvol}
-\DeclareBibliographyOption[boolean]{swapvol}[true]{%
-  \global\settoggle{swapvol}{#1}}%
-\DeclareEntryOption[boolean]{swapvol}[true]{%
+\DeclareBiblatexOption{entry,global}[boolean]{swapvol}[true]{%
   \settoggle{swapvol}{#1}}%
 
 % For setting 'minbibnames' and such, see CMOS, 17th ed., 14.76 and
