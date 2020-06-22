@@ -1,4 +1,4 @@
-% Last modified: Sun 17 May 2020 08:51:10 AM CDT
+% Last modified: Sun 21 Jun 2020 10:36:53 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -251,8 +251,7 @@
     \literal{0000}}}
 
 \defbibcheck{collsonly}{%
-  \ifboolexpr{ test {\ifentrytype{bookinbook}}
-               or test {\ifentrytype{inbook}}}
+  \ifentrytype{inbook}
     {\iffieldundef{crossref}
        {}
        {\skipentry}}%
@@ -269,9 +268,7 @@
 \defbibcheck{reference}{%
   \ifentrytype{reference}
     {\skipentry}%
-    {\ifentrytype{inreference}
-      {\skipentry}%
-      {}}}
+    {}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Data Inheritance  %%
@@ -279,8 +276,7 @@
 
 \ResetDataInheritance
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
-\DeclareDataInheritance{*}{%
-  incollection,inbook,bookinbook,inproceedings,letter,suppbook,review}{%
+\DeclareDataInheritance{*}{incollection,inbook,letter,review}{%
   \inherit{author}{bookauthor}
   \inherit{shortauthor}{shortbookauthor}
   \inherit{editor}{editora}
@@ -300,7 +296,7 @@
   \inherit{volume}{bookvolume}
   \inherit{bookvolume}{bookbookvolume}
   \inherit{options}{options}}
-\DeclareDataInheritance{collection}{bookinbook,collection,inbook}{%
+\DeclareDataInheritance{collection}{collection,inbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}}
 
@@ -477,14 +473,11 @@
 \DeclareFieldFormat{blogtitleaddon}{\mkbibparens{#1}}
 \DeclareFieldFormat{titleaddon}{\mkbibbrackets{#1}}
 
-\DeclareFieldFormat[%
-  article,incollection,inreference,inproceedings,online,reference,review]
+\DeclareFieldFormat[article,incollection,online,reference,review]
   {title}{\mkbibquote{#1}}
-\DeclareFieldFormat[%
-  article,incollection,inreference,inproceedings,online,reference,review]
+\DeclareFieldFormat[article,incollection,online,reference,review]
   {labeltitle}{\mkbibquote{#1}}
-\DeclareIndexFieldFormat[%
-  article,incollection,inreference,inproceedings,online,reference,review]
+\DeclareIndexFieldFormat[article,incollection,online,reference,review]
   {indextitle}{\usebibmacro{index:title}{\index}{\mkbibquote{#1}}}
 
 \DeclareFieldAlias[inbook]{title}{title}
@@ -557,50 +550,41 @@
 %%  Bibliography Aliases  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareBibliographyAlias{periodical}{article}
-\DeclareBibliographyAlias{cite:periodical}{cite:article}
+\DeclareDriverSourcemap[datatype=bibtex]{
+  \map{
+    \step[typesource=periodical,     typetarget=article]
+    \step[typesource=booklet,        typetarget=book]
+    \step[typesource=manual,         typetarget=book]
+    \step[typesource=mvbook,         typetarget=book]
+    \step[typesource=mvcollection,   typetarget=book]
+    \step[typesource=proceedings,    typetarget=book]
+    \step[typesource=report,         typetarget=book]
+    \step[typesource=techreport,     typetarget=book]
+    \step[typesource=bookinbook,     typetarget=inbook]
+    \step[typesource=conference,     typetarget=incollection]
+    \step[typesource=inproceedings,  typetarget=incollection]
+    \step[typesource=suppbook,       typetarget=incollection]
+    \step[typesource=suppcollection, typetarget=incollection]
+    \step[typesource=electronic,     typetarget=online]
+    \step[typesource=www,            typetarget=online]
+    \step[typesource=inreference,    typetarget=reference]
+    \step[typesource=mathesis,       typetarget=thesis]
+    \step[typesource=phdthesis,      typetarget=thesis]}
+  \map{
+    \step[fieldsource=school,        fieldtarget=institution]
+    \step[fieldsource=address,       fieldtarget=location]
+    \step[fieldsource=journal,       fieldtarget=journaltitle]}}
 
-\DeclareBibliographyAlias{booklet}{book}
 \DeclareBibliographyAlias{collection}{book}
-\DeclareBibliographyAlias{manual}{book}
-\DeclareBibliographyAlias{mvbook}{book}
-\DeclareBibliographyAlias{mvcollection}{book}
-\DeclareBibliographyAlias{proceedings}{book}
-\DeclareBibliographyAlias{report}{book}
-\DeclareBibliographyAlias{techreport}{book}
-\DeclareBibliographyAlias{cite:booklet}{cite:book}
 \DeclareBibliographyAlias{cite:collection}{cite:book}
-\DeclareBibliographyAlias{cite:manual}{cite:book}
-\DeclareBibliographyAlias{cite:mvbook}{cite:book}
-\DeclareBibliographyAlias{cite:mvcollection}{cite:book}
-\DeclareBibliographyAlias{cite:proceedings}{cite:book}
-\DeclareBibliographyAlias{cite:report}{cite:book}
-\DeclareBibliographyAlias{cite:techreport}{cite:book}
 
-\DeclareBibliographyAlias{bookinbook}{incollection}
-\DeclareBibliographyAlias{conference}{incollection}
 \DeclareBibliographyAlias{inbook}{incollection}
-\DeclareBibliographyAlias{inproceedings}{incollection}
 \DeclareBibliographyAlias{letter}{incollection}
-\DeclareBibliographyAlias{suppbook}{incollection}
-\DeclareBibliographyAlias{suppcollection}{incollection}
-\DeclareBibliographyAlias{cite:bookinbook}{cite:incollection}
-\DeclareBibliographyAlias{cite:conference}{cite:incollection}
 \DeclareBibliographyAlias{cite:inbook}{cite:incollection}
-\DeclareBibliographyAlias{cite:inproceedings}{cite:incollection}
 \DeclareBibliographyAlias{cite:letter}{cite:incollection}
-\DeclareBibliographyAlias{cite:suppbook}{cite:incollection}
-\DeclareBibliographyAlias{cite:suppcollection}{cite:incollection}
 
-\DeclareBibliographyAlias{mathesis}{thesis}
-\DeclareBibliographyAlias{phdthesis}{thesis}
 \DeclareBibliographyAlias{unpublished}{thesis}
-\DeclareBibliographyAlias{cite:mathesis}{cite:thesis}
-\DeclareBibliographyAlias{cite:phdthesis}{cite:thesis}
 \DeclareBibliographyAlias{cite:unpublished}{cite:thesis}
-
-\DeclareBibliographyAlias{inreference}{reference}
-\DeclareBibliographyAlias{cite:inreference}{cite:reference}
 
 \DeclareBibliographyAlias{*}{book}
 \DeclareBibliographyAlias{cite:*}{cite:book}
@@ -634,12 +618,9 @@
 \newbibmacro*{author+bookauthor}{%
   \ifboolexpr{ togl {swapauth}
                and ( test {\ifentrytype{book}}
-               or test {\ifentrytype{bookinbook}}
                or test {\ifentrytype{collection}}
                or test {\ifentrytype{inbook}}
-               or test {\ifentrytype{incollection}}
-               or test {\ifentrytype{mvbook}}
-               or test {\ifentrytype{mvcollection}} )}
+               or test {\ifentrytype{incollection}} )}
     {}
     {\ifboolexpr{ togl {collection:ib}
                   and togl {swapvol}}
@@ -1315,12 +1296,9 @@
 
 \newbibmacro*{test:collection}{%
   \ifboolexpr{ test {\ifentrytype{book}}
-               or test {\ifentrytype{collection}}
-               or test {\ifentrytype{mvbook}}
-               or test {\ifentrytype{mvcollection}}}
+               or test {\ifentrytype{collection}}}
     {\usebibmacro{test:collection:bk}}%
-    {\ifboolexpr{ test {\ifentrytype{bookinbook}}
-                  or test {\ifentrytype{inbook}}
+    {\ifboolexpr{ test {\ifentrytype{inbook}}
                   or test {\ifentrytype{incollection}}
                   or test {\ifentrytype{letter}}}
        {\usebibmacro{test:collection:icbk+etc}}%
@@ -1348,8 +1326,7 @@
                and not test {\iffieldundef{bookvolume}}}
     {\toggletrue{collection}%
      \toggletrue{collection:icbk}}%
-    {\ifboolexpr{ test {\ifentrytype{bookinbook}}
-                  or test {\ifentrytype{inbook}}}
+    {\ifentrytype{inbook}
        {\usebibmacro{test:collection:ib}}%
        {\usebibmacro{test:collection:icib}}}}
 

@@ -32,6 +32,8 @@ brianchase/windycity").
 
 * fixed placement of `edition` relative to editors, translators, and
   such
+* fixed mismatch in output between `@Article` and `@Periodical` entry
+  types
 * fixed printing `transcomp` and `transed` bibstrings when
   `transcomp+` and `transed+` were needed
 
