@@ -1,4 +1,4 @@
-% Last modified: Sun 12 Apr 2020 05:29:42 PM CDT
+% Last modified: Sun 05 Jul 2020 01:08:29 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -194,7 +194,8 @@
   \setunit{\addspace}% not '\setunit{\space}'
   \usebibmacro{parencite:date}}%
 
-\newbibmacro*{parencite:auth+title}{%
+% DELETE:
+\newbibmacro*{parencite:auth+title+old}{%
   \iftoggle{noauth}
     {}
     {\ifboolexpr{ test {\ifnameundef{labelname}}
@@ -207,6 +208,25 @@
         \clearfield{handle}%
         \clearfield{nameaddon}%
         \usebibmacro{author+bookauthor+etc}}}}
+
+\newbibmacro*{parencite:auth+title}{%
+  \iftoggle{noauth}
+    {}
+    {\ifboolexpr{ test {\ifnameundef{labelname}}
+                  or test {\iffieldundef{labelyear}}}
+       {\iffieldundef{label}
+          {\usebibmacro{parencite:journal}}%
+          {\printfield{label}}}
+       {\global\toggletrue{cbx@short}%
+        \renewcommand*{\cbx@deflabel}{labelname}%
+        \clearfield{handle}%
+        \clearfield{nameaddon}%
+        \ifboolexpr{ test {\ifnameundef{afterword}}
+                     and test {\ifnameundef{foreword}}
+                     and test {\ifnameundef{introduction}}
+                     and test {\ifnameundef{preface}}}
+          {\usebibmacro{author+bookauthor+etc}}%
+          {\usebibmacro{supplement}}}}}
 
 \newbibmacro*{parencite:journal}{%
   {\ifentrytype{article}

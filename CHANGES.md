@@ -30,10 +30,14 @@ brianchase/windycity").
   - translated and edited by, trans. and ed., trans. and eds.
   - translated and revised by, trans. and rev., trans. and revs.
 
+* added support for citing prefaces (akin to citing afterwords,
+  forewords, and introductions)
 * fixed placement of `edition` relative to editors, translators, and
   such
 * fixed mismatch in output between `@Article` and `@Periodical` entry
   types
+* fixed `\parencite` failing to print names in `afterwords`,
+  `forewords`, and `introduction` fields
 * fixed printing `transcomp` and `transed` bibstrings when
   `transcomp+` and `transed+` were needed
 

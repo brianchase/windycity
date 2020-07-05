@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Jun 2020 10:36:53 AM CDT
+% Last modified: Sun 05 Jul 2020 01:08:43 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -388,6 +388,7 @@
 \DeclareNameAlias{editorc}{sortname}
 \DeclareNameAlias{foreword}{sortname}
 \DeclareNameAlias{introduction}{sortname}
+\DeclareNameAlias{preface}{sortname}
 \DeclareNameAlias{translator}{sortname}
 
 \DeclareIndexNameAlias{author}{default}
@@ -399,6 +400,7 @@
 \DeclareIndexNameAlias{editorc}{default}
 \DeclareIndexNameAlias{foreword}{default}
 \DeclareIndexNameAlias{introduction}{default}
+\DeclareIndexNameAlias{preface}{default}
 \DeclareIndexNameAlias{translator}{default}
 
 % Affixes like 'Jr.', should appear last, delimited with a comma, when
@@ -672,20 +674,21 @@
      \newunit}%
     {\setunit{\addcomma\space}}}
 
-\newbibmacro*{aft+fore+intro}{%
+\newbibmacro*{supplement}{%
   \ifnameundef{afterword}
     {\ifnameundef{foreword}
-       {\renewcommand*{\cbx@namelist}{introduction}%
-        \renewcommand*{\cbx@bibstring}{introduction}}%
+       {\ifnameundef{introduction}
+          {\renewcommand*{\cbx@namelist}{preface}%
+           \renewcommand*{\cbx@bibstring}{preface}}%
+          {\renewcommand*{\cbx@namelist}{introduction}%
+           \renewcommand*{\cbx@bibstring}{introduction}}}
        {\renewcommand*{\cbx@namelist}{foreword}%
         \renewcommand*{\cbx@bibstring}{foreword}}}
     {\renewcommand*{\cbx@namelist}{afterword}%
      \renewcommand*{\cbx@bibstring}{afterword}}%
   \usebibmacro{printnames+etc}%
   \savefield{namehash}{\bbx@lasthash}%
-  \usebibmacro{authpos+deflabel}%
-  \newunit
-  \bibstring{\cbx@bibstring}\space}%
+  \usebibmacro{authpos+deflabel}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Editors and Translators  %%
@@ -1753,7 +1756,8 @@
   \usebibmacro{test:bookauthor}%
   \ifboolexpr{ test {\ifnameundef{afterword}}
                and test {\ifnameundef{foreword}}
-               and test {\ifnameundef{introduction}}}
+               and test {\ifnameundef{introduction}}
+               and test {\ifnameundef{preface}}}
     {\usebibmacro{author+bookauthor+etc}%
      \iffieldundef{title}
        {\usebibmacro{booktitle}%
@@ -1767,7 +1771,9 @@
            \usebibmacro{byauthor}%
            \usebibmacro{edtrans}%
            \usebibmacro{chapter+in}}}}
-    {\usebibmacro{aft+fore+intro}}}
+    {\usebibmacro{supplement}%
+     \newunit
+     \bibstring{\cbx@bibstring}\space}}%
 
 \newbibmacro*{crossref+incollections}{%
   \iffieldundef{crossref}
@@ -2038,7 +2044,8 @@
   \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
                or test {\ifnamesequal{afterword}{bookauthor}}
                or test {\ifnamesequal{foreword}{bookauthor}}
-               or test {\ifnamesequal{introduction}{bookauthor}}}
+               or test {\ifnamesequal{introduction}{bookauthor}}
+               or test {\ifnamesequal{preface}{bookauthor}}}
     {\clearname{bookauthor}}%
     {\iftoggle{noauth}
        {\clearname{bookauthor}}%
