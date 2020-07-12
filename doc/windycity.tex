@@ -1,4 +1,4 @@
-% Last modified: Sat 20 Jun 2020 09:42:37 AM CDT
+% Last modified: Sat 11 Jul 2020 07:37:32 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -30,13 +30,13 @@ to the 17th edition of \textit{The Chicago Manual of Style}
 wide range of citations in different formats and includes a set of
 options and commands to support special circumstances. It also has
 extensive support for citing and arranging different kinds of editors,
-translators, and compilers within a single citation. These features
-make Windy City especially suitable for academic work.
+translators, compilers, and revisers within a single citation. These
+features make Windy City especially suitable for academic work.
 
 The following sections assume familiarity with \textit{CMOS} and
 \biblatex. Section \ref{overview} gives a brief overview of the
 style's features. Section \ref{edtrans} discusses the assignment and
-placement of editors, translators, and compilers. Section
+placement of editors, translators, and the like. Section
 \ref{collections} discusses several issues with collections, including
 options for formatting citations of individual volumes. Sections
 \ref{notes} and \ref{paren} reproduce examples from \textit{CMOS}
@@ -1015,22 +1015,22 @@ citation of Beattie in \ref{14.171}.
 
 \end{marglist}
 
-\section{Editors, Translators, and Compilers}
+\section{Editors, Translators, Compilers, and Revisers}
 \label{edtrans}
 
 Windy City offers significant control over the handling of editors,
-translators, and compilers. Taking advantage of it, however, may not
+translators, and the like. Taking advantage of it, however, may not
 seem intuitive at first. This section covers the options and issues
 that you need to grasp in order to master this aspect of the style.
 
-\subsection{Types of Editors, Translators, and Compilers}
+\subsection{Types of Editors and Translators}
 \label{edtransnames}
 
 For the most part, Windy City associates the \bibfield{editor} and
 \bibfield{translator} fields with the lowest level title within the
 scope of an entry. In most cases, then, you can assign editors and
 translators simply by adding the \bibfield{editor} and
-\bibfield{translator} fields to a database entry. Below is the entry
+\bibfield{translator} fields to a database entry. The entry below is
 for an example in \textit{CMOS} \ref{14.104}:
 
 \begin{verbatim}
@@ -1050,7 +1050,7 @@ for an example in \textit{CMOS} \ref{14.104}:
 \end{citebib}
 
 \noindent When the style processes this entry, it identifies the
-editor and translator of the work with the names, respectively, in the
+editor and translator of the work with the names in the
 \bibfield{editor} and \bibfield{translator} fields. Since the entry
 doesn't use the \opt{swaptrans} entry option (see Section
 \ref{edtranspos}), the resulting output lists the editor and
@@ -1113,7 +1113,7 @@ scope of the \bibtype{incollection} entry:
                Jr., John Herman},
      title = {The Renaissance Philosophy of Man},
      address = {Chicago},
-     publisher = ucp,
+     publisher = {University of Chicago Press},
      year = {1948}
    }
 \end{verbatim}
@@ -1122,35 +1122,110 @@ scope of the \bibtype{incollection} entry:
 scope of \bibtype{collection}, the style associates it with
 \textit{The Renaissance Philosophy of Man}.
 
-Sometimes, you need to designate the role of an editor with the field
-\bibfield{editortype}. The values of \bibfield{editortype} are
-\textit{maintitle}, \textit{series}, \textit{issuetitle}, and
-\textit{compiler}. As for the latter, Windy City treats
-\textit{compiler} as a kind of editor. So, if you need to add a
-compiler to an entry, add the compiler's name to an available field
-for an editor, then add an appropriate \bibfield{editortype} field
-with the value \textit{compiler}. It may help to see the bibliography
-database entry for an example in \textit{CMOS} \ref{14.103}:
+The style supports two other basic editorial roles: compiler and
+reviser. To assign them, you need to use the \bibfield{editortype}
+field. It may help to see the bibliography database entries for
+examples in \textit{CMOS} \ref{14.103} and \ref{14.142}:
 
 \begin{verbatim}
    @Book{schechter2011,
-    editor = {Schechter, Harold, and Kurt Brown},
-    editortype = {compiler},
-    title = {Killer Verse},
-    subtitle = {Poems of Murder and Mayhem},
-    address = {London},
-    publisher = {Everyman Paperback Classics},
-    year = {2011}
+     editor = {Schechter, Harold, and Kurt Brown},
+     editortype = {compiler},
+     title = {Killer Verse},
+     subtitle = {Poems of Murder and Mayhem},
+     address = {London},
+     publisher = {Everyman Paperback Classics},
+     year = {2011}
+   }
+   @Book{turabian2013,
+     author = {Turabian, Kate L.},
+     title = {A Manual for Writers of Term Papers, Theses, and
+              Dissertations},
+     edition = {8},
+     editor = {Booth, Wayne C. and Colomb, Gregory G. and
+               Williams, Joseph M. and {the University of Chicago
+               Press Staff}},
+     editortype = {reviser},
+     address = {Chicago},
+     publisher = {University of Chicago Press},
+     year = {2013}
    }
 \end{verbatim}
 
 \begin{citebib}
 \item \cite{schechter2011}
+\item \cite{turabian2013}
 \end{citebib}
 
-Follow the same pattern for editors of a \bibfield{maintitle},
-\bibfield{series}, or \bibfield{issuetitle}. Here's an example from
-\textit{CMOS} \ref{14.123}:
+In addition to the four basic roles (editor, translator, compiler, and
+reviser), you may assign names to any pair of them. A work's editor,
+for example, can also be its translator, or compiler, or reviser but
+not also its translator \textit{and} compiler or translator
+\textit{and} reviser, and so on. And just as you can swap the order of
+the editor and translator roles (again, see Section \ref{edtranspos}),
+you can swap the other combinations, say, to identify a work as
+``compiled and edited by'' Jane Doe rather than ``edited and compiled
+by'' her. The output depends on the value of \bibfield{editortype}.
+See Table \ref{table:ed} for a summary.
+
+\begin{table}[H]
+\caption{} \label{table:ed}
+\begin{tabular}{@{}r l@{}}
+\bibfield{editortype} & Assignment\\
+\toprule
+compiler & compiler\\
+comped & compiler and editor\\
+comprev & compiler and reviser\\
+comptrans & compiler and translator\\
+edcomp & editor and compiler\\
+edrev & editor and reviser\\
+reviser & reviser\\
+revcomp & reviser and compiler\\
+reved & reviser and editor\\
+revtrans & reviser and translator\\
+transcomp & translator and compiler\\
+transrev & translator and reviser\\
+\end{tabular}
+\end{table}
+
+For an example in \textit{CMOS} from table \ref{table:ed}, we need
+turn to the bibliography. This will do:
+
+\begin{verbatim}
+   @Book{fowler1965,
+     author = {Fowler, H. W.},
+     title = {A Dictionary of Modern English Usage},
+     edition = {2},
+     editor = {Gowers, Sir Ernest},
+     editortype = {reved},
+     address = {Oxford},
+     publisher = {Oxford University Press},
+     year = {1965}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{fowler1965}
+\end{citebib}
+
+Try swapping \textit{reved} in the entry above for other values in
+Table \ref{table:ed}. Notice that \textit{edrev} is the reverse of
+\textit{reved}---``edited and revised by'' instead of ``revised and
+edited by.'' Similarly for \textit{comprev} and \textit{revcomp},
+\textit{comptrans} and \textit{transcomp}, and so on.
+
+Missing from the table are \textit{editor}, \textit{translator},
+\textit{edtrans}, and \textit{transed}. Windy City has bibstrings for
+them, too, but they're strictly for the style's internal use. It
+determines which of them applies, if any, based on the contents of the
+\bibfield{editor} and \bibfield{translator} fields and the option
+\opt{swaptrans}. You never need to use them in a bibliography
+database.
+
+Three more values of \bibfield{editortype} allow you to assign editors
+to higher level titles: \textit{maintitle}, \textit{series}, and
+\textit{issuetitle}. Here's an example from \textit{CMOS}
+\ref{14.123}:
 
 \begin{verbatim}
    @Book{allen2009,
@@ -1161,7 +1236,7 @@ Follow the same pattern for editors of a \bibfield{maintitle},
      editor = {Stimpson, Catharine R.},
      editortype = {series},
      address = {Chicago},
-     publisher = ucp,
+     publisher = {University of Chicago Press},
      year = {2009}
    }
 \end{verbatim}
@@ -1171,36 +1246,32 @@ Follow the same pattern for editors of a \bibfield{maintitle},
 \end{citebib}
 
 \noindent If there were no \bibfield{editortype} assigning the editor
-to the series, Windy City would assume that she's the book's editor.
-In short, for a title's compilers and for any title at a higher level
-than the \bibfield{title} field, you need to use
+to the series, Windy City would take her as the book's editor. In
+short, for a title's compilers and revisers and for any title at a
+higher level than \bibfield{title}, you need to use
 \bibfield{editortype}. Combined with Windy City's support for citing
 articles, chapters, books, and other works within books, this scheme
 allows for several sets of editors per work, although it does limit
-you to just one set of compilers.
+you to just one set of compilers and revisers.
 
-Windy City's support for translators falls between its support for
-editors and compilers. Unless a work's bibliography database entry has
-a \bibfield{translatortype} field with the value \textit{maintitle},
-Windy City associates the names in \bibfield{translator} with the
-entry's lowest level title. (Recall ``The Ascent of Mont Ventoux''
-above.) You should rarely, and perhaps never, need more than one set
-of translators per work. But if you do, Windy City lets you assign as
-many as three, if you cross-reference a work with one set of
-translators to another with two. Does any such work exist? Probably
-not. Anyway, support for it is something of an accident, stemming in
-large part from how the style handles cross-referencing with editors.
+What about translators? Unless a work's bibliography database entry
+has a \bibfield{translatortype} field with the value
+\textit{maintitle}, Windy City associates the names in
+\bibfield{translator} with the entry's lowest level title. (Recall
+``The Ascent of Mont Ventoux'' above.) You should rarely, and perhaps
+never, need more than one set of translators per work. But if you do,
+Windy City lets you assign as many as three, that is, if you
+cross-reference a work with one set of translators to another with
+two.
 
-One complication remains: There are other name lists for editors than
-\bibfield{editor}. There's \bibfield{editora}, \bibfield{editorb}, and
-\bibfield{editorc}.
-
-Reserve \bibfield{editor} for the lowest level title in a bibliography
-database entry. That should be the \bibfield{title} field. The next
-level up, as it were, is for \bibfield{editora}, followed by
-\bibfield{editorb}, and so on. Remember to include the appropriate
-\bibfield{type} field to indicate an editor's role. These fields are
-\bibfield{editortype} (for \bibfield{editor}),
+The style has three other name lists for editors: \bibfield{editora},
+\bibfield{editorb}, and \bibfield{editorc}. If a work has more than
+one set of editors, list editors of the lowest level title in
+\bibfield{editor}. Usually, those are editors of a \bibfield{title}.
+The next level up, as it were, is for \bibfield{editora}, followed by
+\bibfield{editorb}, then \bibfield{editorc}. Remember to include the
+appropriate \bibfield{type} field to indicate an editor's role. These
+fields are \bibfield{editortype} (for \bibfield{editor}),
 \bibfield{editoratype} (for \bibfield{editora}),
 \bibfield{editorbtype} (for \bibfield{editorb}), and
 \bibfield{editorctype} (for \bibfield{editorc}).
@@ -1659,7 +1730,7 @@ as a whole. Here's the entry for \textit{The Lisle Letters}:
      title = {The Lisle Letters},
      volumes = {6},
      address = {Chicago},
-     publisher = ucp,
+     publisher = {University of Chicago Press},
      year = {1981}
    }
 \end{verbatim}
@@ -2525,6 +2596,7 @@ field for the second example below contains \textit{vol. 6}.
 
 \subsubsection{Publication Date---General}
 % 14.142 Publication Date---General
+\label{14.142}
 
 \begin{citebib}
 \AtNextCitekey{\clearfield{shorthand}}

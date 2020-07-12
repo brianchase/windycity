@@ -1,4 +1,4 @@
-% Last modified: Tue 16 Jul 2019 07:49:59 AM CDT
+% Last modified: Sat 11 Jul 2020 07:54:49 PM CDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -277,5 +277,11 @@
 \renewcommand{\file}[1]{\emph{#1}}%
 \renewcommand{\opt}[1]{\emph{#1}}%
 \renewcommand{\sty}[1]{\emph{#1}}%
+
+% For tables:
+\usepackage{booktabs}% Enhanced layout
+\usepackage{float}% For nonfloating tables
+\usepackage[it,small]{caption}% Adjust captions
+\gappto{\@floatboxreset}{\centering}% Center floats
 
 \endinput
