@@ -1,4 +1,4 @@
-% Last modified: Sun 05 Jul 2020 01:08:29 PM CDT
+% Last modified: Thu 16 Jul 2020 11:36:22 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -193,21 +193,6 @@
     {\printfield{shorthand}}%
   \setunit{\addspace}% not '\setunit{\space}'
   \usebibmacro{parencite:date}}%
-
-% DELETE:
-\newbibmacro*{parencite:auth+title+old}{%
-  \iftoggle{noauth}
-    {}
-    {\ifboolexpr{ test {\ifnameundef{labelname}}
-                  or test {\iffieldundef{labelyear}}}
-       {\iffieldundef{label}
-          {\usebibmacro{parencite:journal}}%
-          {\printfield{label}}}
-       {\global\toggletrue{cbx@short}%
-        \renewcommand*{\cbx@deflabel}{labelname}%
-        \clearfield{handle}%
-        \clearfield{nameaddon}%
-        \usebibmacro{author+bookauthor+etc}}}}
 
 \newbibmacro*{parencite:auth+title}{%
   \iftoggle{noauth}
