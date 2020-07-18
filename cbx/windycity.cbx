@@ -1,4 +1,4 @@
-% Last modified: Thu 16 Jul 2020 11:36:22 AM CDT
+% Last modified: Sat 18 Jul 2020 10:20:37 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -45,6 +45,9 @@
   \bibsentence#1}%
 \renewcommand{\bibendnotewrapper}[1]{%
   \bibsentence#1}%
+
+\providetoggle{cite:collection}
+\providetoggle{cite:long}
 
 % Protect commas against abbreviation dots and terminal punctuation
 % marks. Note '\addspace'. Using '\space' there causes problems.
@@ -144,8 +147,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{parencite}{%
-  \usebibmacro{test:collection}%
-  \usebibmacro{test:crossref}%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
     {\iffieldundef{postnote}
@@ -153,22 +154,16 @@
           \usebibmacro{parencite:date}%
           \usebibmacro{cite:volume}}}
        {}}
-    {\printtext[bibhyperref]{%
+    {\ifboolexpr{ test {\ifentrytype{book}}
+                  or test {\ifentrytype{collection}}
+                  or test {\ifentrytype{incollection}}
+                  or test {\ifentrytype{inbook}}
+                  or test {\ifentrytype{letter}}}
+       {\usebibmacro{test:crossref}}%
+       {}% needs '%'
+     \printtext[bibhyperref]{%
        \usebibmacro{parencite:long}%
        \usebibmacro{cite:volume}}}}
-
-% See note for 'crossref+long'.
-
-\newbibmacro*{test:crossref}{%
-  \ifboolexpr{ test {\iffieldundef{crossref}}
-               or test {\iffieldundef{title}}}
-    {}
-    {\xifinlist{\thefield{crossref}}{\crossreflist}
-       {\stepcounter{\thefield{crossref}}}
-       {\listxadd{\crossreflist}{\thefield{crossref}}%
-        \ifcsdef{c@\thefield{crossref}}
-          {\setcounter{\thefield{crossref}}{0}}%
-          {\newcounter{\thefield{crossref}}}}}}
 
 \newbibmacro*{parencite:date}{%
   \iffieldundef{labelyear}
@@ -314,7 +309,10 @@
   \usebibmacro{deflabel}%
   \iftoggle{firstshort}
     {\usebibmacro{cite:short}}%
-    {\usebibmacro{crossref+long}}}
+    {\printtext{%
+       \usedriver
+         {\DeclareNameAlias{sortname}{default}}%
+         {cite:\thefield{entrytype}}}}}
 
 % By default, idemtracker is 'false'. As such, '\ifciteidem' returns
 % false. With idemtracker set to 'true' (or to some value that implies
@@ -331,19 +329,18 @@
 % collection with entries containing just 'volume' and 'crossref'
 % fields. Perhaps justifiable in very rare cases.
 
-\newbibmacro*{crossref+long}{%
+\newbibmacro*{test:crossref}{%
   \ifboolexpr{ test {\iffieldundef{crossref}}
                or test {\iffieldundef{title}}}
-    {\usebibmacro{cite:long}}%
+    {\toggletrue{cite:long}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
-       {\stepcounter{\thefield{crossref}}%
-        \usebibmacro{author+incollection+etc}%
-        \usebibmacro{crossref}}%
-       {\listxadd{\crossreflist}{\thefield{crossref}}%
+       {\toggletrue{cite:collection}%
+        \stepcounter{\thefield{crossref}}}
+       {\toggletrue{cite:long}%
+        \listxadd{\crossreflist}{\thefield{crossref}}%
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
-          {\newcounter{\thefield{crossref}}}
-        \usebibmacro{cite:long}}}}
+          {\newcounter{\thefield{crossref}}}}}}
 
 \newbibmacro*{cite:long}{%
   \printtext{%
@@ -463,18 +460,30 @@
   \usebibmacro{colon+comma+etc}}%
 
 \DeclareBibliographyDriver{cite:book}{%
-  \usebibmacro{author+collection+etc}%
-  \newunit
-  \usebibmacro{volume+page}}%
+  \usebibmacro{test:crossref}%
+  \iftoggle{cite:long}
+    {\usebibmacro{author+collection+etc}%
+     \newunit
+     \usebibmacro{volume+page}}%
+    {\iftoggle{cite:collection}
+       {\usebibmacro{author+incollection+etc}%
+        \usebibmacro{crossref}}%
+       {}}}
 
 \DeclareBibliographyDriver{cite:incollection}{%
   \ifentrytype{letter}
     {\toggletrue{noauth}}%
     {}% needs '%'
-  \usebibmacro{author+incollection+etc}%
-  \usebibmacro{incollections}%
-  \newunit
-  \usebibmacro{volume+page}}%
+  \usebibmacro{test:crossref}%
+  \iftoggle{cite:long}
+    {\usebibmacro{author+incollection+etc}%
+     \usebibmacro{incollections}%
+     \newunit
+     \usebibmacro{volume+page}}%
+    {\iftoggle{cite:collection}
+       {\usebibmacro{author+incollection+etc}%
+        \usebibmacro{crossref}}%
+       {}}}
 
 \DeclareBibliographyDriver{cite:misc}{%
   \usebibmacro{author+bookauthor+etc}%
