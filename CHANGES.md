@@ -34,6 +34,8 @@ brianchase/windycity").
   forewords, and introductions)
 * fixed placement of `edition` relative to editors, translators, and
   such
+* fixed short citations of @Review entries failing to print a review's
+  title
 * fixed output of @InReference entries when they cross-reference a
   previously cited @Reference entry
 * fixed mismatch in output between `@Article` and `@Periodical` entry

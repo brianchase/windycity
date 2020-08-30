@@ -1,4 +1,4 @@
-% Last modified: Sat 18 Jul 2020 10:20:37 AM CDT
+% Last modified: Sun 30 Aug 2020 01:07:48 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -283,8 +283,11 @@
     {\usebibmacro{author+bookauthor+etc}%
      \bibstring{review}}%
   \space
-  \renewcommand*{\xtitle}{book}%
-  \usebibmacro{title+labelyear}%
+%  \renewcommand*{\xtitle}{book}%
+%  \usebibmacro{title+labelyear}%
+  \iffieldundef{shortbooktitle}
+    {\printfield[title]{booktitle}\isdot}%
+    {\printfield[title]{shortbooktitle}\isdot}%
   \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:volume}{%
