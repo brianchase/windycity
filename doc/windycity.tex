@@ -1,4 +1,4 @@
-% Last modified: Sun 26 Jul 2020 07:09:04 PM CDT
+% Last modified: Sun 30 Aug 2020 01:53:36 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -371,10 +371,10 @@ discussion of multivolume works, see Section \ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
-\noindent Use this option to shorten the first citation of each work.
-The resulting format consists mainly of the author's name and the
-work's title. According to \textit{CMOS}, this approach is optional
-for documents with complete bibliographies. (See \textit{CMOS}
+\noindent Use this option to shorten a work's first citation. The
+resulting format consists mainly of the author's name and the work's
+title. According to \textit{CMOS}, this approach is optional for
+documents with complete bibliographies. (See \textit{CMOS}
 \ref{14.23}, also 14.29--14.36.) You may use \opt{firstshort} in
 conjunction with \opt{ibid}. However, it adds nothing to \opt{short},
 which has the same effect on first citations.
@@ -534,8 +534,8 @@ such as \cmd{cite*} and \cmd{footcite*}.
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
 \noindent On rare occasions, you may need an entry in a reference list
-to skip the \textit{date} of the author-date format. For examples, see
-Section \ref{entrytypes}.
+to skip the \textit{date} of the author-date format. See Section
+\ref{entrytypes} for examples.
 
 \optitem[false]{swapauth}{\opt{true}, \opt{false}}
 
@@ -626,19 +626,17 @@ author's name clear. From \textit{CMOS} \ref{14.78}:
 
 \cmditem{cites*}[prenote][postnote]{key}
 
-Like \cmd{cites} but, like \cmd{cite*}, suppresses the author's
-position of a note.
+Like \cmd{cites} but suppresses the author's position.
 
 \cmditem{footcite*}[prenote][postnote]{key}
 
-Like \cmd{footcite} but suppresses the author's position of a note.
+Like \cmd{footcite} but suppresses the author's position.
 
 \cmditem{parencite*}[prenote][postnote]{key}
 
-Like \cmd{parencite} but suppresses the author's position of a
-parenthetical citation. This is useful in passages where the author
-receives explicit mention. Here's an example from \textit{CMOS}
-\ref{15.25}:
+Like \cmd{parencite} but suppresses the author's position. This is
+useful in passages where the author receives explicit mention. Here's
+an example from \textit{CMOS} \ref{15.25}:
 
 \begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
 Hout \parencite*{fischer2006} reach more or less the same conclusions.
@@ -656,13 +654,11 @@ The source for the passage above contains:
 
 \cmditem{smartcite*}[prenote][postnote]{key}
 
-Like \cmd{smartcite} but suppresses the author's position of a
-citation.
+Like \cmd{smartcite} but suppresses the author's position.
 
 \cmditem{smartcites*}[prenote][postnote]{key}
 
-Like \cmd{smartcites} but, like \cmd{smartcite*}, suppresses the
-author's position of a citation.
+Like \cmd{smartcites} but suppresses the author's position.
 
 \cmditem{textcite}[prenote][postnote]{key}
 
@@ -689,8 +685,8 @@ the note's internal parentheses to brackets.
 
 \cmditem{textcite*}[prenote][postnote]{key}
 
-Like \cmd{textcite} but suppresses the author's position of a note, as
-in this passage from \textit{CMOS} 13.65:
+Like \cmd{textcite} but suppresses the author's position, as in this
+passage from \textit{CMOS} 13.65:
 
 \begin{quote} In their introduction to \textcite*{tocqueville1999},
 translators Harvey Mansfield and Delba Winthrop write that Tocqueville
@@ -707,13 +703,11 @@ The source for the passage above contains:
 
 \cmditem{textcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 
-Like \cmd{textcite} but for multiple sources in the same way as
-\cmd{cites} and \cmd{smartcites}.
+Like \cmd{textcite} but for multiple sources.
 
 \cmditem{textcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 
-Like \cmd{textcites} but, like \cmd{textcite*}, suppresses the author's
-position of a note.
+Like \cmd{textcites} but suppresses the author's position.
 
 \end{ltxsyntax}
 
@@ -796,7 +790,7 @@ the article cross-ref\-er\-enc\-ed to a \bibtype{reference} entry for
 article from the source.\footnote{Incidentally, reference works don't
 always have titles in italics. As a result, you need to handle it in
 your bibliography database.} But you could also have a single entry of
-either type with the same data, like this:
+either type with the same data:
 
 \begin{verbatim}
    @Reference{salvation1980,
@@ -869,33 +863,31 @@ cross-referencing in notes and bibliographies see Section \ref{notes},
 \ref{collections}.
 
 For more information on entry types---specifically, on the use of
-certain data fields with them---see Section \ref{datafields}.
+certain data fields---see Section \ref{datafields}.
 
 \subsection{Data Fields}
 \label{datafields}
 
-As Windy City has grown to support more citations, it has had to add
-data fields that aren't recognized by \BibTeX\ or \biblatex. It also
-uses some standard ones in perhaps unexpected ways.
+Windy City relies on a small number of data fields that aren't
+recognized by \BibTeX\ or \biblatex. It also uses some standard ones
+in perhaps unexpected ways.
 
 \subsubsection{Additional Data Fields}
 \label{datafields}
 
-Some of Windy City's additional or nonstandard data fields are for its
-internal handling of cross-referencing. Those fields aren't listed
-below, as they're not meant for use in a bibliography database. The
-rest store information that's crucial for correct formatting. Without
-them, quite a few citations in this document wouldn't match their
-counterparts in \textit{CMOS}.
+Some of Windy City's nonstandard data fields are for its internal
+handling of cross-referencing. Those fields aren't listed below, as
+they're not meant for use in a bibliography database. The rest store
+information that's crucial for correct formatting. Without them, quite
+a few citations in this document wouldn't match their counterparts in
+\textit{CMOS}.
 
 \begin{marglist}
 
 \item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}] The name of a
-blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Of
-course, already existing fields would have been preferable for this
-purpose. But since blog posts take the usual \bibfield{title} and
-\bibfield{subtitle}, and since blogs may have host names of different
-sorts, new fields seemed necessary.
+blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
+mind that blog posts take the usual \bibfield{title} and
+\bibfield{subtitle} fields.
 
 \item[editoraddon] Use this field to include additional editorial
 information about a book. It's available for \bibtype{book},
@@ -917,12 +909,9 @@ information like \textit{2nd ser.} and \textit{n.s.} go in the
 \bibfield{series} field.
 
 \item[shortmaintitle] This field is for the short form of a
-\bibfield{maintitle}. Use it in a bibliography database when a work's
-\bibfield{maintitle} may occupy the position of a regular title in a
-short citation and needs a short form. This should only happen with
-certain works in collections. See, for example, the citation of
-\textit{The Complete Tales of Henry James} in Section
-\ref{multivolume}.
+\bibfield{maintitle}. This should only be necessary for certain works
+in collections. See, for example, the citation of \textit{The Complete
+Tales of Henry James} in Section \ref{multivolume}.
 
 \end{marglist}
 
@@ -938,7 +927,7 @@ uses standard data fields. The list below discusses some of them.
 number of the edition in this field---for example, \textit{2} for a
 second edition. To indicate a revised edition, enter either
 \textit{revised} or \textit{rev. ed.} Both options give the same
-output. You may also use the field to indicate a newspaper's edition,
+output. You may also use this field to indicate a newspaper's edition,
 such as \textit{Sunday Book Review} (see \textit{CMOS} \ref{14.202}).
 
 \item[issue] Windy City uses this field with the \bibtype{article},
@@ -946,9 +935,8 @@ such as \textit{Sunday Book Review} (see \textit{CMOS} \ref{14.202}).
 season of publication (spring, summer, autumn/fall, winter). The
 \bibtype{date} field also records seasons---but the value \textit{23},
 for the third season, returns \textit{Autumn}. To print \textit{Fall},
-use an \bibfield{issue} field with that value. In other words, for the
-output \textit{Fall 2013}, a work's bibliography database entry should
-contain:
+use the \bibfield{issue} field. In other words, for \textit{Fall
+2013}, a work's bibliography database entry should contain:
 
 \begin{verbatim}
    issue = {Fall},
@@ -974,25 +962,25 @@ publication, you may use the classic \bibfield{year} field instead.
 \item[series] See the comments for \bibfield{seriesaddon} in Section
 \ref{datafields}.
 
-\item[type] With the \bibtype{thesis} entry type, Windy City uses the
-\bibfield{type} field to distinguish a Master's thesis from a PhD
-dissertation. For the latter, \bibtype{type} should have the values
+\item[type] With the \bibtype{thesis} entry type, Windy City uses
+\bibfield{type} to distinguish a Master's thesis from a PhD
+dissertation. For the latter, \bibtype{type} should have the value
 \textit{phdthesis} or \textit{PhD diss.} For the former, use
 \textit{mathesis} or \textit{master's thesis}. No \bibfield{type}
 field is needed for the \bibtype{mathesis} and \bibtype{phdthesis}
 entry types.
 
-In rare cases, the \bibfield{type} field is necessary for the
-\bibtype{article} and \bibtype{review} entry types when a work's
-bibliographic information doesn't allow Windy City to distinguish a
-journal article from a magazine or newspaper article. This happens
-when a magazine or newspaper article has an issue number. Normally,
-Windy City would respond by printing the issue number before the date
-and enclosing the date in parentheses. But the issue number needs to
-go first, and the date shouldn't be in parentheses. The workaround is
-to include a \bibfield{type} field with the value \textit{newsmag}.
-For an example, see \textit{CMOS} \ref{14.204} and compare it with the
-citation of Beattie in \ref{14.171}.
+In rare cases, \bibfield{type} is necessary for the \bibtype{article}
+and \bibtype{review} entry types when a work's bibliographic
+information doesn't allow Windy City to distinguish a journal article
+from a magazine or newspaper article. This happens when a magazine or
+newspaper article has an issue number. Normally, Windy City would
+respond by printing the issue number before the date and enclosing the
+date in parentheses. But the issue number needs to go first, and the
+date shouldn't be in parentheses. The workaround is to include a
+\bibfield{type} field with the value \textit{newsmag}. For an example,
+see \textit{CMOS} \ref{14.204} and compare it with the citation of
+Beattie in \ref{14.171}.
 
 \end{marglist}
 
