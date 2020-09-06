@@ -1,4 +1,4 @@
-% Last modified: Sat 18 Jul 2020 09:56:08 AM CDT
+% Last modified: Sun 06 Sep 2020 12:33:32 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -274,6 +274,9 @@
 %%  Data Inheritance  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+% As of biblatex 3.14 or biber 2.14 (or thereabouts), '\inherit' no
+% longer works for 'options'.
+
 \ResetDataInheritance
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
 \DeclareDataInheritance{*}{incollection,inbook,letter,review}{%
@@ -299,6 +302,22 @@
 \DeclareDataInheritance{collection}{collection,inbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}}
+\DeclareDataInheritance{*}{*}{%
+  \noinherit{crossref}
+  \noinherit{entryset}
+  \noinherit{entrysubtype}
+  \noinherit{execute}
+  \noinherit{ids}
+  \noinherit{label}
+  \noinherit{presort}
+  \noinherit{related}
+  \noinherit{relatedoptions}
+  \noinherit{relatedstring}
+  \noinherit{relatedtype}
+  \noinherit{shorthand}
+  \noinherit{shorthandintro}
+  \noinherit{sortkey}
+  \noinherit{xref}}
 
 %%%%%%%%%%%%%%%%%%%
 %%  Preliminary  %%
