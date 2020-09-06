@@ -1,4 +1,4 @@
-% Last modified: Sun 30 Aug 2020 01:53:36 PM CDT
+% Last modified: Sun 06 Sep 2020 04:40:58 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1000,7 +1000,7 @@ For the most part, Windy City associates the \bibfield{editor} and
 scope of an entry. In most cases, then, you can assign editors and
 translators simply by adding the \bibfield{editor} and
 \bibfield{translator} fields to a database entry. The entry below is
-for an example in \textit{CMOS} \ref{14.104}:
+an example from \textit{CMOS} \ref{14.104}:
 
 \begin{verbatim}
    @Collection{adorno1999,
@@ -1058,7 +1058,7 @@ with \textit{Harlem}. If you moved \bibfield{editor} from
 \bibtype{collection} to \bibtype{incollection}, the association would
 change to \textit{The Literature of Harlem}.
 
-Consider another example, this one an essay in a collection:
+Consider another example:
 
 \begin{citebib}
 \item \cite{petrarca1948}
@@ -1157,8 +1157,8 @@ transrev & translator and reviser\\
 \end{tabular}
 \end{table}
 
-For an example in \textit{CMOS} from table \ref{table:ed}, we need
-turn to the bibliography. This will do:
+For an example in \textit{CMOS} of a such a dual role, we need turn to
+the bibliography. This will do:
 
 \begin{verbatim}
    @Book{fowler1965,
@@ -1229,7 +1229,7 @@ has a \bibfield{translatortype} field with the value
 \bibfield{translator} with the entry's lowest level title. (Recall
 ``The Ascent of Mont Ventoux'' above.) You should rarely, and perhaps
 never, need more than one set of translators per work. But if you do,
-Windy City lets you assign as many as three, that is, if you
+Windy City lets you assign as many as three---as long as you
 cross-reference a work with one set of translators to another with
 two.
 
@@ -1252,7 +1252,7 @@ clever than the previous paragraph suggests. In particular, if you use
 \bibfield{maintitle} or some other higher level title, and have an
 \bibfield{editora} with no corresponding \bibfield{editoratype}, Windy
 City will assume that \bibfield{editora} is the editor of the
-\bibfield{title}. Regardless, the best practice is the follow the rule
+\bibfield{title}. Regardless, the best practice is to the follow the rule
 of thumb described above, reserving \bibfield{editor} for
 \bibfield{title} and working up from there.
 
@@ -1463,8 +1463,8 @@ This drawback shouldn't affect \bibfield{bookinbook},
 \bibfield{inbook}, \bibfield{incollection}, or \bibfield{letter}
 entries when they're cross-referenced to works that are changed by
 \opt{swapvol}. They should have their own authors or titles that Windy
-City can use for proper sorting. As for examples, it seems that
-\textit{CMOS} gives exactly one in \ref{14.120}:
+City can use for proper sorting. It seems that \textit{CMOS} gives
+exactly such example one in \ref{14.120}:
 
 \begin{citebib}
 \item \cite[169--71]{king2014}
@@ -1482,13 +1482,12 @@ City can use for proper sorting. As for examples, it seems that
 \AtNextBibliography{\toggletrue{swapvol}}
 \end{citebib}
 
-In neither set of examples does Windy City print the volume number
-before the page reference. That's because, with or without
-\opt{swapvol}, the citation is directly to the work's title, not to
-the collection. The same goes for articles, chapters, books, and other
-works of this type. Further, consistent with \textit{CMOS}
-\ref{14.108} and \ref{15.42}, Windy City cross-references previously
-cited volumes.
+In neither case does Windy City print the volume number before the
+page reference. That's because, with or without \opt{swapvol}, the
+citation is directly to the work's title, not to the collection. The
+same goes for articles, chapters, books, and other works of this type.
+Further, consistent with \textit{CMOS} \ref{14.108} and \ref{15.42},
+Windy City cross-references previously cited volumes.
 
 % Due to 'mincrossrefs=2', jones2018 would be added automatically to
 % the bibliography at the end of the document because it's referenced
@@ -1589,7 +1588,7 @@ however, has just one field for a publication date, so using
 can find examples of both approaches in \file{windycity.bib}.
 
 Certain entries cross-referenced to entries that work with
-\opt{swapvol} also work with it. Those enty types are limited to
+\opt{swapvol} also work with it. Those entry types are limited to
 \bibtype{bookinbook}, \bibtype{inbook}, \bibtype{incollection}, or
 \bibtype{letter}. For the letter cited above:
 
@@ -1598,7 +1597,6 @@ Certain entries cross-referenced to entries that work with
      author = {King, Jr., Martin Luther},
      title = {Unpublished letter to the editor of the
               \emph{Afro-American} (Washington, DC)},
-%     crossref = {carson2014}
      crossref = {armstrong2014}
    }
 \end{verbatim}
@@ -1723,12 +1721,12 @@ the appropriate abbreviations (for some examples, see \textit{CMOS}
    \cite[vol. 3, chap. 9]{byrne1981}
 \end{verbatim}
 
-What if you leave the \bibfield{postnote} empty? In that case, Windy
-City assumes that you mean to cite the collection as a whole. As such,
-the first, long citation of the work will print the collection's total
-number of volumes. Subsequent entries will indicate the collection in
-whatever short form corresponds to the preamble options. The following
-shows the default output for two such citations of the collection:
+What if you leave the \bibfield{postnote} empty? Windy City assumes
+that you mean to cite the collection as a whole. As such, the first,
+long citation of the work will print the collection's total number of
+volumes. Subsequent entries will indicate the collection in whatever
+short form corresponds to the preamble options. The following shows
+the default output for two such citations of the collection:
 
 \begin{citeonly}
 \item \cite{byrne1981}
@@ -1830,17 +1828,16 @@ accordingly:
 \noindent If \bibfield{volume} were within the scope of
 \bibfield{spinoza1900.1.1}, Windy City would assume that \textit{A
 Theological-Political Treatise} is volume one of \textit{The Chief
-Works of Benedict de Spinoza}, that it's a volume of a collection,
-like other works in this section. The same error would occur if you
-put all the data for the citation into, say, a \bibfield{collection}
-entry. Windy City would associate \bibfield{volume} with
-\bibfield{title}, not with \bibfield{maintitle}. The upshot is that
-correctly citing a work like this requires cross-referencing an
-\bibtype{inbook} or \bibtype{bookinbook} entry to a
-\bibtype{collection}, \bibtype{book}, \bibtype{mvbook}, or
-\bibtype{mvcollection} entry. (Again, the alternatives give the same
-output.) Only then would Windy City associate \bibfield{volume} with
-the right \bibfield{title}.
+Works of Benedict de Spinoza}, that it's a volume of a collection. The
+same error would occur if you put all the data for the citation into,
+say, a \bibfield{collection} entry. Windy City would associate
+\bibfield{volume} with \bibfield{title}, not with
+\bibfield{maintitle}. The upshot is that correctly citing a work like
+this requires cross-referencing an \bibtype{inbook} or
+\bibtype{bookinbook} entry to a \bibtype{collection}, \bibtype{book},
+\bibtype{mvbook}, or \bibtype{mvcollection} entry. (Again, the
+alternatives give the same output.) Only then would Windy City
+associate \bibfield{volume} with the right \bibfield{title}.
 
 \section{Examples from \emph{CMOS} Chap. 14, ``Notes and
 Bibliography''}
