@@ -39,30 +39,12 @@ Windy City consists of four files:
 * [windycity.cbx](https://github.com/brianchase/windycity/blob/master/cbx/windycity.cbx "windycity.cbx")
 * [american-windycity.lbx](https://github.com/brianchase/windycity/blob/master/lbx/american-windycity.lbx "american-windycity.lbx")
 
-If you need to install Windy City on your system, you may copy its
-files to one of several places. One option is to locate
-[biblatex](http://www.ctan.org/pkg/biblatex "biblatex") on your system
-and use its directories:
-
-* .../biblatex/[windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx "windycity.dbx")
-* .../biblatex/bbx/[windycity.bbx](https://github.com/brianchase/windycity/blob/master/bbx/windycity.bbx "windycity.bbx")
-* .../biblatex/cbx/[windycity.cbx](https://github.com/brianchase/windycity/blob/master/cbx/windycity.cbx "windycity.cbx")
-* .../biblatex/lbx/[american-windycity.lbx](https://github.com/brianchase/windycity/blob/master/lbx/american-windycity.lbx "american-windycity.lbx")
-
-If you prefer not to mix Windy City's files with
-[biblatex](http://www.ctan.org/pkg/biblatex "biblatex")'s, another
-option is to find where your distribution of
-[LaTeX](https://en.wikipedia.org/wiki/LaTeX "LaTeX") keeps
-[biblatex](http://www.ctan.org/pkg/biblatex "biblatex")'s third-party
-style files and proceed accordingly. Yet another option is to install
-Windy City in your local `texmf`. Its location will depend on your
-system and preferences. For a one-off compilation, say, to give Windy
-City a trial run on a single document, you can copy Windy City's files
-to the document's root directory.
-
-After copying the files to one of those places — or another of your
-choosing — remember that for every option but the last (a document's
-root directory), you need to update your `texmf` file name database.
+If you need to install Windy City on your system, you have several
+options. For a one-off compilation, say, to give Windy City a trial
+run on a single document, you could copy Windy City's files to the
+document's root directory. Beyond that, your best option is to install
+it in your local \path{texmf}. Copy the files to a directory of your
+choosing, then update your \path{texmf} file name database.
 
 To compile a document with Windy City, tell
 [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") to load it
@@ -77,14 +59,12 @@ files.
 
 For some entries in your bibliography database, you may need to add
 fields or make other adjustments to get the right output. But since
-Windy City relies as much as possible on standard
-[BibTeX](http://www.bibtex.org "BibTeX") fields, and secondarily on
-[biblatex](http://www.ctan.org/pkg/biblatex "biblatex") fields, you
-may not need to make major changes. The examples in this document and
-its accompanying bibliography database,
-[windycity.bib](https://github.com/brianchase/windycity/blob/master/doc/windycity.bib
-"windycity.bib"), should serve as a guide for how to manage your input
-for nearly every circumstance that the style is meant to handle.
+Windy City relies as much as possible on standard \BibTeX\ fields, and
+secondarily on \biblatex fields, you may not need to make major
+changes. The examples in this document and its accompanying
+bibliography database, \file{windycity.bib}, should serve as a guide
+for how to manage your input for nearly every circumstance that the
+style is meant to handle.
 
 ## License
 
