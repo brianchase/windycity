@@ -1,4 +1,4 @@
-\ProvidesFile{windycity.dbx}[2020/07/05 Windy City data model file for
+\ProvidesFile{windycity.dbx}[2020/09/07 Windy City data model file for
   biblatex]
 \DeclareDatamodelFields[type=field,datatype=literal]{%
   blogsubtitle,
