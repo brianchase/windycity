@@ -8,6 +8,10 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* fixed `\parencite` not printing volume numbers
+
 ## 2020-09-07
 
 * added support for revisers and expanded combinations of editor and

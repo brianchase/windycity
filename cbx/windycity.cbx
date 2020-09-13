@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Sep 2020 11:22:51 AM CDT
+% Last modified: Sun 13 Sep 2020 06:04:59 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -146,10 +146,32 @@
 \newbibmacro*{parencite}{%
   \ifboolexpr{ test \ifciteibid
                and not test \iffirstonpage}
-    {\iffieldundef{postnote}
+    {\usebibmacro{test:collection}%
+     \iffieldundef{postnote}
        {\printtext[bibhyperref]{%
           \usebibmacro{parencite:date}%
           \usebibmacro{cite:volume}}}
+       {}}
+    {\usebibmacro{test:collection}%
+     \ifboolexpr{ test {\ifentrytype{book}}
+                  or test {\ifentrytype{collection}}
+                  or test {\ifentrytype{incollection}}
+                  or test {\ifentrytype{inbook}}
+                  or test {\ifentrytype{letter}}}
+       {\usebibmacro{test:crossref}}%
+       {}% needs '%'
+     \printtext[bibhyperref]{%
+       \usebibmacro{parencite:long}%
+       \usebibmacro{cite:volume}}}}
+
+\newbibmacro*{parencite+bad}{%
+  \ifboolexpr{ test \ifciteibid
+               and not test \iffirstonpage}
+    {\iffieldundef{postnote}
+       {\printtext[bibhyperref]{%
+          \usebibmacro{parencite:date}%
+          \newunit
+          \usebibmacro{volume+page}}}
        {}}
     {\ifboolexpr{ test {\ifentrytype{book}}
                   or test {\ifentrytype{collection}}
@@ -160,7 +182,8 @@
        {}% needs '%'
      \printtext[bibhyperref]{%
        \usebibmacro{parencite:long}%
-       \usebibmacro{cite:volume}}}}
+       \newunit
+       \usebibmacro{volume+page}}}}
 
 \newbibmacro*{parencite:date}{%
   \iffieldundef{labelyear}
