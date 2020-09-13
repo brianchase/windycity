@@ -1,4 +1,4 @@
-% Last modified: Sat 12 Sep 2020 04:38:19 PM CDT
+% Last modified: Sun 13 Sep 2020 10:56:46 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -36,8 +36,8 @@
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{multicite}%
-  \global\togglefalse{cbx@first}%
-  \global\togglefalse{cbx@ibid+loccit}%
+  \global\togglefalse{cbx:first}%
+  \global\togglefalse{ibid:loccit}%
   \AtEveryItem}%
 \AtEveryMultiCite{\toggletrue{multicite}}%
 
@@ -46,15 +46,12 @@
 \renewcommand{\bibendnotewrapper}[1]{%
   \bibsentence#1}%
 
-\providetoggle{cite:collection}
-\providetoggle{cite:long}
-
 % Protect commas against abbreviation dots and terminal punctuation
 % marks. Note '\addspace'. Using '\space' there causes problems.
 
 \renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
 
-% Prevents errant space after a colon.
+% Prevent errant space after a colon.
 
 \renewcommand*{\multicitedelim}{\setunit{\addsemicolon\space}}%
 
@@ -197,7 +194,7 @@
        {\iffieldundef{label}
           {\usebibmacro{parencite:journal}}%
           {\printfield{label}}}
-       {\global\toggletrue{cbx@short}%
+       {\global\toggletrue{cbx:short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
         \clearfield{handle}%
         \clearfield{nameaddon}%
@@ -250,9 +247,9 @@
   \iftoggle{ibid}
     {\bibcpstring{ibidem}%
      \ifloccit
-       {\global\toggletrue{cbx@ibid+loccit}}%
+       {\global\toggletrue{ibid:loccit}}%
        {\usebibmacro{cite:volume}}}
-    {\global\toggletrue{cbx@short}%
+    {\global\toggletrue{cbx:short}%
      \ifentrytype{review}
        {\usebibmacro{ibid:review}}%
        {\usebibmacro{author+bookauthor+etc}%
@@ -270,7 +267,7 @@
   \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:short}{%
-  \global\toggletrue{cbx@short}%
+  \global\toggletrue{cbx:short}%
   \ifentrytype{review}
     {\usebibmacro{short:review}}%
     {\usebibmacro{author+bookauthor+etc}%
@@ -308,7 +305,7 @@
        {\printfield{volume}}}}
 
 \newbibmacro*{cite:new}{%
-  \global\toggletrue{cbx@first}%
+  \global\toggletrue{cbx:first}%
   \usebibmacro{deflabel}%
   \iftoggle{firstshort}
     {\usebibmacro{cite:short}}%
@@ -335,11 +332,11 @@
 \newbibmacro*{test:crossref}{%
   \ifboolexpr{ test {\iffieldundef{crossref}}
                or test {\iffieldundef{title}}}
-    {\toggletrue{cite:long}}%
+    {\toggletrue{cbx:long}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
-       {\toggletrue{cite:collection}%
+       {\toggletrue{cbx:collection}%
         \stepcounter{\thefield{crossref}}}
-       {\toggletrue{cite:long}%
+       {\toggletrue{cbx:long}%
         \listxadd{\crossreflist}{\thefield{crossref}}%
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
@@ -379,13 +376,13 @@
   \usebibmacro{postnote+etc}%
   \usebibmacro{postpunct+etc}}%
 
-% In this context, '\ifloccit' is always true. Get around this by
-% running it earlier, in 'cite:ibid'.
+% In this context, '\ifloccit' is always true. Run it earlier, in
+% 'cite:ibid', and record the state with 'ibid:loccit'.
 
 \newbibmacro*{postnote+etc}{%
-  \iftoggle{cbx@ibid+loccit}
+  \iftoggle{ibid:loccit}
     {}
-    {\iftoggle{cbx@first}
+    {\iftoggle{cbx:first}
        {\usebibmacro{postnote:first}%
         \usebibmacro{shorthand+intro}}%
        {\usebibmacro{postnote}}}}
@@ -447,7 +444,7 @@
     {\setunit{\addspace}%
      \iffieldundef{howpublished}
        {\printtext[parens]{\printfield{year}}}
-       {\global\togglefalse{cbx@first}%
+       {\global\togglefalse{cbx:first}%
         \printtext[parens]{%
           \printfield{howpublished}%
           \newunit
@@ -466,11 +463,11 @@
 
 \DeclareBibliographyDriver{cite:book}{%
   \usebibmacro{test:crossref}%
-  \iftoggle{cite:long}
+  \iftoggle{cbx:long}
     {\usebibmacro{author+collection+etc}%
      \newunit
      \usebibmacro{volume+page}}%
-    {\iftoggle{cite:collection}
+    {\iftoggle{cbx:collection}
        {\usebibmacro{author+incollection+etc}%
         \usebibmacro{crossref}}%
        {}}}
@@ -480,12 +477,12 @@
     {\toggletrue{noauth}}%
     {}% needs '%'
   \usebibmacro{test:crossref}%
-  \iftoggle{cite:long}
+  \iftoggle{cbx:long}
     {\usebibmacro{author+incollection+etc}%
      \usebibmacro{incollections}%
      \newunit
      \usebibmacro{volume+page}}%
-    {\iftoggle{cite:collection}
+    {\iftoggle{cbx:collection}
        {\usebibmacro{author+incollection+etc}%
         \usebibmacro{crossref}}%
        {}}}

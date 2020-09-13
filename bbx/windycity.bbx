@@ -1,4 +1,4 @@
-% Last modified: Sat 12 Sep 2020 04:11:10 PM CDT
+% Last modified: Sat 12 Sep 2020 09:35:49 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -339,11 +339,14 @@
 
 \providetoggle{authposition}
 \providetoggle{bibliography}
+\providetoggle{ibid:loccit}
 \providetoggle{journalfirst}
 \providetoggle{multicite}
-\providetoggle{cbx@first}
-\providetoggle{cbx@ibid+loccit}
-\providetoggle{cbx@short}
+
+\providetoggle{cbx:collection}
+\providetoggle{cbx:first}
+\providetoggle{cbx:long}
+\providetoggle{cbx:short}
 
 \providetoggle{collection}
 \providetoggle{collection:bk}
@@ -363,7 +366,7 @@
 
 \newcommand*{\AtEveryItem}{%
   \global\toggletrue{authposition}%
-  \global\togglefalse{cbx@short}}%
+  \global\togglefalse{cbx:short}}%
 
 \AtBeginBibliography{\AtBeginLists}%
 \AtBeginShorthands{\AtBeginLists}%
@@ -513,13 +516,13 @@
 \DeclareFieldFormat[thesis,unpublished]{title}{%
   \iftoggle{bibliography}
     {\mkbibquote{#1}}%
-    {\iftoggle{cbx@short}
+    {\iftoggle{cbx:short}
        {\mkbibquote{#1}}%
        {\mkbibquote{#1}\nopunct}}}
 \DeclareFieldFormat[thesis]{labeltitle}{%
   \iftoggle{bibliography}
     {\mkbibquote{#1}}%
-    {\iftoggle{cbx@short}
+    {\iftoggle{cbx:short}
        {\mkbibquote{#1}}%
        {\mkbibquote{#1}\nopunct}}}
 
@@ -872,7 +875,7 @@
                             {\renewcommand*{\cbx@bibstring}{editor}}}}}}}}}}}
 
 \newbibmacro*{addplus:authpos}{%
-  \iftoggle{cbx@short}
+  \iftoggle{cbx:short}
     {}
     {\usebibmacro{addplus}%
      \renewcommand*{\plugb}{%
@@ -2108,7 +2111,7 @@
 
 \newbibmacro*{crossref}{%
   \renewcommand*{\cbx@deflabel}{labelname}%
-  \global\toggletrue{cbx@short}%
+  \global\toggletrue{cbx:short}%
   \entrydata{\thefield{crossref}}{%
     \iftoggle{reflist}
       {\usebibmacro{parencite:long}}%
