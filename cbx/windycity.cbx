@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Sep 2020 10:56:46 AM CDT
+% Last modified: Sun 13 Sep 2020 11:22:51 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -332,12 +332,11 @@
 \newbibmacro*{test:crossref}{%
   \ifboolexpr{ test {\iffieldundef{crossref}}
                or test {\iffieldundef{title}}}
-    {\toggletrue{cbx:long}}%
+    {}
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\toggletrue{cbx:collection}%
         \stepcounter{\thefield{crossref}}}
-       {\toggletrue{cbx:long}%
-        \listxadd{\crossreflist}{\thefield{crossref}}%
+       {\listxadd{\crossreflist}{\thefield{crossref}}%
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}}}}
@@ -463,29 +462,25 @@
 
 \DeclareBibliographyDriver{cite:book}{%
   \usebibmacro{test:crossref}%
-  \iftoggle{cbx:long}
+  \iftoggle{cbx:collection}
+    {\usebibmacro{author+incollection+etc}%
+     \usebibmacro{crossref}}%
     {\usebibmacro{author+collection+etc}%
      \newunit
-     \usebibmacro{volume+page}}%
-    {\iftoggle{cbx:collection}
-       {\usebibmacro{author+incollection+etc}%
-        \usebibmacro{crossref}}%
-       {}}}
+     \usebibmacro{volume+page}}}
 
 \DeclareBibliographyDriver{cite:incollection}{%
   \ifentrytype{letter}
     {\toggletrue{noauth}}%
     {}% needs '%'
   \usebibmacro{test:crossref}%
-  \iftoggle{cbx:long}
+  \iftoggle{cbx:collection}
+    {\usebibmacro{author+incollection+etc}%
+     \usebibmacro{crossref}}%
     {\usebibmacro{author+incollection+etc}%
      \usebibmacro{incollections}%
      \newunit
-     \usebibmacro{volume+page}}%
-    {\iftoggle{cbx:collection}
-       {\usebibmacro{author+incollection+etc}%
-        \usebibmacro{crossref}}%
-       {}}}
+     \usebibmacro{volume+page}}}
 
 \DeclareBibliographyDriver{cite:misc}{%
   \usebibmacro{author+bookauthor+etc}%
