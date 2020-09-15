@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Sep 2020 11:12:25 AM CDT
+% Last modified: Mon 14 Sep 2020 08:04:59 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -628,6 +628,7 @@
        {\usebibmacro{edtransuthpos}%
         \ifnameundef{\cbx@namelist}
           {\toggletrue{noauth}%
+           \usebibmacro{authpos+deflabel}%
            \usebibmacro{journalfirst}}%
           {\usebibmacro{addplus:authpos}%
            \usebibmacro{namehash+etc}}}%
@@ -663,10 +664,9 @@
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
     {\renewcommand*{\cbx@namelist}{shortbookauthor}}}
 
-% When 'journaltitle' or 'blogtitle' goes in the author's position.
+% When 'journaltitle' goes in the author's position.
 
 \newbibmacro*{journalfirst}{%
-  \usebibmacro{authpos+deflabel}%
   \ifboolexpr{ ( test {\ifentrytype{article}}
                or test {\ifentrytype{review}} )
                and togl {bibliography}}
@@ -677,14 +677,29 @@
      \clearlist{location}%
      \usebibmacro{labeldate+extradate}%
      \newunit}%
-    {\ifboolexpr{ test {\ifentrytype{online}}
-                  and togl {bibliography}}
-       {\toggletrue{journalfirst}%
-        \usebibmacro{bibblogdash}%
-        \setunit{\space}%
-        \usebibmacro{labeldate+extradate}%
-        \newunit}%
-       {}}}
+    {\usebibmacro{blogtitlefirst}}}
+
+% When 'blogtitle' goes in the author's position.
+
+\newbibmacro*{blogtitlefirst}{%
+  \ifboolexpr{ test {\ifentrytype{online}}
+               and togl {bibliography}}
+    {\toggletrue{journalfirst}%
+     \usebibmacro{bibblogdash}%
+     \setunit{\space}%
+     \usebibmacro{labeldate+extradate}%
+     \newunit}%
+    {\usebibmacro{orgfirst}}}
+
+% When 'organization' goes in the author's position.
+
+\newbibmacro*{orgfirst}{%
+  \ifboolexpr{ test {\ifentrytype{reference}}
+               and not test {\iflistundef{organization}}}
+    {\printlist{organization}%
+     \setunit{\space}%
+     \newunit}%
+    {}}
 
 \newbibmacro*{namehash+etc}{%
   \usebibmacro{printnames+etc}%
@@ -1163,7 +1178,7 @@
   \let\pluga\empty
   \let\plugb\empty}%
 
-% When 'journaltitle' goes in the author's position.
+% When a dash replaces 'journaltitle' in the author's position.
 
 \newbibmacro*{bibjournaldash}{%
   \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
@@ -1177,8 +1192,7 @@
      \usebibmacro{longtitle+titleaddon}%
      \let\xtitle\empty}}%
 
-% When 'blogtitle' goes in the author's position. This should only
-% apply when a blog has changed urls or host organizations.
+% When a dash replaces 'blogtitle' in the author's position.
 
 \newbibmacro*{bibblogdash}{%
   \ifboolexpr{ test {\iffieldequals{blogtitle}{\bbx@lasthash}}

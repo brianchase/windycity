@@ -10,6 +10,9 @@ brianchase/windycity").
 
 ## Latest
 
+* for `@reference` entries, added support for printing the
+`organization` field in the author's position, fixing some short
+citations
 * fixed `\parencite` not printing volume numbers
 
 ## 2020-09-07
@@ -38,11 +41,11 @@ brianchase/windycity").
   forewords, and introductions)
 * fixed placement of `edition` relative to editors, translators, and
   such
-* fixed short citations of @Review entries failing to print a review's
+* fixed short citations of `@review` entries failing to print a review's
   title
-* fixed output of @InReference entries when they cross-reference a
-  previously cited @Reference entry
-* fixed mismatch in output between `@Article` and `@Periodical` entry
+* fixed output of `@inreference` entries when they cross-reference a
+  previously cited `@reference` entry
+* fixed mismatch in output between `@article` and `@periodical` entry
   types
 * fixed `\parencite` failing to print names in `afterwords`,
   `forewords`, and `introduction` fields
