@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Sep 2020 06:04:59 PM CDT
+% Last modified: Sun 20 Sep 2020 11:22:44 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -22,10 +22,6 @@
       This is a fatal error. I'm aborting now.}%
    \endinput}%
 
-% This file contains material only for formatting notes and
-% parenthetical citations. For content that is also used for
-% bibliographies and reference lists, see windycity.bbx.
-
 %%%%%%%%%%%%%%%%%%%
 %%  Preliminary  %%
 %%%%%%%%%%%%%%%%%%%
@@ -46,8 +42,8 @@
 \renewcommand{\bibendnotewrapper}[1]{%
   \bibsentence#1}%
 
-% Protect commas against abbreviation dots and terminal punctuation
-% marks. Note '\addspace'. Using '\space' there causes problems.
+% Protect commas against abbreviation dots and terminal punctuation.
+% Note '\addspace'. Using '\space' there causes problems.
 
 \renewcommand*{\newunitpunct}{\ifterm{,\addspace}{\addcomma\space}}%
 
@@ -163,27 +159,6 @@
      \printtext[bibhyperref]{%
        \usebibmacro{parencite:long}%
        \usebibmacro{cite:volume}}}}
-
-\newbibmacro*{parencite+bad}{%
-  \ifboolexpr{ test \ifciteibid
-               and not test \iffirstonpage}
-    {\iffieldundef{postnote}
-       {\printtext[bibhyperref]{%
-          \usebibmacro{parencite:date}%
-          \newunit
-          \usebibmacro{volume+page}}}
-       {}}
-    {\ifboolexpr{ test {\ifentrytype{book}}
-                  or test {\ifentrytype{collection}}
-                  or test {\ifentrytype{incollection}}
-                  or test {\ifentrytype{inbook}}
-                  or test {\ifentrytype{letter}}}
-       {\usebibmacro{test:crossref}}%
-       {}% needs '%'
-     \printtext[bibhyperref]{%
-       \usebibmacro{parencite:long}%
-       \newunit
-       \usebibmacro{volume+page}}}}
 
 \newbibmacro*{parencite:date}{%
   \iffieldundef{labelyear}
@@ -375,7 +350,7 @@
     {\let\cbx@keyhash\empty}%
     {\savefield{crossref}{\cbx@keyhash}}}
 
-% See CMOS, 17th ed., 14.174, 14.177, 14.185, and 14.188.
+% See CMOS 17th ed. 14.174, 14.177, 14.185, and 14.188.
 
 \newbibmacro*{colon+comma+etc}{%
   \ifboolexpr{ test {\iffieldundef{pages}}
@@ -419,12 +394,12 @@
      \usebibmacro{doi+url+etc}}}
 
 % If the postnote is empty, print the page ranges of journal and
-% review articles. See CMOS, 17th ed., 14.153, 14.167, and 14.174. As
+% review articles. See CMOS 17th ed. 14.153, 14.167, and 14.174. As
 % for incollection and inbook entries, 14.106 seems to suggest the
-% same, but the example in 14.30 suggests otherwise. The examples in
-% 14.108 don't help. For magazines, CMOS is clear that the range can
-% be left out. To do so, simply omit it from your bibliography
-% database.
+% same, but the example in 14.30 suggests otherwise, while the
+% examples in 14.108 don't help. For magazines, CMOS is clear that the
+% range can be left out. To do so, simply omit it from your
+% bibliography database.
 
 \newbibmacro*{cite:pages}{%
   \iffieldundef{pages}
