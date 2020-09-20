@@ -43,8 +43,8 @@ If you need to install Windy City on your system, you have several
 options. For a one-off compilation, say, to give Windy City a trial
 run on a single document, you could copy Windy City's files to the
 document's root directory. Beyond that, your best option is to install
-it in your local \path{texmf}. Copy the files to a directory of your
-choosing, then update your \path{texmf} file name database.
+it in your local `texmf`. Copy the files to a directory of your
+choosing, then update your `texmf` file name database.
 
 To compile a document with Windy City, tell
 [biblatex](http://www.ctan.org/pkg/biblatex "biblatex") to load it
@@ -59,20 +59,20 @@ files.
 
 For some entries in your bibliography database, you may need to add
 fields or make other adjustments to get the right output. But since
-Windy City relies as much as possible on standard \BibTeX\ fields, and
-secondarily on \biblatex fields, you may not need to make major
-changes. The examples in this document and its accompanying
-bibliography database, \file{windycity.bib}, should serve as a guide
-for how to manage your input for nearly every circumstance that the
-style is meant to handle.
+Windy City relies as much as possible on standard `BibTeX` fields, and
+secondarily on [biblatex](http://www.ctan.org/pkg/biblatex "biblatex")
+fields, you may not need to make major changes. The examples in this
+document and its accompanying bibliography database,
+[windycity.bib](https://github.com/brianchase/windycity/blob/master/doc/windycity.bib
+"windycity.bib"), should serve as a guide for how to manage your input
+for nearly every circumstance that the style is meant to handle.
 
 ## License
 
-Copyright (c) 2019 Brian Michael Chase. Under the terms of the [LaTeX
-Project Public License](http://www.latex-project.org/lppl.txt
-"lppl.txt"), version 1.3, permission is granted to copy, distribute,
-or modify this software. See also
-<https://www.latex-project.org/lppl/>.
+Under the terms of the [LaTeX Project Public
+License](http://www.latex-project.org/lppl.txt "lppl.txt"), version
+1.3, permission is granted to copy, distribute, or modify this
+software. See also <https://www.latex-project.org/lppl/>.
 
 This software is provided as is, without warranty of any kind, either
 expressed or implied, including, but not limited to, the implied
