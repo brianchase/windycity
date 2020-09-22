@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Sep 2020 06:44:59 PM CDT
+% Last modified: Tue 22 Sep 2020 05:34:36 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -31,9 +31,9 @@
 \DeclareCitePunctuationPosition{cite}{r}
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
-  \global\togglefalse{multicite}%
   \global\togglefalse{cbx:first}%
   \global\togglefalse{ibid:loccit}%
+  \global\togglefalse{multicite}%
   \AtEveryItem}%
 \AtEveryMultiCite{\toggletrue{multicite}}%
 
@@ -316,7 +316,7 @@
 
 \newbibmacro*{cite:new}{%
   \global\toggletrue{cbx:first}%
-  \usebibmacro{new:idem+multicite}%
+  \usebibmacro{idem+short+multicite}%
   \iftoggle{firstshort}
     {\usebibmacro{cite:short}}%
     {\printtext{%
@@ -329,7 +329,7 @@
 % 'true') the test below will print 'labelname' if it matches that of
 % the previous citation.
 
-\newbibmacro*{new:idem+multicite}{%
+\newbibmacro*{idem+short+multicite}{%
   \ifboolexpr{ test {\ifciteidem}
                or togl {firstshort}}
     {\renewcommand*{\cbx@deflabel}{labelname}}%
@@ -353,12 +353,6 @@
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}}}}
-
-\newbibmacro*{cite:long}{%
-  \printtext{%
-    \usedriver
-      {\DeclareNameAlias{sortname}{default}}%
-      {cite:\thefield{entrytype}}}}
 
 \newbibmacro*{savefields}{%
   \iffieldundef{crossref}
