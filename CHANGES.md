@@ -10,10 +10,13 @@ brianchase/windycity").
 
 ## Latest
 
+* fixed `\cites` and `\parencites` for consecutive citations of the
+same author (most seriously affecting parenthetical citations but also
+default and short citations in different ways)
 * for `@reference` entries, added support for printing the
 `organization` field in the author's position, fixing some short
 citations
-* fixed `\parencite` not printing volume numbers
+* fixed parenthetical citations not printing volume numbers
 
 ## 2020-09-07
 

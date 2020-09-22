@@ -1,4 +1,4 @@
-% Last modified: Sun 20 Sep 2020 11:25:05 AM CDT
+% Last modified: Mon 21 Sep 2020 06:47:49 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -703,7 +703,8 @@
 
 \newbibmacro*{namehash+etc}{%
   \usebibmacro{printnames+etc}%
-  \iftoggle{authposition}% false in 'crossref' macro
+  \ifboolexpr{ togl {authposition}% false in 'crossref' macro
+               or togl {multicite}}
     {\savefield{namehash}{\bbx@lasthash}%
      \usebibmacro{authpos+deflabel}%
      \newunit}%
@@ -2127,7 +2128,7 @@
   \global\toggletrue{cbx:short}%
   \entrydata{\thefield{crossref}}{%
     \iftoggle{reflist}
-      {\usebibmacro{parencite:long}}%
+      {\usebibmacro{parencite:new}}%
       {\usebibmacro{author+bookauthor+etc}%
        \usebibmacro{shorttitle+crossref}}%
     \usebibmacro{cite:volume}}}
