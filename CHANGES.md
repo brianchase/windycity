@@ -10,6 +10,8 @@ brianchase/windycity").
 
 ## Latest
 
+* better punctuation handling in parenthetical citations, allowing
+examples in *CMOS* 15.24 and 15.30 (17th ed.)
 * fixed `\cites` and `\parencites` for consecutive citations of the
 same author (most seriously affecting parenthetical citations but also
 default and short citations in different ways)
