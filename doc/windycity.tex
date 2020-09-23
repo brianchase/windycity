@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Sep 2020 07:13:35 PM CDT
+% Last modified: Tue 22 Sep 2020 07:44:38 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1138,7 +1138,6 @@ by'' her. The output depends on the value of \bibfield{editortype}.
 See Table \ref{table:ed} for a summary.
 
 \begin{table}[H]
-\caption{} \label{table:ed}
 \begin{tabular}{@{}r l@{}}
 \bibfield{editortype} & Assignment\\
 \toprule
@@ -1155,6 +1154,7 @@ revtrans & reviser and translator\\
 transcomp & translator and compiler\\
 transrev & translator and reviser\\
 \end{tabular}
+\caption{} \label{table:ed}
 \end{table}
 
 For an example in \textit{CMOS} of a such a dual role, we need turn to
@@ -3097,7 +3097,14 @@ after the year, not before.
 \item \parencite{doershuk2016}
 \end{citeref}
 
-\setcounter{subsubsection}{24}
+\setcounter{subsubsection}{23}
+\subsubsection{Additional material in text citations}
+% 15.24 Additional material in text citations
+
+\begin{citeref}
+\item \parencite[; t-tests are used here]{mandolan2017}
+\end{citeref}
+
 \subsubsection{Text citations in relation to surrounding text and punctuation}
 % 15.25 Text citations in relation to surrounding text and punctuation
 \label{15.25}
