@@ -1,4 +1,4 @@
-% Last modified: Tue 22 Sep 2020 07:50:57 PM CDT
+% Last modified: Tue 22 Sep 2020 09:06:11 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -494,7 +494,7 @@
     {\usebibmacro{author+incollection+etc}%
      \usebibmacro{crossref}}%
     {\usebibmacro{author+collection+etc}%
-     \newunit
+     \usebibmacro{cite:punctuation}%
      \usebibmacro{volume+page}}}
 
 \DeclareBibliographyDriver{cite:incollection}{%
@@ -507,7 +507,7 @@
      \usebibmacro{crossref}}%
     {\usebibmacro{author+incollection+etc}%
      \usebibmacro{incollections}%
-     \newunit
+     \usebibmacro{cite:punctuation}%
      \usebibmacro{volume+page}}}
 
 \DeclareBibliographyDriver{cite:misc}{%
