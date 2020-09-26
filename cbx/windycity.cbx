@@ -1,4 +1,4 @@
-% Last modified: Wed 23 Sep 2020 07:45:34 AM CDT
+% Last modified: Sat 26 Sep 2020 04:02:29 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -464,7 +464,18 @@
        {}}
     {}}
 
-\newbibmacro*{refworks}{%
+%%%%%%%%%%%%%%
+%%  Extras  %%
+%%%%%%%%%%%%%%
+
+\newbibmacro*{reference:authpos}{%
+  \iflistundef{organization}
+    {\renewcommand*{\cbx@namelist}{author}%
+     \usebibmacro{printnames+etc}}%
+    {\printlist{organization}%
+     \clearlist{organization}}}
+
+\newbibmacro*{reference:howpublished+etc}{%
   \ifboolexpr{ test {\iffieldundef{howpublished}}
                and test {\iffieldundef{year}}}
     {}
@@ -531,16 +542,15 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:reference}{%
-  \printlist{organization}%
+  \usebibmacro{reference:authpos}%
   \usebibmacro{edition}{}%
-  \usebibmacro{refworks}%
+  \usebibmacro{reference:howpublished+etc}%
   \newunit
   \bibstring{subverbo}\space
   \usebibmacro{longtitle+titleaddon}%
   \newunit
   \renewcommand*{\pluga}{\bibstring{by}\space}%
-  \renewcommand*{\cbx@namelist}{author}%
-  \usebibmacro{printnames+etc}}%
+  \usebibmacro{reference:authpos}}%
 
 \DeclareBibliographyDriver{cite:review}{%
   \usebibmacro{reviews}%

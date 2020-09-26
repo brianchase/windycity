@@ -12,13 +12,17 @@ brianchase/windycity").
 
 * better punctuation handling in parenthetical citations, allowing
 examples in *CMOS* 15.24 and 15.30 (17th ed.)
+* for `@reference` and `@inreference` entries, allowed the `author`
+field to substitute for `organization` (not recommended but could
+prevent confusion in some cases)
+* also for `@reference` and `@inreference` entries, added support for
+printing the `organization` field in the author's position, fixing
+short citations
 * fixed `\cites` and `\parencites` for consecutive citations of the
 same author (most seriously affecting parenthetical citations but also
 default and short citations in different ways)
-* for `@reference` entries, added support for printing the
-`organization` field in the author's position, fixing some short
-citations
-* fixed parenthetical citations not printing volume numbers
+* fixed parenthetical citations not printing volume numbers for
+certain collections
 
 ## 2020-09-07
 
