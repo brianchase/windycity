@@ -1,4 +1,4 @@
-% Last modified: Wed 23 Sep 2020 05:36:22 PM CDT
+% Last modified: Sat 26 Sep 2020 04:45:52 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -17,8 +17,8 @@
 
 \section{Introduction}
 
-\nfootnote{Copyright \textcopyright\ 2020 Brian Michael Chase. Under
-the terms of the \LaTeX\ Project Public License, version 1.3,
+\nfootnote{Copyright \textcopyright\ 2014--2020 Brian Michael Chase.
+Under the terms of the \LaTeX\ Project Public License, version 1.3,
 permission is granted to copy, distribute, or modify this software.
 See \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}
 or \url{https://www.latex-project.org/lppl/}.}
@@ -154,7 +154,7 @@ short forms of citations, including the use of \textit{ibid.}, see
 Section \ref{short}. For options to skip parts of citations, change
 the order of editors and translators, and more, see Sections
 \ref{preops} and \ref{entryops}. For parenthetical citations, see
-examples in Section \ref{paren}.
+Section \ref{paren}.
 
 The block below shows Windy City's default bibliography for the
 previously cited works:
@@ -199,11 +199,11 @@ reference lists may have problems with sorting. (You'll notice some in
 \ref{ref}, at the end of this document.) For best results, use the
 \opt{reflist} preamble option.
 
-As you proceed through the text, note that all examples of citations
-and bibliographies are outputs of the style from commands that you can
-inspect in the document's source, \file{windycity.tex}, and in its
-style file, \file{windycity.sty}. Almost all citations are from
-\cmd{cite} or \cmd{parencite}. A few are from more specialized
+As you proceed through the this guide, note that all examples of
+citations and bibliographies are outputs of the style from commands
+that you can inspect in the document's source, \file{windycity.tex},
+and in its style file, \file{windycity.sty}. Almost all citations are
+from \cmd{cite} or \cmd{parencite}. A few are from more specialized
 commands, such as \cmd{cite*} or \cmd{cites}. All example
 bibliographies are outputs of the style from \cmd{printbibliography}.
 All bibliographic data resides in \file{windycity.bib}.
@@ -303,16 +303,16 @@ option \opt{ibid} (again, see Section \ref{preops}). Options
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-There are still other ways to save space: With the default format, you
+Other ways to make citations more concise: In the default format, you
 can use the preamble option \opt{firstshort} to swap long first
-citations for short ones (see Section \ref{preops}). Also with the
-default format, you can shorten the author's name in the first
-citation if the previous citation is of the same author. To do that,
-use the preamble option \opt{idemtracker} (see Section \ref{preops}).
-The entry option \opt{noauth} omits the author's name altogether (see
-Section \ref{entryops}). And the \bibfield{shorthand} field allows you
-to set an abbreviation to stand in place of the author's name, the
-work's title, and other elements of a citation (see \ref{14.59}).
+citations for short ones (see Section \ref{preops}). Also in the
+default format, you can use the preamble option \opt{idemtracker} to
+shorten the author's name in the first citation if the previous
+citation is of the same author (see Section \ref{preops}). The entry
+option \opt{noauth} omits the author's name altogether (see Section
+\ref{entryops}). And the \bibfield{shorthand} field allows you to set
+an abbreviation to stand in place of the author's name, the work's
+title, and other elements of a citation (see \ref{14.59}).
 
 \subsection{Preamble Options}
 \label{preops}
@@ -356,18 +356,18 @@ name.}
 \noindent This option is for printing annotated bibliographies.
 Annotations will print in block paragraphs below entries. To change
 the spacing between entries and annotations, change the value of
-\cmd{bibitemsep}. Store the text of an annotation in the
-\bibfield{annotation} field of the work's bibliography database entry.
+\cmd{bibitemsep}. Save an annotation in the \bibfield{annotation}
+field of a work's bibliography database entry.
 
 \optitem[false]{collsonly}{\opt{true}, \opt{false}}
 
-\noindent Citing individual works of a collection adds an entry for
-each work to the bibliography. To exclude them and print only an entry
-for the whole collection, use \opt{collsonly}. It has no effect on
-many \bibtype{incollection} entries, such as articles in books, which
-need or ought to have a place in the bibliography, but it does filter
-out chapters of books, books in books, and volumes of collections. For
-discussion of multivolume works, see Section \ref{multivolume}.
+\noindent Citing individual works of a collection adds entries for
+those works to the bibliography. To exclude them and print only an
+entry for the whole collection, use \opt{collsonly}. It has no effect
+on many \bibtype{incollection} entries, such as articles in books, but
+it does filter out chapters of books, books in books, and volumes of
+collections. For discussion of multivolume works, see Section
+\ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
 
@@ -384,12 +384,12 @@ which has the same effect on first citations.
 \noindent This option controls whether consecutive citations of a work
 on the same page receive an \textit{ibid}. The qualification ``on the
 same page'' means that \textit{ibid.} always refers to a work cited on
-the current page without an \textit{ibid.} The latter is not a
+the current page without an \textit{ibid.} The latter isn't a
 requirement of \textit{CMOS} but seems reasonable, since it prevents
-readers from having to look at another page to determine the referent
-of an \textit{ibid.} For examples of its output, see Section
-\ref{short} and \ref{14.34}. As of the 17th edition, \textit{CMOS}
-discourages the use of \textit{ibid.} (see \ref{14.34}).
+readers from having to look at another page to find the referent of an
+\textit{ibid.} For examples of its output, see Section \ref{short} and
+\ref{14.34}. As of the 17th edition, \textit{CMOS} discourages the use
+of \textit{ibid.} (see \ref{14.34}).
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
@@ -397,7 +397,8 @@ discourages the use of \textit{ibid.} (see \ref{14.34}).
 ISBN goes in the \bibfield{isbn} field of its bibliography database
 entry. With this option, the style will print ISBNs at the end of
 every entry in the bibliography, before annotations. To print the ISBN
-of a particular work, use the \opt{isbn} entry option.
+of a particular work, use the \opt{isbn} entry option. Neither option
+effects the output of entries without an \bibfield{isbn} field.
 
 \optitem[false]{library}{\opt{true}, \opt{false}}
 
@@ -406,7 +407,8 @@ field of every work in the bibliography. Use it to print information
 about libraries, call numbers, and the like. If you use it with the
 \opt{isbn} and \opt{annotation} options, it will print after the
 former but before the latter. To print this information for selected
-works, use the \opt{library} entry option.
+works, use the \opt{library} entry option. Neither option effects the
+output of entries without a \bibfield{library} field.
 
 \optitem[false]{nolos}{\opt{true}, \opt{false}}
 
@@ -419,9 +421,9 @@ bibliography, their results may overlap.
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print a bibliography in the author-date
-format, what \textit{CMOS} calls a reference list. If you choose
-parenthetical citations over notes, consider using \opt{reflist} to
-maintain consistency with \textit{CMOS}. Again, another way to print a
+format, what \textit{CMOS} calls a reference list. If you use
+parenthetical citations, consider using \opt{reflist} to maintain
+consistency with \textit{CMOS}. Again, another way to print a
 reference list is to pass \opt{env=reflist} to
 \cmd{printbibliography}. See Section \ref{overview} for more
 information.
@@ -436,8 +438,8 @@ same page, and so never refers to a citation on a previous page,
 \opt{short} drops the title from consecutive citations of a work on
 the same page, never in reference to a citation on a previous page. As
 with \textit{ibid.}, this feature isn't required by \textit{CMOS}, but
-it prevents readers from having to look at a previous page to
-determine which title a citation refers to.
+it prevents readers from having to look at another page to find the
+title of a citation.
 
 In contexts where \opt{short} would drop a title from a citation, but
 where no name occupies the author's position, it will print the work's
@@ -482,8 +484,8 @@ published work in brackets, as in this example from \textit{CMOS}
 
 \optitem[false]{anonqauth}{\opt{true}, \opt{false}}
 
-\noindent Similar to the previous but adds a question mark after the
-author's name, as in this example from \textit{CMOS} \ref{14.79}:
+\noindent Like \opt{anonauth} but adds a question mark after the
+author's name. From \textit{CMOS} \ref{14.79}:
 
 \begin{citebib}
 \item \cite{hawkes1834}
@@ -492,17 +494,17 @@ author's name, as in this example from \textit{CMOS} \ref{14.79}:
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print the ISBN of a particular work in a
-bibliography. The ISBN will appear at the end of the work's entry but,
-if applicable, before an annotation. To print ISBNs of every work in
-the bibliography, see the \bibfield{isbn} preamble option.
+bibliography. The ISBN will appear at the end of the work's entry (if
+applicable, before an annotation). To print ISBNs of every work in the
+bibliography, see the \bibfield{isbn} preamble option.
 
 \optitem[false]{library}{\opt{true}, \opt{false}}
 
 \noindent This option prints the \bibfield{library} field of a work's
 bibliography database entry. This information prints at the end of the
-work's entry, though, like an ISBN, before an annotation. To print the
-\bibfield{library} field of every work in the bibliography, use the
-\opt{library} preamble option.
+work's entry (if applicable, after an ISBN and before an annotation).
+To print the \bibfield{library} field of every work in the
+bibliography, use the \opt{library} preamble option.
 
 \optitem[false]{listvols}{\opt{true}, \opt{false}}
 
@@ -529,13 +531,12 @@ title's position. Below is an example from \textit{CMOS} \ref{14.105}:
 
 \noindent To bypass the author's position in a single note, without
 affecting the bibliography, use starred versions of citation commands,
-such as \cmd{cite*} and \cmd{footcite*}.
+such as \cmd{cite*}, \cmd{footcite*}, and \cmd{parencite*}.
 
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
 \noindent On rare occasions, you may need an entry in a reference list
-to skip the \textit{date} of the author-date format. See Section
-\ref{entrytypes} for examples.
+to skip the \textit{date}. See Section \ref{entrytypes} for examples.
 
 \optitem[false]{swapauth}{\opt{true}, \opt{false}}
 
@@ -549,13 +550,15 @@ translator, use \opt{swapauth}. This option works for \bibtype{book},
 
 \noindent According to \textit{CMOS}, if a work has an editor and a
 translator, their names should appear in citations in the order in
-which they appear on the work's title page (\ref{14.104}). By default,
-the style lists editors first. Entries with the option
-\bibfield{swaptrans} reverse this order: Their translators print
-first. If a work's translators and editors are the same, using
+which they appear on the work's title page (see \textit{CMOS}
+\ref{14.104}). By default, the style lists editors first. Entries with
+the option \bibfield{swaptrans} reverse this order: Their translators
+print first. If a work's translators and editors are the same,
 \bibfield{swaptrans} reverses the order of their roles, say, from
 \textit{edited and translated by} to \textit{translated and edited
-by}. For more information, see Section \ref{edtranspos}.
+by}. The same goes for compilers and revisers, which the style treats
+as specialized editors. For more information, see Section
+\ref{edtranspos}.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -593,21 +596,21 @@ Windy City supports most of the citation commands familiar from
 citations). Their multicite forms---\cmd{cites}, \cmd{footcites}, and
 \cmd{parencites}---take a comma-separated list of entry keys.
 
-Use \cmd{nocite} to add works to bibliographies without citing them in
-the text. Use it with an asterisk to add every work in every
-\file{bib} file that was loaded with \cmd{addbibresource} or
-\cmd{bibliography}.
+Use \cmd{nocite} to add works to bibliographies even if you haven't
+cited them in the text with citations commands. Use it with an
+asterisk to add every work in every \file{bib} file that your document
+loaded with \cmd{addbibresource} or \cmd{bibliography}.
 
 Windy City sets the \opt{autocite} preamble option to \opt{footnote},
-which makes \cmd{autocite} equivalent to \cmd{smartcite}---which in
-turn behaves like different citation commands in different contexts.
-In Windy City, \cmd{smartcite} is equivalent to \cmd{footcite} in a
-document's body and \cmd{cite} in footnotes and endnotes.\footnote{In
-a \env{minipage} environment, \cmd{smartcite} is equivalent to
-\cmd{cite}. To use \cmd{smartcite} with endnotes, use the
-\sty{endnotes} package.} If you set the \opt{autocite} preamble option
-to \opt{inline}, \cmd{autocite} is equivalent to \cmd{parencite}. If
-you set it to \opt{plain}, \cmd{autocite} is equivalent to \cmd{cite}.
+which makes \cmd{autocite} equivalent to \cmd{smartcite}. The latter
+runs different citation commands in different contexts. In Windy City,
+\cmd{smartcite} is equivalent to \cmd{footcite} in a document's body
+and \cmd{cite} in footnotes and endnotes.\footnote{In a \env{minipage}
+environment, \cmd{smartcite} is equivalent to \cmd{cite}. To use
+\cmd{smartcite} with endnotes, use the \sty{endnotes} package.} If you
+set the \opt{autocite} preamble option to \opt{inline}, \cmd{autocite}
+is equivalent to \cmd{parencite}. If you set it to \opt{plain},
+\cmd{autocite} is equivalent to \cmd{cite}.
 
 Other citation commands:
 
@@ -634,9 +637,9 @@ Like \cmd{footcite} but suppresses the author's position.
 
 \cmditem{parencite*}[prenote][postnote]{key}
 
-Like \cmd{parencite} but suppresses the author's position. This is
-useful in passages where the author receives explicit mention. Here's
-an example from \textit{CMOS} \ref{15.25}:
+Like \cmd{parencite} but suppresses the author's position---useful in
+passages where the author receives explicit mention. Here's an example
+from \textit{CMOS} \ref{15.25}:
 
 \begin{quote} Fiorina et al. \parencite*{fiorina2005} and Fischer and
 Hout \parencite*{fischer2006} reach more or less the same conclusions.
@@ -680,13 +683,13 @@ The source for the passage above contains:
 
 Note that \cmd{textcite} doesn't enclose citations in parentheses but
 does drop the final period that standard citations usually end with.
-The parentheses above come from \cmd{mkbibparens}, which also switches
-the note's internal parentheses to brackets.
+The parentheses above come from \cmd{mkbibparens}, which switches the
+note's internal parentheses to brackets.
 
 \cmditem{textcite*}[prenote][postnote]{key}
 
-Like \cmd{textcite} but suppresses the author's position, as in this
-passage from \textit{CMOS} 13.65:
+Like \cmd{textcite} but suppresses the author's position. From
+\textit{CMOS} 13.65:
 
 \begin{quote} In their introduction to \textcite*{tocqueville1999},
 translators Harvey Mansfield and Delba Winthrop write that Tocqueville
@@ -763,8 +766,8 @@ City processes it as a book.
 One comment about \bibtype{reference} and \bibtype{inreference}
 entries: You may cross-reference \bibtype{inreference} entries to
 \bibtype{reference} entries, as with articles in books, but you can
-get the same output using one or the other entry type alone. Take an
-example from \textit{CMOS} \ref{14.232}:
+get the same output using one or the other type alone. Take an example
+from \textit{CMOS} \ref{14.232}:
 
 \begin{citeonly}
 \item \cite{salvation1980}
@@ -788,7 +791,7 @@ the article cross-ref\-er\-enc\-ed to a \bibtype{reference} entry for
 
 \noindent This approach makes sense if you plan to cite more than one
 article from the source.\footnote{Incidentally, reference works don't
-always have titles in italics. As a result, you need to handle it in
+always have titles in italics. As a result, you need to set italics in
 your bibliography database.} But you could also have a single entry of
 either type with the same data:
 
@@ -811,7 +814,7 @@ makes it a fallback for almost anything. The example below is from
 \item \cite{roosevelt1959}
 \end{citebib}
 
-\noindent The database entry for this work contains most of the format
+\noindent This work's database entry contains most of its information
 in \bibfield{usera} (for notes) and \bibfield{userb} (for
 bibliographies). The \bibfield{title} field needs manual formatting,
 since works of this type may have titles in italics or quotation
@@ -862,8 +865,7 @@ cross-referencing in notes and bibliographies see Section \ref{notes},
 \ref{14.108}; Section \ref{paren}, \ref{15.42}; and Section
 \ref{collections}.
 
-For more information on entry types---specifically, on the use of
-certain data fields---see Section \ref{datafields}.
+For more discussion of entry types, see Section \ref{datafields}.
 
 \subsection{Data Fields}
 \label{datafields}
@@ -910,8 +912,8 @@ information like \textit{2nd ser.} and \textit{n.s.} go in the
 
 \item[shortmaintitle] This field is for the short form of a
 \bibfield{maintitle}. This should only be necessary for certain works
-in collections. See, for example, the citation of \textit{The Complete
-Tales of Henry James} in Section \ref{multivolume}.
+in collections. See the citation of \textit{The Complete Tales of
+Henry James} in Section \ref{multivolume}.
 
 \end{marglist}
 
@@ -957,7 +959,7 @@ use the \bibfield{issue} field. In other words, for \textit{Fall
 \end{verbatim}
 
 \noindent Remember that when \bibfield{date} contains just a year of
-publication, you may use the classic \bibfield{year} field instead.
+publication, you may use the classic \bibfield{year} field.
 
 \item[series] See the comments for \bibfield{seriesaddon} in Section
 \ref{datafields}.
@@ -989,8 +991,8 @@ Beattie in \ref{14.171}.
 
 Windy City offers significant control over the handling of editors,
 translators, and the like. Taking advantage of it, however, may not
-seem intuitive at first. This section covers the options and issues
-that you need to grasp in order to master this aspect of the style.
+seem intuitive at first. This section covers all the relevant features
+and options.
 
 \subsection{Types of Editors and Translators}
 \label{edtransnames}
@@ -1260,8 +1262,8 @@ of thumb described above, reserving \bibfield{editor} for
 \label{edtranspos}
 
 Normally, Windy City lists editors first. But if translators are
-listed first on a work's title page (or in some other relevant place),
-you may want to reverse the order. For that, use the entry option
+listed first on a work's title page, you should reverse the order (see
+\textit{CMOS} \ref{14.104}). For that, use the entry option
 \opt{swaptrans}. Compare:
 
 \begin{citebib}
@@ -1413,14 +1415,11 @@ not the volumes themselves.) In any event, Windy City prints the
 volume number only when the collection has priority, that is, when
 \opt{swapvol} is \textit{true}.
 
-Sometimes, you may want collections to have priority in every case. If
-so, compile documents with the \opt{swapvol} preamble option,
-which acts globally, affecting all relevant citations. More likely,
+If you want collections to have priority in every case, use the
+\opt{swapvol} preamble option, which acts globally. More likely,
 though, you'll want to give priority to the collection when citing
-some works but not others. That's why there's a \opt{swapvol} entry
-option for changing individual citations.
-
-A good candidate for the entry option is this example from
+some works but not others. In those cases, use the \opt{swapvol} entry
+option. A good candidate for the latter is this example from
 \textit{CMOS} \ref{14.118}:
 
 \begin{citebib}
@@ -1721,9 +1720,9 @@ the appropriate abbreviations (for some examples, see \textit{CMOS}
    \cite[vol. 3, chap. 9]{byrne1981}
 \end{verbatim}
 
-What if you leave the \bibfield{postnote} empty? Windy City assumes
-that you mean to cite the collection as a whole. As such, the first,
-long citation of the work will print the collection's total number of
+What if the \bibfield{postnote} is empty? Windy City assumes that you
+mean to cite the collection as a whole. As such, the first, long
+citation of the work will print the collection's total number of
 volumes. Subsequent entries will indicate the collection in whatever
 short form corresponds to the preamble options. The following shows
 the default output for two such citations of the collection:
@@ -1758,11 +1757,25 @@ in the bibliography database. Here's the entry for the volume cited in
 Since the volume number is part of the entry and needs to print in
 different places depending on the context, don't include it in the
 \bibfield{postnote}. Let Windy City handle it. Below is the source for
-the first citation of \textit{The Complete Tales Henry James}:
+the first and second citations of \textit{The Complete Tales Henry
+James}:
 
 \begin{verbatim}
-   \cite*[32--33]{james1963.5}
+   \item \cite*[32--33]{james1963.5}
+     ...
+   \item \cite*[34]{james1963.5}
 \end{verbatim}
+
+\noindent The first citation prints the volume number after the
+editor's name, long before the \bibfield{postnote}. The second prints
+it just before the \bibfield{postnote}, separated from the page by a
+colon:
+
+\begin{citeonly}
+\item[2.] \cite*[32--33]{james1963.5}
+\item[\ldots]
+\item[4.] \cite*[34]{james1963.5}
+\end{citeonly}
 
 Neither type of collection uses cross-referencing in the bibliography
 database. For \textit{The Lisle Letters}, cross-referencing would
@@ -1828,16 +1841,16 @@ accordingly:
 \noindent If \bibfield{volume} were within the scope of
 \bibfield{spinoza1900.1.1}, Windy City would assume that \textit{A
 Theological-Political Treatise} is volume one of \textit{The Chief
-Works of Benedict de Spinoza}, that it's a volume of a collection. The
-same error would occur if you put all the data for the citation into,
-say, a \bibfield{collection} entry. Windy City would associate
-\bibfield{volume} with \bibfield{title}, not with
-\bibfield{maintitle}. The upshot is that correctly citing a work like
-this requires cross-referencing an \bibtype{inbook} or
-\bibtype{bookinbook} entry to a \bibtype{collection}, \bibtype{book},
-\bibtype{mvbook}, or \bibtype{mvcollection} entry. (Again, the
-alternatives give the same output.) Only then would Windy City
-associate \bibfield{volume} with the right \bibfield{title}.
+Works of Benedict de Spinoza}. The same error would occur if you put
+all the data for the citation into, say, a \bibfield{collection}
+entry. Windy City would associate \bibfield{volume} with
+\bibfield{title}, not with \bibfield{maintitle}. The upshot is that
+correctly citing a work like this requires cross-referencing an
+\bibtype{inbook} or \bibtype{bookinbook} entry to a
+\bibtype{collection}, \bibtype{book}, \bibtype{mvbook}, or
+\bibtype{mvcollection} entry. (Again, the alternatives give the same
+output.) Only then would Windy City associate \bibfield{volume} with
+the right \bibfield{title}.
 
 \section{Examples from \emph{CMOS} Chap. 14, ``Notes and
 Bibliography''}
