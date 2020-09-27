@@ -1,4 +1,4 @@
-% Last modified: Sat 26 Sep 2020 04:45:52 PM CDT
+% Last modified: Sun 27 Sep 2020 01:32:36 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -40,7 +40,7 @@ placement of editors, translators, and the like. Section
 \ref{collections} discusses several issues with collections, including
 options for formatting citations of individual volumes. Sections
 \ref{notes} and \ref{paren} reproduce examples from \textit{CMOS}
-Chapters 14 and 15, respectively, with occasional commentary and
+chapters 14 and 15, respectively, with occasional commentary and
 references to other sections.
 
 Windy City requires \biblatex version 3.13 or later.
@@ -50,7 +50,7 @@ Windy City requires \biblatex version 3.13 or later.
 
 This section covers basic information about Windy City. If you're
 completely new to \biblatex, you should probably glance at its
-documentation. For the impatient, examples in Sections \ref{default},
+documentation. For the impatient, examples in sections \ref{default},
 \ref{short}, \ref{notes}, and \ref{paren} might be of more immediate
 interest.
 
@@ -151,10 +151,10 @@ short form of the work's title.
 
 Windy City supports variations on this format. For information on
 short forms of citations, including the use of \textit{ibid.}, see
-Section \ref{short}. For options to skip parts of citations, change
-the order of editors and translators, and more, see Sections
+section \ref{short}. For options to skip parts of citations, change
+the order of editors and translators, and more, see sections
 \ref{preops} and \ref{entryops}. For parenthetical citations, see
-Section \ref{paren}.
+section \ref{paren}.
 
 The block below shows Windy City's default bibliography for the
 previously cited works:
@@ -267,13 +267,13 @@ names and titles and omits all other publication information.
 Consecutive citations of a work may omit the title or, as in the
 eleventh note, where the title is the key mark of distinction, the
 author's name. To use this format, start \biblatex with the preamble
-option \opt{short}. See Section \ref{preops} for more information.
+option \opt{short}. See section \ref{preops} for more information.
 
 \textit{CMOS} \ref{14.34} also shows how to render the passage above
 with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
 17th edition discourages its use. As such, \textit{ibid.} is no longer
 part of Windy City's default format. Enable it with the preamble
-option \opt{ibid} (again, see Section \ref{preops}). Options
+option \opt{ibid} (again, see section \ref{preops}). Options
 \opt{short} and \opt{ibid} together give the following:
 
 \begin{citeonly}
@@ -305,11 +305,11 @@ option \opt{ibid} (again, see Section \ref{preops}). Options
 
 Other ways to make citations more concise: In the default format, you
 can use the preamble option \opt{firstshort} to swap long first
-citations for short ones (see Section \ref{preops}). Also in the
+citations for short ones (see section \ref{preops}). Also in the
 default format, you can use the preamble option \opt{idemtracker} to
 shorten the author's name in the first citation if the previous
-citation is of the same author (see Section \ref{preops}). The entry
-option \opt{noauth} omits the author's name altogether (see Section
+citation is of the same author (see section \ref{preops}). The entry
+option \opt{noauth} omits the author's name altogether (see section
 \ref{entryops}). And the \bibfield{shorthand} field allows you to set
 an abbreviation to stand in place of the author's name, the work's
 title, and other elements of a citation (see \ref{14.59}).
@@ -343,7 +343,7 @@ the previous section the citation of Toni Morrison's \textit{Song of
 Solomon} immediately after a citation of her \textit{Beloved}. In a
 context like that, do you really need to remind readers of the
 author's full name? If you think not, change \opt{idemtracker} to an
-appropriate value (see Section 3.1.2.3 of \biblatex's user
+appropriate value (see section 3.1.2.3 of \biblatex's user
 guide).\footnote{\textit{CMOS} seems to have no policy on this point.
 In the 16th edition, however, Figure 14.3 shows consecutive citations
 of works by the same author, both of which give the author's full
@@ -366,7 +366,7 @@ those works to the bibliography. To exclude them and print only an
 entry for the whole collection, use \opt{collsonly}. It has no effect
 on many \bibtype{incollection} entries, such as articles in books, but
 it does filter out chapters of books, books in books, and volumes of
-collections. For discussion of multivolume works, see Section
+collections. For discussion of multivolume works, see section
 \ref{multivolume}.
 
 \optitem[false]{firstshort}{\opt{true}, \opt{false}}
@@ -387,7 +387,7 @@ same page'' means that \textit{ibid.} always refers to a work cited on
 the current page without an \textit{ibid.} The latter isn't a
 requirement of \textit{CMOS} but seems reasonable, since it prevents
 readers from having to look at another page to find the referent of an
-\textit{ibid.} For examples of its output, see Section \ref{short} and
+\textit{ibid.} For examples of its output, see section \ref{short} and
 \ref{14.34}. As of the 17th edition, \textit{CMOS} discourages the use
 of \textit{ibid.} (see \ref{14.34}).
 
@@ -425,12 +425,12 @@ format, what \textit{CMOS} calls a reference list. If you use
 parenthetical citations, consider using \opt{reflist} to maintain
 consistency with \textit{CMOS}. Again, another way to print a
 reference list is to pass \opt{env=reflist} to
-\cmd{printbibliography}. See Section \ref{overview} for more
+\cmd{printbibliography}. See section \ref{overview} for more
 information.
 
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
-\noindent As shown in Section \ref{short}, this option prints
+\noindent As shown in section \ref{short}, this option prints
 citations in a short format (see \textit{CMOS} \ref{14.34}). The use
 of \opt{short} has one feature in common with \opt{ibid}: Just as
 \textit{ibid.} appears only for consecutive citations of a work on the
@@ -449,7 +449,7 @@ applicable. In those situations, the short format is no different from
 the default.
 
 As noted earlier, \opt{short} has the same effect on first citations
-as \opt{firstshort}. But recall from Section \ref{short} that you can
+as \opt{firstshort}. But recall from section \ref{short} that you can
 combine \opt{short} and \opt{ibid} for more concise output.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
@@ -458,7 +458,7 @@ combine \opt{short} and \opt{ibid} for more concise output.
 may place publication information for the volume before that of the
 collection or \textit{vice versa}. Windy City gives priority to the
 volume. To reverse this for all relevant citations, use \opt{swapvol}.
-For more information, see Section \ref{collorder}.
+For more information, see section \ref{collorder}.
 
 \end{optionlist}
 
@@ -467,7 +467,7 @@ For more information, see Section \ref{collorder}.
 
 An entry option is a value for the \bibfield{options} field of a
 work's database entry. It affects the format of that particular work.
-For options that affect the format of every work, see Section
+For options that affect the format of every work, see section
 \ref{preops}.
 
 \begin{optionlist}
@@ -516,7 +516,7 @@ citations only if the \bibfield{postnote} field is empty. This does a
 better job of matching examples in \textit{CMOS} than a simpler policy
 would. For the rest, use \opt{listvols}. It prints the
 \bibfield{volumes} field in those citations no matter what the
-\bibfield{postnote} contains. For more information, see Section
+\bibfield{postnote} contains. For more information, see section
 \ref{collorder}.
 
 \optitem[false]{noauth}{\opt{true}, \opt{false}}
@@ -536,14 +536,14 @@ such as \cmd{cite*}, \cmd{footcite*}, and \cmd{parencite*}.
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
 \noindent On rare occasions, you may need an entry in a reference list
-to skip the \textit{date}. See Section \ref{entrytypes} for examples.
+to skip the \textit{date}. See section \ref{entrytypes} for examples.
 
 \optitem[false]{swapauth}{\opt{true}, \opt{false}}
 
 \noindent To swap the places of a book's author with an editor or
 translator, use \opt{swapauth}. This option works for \bibtype{book},
 \bibtype{bookinbook}, \bibtype{collection}, \bibtype{inbook}, and
-\bibtype{incollection} entry types. For more information, see Section
+\bibtype{incollection} entry types. For more information, see section
 \ref{edtranspos}.
 
 \optitem[false]{swaptrans}{\opt{true}, \opt{false}}
@@ -557,7 +557,7 @@ print first. If a work's translators and editors are the same,
 \bibfield{swaptrans} reverses the order of their roles, say, from
 \textit{edited and translated by} to \textit{translated and edited
 by}. The same goes for compilers and revisers, which the style treats
-as specialized editors. For more information, see Section
+as specialized editors. For more information, see section
 \ref{edtranspos}.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
@@ -567,7 +567,7 @@ basis what the \opt{swapvol} preamble option does globally: When set
 to true, it changes the format of a work in a collection so that, in
 bibliographies and long citations, publication information for the
 collection precedes that of the volume. For more information, see
-Section \ref{collorder}.
+section \ref{collorder}.
 
 \end{optionlist}
 
@@ -861,11 +861,11 @@ from printing \textit{n.d.} (no date) after the name to indicate a
 missing publication date. After adding the \bibtype{misc} entries, use
 \cmd{nocite} with their entry keys to add them to your bibliography,
 and cite the remaining entries as usual. For examples of automatic
-cross-referencing in notes and bibliographies see Section \ref{notes},
-\ref{14.108}; Section \ref{paren}, \ref{15.42}; and Section
+cross-referencing in notes and bibliographies see section \ref{notes},
+\ref{14.108}; section \ref{paren}, \ref{15.42}; and section
 \ref{collections}.
 
-For more discussion of entry types, see Section \ref{datafields}.
+For more discussion of entry types, see section \ref{datafields}.
 
 \subsection{Data Fields}
 \label{datafields}
@@ -894,10 +894,10 @@ mind that blog posts take the usual \bibfield{title} and
 \item[editoraddon] Use this field to include additional editorial
 information about a book. It's available for \bibtype{book},
 \bibtype{incollection}, and \bibfield{review} entry types and their
-aliases. (For information on aliases in Windy City, see Section
+aliases. (For information on aliases in Windy City, see section
 \ref{entrytypes}.) When applicable, its content appears after the
 names of a book's editors and translators without intervening
-punctuation. For an example, see Section \ref{entryops}, where the
+punctuation. For an example, see section \ref{entryops}, where the
 citation of \textit{Chaucer Life-Records} prints this
 \bibfield{editoraddon}: ``from materials compiled by John M. Manly and
 Edith Richert, with the assistance of Lilian J. Redstone et al.''
@@ -913,7 +913,7 @@ information like \textit{2nd ser.} and \textit{n.s.} go in the
 \item[shortmaintitle] This field is for the short form of a
 \bibfield{maintitle}. This should only be necessary for certain works
 in collections. See the citation of \textit{The Complete Tales of
-Henry James} in Section \ref{multivolume}.
+Henry James} in section \ref{multivolume}.
 
 \end{marglist}
 
@@ -926,11 +926,22 @@ uses standard data fields. The list below discusses some of them.
 \begin{marglist}
 
 \item[edition] To indicate a numbered edition of a work, put the
-number of the edition in this field---for example, \textit{2} for a
-second edition. To indicate a revised edition, enter either
-\textit{revised} or \textit{rev. ed.} Both options give the same
-output. You may also use this field to indicate a newspaper's edition,
-such as \textit{Sunday Book Review} (see \textit{CMOS} \ref{14.202}).
+edition's number in this field---for example, \textit{2} for a second
+edition. To indicate a revised edition, enter either \textit{revised}
+or \textit{rev. ed.} Both options give the same output. For expanded
+and updated editions, you may use \textit{expanded} or
+\textit{updated}. Add additional data as necessary. For the following
+example from \textit{CMOS} Bibliography 2.4, \bibfield{edition}
+contains \textit{updated edition by Arlene O'Sean and Antoinette
+Schleyer}:
+
+\begin{bibonly}
+\nocite{swanson1999}
+\end{bibonly}
+
+\noindent You may also use the field to indicate a newspaper's
+edition, such as \textit{Sunday Book Review} (see \textit{CMOS}
+\ref{14.202}).
 
 \item[issue] Windy City uses this field with the \bibtype{article},
 \bibtype{online}, and \bibtype{review} entry types to record a work's
@@ -961,7 +972,7 @@ use the \bibfield{issue} field. In other words, for \textit{Fall
 \noindent Remember that when \bibfield{date} contains just a year of
 publication, you may use the classic \bibfield{year} field.
 
-\item[series] See the comments for \bibfield{seriesaddon} in Section
+\item[series] See the comments for \bibfield{seriesaddon} in section
 \ref{datafields}.
 
 \item[type] With the \bibtype{thesis} entry type, Windy City uses
@@ -1023,15 +1034,15 @@ an example from \textit{CMOS} \ref{14.104}:
 \noindent When the style processes this entry, it identifies the
 editor and translator of the work with the names in the
 \bibfield{editor} and \bibfield{translator} fields. Since the entry
-doesn't use the \opt{swaptrans} entry option (see Section
+doesn't use the \opt{swaptrans} entry option (see section
 \ref{edtranspos}), the resulting output lists the editor and
 translator, in that order, after the authors and title.
 
-Cross-referencing introduces a bit more complexity, though the
-principle is the same: Within the scope of an entry, the style
-associates \bibfield{editor} and \bibfield{translator} with the lowest
-level title. In this example from \textit{CMOS} \ref{14.30}, an essay
-is cross-referenced to a collection:
+Cross-referencing introduces a bit more complexity, but the principle
+is the same: Within the scope of an entry, the style associates
+\bibfield{editor} and \bibfield{translator} with the lowest level
+title. In this example from \textit{CMOS} \ref{14.30}, an essay is
+cross-referenced to a collection:
 
 \begin{verbatim}
    @InCollection{kaiser1964,
@@ -1130,14 +1141,14 @@ examples in \textit{CMOS} \ref{14.103} and \ref{14.142}:
 
 In addition to the four basic roles (editor, translator, compiler, and
 reviser), you may assign names to any pair of them. A work's editor,
-for example, can also be its translator, or compiler, or reviser but
-not also its translator \textit{and} compiler or translator
-\textit{and} reviser, and so on. And just as you can swap the order of
-the editor and translator roles (again, see Section \ref{edtranspos}),
-you can swap the other combinations, say, to identify a work as
-``compiled and edited by'' Jane Doe rather than ``edited and compiled
-by'' her. The output depends on the value of \bibfield{editortype}.
-See Table \ref{table:ed} for a summary.
+for example, can also be its translator, or compiler, or reviser---but
+no more than one of these. And just as you can swap the order of the
+editor and translator roles (again, see section \ref{edtranspos}), you
+can swap all other combinations, say, to identify a work as
+\textit{compiled and edited by} Jane Doe rather than \textit{edited
+and compiled by} her. Simply change the value of
+\bibfield{editortype}. A summary of these values appears in Table
+\ref{table:ed}.
 
 \begin{table}[H]
 \begin{tabular}{@{}r l@{}}
@@ -1159,8 +1170,8 @@ transrev & translator and reviser\\
 \caption{} \label{table:ed}
 \end{table}
 
-For an example in \textit{CMOS} of a such a dual role, we need turn to
-the bibliography. This will do:
+For an example in \textit{CMOS}, we need turn the bibliography. This
+will do:
 
 \begin{verbatim}
    @Book{fowler1965,
@@ -1268,6 +1279,8 @@ listed first on a work's title page, you should reverse the order (see
 
 \begin{citebib}
 \item \cite{doe2010a}
+\end{citebib}
+\begin{citebib}
 \item \cite{doe2010b}
 \end{citebib}
 
@@ -1640,7 +1653,7 @@ citation and its entry in the bibliography. This prevents the
 appearance that something has gone wrong when an element in one is
 missing from the other. If the \bibfield{postnote} isn't empty, it
 likely contains information that, as with page references, should also
-include a volume number (see Section \ref{multivolume}). Including a
+include a volume number (see section \ref{multivolume}). Including a
 volume number makes it less important, arguably, to include the total
 number of volumes. The main benefit, anyway, is that Windy City's
 approach is consistent with citations of \textit{The Lisle Letters} in
@@ -1856,7 +1869,7 @@ the right \bibfield{title}.
 Bibliography''}
 \label{notes}
 
-Examples in this section reproduce those in \textit{CMOS} Chapter 14.
+Examples in this section reproduce those in \textit{CMOS} chapter 14.
 To help with cross-checking, subsection numbers and headings are from
 \textit{CMOS}.
 
@@ -1908,7 +1921,7 @@ To help with cross-checking, subsection numbers and headings are from
 % 14.34:
 \label{14.34}
 
-See Section \ref{short} for a discussion of how to enable the short
+See section \ref{short} for a discussion of how to enable the short
 format and the use of \textit{ibid.} First, the short format:
 
 \begin{citeonly}
@@ -2061,7 +2074,7 @@ this in the bibliography database with \cmd{emph} or \cmd{mkbibemph}.
 % 14.79 No listed author (anonymous works)
 \label{14.79}
 
-See Section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
+See section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
 entry options.
 
 \begin{citebib}
@@ -2085,7 +2098,7 @@ entry options.
 \label{14.81}
 
 For information on how to add entries that cross-references others,
-like several of those below, see Section \ref{entrytypes}. For
+like several of those below, see section \ref{entrytypes}. For
 examples of automatic cross-referencing in a bibliography, see
 \ref{14.108} and \ref{15.42}.
 
@@ -2097,7 +2110,7 @@ examples of automatic cross-referencing in a bibliography, see
 % 14.82 Alternative real names
 \label{14.82}
 
-For information on how to get the last entry below, see Section
+For information on how to get the last entry below, see section
 \ref{entrytypes}.
 
 \begin{bibonly}
@@ -2231,7 +2244,7 @@ database.
 % 14.104 Editor or translator in addition to author
 \label{14.104}
 
-On how to make an author and editor swap places, see Section
+On how to make an author and editor swap places, see section
 \ref{edtranspos}.
 
 \begin{citebib}
@@ -2386,7 +2399,7 @@ elsewhere, such as in \textit{CMOS} \ref{14.163}.
 % 14.118 Citing a particular volume in a note
 \label{14.118}
 
-For a discussion of how to handle these types of works, see Section
+For a discussion of how to handle these types of works, see section
 \ref{multivolume}.
 
 \begin{citebib}
@@ -2463,7 +2476,7 @@ example of the bibliography.
 % 14.122 Authors and editors of multivolume works
 \label{14.122}
 
-For issues surrounding the first example below, see Section
+For issues surrounding the first example below, see section
 \ref{collorder}.
 
 \begin{citebib}
@@ -2880,7 +2893,7 @@ entry. To get the format for the series, you'd need to use the
 \label{14.204}
 
 On the use of the \bibfield{type} field to format this example
-correctly, see Section \ref{fieldscon}.
+correctly, see section \ref{fieldscon}.
 
 \begin{citebib}
 \item \cite{zeitung1828}
@@ -2968,7 +2981,7 @@ correct.
 Some reference works show full publication information in the same way
 as books. Use the \bibtype{book} entry type for them. The first three
 citations below are different. They need the \bibtype{reference} or
-\bibtype{inreference} entry type. See Section \ref{entrytypes} for
+\bibtype{inreference} entry type. See section \ref{entrytypes} for
 more information. Following the suggestion in \textit{CMOS} 14.232,
 \bibtype{reference} and \bibtype{inreference} works don't appear in
 bibliographies or reference lists.
@@ -2989,7 +3002,7 @@ Like some of the reference works in the previous section, the ones
 below need the \bibtype{reference} or \bibtype{inreference} entry
 type. As odd as it may seem, but consistent with \textit{CMOS}, they,
 too, aren't included in bibliographies and reference lists. See
-Section \ref{entrytypes} for more information.
+section \ref{entrytypes} for more information.
 
 \begin{citeonly}
 \item \cite{toscanini2016}
@@ -3042,7 +3055,7 @@ Section \ref{entrytypes} for more information.
 References''}
 \label{paren}
 
-Examples in this section reproduce those in \textit{CMOS} Chapter 15.
+Examples in this section reproduce those in \textit{CMOS} chapter 15.
 To help with cross-checking, subsection numbers and headings are from
 \textit{CMOS}. Since parenthetical citations are relatively simple,
 and since the format of references lists is derivative of the default,
@@ -3171,7 +3184,7 @@ midst. \end{citeref}
 \subsubsection{Author-date format for anonymous works (no listed author)}
 % 15.34 Author-date format for anonymous works (no listed author)
 
-See Section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
+See section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
 entry options.
 
 \begin{citeref}
@@ -3327,7 +3340,7 @@ from the February 1931 issue of \textit{Poetry} magazine
 with the argument \opt{shorthand}. Running \cmd{printshorthands}
 produces the same output. By default, works in this list also appear
 in bibliographies. To exclude them, use the preamble option
-\opt{nolos}. See Section \ref{preops} for more information.\\}%
+\opt{nolos}. See section \ref{preops} for more information.\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. The next section shows the author-date
@@ -3335,7 +3348,7 @@ format.\\}%
 
 \defbibnote{ref}{This section shows the output of
 \cmd{printbibliography} in the author-date format. For information on
-how to produce this output, see Section \ref{preops}. Issues with
+how to produce this output, see section \ref{preops}. Issues with
 sorting in this section are mentioned there. Creating a reference list
 in the preferred way, with the \opt{reflist} preamble option, should
 prevent those issues.\\}%
