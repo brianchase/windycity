@@ -1,4 +1,4 @@
-% Last modified: Sat 26 Sep 2020 04:02:29 PM CDT
+% Last modified: Sun 27 Sep 2020 12:49:02 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -395,6 +395,28 @@
           {\newunit}%
           {\setunit{\addcolon\space}}}}}
 
+\newbibmacro*{reference:authpos}{%
+  \iflistundef{organization}
+    {\renewcommand*{\cbx@namelist}{author}%
+     \usebibmacro{printnames+etc}}%
+    {\printlist{organization}%
+     \clearlist{organization}}}
+
+\newbibmacro*{reference:howpublished+etc}{%
+  \ifboolexpr{ test {\iffieldundef{howpublished}}
+               and test {\iffieldundef{year}}}
+    {}
+    {\setunit{\addspace}%
+     \iffieldundef{howpublished}
+       {\printtext[parens]{\printfield{year}}}
+       {\global\togglefalse{cbx:first}%
+        \printtext[parens]{%
+          \printfield{howpublished}%
+          \newunit
+          \printfield{version}%
+          \newunit
+          \printfield{year}}}}}
+
 %%%%%%%%%%%%%%%%
 %%  Postnote  %%
 %%%%%%%%%%%%%%%%
@@ -463,32 +485,6 @@
        {\addperiod}%
        {}}
     {}}
-
-%%%%%%%%%%%%%%
-%%  Extras  %%
-%%%%%%%%%%%%%%
-
-\newbibmacro*{reference:authpos}{%
-  \iflistundef{organization}
-    {\renewcommand*{\cbx@namelist}{author}%
-     \usebibmacro{printnames+etc}}%
-    {\printlist{organization}%
-     \clearlist{organization}}}
-
-\newbibmacro*{reference:howpublished+etc}{%
-  \ifboolexpr{ test {\iffieldundef{howpublished}}
-               and test {\iffieldundef{year}}}
-    {}
-    {\setunit{\addspace}%
-     \iffieldundef{howpublished}
-       {\printtext[parens]{\printfield{year}}}
-       {\global\togglefalse{cbx:first}%
-        \printtext[parens]{%
-          \printfield{howpublished}%
-          \newunit
-          \printfield{version}%
-          \newunit
-          \printfield{year}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers for Notes  %%
