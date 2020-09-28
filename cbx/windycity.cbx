@@ -1,4 +1,4 @@
-% Last modified: Sun 27 Sep 2020 12:49:02 PM CDT
+% Last modified: Sun 27 Sep 2020 07:38:13 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -154,7 +154,8 @@
   \iffieldundef{labelyear}
     {}
     {\usebibmacro{parencite:origyear}%
-     \ifboolexpr{ test {\iffieldundef{year}}
+     \ifboolexpr{ ( test {\iffieldundef{year}}
+                  and test {\iffieldundef{urlyear}} )
                   or test {\iffieldequalstr{year}{forthcoming}}}
        {\addcomma}%
        {}% needs '%'
