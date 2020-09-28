@@ -1,4 +1,4 @@
-% Last modified: Wed 23 Sep 2020 07:45:05 AM CDT
+% Last modified: Mon 28 Sep 2020 06:52:16 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -302,6 +302,8 @@
 \DeclareDataInheritance{collection}{collection,inbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}}
+\DeclareDataInheritance{reference}{reference}{%
+  \inherit{author}{bookauthor}}
 \DeclareDataInheritance{*}{*}{%
   \noinherit{crossref}
   \noinherit{entryset}
@@ -1396,8 +1398,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 
 % The next command should work well enough for most languages but can
-% be overridden by lbx files. This happens when windycity.bbx loads
-% american-windycity.lbx.
+% be overridden by lbx files.
 
 \renewcommand*{\mkdaterangefull}[2]{%
   \begingroup
