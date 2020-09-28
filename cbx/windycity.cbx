@@ -1,4 +1,4 @@
-% Last modified: Sun 27 Sep 2020 07:38:13 PM CDT
+% Last modified: Mon 28 Sep 2020 06:35:49 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -398,7 +398,9 @@
 
 \newbibmacro*{reference:authpos}{%
   \iflistundef{organization}
-    {\renewcommand*{\cbx@namelist}{author}%
+    {\ifnameundef{bookauthor}
+       {\renewcommand*{\cbx@namelist}{author}}%
+       {\renewcommand*{\cbx@namelist}{bookauthor}}%
      \usebibmacro{printnames+etc}}%
     {\printlist{organization}%
      \clearlist{organization}}}
