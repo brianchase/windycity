@@ -8,19 +8,19 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2020-09-29
 
 * better punctuation handling in parenthetical citations, allowing
 examples in *CMOS* 15.24 and 15.30 (17th ed.)
-* for `@reference` and `@inreference` entries, allowed the `author`
-field to substitute for `organization` (not recommended but could
-prevent confusion in some cases)
-* also for `@reference` and `@inreference` entries, added support for
+* for `@reference` and `@inreference` entries, added support for
 printing the `organization` field in the author's position of short
 citations, fixing many of them (most of them? it was bad!)
+* also for `@reference` and `@inreference` entries, allowed the
+`author` field to substitute for `organization` (not recommended but
+could prevent confusion in some cases)
 * fixed `\cites` and `\parencites` for consecutive citations of the
 same author (most seriously affecting parenthetical citations but also
-default and short citations in different ways)
+standard and short citations in different ways)
 * fixed parenthetical citations not printing volume numbers for
 certain collections
 
