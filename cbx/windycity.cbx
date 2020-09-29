@@ -1,4 +1,4 @@
-% Last modified: Mon 28 Sep 2020 07:13:35 PM CDT
+% Last modified: Tue 29 Sep 2020 07:50:06 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -22,13 +22,10 @@
       This is a fatal error. I'm aborting now.}%
    \endinput}%
 
-%%%%%%%%%%%%%%%%%%%
-%%  Preliminary  %%
-%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%%  Basics  %%
+%%%%%%%%%%%%%%
 
-\InitializeCitationStyle{\let\crossreflist\empty}%
-\DeclareAutoPunctuation{.,;:!?}
-\DeclareCitePunctuationPosition{cite}{r}
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{cbx:first}%
@@ -36,6 +33,9 @@
   \global\togglefalse{multicite}%
   \AtEveryItem}%
 \AtEveryMultiCite{\toggletrue{multicite}}%
+\DeclareAutoPunctuation{.,;:!?}
+\DeclareCitePunctuationPosition{cite}{r}
+\InitializeCitationStyle{\let\crossreflist\empty}%
 
 \renewcommand{\bibfootnotewrapper}[1]{%
   \bibsentence#1}%
