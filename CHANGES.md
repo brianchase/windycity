@@ -16,8 +16,8 @@ examples in *CMOS* 15.24 and 15.30 (17th ed.)
 field to substitute for `organization` (not recommended but could
 prevent confusion in some cases)
 * also for `@reference` and `@inreference` entries, added support for
-printing the `organization` field in the author's position, fixing
-short citations
+printing the `organization` field in the author's position of short
+citations, fixing many of them (most of them? it was bad!)
 * fixed `\cites` and `\parencites` for consecutive citations of the
 same author (most seriously affecting parenthetical citations but also
 default and short citations in different ways)
