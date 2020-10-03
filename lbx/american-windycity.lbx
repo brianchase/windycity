@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Sep 2020 06:29:33 PM CDT
+% Last modified: Fri 02 Oct 2020 07:45:54 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -119,8 +119,8 @@
 }
 
 \NewBibliographyString{by}
-\NewBibliographyString{comped,comped+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+}
-\NewBibliographyString{editor+,edcomp,edcomp+,edrev,edrev+,edtrans,edtrans+}
+\NewBibliographyString{comped,comped+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+,compup,compup+}
+\NewBibliographyString{editor+,edcomp,edcomp+,edrev,edrev+,edtrans,edtrans+,edup,edup+}
 \NewBibliographyString{expanded}
 \NewBibliographyString{noplace}
 \NewBibliographyString{of}
@@ -129,13 +129,15 @@
 \NewBibliographyString{preface}
 \NewBibliographyString{reprint,reprinted}
 \NewBibliographyString{review,reviewnoauth}
-\NewBibliographyString{revcomp,revcomp+,reved,reved+,reviser,reviser+,revtrans,revtrans+}
+\NewBibliographyString{revcomp,revcomp+,reved,reved+,reviser,reviser+,revtrans,revtrans+,revup,revup+}
 \NewBibliographyString{revised}
 \NewBibliographyString{selfpub}
 \NewBibliographyString{special}
 \NewBibliographyString{subverbo,subverbos}
-\NewBibliographyString{transcomp,transcomp+,transed,transed+,translator+,transrev,transrev+}
+\NewBibliographyString{transcomp,transcomp+,transed,transed+,translator+,transrev,transrev+,transup,transup+}
+\NewBibliographyString{upcomp,upcomp+,updater,updater+,uped,uped+,uprev,uprev+,uptrans,uptrans+}
 \NewBibliographyString{updated}
+\NewBibliographyString{updater}
 
 \DeclareBibliographyStrings{%
   am            = {{a\adddot m\adddot}{a\adddot m\adddot}},
@@ -153,6 +155,8 @@
   comprev+      = {{compiled and revised by}{comps\adddotspace and revs\adddot}},
   comptrans     = {{compiled and translated by}{comp\adddotspace and trans\adddot}},
   comptrans+    = {{compiled and translated by}{comps\adddotspace and trans\adddot}},
+  compup        = {{compiled and updated by}{comp\adddotspace and up\adddot}},
+  compup+       = {{compiled and updated by}{comps\adddotspace and up\adddot}},
   edcomp        = {{edit\-ed and compiled by}{ed\adddotspace and comp\adddot}},
   edcomp+       = {{edit\-ed and compiled by}{eds\adddotspace and comps\adddot}},
   edition       = {{ed\adddot}{ed\adddot}},
@@ -162,6 +166,8 @@
   edrev+        = {{edit\-ed and revised by}{eds\adddotspace and revs\adddot}},
   edtrans       = {{edit\-ed and translated by}{ed\adddotspace and trans\adddot}},
   edtrans+      = {{edit\-ed and translated by}{eds\adddotspace and trans\adddot}},
+  edup          = {{edit\-ed and updated by}{ed\adddotspace and up\adddot}},
+  edup+         = {{edit\-ed and updated by}{eds\adddotspace and up\adddot}},
   expanded      = {{expanded edition}{exp\adddotspace ed\adddot}},
   foreword      = {{foreword to}{foreword to}},
   forthcoming   = {{forthcoming}{forthcoming}},
@@ -193,6 +199,8 @@
   reviser+      = {{revised by}{revs\adddot}},
   revtrans      = {{revised and translated by}{rev\adddotspace and trans\adddot}},
   revtrans+     = {{revised and translated by}{revs\adddotspace and trans\adddot}},
+  revup         = {{revised and updated by}{rev\adddotspace and up\adddot}},
+  revup+        = {{revised and updated by}{revs\adddotspace and up\adddot}},
   selfpub       = {{Self-published}{self-pub\adddot}},
   special       = {{special issue}{special issue}},
   subverbo      = {{s\adddot v\adddot}{s\adddot v\adddot}},
@@ -205,7 +213,19 @@
   translator+   = {{translated by}{trans\adddot}},
   transrev      = {{translated and revised by}{trans\adddotspace and rev\adddot}},
   transrev+     = {{translated and revised by}{trans\adddotspace and revs\adddot}},
+  transup       = {{translated and updated by}{trans\adddotspace and up\adddot}},
+  transup+      = {{translated and updated by}{trans\adddotspace and up\adddot}},
+  upcomp        = {{updated and compiled by}{up\adddotspace and comp\adddot}},
+  upcomp+       = {{updated and compiled by}{up\adddotspace and comps\adddot}},
   updated       = {{updated edition}{up\adddotspace ed\adddot}},
+  updater       = {{updated by}{up\adddot}},
+  updater+      = {{updated by}{up\adddot}},
+  uped          = {{updated and edit\-ed by}{up\adddotspace and ed\adddot}},
+  uped+         = {{updated and edit\-ed by}{up\adddotspace and eds\adddot}},
+  uprev         = {{updated and revised by}{up\adddotspace and rev\adddot}},
+  uprev+        = {{updated and revised by}{up\adddotspace and revs\adddot}},
+  uptrans       = {{updated and translated by}{up\adddotspace and trans\adddot}},
+  uptrans+      = {{updated and translated by}{up\adddotspace and trans\adddot}},
   urlseen       = {{accessed}{accessed}},
   volume        = {{vol\adddot}{vol\adddot}},
   volumes       = {{vols\adddot}{vols\adddot}}
