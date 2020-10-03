@@ -1,4 +1,4 @@
-% Last modified: Fri 02 Oct 2020 07:45:57 PM CDT
+% Last modified: Fri 02 Oct 2020 08:29:32 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -874,24 +874,29 @@
                   or test {\iffieldequalstr{\xeditor type}{comped}}
                   or test {\iffieldequalstr{\xeditor type}{comprev}}
                   or test {\iffieldequalstr{\xeditor type}{comptrans}}
-                  or test {\iffieldequalstr{\xeditor type}{compup}}
-                  or test {\iffieldequalstr{\xeditor type}{transcomp}}}
+                  or test {\iffieldequalstr{\xeditor type}{compup}}}
        {\renewcommand*{\cbx@bibstring}{comptrans}}%
        {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
                      or test {\iffieldequalstr{\xeditor type}{revcomp}}
                      or test {\iffieldequalstr{\xeditor type}{reved}}
                      or test {\iffieldequalstr{\xeditor type}{revtrans}}
-                     or test {\iffieldequalstr{\xeditor type}{revup}}
-                     or test {\iffieldequalstr{\xeditor type}{transrev}}}
+                     or test {\iffieldequalstr{\xeditor type}{revup}}}
           {\renewcommand*{\cbx@bibstring}{revtrans}}%
           {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{updater}}
                         or test {\iffieldequalstr{\xeditor type}{upcomp}}
                         or test {\iffieldequalstr{\xeditor type}{uped}}
                         or test {\iffieldequalstr{\xeditor type}{uprev}}
-                        or test {\iffieldequalstr{\xeditor type}{uptrans}}
-                        or test {\iffieldequalstr{\xeditor type}{transup}}}
+                        or test {\iffieldequalstr{\xeditor type}{uptrans}}}
              {\renewcommand*{\cbx@bibstring}{uptrans}}%
-             {\renewcommand*{\cbx@bibstring}{edtrans}}}}}
+             {\iffieldequalstr{\xeditor type}{transcomp}
+                {\renewcommand*{\cbx@bibstring}{transcomp}}%
+                {\iffieldequalstr{\xeditor type}{transed}
+                   {\renewcommand*{\cbx@bibstring}{transed}}%
+                   {\iffieldequalstr{\xeditor type}{transrev}
+                      {\renewcommand*{\cbx@bibstring}{transrev}}%
+                      {\iffieldequalstr{\xeditor type}{transup}
+                         {\renewcommand*{\cbx@bibstring}{transup}}%
+                         {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}}}}
     {\iffieldequalstr{\xeditor type}{compiler}
        {\renewcommand*{\cbx@bibstring}{compiler}}%
        {\iffieldequalstr{\xeditor type}{reviser}

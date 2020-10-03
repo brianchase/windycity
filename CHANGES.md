@@ -23,6 +23,11 @@ can combine with any other role:
   - revised and updated by...
   - translated and updated by...
 
+* when editors and translators are the same, and you haven't set the
+`swaptrans` entry option, the value of the `editortype` field
+determines which editorial role goes first (example: `transrev` prints
+"translated and revised by" without needing `swaptrans`)
+
 ## 2020-09-29
 
 * better punctuation handling in parenthetical citations, allowing
