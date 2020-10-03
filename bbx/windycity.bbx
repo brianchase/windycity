@@ -1,4 +1,4 @@
-% Last modified: Fri 02 Oct 2020 08:29:32 PM CDT
+% Last modified: Sat 03 Oct 2020 04:34:46 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -842,25 +842,13 @@
   \renewcommand*{\cbx@namelist}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
-     \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
-                  or test {\iffieldequalstr{\xeditor type}{comped}}
-                  or test {\iffieldequalstr{\xeditor type}{comprev}}
-                  or test {\iffieldequalstr{\xeditor type}{comptrans}}
-                  or test {\iffieldequalstr{\xeditor type}{compup}}
+     \ifboolexpr{ test {\iffieldstart{editortype}{c}}
                   or test {\iffieldequalstr{\xeditor type}{transcomp}}}
        {\renewcommand*{\cbx@bibstring}{transcomp}}%
-       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
-                     or test {\iffieldequalstr{\xeditor type}{revcomp}}
-                     or test {\iffieldequalstr{\xeditor type}{reved}}
-                     or test {\iffieldequalstr{\xeditor type}{revtrans}}
-                     or test {\iffieldequalstr{\xeditor type}{revup}}
+       {\ifboolexpr{ test {\iffieldstart{\xeditor type}{r}}
                      or test {\iffieldequalstr{\xeditor type}{transrev}}}
           {\renewcommand*{\cbx@bibstring}{transrev}}%
-          {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{updater}}
-                        or test {\iffieldequalstr{\xeditor type}{upcomp}}
-                        or test {\iffieldequalstr{\xeditor type}{uped}}
-                        or test {\iffieldequalstr{\xeditor type}{uprev}}
-                        or test {\iffieldequalstr{\xeditor type}{uptrans}}
+          {\ifboolexpr{ test {\iffieldstart{\xeditor type}{u}}
                         or test {\iffieldequalstr{\xeditor type}{transup}}}
              {\renewcommand*{\cbx@bibstring}{transup}}%
              {\renewcommand*{\cbx@bibstring}{transed}}}}}
@@ -870,64 +858,74 @@
   \renewcommand*{\cbx@namelist}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
-     \ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
-                  or test {\iffieldequalstr{\xeditor type}{comped}}
-                  or test {\iffieldequalstr{\xeditor type}{comprev}}
-                  or test {\iffieldequalstr{\xeditor type}{comptrans}}
-                  or test {\iffieldequalstr{\xeditor type}{compup}}}
-       {\renewcommand*{\cbx@bibstring}{comptrans}}%
-       {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{reviser}}
-                     or test {\iffieldequalstr{\xeditor type}{revcomp}}
-                     or test {\iffieldequalstr{\xeditor type}{reved}}
-                     or test {\iffieldequalstr{\xeditor type}{revtrans}}
-                     or test {\iffieldequalstr{\xeditor type}{revup}}}
-          {\renewcommand*{\cbx@bibstring}{revtrans}}%
-          {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{updater}}
-                        or test {\iffieldequalstr{\xeditor type}{upcomp}}
-                        or test {\iffieldequalstr{\xeditor type}{uped}}
-                        or test {\iffieldequalstr{\xeditor type}{uprev}}
-                        or test {\iffieldequalstr{\xeditor type}{uptrans}}}
-             {\renewcommand*{\cbx@bibstring}{uptrans}}%
-             {\iffieldequalstr{\xeditor type}{transcomp}
-                {\renewcommand*{\cbx@bibstring}{transcomp}}%
-                {\iffieldequalstr{\xeditor type}{transed}
-                   {\renewcommand*{\cbx@bibstring}{transed}}%
-                   {\iffieldequalstr{\xeditor type}{transrev}
-                      {\renewcommand*{\cbx@bibstring}{transrev}}%
-                      {\iffieldequalstr{\xeditor type}{transup}
-                         {\renewcommand*{\cbx@bibstring}{transup}}%
-                         {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}}}}
-    {\iffieldequalstr{\xeditor type}{compiler}
-       {\renewcommand*{\cbx@bibstring}{compiler}}%
-       {\iffieldequalstr{\xeditor type}{reviser}
-          {\renewcommand*{\cbx@bibstring}{reviser}}%
-          {\iffieldequalstr{\xeditor type}{updater}
-             {\renewcommand*{\cbx@bibstring}{updater}}%
-             {\iffieldequalstr{\xeditor type}{comped}
-                {\renewcommand*{\cbx@bibstring}{comped}}%
-                {\iffieldequalstr{\xeditor type}{comprev}
-                   {\renewcommand*{\cbx@bibstring}{comprev}}%
-                   {\iffieldequalstr{\xeditor type}{compup}
-                      {\renewcommand*{\cbx@bibstring}{compup}}%
-                      {\iffieldequalstr{\xeditor type}{edcomp}
-                         {\renewcommand*{\cbx@bibstring}{edcomp}}%
-                         {\iffieldequalstr{\xeditor type}{edrev}
-                            {\renewcommand*{\cbx@bibstring}{edrev}}%
-                            {\iffieldequalstr{\xeditor type}{edup}
-                               {\renewcommand*{\cbx@bibstring}{edup}}%
-                               {\iffieldequalstr{\xeditor type}{revcomp}
-                                  {\renewcommand*{\cbx@bibstring}{revcomp}}%
-                                  {\iffieldequalstr{\xeditor type}{reved}
-                                     {\renewcommand*{\cbx@bibstring}{reved}}%
-                                     {\iffieldequalstr{\xeditor type}{revup}
-                                        {\renewcommand*{\cbx@bibstring}{revup}}%
-                                        {\iffieldequalstr{\xeditor type}{upcomp}
-                                           {\renewcommand*{\cbx@bibstring}{upcomp}}%
-                                           {\iffieldequalstr{\xeditor type}{uped}
-                                              {\renewcommand*{\cbx@bibstring}{uped}}%
-                                              {\iffieldequalstr{\xeditor type}{uprev}
-                                                 {\renewcommand*{\cbx@bibstring}{uprev}}%
-                                                 {\renewcommand*{\cbx@bibstring}{editor}}}}}}}}}}}}}}}}}}
+     \usebibmacro{edcombos:trans}}%
+    {\usebibmacro{edcombos:notrans}}}
+
+\newbibmacro*{edcombos:trans}{%
+  \iffieldstart{\xeditor type}{c}
+    {\renewcommand*{\cbx@bibstring}{comptrans}}%
+    {\iffieldstart{\xeditor type}{r}
+       {\renewcommand*{\cbx@bibstring}{revtrans}}%
+       {\iffieldstart{\xeditor type}{u}
+          {\renewcommand*{\cbx@bibstring}{uptrans}}%
+          {\iffieldequalstr{\xeditor type}{transcomp}
+             {\renewcommand*{\cbx@bibstring}{transcomp}}%
+             {\iffieldequalstr{\xeditor type}{transed}
+                {\renewcommand*{\cbx@bibstring}{transed}}%
+                {\iffieldequalstr{\xeditor type}{transrev}
+                   {\renewcommand*{\cbx@bibstring}{transrev}}%
+                   {\iffieldequalstr{\xeditor type}{transup}
+                      {\renewcommand*{\cbx@bibstring}{transup}}%
+                      {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}}}}
+
+\newbibmacro*{edcombos:notrans}{%
+  \iffieldequalstr{\xeditor type}{compiler}
+    {\renewcommand*{\cbx@bibstring}{compiler}}%
+    {\iffieldequalstr{\xeditor type}{reviser}
+       {\renewcommand*{\cbx@bibstring}{reviser}}%
+       {\iffieldequalstr{\xeditor type}{updater}
+          {\renewcommand*{\cbx@bibstring}{updater}}%
+          {\iffieldequalstr{\xeditor type}{comped}
+             {\renewcommand*{\cbx@bibstring}{comped}}%
+             {\iffieldequalstr{\xeditor type}{comprev}
+                {\renewcommand*{\cbx@bibstring}{comprev}}%
+                {\iffieldequalstr{\xeditor type}{compup}
+                   {\renewcommand*{\cbx@bibstring}{compup}}%
+                   {\iffieldequalstr{\xeditor type}{edcomp}
+                      {\renewcommand*{\cbx@bibstring}{edcomp}}%
+                      {\iffieldequalstr{\xeditor type}{edrev}
+                         {\renewcommand*{\cbx@bibstring}{edrev}}%
+                         {\iffieldequalstr{\xeditor type}{edup}
+                            {\renewcommand*{\cbx@bibstring}{edup}}%
+                            {\iffieldequalstr{\xeditor type}{revcomp}
+                               {\renewcommand*{\cbx@bibstring}{revcomp}}%
+                               {\iffieldequalstr{\xeditor type}{reved}
+                                  {\renewcommand*{\cbx@bibstring}{reved}}%
+                                  {\iffieldequalstr{\xeditor type}{revup}
+                                     {\renewcommand*{\cbx@bibstring}{revup}}%
+                                     {\iffieldequalstr{\xeditor type}{upcomp}
+                                        {\renewcommand*{\cbx@bibstring}{upcomp}}%
+                                        {\iffieldequalstr{\xeditor type}{uped}
+                                           {\renewcommand*{\cbx@bibstring}{uped}}%
+                                           {\iffieldequalstr{\xeditor type}{uprev}
+                                              {\renewcommand*{\cbx@bibstring}{uprev}}%
+                                              {\renewcommand*{\cbx@bibstring}{editor}}}}}}}}}}}}}}}}}
+
+% Thanks to David Fussner's biblatex-chicago for pointing me to this
+% command by Philipp Lehman. Source:
+% https://groups.google.com/forum/#!topic/comp.text.tex/kG003fkZK1I
+
+\newrobustcmd*{\iffieldstart}[2]{%
+  \iffieldundef{#1}
+    {\@secondoftwo}% originally '\@gobbletwo'
+    {\begingroup
+     \edef\@tempa{%
+       \long\def\noexpand\iffieldstart@i####1\detokenize{#2}####2}%
+     \@tempa\@nil{\endgroup\ifblank{##1}}%
+     \savefield*{#1}{\@tempa}%
+     \expandafter\iffieldstart@i\detokenize
+     \expandafter\expandafter\expandafter{%
+       \expandafter\@tempa\detokenize{#2}}\@nil}}%
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx:short}
