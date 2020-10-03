@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Sep 2020 06:29:14 PM CDT
+% Last modified: Sat 03 Oct 2020 02:28:26 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -328,7 +328,7 @@
 
 \newrobustcmd*{\iffieldstart}[2]{%
   \iffieldundef{#1}
-    {\@gobbletwo}%
+    {\@secondoftwo}% originally '\@gobbletwo'
     {\begingroup
      \edef\@tempa{%
        \long\def\noexpand\iffieldstart@i####1\detokenize{#2}####2}%
