@@ -27,6 +27,8 @@ can combine with any other role:
 `swaptrans` entry option, the value of the `editortype` field
 determines which editorial role goes first (example: `transrev` prints
 "translated and revised by" without needing `swaptrans`)
+* dropped the `anonauth` and `anonqauth` entry options; instead, use
+the `authortype` field with values `anon` and `anon?`, respectively
 
 ## 2020-09-29
 

@@ -1,4 +1,4 @@
-% Last modified: Sat 03 Oct 2020 04:34:46 PM CDT
+% Last modified: Sun 04 Oct 2020 12:46:10 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -25,20 +25,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography and Entry Options  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\providetoggle{anonauth}
-\DeclareBiblatexOption{entry}[boolean]{anonauth}[true]{%
-  \ifstrequal{#1}{true}
-    {\renewcommand*{\anona}{\bibopenbracket}%
-     \renewcommand*{\anonb}{\bibclosebracket}}%
-    {}}
-
-\providetoggle{anonqauth}
-\DeclareBiblatexOption{entry}[boolean]{anonqauth}[true]{%
-  \ifstrequal{#1}{true}
-    {\renewcommand*{\anona}{\bibopenbracket}%
-     \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
-    {}}
 
 \providetoggle{annotate}
 \DeclareBiblatexOption{global}[boolean]{annotate}[true]{%
@@ -281,6 +267,7 @@
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
 \DeclareDataInheritance{*}{incollection,inbook,letter,review}{%
   \inherit{author}{bookauthor}
+  \inherit{authortype}{bookauthortype}
   \inherit{shortauthor}{shortbookauthor}
   \inherit{editor}{editora}
   \inherit{editora}{editorb}
@@ -659,13 +646,26 @@
   \ifboolexpr{ test {\ifnameundef{shortauthor}}
                or togl {bibliography}}
     {\renewcommand*{\cbx@namelist}{author}}%
-    {\renewcommand*{\cbx@namelist}{shortauthor}}}
+    {\renewcommand*{\cbx@namelist}{shortauthor}}%
+  \usebibmacro{author+bookauthor+type}}%
 
 \newbibmacro*{bookauthor+namelist}{%
   \ifboolexpr{ test {\ifnameundef{shortbookauthor}}
                or togl {bibliography}}
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
-    {\renewcommand*{\cbx@namelist}{shortbookauthor}}}
+    {\renewcommand*{\cbx@namelist}{shortbookauthor}}%
+  \usebibmacro{author+bookauthor+type}}%
+
+\newbibmacro*{author+bookauthor+type}{%
+  \iffieldundef{\cbx@namelist type}
+    {}
+    {\iffieldequalstr{\cbx@namelist type}{anon}
+       {\renewcommand*{\anona}{\bibopenbracket}%
+        \renewcommand*{\anonb}{\bibclosebracket}}%
+       {\iffieldequalstr{\cbx@namelist type}{anon?}
+          {\renewcommand*{\anona}{\bibopenbracket}%
+           \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
+          {}}}}
 
 % When 'journaltitle' goes in the author's position.
 
