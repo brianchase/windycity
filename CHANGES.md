@@ -11,7 +11,7 @@ brianchase/windycity").
 ## Latest
 
 * added support for updaters, which, like other editorial roles, you
-can combine with any other role:
+  can combine with any other role:
 
   - updated by...
   - updated and compiled by...
@@ -24,27 +24,27 @@ can combine with any other role:
   - translated and updated by...
 
 * when editors and translators are the same, and you haven't set the
-`swaptrans` entry option, the value of the `editortype` field
-determines which editorial role goes first (example: `transrev` prints
-"translated and revised by" without needing `swaptrans`)
+  `swaptrans` entry option, the value of the `editortype` field
+  determines which role goes first (example: `transrev` prints
+  "translated and revised by" without needing `swaptrans`)
 * dropped the `anonauth` and `anonqauth` entry options; instead, use
-the `authortype` field with values `anon` and `anon?`, respectively
+  the `authortype` field with values `anon` and `anon?`, respectively
 
 ## 2020-09-29
 
 * better punctuation handling in parenthetical citations, allowing
-examples in *CMOS* 15.24 and 15.30 (17th ed.)
+  examples in *CMOS* 15.24 and 15.30 (17th ed.)
 * for `@reference` and `@inreference` entries, added support for
-printing the `organization` field in the author's position of short
-citations, fixing many of them (most of them? it was bad!)
+  printing the `organization` field in the author's position of short
+  citations, fixing many of them (most of them? it was bad!)
 * also for `@reference` and `@inreference` entries, allowed the
-`author` field to substitute for `organization` (not recommended but
-could prevent confusion in some cases)
+  `author` field to substitute for `organization` (not recommended but
+  could prevent confusion in some cases)
 * fixed `\cites` and `\parencites` for consecutive citations of the
-same author (most seriously affecting parenthetical citations but also
-standard and short citations in different ways)
+  same author (most seriously affecting parenthetical citations but
+  also standard and short citations in different ways)
 * fixed parenthetical citations not printing volume numbers for
-certain collections
+  certain collections
 
 ## 2020-09-07
 
@@ -80,7 +80,8 @@ certain collections
   types
 * fixed `\parencite` failing to print names in `afterwords`,
   `forewords`, and `introduction` fields
-* fixed printing `transcomp` and `transed` bibstrings when
+
+* fixed printing `transcomp` and `transed` bibliography strings when
   `transcomp+` and `transed+` were needed
 
 ## 2019-07-17

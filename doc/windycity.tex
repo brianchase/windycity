@@ -1,4 +1,4 @@
-% Last modified: Tue 29 Sep 2020 05:38:35 PM CDT
+% Last modified: Sun 04 Oct 2020 06:35:02 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -29,9 +29,9 @@ to the 17th edition of \textit{The Chicago Manual of Style}
 (\textit{CMOS}).\footnote{\cite{chicago2017}} It accurately handles a
 wide range of citations in different formats and includes a set of
 options and commands to support special circumstances. It also has
-extensive support for citing and arranging different kinds of editors,
-translators, compilers, and revisers within a single citation. These
-features make Windy City especially suitable for academic work.
+extensive support for citing and arranging different kinds of editors
+and translators within a single citation. These features make Windy
+City especially suitable for academic work.
 
 The following sections assume familiarity with \textit{CMOS} and
 \biblatex. Section \ref{overview} gives a brief overview of the
@@ -472,25 +472,6 @@ For options that affect the format of every work, see section
 
 \begin{optionlist}
 
-\optitem[false]{anonauth}{\opt{true}, \opt{false}}
-
-\noindent This option prints the author's name of an anonymously
-published work in brackets, as in this example from \textit{CMOS}
-\ref{14.79}:
-
-\begin{citebib}
-\item \cite{horsley1796}
-\end{citebib}
-
-\optitem[false]{anonqauth}{\opt{true}, \opt{false}}
-
-\noindent Like \opt{anonauth} but adds a question mark after the
-author's name. From \textit{CMOS} \ref{14.79}:
-
-\begin{citebib}
-\item \cite{hawkes1834}
-\end{citebib}
-
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print the ISBN of a particular work in a
@@ -556,8 +537,8 @@ the option \bibfield{swaptrans} reverse this order: Their translators
 print first. If a work's translators and editors are the same,
 \bibfield{swaptrans} reverses the order of their roles, say, from
 \textit{edited and translated by} to \textit{translated and edited
-by}. The same goes for compilers and revisers, which the style treats
-as specialized editors. For more information, see section
+by}. The same goes for compilers, revisers, and updaters, which the
+style treats as specialized editors. For more information, see section
 \ref{edtranspos}.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
@@ -925,13 +906,23 @@ uses standard data fields. The list below discusses some of them.
 
 \begin{marglist}
 
+\item[authtype] This field takes just two values, \textit{anon} (to
+print an anonymous author's name in brackets) and \textit{anon?} (to
+add a question mark inside the brackets). From \textit{CMOS}
+\ref{14.79}:
+
+\begin{citebib}
+\item \cite{horsley1796}
+\item \cite{hawkes1834}
+\end{citebib}
+
 \item[edition] To indicate a numbered edition of a work, put the
 edition's number in this field---for example, \textit{2} for a second
 edition. To indicate a revised edition, enter either \textit{revised}
 or \textit{rev. ed.} Both options give the same output. For expanded
 and updated editions, you may use \textit{expanded} or
 \textit{updated}. Add additional data as necessary. For the following
-example from \textit{CMOS} Bibliography 2.4, \bibfield{edition}
+example from \textit{CMOS} bibliography 2.4, \bibfield{edition}
 contains \textit{updated edition by Arlene O'Sean and Antoinette
 Schleyer}:
 
@@ -997,7 +988,7 @@ Beattie in \ref{14.171}.
 
 \end{marglist}
 
-\section{Editors, Translators, Compilers, and Revisers}
+\section{Editors, Translators, Friends}
 \label{edtrans}
 
 Windy City offers significant control over the handling of editors,
@@ -1104,10 +1095,11 @@ scope of the \bibtype{incollection} entry:
 scope of \bibtype{collection}, the style associates it with
 \textit{The Renaissance Philosophy of Man}.
 
-The style supports two other basic editorial roles: compiler and
-reviser. To assign them, you need to use the \bibfield{editortype}
-field. It may help to see the bibliography database entries for
-examples in \textit{CMOS} \ref{14.103} and \ref{14.142}:
+The style supports three more basic editorial roles: compiler,
+reviser, and updater. To assign them, you need to use the
+\bibfield{editortype} field. It may help to see the bibliography
+database entries for examples in \textit{CMOS} \ref{14.103} and
+\ref{14.142}:
 
 \begin{verbatim}
    @Book{schechter2011,
@@ -1139,70 +1131,62 @@ examples in \textit{CMOS} \ref{14.103} and \ref{14.142}:
 \item \cite{turabian2013}
 \end{citebib}
 
-In addition to the four basic roles (editor, translator, compiler, and
-reviser), you may assign names to any pair of them. A work's editor,
-for example, can also be its translator, or compiler, or reviser---but
-no more than one of these. And just as you can swap the order of the
-editor and translator roles (again, see section \ref{edtranspos}), you
-can swap all other combinations, say, to identify a work as
-\textit{compiled and edited by} Jane Doe rather than \textit{edited
-and compiled by} her. Simply change the value of
+In addition to the five basic roles (editor, translator, compiler,
+reviser, and updater), you may assign names to any pair of them. A
+work's editor, for example, can also be its translator, compiler,
+reviser, or updater---but no more than one of these. And just as you
+can swap the order of the editor and translator roles (again, see
+section \ref{edtranspos}), you can swap all other combinations, say,
+to identify a work as \textit{compiled and edited by} Jane Doe rather
+than \textit{edited and compiled by} her. Simply change the value of
 \bibfield{editortype}. A summary of these values appears in Table
 \ref{table:ed}.
 
 \begin{table}[H]
-\begin{tabular}{@{}r l@{}}
-\bibfield{editortype} & Assignment\\
+\begin{tabular}{@{}r l r l@{}}
+\bibfield{editortype} & Assignment & \bibfield{editortype} & Assignment\\
 \toprule
-compiler & compiler\\
-comped & compiler and editor\\
-comprev & compiler and reviser\\
-comptrans & compiler and translator\\
-edcomp & editor and compiler\\
-edrev & editor and reviser\\
-reviser & reviser\\
-revcomp & reviser and compiler\\
-reved & reviser and editor\\
-revtrans & reviser and translator\\
-transcomp & translator and compiler\\
-transrev & translator and reviser\\
+compiler & compiler & updater & updater\\
+comped & compiler and editor & upcomp & updater and compiler\\
+comprev & compiler and reviser & uped & updater and editor\\
+comptrans & compiler and translator & uprev & updater and reviser\\
+compup & compiler and updater & uptrans & updater and translator\\
+edcomp & editor and compiler & edup & editor and updater\\
+transcomp & translator and compiler & transup & translator and updater\\
+reviser & reviser & &\\
+revcomp & reviser and compiler & &\\
+reved & reviser and editor & &\\
+revtrans & reviser and translator & &\\
+revup & reviser and updater & &\\
+edrev & editor and reviser & &\\
+transrev & translator and reviser & &\\
 \end{tabular}
 \caption{} \label{table:ed}
 \end{table}
 
-For an example in \textit{CMOS}, we need turn the bibliography. This
-will do:
-
-\begin{verbatim}
-   @Book{fowler1965,
-     author = {Fowler, H. W.},
-     title = {A Dictionary of Modern English Usage},
-     edition = {2},
-     editor = {Gowers, Sir Ernest},
-     editortype = {reved},
-     address = {Oxford},
-     publisher = {Oxford University Press},
-     year = {1965}
-   }
-\end{verbatim}
+For examples in \textit{CMOS}, we need to turn to the bibliography.
+The first one below shows the output of \textit{reved} in the
+\bibfield{editortype} field, the second of \textit{revup}.
 
 \begin{citebib}
 \item \cite{fowler1965}
+\item \cite{gowers2015}
 \end{citebib}
 
-Try swapping \textit{reved} in the entry above for other values in
-Table \ref{table:ed}. Notice that \textit{edrev} is the reverse of
-\textit{reved}---``edited and revised by'' instead of ``revised and
-edited by.'' Similarly for \textit{comprev} and \textit{revcomp},
-\textit{comptrans} and \textit{transcomp}, and so on.
+% Try swapping the editor type in the entries above for other values
+% in Table \ref{table:ed}. Note that \textit{edrev} is the reverse of
+% \textit{reved}---\textit{edited and revised by} instead of
+% \textit{revised and edited by}. So, too, for \textit{comprev} and
+% \textit{revcomp}, \textit{comptrans} and \textit{transcomp}, and so
+% on.
 
-Missing from the table are \textit{editor}, \textit{translator},
-\textit{edtrans}, and \textit{transed}. Windy City has bibstrings for
-them, too, but they're strictly for the style's internal use. It
-determines which of them applies, if any, based on the contents of the
-\bibfield{editor} and \bibfield{translator} fields and the option
-\opt{swaptrans}. You never need to use them in a bibliography
-database.
+Missing from Table \ref{table:ed} are \textit{editor},
+\textit{translator}, \textit{edtrans}, and \textit{transed}. Windy
+City has bibliography strings for them, too, but they're meant for the
+style's internal use. It determines which of them applies, if any,
+based on the contents of the \bibfield{editor} and
+\bibfield{translator} fields and the option \opt{swaptrans}. You never
+need to use them in a bibliography database.
 
 Three more values of \bibfield{editortype} allow you to assign editors
 to higher level titles: \textit{maintitle}, \textit{series}, and
@@ -1317,12 +1301,16 @@ translated by}. Reverse them with \opt{swaptrans}. From \textit{CMOS}
 \item \cite{menchu1999}
 \end{citebib}
 
-Since Windy City treats a compiler as a kind of editor, the comments
-above apply to compilers: If a work has compilers and translators,
-compilers' names will print first, unless you use \opt{swaptrans}.
+To make switching roles easier in these cases, you may also use the
+relevant \bibfield{editortype} field with a bibliography string from
+Table \ref{table:ed}. After all, for compilers, revisers, and
+updaters, you need to put a value in \bibfield{editortype} anyway. So,
+if you pick one that begins with \textit{trans} (\textit{transcomp},
+\textit{transed}, \textit{transrev}, or \textit{transup}), Windy City
+will assume that the translator's role goes first.
 
-In rare cases, you may want to swap the position of an author and an
-editor or translator. \textit{CMOS} \ref{14.104} gives an example:
+On rare occasions, you may want to swap the position of an author and
+an editor or translator. \textit{CMOS} \ref{14.104} gives an example:
 
 \begin{citebib}
 \item \cite{pound1953}
@@ -2074,8 +2062,8 @@ this in the bibliography database with \cmd{emph} or \cmd{mkbibemph}.
 % 14.79 No listed author (anonymous works)
 \label{14.79}
 
-See section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
-entry options.
+See section \ref{fieldscon} on the use of the \bibfield{authtype}
+field for anonymous works.
 
 \begin{citebib}
 \item \cite{anon1610}
@@ -3184,8 +3172,8 @@ midst. \end{citeref}
 \subsubsection{Author-date format for anonymous works (no listed author)}
 % 15.34 Author-date format for anonymous works (no listed author)
 
-See section \ref{entryops} on the \opt{anonauth} and \opt{anonauthq}
-entry options.
+See section \ref{fieldscon} on the use of the \bibfield{authtype}
+field for anonymous works.
 
 \begin{citeref}
 \item \parencite{anon1610}
