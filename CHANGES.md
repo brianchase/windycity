@@ -29,6 +29,8 @@ brianchase/windycity").
   "translated and revised by" without needing `swaptrans`)
 * dropped the `anonauth` and `anonqauth` entry options; instead, use
   the `authortype` field with values `anon` and `anon?`, respectively
+* added support for the `\fullcite` and `\footfullcite` citation
+  commands
 
 ## 2020-09-29
 
