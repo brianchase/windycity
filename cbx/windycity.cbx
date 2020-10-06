@@ -1,4 +1,4 @@
-% Last modified: Sat 03 Oct 2020 04:34:21 PM CDT
+% Last modified: Tue 06 Oct 2020 05:22:42 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -85,6 +85,22 @@
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
 
+\DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}%
+  {\citereset
+   \usebibmacro{citeindex}%
+   \usebibmacro{cite:new}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}%
+  {\citereset
+   \usebibmacro{citeindex}%
+   \usebibmacro{cite:new}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
 \DeclareCiteCommand{\parencite}[\mkbibparens]
   {\usebibmacro{prenote}}%
   {\usebibmacro{citeindex}%
@@ -157,18 +173,6 @@
      \iffieldnums{labelyear}
        {}% needs '%'
        {\addcomma}%
-     \usebibmacro{labeldate+endyear}%
-     \printfield{extradate}}}
-
-\newbibmacro*{parencite:date+old}{%
-  \iffieldundef{labelyear}
-    {}
-    {\usebibmacro{parencite:origyear}%
-     \ifboolexpr{ ( test {\iffieldundef{year}}
-                  and test {\iffieldundef{urlyear}} )
-                  or test {\iffieldequalstr{year}{forthcoming}}}
-       {\addcomma}%
-       {}% needs '%'
      \usebibmacro{labeldate+endyear}%
      \printfield{extradate}}}
 
@@ -340,10 +344,9 @@
          {\DeclareNameAlias{sortname}{default}}%
          {cite:\thefield{entrytype}}}}}
 
-% By default, idemtracker is 'false'. As such, '\ifciteidem' returns
-% false. With idemtracker set to 'true' (or to some value that implies
-% 'true') the test below will print 'labelname' if it matches that of
-% the previous citation.
+% By default, idemtracker is 'false'. With idemtracker set to 'true'
+% (or to some value that implies 'true') the test below will print
+% 'labelname' if it matches that of the previous citation.
 
 \newbibmacro*{idem+short+multicite}{%
   \ifboolexpr{ test {\ifciteidem}
