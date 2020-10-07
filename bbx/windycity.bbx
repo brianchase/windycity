@@ -1,4 +1,4 @@
-% Last modified: Sun 04 Oct 2020 12:46:10 PM CDT
+% Last modified: Wed 07 Oct 2020 06:15:41 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -656,6 +656,8 @@
     {\renewcommand*{\cbx@namelist}{shortbookauthor}}%
   \usebibmacro{author+bookauthor+type}}%
 
+% See notes for 'handle' and 'nameaddon'.
+
 \newbibmacro*{author+bookauthor+type}{%
   \iffieldundef{\cbx@namelist type}
     {}
@@ -665,7 +667,10 @@
        {\iffieldequalstr{\cbx@namelist type}{anon?}
           {\renewcommand*{\anona}{\bibopenbracket}%
            \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
-          {}}}}
+          {\ifboolexpr{ test {\iffieldequalstr{\cbx@namelist type}{pseudo}}
+                        and not togl {cbx:short}}
+             {\renewcommand*{\anonb}{\space\mkbibbrackets{\bibstring{pseudo}}}}
+             {}}}}}
 
 % When 'journaltitle' goes in the author's position.
 
@@ -1202,17 +1207,23 @@
     {\anona\pluga\printnames[\cbx@deflabel]{%
        \cbx@namelist}\plugb\anonb}}%
 
-% A screen name precedes 'nameaddon'. See CMOS, 17th ed., 14.208.
+% A screen name precedes 'nameaddon' and can be omitted from short
+% citations. See CMOS, 17th ed., 14.209.
 
 \newbibmacro*{handle}{%
-  \iffieldundef{handle}
+  \ifboolexpr{ test {\iffieldundef{handle}}
+               or togl {cbx:short}}
     {}
     {\space
      \printfield[parens]{handle}%
      \clearfield{handle}}}
 
+% In short citations, omit addons. See CMOS, 17th ed., 14.80 and
+% 14.209.
+
 \newbibmacro*{nameaddon}{%
-  \iffieldundef{nameaddon}
+  \ifboolexpr{ test {\iffieldundef{nameaddon}}
+               or togl {cbx:short}}
     {}
     {\space
      \printfield[brackets]{nameaddon}%

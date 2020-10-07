@@ -29,8 +29,13 @@ brianchase/windycity").
   "translated and revised by" without needing `swaptrans`)
 * dropped the `anonauth` and `anonqauth` entry options; instead, use
   the `authortype` field with values `anon` and `anon?`, respectively
+* in addition to anonymous authors, `authortype` can handle some
+  pseudonymous authors with the value `pseudo` (the `nameaddon` field
+  still works for this and, in fact, remains the only way to list a
+  pseudonymous author's given name)
 * added support for the `\fullcite` and `\footfullcite` citation
   commands
+* fixed `nameaddon` and `handle` fields printing in short citations
 
 ## 2020-09-29
 
