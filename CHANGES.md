@@ -35,6 +35,8 @@ brianchase/windycity").
   pseudonymous author's given name)
 * added support for the `\fullcite` and `\footfullcite` citation
   commands
+* added support for printing ISSNs with `issn` entry and bibliography
+  options
 * fixed `nameaddon` and `handle` fields printing in short citations
 
 ## 2020-09-29

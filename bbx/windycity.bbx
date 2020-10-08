@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Oct 2020 06:15:41 PM CDT
+% Last modified: Wed 07 Oct 2020 07:09:42 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -51,6 +51,10 @@
 \providetoggle{isbn}
 \DeclareBiblatexOption{entry,global}[boolean]{isbn}[true]{%
   \settoggle{isbn}{#1}}%
+
+\providetoggle{isnn}
+\DeclareBiblatexOption{entry,global}[boolean]{isnn}[true]{%
+  \settoggle{isnn}{#1}}%
 
 \providetoggle{library}
 \DeclareBiblatexOption{entry,global}[boolean]{library}[true]{%
@@ -1815,6 +1819,7 @@
 \newbibmacro*{doi+finentry+etc}{%
   \usebibmacro{doi+url+etc}%
   \usebibmacro{isbn}%
+  \usebibmacro{issn}%
   \usebibmacro{library}%
   \usebibmacro{pageref+finentry}}%
 
@@ -2034,6 +2039,16 @@
        {\iftoggle{isbn}
           {\newunit
            \printfield{isbn}}%
+          {}}
+       {}}}
+
+\newbibmacro*{issn}{%
+  \iffieldundef{issn}
+    {}
+    {\iftoggle{bibliography}
+       {\iftoggle{issn}
+          {\newunit
+           \printfield{issn}}%
           {}}
        {}}}
 

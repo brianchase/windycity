@@ -1,4 +1,4 @@
-% Last modified: Sun 04 Oct 2020 06:35:02 PM CDT
+% Last modified: Wed 07 Oct 2020 07:17:56 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -307,7 +307,7 @@ Other ways to make citations more concise: In the default format, you
 can use the preamble option \opt{firstshort} to swap long first
 citations for short ones (see section \ref{preops}). Also in the
 default format, you can use the preamble option \opt{idemtracker} to
-shorten the author's name in the first citation if the previous
+shorten the author's name of a work's first citation if the previous
 citation is of the same author (see section \ref{preops}). The entry
 option \opt{noauth} omits the author's name altogether (see section
 \ref{entryops}). And the \bibfield{shorthand} field allows you to set
@@ -400,15 +400,19 @@ every entry in the bibliography, before annotations. To print the ISBN
 of a particular work, use the \opt{isbn} entry option. Neither option
 effects the output of entries without an \bibfield{isbn} field.
 
+\optitem[false]{issn}{\opt{true}, \opt{false}}
+
+\noindent Similar to \opt{isbn} but for printing ISSNs.
+
 \optitem[false]{library}{\opt{true}, \opt{false}}
 
-\noindent Like \opt{isbn}, this option prints the \bibfield{library}
-field of every work in the bibliography. Use it to print information
-about libraries, call numbers, and the like. If you use it with the
-\opt{isbn} and \opt{annotation} options, it will print after the
-former but before the latter. To print this information for selected
-works, use the \opt{library} entry option. Neither option effects the
-output of entries without a \bibfield{library} field.
+\noindent Like \opt{isbn} and \opt{issn}, this option prints the
+\bibfield{library} field of every work in the bibliography. Use it to
+print information about libraries, call numbers, and the like. If you
+use it with the \opt{isbn} and \opt{annotation} options, it will print
+after the former but before the latter. To print this information for
+selected works, use the \opt{library} entry option. Neither option
+effects the output of entries without a \bibfield{library} field.
 
 \optitem[false]{nolos}{\opt{true}, \opt{false}}
 
@@ -478,6 +482,10 @@ For options that affect the format of every work, see section
 bibliography. The ISBN will appear at the end of the work's entry (if
 applicable, before an annotation). To print ISBNs of every work in the
 bibliography, see the \bibfield{isbn} preamble option.
+
+\optitem[false]{issn}{\opt{true}, \opt{false}}
+
+\noindent Similar to \opt{isbn} but for printing ISSNs.
 
 \optitem[false]{library}{\opt{true}, \opt{false}}
 
@@ -565,7 +573,10 @@ Windy City supports most of the citation commands familiar from
 \cmditem{cites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{footcite}[prenote][postnote]{key}
 \cmditem{footcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
-\cmditem{nocite}{key} \cmditem*{nocite}|\{*\}|
+\cmditem{footfullcite}[prenote][postnote]{key}
+\cmditem{fullcite}[prenote][postnote]{key}
+\cmditem{nocite}{key}
+\cmditem*{nocite}|\{*\}|
 \cmditem{parencite}[prenote][postnote]{key}
 \cmditem{parencites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{smartcite}[prenote][postnote]{key}
@@ -615,6 +626,14 @@ Like \cmd{cites} but suppresses the author's position.
 \cmditem{footcite*}[prenote][postnote]{key}
 
 Like \cmd{footcite} but suppresses the author's position.
+
+\cmditem{footfullcite*}[prenote][postnote]{key}
+
+Like \cmd{footfullcite} but suppresses the author's position.
+
+\cmditem{fullcite*}[prenote][postnote]{key}
+
+Like \cmd{fullcite} but suppresses the author's position.
 
 \cmditem{parencite*}[prenote][postnote]{key}
 
