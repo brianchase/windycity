@@ -1,4 +1,4 @@
-% Last modified: Sun 19 Jul 2020 11:58:38 AM CDT
+% Last modified: Wed 07 Oct 2020 08:06:18 PM CDT
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -283,5 +283,6 @@
 \usepackage{float}% For nonfloating tables
 \usepackage[it,small]{caption}% Adjust captions
 \gappto{\@floatboxreset}{\centering}% Center floats
+\AtBeginEnvironment{tabular}{\small}% Adjust fonts
 
 \endinput

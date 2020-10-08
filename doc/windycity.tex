@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Oct 2020 07:17:56 PM CDT
+% Last modified: Wed 07 Oct 2020 08:53:03 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -921,19 +921,25 @@ Henry James} in section \ref{multivolume}.
 \label{fieldscon}
 
 Examples in this document don't always make it clear how Windy City
-uses standard data fields. The list below discusses some of them.
+uses standard data fields. The section discusses some of them.
 
 \begin{marglist}
 
-\item[authtype] This field takes just two values, \textit{anon} (to
-print an anonymous author's name in brackets) and \textit{anon?} (to
-add a question mark inside the brackets). From \textit{CMOS}
-\ref{14.79}:
+\item[authtype] This field takes three values: \textit{anon} (to print
+an anonymous author's name in brackets), \textit{anon?} (to add a
+question mark inside the brackets), and \textit{pseudo} (to print
+\textit{pseud.} in brackets after the name of a pseudonymous author).
+From \textit{CMOS} \ref{14.79}:
 
 \begin{citebib}
 \item \cite{horsley1796}
 \item \cite{hawkes1834}
 \end{citebib}
+
+With respect to pseudonymous authors, another solution is to use the
+\bibfield{nameaddon} field. Unlike with \bibfield{authtype},
+\bibfield{nameaddon} allows you to include an author's given name in
+the brackets. For examples, see \textit{CMOS} \ref{14.81}.
 
 \item[edition] To indicate a numbered edition of a work, put the
 edition's number in this field---for example, \textit{2} for a second
@@ -1007,7 +1013,7 @@ Beattie in \ref{14.171}.
 
 \end{marglist}
 
-\section{Editors, Translators, Friends}
+\section{Editors, Translators, and Friends}
 \label{edtrans}
 
 Windy City offers significant control over the handling of editors,
@@ -1165,20 +1171,18 @@ than \textit{edited and compiled by} her. Simply change the value of
 \begin{tabular}{@{}r l r l@{}}
 \bibfield{editortype} & Assignment & \bibfield{editortype} & Assignment\\
 \toprule
-compiler & compiler & updater & updater\\
-comped & compiler and editor & upcomp & updater and compiler\\
-comprev & compiler and reviser & uped & updater and editor\\
-comptrans & compiler and translator & uprev & updater and reviser\\
-compup & compiler and updater & uptrans & updater and translator\\
-edcomp & editor and compiler & edup & editor and updater\\
-transcomp & translator and compiler & transup & translator and updater\\
-reviser & reviser & &\\
-revcomp & reviser and compiler & &\\
-reved & reviser and editor & &\\
-revtrans & reviser and translator & &\\
-revup & reviser and updater & &\\
-edrev & editor and reviser & &\\
-transrev & translator and reviser & &\\
+compiler & compiler & reviser & reviser\\
+comped & compiler and editor & revcomp & reviser and compiler\\
+comprev & compiler and reviser & reved & reviser and editor\\
+comptrans & compiler and translator & revtrans & reviser and translator\\
+compup & compiler and updater & revup & reviser and updater\\
+edcomp & editor and compiler & edrev & editor and reviser\\
+transcomp & translator and compiler & transrev & translator and reviser\\
+\midrule
+updater & updater & uptrans & updater and translator\\
+upcomp & updater and compiler & edup & editor and updater\\
+uped & updater and editor & transup & translator and updater\\
+uprev & updater and reviser & &\\
 \end{tabular}
 \caption{} \label{table:ed}
 \end{table}
