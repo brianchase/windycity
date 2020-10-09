@@ -1,4 +1,4 @@
-% Last modified: Thu 08 Oct 2020 07:56:12 AM CDT
+% Last modified: Thu 08 Oct 2020 06:28:54 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -72,6 +72,10 @@
   \ifstrequal{#1}{true}
     {\AtBeginBibliography{\blx@key@bibcheck{nolos}}}
     {}}
+
+\providetoggle{nopages}
+\DeclareBiblatexOption{global}[boolean]{nopages}[true]{%
+  \settoggle{nopages}{#1}}%
 
 \providetoggle{reflist}
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%

@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Oct 2020 08:53:03 PM CDT
+% Last modified: Thu 08 Oct 2020 07:24:04 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -422,6 +422,15 @@ avoid duplication with the output of \cmd{printshorthands}, use
 \opt{nolos}. Since \opt{collsonly} also excludes works from the
 bibliography, their results may overlap.
 
+\optitem[false]{nopages}{\opt{true}, \opt{false}}
+
+\noindent On the first citation of \bibtype{article} or
+\bibtype{review} entries (and their aliases), Windy City prints the
+\bibfield{pages} field if the \bibfield{postnote} field is blank. This
+lets you cite the entirety of a work without having to duplicate the
+content of the \bibfield{pages} field in the \bibfield{postnote}. To
+override this feature, use the \opt{nopages} option.
+
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print a bibliography in the author-date
@@ -570,17 +579,29 @@ Windy City supports most of the citation commands familiar from
 \cmditem{autocite}[prenote][postnote]{key}
 \cmditem{autocites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{cite}[prenote][postnote]{key}
+\cmditem{cite*}[prenote][postnote]{key}
 \cmditem{cites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{cites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{footcite}[prenote][postnote]{key}
+\cmditem{footcite*}[prenote][postnote]{key}
 \cmditem{footcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{footcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{footfullcite}[prenote][postnote]{key}
+\cmditem{footfullcite*}[prenote][postnote]{key}
 \cmditem{fullcite}[prenote][postnote]{key}
+\cmditem{fullcite*}[prenote][postnote]{key}
 \cmditem{nocite}{key}
 \cmditem*{nocite}|\{*\}|
 \cmditem{parencite}[prenote][postnote]{key}
+\cmditem{parencite*}[prenote][postnote]{key}
 \cmditem{parencites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \cmditem{smartcite}[prenote][postnote]{key}
+\cmditem{smartcite*}[prenote][postnote]{key}
 \cmditem{smartcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{smartcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{textcite}[prenote][postnote]{key}
+\cmditem{textcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{textcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
 \end{ltxsyntax}
 
 \noindent New users should get comfortable first with \cmd{cite} and
@@ -604,7 +625,7 @@ set the \opt{autocite} preamble option to \opt{inline}, \cmd{autocite}
 is equivalent to \cmd{parencite}. If you set it to \opt{plain},
 \cmd{autocite} is equivalent to \cmd{cite}.
 
-Other citation commands:
+Other comments:
 
 \begin{ltxsyntax}
 
@@ -618,22 +639,6 @@ author's name clear. From \textit{CMOS} \ref{14.78}:
 \item \cite*[233]{franklin1868}
 \item \cite*[234]{franklin1868}
 \end{citebib}
-
-\cmditem{cites*}[prenote][postnote]{key}
-
-Like \cmd{cites} but suppresses the author's position.
-
-\cmditem{footcite*}[prenote][postnote]{key}
-
-Like \cmd{footcite} but suppresses the author's position.
-
-\cmditem{footfullcite*}[prenote][postnote]{key}
-
-Like \cmd{footfullcite} but suppresses the author's position.
-
-\cmditem{fullcite*}[prenote][postnote]{key}
-
-Like \cmd{fullcite} but suppresses the author's position.
 
 \cmditem{parencite*}[prenote][postnote]{key}
 
@@ -654,14 +659,6 @@ The source for the passage above contains:
    and Hout \parencite*{fischer2006}... Abramowitz and Saunders
    \parencite*{abramowitz2005}... \end{quote}
 \end{verbatim}
-
-\cmditem{smartcite*}[prenote][postnote]{key}
-
-Like \cmd{smartcite} but suppresses the author's position.
-
-\cmditem{smartcites*}[prenote][postnote]{key}
-
-Like \cmd{smartcites} but suppresses the author's position.
 
 \cmditem{textcite}[prenote][postnote]{key}
 
@@ -703,14 +700,6 @@ The source for the passage above contains:
    \begin{quote} In their introduction to \textcite*{tocqueville1999}
    ...\parencite[xvii]{tocqueville1999}. \end{quote}
 \end{verbatim}
-
-\cmditem{textcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
-
-Like \cmd{textcite} but for multiple sources.
-
-\cmditem{textcites*}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
-
-Like \cmd{textcites} but suppresses the author's position.
 
 \end{ltxsyntax}
 
@@ -988,8 +977,20 @@ use the \bibfield{issue} field. In other words, for \textit{Fall
 \noindent Remember that when \bibfield{date} contains just a year of
 publication, you may use the classic \bibfield{year} field.
 
-\item[series] See the comments for \bibfield{seriesaddon} in section
+\item[pages] See comments on the \opt{nopages} bibliography
+option in section \ref{preops}.
+
+\item[series] See comments on \bibfield{seriesaddon} in section
 \ref{datafields}.
+
+\item[titleaddon] Like \bibfield{nameaddon}, this field encloses its
+content in brackets. This is especially useful for translated titles.
+From \textit{CMOS} \ref{14.99}:
+
+\begin{citebib}
+\item \cite{wereszycki1977}; includes a summary in German.
+\item \cite{pirumova1977b}
+\end{citebib}
 
 \item[type] With the \bibtype{thesis} entry type, Windy City uses
 \bibfield{type} to distinguish a Master's thesis from a PhD
@@ -2215,6 +2216,7 @@ database.
 \setcounter{subsubsection}{98}
 \subsubsection{Translated titles of cited works}
 % 14.99 Translated titles of cited works
+\label{14.99}
 
 \begin{citebib}
 \item \cite{wereszycki1977}; includes a summary in German.

@@ -1,4 +1,4 @@
-% Last modified: Tue 06 Oct 2020 05:22:42 PM CDT
+% Last modified: Thu 08 Oct 2020 06:28:11 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -454,7 +454,8 @@
 % bibliography database.
 
 \newbibmacro*{cite:pages}{%
-  \iffieldundef{pages}
+  \ifboolexpr{ test {\iffieldundef{pages}}
+               or togl {nopages}}
     {}
     {\ifboolexpr{ test {\ifentrytype{article}}
                   or test {\ifentrytype{review}}}

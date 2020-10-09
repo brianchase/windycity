@@ -33,6 +33,9 @@ brianchase/windycity").
   pseudonymous authors with the value `pseudo` (the `nameaddon` field
   still works for this and, in fact, remains the only way to list a
   pseudonymous author's given name)
+* added a `nopages` bibliography option to stop automatic printing of
+  the `pages` field on first citations of `@article` and `@review`
+  entries (and their aliases) when the `postnote` is blank
 * added support for the `\fullcite` and `\footfullcite` citation
   commands
 * added support for printing ISSNs with `issn` entry and bibliography
