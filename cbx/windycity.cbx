@@ -1,4 +1,4 @@
-% Last modified: Sat 24 Oct 2020 10:55:50 AM CDT
+% Last modified: Tue 27 Oct 2020 05:39:49 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -29,6 +29,7 @@
 \AtEveryCite{%
   \global\togglefalse{bibliography}%
   \global\togglefalse{cbx:first}%
+  \global\togglefalse{cbx:idem}%
   \global\togglefalse{ibid:loccit}%
   \global\togglefalse{multicite}%
   \AtEveryItem}%
@@ -143,6 +144,25 @@
    \usebibmacro{cite}}%
   {\multicitedelim}%
   {\usebibmacro{postnote}}%
+
+\DeclareCiteCommand{\idemcite}
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \toggletrue{cbx:idem}%
+   \usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareCiteCommand{\footidemcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \toggletrue{cbx:idem}%
+   \usebibmacro{cite}}%
+  {\multicitedelim}%
+  {\usebibmacro{cite:postnote}}%
+
+\DeclareMultiCiteCommand{\idemcites}{\idemcite}{\multicitedelim}%
+\DeclareMultiCiteCommand{\footidemcites}[\mkbibfootnote]{\footidemcite}{\multicitedelim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Parenthetical Citations  %%
@@ -345,6 +365,7 @@
 
 \newbibmacro*{idem+short+multicite}{%
   \ifboolexpr{ test {\ifciteidem}
+               or togl {cbx:idem}
                or togl {firstshort}}
     {\renewcommand*{\cbx@deflabel}{labelname}}%
     {\ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}

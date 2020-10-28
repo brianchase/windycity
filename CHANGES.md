@@ -38,6 +38,8 @@ brianchase/windycity").
   entries (and their aliases) when the `postnote` is blank
 * added support for the `\fullcite` and `\footfullcite` citation
   commands
+* new citation commands: `idemcite`, `idemcites`, `footidemcite`,
+  `footidemcites`
 * added support for printing ISSNs with `issn` entry and bibliography
   options
 * fixed `nameaddon` and `handle` fields printing in short citations

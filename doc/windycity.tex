@@ -1,4 +1,4 @@
-% Last modified: Thu 08 Oct 2020 07:24:04 PM CDT
+% Last modified: Wed 28 Oct 2020 05:43:37 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -573,7 +573,12 @@ section \ref{collorder}.
 \label{citecmds}
 
 Windy City supports most of the citation commands familiar from
-\biblatex:
+\biblatex, plus a small set of custom commands for tricky situations.
+
+\subsubsection{Standard Citation Commands}
+
+The following list, though not exhaustive, covers the most important
+citation commands from \biblatex that Windy City supports:
 
 \begin{ltxsyntax}
 \cmditem{autocite}[prenote][postnote]{key}
@@ -702,6 +707,70 @@ The source for the passage above contains:
 \end{verbatim}
 
 \end{ltxsyntax}
+
+\subsubsection{Custom Citation Commands}
+\label{cust.cmd}
+
+Windy City's custom citation commands are convenient but not strictly
+necessary. They make certain citations simpler than they would be with
+standard commands.
+
+\begin{ltxsyntax}
+\cmditem{idemcite}[prenote][postnote]{key}
+\cmditem{idemcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\cmditem{footidemcite}[prenote][postnote]{key}
+\cmditem{footidemcites}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\end{ltxsyntax}
+
+Perhaps the best use case for these commands is the example in
+\textit{CMOS} \ref{14.57}. The sources mentioned in a passage are
+cited in the long format with shortened names:
+
+\begin{quote} Only when we gather the work of several
+scholars---Walter Sutton's explications of some of Whitman's shorter
+poems; Paul Fussell's careful study of structure in ``Cradle''; S. K.
+Coffman's close readings of ``Crossing Brooklyn Ferry'' and ``Passage
+to India''; and the attempts of Thomas I. Rountree and John Lovell,
+dealing with ``Song of Myself'' and ``Passage to India,''
+respectively, to elucidate the strategy in ``indirection''---do we
+begin to get a sense of both the extent and the specificity of
+Whitman's forms. \end{quote}
+
+\begin{citeonly}
+\item \idemcites{sutton1959,fussell1962,coffman1954,coffman1955,rountree1958}[and][]{lovell1960}
+\end{citeonly}
+
+Without commands like \cmd{idemcite}, there's often no easy way to
+tell Windy City to shorten names in the long format. The preamble
+option \opt{idemtracker} helps with consecutive citations of the same
+author, but that's no use when you want to shorten names because
+you've mentioned them in the text.
+
+Nevertheless, there are at least three ways to get this output with
+standard commands:
+
+\begin{verbatim}
+   \footnote{\cites*[Sutton,][]{sutton1959}[Fussell,][]{fussell1962}...
+   \footcites*[Sutton,][]{sutton1959}[Fussell,][]{fussell1962}...
+   \footnote{Sutton, \cite*{sutton1959}; Fussell, \cite*{fussell1962}...
+\end{verbatim}
+
+\noindent They're ugly workarounds, exploiting starred citations
+commands to suppress the author's position while you handle it
+manually---but they do work.
+
+With \cmd{idemcites} and \cmd{footidemcites}, you have simpler
+alternatives that make your intentions clearer and your file easier to
+read:
+
+\begin{verbatim}
+   \footnote{\idemcites{sutton1959,fussell1962,...}[and][]{lovell1960}}
+   \footidemcites{sutton1959,fussell1962,...}[and][]{lovell1960}
+   \footnote{\idemcite{sutton1959}; ... and \idemcite{lovell1960}}
+\end{verbatim}
+
+Notice that the only reason to use \cmd{footidemcites} rather than
+\cmd{footidemcite} is to insert \textit{and} before the last citation.
 
 \subsection{Entry Types}
 \label{entrytypes}
@@ -2000,6 +2069,27 @@ format and the use of \textit{ibid.} First, the short format:
 \item \cite*[Originally published as][22–69, © 1992 by The University of
 Chicago. All rights reserved. Reprinted by permission]{manet1992}
 \end{citebib}
+
+\setcounter{subsubsection}{56}
+\subsubsection{Several citations in one note}
+% 14.57 Several citations in one note
+\label{14.57}
+
+See \ref{cust.cmd} for information on how to reproduce this example.
+
+\begin{quote} Only when we gather the work of several
+scholars---Walter Sutton's explications of some of Whitman's shorter
+poems; Paul Fussell's careful study of structure in ``Cradle''; S. K.
+Coffman's close readings of ``Crossing Brooklyn Ferry'' and ``Passage
+to India''; and the attempts of Thomas I. Rountree and John Lovell,
+dealing with ``Song of Myself'' and ``Passage to India,''
+respectively, to elucidate the strategy in ``indirection''---do we
+begin to get a sense of both the extent and the specificity of
+Whitman's forms.\footnotemark[1] \end{quote}
+
+\begin{citeonly}
+\item \idemcites{sutton1959,fussell1962,coffman1954,coffman1955,rountree1958}[and][]{lovell1960}
+\end{citeonly}
 
 \setcounter{subsubsection}{58}
 \subsubsection{Abbreviations for frequently cited works}
