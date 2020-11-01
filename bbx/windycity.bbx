@@ -1,4 +1,4 @@
-% Last modified: Sun 01 Nov 2020 04:22:04 PM CST
+% Last modified: Sun 01 Nov 2020 04:23:25 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1344,7 +1344,7 @@
          {\printfield[title]{shortbooktitle}\isdot}}%
        {\printfield[\thefield{entrytype}]{labeltitle}\isdot}}}
 
-\newbibmacro*{booktitle}{%
+\renewbibmacro*{booktitle}{%
   \iffieldundef{booktitle}
     {}
     {\renewcommand*{\xtitle}{book}%
@@ -1360,7 +1360,7 @@
      \renewcommand*{\xtitle}{bookbook}%
      \usebibmacro{longtitle+titleaddon}}}
 
-\newbibmacro*{maintitle}{%
+\renewbibmacro*{maintitle}{%
   \iffieldundef{maintitle}
     {}
     {\renewcommand*{\xtitle}{main}%

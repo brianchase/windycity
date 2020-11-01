@@ -1,4 +1,4 @@
-% Last modified: Sun 01 Nov 2020 01:46:03 PM CST
+% Last modified: Sun 01 Nov 2020 04:10:10 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -26,7 +26,12 @@ or \url{https://www.latex-project.org/lppl/}.}
 Windy City is a style for \biblatex that formats notes,
 bibliographies, parenthetical citations, and reference lists according
 to the 17th edition of \textit{The Chicago Manual of Style}
-(\textit{CMOS}).\footnote{\cite{chicago2017}} It accurately handles a
+(\textit{CMOS}).\footnote{\cite{chicago2017}}
+
+\end{document}
+
+
+It accurately handles a
 wide range of citations in different formats and includes a set of
 options and commands to support special circumstances. It also has
 extensive support for citing and arranging different kinds of editors
@@ -567,13 +572,12 @@ section \ref{collorder}.
 \end{optionlist}
 
 \subsection{Citation Commands}
-\label{citecmds}
 
 Windy City supports most of the citation commands familiar from
 \biblatex, plus a small set of custom commands for tricky situations.
 
 \subsubsection{Standard Citation Commands}
-\label{std.cmds}
+\label{std.cmd}
 
 The following list, though not exhaustive, shows the most important
 citation commands from \biblatex that Windy City supports:
@@ -933,7 +937,6 @@ recognized by \BibTeX\ or \biblatex. It also uses some standard ones
 in perhaps unexpected ways.
 
 \subsubsection{Additional Data Fields}
-\label{datafields}
 
 Some of Windy City's nonstandard data fields are for its internal
 handling of cross-referencing. Those fields aren't listed below, as
@@ -1254,7 +1257,7 @@ upcomp & updater and compiler & edup & editor and updater\\
 uped & updater and editor & transup & translator and updater\\
 uprev & updater and reviser & &\\
 \end{tabular}
-\caption{} \label{table:ed}
+\caption{}\label{table:ed}
 \end{table}
 
 For examples in \textit{CMOS}, we need to turn to the bibliography.
@@ -2171,7 +2174,7 @@ on whether a page break falls somewhere within the list.
 % 14.78 Author's name in title
 \label{14.78}
 
-On the use of starred citation commands, see section \ref{std.cmds}.
+On the use of starred citation commands, see section \ref{std.cmd}.
 
 \begin{citebib}
 \item \cite*[233]{franklin1868}
