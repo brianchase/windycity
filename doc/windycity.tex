@@ -1,4 +1,4 @@
-% Last modified: Sun 01 Nov 2020 07:57:06 PM CST
+% Last modified: Wed 04 Nov 2020 06:32:22 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -50,7 +50,7 @@ Windy City requires \biblatex version 3.13 or later.
 
 This section covers basic information about Windy City. If you're
 completely new to \biblatex, you should probably glance at its
-documentation. For the impatient, examples in sections \ref{default},
+documentation. For the impatient, examples in sections \ref{standard},
 \ref{short}, \ref{notes}, and \ref{paren} might be of more immediate
 interest.
 
@@ -128,8 +128,8 @@ bibliography database, \file{windycity.bib}, should serve as a guide
 for how to manage your input for nearly every circumstance that the
 style is meant to handle.
 
-\subsection{The Default Format}
-\label{default}
+\subsection{Standard Citations}
+\label{standard}
 
 For a first set of examples, consider this passage from \textit{CMOS}
 \ref{14.30}:
@@ -143,19 +143,16 @@ For a first set of examples, consider this passage from \textit{CMOS}
 \item \cite[189--90]{kaiser1964}
 \end{citeonly}
 
-The citations show Windy City's default output, which matches the
-standard format of citations within \textit{CMOS}. A work's first
-citation is similar to its entry in the bibliography. It includes all
-or most of its bibliographic information. Subsequent citations are
-shorter, usually consisting of a short form of the author's name and a
-short form of the work's title.
+A work's first citation is similar to its entry in the bibliography.
+It includes all or most of its bibliographic information. Subsequent
+citations are shorter, usually consisting of a short form of the
+author's name and a short form of the work's title.
 
 Windy City supports variations on this format. For information on
-short forms of citations, including the use of \textit{ibid.}, see
-section \ref{short}. For options to skip parts of citations, change
-the order of editors and translators, and more, see sections
-\ref{preops} and \ref{entryops}. For parenthetical citations, see
-section \ref{paren}.
+short citations, including the use of \textit{ibid.}, see section
+\ref{short}. For options to skip parts of citations, change the order
+of editors and translators, and more, see sections \ref{preops} and
+\ref{entryops}. For parenthetical citations, see section \ref{paren}.
 
 The block below shows Windy City's default bibliography for the
 previously cited works:
@@ -164,8 +161,8 @@ previously cited works:
 \nocite{kaiser1964,morley1995,schwartz1992}
 \end{bibonly}
 
-\noindent You may also print a bibliography in the author-date format,
-what \textit{CMOS} calls a reference list:
+\noindent You may also print a bibliography in the author-date format
+(what \textit{CMOS} calls a reference list):
 
 \begin{refonly}
 \nocite{kaiser1964,morley1995,schwartz1992}
@@ -188,7 +185,7 @@ To use the author-date format on a case-by-case basis, run
 \cmd{printbibliography} with an appropriate \opt{env} option. With
 Windy City, a so-called ``bib environment'' must set the style's
 internal \opt{reflist} toggle to \opt{true}. Windy City's own such
-environment is called \opt{reflist}, which you may use as follows:
+environment is called \opt{reflist}. Use it as follows:
 
 \begin{verbatim}
    \printbibliography[env=reflist]
@@ -213,7 +210,7 @@ All bibliographic data resides in \file{windycity.bib}.
 \label{short}
 
 Standard citations may take a variety of shorter forms. Consider this
-example from \textit{CMOS} \ref{14.34}:\footnote{Switching formats
+example from \textit{CMOS} \ref{14.34}:\footnote{Switching forms
 within a document isn't a feature of the style. For demonstration
 purposes, though, it's possible.}
 
@@ -244,7 +241,7 @@ purposes, though, it's possible.}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-\noindent Compare that with the style's default output:
+\noindent Compare that with the default output:
 
 \begin{citeonly}
 \item \cite[3]{morrison2004a}
@@ -261,20 +258,18 @@ purposes, though, it's possible.}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-\noindent In the short format, a work's first citation
-gives short names and titles and omits all other publication
+\noindent In this short version of the standard format, a work's first
+citation gives short names and titles and omits all other publication
 information. Consecutive citations of a work may omit the title or, as
-in the eleventh note, where the title is the key mark of distinction,
-the author's name. To use this format, start \biblatex with the
-preamble option \opt{short}. See section \ref{preops} for more
-information.
+in the eleventh note, the author's name. To use this format, start
+\biblatex with the preamble option \opt{short}. See section
+\ref{preops} for more information.
 
 \textit{CMOS} \ref{14.34} also shows how to render the passage above
 with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
-17th edition discourages its use. As such, \textit{ibid.} is no longer
-part of Windy City's default format. Enable it with the preamble
-option \opt{ibid} (again, see section \ref{preops}). Options
-\opt{short} and \opt{ibid} together give the following:
+17th edition discourages its use. Enable it with the preamble option
+\opt{ibid} (again, see section \ref{preops}). Options \opt{short} and
+\opt{ibid} together give the following:
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
@@ -303,16 +298,16 @@ option \opt{ibid} (again, see section \ref{preops}). Options
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-Other ways to make citations more concise: In the default format, you
-can use the preamble option \opt{firstshort} to swap long first
-citations for short ones (see section \ref{preops}). Also in the
-default format, you can use the preamble option \opt{idemtracker} to
-shorten the author's name of a work's first citation if the previous
-citation is of the same author (see section \ref{preops}). The entry
-option \opt{noauth} omits the author's name altogether (see section
-\ref{entryops}). And the \bibfield{shorthand} field allows you to set
-an abbreviation to stand in place of the author's name, the work's
-title, and other elements of a citation (see \ref{14.59}).
+Other ways to make citations more concise: In the standard format, the
+preamble option \opt{firstshort} swaps long first citations for short
+ones (see section \ref{preops}). Also in the standard format, you can
+use the preamble option \opt{idemtracker} to shorten the author's name
+of a work's first citation if the previous citation is of the same
+author (see section \ref{preops}). The entry option \opt{noauth} omits
+the author's name altogether (see section \ref{entryops}). And the
+\bibfield{shorthand} field allows you to set an abbreviation to stand
+in place of the author's name, the work's title, and other elements of
+a citation (see \ref{14.59}).
 
 \subsection{Preamble Options}
 \label{preops}
@@ -441,23 +436,21 @@ information.
 
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
-\noindent As shown in section \ref{short}, this option prints
-citations in a short format (see \textit{CMOS} \ref{14.34}). The use
-of \opt{short} has one feature in common with \opt{ibid}: Just as
-\textit{ibid.} appears only for consecutive citations of a work on the
-same page, and so never refers to a citation on a previous page,
-\opt{short} affects consecutive citations of a work on the same page,
-never in reference to a citation on a previous page. As with
-\textit{ibid.}, this feature isn't required by \textit{CMOS}, but it
-prevents readers from having to look at another page to find the title
-of a citation.
+\noindent As shown in section \ref{short}, this option prints short
+citations (see \textit{CMOS} \ref{14.34}). The use of \opt{short} has
+one feature in common with \opt{ibid}: Just as \textit{ibid.} appears
+only for consecutive citations of a work on the same page, and so
+never refers to a citation on a previous page, \opt{short} affects
+consecutive citations of a work on the same page, never in reference
+to a citation on a previous page. As with \textit{ibid.}, this feature
+isn't required by \textit{CMOS}, but it prevents readers from having
+to look at another page to find the title of a citation.
 
 In contexts where \opt{short} would drop a title from a citation, but
 where no name occupies the author's position, it prints the work's
 \bibfield{labeltitle}. This can be a short form of the title, either
 the title minus the subtitle or the content of the
-\bibfield{shorttitle} field, if available. Either way, the short
-format in those contexts is no different from the default.
+\bibfield{shorttitle} field, if available.
 
 As noted earlier, \opt{short} has the same effect on first citations
 as \opt{firstshort}. But recall from section \ref{short} that you can
@@ -667,8 +660,8 @@ The source for the passage above contains:
 
 \cmditem{textcite}[prenote][postnote]{key}
 
-Use \cmd{textcite} for in-text citations in the standard format.
-Here's an example from \textit{CMOS} 13.65:
+Use \cmd{textcite} for in-text citations. Here's an example from
+\textit{CMOS} 13.65:
 
 \begin{quote} ``If an astronaut falls into a black hole, its mass will
 increase, but eventually the energy equivalent of that extra mass will
@@ -723,8 +716,8 @@ standard commands.
 \end{ltxsyntax}
 
 Perhaps the best use case for these commands is the example in
-\textit{CMOS} \ref{14.57}. The sources mentioned in a passage are
-cited in the standard, long format with shortened names:
+\textit{CMOS} \ref{14.57}. The sources mentioned in a passage receive
+long citations with shortened names:
 
 \begin{quote} Only when we gather the work of several
 scholars---Walter Sutton's explications of some of Whitman's shorter
@@ -741,13 +734,13 @@ Whitman's forms.\footnotemark[1] \end{quote}
 \end{citeonly}
 
 Without commands like \cmd{idemcite}, there's often no easy way to
-tell Windy City to shorten names in the long format. The preamble
-option \opt{idemtracker} helps with consecutive citations of the same
-author, but that's no use when you want to shorten names because
-you've mentioned them in the text.
+tell Windy City to shorten names like this. The preamble option
+\opt{idemtracker} helps with consecutive citations of the same author,
+but that's no use when you want to shorten names because you've
+mentioned them in the text.
 
-Nevertheless, there are at least three ways to get this output with
-standard commands:
+Nevertheless, standard commands can reproduce the example in at least
+three ways:
 
 \begin{verbatim}
    \footnote{\cites*[Sutton,][]{sutton1959}[Fussell,][]{fussell1962}...
@@ -756,12 +749,12 @@ standard commands:
 \end{verbatim}
 
 \noindent They're ugly workarounds, exploiting starred citations
-commands to suppress the author's position while you handle it
+commands to suppress the author's position while you add names
 manually---but they do work.
 
-With \cmd{idemcites} and \cmd{footidemcites}, you have simpler
-alternatives that make your intentions clearer and your file easier to
-read:
+With \cmd{idemcites} and \cmd{footidemcites}, on the other hand, you
+have simpler alternatives that make your intentions clearer and your
+file easier to read:
 
 \begin{verbatim}
    \footnote{\idemcites{sutton1959,fussell1962,...}[and][]{lovell1960}}
@@ -864,9 +857,8 @@ either type with the same data:
 
 For unusually complicated citations, or those just not supported by
 the style, consider using the \bibtype{misc} entry type. The style
-formats these entries with a small number of fields but in way that
-makes it a fallback for almost anything. The example below is from
-\textit{CMOS} 14.264:
+prints these entries in way that makes it a fallback for almost
+anything. The example below is from \textit{CMOS} 14.264:
 
 \begin{citebib}
 \item \cite{roosevelt1959}
@@ -1467,11 +1459,11 @@ priority, the collection's or the volume's. Consider an example from
 \end{citebib}
 
 \noindent The editor and title of the volume precede the editor and
-title of the collection. In notes and bibliographies in the default
-format, \textit{CMOS} gives you the option of reversing this order.
-(See especially \textit{CMOS} \ref{14.119}, \ref{14.121}, and
-\ref{14.122}, and compare \ref{14.144} and \ref{15.41}.) Windy City
-does as well, with the entry or preamble option \opt{swapvol}.
+title of the collection. In standard notes and bibliographies,
+\textit{CMOS} gives you the option of reversing this order. (See
+especially \textit{CMOS} \ref{14.119}, \ref{14.121}, and \ref{14.122},
+and compare \ref{14.144} and \ref{15.41}.) Windy City does as well,
+with the entry or preamble option \opt{swapvol}.
 
 \begin{citebib}
 \AtNextCitekey{\toggletrue{swapvol}}
@@ -1538,7 +1530,7 @@ the volume's title looks odd. But it's not wrong. The volume's author
 didn't write every volume of the collection. In giving priority to the
 collection, then, the first position, where an author's name normally
 goes, should go to the collection's editor, not to the volume's
-author. By contrast, the default format looks more familiar:
+author. By contrast, the default output looks more familiar:
 
 \begin{citebib}
 \item \cite{barrows1959}
