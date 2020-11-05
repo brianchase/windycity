@@ -1,4 +1,4 @@
-% Last modified: Tue 27 Oct 2020 05:39:49 PM CDT
+% Last modified: Wed 04 Nov 2020 06:52:38 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -37,6 +37,13 @@
 \DeclareAutoPunctuation{.,;:!?}
 \DeclareCitePunctuationPosition{cite}{r}
 \InitializeCitationStyle{\let\crossreflist\empty}%
+
+\renewcommand{\bibfootnotewrapper}[1]{%
+  \clearfield{postpunct}%
+  \bibsentence#1}%
+\renewcommand{\bibendnotewrapper}[1]{%
+  \clearfield{postpunct}%
+  \bibsentence#1}%
 
 % Protect commas against abbreviation dots and terminal punctuation.
 % Note '\addspace'. Using '\space' there causes problems.
