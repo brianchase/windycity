@@ -1,4 +1,4 @@
-% Last modified: Wed 04 Nov 2020 06:32:22 PM CST
+% Last modified: Sat 07 Nov 2020 02:02:21 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -96,7 +96,7 @@ its style files.
 
 The localization file \file{american-windycity.lbx} is responsible for
 Windy City's American-style punctuation and dates and many of the
-bibliography strings that appear in citations, such as \textit{edited
+bibliography strings that print in citations, such as \textit{edited
 by}. Windy City loads this file if \biblatex determines that your
 document's language is English---either due to settings in \sty{babel}
 or \sty{polyglossia} or because neither \sty{babel} nor
@@ -268,7 +268,7 @@ in the eleventh note, the author's name. To use this format, start
 \textit{CMOS} \ref{14.34} also shows how to render the passage above
 with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
 17th edition discourages its use. Enable it with the preamble option
-\opt{ibid} (again, see section \ref{preops}). Options \opt{short} and
+\opt{ibid} (see section \ref{preops}). Options \opt{short} and
 \opt{ibid} together give the following:
 
 \begin{citeonly}
@@ -333,12 +333,12 @@ set in \file{windycity.bbx}. In particular, the style sets
 \opt{idemtracker} to \opt{false}. If you set it to \opt{true} (or to
 some value that implies \opt{true}), Windy City will detect when the
 first citation of a work follows another citation of a work by the
-same author and print a short form of the author's name. Recall from
-the previous section the citation of Toni Morrison's \textit{Song of
-Solomon} immediately after a citation of her \textit{Beloved}. In a
-context like that, do you really need to remind readers of the
-author's full name? If you think not, change \opt{idemtracker} to an
-appropriate value (see section 3.1.2.3 of \biblatex's user
+same author and shorten the author's name. Recall from the previous
+section the citation of Toni Morrison's \textit{Song of Solomon}
+immediately after a citation of her \textit{Beloved}. In a context
+like that, do you really need to remind readers of the author's full
+name? If you think not, change \opt{idemtracker} to an appropriate
+value (see section 3.1.2.3 of \biblatex's user
 guide).\footnote{\textit{CMOS} seems to have no policy on this point.
 In the 16th edition, however, Figure 14.3 shows consecutive citations
 of works by the same author, both of which give the author's full
@@ -382,7 +382,7 @@ same page'' means that \textit{ibid.} always refers to a work cited on
 the current page without an \textit{ibid.} The latter isn't a
 requirement of \textit{CMOS} but seems reasonable, since it prevents
 readers from having to look at another page to find the referent of an
-\textit{ibid.} For examples of its output, see section \ref{short} and
+\textit{ibid}. For examples of its output, see section \ref{short} and
 \ref{14.34}. As of the 17th edition, \textit{CMOS} discourages the use
 of \textit{ibid.} (see \ref{14.34}).
 
@@ -396,7 +396,7 @@ particular work, use the \opt{isbn} entry option.
 
 \optitem[false]{issn}{\opt{true}, \opt{false}}
 
-\noindent Similar to \opt{isbn} but for printing ISSNs.
+\noindent Similar to \opt{isbn} but for ISSNs.
 
 \optitem[false]{library}{\opt{true}, \opt{false}}
 
@@ -427,7 +427,7 @@ override this feature, use the \opt{nopages} option.
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
 \noindent Use this option to print a bibliography in the author-date
-format, what \textit{CMOS} calls a reference list. If you use
+format (what \textit{CMOS} calls a reference list). If you use
 parenthetical citations, consider using \opt{reflist} to maintain
 consistency with \textit{CMOS}. Again, another way to print a
 reference list is to pass \opt{env=reflist} to
@@ -485,7 +485,7 @@ bibliography, see the \bibfield{isbn} preamble option.
 
 \optitem[false]{issn}{\opt{true}, \opt{false}}
 
-\noindent Similar to \opt{isbn} but for printing ISSNs.
+\noindent Similar to \opt{isbn} but for ISSNs.
 
 \optitem[false]{library}{\opt{true}, \opt{false}}
 
@@ -857,7 +857,7 @@ either type with the same data:
 
 For unusually complicated citations, or those just not supported by
 the style, consider using the \bibtype{misc} entry type. The style
-prints these entries in way that makes it a fallback for almost
+handles these entries in way that makes it a fallback for almost
 anything. The example below is from \textit{CMOS} 14.264:
 
 \begin{citebib}
@@ -911,8 +911,8 @@ from printing \textit{n.d.} (no date) after the name to indicate a
 missing publication date. After adding the \bibtype{misc} entries, use
 \cmd{nocite} with their entry keys to add them to your bibliography,
 and cite the remaining entries as usual. For examples of automatic
-cross-referencing in notes and bibliographies see section \ref{notes},
-\ref{14.108}; section \ref{paren}, \ref{15.42}; and section
+cross-referencing in notes and bibliographies see section \ref{notes}
+(\ref{14.108}), section \ref{paren} (\ref{15.42}), and section
 \ref{collections}.
 
 For more discussion of entry types, see section \ref{datafields}.
@@ -947,9 +947,9 @@ aliases. (For information on aliases in Windy City, see section
 \ref{entrytypes}.) When applicable, its content appears after a book's
 editors and translators without intervening punctuation. For an
 example, see section \ref{entryops}, where the citation of
-\textit{Chaucer Life-Records} prints this \bibfield{editoraddon}:
-``from materials compiled by John M. Manly and Edith Richert, with the
-assistance of Lilian J. Redstone et al.''
+\textit{Chaucer Life-Records} prints: ``from materials compiled by
+John M. Manly and Edith Richert, with the assistance of Lilian J.
+Redstone et al.''
 
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
