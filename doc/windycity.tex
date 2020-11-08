@@ -1,4 +1,4 @@
-% Last modified: Sat 07 Nov 2020 02:02:21 PM CST
+% Last modified: Sun 08 Nov 2020 03:05:14 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -71,9 +71,9 @@ GitHub}.\endgroup
 Windy City consists of four files:
 
 \begin{itemize}[before=\small]
-\item \file{windycity.dbx}
 \item \file{windycity.bbx}
 \item \file{windycity.cbx}
+\item \file{windycity.dbx}
 \item \file{american-windycity.lbx}
 \end{itemize}
 
@@ -98,26 +98,26 @@ The localization file \file{american-windycity.lbx} is responsible for
 Windy City's American-style punctuation and dates and many of the
 bibliography strings that print in citations, such as \textit{edited
 by}. Windy City loads this file if \biblatex determines that your
-document's language is English---either due to settings in \sty{babel}
-or \sty{polyglossia} or because neither \sty{babel} nor
-\sty{polyglossia} has been loaded. You can prevent Windy City from
-loading \file{american-windycity.lbx} by commenting the following line
-in \file{windycity.bbx}:
+document's language is English---either due to settings in \babel or
+\polyglossia or because neither \babel nor \polyglossia has been
+loaded. You can prevent Windy City from loading
+\file{american-windycity.lbx} by commenting the following line in
+\file{windycity.bbx}:
 
 \begin{verbatim}
    \DeclareLanguageMapping{english}{american-windycity}
 \end{verbatim}
 
 If you wish to use Windy City with a language other than English, set
-it accordingly with \sty{babel} or \sty{polyglossia} before loading
-\biblatex. Windy City will then try to load
-\file{<language>-windycity.lbx} and, if it's available, use it to
-override any other localization files that were loaded. This allows
-you to make your own localization files for Windy City without needing
-to edit other files. For example, if you load \sty{babel} with option
-\sty{german}, Windy City will try to load \file{german-windycity.lbx}.
-If it's available, it will override any other localization files that
-were loaded, including \biblatex's own \file{german.lbx}.
+it accordingly with \babel or \polyglossia before loading \biblatex.
+Windy City will then try to load \file{<language>-windycity.lbx} and,
+if it's available, use it to override any other localization files
+that were loaded. This allows you to make your own localization files
+for Windy City without needing to edit other files. For example, if
+you load \babel with option \sty{german}, Windy City will try to load
+\file{german-windycity.lbx}. If it's available, it will override any
+other localization files that were loaded, including \biblatex's own
+\file{german.lbx}.
 
 For some entries in your bibliography database, you may need to add
 fields or make other adjustments to get the right output. But since
@@ -161,8 +161,9 @@ previously cited works:
 \nocite{kaiser1964,morley1995,schwartz1992}
 \end{bibonly}
 
-\noindent You may also print a bibliography in the author-date format
-(what \textit{CMOS} calls a reference list):
+You may also print a bibliography in the author-date format (what
+\textit{CMOS} calls a reference list). The key difference is the
+placement of the publication date after the author's name:
 
 \begin{refonly}
 \nocite{kaiser1964,morley1995,schwartz1992}
@@ -175,7 +176,7 @@ To make \cmd{printbibliography} use the author-date format, load
    \usepackage[reflist,style=windycity]{biblatex}
 \end{verbatim}
 
-\noindent Note that \opt{reflist=true} has the same effect:
+\noindent Alternatively:
 
 \begin{verbatim}
    \usepackage[reflist=true,style=windycity]{biblatex}
@@ -191,11 +192,11 @@ environment is called \opt{reflist}. Use it as follows:
    \printbibliography[env=reflist]
 \end{verbatim}
 
-\noindent Unfortunately, while the \opt{env} option allows for
-differently formatted bibliographies within the same document, the
-reference lists may have problems with sorting. (You'll notice some in
-\ref{ref}, at the end of this document.) For best results, use the
-\opt{reflist} preamble option.
+Unfortunately, while the \opt{env} option allows for differently
+formatted bibliographies within the same document, the reference lists
+may have problems with sorting. (You'll notice some in \ref{ref}, at
+the end of this document.) For best results, use the \opt{reflist}
+preamble option.
 
 As you proceed through the this guide, note that all examples of
 citations and bibliographies are outputs of the style from commands
@@ -204,15 +205,39 @@ and in its style file, \file{windycity.sty}. Almost all citations are
 from \cmd{cite} or \cmd{parencite}. A few are from more specialized
 commands, such as \cmd{cite*} or \cmd{cites}. All example
 bibliographies are outputs of the style from \cmd{printbibliography}.
-All bibliographic data resides in \file{windycity.bib}.
+All bibliographic data reside in \file{windycity.bib}.
 
 \subsection{Short Citations}
 \label{short}
 
-Standard citations may take a variety of shorter forms. Consider this
-example from \textit{CMOS} \ref{14.34}:\footnote{Switching forms
-within a document isn't a feature of the style. For demonstration
-purposes, though, it's possible.}
+Standard citations may take a variety of shorter forms. Windy City
+offers several preamble options and other means for reproducing them.
+
+Let's start with another passage of default output:
+
+\begin{citeonly}
+\item \cite[3]{morrison2004a}
+\item \cite[18]{morrison2004a}
+\item \cite[18]{morrison2004a}
+\item \cite[24--26]{morrison2004a}
+\item \cite[401-2]{morrison2004b}
+\item \cite[433]{morrison2004b}
+\item \cite[37--38]{diaz2008}
+\item \cite[403]{morrison2004b}
+\item \cite[152]{diaz2008}
+\item \cite[201-2]{diaz2008}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\item \cite[33]{morrison2004a}
+\end{citeonly}
+
+A shorter form of this passage appears in \textit{CMOS}
+\ref{14.34}:\footnote{Switching forms within a document isn't a
+feature of the style. For demonstration purposes, though, it's
+possible.}
+
+% The use of 'firstshort' below might be confusing. It's necessary to
+% simulate the effect of 'short' within a document that otherwise
+% gives default output.
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
@@ -241,35 +266,20 @@ purposes, though, it's possible.}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-\noindent Compare that with the default output:
-
-\begin{citeonly}
-\item \cite[3]{morrison2004a}
-\item \cite[18]{morrison2004a}
-\item \cite[18]{morrison2004a}
-\item \cite[24--26]{morrison2004a}
-\item \cite[401-2]{morrison2004b}
-\item \cite[433]{morrison2004b}
-\item \cite[37--38]{diaz2008}
-\item \cite[403]{morrison2004b}
-\item \cite[152]{diaz2008}
-\item \cite[201-2]{diaz2008}
-\item \cites[240]{morrison2004b}[32]{morrison2004a}
-\item \cite[33]{morrison2004a}
-\end{citeonly}
-
-\noindent In this short version of the standard format, a work's first
-citation gives short names and titles and omits all other publication
-information. Consecutive citations of a work may omit the title or, as
-in the eleventh note, the author's name. To use this format, start
-\biblatex with the preamble option \opt{short}. See section
-\ref{preops} for more information.
+In this version, a work's first citation gives short names and titles
+and omits all other publication information. Consecutive citations of
+a work may omit the title or, as in the eleventh note, the author's
+name. For citations in this form, use the preamble option \opt{short}.
+See section \ref{preops} for more information.
 
 \textit{CMOS} \ref{14.34} also shows how to render the passage above
 with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
 17th edition discourages its use. Enable it with the preamble option
 \opt{ibid} (see section \ref{preops}). Options \opt{short} and
-\opt{ibid} together give the following:
+\opt{ibid} together give the following:\footnote{As explained in
+section \ref{preops}, Windy City won't print \textit{ibid.} in
+reference to a citation on a previous page. A page break here may
+affect the output.}
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
@@ -298,13 +308,14 @@ with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-Other ways to make citations more concise: In the standard format, the
-preamble option \opt{firstshort} swaps long first citations for short
-ones (see section \ref{preops}). Also in the standard format, you can
-use the preamble option \opt{idemtracker} to shorten the author's name
-of a work's first citation if the previous citation is of the same
-author (see section \ref{preops}). The entry option \opt{noauth} omits
-the author's name altogether (see section \ref{entryops}). And the
+Other ways to make citations more concise: For a compromise between
+standard and short forms, try the  preamble option \opt{firstshort}.
+It swaps long first citations for short ones but otherwise follows the
+standard (see section \ref{preops}). Also with standard citations, the
+preamble option \opt{idemtracker} shortens the author's name of a
+work's first citation if the previous citation is of the same author
+(see section \ref{preops}). The entry option \opt{noauth} omits the
+author's name altogether (see section \ref{entryops}). And the
 \bibfield{shorthand} field allows you to set an abbreviation to stand
 in place of the author's name, the work's title, and other elements of
 a citation (see \ref{14.59}).
@@ -1296,9 +1307,9 @@ to higher level titles: \textit{maintitle}, \textit{series}, and
 \end{citebib}
 
 \noindent If there were no \bibfield{editortype} assigning the editor
-to the series, Windy City would take her as the book's editor. In
-short, for a title's compilers, revisers, and updaters and for any
-title at a higher level than \bibfield{title}, you need to use
+to the series, the output would list a book's editor. In short, for a
+title's compilers, revisers, and updaters and for any title at a
+higher level than \bibfield{title}, you need to use
 \bibfield{editortype}. Combined with Windy City's support for citing
 articles, chapters, books, and other works within books, this scheme
 allows for several sets of editors per work, although it does limit
