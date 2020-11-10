@@ -34,9 +34,9 @@ you might be able to skip this step.
 
 Windy City consists of four files:
 
-* [windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx "windycity.dbx")
 * [windycity.bbx](https://github.com/brianchase/windycity/blob/master/bbx/windycity.bbx "windycity.bbx")
 * [windycity.cbx](https://github.com/brianchase/windycity/blob/master/cbx/windycity.cbx "windycity.cbx")
+* [windycity.dbx](https://github.com/brianchase/windycity/blob/master/windycity.dbx "windycity.dbx")
 * [american-windycity.lbx](https://github.com/brianchase/windycity/blob/master/lbx/american-windycity.lbx "american-windycity.lbx")
 
 If you need to install Windy City on your system, you have several

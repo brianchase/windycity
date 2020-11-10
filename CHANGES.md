@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2020-11-10
 
 * added support for updaters, which, like other editorial roles, you
   can combine with any other role:

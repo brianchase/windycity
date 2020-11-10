@@ -1,4 +1,4 @@
-% Last modified: Wed 04 Nov 2020 06:52:38 PM CST
+% Last modified: Tue 10 Nov 2020 05:24:14 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -11,7 +11,7 @@
 % implied warranties of merchantability and fitness for a particular
 % purpose.
 
-\ProvidesFile{windycity.cbx}[2020/09/29 Windy City citation style for
+\ProvidesFile{windycity.cbx}[2020/11/10 Windy City citation style for
   biblatex]
 \@ifpackagelater{biblatex}{2019/08/17}
   {}
@@ -39,10 +39,10 @@
 \InitializeCitationStyle{\let\crossreflist\empty}%
 
 \renewcommand{\bibfootnotewrapper}[1]{%
-  \clearfield{postpunct}%
+%  \clearfield{postpunct}%
   \bibsentence#1}%
 \renewcommand{\bibendnotewrapper}[1]{%
-  \clearfield{postpunct}%
+%  \clearfield{postpunct}%
   \bibsentence#1}%
 
 % Protect commas against abbreviation dots and terminal punctuation.
