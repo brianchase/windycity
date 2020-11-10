@@ -1,4 +1,4 @@
-% Last modified: Mon 09 Nov 2020 05:59:30 PM CST
+% Last modified: Mon 09 Nov 2020 08:29:38 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -195,13 +195,13 @@
   \csname adddot@#1\endcsname\quad}%
 \newcommand*{\adddot@section}{.}%
 
-\usepackage[clearempty,explicit]{titlesec}
+\usepackage[clearempty]{titlesec}
 \titleformat{\section}
-  {\large\bfseries}{\thesection.}{2ex}{#1}
+  {\large\bfseries}{\thesection.}{2ex}{}
 \titleformat{\subsection}
-  {\normalsize\bfseries}{\thesubsection}{2ex}{#1}
+  {\normalsize\bfseries}{\thesubsection}{2ex}{}
 \titleformat{\subsubsection}
-  {\normalsize\it}{\thesubsubsection}{2ex}{#1}
+  {\normalsize\it}{\thesubsubsection}{2ex}{}
 \titlespacing*{\section}
   {0ex}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}[0ex]
 \titlespacing*{\subsection}
