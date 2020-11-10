@@ -1,4 +1,4 @@
-% Last modified: Mon 09 Nov 2020 08:29:54 PM CST
+% Last modified: Tue 10 Nov 2020 07:34:50 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -318,7 +318,7 @@ work's first citation if the previous citation is of the same author
 author's name altogether (see section \ref{entry}). And the
 \bibfield{shorthand} field allows you to set an abbreviation to stand
 in place of the author's name, the work's title, and other elements of
-a citation (see \ref{14.59}).
+a citation (see sections \ref{otherfields} and \ref{14.59}).
 
 \subsection{Preamble Options}
 \label{preamble}
@@ -934,7 +934,7 @@ recognized by \BibTeX\ or \biblatex. It also uses some standard ones
 in perhaps unexpected ways.
 
 \subsubsection{Standard Data Fields}
-\label{fieldscon}
+\label{stdfields}
 
 Examples in this document don't always make it clear how Windy City
 uses standard data fields. The section discusses some of them.
@@ -1042,6 +1042,7 @@ Beattie in \ref{14.171}.
 \end{marglist}
 
 \subsubsection{Other Data Fields}
+\label{otherfields}
 
 Some of Windy City's nonstandard data fields are for its internal
 handling of cross-referencing. Those fields aren't listed below, as
@@ -1075,6 +1076,19 @@ such as \textit{2nd ser.} and \textit{n.s.} For examples, see
 journals, which occasionally have a series but no series name,
 information like \textit{2nd ser.} and \textit{n.s.} go in the
 \bibfield{series} field.
+
+\item[shorthand] Windy City doesn't automatically italicize a
+\bibfield{shorthand}. Per \textit{CMOS} 14.60, a shorthand should be
+italicized if the title that it abbreviates is italicized. Set it the
+bibliography database with \cmd{emph} or \cmd{mkbibemph}. For examples
+of a \bibfield{shorthand}, see section \ref{14.59} and the first
+citation of \textit{CMOS} in this document's introduction.
+
+\item[shorthandintro] You may override the default announcement of a
+\bibfield{shorthand} by adding your preferred content to
+\bibfield{shorthandintro}. For an example, see the first citation of
+\textit{CMOS} in this document's introduction, where the announcement
+is a separate sentence, rather than in parentheses.
 
 \item[shortmaintitle] This field contains the short form of a
 \bibfield{maintitle}. It should only be necessary for certain works in
@@ -1953,8 +1967,8 @@ Examples in this section reproduce those in \textit{CMOS} chapter 14.
 To help with cross-checking, subsection numbers and headings are from
 \textit{CMOS}.
 
-\subsection{Basic Format, with Examples and Variations}
 \titleformat{\subsubsection}{\normalsize\it}{\arabic{subsection}.\arabic{subsubsection}}{2ex}{}
+\subsection{Basic Format, with Examples and Variations}
 \setcounter{subsection}{14}
 
 \setcounter{subsubsection}{22}
@@ -2002,6 +2016,9 @@ To help with cross-checking, subsection numbers and headings are from
 % 14.34:
 \label{14.34}
 
+On short citations and the \opt{short} and \opt{ibid} preamble
+options, see sections \ref{short} and \ref{preamble}.
+
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
 \item \cite[3]{morrison2004a}
@@ -2028,7 +2045,7 @@ To help with cross-checking, subsection numbers and headings are from
 \AtNextCitekey{\toggletrue{short}} \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-\noindent With \textit{ibid.}:
+\noindent With options \opt{short} and \opt{ibid}:
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
@@ -2093,15 +2110,7 @@ Whitman's forms.\footnotemark[1] \end{quote}
 % 14.59 Abbreviations for frequently cited works
 \label{14.59}
 
-You may override the default announcement of a \bibfield{shorthand} by
-adding your preferred content to \bibfield{shorthandintro}. For an
-example, one that prints the announcement in a separate sentence, see
-the first citation of \textit{CMOS} in this document's introduction.
-
-Note that Windy City doesn't automatically italicize a
-\bibfield{shorthand}. Per \textit{CMOS} 14.60, a shorthand should be
-italicized if the title that it abbreviates is also italicized. Set
-this in the bibliography database with \cmd{emph} or \cmd{mkbibemph}.
+For information on shorthands, see section \ref{otherfields}.
 
 \begin{citebib}
 % There's no way to suppress these fields in the bibliography:
@@ -2180,7 +2189,7 @@ On the use of starred citation commands, see section \ref{std.cmd}.
 % 14.79 No listed author (anonymous works)
 \label{14.79}
 
-See section \ref{fieldscon} on the use of the \bibfield{authtype}
+See section \ref{stdfields} on the use of the \bibfield{authtype}
 field for anonymous works.
 
 \begin{citebib}
@@ -2999,7 +3008,7 @@ entry type.
 \label{14.204}
 
 On the use of the \bibfield{type} field to format this example
-correctly, see section \ref{fieldscon}.
+correctly, see section \ref{stdfields}.
 
 \begin{citebib}
 \item \cite{zeitung1828}
@@ -3290,7 +3299,7 @@ midst. \end{citeref}
 \subsubsection{Author-date format for anonymous works (no listed author)}
 % 15.34 Author-date format for anonymous works (no listed author)
 
-See section \ref{fieldscon} on the use of the \bibfield{authtype}
+See section \ref{stdfields} on the use of the \bibfield{authtype}
 field for anonymous works.
 
 \begin{citeref}
