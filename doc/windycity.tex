@@ -1,4 +1,4 @@
-% Last modified: Sun 08 Nov 2020 03:05:14 PM CST
+% Last modified: Mon 09 Nov 2020 05:56:28 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -151,8 +151,8 @@ author's name and a short form of the work's title.
 Windy City supports variations on this format. For information on
 short citations, including the use of \textit{ibid.}, see section
 \ref{short}. For options to skip parts of citations, change the order
-of editors and translators, and more, see sections \ref{preops} and
-\ref{entryops}. For parenthetical citations, see section \ref{paren}.
+of editors and translators, and more, see sections \ref{preamble} and
+\ref{entry}. For parenthetical citations, see section \ref{paren}.
 
 The block below shows Windy City's default bibliography for the
 previously cited works:
@@ -270,16 +270,16 @@ In this version, a work's first citation gives short names and titles
 and omits all other publication information. Consecutive citations of
 a work may omit the title or, as in the eleventh note, the author's
 name. For citations in this form, use the preamble option \opt{short}.
-See section \ref{preops} for more information.
+See section \ref{preamble} for more information.
 
-\textit{CMOS} \ref{14.34} also shows how to render the passage above
-with \textit{ibid.} Unlike previous editions of \textit{CMOS}, the
-17th edition discourages its use. Enable it with the preamble option
-\opt{ibid} (see section \ref{preops}). Options \opt{short} and
-\opt{ibid} together give the following:\footnote{As explained in
-section \ref{preops}, Windy City won't print \textit{ibid.} in
-reference to a citation on a previous page. A page break here may
-affect the output.}
+\textit{CMOS} \ref{14.34} also shows how to render the passage with
+\textit{ibid.} Unlike previous editions of \textit{CMOS}, the 17th
+edition discourages its use. Windy City makes it available with the
+preamble option \opt{ibid} (see section \ref{preamble}). Options
+\opt{short} and \opt{ibid} together give the following:\footnote{As
+explained in section \ref{preamble}, Windy City won't print
+\textit{ibid.} in reference to a citation on a previous page. A page
+break here may affect the output.}
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
@@ -311,17 +311,17 @@ affect the output.}
 Other ways to make citations more concise: For a compromise between
 standard and short forms, try the  preamble option \opt{firstshort}.
 It swaps long first citations for short ones but otherwise follows the
-standard (see section \ref{preops}). Also with standard citations, the
-preamble option \opt{idemtracker} shortens the author's name of a
+standard (see section \ref{preamble}). Also with standard citations,
+the preamble option \opt{idemtracker} shortens the author's name of a
 work's first citation if the previous citation is of the same author
-(see section \ref{preops}). The entry option \opt{noauth} omits the
-author's name altogether (see section \ref{entryops}). And the
+(see section \ref{preamble}). The entry option \opt{noauth} omits the
+author's name altogether (see section \ref{entry}). And the
 \bibfield{shorthand} field allows you to set an abbreviation to stand
 in place of the author's name, the work's title, and other elements of
 a citation (see \ref{14.59}).
 
 \subsection{Preamble Options}
-\label{preops}
+\label{preamble}
 
 A preamble option is an argument for the \cmd{usepackage} macro that
 loads \biblatex. Preamble options affect the format of notes,
@@ -478,12 +478,12 @@ For more information, see section \ref{collorder}.
 \end{optionlist}
 
 \subsection{Entry Options}
-\label{entryops}
+\label{entry}
 
 An entry option is a value for the \bibfield{options} field of a
 work's database entry. It affects the format of that particular work.
 For options that affect the format of every work, see section
-\ref{preops}.
+\ref{preamble}.
 
 \begin{optionlist}
 
@@ -634,8 +634,6 @@ set the \opt{autocite} preamble option to \opt{inline}, \cmd{autocite}
 is equivalent to \cmd{parencite}. If you set it to \opt{plain},
 \cmd{autocite} is equivalent to \cmd{cite}.
 
-Other comments:
-
 \begin{ltxsyntax}
 
 \cmditem{cite*}[prenote][postnote]{key}
@@ -712,7 +710,7 @@ The source for the passage above contains:
 
 \end{ltxsyntax}
 
-\subsubsection{Custom Citation Commands}
+\subsubsection{Other Citation Commands}
 \label{cust.cmd}
 
 Windy City's custom citation commands are convenient but not strictly
@@ -745,7 +743,7 @@ Whitman's forms.\footnotemark[1] \end{quote}
 \end{citeonly}
 
 Without commands like \cmd{idemcite}, there's often no easy way to
-tell Windy City to shorten names like this. The preamble option
+tell Windy City to shorten names. The preamble option
 \opt{idemtracker} helps with consecutive citations of the same author,
 but that's no use when you want to shorten names because you've
 mentioned them in the text.
@@ -935,49 +933,7 @@ Windy City relies on a small number of data fields that aren't
 recognized by \BibTeX\ or \biblatex. It also uses some standard ones
 in perhaps unexpected ways.
 
-\subsubsection{Additional Data Fields}
-
-Some of Windy City's nonstandard data fields are for its internal
-handling of cross-referencing. Those fields aren't listed below, as
-they're not meant for use in a bibliography database. The rest store
-information that's crucial for correct formatting. Without them, quite
-a few citations in this document wouldn't match their counterparts in
-\textit{CMOS}.
-
-\begin{marglist}
-
-\item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}] The name of a
-blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
-mind that blog posts take the usual \bibfield{title} and
-\bibfield{subtitle} fields.
-
-\item[editoraddon] Use this field to include additional editorial
-information about a book. It's available for \bibtype{book},
-\bibtype{incollection}, and \bibfield{review} entry types and their
-aliases. (For information on aliases in Windy City, see section
-\ref{entrytypes}.) When applicable, its content appears after a book's
-editors and translators without intervening punctuation. For an
-example, see section \ref{entryops}, where the citation of
-\textit{Chaucer Life-Records} prints: ``from materials compiled by
-John M. Manly and Edith Richert, with the assistance of Lilian J.
-Redstone et al.''
-
-\item[seriesaddon] This field is for additional information about a
-book's series. That includes information about the run of a series,
-such as \textit{2nd ser.} and \textit{n.s.} For examples, see
-\textit{CMOS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
-journals, which occasionally have a series but no series name,
-information like \textit{2nd ser.} and \textit{n.s.} go in the
-\bibfield{series} field.
-
-\item[shortmaintitle] This field contains the short form of a
-\bibfield{maintitle}. It should only be necessary for certain works in
-collections. See the citation of \textit{The Complete Tales of Henry
-James} in section \ref{multivolume}.
-
-\end{marglist}
-
-\subsubsection{Other Data Fields}
+\subsubsection{Standard Data Fields}
 \label{fieldscon}
 
 Examples in this document don't always make it clear how Windy City
@@ -1049,7 +1005,7 @@ use the \bibfield{issue} field. In other words, for \textit{Fall
 publication, you may use the classic \bibfield{year} field.
 
 \item[pages] See comments on the \opt{nopages} bibliography
-option in section \ref{preops}.
+option in section \ref{preamble}.
 
 \item[series] See comments on \bibfield{seriesaddon} in section
 \ref{datafields}.
@@ -1082,6 +1038,48 @@ date shouldn't be in parentheses. The workaround is to include a
 \bibfield{type} field with the value \textit{newsmag}. For an example,
 see \textit{CMOS} \ref{14.204} and compare it with the citation of
 Beattie in \ref{14.171}.
+
+\end{marglist}
+
+\subsubsection{Other Data Fields}
+
+Some of Windy City's nonstandard data fields are for its internal
+handling of cross-referencing. Those fields aren't listed below, as
+they're not meant for use in a bibliography database. The rest store
+information that's crucial for correct formatting. Without them, quite
+a few citations in this document wouldn't match their counterparts in
+\textit{CMOS}.
+
+\begin{marglist}
+
+\item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}] The name of a
+blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
+mind that blog posts take the usual \bibfield{title} and
+\bibfield{subtitle} fields.
+
+\item[editoraddon] Use this field to include additional editorial
+information about a book. It's available for \bibtype{book},
+\bibtype{incollection}, and \bibfield{review} entry types and their
+aliases. (For information on aliases in Windy City, see section
+\ref{entrytypes}.) When applicable, its content appears after a book's
+editors and translators without intervening punctuation. For an
+example, see section \ref{entry}, where the citation of
+\textit{Chaucer Life-Records} prints: ``from materials compiled by
+John M. Manly and Edith Richert, with the assistance of Lilian J.
+Redstone et al.''
+
+\item[seriesaddon] This field is for additional information about a
+book's series. That includes information about the run of a series,
+such as \textit{2nd ser.} and \textit{n.s.} For examples, see
+\textit{CMOS} \ref{14.123} and \ref{14.126}. Keep in mind that, for
+journals, which occasionally have a series but no series name,
+information like \textit{2nd ser.} and \textit{n.s.} go in the
+\bibfield{series} field.
+
+\item[shortmaintitle] This field contains the short form of a
+\bibfield{maintitle}. It should only be necessary for certain works in
+collections. See the citation of \textit{The Complete Tales of Henry
+James} in section \ref{multivolume}.
 
 \end{marglist}
 
@@ -1956,6 +1954,7 @@ To help with cross-checking, subsection numbers and headings are from
 \textit{CMOS}.
 
 \subsection{Basic Format, with Examples and Variations}
+\titleformat{\subsubsection}{\normalsize\it}{\arabic{subsection}.\arabic{subsubsection}}{2ex}{#1}
 \setcounter{subsection}{14}
 
 \setcounter{subsubsection}{22}
@@ -2002,9 +2001,6 @@ To help with cross-checking, subsection numbers and headings are from
 \subsubsection{Shortened citations versus ``ibid''}
 % 14.34:
 \label{14.34}
-
-See section \ref{short} for a discussion of how to enable the short
-format and the use of \textit{ibid.} First, the short format:
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
@@ -3451,7 +3447,7 @@ from the February 1931 issue of \textit{Poetry} magazine
 with the argument \opt{shorthand}. Running \cmd{printshorthands}
 produces the same output. By default, works in this list also appear
 in bibliographies. To exclude them, use the preamble option
-\opt{nolos}. See section \ref{preops} for more information.\\}%
+\opt{nolos}. See section \ref{preamble} for more information.\\}%
 
 \defbibnote{bib}{This section shows the default output of
 \cmd{printbibliography}. The next section shows the author-date
@@ -3459,7 +3455,7 @@ format.\\}%
 
 \defbibnote{ref}{This section shows the output of
 \cmd{printbibliography} in the author-date format. For information on
-how to produce this output, see section \ref{preops}. Issues with
+how to produce this output, see section \ref{preamble}. Issues with
 sorting in this section are mentioned there. Creating a reference list
 in the preferred way, with the \opt{reflist} preamble option, should
 prevent those issues.\\}%

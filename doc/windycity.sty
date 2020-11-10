@@ -1,4 +1,4 @@
-% Last modified: Sun 08 Nov 2020 11:36:12 AM CST
+% Last modified: Mon 09 Nov 2020 05:59:30 PM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -194,21 +194,20 @@
   \csname the#1\endcsname
   \csname adddot@#1\endcsname\quad}%
 \newcommand*{\adddot@section}{.}%
-\renewcommand\thesubsubsection{%
-  \normalfont\arabic{subsection}.\@arabic\c@subsubsection}
 
-\renewcommand\section{\@startsection{section}{1}{\z@}%
-  {-3.5ex \@plus -1ex \@minus -.2ex}%
-  {2.3ex \@plus.2ex}%
-  {\normalfont\large\bfseries}}
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-  {-3.5ex\@plus -1ex \@minus -.2ex}%
-  {1.5ex \@plus .2ex}%
-  {\normalfont\bfseries}}%
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-  {-4ex\@plus -1ex \@minus -.2ex}%
-  {1.5ex \@plus .2ex}%
-  {\normalfont\it}}
+\usepackage[clearempty,explicit]{titlesec}
+\titleformat{\section}
+  {\large\bfseries}{\thesection.}{2ex}{#1}
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection}{2ex}{#1}
+\titleformat{\subsubsection}
+  {\normalsize\it}{\thesubsubsection}{2ex}{#1}
+\titlespacing*{\section}
+  {0ex}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}[0ex]
+\titlespacing*{\subsection}
+  {0ex}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}[0ex]
+\titlespacing*{\subsubsection}
+  {0ex}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}[0ex]
 
 \AtBeginEnvironment{quote}{\small}
 \AtBeginEnvironment{verbatim}{\small}
