@@ -8,6 +8,11 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* fixed `autopunct` when `\footcites` follows `\cite` plus an
+  `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
+
 ## 2020-11-10
 
 * added support for updaters, which, like other editorial roles, you
@@ -43,8 +48,6 @@ brianchase/windycity").
 * added support for printing ISSNs with `issn` entry and bibliography
   options
 * fixed `nameaddon` and `handle` fields printing in short citations
-* fixed `autopunct` when `\footcites` follows `\cite` plus an
-  `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
 
 ## 2020-09-29
 
