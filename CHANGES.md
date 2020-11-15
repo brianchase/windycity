@@ -10,6 +10,9 @@ brianchase/windycity").
 
 ## Latest
 
+* fixed parenthetical citations for `@online` entries that should have
+  nothing in the date's position, not even "n.d.", such as when you
+  cite a blog but not any particular post
 * fixed `autopunct` when `\footcites` follows `\cite` plus an
   `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
 

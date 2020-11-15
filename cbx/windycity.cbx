@@ -1,4 +1,4 @@
-% Last modified: Sat 14 Nov 2020 10:29:02 AM CST
+% Last modified: Sun 15 Nov 2020 03:03:06 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -189,7 +189,8 @@
      \usebibmacro{parencite:multicite}}}
 
 \newbibmacro*{parencite:date}{%
-  \iffieldundef{labelyear}
+  \ifboolexpr{ test {\ifentrytype{online}}
+               and test {\iffieldundef{year}}}
     {}
     {\usebibmacro{parencite:origyear}%
      \iffieldnums{labelyear}
