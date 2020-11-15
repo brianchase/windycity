@@ -1,4 +1,4 @@
-% Last modified: Sun 15 Nov 2020 03:03:06 PM CST
+% Last modified: Sun 15 Nov 2020 03:14:57 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -259,6 +259,12 @@
        {\renewcommand*{\xtitle}{journal}%
         \usebibmacro{longtitle}}%
        {\printfield[journal]{shortjournal}}}
+    {\usebibmacro{parencite:blog}}}}
+
+\newbibmacro*{parencite:blog}{%
+  {\ifentrytype{online}
+    {\renewcommand*{\xtitle}{blog}%
+     \usebibmacro{longtitle}}%
     {\printfield[citetitle]{labeltitle}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%

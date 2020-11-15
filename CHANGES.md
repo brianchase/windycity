@@ -10,6 +10,8 @@ brianchase/windycity").
 
 ## Latest
 
+* fixed parenthetical citations that need `blogtitle` in the author's
+  position
 * fixed parenthetical citations for `@online` entries that should have
   nothing in the date's position, not even "n.d.", such as when you
   cite a blog but not any particular post
