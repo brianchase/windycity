@@ -10,11 +10,13 @@ brianchase/windycity").
 
 ## Latest
 
+* added support for the `pubstate` field (the `year` field still works
+  for this purpose)
 * fixed parenthetical citations that need `blogtitle` in the author's
   position
 * fixed parenthetical citations for `@online` entries that should have
-  nothing in the date's position, not even "n.d.", such as when you
-  cite a blog but not any particular post
+  nothing in the date's position, not even "n.d." (no date), such as
+  when you cite a blog but not any particular post
 * fixed `autopunct` when `\footcites` follows `\cite` plus an
   `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
 

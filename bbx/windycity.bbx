@@ -1,4 +1,4 @@
-% Last modified: Tue 10 Nov 2020 05:24:28 PM CST
+% Last modified: Sun 15 Nov 2020 04:21:58 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1495,10 +1495,10 @@
 
 \newbibmacro*{issue+month+etc}[1]{%
   \iffieldundef{year}
-    {\iffieldundef{month}
-       {}
-       {\setunit{\space}%
-        \printtext[parens]{\printdate}}}
+    {\setunit{\space}%
+     \iffieldundef{month}
+       {\usebibmacro{pubstate}{parens}}%
+       {\printtext[parens]{\printdate}}}
     {\ifboolexpr{ test {\iffieldundef{volume}}
                   and test {\iffieldundef{number}}}
        {\iffieldundef{journal}
@@ -1518,6 +1518,18 @@
              {\usebibmacro{reflist+year+day}%
               \setunit{\space}%
               \printtext[parens]{\printdate}}}}}}
+
+\newbibmacro*{pubstate}[1]{%
+  \iffieldundef{pubstate}
+    {\ifstrequal{#1}{label}
+       {\printlabeldate}%
+       {\ifstrequal{#1}{date}
+          {\printdate}%
+          {}}}
+    {\ifstrequal{#1}{parens}
+       {\printtext[parens]{\printfield{pubstate}}}
+       {\printfield{pubstate}}%
+     \clearfield{pubstate}}}
 
 \newbibmacro*{reflist+year+day}{%
   \ifboolexpr{ togl {bibliography}
@@ -1573,7 +1585,7 @@
         \usebibmacro{endbookyear}}}
     {\ifboolexpr{ test {\iffieldundef{year}}
                   and test {\iffieldundef{bookyear}}}
-       {\bibstring{nodate}}%
+       {\usebibmacro{pubstate}{label}}%
        {\iffieldundef{bookyear}
           {\printfield{year}%
            \usebibmacro{endyear}}%
@@ -1654,10 +1666,10 @@
 \newbibmacro*{labeldate+endyear}{%
   \iffieldequalstr{labeldatesource}{bookyear}
     {\iffieldundef{year}
-       {\printlabeldate}%
-       {\printfield{year}%
+       {\usebibmacro{pubstate}{label}}%
+       {\usebibmacro{pubstate}{date}%
         \usebibmacro{endyear}}}
-     {\printlabeldate}}%
+     {\usebibmacro{pubstate}{label}}}
 
 %%%%%%%%%%%%%%%%%
 %%  Locations  %%
