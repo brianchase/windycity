@@ -12,6 +12,8 @@ brianchase/windycity").
 
 * added support for the `pubstate` field (the `year` field still works
   for this purpose)
+* added support for the `eprint` field, plus related fields and
+  options
 * fixed parenthetical citations that need `blogtitle` in the author's
   position
 * fixed parenthetical citations for `@online` entries that should have

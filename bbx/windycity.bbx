@@ -1,4 +1,4 @@
-% Last modified: Sun 15 Nov 2020 04:21:58 PM CST
+% Last modified: Mon 23 Nov 2020 06:26:03 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -36,6 +36,14 @@
      \ExecuteBibliographyOptions{minxrefs=1}%
      \AtBeginBibliography{\blx@key@bibcheck{collsonly}}}
     {}}
+
+\providetoggle{doi}
+\DeclareBiblatexOption{entry,global}[boolean]{doi}[true]{%
+  \settoggle{doi}{#1}}
+
+\providetoggle{eprint}
+\DeclareBiblatexOption{entry,global}[boolean]{eprint}[true]{%
+  \settoggle{eprint}{#1}}
 
 \providetoggle{firstshort}
 \DeclareBiblatexOption{global}[boolean]{firstshort}[true]{%
@@ -114,6 +122,10 @@
 \DeclareBiblatexOption{entry,global}[boolean]{swapvol}[true]{%
   \settoggle{swapvol}{#1}}%
 
+\providetoggle{url}
+\DeclareBiblatexOption{entry,global}[boolean]{url}[true]{%
+  \settoggle{url}{#1}}
+
 % For setting 'minbibnames' and such, see CMOS, 17th ed., 14.76 and
 % 15.29.
 
@@ -126,6 +138,8 @@
   date=long,
   dateabbrev=false,
   dateusetime=true,
+  doi=true,
+  eprint=true,
   ibidtracker=constrict,
   idemtracker=false,
   indexing=true,
@@ -148,6 +162,7 @@
   timezones=true,
   uniquelist=minyear,
   uniquename=minfull,
+  url=true,
   urldate=long,
   useeditor=true,
   useprefix=false,
@@ -2031,6 +2046,7 @@
   \ifboolexpr{ test {\iffieldundef{howpublished}}
                and test {\iffieldundef{url}}
                and test {\iffieldundef{doi}}
+               and test {\iffieldundef{eprint}}
                and test {\iffieldundef{addendum}}
                or ( togl {firstshort} and not togl {bibliography} )}
     {}
@@ -2038,13 +2054,13 @@
      \newunit
      \printfield{howpublished}%
      \newunit
-     \printurldate
-     \newunit
      \printfield[noformat]{version}%
      \newunit
-     \printfield{url}%
+     \usebibmacro{urldate+url}%
      \newunit
-     \printfield{doi}%
+     \usebibmacro{doi}%
+     \newunit
+     \usebibmacro{eprint+etc}%
      \newunit
      \printfield{addendum}}}
 
@@ -2269,6 +2285,29 @@
        {\setunit{\addcolon\space}}%
        {\newunit}%
      \printfield{eid}}}
+
+\newbibmacro*{urldate+url}{%
+  \iffieldundef{url}
+    {}
+    {\iftoggle{url}
+       {\printurldate
+        \newunit
+        \printfield{url}}%
+       {}}}
+
+\newbibmacro*{doi}{%
+  \iffieldundef{doi}
+    {}
+    {\iftoggle{doi}
+       {\printfield{doi}}%
+       {}}}
+
+\newbibmacro*{eprint+etc}{%
+  \iffieldundef{eprint}
+    {}
+    {\iftoggle{eprint}
+       {\usebibmacro{eprint}}%
+       {}}}
 
 \newbibmacro*{volumes}{%
   \iffieldundef{volumes}
