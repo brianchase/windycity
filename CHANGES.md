@@ -19,6 +19,8 @@ brianchase/windycity").
 * fixed parenthetical citations for `@online` entries that should have
   nothing in the date's position, not even "n.d." (no date), such as
   when you cite a blog but not any particular post
+* fixed punctuation after `title` when an `@unpublished` entry has no
+  `type` field
 * fixed `autopunct` when `\footcites` follows `\cite` plus an
   `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
 
