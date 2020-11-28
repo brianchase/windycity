@@ -1,4 +1,4 @@
-% Last modified: Mon 23 Nov 2020 06:26:03 PM CST
+% Last modified: Sat 28 Nov 2020 10:58:27 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1951,13 +1951,17 @@
 
 \newbibmacro*{inst+loc+date}{%
   \usebibmacro{thesis+type}%
-  \setunit{\addcomma\space}%
+  \ifboolexpr{ test {\iflistundef{institution}}
+               and test {\iflistundef{venue}}}
+    {}
+    {\iflistundef{institution}
+       {\printfield{venue}}%
+       {\printlist{institution}}%
+     \setunit{\addcomma\space}}%
   \iflistundef{institution}
-    {\printfield{venue}}%
-    {\printlist{institution}}%
-  \setunit{\addcomma\space}%
-  \printlist{location}%
-  \setunit{\addcomma\space}%
+    {}
+    {\printlist{location}%
+     \setunit{\addcomma\space}}%
   \usebibmacro{reflist+year+day}%
   \printdate}%
 
@@ -2265,14 +2269,17 @@
 
 \newbibmacro*{thesis+type}{%
   \ifentrytype{mathesis}
-    {\bibstring{mathesis}}%
+    {\bibstring{mathesis}%
+     \setunit{\addcomma\space}}%
     {\ifentrytype{phdthesis}
-       {\bibstring{phdthesis}}%
+       {\bibstring{phdthesis}%
+        \setunit{\addcomma\space}}%
        {\iffieldundef{type}
          {}
          {\iffieldbibstring{type}
             {\bibstring{\thefield{type}}}
-            {\printfield{type}}}}}}
+            {\printfield{type}}%
+          \setunit{\addcomma\space}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%
