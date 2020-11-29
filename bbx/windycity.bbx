@@ -1,4 +1,4 @@
-% Last modified: Sun 29 Nov 2020 02:54:45 PM CST
+% Last modified: Sun 29 Nov 2020 03:08:55 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -75,6 +75,10 @@
 \providetoggle{noauth}
 \DeclareBiblatexOption{entry}[boolean]{noauth}[true]{%
   \settoggle{noauth}{#1}}%
+
+\providetoggle{noreprint}
+\DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
+  \settoggle{noreprint}{#1}}%
 
 \DeclareBiblatexOption{global}[boolean]{nolos}[true]{%
   \ifstrequal{#1}{true}
@@ -2414,7 +2418,8 @@
 
 \newbibmacro*{reprint}{%
   \ifboolexpr{ test {\iffieldundef{origyear}}
-               and test {\iflistundef{origpublisher}}}
+               and test {\iflistundef{origpublisher}}
+               or togl {noreprint}}
     {}
     {\iftoggle{bibliography}
        {\newunit}%

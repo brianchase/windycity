@@ -17,6 +17,8 @@ brianchase/windycity").
   (with value *prepub*)
 * added support for the `eprint` field, plus related fields and
   options
+* added `noreprint` entry option to exclude the `reprint` bibliography
+  string from citations of certain reprints
 * fixed several macros in which the preamble option `reflist` could
   cause errors in standard citations
 * fixed parenthetical citations for `@online` entries that should have

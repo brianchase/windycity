@@ -1,4 +1,4 @@
-% Last modified: Sat 28 Nov 2020 07:29:36 PM CST
+% Last modified: Sun 29 Nov 2020 01:53:58 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -533,6 +533,26 @@ title's position. Below is an example from \textit{CMOS} \ref{14.105}:
 affecting the bibliography, use starred versions of citation commands,
 such as \cmd{cite*}, \cmd{footcite*}, and \cmd{parencite*}.
 
+\optitem[false]{noreprint}{\opt{true}, \opt{false}}
+
+\noindent This option helps if you need to indicate a work's original
+year of publication with the \bibfield{origdate} or
+\bibfield{origyear} field but want to depart from the style's usual
+output by excluding the \textit{reprint} bibliography string. First,
+an example of the default output from \textit{CMOS} \ref{15.40} (in
+the author-year format):
+
+\begin{refonly}
+\nocite{maitland1998}
+\end{refonly}
+
+\noindent Now, from the same section, an example that requires
+\opt{noreprint}:
+
+\begin{refonly}
+\nocite{darwin1964}
+\end{refonly}
+
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
 \noindent On rare occasions, you may need an entry in a reference list
@@ -983,13 +1003,14 @@ the \bibfield{eprint} field, along with its cousins
 associated options (\opt{eprint}, \opt{doi}, and \opt{url}), which are
 set to \textit{true} by default.
 
-\item[issue] Windy City uses this field with the \bibtype{article},
-\bibtype{online}, and \bibtype{review} entry types to record a work's
-season of publication (spring, summer, autumn/fall, winter). The
-\bibtype{date} field also records seasons---but the value \textit{23},
-for the third season, returns \textit{Autumn}. To print \textit{Fall},
-use the \bibfield{issue} field. In other words, for \textit{Fall
-2013}, a work's bibliography database entry should contain:
+\item[issue] Windy City uses this field with \bibtype{article},
+\bibtype{online}, and \bibtype{review} entry types (and their aliases)
+to record a work's season of publication (spring, summer, autumn/fall,
+winter). The \bibtype{date} field also records seasons---but the value
+\textit{23}, for the third season, returns \textit{Autumn}. To print
+\textit{Fall}, use the \bibfield{issue} field. In other words, for
+\textit{Fall 2013}, a work's bibliography database entry should
+contain:
 
 \begin{verbatim}
    issue = {Fall},
@@ -1022,11 +1043,11 @@ an electronic article published ahead of the official publication date
 (with value \textit{prepub}). A preprint or working paper needs an
 \bibtype{unpublished} entry in your bibliography database (see
 \textit{CMOS} \ref{14.173} and \ref{14.218}). A prepublication should
-have an \bibtype{article} entry (see \textit{CMOS} \ref{14.172}). For
-forthcoming works, see \textit{CMOS} \ref{14.146}, \ref{14.172}, and
-\ref{15.45}. Forthcoming works also print correctly with
-\textit{forthcoming} in the \bibfield{year} field, as previous
-versions of the style required.
+have an \bibtype{article} or \bibtype{periodical} entry (see
+\textit{CMOS} \ref{14.172}). For forthcoming works, see \textit{CMOS}
+\ref{14.146}, \ref{14.172}, and \ref{15.45}. Forthcoming works also
+print correctly with \textit{forthcoming} in the \bibfield{year}
+field, as previous versions of the style required.
 
 \begin{bibonly}
 \nocite{faraday,huang2015,jubb2015,lucki1980}
@@ -1052,17 +1073,17 @@ dissertation. For the latter, \bibtype{type} should have the value
 field is needed for the \bibtype{mathesis} and \bibtype{phdthesis}
 entry types.
 
-In rare cases, \bibfield{type} is necessary for the \bibtype{article}
-and \bibtype{review} entry types when a work's bibliographic
-information doesn't allow Windy City to distinguish a journal article
-from a magazine or newspaper article. This happens when a magazine or
-newspaper article has an issue number. Normally, Windy City would
-respond by printing the issue number before the date and enclosing the
-date in parentheses. But the issue number needs to go first, and the
-date shouldn't be in parentheses. The workaround is to include a
-\bibfield{type} field with the value \textit{newsmag}. For an example,
-see \textit{CMOS} \ref{14.204} and compare it with the citation of
-Beattie in \ref{14.171}.
+In rare cases, \bibfield{type} is necessary for \bibtype{article} and
+\bibtype{review} entry types (and their aliases) when a work's
+bibliographic information doesn't allow Windy City to distinguish a
+journal article from a magazine or newspaper article. This happens
+when a magazine or newspaper article has an issue number. Normally,
+Windy City would respond by printing the issue number before the date
+and enclosing the date in parentheses. But the issue number needs to
+go first, and the date shouldn't be in parentheses. The workaround is
+to include a \bibfield{type} field with the value \textit{newsmag}.
+For an example, see \textit{CMOS} \ref{14.204} and compare it with the
+citation of Beattie in \ref{14.171}.
 
 \end{marglist}
 
@@ -3379,6 +3400,7 @@ after \textit{ISO 4}. Compare it with the nearly identical example in
 
 \begin{citeref}
 \item \parencite{austen2003}
+\item \parencite{darwin1964}
 \item \parencite{maitland1998}
 \end{citeref}
 
