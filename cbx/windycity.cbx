@@ -1,4 +1,4 @@
-% Last modified: Mon 16 Nov 2020 05:23:49 PM CST
+% Last modified: Sun 29 Nov 2020 12:33:14 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -254,19 +254,34 @@
           {\usebibmacro{author+bookauthor+etc}}%
           {\usebibmacro{supplement}}}}}
 
+% When 'journaltitle' goes in the author's position. Beware: the
+% 'extradate' field doesn't work in these cases.
+
 \newbibmacro*{parencite:journal}{%
-  {\ifentrytype{article}
+  \ifentrytype{article}
     {\iffieldundef{shortjournal}
        {\renewcommand*{\xtitle}{journal}%
         \usebibmacro{longtitle}}%
        {\printfield[journal]{shortjournal}}}
-    {\usebibmacro{parencite:blog}}}}
+    {\usebibmacro{parencite:blog}}}
+
+% When 'blogtitle' goes in the author's position. Beware: the
+% 'extradate' field doesn't work in these cases.
 
 \newbibmacro*{parencite:blog}{%
-  {\ifentrytype{online}
+  \ifentrytype{online}
     {\renewcommand*{\xtitle}{blog}%
      \usebibmacro{longtitle}}%
-    {\printfield[citetitle]{labeltitle}}}}
+    {\usebibmacro{parencite:organization}}}
+
+% When 'organization' goes in the author's position. Beware: the
+% 'extradate' field doesn't work in these cases.
+
+\newbibmacro*{parencite:organization}{%
+  \ifboolexpr{ test {\ifentrytype{reference}}
+               and not test {\iflistundef{organization}}}
+    {\printlist{organization}}%
+    {\printfield[citetitle]{labeltitle}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citations in Notes  %%

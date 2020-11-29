@@ -17,15 +17,17 @@ brianchase/windycity").
   (with value *prepub*)
 * added support for the `eprint` field, plus related fields and
   options
-* fixed parenthetical citations that need `blogtitle` in the author's
-  position
 * fixed parenthetical citations for `@online` entries that should have
   nothing in the date's position, not even "n.d." (no date), such as
   when you cite a blog but not any particular post
 * fixed punctuation after `title` when an `@unpublished` entry has no
   `type`, `location`, or `pubstate` field
-* fixed `autopunct` when `\footcites` follows `\cite` plus an
-  `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
+* partially fixed parenthetical citations that need `blogtitle` or
+  `organization` in the author's position, though the `extradate`
+  field works for neither, just as it doesn't for `journaltitle`
+* [accidentally dropped from previous release:] fixed `autopunct` when
+  `\footcites` follows `\cite` plus an `autopunct` mark (e.g.
+  `\cite{key1}?\footcites{key2}{key3}`)
 
 ## 2020-11-10
 
