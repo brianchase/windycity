@@ -1,4 +1,4 @@
-% Last modified: Sun 29 Nov 2020 09:19:58 AM CST
+% Last modified: Sun 29 Nov 2020 02:54:45 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1396,7 +1396,8 @@
      \printtext[parens]{%
        \usebibmacro{origlocation}%
        \usebibmacro{origpublisher}%
-       \iftoggle{reflist}
+       \ifboolexpr{ togl {bibliography}
+                    and togl {reflist}}
          {}
          {\usebibmacro{origyear+origendyear}}}}}
 
@@ -1846,7 +1847,8 @@
   \ifboolexpr{ test {\iffieldundef{pages}}
                or not test {\iffieldundef{eid}}}
     {}
-    {\iftoggle{reflist}
+    {\ifboolexpr{ togl {bibliography}
+                  and togl {reflist}}
        {\ifboolexpr{test {\iffieldundef{number}}
                     and test {\iffieldundef{month}}
                     and test {\iffieldundef{issue}}
@@ -2246,7 +2248,8 @@
   \renewcommand*{\cbx@deflabel}{labelname}%
   \global\toggletrue{cbx:short}%
   \entrydata{\thefield{crossref}}{%
-    \iftoggle{reflist}
+    \ifboolexpr{ togl {bibliography}
+                 and togl {reflist}}
       {\usebibmacro{parencite:new}}%
       {\usebibmacro{author+bookauthor+etc}%
        \usebibmacro{shorttitle+crossref}}%
@@ -2396,7 +2399,8 @@
 \newbibmacro*{orig+etc}{%
   \usebibmacro{origlocation}%
   \usebibmacro{origpublisher}%
-  \iftoggle{reflist}
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}}
     {}
     {\usebibmacro{origyear+origendyear}}%
   \usebibmacro{reprint}%

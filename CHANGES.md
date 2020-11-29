@@ -17,6 +17,8 @@ brianchase/windycity").
   (with value *prepub*)
 * added support for the `eprint` field, plus related fields and
   options
+* fixed several macros in which the preamble option `reflist` could
+  cause errors in standard citations
 * fixed parenthetical citations for `@online` entries that should have
   nothing in the date's position, not even "n.d." (no date), such as
   when you cite a blog but not any particular post
