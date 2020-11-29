@@ -1,4 +1,4 @@
-% Last modified: Sat 28 Nov 2020 07:45:01 PM CST
+% Last modified: Sun 29 Nov 2020 09:19:58 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -720,16 +720,6 @@
      \usebibmacro{bibblogdash}%
      \setunit{\space}%
      \usebibmacro{labeldate+extradate}%
-     \newunit}%
-    {\usebibmacro{orgfirst}}}
-
-% When 'organization' goes in the author's position.
-
-\newbibmacro*{orgfirst}{%
-  \ifboolexpr{ test {\ifentrytype{reference}}
-               and not test {\iflistundef{organization}}}
-    {\printlist{organization}%
-     \setunit{\space}%
      \newunit}%
     {}}
 
