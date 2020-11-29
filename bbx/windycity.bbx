@@ -1,4 +1,4 @@
-% Last modified: Sat 28 Nov 2020 06:35:26 PM CST
+% Last modified: Sat 28 Nov 2020 07:45:01 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -568,6 +568,7 @@
 \DeclareFieldFormat{part}{\bibstring{part}\space#1}
 \DeclareFieldFormat{postnote}{#1}
 \DeclareListFormat{publisher}{#1}
+\DeclareFieldFormat{pubstate}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
 
 % A shorthand should be italicized if the title that it abbreviates is
@@ -1524,27 +1525,44 @@
           {\usebibmacro{reflist+year+day}%
            \printdate}}%
        {\iffieldundef{month}
-          {\setunit{\space}%
-           \usebibmacro{reflist+issue+season}}%
+          {\usebibmacro{reflist+issue+season}}%
           {\ifstrequal{#1}{noparens}
              {\usebibmacro{reflist+year+day}%
               \newunit
-              \printdate}%
+              \usebibmacro{pubstate}{date}}%
              {\usebibmacro{reflist+year+day}%
               \setunit{\space}%
               \printtext[parens]{\printdate}}}}}}
 
 \newbibmacro*{pubstate}[1]{%
-  \iffieldundef{pubstate}
-    {\ifstrequal{#1}{label}
-       {\printlabeldate}%
-       {\ifstrequal{#1}{date}
-          {\printdate}%
-          {}}}
-    {\ifstrequal{#1}{parens}
-       {\printtext[parens]{\printfield{pubstate}}}
-       {\printfield{pubstate}}%
-     \clearfield{pubstate}}}
+  \iftoggle{authposition}
+    {\iffieldequalstr{pubstate}{forthcoming}
+       {\printfield{pubstate}%
+        \clearfield{pubstate}}%
+       {\usebibmacro{labeldate+date}{#1}}}
+    {\iffieldundef{pubstate}
+       {\usebibmacro{labeldate+date}{#1}}%
+       {\iffieldequalstr{pubstate}{preprint}
+          {\bibstring{preprint}}%
+          {\iffieldequalstr{pubstate}{prepub}
+             {\newunit% necessary if no 'date'
+              \bibstring{prepub}%
+              \setunit{\addcomma\space}%
+              \printdate}%
+             {\iffieldequalstr{pubstate}{working}
+                {\bibstring{working}%
+                 \setunit{\addcomma\space}}%
+                {\ifstrequal{#1}{parens}
+                   {\printtext[parens]{\printfield{pubstate}}}
+                   {\printfield{pubstate}}}}}% needs '%'
+        \clearfield{pubstate}}}}
+
+\newbibmacro*{labeldate+date}[1]{%
+  \ifstrequal{#1}{label}
+    {\printlabeldate}%
+    {\ifstrequal{#1}{date}
+       {\printdate}%
+       {}}}
 
 \newbibmacro*{reflist+year+day}{%
   \ifboolexpr{ togl {bibliography}
@@ -1568,8 +1586,8 @@
        {}
        {\setunit{\space}%
         \iffieldundef{issue}
-           {\printtext[parens]{\printfield{season}}}
-           {\printtext[parens]{\printfield{issue}}}}}
+          {\printtext[parens]{\printfield{season}}}
+          {\printtext[parens]{\printfield{issue}}}}}
     {\setunit{\space}%
      \printtext[parens]{\usebibmacro{issue+season+year}}}}
 
@@ -1825,7 +1843,9 @@
     {\usebibmacro{issue+month+etc}{noparens}%
      \usebibmacro{periodical:number}}%
     {\usebibmacro{periodical:number}%
-     \usebibmacro{issue+month+etc}{}}%
+     \iffieldequalstr{pubstate}{prepub}
+       {\usebibmacro{issue+month+etc}{noparens}}%
+       {\usebibmacro{issue+month+etc}{}}}% needs '%'
   \toggletrue{edshift}%
   \usebibmacro{edition}{noformat}}%
 
@@ -2277,7 +2297,7 @@
        {\bibstring{phdthesis}%
         \setunit{\addcomma\space}}%
        {\iffieldundef{type}
-         {}
+         {\usebibmacro{pubstate}{}}%
          {\iffieldbibstring{type}
             {\bibstring{\thefield{type}}}
             {\printfield{type}}%

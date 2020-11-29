@@ -10,8 +10,11 @@ brianchase/windycity").
 
 ## Latest
 
-* added support for the `pubstate` field (the `year` field still works
-  for this purpose)
+* added support for the `pubstate` field to indicate when a when a
+  work is forthcoming (with value *forthcoming*), a preprint (with
+  value *preprint*), a working paper (with value *working*), or an
+  electronic article published ahead of the official publication date
+  (with value *prepub*)
 * added support for the `eprint` field, plus related fields and
   options
 * fixed parenthetical citations that need `blogtitle` in the author's
@@ -20,7 +23,7 @@ brianchase/windycity").
   nothing in the date's position, not even "n.d." (no date), such as
   when you cite a blog but not any particular post
 * fixed punctuation after `title` when an `@unpublished` entry has no
-  `type` or `location` field
+  `type`, `location`, or `pubstate` field
 * fixed `autopunct` when `\footcites` follows `\cite` plus an
   `autopunct` mark (e.g. `\cite{key1}?\footcites{key2}{key3}`)
 

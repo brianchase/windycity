@@ -1,4 +1,4 @@
-% Last modified: Sat 28 Nov 2020 04:15:08 PM CST
+% Last modified: Sat 28 Nov 2020 07:29:36 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -975,6 +975,14 @@ Schleyer}:
 edition, such as \textit{Sunday Book Review} (see \textit{CMOS}
 \ref{14.202}).
 
+\item[eprint] Windy City supports the built-in resources that
+\biblatex provides for electronic publishing information, even though
+the output doesn't conform to \textit{CMOS}. To that end, you may use
+the \bibfield{eprint} field, along with its cousins
+\bibfield{eprinttype} and \bibfield{eprintclass}, and all the
+associated options (\opt{eprint}, \opt{doi}, and \opt{url}), which are
+set to \textit{true} by default.
+
 \item[issue] Windy City uses this field with the \bibtype{article},
 \bibtype{online}, and \bibtype{review} entry types to record a work's
 season of publication (spring, summer, autumn/fall, winter). The
@@ -1006,6 +1014,23 @@ publication, you may use the classic \bibfield{year} field.
 
 \item[pages] See comments on the \opt{nopages} bibliography option in
 section \ref{preamble}.
+
+\item[pubstate] This fields indicates when a work is forthcoming (with
+value \textit{forthcoming}), a preprint (with value
+\textit{preprint}), a working paper (with value \textit{working}), or
+an electronic article published ahead of the official publication date
+(with value \textit{prepub}). A preprint or working paper needs an
+\bibtype{unpublished} entry in your bibliography database (see
+\textit{CMOS} \ref{14.173} and \ref{14.218}). A prepublication should
+have an \bibtype{article} entry (see \textit{CMOS} \ref{14.172}). For
+forthcoming works, see \textit{CMOS} \ref{14.146}, \ref{14.172}, and
+\ref{15.45}. Forthcoming works also print correctly with
+\textit{forthcoming} in the \bibfield{year} field, as previous
+versions of the style required.
+
+\begin{bibonly}
+\nocite{faraday,huang2015,jubb2015,lucki1980}
+\end{bibonly}
 
 \item[series] See comments on \bibfield{seriesaddon} in section
 \ref{datafields}.
@@ -2740,6 +2765,7 @@ field for the second example below contains \textit{vol. 6}.
 
 \subsubsection{Forthcoming publications}
 % 14.146 Forthcoming publications
+\label{14.146}
 
 \begin{citebib}
 \item \cite{author}
@@ -2832,20 +2858,21 @@ print \textit{Autumn 2013}.
 
 \subsubsection{Forthcoming journal articles}
 % 14.172 Forthcoming journal articles
+\label{14.172}
 
 \begin{citebib}
 \item \cite{authora}
-%\item \cite{jubb2015}
+\item \cite{jubb2015}
 \end{citebib}
 
-%\subsubsection{Journal article preprints}
-%% 14.173 Journal article preprints
+\subsubsection{Journal article preprints}
+% 14.173 Journal article preprints
+\label{14.173}
 
-%\begin{citebib}
-%\item \cite{huang2015}
-%\end{citebib}
+\begin{citebib}
+\item \cite{huang2015}
+\end{citebib}
 
-\setcounter{subsubsection}{173}
 \subsubsection{Journal page references}
 % 14.174 Journal page references
 
@@ -3077,6 +3104,7 @@ correct.
 
 \subsubsection{Working papers and the like}
 % 14.218 Working papers and the like
+\label{14.218}
 
 \begin{citebib}
 \item \cite{lucki1980}
@@ -3385,6 +3413,7 @@ after \textit{ISO 4}. Compare it with the nearly identical example in
 
 \subsubsection{``Forthcoming'' in author-date references}
 % 15.45 ``Forthcoming'' in author-date references
+\label{15.45}
 
 \begin{citeref}
 \item \parencite{faraday}
