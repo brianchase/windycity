@@ -1,4 +1,4 @@
-% Last modified: Sun 29 Nov 2020 03:08:55 PM CST
+% Last modified: Thu 03 Dec 2020 05:06:42 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -672,6 +672,7 @@
 
 \newbibmacro*{author+namelist}{%
   \ifboolexpr{ test {\ifnameundef{shortauthor}}
+               or togl {cbx:first}
                or togl {bibliography}}
     {\renewcommand*{\cbx@namelist}{author}}%
     {\renewcommand*{\cbx@namelist}{shortauthor}}%

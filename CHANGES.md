@@ -19,6 +19,7 @@ brianchase/windycity").
   options
 * added `noreprint` entry option to exclude the `reprint` bibliography
   string from citations of certain reprints
+* fixed `shortauthor` from printing in long, first citations
 * fixed several macros in which the preamble option `reflist` could
   cause errors in standard citations
 * fixed parenthetical citations for `@online` entries that should have
