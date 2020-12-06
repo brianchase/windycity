@@ -13,8 +13,10 @@
   endbookyear,
   handle,
   seriesaddon,
+  shortblog,
   shortbooktitle,
   shortmaintitle,
+  shortorganization,
   translatoratype,
   translatortype}
 \DeclareDatamodelFields[type=list,datatype=name]{%

@@ -1,4 +1,4 @@
-% Last modified: Sun 29 Nov 2020 12:33:14 PM CST
+% Last modified: Sun 06 Dec 2020 11:05:12 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -254,8 +254,7 @@
           {\usebibmacro{author+bookauthor+etc}}%
           {\usebibmacro{supplement}}}}}
 
-% When 'journaltitle' goes in the author's position. Beware: the
-% 'extradate' field doesn't work in these cases.
+% When 'journaltitle' goes in the author's position.
 
 \newbibmacro*{parencite:journal}{%
   \ifentrytype{article}
@@ -265,8 +264,7 @@
        {\printfield[journal]{shortjournal}}}
     {\usebibmacro{parencite:blog}}}
 
-% When 'blogtitle' goes in the author's position. Beware: the
-% 'extradate' field doesn't work in these cases.
+% When 'blogtitle' goes in the author's position.
 
 \newbibmacro*{parencite:blog}{%
   \ifentrytype{online}
@@ -274,8 +272,7 @@
      \usebibmacro{longtitle}}%
     {\usebibmacro{parencite:organization}}}
 
-% When 'organization' goes in the author's position. Beware: the
-% 'extradate' field doesn't work in these cases.
+% When 'organization' goes in the author's position.
 
 \newbibmacro*{parencite:organization}{%
   \ifboolexpr{ test {\ifentrytype{reference}}
@@ -440,13 +437,15 @@
           {\setunit{\addcolon\space}}}}}
 
 \newbibmacro*{reference:authpos}{%
-  \iflistundef{organization}
-    {\ifnameundef{bookauthor}
-       {\renewcommand*{\cbx@namelist}{author}}%
-       {\renewcommand*{\cbx@namelist}{bookauthor}}%
-     \usebibmacro{printnames+etc}}%
-    {\printlist{organization}%
-     \clearlist{organization}}}
+  \iftoggle{newauth}
+    {\usebibmacro{author+bookauthor+etc}%
+     \togglefalse{newauth}%
+     \clearlist{organization}%
+     \clearname{author}}%
+    {\iflistundef{organization}
+       {\usebibmacro{author+bookauthor+etc}}%
+       {\printlist{organization}%
+        \clearlist{organization}}}}
 
 \newbibmacro*{reference:howpublished+etc}{%
   \ifboolexpr{ test {\iffieldundef{howpublished}}
@@ -538,6 +537,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyDriver{cite:article}{%
+  \usebibmacro{newauth}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{articles}%
   \usebibmacro{colon+comma+etc}}%
@@ -572,6 +572,7 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:online}{%
+  \usebibmacro{newauth}%
   \usebibmacro{author+title+etc}%
   \setunit*{\newunitpunct}% needs '*'
   \usebibmacro{websites}%
@@ -596,6 +597,7 @@
   \usebibmacro{reference:authpos}}%
 
 \DeclareBibliographyDriver{cite:review}{%
+  \usebibmacro{newauth}%
   \usebibmacro{reviews}%
   \usebibmacro{articles}%
   \usebibmacro{colon+comma+etc}}%

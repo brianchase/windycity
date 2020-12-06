@@ -1,4 +1,4 @@
-% Last modified: Thu 03 Dec 2020 05:06:42 PM CST
+% Last modified: Sun 06 Dec 2020 11:11:01 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -117,6 +117,10 @@
 \providetoggle{swapauth}
 \DeclareBiblatexOption{entry}[boolean]{swapauth}[true]{%
   \settoggle{swapauth}{#1}}%
+
+\providetoggle{newauth}
+\DeclareBiblatexOption{entry}[boolean]{newauth}[true]{%
+  \settoggle{newauth}{#1}}%
 
 \providetoggle{swaptrans}
 \DeclareBiblatexOption{entry}[boolean]{swaptrans}[true]{%
@@ -262,6 +266,86 @@
     \field[padside=left,padwidth=4,padchar=0]{volume}
     \literal{0000}}}
 
+% Mapping for when 'journaltitle', 'organization', or 'blogtitle' goes
+% in the author's position.
+
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \pertype{article}
+      \pertype{review}
+      \step[notfield=author, final]
+      \step[notfield=editor, final]
+      \step[notfield=translator, final]
+      \step[fieldsource=journal]
+      \step[fieldset=author, origfieldval]
+      \step[fieldsource=author,
+            match=\regexp{(.+)},
+            replace=\regexp{\\mkbibemph{{$1}}}]
+      \step[fieldset=options, fieldvalue={,newauth}, append]
+      \step[fieldset=verba, fieldvalue=journaltitle]
+      \step[fieldsource=shortjournal]
+      \step[fieldset=shortauthor, origfieldval]
+      \step[fieldsource=shortauthor,
+            match=\regexp{(.+)},
+            replace=\regexp{\\mkbibemph{{$1}}}]
+      \step[fieldsource=journaltitleaddon, final]
+      \step[fieldset=nameaddon, origfieldval]
+      \step[fieldsource=nameaddon,
+            match=\regexp{(.+)},
+            replace=\regexp{\\mkbibbrackets{$1}}]
+    }
+  }
+}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \pertype{online}
+      \step[notfield=author, final]
+      \step[notfield=editor, final]
+      \step[notfield=translator, final]
+      \step[fieldsource=blogtitle]
+      \step[fieldset=author, origfieldval]
+      \step[fieldsource=author,
+            match=\regexp{(.+)},
+            replace=\regexp{\\mkbibemph{{$1}}}]
+      \step[fieldset=options, fieldvalue={,newauth}, append]
+      \step[fieldset=verba, fieldvalue=blogtitle]
+      \step[fieldsource=shortblog]
+      \step[fieldset=shortauthor, origfieldval]
+      \step[fieldsource=shortauthor,
+            match=\regexp{(.+)},
+            replace=\regexp{\\mkbibemph{{$1}}}]
+      \step[fieldsource=blogtitleaddon, final]
+      \step[fieldset=nameaddon, origfieldval]
+      \step[fieldsource=nameaddon,
+            match=\regexp{(.+)},
+            replace=\regexp{\\mkbibparens{$1}}]
+    }
+  }
+}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \pertype{inreference}
+      \pertype{reference}
+      \step[notfield=author, final]
+      \step[fieldsource=organization]
+      \step[fieldset=author, origfieldval]
+      \step[fieldsource=author,
+            match=\regexp{(.+)},
+            replace=\regexp{{$1}}]
+      \step[fieldset=options, fieldvalue={,newauth}, append]
+      \step[fieldset=verba, fieldvalue=organization]
+      \step[fieldsource=shortorganization]
+      \step[fieldset=shortauthor, origfieldval]
+      \step[fieldsource=shortauthor,
+            match=\regexp{(.+)},
+            replace=\regexp{{$1}}]
+    }
+  }
+}
+
 \defbibcheck{collsonly}{%
   \ifentrytype{inbook}
     {\iffieldundef{crossref}
@@ -315,8 +399,6 @@
 \DeclareDataInheritance{collection}{collection,inbook}{%
   \inherit{year}{bookyear}
   \inherit{endyear}{endbookyear}}
-\DeclareDataInheritance{reference}{reference}{%
-  \inherit{author}{bookauthor}}
 \DeclareDataInheritance{*}{*}{%
   \noinherit{crossref}
   \noinherit{entryset}
@@ -355,7 +437,6 @@
 \providetoggle{authposition}
 \providetoggle{bibliography}
 \providetoggle{ibid:loccit}
-\providetoggle{journalfirst}
 \providetoggle{multicite}
 
 \providetoggle{cbx:collection}
@@ -511,6 +592,7 @@
   \usebibmacro{index:field}{#1}{\thefield{indexsorttitle}}{#2}}%
 
 \DeclareFieldFormat{blogtitleaddon}{\mkbibparens{#1}}
+\DeclareFieldFormat{journaltitleaddon}{\mkbibbrackets{#1}}
 \DeclareFieldFormat{titleaddon}{\mkbibbrackets{#1}}
 
 \DeclareFieldFormat[article,incollection,online,reference,review]
@@ -646,8 +728,7 @@
        {\usebibmacro{edtrans:authpos}%
         \ifnameundef{\cbx@namelist}
           {\toggletrue{noauth}%
-           \usebibmacro{authpos+deflabel}%
-           \usebibmacro{journalfirst}}%
+           \usebibmacro{authpos+deflabel}}%
           {\usebibmacro{addplus:authpos}%
            \usebibmacro{namehash+etc}}}%
        {\usebibmacro{namehash+etc}}}}
@@ -700,33 +781,6 @@
                         and not togl {cbx:short}}
              {\renewcommand*{\anonb}{\space\mkbibbrackets{\bibstring{pseudo}}}}
              {}}}}}
-
-% When 'journaltitle' goes in the author's position.
-
-\newbibmacro*{journalfirst}{%
-  \ifboolexpr{ ( test {\ifentrytype{article}}
-               or test {\ifentrytype{review}} )
-               and togl {bibliography}}
-    {\toggletrue{journalfirst}%
-     \usebibmacro{bibjournaldash}%
-     \setunit{\space}%
-     \usebibmacro{journallocation}%
-     \clearlist{location}%
-     \usebibmacro{labeldate+extradate}%
-     \newunit}%
-    {\usebibmacro{blogtitlefirst}}}
-
-% When 'blogtitle' goes in the author's position.
-
-\newbibmacro*{blogtitlefirst}{%
-  \ifboolexpr{ test {\ifentrytype{online}}
-               and togl {bibliography}}
-    {\toggletrue{journalfirst}%
-     \usebibmacro{bibblogdash}%
-     \setunit{\space}%
-     \usebibmacro{labeldate+extradate}%
-     \newunit}%
-    {}}
 
 \newbibmacro*{namehash+etc}{%
   \usebibmacro{printnames+etc}%
@@ -1197,6 +1251,7 @@
 %%  Names and Dashes  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+% HERE
 \newbibmacro*{printnames+etc}{%
   \ifboolexpr{ togl {authposition}
                and togl {bibliography}}
@@ -1204,6 +1259,7 @@
     {\usebibmacro{printnames}}%
   \usebibmacro{handle}%
   \usebibmacro{nameaddon}%
+  \usebibmacro{newauth+journallocation}%
   \usebibmacro{a:labeldate+extradate}%
   \usebibmacro{clearnames+empty}}%
 
@@ -1245,8 +1301,21 @@
                or togl {cbx:short}}
     {}
     {\space
-     \printfield[brackets]{nameaddon}%
-     \clearfield{nameaddon}}}
+     \iftoggle{newauth}
+       {\printfield[noformat]{nameaddon}%
+        \clearfield{nameaddon}}%
+       {\printfield[brackets]{nameaddon}%
+        \clearfield{nameaddon}}}}
+
+\newbibmacro*{newauth+journallocation}{%
+  \iftoggle{newauth}
+    {\ifboolexpr{ test {\ifentrytype{article}}
+                  and togl {bibliography}}
+       {\setunit{\space}%
+        \usebibmacro{journallocation}%
+        \newunit}%
+       {}}
+    {}}
 
 \newbibmacro*{clearnames+empty}{%
   \clearname{\cbx@namelist}%
@@ -1255,33 +1324,6 @@
   \let\anonb\empty
   \let\pluga\empty
   \let\plugb\empty}%
-
-% When a dash replaces 'journaltitle' in the author's position.
-
-\newbibmacro*{bibjournaldash}{%
-  \ifboolexpr{ test {\iffieldequals{journaltitle}{\bbx@lasthash}}
-               and not test \iffirstonpage}
-    {\bibnamedash
-     \clearfield{journaltitle}%
-     \clearlist{location}%
-     \newunit}%
-    {\savefield{journaltitle}{\bbx@lasthash}%
-     \renewcommand*{\xtitle}{journal}%
-     \usebibmacro{longtitle+titleaddon}%
-     \let\xtitle\empty}}%
-
-% When a dash replaces 'blogtitle' in the author's position.
-
-\newbibmacro*{bibblogdash}{%
-  \ifboolexpr{ test {\iffieldequals{blogtitle}{\bbx@lasthash}}
-               and not test \iffirstonpage}
-    {\bibnamedash
-     \clearfield{blogtitle}%
-     \newunit}%
-    {\savefield{blogtitle}{\bbx@lasthash}%
-     \renewcommand*{\xtitle}{blog}%
-     \usebibmacro{longtitle+titleaddon}%
-     \let\xtitle\empty}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Titles and Subtitles  %%
@@ -1658,9 +1700,8 @@
     {\usebibmacro{labeldate+extradate}}}
 
 \newbibmacro*{b:labeldate+extradate}{%
-  \ifboolexpr{ togl {noauth}
-               and not togl {journalfirst}}
-    {\usebibmacro{labeldate+extradate}}%
+  \iftoggle{noauth}
+    {halb \usebibmacro{labeldate+extradate}}%
     {}}
 
 \newbibmacro*{labeldate+extradate}{%
@@ -1750,6 +1791,7 @@
 
 \DeclareBibliographyDriver{article}{%
   \usebibmacro{bibindex}%
+  \usebibmacro{newauth}%
   \usebibmacro{author+title+etc}%
   \usebibmacro{articles}%
   \usebibmacro{colon+pages+etc}%
@@ -1776,6 +1818,7 @@
 
 \DeclareBibliographyDriver{online}{%
   \usebibmacro{bibindex}%
+  \usebibmacro{newauth}%
   \usebibmacro{author+title+etc}%
   \newunit
   \usebibmacro{websites}%
@@ -1793,6 +1836,7 @@
 
 \DeclareBibliographyDriver{review}{%
   \usebibmacro{bibindex}%
+  \usebibmacro{newauth}%
   \usebibmacro{reviews}%
   \usebibmacro{articles}%
   \usebibmacro{colon+pages+etc}%
@@ -1816,6 +1860,13 @@
   \usebibmacro{annotation}%
   \finentry}%
 
+\newbibmacro*{newauth}{%
+  \iftoggle{newauth}
+    {\iftoggle{bibliography}
+       {\clearfield{\thefield{verba}}}
+       {\toggletrue{noauth}}}
+    {}}
+
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{author+bookauthor+etc}%
   \usebibmacro{title+labelyear}%
@@ -1828,11 +1879,11 @@
   \usebibmacro{issuetitle}%
   \renewcommand*{\xtitle}{journal}%
   \usebibmacro{longtitle+titleaddon}%
-  \usebibmacro{journalseries}%
   \setunit{\space}%
   \usebibmacro{journallocation}%
+  \usebibmacro{journalseries}%
   \printfield[noformat]{volume}%
-  \iftoggle{journalfirst}
+  \iftoggle{newauth}
     {\newunit}%
     {\setunit{\addcomma\space}}%
   \iffieldequalstr{type}{newsmag}
@@ -2012,24 +2063,26 @@
      \setunit{\addcomma\space}%
      \clearfield{part}}}
 
+\newbibmacro*{journallocation}{%
+  \iflistundef{location}
+    {}
+    {\nopunct
+     \printtext[parens]{%
+       \printlist{location}}\space}%
+     \clearlist{location}}%
+
 \newbibmacro*{journalseries}{%
   \iffieldundef{series}
     {}
-    {\iflistundef{location}
-       {\setunit{\addcomma\space}%
+    {\iftoggle{newauth}
+       {\newunit
         \printfield{series}}%
-       {\setunit{\space}%
+       {\setunit{\addcomma\space}%
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
      \usebibmacro{editortypes}{series}%
      \newunit}}%
-
-\newbibmacro*{journallocation}{%
-  \iflistundef{location}
-    {}
-    {\nopunct\printtext[parens]{%
-       \printlist{location}}\space}}%
 
 % On how to format the issue number of periodicals, see CMOS, 17th
 % ed., 14.171 and 15.47.
@@ -2271,7 +2324,7 @@
        {}}}
 
 \newbibmacro*{review+title}{%
-  \iftoggle{noauth}
+  \iftoggle{newauth}
     {\bibcpstring{reviewnoauth}}%
     {\bibstring{review}}%
   \space

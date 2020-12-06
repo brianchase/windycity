@@ -19,7 +19,14 @@ brianchase/windycity").
   options
 * added `noreprint` entry option to exclude the `reprint` bibliography
   string from citations of certain reprints
-* fixed `shortauthor` from printing in long, first citations
+* fixed `shortauthor` from printing in long, first citations (sorry
+  about that!)
+* fixed several bugs, mostly affecting parenthetical citations, having
+  to do with the placement, punctuation, and tracking of citations
+  with `journaltitle`, `organization`, or `blogtitle` in the author's
+  position
+* related to the previous, added support for the `shortjournal` field
+  and added `shortorganization` and `shortblog` fields
 * fixed several macros in which the preamble option `reflist` could
   cause errors in standard citations
 * fixed parenthetical citations for `@online` entries that should have
@@ -27,9 +34,6 @@ brianchase/windycity").
   when you cite a blog but not any particular post
 * fixed punctuation after `title` when an `@unpublished` entry has no
   `type`, `location`, or `pubstate` field
-* partially fixed parenthetical citations that need `blogtitle` or
-  `organization` in the author's position, though the `extradate`
-  field works for neither, just as it doesn't for `journaltitle`
 * [accidentally dropped from previous release:] fixed `autopunct` when
   `\footcites` follows `\cite` plus an `autopunct` mark (e.g.
   `\cite{key1}?\footcites{key2}{key3}`)
