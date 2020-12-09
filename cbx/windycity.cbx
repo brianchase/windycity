@@ -1,4 +1,4 @@
-% Last modified: Sun 06 Dec 2020 11:05:12 AM CST
+% Last modified: Tue 08 Dec 2020 06:34:49 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -505,14 +505,14 @@
     {\ifboolexpr{ test {\ifentrytype{article}}
                   or test {\ifentrytype{review}}}
        {\iffieldundef{postnote}
-          {\printtext[bibhyperref]{\printfield{pages}}}
+          {\printfield{pages}}%
           {}}
        {}}}
 
 \renewbibmacro*{postnote}{%
   \iffieldundef{postnote}
     {}
-    {\printtext[bibhyperref]{\printfield{postnote}}}}
+    {\printfield{postnote}}}
 
 \newbibmacro*{shorthand+intro}{%
   \iffieldundef{shorthand}
