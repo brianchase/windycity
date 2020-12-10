@@ -1,4 +1,4 @@
-% Last modified: Wed 09 Dec 2020 06:22:17 PM CST
+% Last modified: Wed 09 Dec 2020 07:51:25 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -109,6 +109,10 @@
 \providetoggle{shortfirst}
 \DeclareBiblatexOption{global}[boolean]{shortfirst}[true]{%
   \settoggle{shortfirst}{#1}}%
+
+\providetoggle{shortlinks}
+\DeclareBiblatexOption{global}[boolean]{shortlinks}[true]{%
+  \settoggle{shortlinks}{#1}}%
 
 \providetoggle{skipdate}
 \DeclareBiblatexOption{entry}[boolean]{skipdate}[true]{%
@@ -1334,10 +1338,13 @@
 \newbibmacro*{longtitle+titleaddon}{%
   \iffieldundef{\xtitle title}
     {}
-    {\usebibmacro{longtitle}%
+    {\iftoggle{shortlinks}
+       {\togglefalse{shortlinks}%
+        \printtext[bibhyperref]{\usebibmacro{longtitle}}}
+       {\usebibmacro{longtitle}}%
      \usebibmacro{titleaddon}%
      \usebibmacro{test:titledupes}%
-     \clearfield{\xtitle title}}}
+     \clearfield{\xtitle title}}}% test
 
 \newbibmacro*{longtitle}{%
   \printtext[\xtitle title]{%
@@ -1353,8 +1360,8 @@
     {\ifboolexpr{ test {\iffieldundef{subtitle}}
                   or test {\iffieldsequal{subtitle}{booksubtitle}}}
        {\clearfield{booktitle}}%
-       {}}
-    {}}
+       {}}% test
+    {}}% test
 
 \newbibmacro*{titleaddon}{%
   \iffieldundef{\xtitle titleaddon}
@@ -1368,7 +1375,9 @@
      \usebibmacro{b:labeldate+extradate}}%
     {\ifboolexpr{ test \ifciteseen
                   or togl {shortfirst}}
-       {\usebibmacro{shorttitle}}%
+       {\iftoggle{shortlinks}
+          {\printtext[bibhyperref]{\usebibmacro{shorttitle}}}
+          {\usebibmacro{shorttitle}}}
        {\usebibmacro{longtitle+titleaddon}}}}
 
 \newbibmacro*{shorttitle}{%

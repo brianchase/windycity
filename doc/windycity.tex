@@ -1,4 +1,4 @@
-% Last modified: Wed 09 Dec 2020 07:52:11 AM CST
+% Last modified: Wed 09 Dec 2020 08:48:24 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -466,6 +466,46 @@ documents with complete bibliographies. (See \textit{CMOS}
 \ref{14.23}, also 14.29--14.36.) You may use \opt{shortfirst} in
 conjunction with \opt{ibid}. However, it adds nothing to \opt{short},
 which has the same effect on first citations.
+
+\optitem[false]{shortlinks}{\opt{true}, \opt{false}}
+
+\noindent If you use Windy City with
+\href{http://www.ctan.org/pkg/hyperref}{\textcolor{blue}{hyerref}},
+citations contain embedded links to their respective entries in the
+bibliography. In standard citations, these links encompass the entire
+citation (minus some punctuation). With \opt{shortlinks}, they're
+embedded in just one element: the title or, if no title is present,
+whatever part of the citation occupies the author's position, such as
+the author's name, \textit{ibid.}, or a shorthand. For comparison,
+here's what default links are like in blue:
+
+\hypersetup{citecolor=blue}
+\begin{citeonly}
+\item \cite[24--25]{morley1995}
+\item \cite{schwartz1992}
+\item \cite{kaiser1964}
+\item \cite[43]{morley1995}
+\item \cite[138]{schwartz1992}
+\item \cite[189--90]{kaiser1964}
+\end{citeonly}
+
+\noindent And here they are with \opt{shortlinks}:
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{shortlinks}}
+\item \cite[24--25]{morley1995}
+\AtNextCitekey{\toggletrue{shortlinks}}
+\item \cite{schwartz1992}
+\AtNextCitekey{\toggletrue{shortlinks}}
+\item \cite{kaiser1964}
+\AtNextCitekey{\toggletrue{shortlinks}}
+\item \cite[43]{morley1995}
+\AtNextCitekey{\toggletrue{shortlinks}}
+\item \cite[138]{schwartz1992}
+\AtNextCitekey{\toggletrue{shortlinks}}
+\item \cite[189--90]{kaiser1964}
+\end{citeonly}
+\hypersetup{citecolor=}
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 

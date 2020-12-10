@@ -17,9 +17,16 @@ brianchase/windycity").
   (with value *prepub*)
 * added support for the `eprint` field, plus related fields and
   options
+* added `shortlinks` preamble option to "shorten" embedded links from
+  `bibhyperref` in standard citations; instead of encompassing an
+  entire citation, links apply to just one element: the title or, if
+  no title is present, whatever part of the citation occupies the
+  author's position, such as the author's name, *ibid.*, or a
+  shorthand
+* somewhat related to the previous, changed preamble option
+  `firstshort` to `shortfirst`
 * added `noreprint` entry option to exclude the `reprint` bibliography
   string from citations of certain reprints
-* changed preamble option `firstshort` to `shortfirst`
 * fixed `shortauthor` from printing in long, first citations (sorry
   about that!)
 * fixed several bugs, mostly affecting parenthetical citations, having

@@ -1,4 +1,4 @@
-% Last modified: Wed 09 Dec 2020 06:22:15 PM CST
+% Last modified: Wed 09 Dec 2020 08:43:11 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -182,7 +182,7 @@
      \iffieldundef{postnote}
        {\printtext[bibhyperref]{%
           \usebibmacro{parencite:date}%
-          \usebibmacro{cite:volume}}}
+          \usebibmacro{cite:volume}}}% needs '%'
        {}}
     {\usebibmacro{test:collection}%
      \usebibmacro{parencite:crossref}%
@@ -223,10 +223,10 @@
       {}% needs '%'
     \printtext[bibhyperref]{%
       \usebibmacro{parencite:date}%
-      \usebibmacro{cite:volume}}}
+      \usebibmacro{cite:volume}}}% needs '%'
    {\printtext[bibhyperref]{%
       \usebibmacro{parencite:new}%
-      \usebibmacro{cite:volume}}}}
+      \usebibmacro{cite:volume}}}}% needs '%'
 
 \newbibmacro*{parencite:new}{%
   \iffieldundef{shorthand}
@@ -288,8 +288,12 @@
   \ifciteseen
     {\usebibmacro{test:collection}%
      \renewcommand*{\cbx@deflabel}{labelname}%
-     \printtext[bibhyperref]{\usebibmacro{cite:seen}}}
-    {\printtext[bibhyperref]{\usebibmacro{cite:new}}}% needs '%'
+     \iftoggle{shortlinks}
+       {\usebibmacro{cite:seen}}%
+       {\printtext[bibhyperref]{\usebibmacro{cite:seen}}}}
+    {\iftoggle{shortlinks}
+       {\usebibmacro{cite:new}}%
+       {\printtext[bibhyperref]{\usebibmacro{cite:new}}}}% needs '%'
   \usebibmacro{savefields}}%
 
 \newbibmacro*{cite:seen}{%
@@ -299,23 +303,32 @@
                   and not test \iffirstonpage}
        {\usebibmacro{cite:ibid}}%
        {\usebibmacro{cite:short}}}
-    {\printfield{shorthand}%
-     \usebibmacro{cite:volume}}}
+    {\iftoggle{shortlinks}
+       {\printtext[bibhyperref]{%
+          \printfield{shorthand}%
+          \usebibmacro{cite:volume}}}
+       {\printfield{shorthand}%
+        \usebibmacro{cite:volume}}}}
 
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
-    {\bibcpstring{ibidem}%
-     \ifloccit
-       {\global\toggletrue{ibid:loccit}}%
-       {\usebibmacro{cite:volume}}}
+    {\iftoggle{shortlinks}
+       {\printtext[bibhyperref]{%
+          \usebibmacro{cite:ibid+loccit}}}
+       {\usebibmacro{cite:ibid+loccit}}}
     {\global\toggletrue{cbx:short}%
      \ifentrytype{review}
        {\usebibmacro{ibid:review}}%
-       {\usebibmacro{author+bookauthor+etc}%
-        \iftoggle{noauth}
-          {\usebibmacro{title+labelyear}}%
-          {}% needs '%'
-        \usebibmacro{cite:volume}}}}
+       {\iftoggle{shortlinks}
+          {\printtext[bibhyperref]{%
+             \usebibmacro{cite:author+title+etc}}}
+          {\usebibmacro{cite:author+title+etc}}}}}
+
+\newbibmacro*{cite:ibid+loccit}{%
+  \bibcpstring{ibidem}%
+  \ifloccit
+    {\global\toggletrue{ibid:loccit}}%
+    {\usebibmacro{cite:volume}}}
 
 \newbibmacro*{ibid:review}{%
   \ifnameundef{author}
@@ -323,6 +336,13 @@
      \space
      \usebibmacro{title+labelyear}}%
     {\usebibmacro{author+bookauthor+etc}}%
+  \usebibmacro{cite:volume}}%
+
+\newbibmacro*{cite:author+title+etc}{%
+  \usebibmacro{author+bookauthor+etc}%
+  \iftoggle{noauth}
+    {\usebibmacro{title+labelyear}}%
+    {}% needs '%'
   \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:short}{%
@@ -505,14 +525,18 @@
     {\ifboolexpr{ test {\ifentrytype{article}}
                   or test {\ifentrytype{review}}}
        {\iffieldundef{postnote}
-          {\printfield{pages}}%
+          {\iftoggle{shortlinks}
+             {\printfield{pages}}%
+             {\printtext[bibhyperref]{\printfield{pages}}}}
           {}}
        {}}}
 
 \renewbibmacro*{postnote}{%
   \iffieldundef{postnote}
     {}
-    {\printfield{postnote}}}
+    {\iftoggle{shortlinks}
+       {\printfield{postnote}}%
+       {\printtext[bibhyperref]{\printfield{postnote}}}}}
 
 \newbibmacro*{shorthand+intro}{%
   \iffieldundef{shorthand}
