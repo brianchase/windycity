@@ -19,6 +19,7 @@ brianchase/windycity").
   options
 * added `noreprint` entry option to exclude the `reprint` bibliography
   string from citations of certain reprints
+* changed preamble option `firstshort` to `shortfirst`
 * fixed `shortauthor` from printing in long, first citations (sorry
   about that!)
 * fixed several bugs, mostly affecting parenthetical citations, having

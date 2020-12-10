@@ -1,4 +1,4 @@
-% Last modified: Sun 06 Dec 2020 02:56:42 PM CST
+% Last modified: Wed 09 Dec 2020 06:22:17 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -44,10 +44,6 @@
 \providetoggle{eprint}
 \DeclareBiblatexOption{entry,global}[boolean]{eprint}[true]{%
   \settoggle{eprint}{#1}}
-
-\providetoggle{firstshort}
-\DeclareBiblatexOption{global}[boolean]{firstshort}[true]{%
-  \settoggle{firstshort}{#1}}%
 
 \providetoggle{ibid}
 \DeclareBiblatexOption{global}[boolean]{ibid}[true]{%
@@ -107,8 +103,12 @@
 \DeclareBiblatexOption{global}[boolean]{short}[true]{%
   \ifstrequal{#1}{true}
     {\toggletrue{short}%
-     \toggletrue{firstshort}}%
+     \toggletrue{shortfirst}}%
     {\togglefalse{short}}}
+
+\providetoggle{shortfirst}
+\DeclareBiblatexOption{global}[boolean]{shortfirst}[true]{%
+  \settoggle{shortfirst}{#1}}%
 
 \providetoggle{skipdate}
 \DeclareBiblatexOption{entry}[boolean]{skipdate}[true]{%
@@ -1367,7 +1367,7 @@
     {\usebibmacro{longtitle+titleaddon}%
      \usebibmacro{b:labeldate+extradate}}%
     {\ifboolexpr{ test \ifciteseen
-                  or togl {firstshort}}
+                  or togl {shortfirst}}
        {\usebibmacro{shorttitle}}%
        {\usebibmacro{longtitle+titleaddon}}}}
 
@@ -2012,7 +2012,7 @@
   \usebibmacro{note}%
   \usebibmacro{review+title}%
   \setunit{\addcomma\space}%
-  \iftoggle{firstshort}
+  \iftoggle{shortfirst}
     {}
     {\toggletrue{edshift}%
      \usebibmacro{edtrans}}}
@@ -2124,7 +2124,7 @@
                and test {\iffieldundef{doi}}
                and test {\iffieldundef{eprint}}
                and test {\iffieldundef{addendum}}
-               or ( togl {firstshort} and not togl {bibliography} )}
+               or ( togl {shortfirst} and not togl {bibliography} )}
     {}
     {\usebibmacro{eid}%
      \newunit
@@ -2330,7 +2330,7 @@
   \space
   \renewcommand*{\xtitle}{book}%
   \usebibmacro{title+labelyear}%
-  \iftoggle{firstshort}
+  \iftoggle{shortfirst}
     {\clearfield{booktitle}}%
     {\setunit{\addcomma\space}%
      \ifdefempty{\reviewee}

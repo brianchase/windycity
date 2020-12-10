@@ -1,4 +1,4 @@
-% Last modified: Tue 08 Dec 2020 06:34:49 PM CST
+% Last modified: Wed 09 Dec 2020 06:22:15 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -379,7 +379,7 @@
 \newbibmacro*{cite:new}{%
   \global\toggletrue{cbx:first}%
   \usebibmacro{idem+short+multicite}%
-  \iftoggle{firstshort}
+  \iftoggle{shortfirst}
     {\usebibmacro{cite:short}}%
     {\printtext{%
        \usedriver
@@ -393,7 +393,7 @@
 \newbibmacro*{idem+short+multicite}{%
   \ifboolexpr{ test {\ifciteidem}
                or togl {cbx:idem}
-               or togl {firstshort}}
+               or togl {shortfirst}}
     {\renewcommand*{\cbx@deflabel}{labelname}}%
     {\ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
                   and togl {multicite}}

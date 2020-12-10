@@ -1,4 +1,4 @@
-% Last modified: Sun 29 Nov 2020 01:53:58 PM CST
+% Last modified: Wed 09 Dec 2020 07:52:11 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -235,12 +235,12 @@ A shorter form of this passage appears in \textit{CMOS}
 feature of the style. For demonstration purposes, though, it's
 possible.}
 
-% The use of 'firstshort' below might be confusing. It's necessary to
+% The use of 'shortfirst' below might be confusing. It's necessary to
 % simulate the effect of 'short' within a document that otherwise
 % gives default output.
 
 \begin{citeonly}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[18]{morrison2004a}
@@ -248,11 +248,11 @@ possible.}
 \item \cite[18]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[24--26]{morrison2004a}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[401-2]{morrison2004b}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[433]{morrison2004b}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[37--38]{diaz2008}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[403]{morrison2004b}
@@ -282,7 +282,7 @@ explained in section \ref{preamble}, Windy City won't print
 break here may affect the output.}
 
 \begin{citeonly}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}\toggletrue{ibid}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[18]{morrison2004a}
@@ -290,11 +290,11 @@ break here may affect the output.}
 \item \cite[18]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[24--26]{morrison2004a}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}\toggletrue{ibid}}
 \item \cite[401-2]{morrison2004b}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[433]{morrison2004b}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}\toggletrue{ibid}}
 \item \cite[37--38]{diaz2008}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[403]{morrison2004b}
@@ -302,14 +302,14 @@ break here may affect the output.}
 \item \cite[152]{diaz2008}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[201-2]{diaz2008}
-\AtNextMultiCite{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextMultiCite{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
 Other ways to make citations more concise: For a compromise between
-standard and short forms, try the  preamble option \opt{firstshort}.
+standard and short forms, try the  preamble option \opt{shortfirst}.
 It swaps long first citations for short ones but otherwise follows the
 standard (see section \ref{preamble}). Also with standard citations,
 the preamble option \opt{idemtracker} shortens the author's name of a
@@ -374,16 +374,6 @@ on many \bibtype{incollection} entries, such as articles in books, but
 it does filter out chapters of books, books in books, and volumes of
 collections. For discussion of multivolume works, see section
 \ref{multivolume}.
-
-\optitem[false]{firstshort}{\opt{true}, \opt{false}}
-
-\noindent Use this option to shorten a work's first citation. The
-resulting output consists mainly of the author's name and the work's
-title. According to \textit{CMOS}, this approach is optional for
-documents with complete bibliographies. (See \textit{CMOS}
-\ref{14.23}, also 14.29--14.36.) You may use \opt{firstshort} in
-conjunction with \opt{ibid}. However, it adds nothing to \opt{short},
-which has the same effect on first citations.
 
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
@@ -464,8 +454,18 @@ the title minus the subtitle or the content of the
 \bibfield{shorttitle} field, if available.
 
 As noted earlier, \opt{short} has the same effect on first citations
-as \opt{firstshort}. But recall from section \ref{short} that you can
+as \opt{shortfirst}. But recall from section \ref{short} that you can
 combine \opt{short} and \opt{ibid} for more concise output.
+
+\optitem[false]{shortfirst}{\opt{true}, \opt{false}}
+
+\noindent Use this option to shorten a work's first citation. The
+resulting output consists mainly of the author's name and the work's
+title. According to \textit{CMOS}, this approach is optional for
+documents with complete bibliographies. (See \textit{CMOS}
+\ref{14.23}, also 14.29--14.36.) You may use \opt{shortfirst} in
+conjunction with \opt{ibid}. However, it adds nothing to \opt{short},
+which has the same effect on first citations.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -2066,7 +2066,7 @@ On short citations and the \opt{short} and \opt{ibid} preamble
 options, see sections \ref{short} and \ref{preamble}.
 
 \begin{citeonly}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[18]{morrison2004a}
@@ -2074,11 +2074,11 @@ options, see sections \ref{short} and \ref{preamble}.
 \item \cite[18]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[24--26]{morrison2004a}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[401-2]{morrison2004b}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[433]{morrison2004b}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[37--38]{diaz2008}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[403]{morrison2004b}
@@ -2094,7 +2094,7 @@ options, see sections \ref{short} and \ref{preamble}.
 \noindent With options \opt{short} and \opt{ibid}:
 
 \begin{citeonly}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}\toggletrue{ibid}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[18]{morrison2004a}
@@ -2102,11 +2102,11 @@ options, see sections \ref{short} and \ref{preamble}.
 \item \cite[18]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[24--26]{morrison2004a}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}\toggletrue{ibid}}
 \item \cite[401-2]{morrison2004b}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[433]{morrison2004b}
-\AtNextCitekey{\toggletrue{short}\toggletrue{firstshort}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}\toggletrue{ibid}}
 \item \cite[37--38]{diaz2008}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[403]{morrison2004b}
@@ -2114,7 +2114,7 @@ options, see sections \ref{short} and \ref{preamble}.
 \item \cite[152]{diaz2008}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[201-2]{diaz2008}
-\AtNextMultiCite{\toggletrue{short}\toggletrue{firstshort}}
+\AtNextMultiCite{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[33]{morrison2004a}
