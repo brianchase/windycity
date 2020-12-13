@@ -1,4 +1,4 @@
-% Last modified: Wed 09 Dec 2020 08:43:11 PM CST
+% Last modified: Sun 13 Dec 2020 11:11:08 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -241,7 +241,7 @@
     {\ifboolexpr{ test {\ifnameundef{labelname}}
                   or test {\iffieldundef{labelyear}}}
        {\iffieldundef{label}
-          {\usebibmacro{parencite:journal}}%
+          {\printfield[citetitle]{labeltitle}}%
           {\printfield{label}}}
        {\global\toggletrue{cbx:short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
@@ -253,32 +253,6 @@
                      and test {\ifnameundef{preface}}}
           {\usebibmacro{author+bookauthor+etc}}%
           {\usebibmacro{supplement}}}}}
-
-% When 'journaltitle' goes in the author's position.
-
-\newbibmacro*{parencite:journal}{%
-  \ifentrytype{article}
-    {\iffieldundef{shortjournal}
-       {\renewcommand*{\xtitle}{journal}%
-        \usebibmacro{longtitle}}%
-       {\printfield[journal]{shortjournal}}}
-    {\usebibmacro{parencite:blog}}}
-
-% When 'blogtitle' goes in the author's position.
-
-\newbibmacro*{parencite:blog}{%
-  \ifentrytype{online}
-    {\renewcommand*{\xtitle}{blog}%
-     \usebibmacro{longtitle}}%
-    {\usebibmacro{parencite:organization}}}
-
-% When 'organization' goes in the author's position.
-
-\newbibmacro*{parencite:organization}{%
-  \ifboolexpr{ test {\ifentrytype{reference}}
-               and not test {\iflistundef{organization}}}
-    {\printlist{organization}}%
-    {\printfield[citetitle]{labeltitle}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Citations in Notes  %%
