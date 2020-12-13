@@ -10,11 +10,11 @@ brianchase/windycity").
 
 ## Latest
 
-* added support for the `pubstate` field to indicate when a when a
-  work is forthcoming (with value *forthcoming*), a preprint (with
-  value *preprint*), a working paper (with value *working*), or an
-  electronic article published ahead of the official publication date
-  (with value *prepub*)
+* added support for the `pubstate` field to indicate when a work is
+  forthcoming (with value *forthcoming*), a preprint (with value
+  preprint*), a working paper (with value *working*), or an electronic
+  article published ahead of the official publication date (with value
+  *prepub*)
 * added support for the `eprint` field, plus related fields and
   options
 * added `shortlinks` preamble option to "shorten" embedded links from
@@ -27,8 +27,9 @@ brianchase/windycity").
   `firstshort` to `shortfirst`
 * added `noreprint` entry option to exclude the `reprint` bibliography
   string from citations of certain reprints
-* fixed `shortauthor` from printing in long, first citations (sorry
-  about that!)
+* expanded support for the `label` field to all citation commands
+* fixed the `shortauthor` field printing in long, first citations
+  (sorry about that!)
 * fixed several bugs, mostly affecting parenthetical citations, having
   to do with the placement, punctuation, and tracking of citations
   with `journaltitle`, `organization`, or `blogtitle` in the author's
