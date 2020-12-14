@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Dec 2020 11:11:08 AM CST
+% Last modified: Mon 14 Dec 2020 05:26:40 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -240,9 +240,7 @@
     {}
     {\ifboolexpr{ test {\ifnameundef{labelname}}
                   or test {\iffieldundef{labelyear}}}
-       {\iffieldundef{label}
-          {\printfield[citetitle]{labeltitle}}%
-          {\printfield{label}}}
+       {\printfield[citetitle]{labeltitle}}%
        {\global\toggletrue{cbx:short}%
         \renewcommand*{\cbx@deflabel}{labelname}%
         \clearfield{handle}%

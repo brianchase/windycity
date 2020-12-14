@@ -1,4 +1,4 @@
-% Last modified: Sun 13 Dec 2020 05:44:32 PM CST
+% Last modified: Mon 14 Dec 2020 05:26:47 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -731,13 +731,8 @@
      \ifnameundef{\cbx@namelist}
        {\usebibmacro{edtrans:authpos}%
         \ifnameundef{\cbx@namelist}
-          {\iffieldundef{label}
-             {\toggletrue{noauth}%
-              \usebibmacro{authpos+deflabel}}%
-             {\usebibmacro{biblabeldash}%
-              \setunit{\space}%
-              \usebibmacro{labeldate+extradate}%
-              \newunit}}%
+          {\toggletrue{noauth}%
+           \usebibmacro{authpos+deflabel}}%
           {\usebibmacro{addplus:authpos}%
            \usebibmacro{namehash+etc}}}
        {\usebibmacro{namehash+etc}}}}
@@ -1333,16 +1328,6 @@
   \let\anonb\empty
   \let\pluga\empty
   \let\plugb\empty}%
-
-% When a dash replaces 'label' in the author's position.
-
-\newbibmacro*{biblabeldash}{%
-  \ifboolexpr{ test {\iffieldequals{label}{\bbx@lasthash}}
-               and not test \iffirstonpage}
-    {\bibnamedash
-     \newunit}%
-    {\savefield{label}{\bbx@lasthash}%
-     \printfield{label}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Titles and Subtitles  %%
