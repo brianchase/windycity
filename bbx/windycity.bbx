@@ -1,4 +1,4 @@
-% Last modified: Sun 20 Dec 2020 06:41:51 PM CST
+% Last modified: Mon 21 Dec 2020 06:18:21 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -283,34 +283,6 @@
       \step[notfield=translator, final]
       \step[notfield=journaltitle, final]
       \step[fieldsource=journal]
-      \step[fieldset=author, origfieldval]
-      \step[fieldsource=author,
-            match=\regexp{(.+)},
-            replace=\regexp{\\mkbibemph{{$1}}}]
-      \step[fieldset=options, fieldvalue={,newauth}, append]
-      \step[fieldset=verba, fieldvalue=journaltitle]
-      \step[fieldsource=shortjournal]
-      \step[fieldset=shortauthor, origfieldval]
-      \step[fieldsource=shortauthor,
-            match=\regexp{(.+)},
-            replace=\regexp{\\mkbibemph{{$1}}}]
-      \step[fieldsource=journaltitleaddon, final]
-      \step[fieldset=nameaddon, origfieldval]
-      \step[fieldsource=nameaddon,
-            match=\regexp{(.+)},
-            replace=\regexp{\\mkbibbrackets{$1}}]
-    }
-  }
-}
-\DeclareSourcemap{
-  \maps[datatype=bibtex]{
-    \map[overwrite]{
-      \pertype{article}
-      \pertype{review}
-      \step[notfield=author, final]
-      \step[notfield=editor, final]
-      \step[notfield=translator, final]
-      \step[notfield=journal, final]
       \step[fieldsource=journaltitle]
       \step[fieldset=author, origfieldval]
       \step[fieldsource=author,
