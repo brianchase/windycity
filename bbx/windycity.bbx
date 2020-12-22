@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Dec 2020 06:18:21 PM CST
+% Last modified: Mon 21 Dec 2020 06:19:38 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -281,7 +281,6 @@
       \step[notfield=author, final]
       \step[notfield=editor, final]
       \step[notfield=translator, final]
-      \step[notfield=journaltitle, final]
       \step[fieldsource=journal]
       \step[fieldsource=journaltitle]
       \step[fieldset=author, origfieldval]
@@ -1890,7 +1889,10 @@
   \usebibmacro{issuetitle}%
   \renewcommand*{\xtitle}{journal}%
   \usebibmacro{longtitle+titleaddon}%
-  \setunit{\space}%
+  \ifboolexpr{ togl {bibliography}
+                and togl {newauth}}
+    {}% needs '%'
+    {\setunit{\space}}%
   \usebibmacro{journallocation}%
   \usebibmacro{journalseries}%
   \printfield[noformat]{volume}%
