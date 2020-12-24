@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Dec 2020 06:19:38 PM CST
+% Last modified: Thu 24 Dec 2020 09:53:56 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -270,8 +270,8 @@
     \field[padside=left,padwidth=4,padchar=0]{volume}
     \literal{0000}}}
 
-% Mapping for when 'journaltitle', 'organization', or 'blogtitle' goes
-% in the author's position.
+% Mapping for when 'journal', 'journaltitle', 'organization', or
+% 'blogtitle' goes in the author's position.
 
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
@@ -770,8 +770,6 @@
     {\renewcommand*{\cbx@namelist}{bookauthor}}%
     {\renewcommand*{\cbx@namelist}{shortbookauthor}}%
   \usebibmacro{author+bookauthor+type}}%
-
-% See notes for 'handle' and 'nameaddon'.
 
 \newbibmacro*{author+bookauthor+type}{%
   \iffieldundef{\cbx@namelist type}
@@ -1316,8 +1314,7 @@
   \iftoggle{newauth}
     {\ifboolexpr{ test {\ifentrytype{article}}
                   and togl {bibliography}}
-       {\setunit{\space}%
-        \usebibmacro{journallocation}%
+       {\usebibmacro{journallocation}%
         \newunit}%
        {}}
     {}}
@@ -1889,13 +1886,9 @@
   \usebibmacro{issuetitle}%
   \renewcommand*{\xtitle}{journal}%
   \usebibmacro{longtitle+titleaddon}%
-  \ifboolexpr{ togl {bibliography}
-                and togl {newauth}}
-    {}% needs '%'
-    {\setunit{\space}}%
   \usebibmacro{journallocation}%
   \usebibmacro{journalseries}%
-  \printfield[noformat]{volume}%
+  \usebibmacro{volume}%
   \iftoggle{newauth}
     {\newunit}%
     {\setunit{\addcomma\space}}%
@@ -2079,9 +2072,9 @@
 \newbibmacro*{journallocation}{%
   \iflistundef{location}
     {}
-    {\nopunct
+    {\nopunct\setunit{\space}%
      \printtext[parens]{%
-       \printlist{location}}\space}%
+       \printlist{location}}}%
      \clearlist{location}}%
 
 \newbibmacro*{journalseries}{%
@@ -2096,6 +2089,15 @@
      \usebibmacro{seriesaddon}%
      \usebibmacro{editortypes}{series}%
      \newunit}}%
+
+\newbibmacro*{volume}{%
+  \iffieldundef{volume}
+    {}
+    {\ifboolexpr{ togl {bibliography}
+               and togl {newauth}}
+       {\printfield[noformat]{volume}}%
+       {\setunit{\space}%
+        \printfield[noformat]{volume}}}}
 
 % On how to format the issue number of periodicals, see CMOS, 17th
 % ed., 14.171 and 15.47.
