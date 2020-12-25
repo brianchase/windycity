@@ -25,6 +25,10 @@ brianchase/windycity").
   shorthand
 * somewhat related to the previous, changed preamble option
   `firstshort` to `shortfirst`
+* sorting in bibliographies and reference lists now respond to the
+  month, day, hour, and minute or entries (e.g. in a reference list,
+  two articles by the same author published on the same day, minutes
+  apart, will sort the earliest article first)
 * added `noreprint` entry option to exclude the `reprint` bibliography
   string from citations of certain reprints
 * fixed the `shortauthor` field printing in long, first citations
