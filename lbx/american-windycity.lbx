@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Jan 2021 10:44:04 AM CST
+% Last modified: Sun 31 Jan 2021 11:34:54 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -119,9 +119,10 @@
 }
 
 \NewBibliographyString{by}
-\NewBibliographyString{comped,comped+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+,compup,compup+}
-\NewBibliographyString{editor+,edcomp,edcomp+,edrev,edrev+,edtrans,edtrans+,edup,edup+}
+\NewBibliographyString{comped,comped+,compex,compex+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+,compup,compup+}
+\NewBibliographyString{editor+,edcomp,edcomp+,edex,edex+,edrev,edrev+,edtrans,edtrans+,edup,edup+}
 \NewBibliographyString{expanded}
+\NewBibliographyString{excomp,excomp+,exed,exed+,expander,expander+,exrev,exrev+,extrans,extrans+,exup,exup+}
 \NewBibliographyString{noplace}
 \NewBibliographyString{of}
 \NewBibliographyString{origpub}
@@ -132,13 +133,13 @@
 \NewBibliographyString{pseudo}
 \NewBibliographyString{reprint,reprinted}
 \NewBibliographyString{review,reviewnoauth}
-\NewBibliographyString{revcomp,revcomp+,reved,reved+,reviser,reviser+,revtrans,revtrans+,revup,revup+}
+\NewBibliographyString{revcomp,revcomp+,reved,reved+,revex,revex+,reviser,reviser+,revtrans,revtrans+,revup,revup+}
 \NewBibliographyString{revised}
 \NewBibliographyString{selfpub}
 \NewBibliographyString{special}
 \NewBibliographyString{subverbo,subverbos}
-\NewBibliographyString{transcomp,transcomp+,transed,transed+,translator+,transrev,transrev+,transup,transup+}
-\NewBibliographyString{upcomp,upcomp+,updater,updater+,uped,uped+,uprev,uprev+,uptrans,uptrans+}
+\NewBibliographyString{transcomp,transcomp+,transed,transed+,transex,transex+,translator+,transrev,transrev+,transup,transup+}
+\NewBibliographyString{upcomp,upcomp+,updater,updater+,uped,uped+,upex,upex+,uprev,uprev+,uptrans,uptrans+}
 \NewBibliographyString{updated}
 \NewBibliographyString{working}
 
@@ -152,6 +153,8 @@
   citedas       = {{hereafter cited as}{hereafter cited as}},
   comped        = {{compiled and edit\-ed by}{comp\adddotspace and ed\adddot}},
   comped+       = {{compiled and edit\-ed by}{comps\adddotspace and eds\adddot}},
+  compex        = {{compiled and expanded by}{comp\adddotspace and expand\adddot}},
+  compex+       = {{compiled and expanded by}{comps\adddotspace and expand\adddot}},
   compiler      = {{compiled by}{comp\adddot}},
   compiler+     = {{compiled by}{comps\adddot}},
   comprev       = {{compiled and revised by}{comp\adddotspace and rev\adddot}},
@@ -162,6 +165,8 @@
   compup+       = {{compiled and updated by}{comps\adddotspace and up\adddot}},
   edcomp        = {{edit\-ed and compiled by}{ed\adddotspace and comp\adddot}},
   edcomp+       = {{edit\-ed and compiled by}{eds\adddotspace and comps\adddot}},
+  edex          = {{edit\-ed and expanded by}{ed\adddotspace and expand\adddot}},
+  edex+         = {{edit\-ed and expanded by}{eds\adddotspace and expand\adddot}},
   edition       = {{ed\adddot}{ed\adddot}},
   editor        = {{edit\-ed by}{ed\adddot}},
   editor+       = {{edit\-ed by}{eds\adddot}},
@@ -171,7 +176,19 @@
   edtrans+      = {{edit\-ed and translated by}{eds\adddotspace and trans\adddot}},
   edup          = {{edit\-ed and updated by}{ed\adddotspace and up\adddot}},
   edup+         = {{edit\-ed and updated by}{eds\adddotspace and up\adddot}},
+  excomp        = {{expanded and compiled by}{expand\adddotspace and comp\adddot}},
+  excomp+       = {{expanded and compiled by}{expand\adddotspace and comps\adddot}},
+  exed          = {{expanded and edit\-ed by}{expand\adddotspace and ed\adddot}},
+  exed+         = {{expanded and edit\-ed by}{expand\adddotspace and eds\adddot}},
   expanded      = {{expanded edition}{exp\adddotspace ed\adddot}},
+  expander      = {{expanded by}{expand\adddot}},
+  expander+     = {{expanded by}{expand\adddot}},
+  exrev         = {{expanded and revised by}{expand\adddotspace and rev\adddot}},
+  exrev+        = {{expanded and revised by}{expand\adddotspace and revs\adddot}},
+  extrans       = {{expanded and translated by}{expand\adddotspace and trans\adddot}},
+  extrans+      = {{expanded and translated by}{expand\adddotspace and trans\adddot}},
+  exup          = {{expanded and updated by}{expand\adddotspace and up\adddot}},
+  exup+         = {{expanded and updated by}{expand\adddotspace and up\adddot}},
   foreword      = {{foreword to}{foreword to}},
   forthcoming   = {{forthcoming}{forthcoming}},
   ibidem        = {{ibid\adddot}{ibid\adddot}},
@@ -196,6 +213,8 @@
   reprinted     = {{reprinted in}{reprinted in}},
   reved         = {{revised and edit\-ed by}{rev\adddotspace and ed\adddot}},
   reved+        = {{revised and edit\-ed by}{revs\adddotspace and eds\adddot}},
+  revex         = {{revised and edit\-ed by}{rev\adddotspace and ed\adddot}},
+  revex+        = {{revised and expanded by}{revs\adddotspace and expand\adddot}},
   revcomp       = {{revised and compiled by}{rev\adddotspace and comp\adddot}},
   revcomp+      = {{revised and compiled by}{revs\adddotspace and comps\adddot}},
   review        = {{review of}{review of}},
@@ -215,6 +234,8 @@
   transcomp+    = {{translated and compiled by}{trans\adddotspace and comps\adddot}},
   transed       = {{translated and edit\-ed by}{trans\adddotspace and ed\adddot}},
   transed+      = {{translated and edit\-ed by}{trans\adddotspace and eds\adddot}},
+  transex       = {{translated and expanded by}{trans\adddotspace and expand\adddot}},
+  transex+      = {{translated and expanded by}{trans\adddotspace and expand\adddot}},
   translator    = {{translated by}{trans\adddot}},
   translator+   = {{translated by}{trans\adddot}},
   transrev      = {{translated and revised by}{trans\adddotspace and rev\adddot}},
@@ -228,6 +249,8 @@
   updater+      = {{updated by}{up\adddot}},
   uped          = {{updated and edit\-ed by}{up\adddotspace and ed\adddot}},
   uped+         = {{updated and edit\-ed by}{up\adddotspace and eds\adddot}},
+  upex          = {{updated and expanded by}{up\adddotspace and expand\adddot}},
+  upex+         = {{updated and expanded by}{up\adddotspace and expand\adddot}},
   uprev         = {{updated and revised by}{up\adddotspace and rev\adddot}},
   uprev+        = {{updated and revised by}{up\adddotspace and revs\adddot}},
   uptrans       = {{updated and translated by}{up\adddotspace and trans\adddot}},
