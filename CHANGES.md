@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2021-01-30
 
 * added support for the `pubstate` field to indicate when a work is
   forthcoming (with value *forthcoming*), a preprint (with value
