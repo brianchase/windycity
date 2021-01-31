@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Jan 2021 06:17:53 PM CST
+% Last modified: Sun 31 Jan 2021 09:18:40 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -105,6 +105,9 @@
     {\toggletrue{short}%
      \toggletrue{shortfirst}}%
     {\togglefalse{short}}}
+
+\DeclareBiblatexOption{global}[boolean]{shortafter}[true]{%
+  \settoggle{short}{#1}}%
 
 \providetoggle{shortfirst}
 \DeclareBiblatexOption{global}[boolean]{shortfirst}[true]{%

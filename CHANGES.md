@@ -8,6 +8,11 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* added preamble option `shortafter` to print the same output as the
+  preamble option `short` but with long first citations
+
 ## 2021-01-30
 
 * added support for the `pubstate` field to indicate when a work is

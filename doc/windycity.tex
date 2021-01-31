@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Jan 2021 06:32:36 PM CST
+% Last modified: Sun 31 Jan 2021 09:38:09 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -311,14 +311,16 @@ break here may affect the output.}
 Other ways to make citations more concise: For a compromise between
 standard and short forms, try the  preamble option \opt{shortfirst}.
 It swaps long first citations for short ones but otherwise follows the
-standard (see section \ref{preamble}). Also with standard citations,
-the preamble option \opt{idemtracker} shortens the author's name of a
-work's first citation if the previous citation is of the same author
-(see section \ref{preamble}). The entry option \opt{noauth} omits the
-author's name altogether (see section \ref{entry}). And the
-\bibfield{shorthand} field allows you to set an abbreviation to stand
-in place of the author's name, the work's title, and other elements of
-a citation (see sections \ref{otherfields} and \ref{14.59}).
+standard (see section \ref{preamble}). For another variant, try
+\opt{shortafter}, which gives the same output as \opt{short} but with
+long first citations. Also with standard citations, the preamble
+option \opt{idemtracker} shortens the author's name of a work's first
+citation if the previous citation is of the same author (see section
+\ref{preamble}). The entry option \opt{noauth} omits the author's name
+altogether (see section \ref{entry}). And the \bibfield{shorthand}
+field allows you to set an abbreviation to stand in place of the
+author's name, the work's title, and other elements of a citation (see
+sections \ref{otherfields} and \ref{14.59}).
 
 \subsection{Preamble Options}
 \label{preamble}
@@ -456,6 +458,43 @@ the title minus the subtitle or the content of the
 As noted earlier, \opt{short} has the same effect on first citations
 as \opt{shortfirst}. But recall from section \ref{short} that you can
 combine \opt{short} and \opt{ibid} for more concise output.
+
+\optitem[false]{shortafter}{\opt{true}, \opt{false}}
+
+\noindent If you want the output of \opt{short} but with long first
+citations, use \opt{shortafter}. Compare the following with examples
+in \textit{CMOS} \ref{14.34}:
+
+% The option 'short' implies the option 'shortfirst'. The option
+% 'shortafter' doesn't. Hence, to display the output of 'shortafter'
+% below, you need only toggle true 'short'.
+
+\begin{citeonly}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[3]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[18]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[24--26]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[401-2]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[433]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[37--38]{diaz2008}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[403]{morrison2004b}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[152]{diaz2008}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[201-2]{diaz2008}
+\AtNextMultiCite{\toggletrue{short}}
+\item \cites[240]{morrison2004b}[32]{morrison2004a}
+\AtNextCitekey{\toggletrue{short}}
+\item \cite[33]{morrison2004a}
+\end{citeonly}
 
 \optitem[false]{shortfirst}{\opt{true}, \opt{false}}
 
