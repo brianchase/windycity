@@ -1,4 +1,4 @@
-% Last modified: Mon 01 Feb 2021 07:50:27 AM CST
+% Last modified: Sun 07 Feb 2021 01:56:17 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1329,11 +1329,52 @@ scope of the \bibtype{incollection} entry:
 scope of \bibtype{collection}, the style associates it with
 \textit{The Renaissance Philosophy of Man}.
 
-The style supports several more basic editorial roles: compiler,
-expander, reviser, and updater. To assign them, you need to use the
-\bibfield{editortype} field. It may help to see the bibliography
-database entries for examples in \textit{CMOS} \ref{14.103} and
-\ref{14.142}:
+The style supports a second tier of editors after a \bibfield{title}
+field when no other \bibfield{title} is available for the assignment.
+If the style recognizes a second tiers of editors, \bibfield{editor}
+precedes \bibfield{editora}, and \bibfield{editora} preceedes
+\bibfield{editorb}. (This features excludes \bibfield{editorc}.)
+Further, the second editor always prints after \bibfield{title}, even
+when the first occupies the author's position.
+
+\begin{verbatim}
+   @InCollection{myers2012,
+     author = {Myers, Herbert},
+     title = {Pitch and Transposition},
+     pages = {375--393},
+     crossref = {carter2012}
+   }
+   @Collection{carter2012,
+     title = {A Performer's Guide to Seventeenth-Century Music},
+     editor = {Carter, Stewart},
+     editora = {Kite-Powell, Jeffery},
+     editoratype = {revex},
+     address = {Bloomington},
+     publisher = {Indiana University Press},
+     year = {2012}
+   }
+\end{verbatim}
+
+\begin{bibonly}
+\nocite{myers2012,carter2012}
+\end{bibonly}
+
+The editors print correctly in the examples above because there's no
+ambiguity about which title they're responsible for. Neither is an
+editor of ``Pitch and Transposition,'' so both must be editors of
+\textit{A Performer's Guide to Seventeenth-Century Music}. If there
+were another \bibfield{title}, the style would assign
+\bibfield{editor} to \textit{A Performer's Guide} and
+\bibfield{editora} to the next one. Failure to assign a second tier of
+editors is more likely to happen with double or triple
+cross-referencing. That's rarely necessary, but it no doubt affects
+some works in collections.
+
+As these exaples also show, the style supports editorial roles beyond
+just editor and translator. Those roles are compiler, expander,
+reviser, and updater. To assign them, you need to use the
+\bibfield{editortype} field. Below are some bibliography database
+entries for examples in \textit{CMOS} \ref{14.103} and \ref{14.142}:
 
 \begin{verbatim}
    @Book{schechter2011,

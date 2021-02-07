@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Jan 2021 05:43:16 PM CST
+% Last modified: Sun 07 Feb 2021 02:10:10 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1071,7 +1071,30 @@
      \usebibmacro{edcombos+etc}}%
     {\usebibmacro{edcombos+etc}%
      \usebibmacro{transcombos+etc}}%
-  \usebibmacro{editoraddon}}%
+  \usebibmacro{editoraddon}%
+  \usebibmacro{editora+editorb}}%
+
+\newbibmacro*{editora+editorb}{%
+  \ifboolexpr{ test {\iffieldundef{booktitle}}
+               and test {\iffieldundef{bookbooktitle}}}
+    {\ifnameundef{editora}
+       {\ifnameundef{editorb}
+          {}
+          {\ifboolexpr{ test {\iffieldequalstr{editorbtype}{issuetitle}}
+                        or test {\iffieldequalstr{editorbtype}{maintitle}}
+                        or test {\iffieldequalstr{editorbtype}{series}}
+                        or test {\iffieldundef{editorbtype}}}
+             {}
+             {\usebibmacro{edcombos}%
+              \usebibmacro{pluga+etc}}}}
+       {\ifboolexpr{ test {\iffieldequalstr{editoratype}{issuetitle}}
+                     or test {\iffieldequalstr{editoratype}{maintitle}}
+                     or test {\iffieldequalstr{editoratype}{series}}
+                     or test {\iffieldundef{editoratype}}}
+          {}
+          {\usebibmacro{edcombos}%
+           \usebibmacro{pluga+etc}}}}
+    {}}
 
 \newbibmacro*{transcombos+etc}{%
   \togglefalse{noed}%

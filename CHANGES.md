@@ -26,6 +26,10 @@ brianchase/windycity").
   - translated and expanded by...
   - updated and expanded by...
 
+* added support for printing a second tier of editors after some
+  titles, as in "Edited by Jane Doe. Revised and Expanded by John
+  Smith"
+
 ## 2021-01-30
 
 * added support for the `pubstate` field to indicate when a work is
