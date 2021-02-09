@@ -1,4 +1,4 @@
-% Last modified: Sun 07 Feb 2021 04:02:02 PM CST
+% Last modified: Mon 08 Feb 2021 08:21:12 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2316,8 +2316,7 @@
   \iffieldundef{edition}
     {}
     {\iftoggle{edshift}
-       {\setunit{\addcomma\space}%
-        \togglefalse{edshift}}%
+       {\setunit{\addcomma\space}}%
        {\newunit}%
      \iffieldbibstring{edition}
        {\bibstring{\thefield{edition}}}

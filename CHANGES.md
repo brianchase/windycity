@@ -29,6 +29,8 @@ brianchase/windycity").
 * added support for printing a second tier of editors after some
   titles, as in "Edited by Jane Doe. Revised and Expanded by John
   Smith"
+* for works in certain collections, fixed punctuation after the
+  `edition` field
 
 ## 2021-01-30
 
