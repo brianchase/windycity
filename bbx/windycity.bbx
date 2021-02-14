@@ -1,4 +1,4 @@
-% Last modified: Mon 08 Feb 2021 08:21:12 PM CST
+% Last modified: Sun 14 Feb 2021 01:27:27 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -959,21 +959,23 @@
 \newbibmacro*{edcombos:trans}{%
   \iffieldstart{\xeditor type}{c}
     {\renewcommand*{\cbx@bibstring}{comptrans}}%
-    {\iffieldstart{\xeditor type}{r}
-       {\renewcommand*{\cbx@bibstring}{revtrans}}%
-       {\iffieldstart{\xeditor type}{u}
-          {\renewcommand*{\cbx@bibstring}{uptrans}}%
-          {\iffieldequalstr{\xeditor type}{transcomp}
-             {\renewcommand*{\cbx@bibstring}{transcomp}}%
-             {\iffieldequalstr{\xeditor type}{transed}
-                {\renewcommand*{\cbx@bibstring}{transed}}%
-                {\iffieldequalstr{\xeditor type}{transex}
-                   {\renewcommand*{\cbx@bibstring}{transex}}%
-                   {\iffieldequalstr{\xeditor type}{transrev}
-                      {\renewcommand*{\cbx@bibstring}{transrev}}%
-                      {\iffieldequalstr{\xeditor type}{transup}
-                         {\renewcommand*{\cbx@bibstring}{transup}}%
-                         {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}}}}}
+    {\iffieldstart{\xeditor type}{e}
+       {\renewcommand*{\cbx@bibstring}{extrans}}%
+       {\iffieldstart{\xeditor type}{r}
+          {\renewcommand*{\cbx@bibstring}{revtrans}}%
+          {\iffieldstart{\xeditor type}{u}
+             {\renewcommand*{\cbx@bibstring}{uptrans}}%
+             {\iffieldequalstr{\xeditor type}{transcomp}
+                {\renewcommand*{\cbx@bibstring}{transcomp}}%
+                {\iffieldequalstr{\xeditor type}{transed}
+                   {\renewcommand*{\cbx@bibstring}{transed}}%
+                   {\iffieldequalstr{\xeditor type}{transex}
+                      {\renewcommand*{\cbx@bibstring}{transex}}%
+                      {\iffieldequalstr{\xeditor type}{transrev}
+                         {\renewcommand*{\cbx@bibstring}{transrev}}%
+                         {\iffieldequalstr{\xeditor type}{transup}
+                            {\renewcommand*{\cbx@bibstring}{transup}}%
+                            {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}}}}}}
 
 \newbibmacro*{edcombos:notrans:a}{%
   \iffieldequalstr{\xeditor type}{compiler}
