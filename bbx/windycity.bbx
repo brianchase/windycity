@@ -1,4 +1,4 @@
-% Last modified: Sun 14 Feb 2021 01:27:27 PM CST
+% Last modified: Tue 16 Feb 2021 06:42:27 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1087,7 +1087,7 @@
                         or test {\iffieldequalstr{editorbtype}{series}}
                         or test {\iffieldundef{editorbtype}}}
              {}
-             {\renewcommand*{\xeditor}{editorb}% in case 'edshift' is true
+             {\renewcommand*{\xeditor}{editorb}%
               \usebibmacro{edcombos}%
               \usebibmacro{pluga+etc}}}}
        {\ifboolexpr{ test {\iffieldequalstr{editoratype}{issuetitle}}
@@ -1095,7 +1095,8 @@
                      or test {\iffieldequalstr{editoratype}{series}}
                      or test {\iffieldundef{editoratype}}}
           {}
-          {\usebibmacro{edcombos}%
+          {\renewcommand*{\xeditor}{editora}%
+           \usebibmacro{edcombos}%
            \usebibmacro{pluga+etc}}}}
     {}}
 
