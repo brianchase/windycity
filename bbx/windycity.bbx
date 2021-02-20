@@ -1,4 +1,4 @@
-% Last modified: Tue 16 Feb 2021 06:42:27 PM CST
+% Last modified: Sat 20 Feb 2021 05:05:41 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -446,9 +446,9 @@
 \let\pluga\empty
 \let\plugb\empty
 \let\xeditor\empty
-\let\yeditor\empty
 \let\xtitle\empty
 \let\xvolume\empty
+\let\yeditor\empty
 
 \providetoggle{authposition}
 \providetoggle{bibliography}
@@ -857,15 +857,17 @@
 
 \newbibmacro*{test:xeditor:a}[1]{%
   \ifboolexpr{ test {\ifnameundef{\xeditor}}
-               or test {\iffieldequalstr{\xeditor type}{issuetitle}}
-               or test {\iffieldequalstr{\xeditor type}{series}}}
+               or test {\ifinlist{issuetitle}{\editortypes}}
+               or test {\ifinlist{series}{\editortypes}}}
     {\toggletrue{noed}}%
     {\ifstrequal{#1}{ap}% not 'authposition' toggle
        {\usebibmacro{test:xeditor:b:authpos}}%
-       {\usebibmacro{test:xeditor:b}}}}
+       {\ifinlist{maintitle}{\editortypes}
+         {\toggletrue{noed}}%
+         {}}}}
 
 \newbibmacro*{test:xeditor:b:authpos}{%
-  \iffieldequalstr{\xeditor type}{maintitle}
+  \ifinlist{maintitle}{\editortypes}
     {\iftoggle{collection:bk}
        {\iftoggle{swapvol}
           {}
@@ -882,7 +884,7 @@
           {}}}}
 
 \newbibmacro*{test:editor:authpos}{%
-  \renewcommand*{\xeditor}{editor}%
+  \usebibmacro{editortypes}{editor}%
   \usebibmacro{test:xeditor:a}{ap}%
   \iftoggle{noed}
     {}
@@ -897,7 +899,7 @@
           {}}}}
 
 \newbibmacro*{test:editora:authpos}{%
-  \renewcommand*{\xeditor}{editora}%
+  \usebibmacro{editortypes}{editora}%
   \usebibmacro{test:xeditor:a}{ap}%
   \iftoggle{noed}
     {}
@@ -911,141 +913,71 @@
   \usebibmacro{trans+transa+transb}%
   \ifnameundef{\yeditor}
     {\toggletrue{notrans}}%
-    {\iffieldequalstr{translatortype}{maintitle}
+    {\ifinlist{maintitle}{\translatortypes}
        {\ifboolexpr{ togl {collection:bk}
                      and togl {swapvol}}
           {}
           {\toggletrue{notrans}}}
-       {\iffieldequalstr{translatoratype}{maintitle}
-          {\ifboolexpr{ togl {collection:icbk}
-                        and togl {swapvol}}
-             {}
-             {\toggletrue{notrans}}}
-          {}}}}
+       {}}}
 
 \newbibmacro*{trans+transa+transb}{%
   \ifnameundef{translator}
     {\ifnameundef{translatora}
-       {\renewcommand*{\yeditor}{translatorb}}%
-       {\renewcommand*{\yeditor}{translatora}}}
-    {\renewcommand*{\yeditor}{translator}}}
+       {\usebibmacro{translatortypes}{translatorb}}%
+       {\usebibmacro{translatortypes}{translatora}}}
+    {\usebibmacro{translatortypes}{translator}}}
 
 \newbibmacro*{transcombos}{%
   \renewcommand*{\cbx@namelist}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
-     \ifboolexpr{ test {\iffieldstart{editortype}{c}}
-                  or test {\iffieldequalstr{\xeditor type}{transcomp}}}
-       {\renewcommand*{\cbx@bibstring}{transcomp}}%
-       {\ifboolexpr{ test {\iffieldstart{\xeditor type}{ex}}
-                     or test {\iffieldequalstr{\xeditor type}{transex}}}
-          {\renewcommand*{\cbx@bibstring}{transex}}%
-          {\ifboolexpr{ test {\iffieldstart{\xeditor type}{r}}
-                        or test {\iffieldequalstr{\xeditor type}{transrev}}}
-             {\renewcommand*{\cbx@bibstring}{transrev}}%
-             {\ifboolexpr{ test {\iffieldstart{\xeditor type}{u}}
-                           or test {\iffieldequalstr{\xeditor type}{transup}}}
-                {\renewcommand*{\cbx@bibstring}{transup}}%
-                {\renewcommand*{\cbx@bibstring}{transed}}}}}}
-    {\renewcommand*{\cbx@bibstring}{translator}}}
+     \usebibmacro{transcombos:a}}%
+    {\usebibmacro{transcombos:b}}}
 
 \newbibmacro*{edcombos}{%
   \renewcommand*{\cbx@namelist}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
-     \usebibmacro{edcombos:trans}}%
-    {\usebibmacro{edcombos:notrans:a}}}
+     \usebibmacro{edcombos:a}}%
+    {\usebibmacro{edcombos:b}}}
 
-\newbibmacro*{edcombos:trans}{%
-  \iffieldstart{\xeditor type}{c}
-    {\renewcommand*{\cbx@bibstring}{comptrans}}%
-    {\iffieldstart{\xeditor type}{e}
-       {\renewcommand*{\cbx@bibstring}{extrans}}%
-       {\iffieldstart{\xeditor type}{r}
-          {\renewcommand*{\cbx@bibstring}{revtrans}}%
-          {\iffieldstart{\xeditor type}{u}
-             {\renewcommand*{\cbx@bibstring}{uptrans}}%
-             {\iffieldequalstr{\xeditor type}{transcomp}
-                {\renewcommand*{\cbx@bibstring}{transcomp}}%
-                {\iffieldequalstr{\xeditor type}{transed}
-                   {\renewcommand*{\cbx@bibstring}{transed}}%
-                   {\iffieldequalstr{\xeditor type}{transex}
-                      {\renewcommand*{\cbx@bibstring}{transex}}%
-                      {\iffieldequalstr{\xeditor type}{transrev}
-                         {\renewcommand*{\cbx@bibstring}{transrev}}%
-                         {\iffieldequalstr{\xeditor type}{transup}
-                            {\renewcommand*{\cbx@bibstring}{transup}}%
-                            {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}}}}}}
+\newbibmacro*{transcombos:a}{%
+  \renewcommand*{\do}[1]{%
+    \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
+                 or test {\ifstrequal{##1}{transed}}}
+      {\renewcommand*{\cbx@bibstring}{##1}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{comptrans,edtrans,extrans,revtrans,transcomp,transex,transrev,transup,uptrans,transed}}%
 
-\newbibmacro*{edcombos:notrans:a}{%
-  \iffieldequalstr{\xeditor type}{compiler}
-    {\renewcommand*{\cbx@bibstring}{compiler}}%
-    {\iffieldequalstr{\xeditor type}{expander}
-       {\renewcommand*{\cbx@bibstring}{expander}}%
-       {\iffieldequalstr{\xeditor type}{reviser}
-          {\renewcommand*{\cbx@bibstring}{reviser}}%
-          {\iffieldequalstr{\xeditor type}{updater}
-             {\renewcommand*{\cbx@bibstring}{updater}}%
-             {\iffieldequalstr{\xeditor type}{comped}
-                {\renewcommand*{\cbx@bibstring}{comped}}%
-                {\iffieldequalstr{\xeditor type}{compex}
-                   {\renewcommand*{\cbx@bibstring}{compex}}%
-                   {\iffieldequalstr{\xeditor type}{comprev}
-                      {\renewcommand*{\cbx@bibstring}{comprev}}%
-                      {\iffieldequalstr{\xeditor type}{compup}
-                         {\renewcommand*{\cbx@bibstring}{compup}}%
-                         {\iffieldequalstr{\xeditor type}{edcomp}
-                            {\renewcommand*{\cbx@bibstring}{edcomp}}%
-                            {\iffieldequalstr{\xeditor type}{edex}
-                               {\renewcommand*{\cbx@bibstring}{edex}}%
-                               {\iffieldequalstr{\xeditor type}{edrev}
-                                  {\renewcommand*{\cbx@bibstring}{edrev}}%
-                                  {\iffieldequalstr{\xeditor type}{edup}
-                                     {\renewcommand*{\cbx@bibstring}{edup}}%
-                                     {\usebibmacro{edcombos:notrans:b}}}}}}}}}}}}}}
+\newbibmacro*{transcombos:b}{%
+  \renewcommand*{\do}[1]{%
+    \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
+                 or test {\ifstrequal{##1}{translator}}}
+      {\renewcommand*{\cbx@bibstring}{##1}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{comptrans,edtrans,extrans,revtrans,transcomp,transed,transex,transrev,transup,uptrans,
+             translator}}%
 
-\newbibmacro*{edcombos:notrans:b}{%
-  \iffieldequalstr{\xeditor type}{excomp}
-    {\renewcommand*{\cbx@bibstring}{excomp}}%
-    {\iffieldequalstr{\xeditor type}{exed}
-       {\renewcommand*{\cbx@bibstring}{exed}}%
-       {\iffieldequalstr{\xeditor type}{exrev}
-          {\renewcommand*{\cbx@bibstring}{exrev}}%
-          {\iffieldequalstr{\xeditor type}{exup}
-             {\renewcommand*{\cbx@bibstring}{exup}}%
-             {\iffieldequalstr{\xeditor type}{revcomp}
-                {\renewcommand*{\cbx@bibstring}{revcomp}}%
-                {\iffieldequalstr{\xeditor type}{reved}
-                   {\renewcommand*{\cbx@bibstring}{reved}}%
-                   {\iffieldequalstr{\xeditor type}{revex}
-                      {\renewcommand*{\cbx@bibstring}{revex}}%
-                      {\iffieldequalstr{\xeditor type}{revup}
-                         {\renewcommand*{\cbx@bibstring}{revup}}%
-                         {\iffieldequalstr{\xeditor type}{upcomp}
-                            {\renewcommand*{\cbx@bibstring}{upcomp}}%
-                            {\iffieldequalstr{\xeditor type}{uped}
-                               {\renewcommand*{\cbx@bibstring}{uped}}%
-                               {\iffieldequalstr{\xeditor type}{upex}
-                                  {\renewcommand*{\cbx@bibstring}{upex}}%
-                                  {\iffieldequalstr{\xeditor type}{uprev}
-                                     {\renewcommand*{\cbx@bibstring}{uprev}}%
-                                     {\renewcommand*{\cbx@bibstring}{editor}}}}}}}}}}}}}}
+\newbibmacro*{edcombos:a}{%
+  \renewcommand*{\do}[1]{%
+    \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
+                 or test {\ifstrequal{##1}{edtrans}}}
+      {\renewcommand*{\cbx@bibstring}{##1}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{comptrans,extrans,revtrans,transcomp,transed,transex,transrev,transup,uptrans,edtrans}}%
 
-% Thanks to David Fussner's biblatex-chicago for pointing me to this
-% command by Philipp Lehman. Source:
-% https://groups.google.com/forum/#!topic/comp.text.tex/kG003fkZK1I
-
-\newrobustcmd*{\iffieldstart}[2]{%
-  \iffieldundef{#1}
-    {\@secondoftwo}% originally '\@gobbletwo'
-    {\begingroup
-     \edef\@tempa{%
-       \long\def\noexpand\iffieldstart@i####1\detokenize{#2}####2}%
-     \@tempa\@nil{\endgroup\ifblank{##1}}%
-     \savefield*{#1}{\@tempa}%
-     \expandafter\iffieldstart@i\detokenize
-     \expandafter\expandafter\expandafter{%
-       \expandafter\@tempa\detokenize{#2}}\@nil}}%
+\newbibmacro*{edcombos:b}{%
+  \renewcommand*{\do}[1]{%
+    \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
+                 or test {\ifstrequal{##1}{editor}}}
+      {\renewcommand*{\cbx@bibstring}{##1}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,compup,edcomp,edex,edrev,edup,
+             excomp,exed,exrev,exup,revcomp,reved,revex,revup,upcomp,uped,upex,uprev,editor}}%
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx:short}
@@ -1082,23 +1014,37 @@
     {\ifnameundef{editora}
        {\ifnameundef{editorb}
           {}
-          {\ifboolexpr{ test {\iffieldequalstr{editorbtype}{issuetitle}}
-                        or test {\iffieldequalstr{editorbtype}{maintitle}}
-                        or test {\iffieldequalstr{editorbtype}{series}}
+          {\usebibmacro{editortypes}{editorb}%
+           \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
+                        or test {\ifinlist{maintitle}{\editortypes}}
+                        or test {\ifinlist{series}{\editortypes}}
                         or test {\iffieldundef{editorbtype}}}
              {}
-             {\renewcommand*{\xeditor}{editorb}%
-              \usebibmacro{edcombos}%
+             {\usebibmacro{edcombos}%
               \usebibmacro{pluga+etc}}}}
-       {\ifboolexpr{ test {\iffieldequalstr{editoratype}{issuetitle}}
-                     or test {\iffieldequalstr{editoratype}{maintitle}}
-                     or test {\iffieldequalstr{editoratype}{series}}
+       {\usebibmacro{editortypes}{editora}%
+        \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
+                     or test {\ifinlist{maintitle}{\editortypes}}
+                     or test {\ifinlist{series}{\editortypes}}
                      or test {\iffieldundef{editoratype}}}
           {}
-          {\renewcommand*{\xeditor}{editora}%
-           \usebibmacro{edcombos}%
+          {\usebibmacro{edcombos}%
            \usebibmacro{pluga+etc}}}}
     {}}
+
+\newbibmacro*{editortypes}[1]{%
+  \let\editortypes\empty
+  \renewcommand*{\xeditor}{#1}%
+  \iffieldundef{\xeditor type}
+    {}
+    {\forcsvfield{\listadd\editortypes}{\xeditor type}}}
+
+\newbibmacro*{translatortypes}[1]{%
+  \let\translatortypes\empty
+  \renewcommand*{\yeditor}{#1}%
+  \iffieldundef{\yeditor type}
+    {}
+    {\forcsvfield{\listadd\translatortypes}{\yeditor type}}}
 
 \newbibmacro*{transcombos+etc}{%
   \togglefalse{noed}%
@@ -1159,13 +1105,13 @@
   \ifnameundef{editor}
     {\ifnameundef{editora}
        {\ifnameundef{editorb}
-          {\renewcommand*{\xeditor}{editorc}}%
-          {\renewcommand*{\xeditor}{editorb}}%
+          {\usebibmacro{editortypes}{editorc}}%
+          {\usebibmacro{editortypes}{editorb}}%
         \usebibmacro{test:editorb}}%
        {\usebibmacro{test:editora}%
         \iftoggle{noed}
           {\togglefalse{noed}%
-           \renewcommand*{\xeditor}{editorb}%
+           \usebibmacro{editortypes}{editorb}%
            \usebibmacro{test:editorb}}%
           {}}}
     {\usebibmacro{test:editor}%
@@ -1175,7 +1121,7 @@
        {}}}
 
 \newbibmacro*{test:editor}{%
-  \renewcommand*{\xeditor}{editor}%
+  \usebibmacro{editortypes}{editor}%
   \usebibmacro{test:xeditor:a}{}%
   \iftoggle{noed}
     {}
@@ -1184,7 +1130,7 @@
        {}}}
 
 \newbibmacro*{test:editora}{%
-  \renewcommand*{\xeditor}{editora}%
+  \usebibmacro{editortypes}{editora}%
   \usebibmacro{test:xeditor:a}{}%
   \iftoggle{noed}
     {}
@@ -1209,56 +1155,11 @@
        {}}
     {}}
 
-\newbibmacro*{test:xeditor:b}{%
- \iffieldequalstr{\xeditor type}{maintitle}
-   {\toggletrue{noed}}%
-   {\ifdefempty{\xtitle}
-      {\ifboolexpr{ test {\iffieldequalstr{\xeditor type}{compiler}}
-                    or test {\iffieldequalstr{\xeditor type}{comped}}
-                    or test {\iffieldequalstr{\xeditor type}{compex}}
-                    or test {\iffieldequalstr{\xeditor type}{comprev}}
-                    or test {\iffieldequalstr{\xeditor type}{comptrans}}
-                    or test {\iffieldequalstr{\xeditor type}{compup}}
-                    or test {\iffieldequalstr{\xeditor type}{editor}}
-                    or test {\iffieldequalstr{\xeditor type}{edcomp}}
-                    or test {\iffieldequalstr{\xeditor type}{edex}}
-                    or test {\iffieldequalstr{\xeditor type}{edrev}}
-                    or test {\iffieldequalstr{\xeditor type}{edtrans}}
-                    or test {\iffieldequalstr{\xeditor type}{edup}}
-                    or test {\iffieldequalstr{\xeditor type}{expander}}
-                    or test {\iffieldequalstr{\xeditor type}{excomp}}
-                    or test {\iffieldequalstr{\xeditor type}{exed}}
-                    or test {\iffieldequalstr{\xeditor type}{exrev}}
-                    or test {\iffieldequalstr{\xeditor type}{extrans}}
-                    or test {\iffieldequalstr{\xeditor type}{exup}}
-                    or test {\iffieldequalstr{\xeditor type}{reviser}}
-                    or test {\iffieldequalstr{\xeditor type}{revcomp}}
-                    or test {\iffieldequalstr{\xeditor type}{reved}}
-                    or test {\iffieldequalstr{\xeditor type}{revex}}
-                    or test {\iffieldequalstr{\xeditor type}{revtrans}}
-                    or test {\iffieldequalstr{\xeditor type}{revup}}
-                    or test {\iffieldequalstr{\xeditor type}{transcomp}}
-                    or test {\iffieldequalstr{\xeditor type}{transed}}
-                    or test {\iffieldequalstr{\xeditor type}{transex}}
-                    or test {\iffieldequalstr{\xeditor type}{transrev}}
-                    or test {\iffieldequalstr{\xeditor type}{transup}}
-                    or test {\iffieldequalstr{\xeditor type}{updater}}
-                    or test {\iffieldequalstr{\xeditor type}{upcomp}}
-                    or test {\iffieldequalstr{\xeditor type}{uped}}
-                    or test {\iffieldequalstr{\xeditor type}{upex}}
-                    or test {\iffieldequalstr{\xeditor type}{uprev}}
-                    or test {\iffieldequalstr{\xeditor type}{uptrans}}
-                    or test {\iffieldequalstr{\xeditor type}{title}}
-                    or test {\iffieldundef{\xeditor type}}}
-         {}
-         {\toggletrue{noed}}}
-      {}}}
-
 \newbibmacro*{test:trans}{%
   \usebibmacro{trans+transa+transb}%
   \ifnameundef{\yeditor}
     {\toggletrue{notrans}}%
-    {\iffieldequalstr{\yeditor type}{maintitle}
+    {\ifinlist{maintitle}{\translatortypes}
        {\toggletrue{notrans}}%
        {\ifdefstring{\yeditor}{translatorb}
           {\ifboolexpr{ test {\ifdefempty{\xtitle}}
@@ -1278,14 +1179,19 @@
 
 % For editors of an 'issuetitle', 'maintitle', or 'series'.
 
-\newbibmacro*{editortypes}[1]{%
-  \ifboolexpr{ test {\iffieldequalstr{editortype}{#1}}
-               or test {\iffieldequalstr{editoratype}{#1}}
-               or test {\iffieldequalstr{editorbtype}{#1}}
-               or test {\iffieldequalstr{editorctype}{#1}}}
+\newbibmacro*{eds:maintitle+etc}[1]{%
+  \renewcommand*{\do}[1]{%
+    \ifnameundef{##1}
+      {}
+      {\usebibmacro{editortypes}{##1}%
+       \usebibmacro{eds:lists+etc}{#1}%
+       \listbreak}}%
+  \docsvlist{editor,editora,editorb,editorc}}%
+
+\newbibmacro*{eds:lists+etc}[1]{%
+  \ifinlist{#1}{\editortypes}
     {\usebibmacro{edtranspunct:c}%
-     \renewcommand*{\cbx@bibstring}{editor}%
-     \usebibmacro{editorlists}{#1}%
+     \usebibmacro{edcombos}%
      \usebibmacro{pluga+printnames}}%
     {}}
 
@@ -1295,25 +1201,22 @@
     {\newunit}%
     {\setunit{\addcomma\space}}}
 
-\newbibmacro*{editorlists}[1]{%
-  \iffieldequalstr{editortype}{#1}
-    {\renewcommand*{\cbx@namelist}{editor}}%
-    {\iffieldequalstr{editoratype}{#1}
-       {\renewcommand*{\cbx@namelist}{editora}}%
-       {\iffieldequalstr{editorbtype}{#1}
-          {\renewcommand*{\cbx@namelist}{editorb}}%
-          {\renewcommand*{\cbx@namelist}{editorc}}}}}
+% For translators of a 'maintitle'. With work, this could extend to
+% 'issuetitle' and 'series', as with the 'eds:maintitle+etc' macro.
 
-% For translators of a 'maintitle'.
+\newbibmacro*{trans:maintitle+etc}[1]{%
+  \renewcommand*{\do}[1]{%
+    \ifnameundef{##1}
+      {}
+      {\usebibmacro{translatortypes}{##1}%
+       \usebibmacro{trans:lists+etc}{#1}%
+       \listbreak}}%
+  \docsvlist{translator,translatora,translatora}}%
 
-\newbibmacro*{translatortypes}{%
-  \ifboolexpr{ test {\iffieldequalstr{translatortype}{maintitle}}
-               or test {\iffieldequalstr{translatoratype}{maintitle}}}
+\newbibmacro*{trans:lists+etc}[1]{%
+  \ifinlist{#1}{\translatortypes}
     {\usebibmacro{edtranspunct:c}%
-     \renewcommand*{\cbx@bibstring}{translator}%
-     \iffieldequalstr{translatortype}{maintitle}
-       {\renewcommand*{\cbx@namelist}{translator}}%
-       {\renewcommand*{\cbx@namelist}{translatora}}%
+     \usebibmacro{transcombos}%
      \usebibmacro{pluga+printnames}}%
     {}}
 
@@ -1399,7 +1302,7 @@
   \let\anona\empty
   \let\anonb\empty
   \let\pluga\empty
-  \let\plugb\empty}%
+  \let\plugb\empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Titles and Subtitles  %%
@@ -1508,7 +1411,7 @@
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \usebibmacro{editortypes}{issuetitle}}%
+        \usebibmacro{eds:maintitle+etc}{issuetitle}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
@@ -2161,7 +2064,7 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \usebibmacro{editortypes}{series}%
+     \usebibmacro{eds:maintitle+etc}{series}%
      \newunit}}%
 
 \newbibmacro*{volume}{%
@@ -2264,10 +2167,10 @@
   \usebibmacro{note}%
   \usebibmacro{edition}{}%
   \iftoggle{swaptrans}
-    {\usebibmacro{translatortypes}%
-     \usebibmacro{editortypes}{maintitle}}%
-    {\usebibmacro{editortypes}{maintitle}%
-     \usebibmacro{translatortypes}}}
+    {\usebibmacro{trans:maintitle+etc}{maintitle}%
+     \usebibmacro{eds:maintitle+etc}{maintitle}}%
+    {\usebibmacro{eds:maintitle+etc}{maintitle}%
+     \usebibmacro{trans:maintitle+etc}{maintitle}}}
 
 \newbibmacro*{volume+number+etc}{%
   \iffieldundef{\xvolume volume}
@@ -2496,7 +2399,7 @@
      \newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \usebibmacro{editortypes}{series}%
+     \usebibmacro{eds:maintitle+etc}{series}%
      \setunit{\addcomma\space}}}
 
 \newbibmacro*{seriesaddon}{%
@@ -2532,11 +2435,10 @@
      \printfield[journum]{number}}%
     {}}
 
+% FIX: For translators of a 'series', check '\translatortypes'.
+
 \newbibmacro*{other:number}{%
-  \ifboolexpr{ test {\iffieldequalstr{editortype}{series}}
-               or test {\iffieldequalstr{editoratype}{series}}
-               or test {\iffieldequalstr{editorbtype}{series}}
-               or test {\iffieldequalstr{editorctype}{series}}}
+  \ifinlist{series}{\editortypes}
     {\setunit{\addcomma\space}%
      \printfield{number}}%
     {\setunit{\addspace}% not '\setunit{\space}'
