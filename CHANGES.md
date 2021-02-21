@@ -26,11 +26,15 @@ brianchase/windycity").
   - translated and expanded by...
   - updated and expanded by...
 
+* added support for translators of `issuetitle` and `series`
 * to expand the kinds of editors and translators available for
   `issuetitle`, `maintitle` and `series`, editor and translator type
   fields accept comma-separated bibliography strings (e.g. if `editor`
   is the reviser of `maintitle`, put `maintitle,reviser` or
   `reviser,maintitle` in `editortype`)
+* added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
+  entry options to swap positions of editors and translators of
+  `issuetitle`, `maintitle`, and `series`
 * added support for printing a second tier of editors after some
   titles, as in "Edited by Jane Doe. Revised and Expanded by John
   Smith"

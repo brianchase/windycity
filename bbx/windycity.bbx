@@ -1,4 +1,4 @@
-% Last modified: Sat 20 Feb 2021 05:05:41 PM CST
+% Last modified: Sat 20 Feb 2021 07:04:31 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -132,6 +132,18 @@
 \providetoggle{swaptrans}
 \DeclareBiblatexOption{entry}[boolean]{swaptrans}[true]{%
   \settoggle{swaptrans}{#1}}%
+
+\providetoggle{swaptrans:issue}
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:issue}[true]{%
+  \settoggle{swaptrans:issue}{#1}}%
+
+\providetoggle{swaptrans:main}
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:main}[true]{%
+  \settoggle{swaptrans:main}{#1}}%
+
+\providetoggle{swaptrans:series}
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:series}[true]{%
+  \settoggle{swaptrans:series}{#1}}%
 
 \providetoggle{swapvol}
 \DeclareBiblatexOption{entry,global}[boolean]{swapvol}[true]{%
@@ -911,7 +923,9 @@
 
 \newbibmacro*{test:trans:authpos}{%
   \usebibmacro{trans+transa+transb}%
-  \ifnameundef{\yeditor}
+  \ifboolexpr{ test {\ifnameundef{\yeditor}}
+               or test {\ifinlist{issuetitle}{\translatortypes}}
+               or test {\ifinlist{series}{\translatortypes}}}
     {\toggletrue{notrans}}%
     {\ifinlist{maintitle}{\translatortypes}
        {\ifboolexpr{ togl {collection:bk}
@@ -1157,25 +1171,25 @@
 
 \newbibmacro*{test:trans}{%
   \usebibmacro{trans+transa+transb}%
-  \ifnameundef{\yeditor}
+  \ifboolexpr{ test {\ifnameundef{\yeditor}}
+               or test {\ifinlist{issuetitle}{\translatortypes}}
+               or test {\ifinlist{series}{\translatortypes}}}
     {\toggletrue{notrans}}%
-    {\ifinlist{maintitle}{\translatortypes}
-       {\toggletrue{notrans}}%
-       {\ifdefstring{\yeditor}{translatorb}
+    {\ifdefstring{\yeditor}{translatorb}
+       {\ifboolexpr{ test {\ifdefempty{\xtitle}}
+                     or test {\ifdefstring{\xtitle}{book}}}
+          {\toggletrue{notrans}}%
+          {}}
+       {\ifdefstring{\yeditor}{translatora}
           {\ifboolexpr{ test {\ifdefempty{\xtitle}}
-                        or test {\ifdefstring{\xtitle}{book}}}
+                        or test {\ifdefstring{\xtitle}{bookbook}}}
              {\toggletrue{notrans}}%
              {}}
-          {\ifdefstring{\yeditor}{translatora}
-             {\ifboolexpr{ test {\ifdefempty{\xtitle}}
-                           or test {\ifdefstring{\xtitle}{bookbook}}}
-                {\toggletrue{notrans}}%
-                {}}
-             {\ifboolexpr{ togl {collection}
-                           and togl {swapvol}
-                           and test {\ifdefstring{\xtitle}{book}}}
-                {\toggletrue{notrans}}%
-                {}}}}}}
+          {\ifboolexpr{ togl {collection}
+                        and togl {swapvol}
+                        and test {\ifdefstring{\xtitle}{book}}}
+             {\toggletrue{notrans}}%
+             {}}}}}
 
 % For editors of an 'issuetitle', 'maintitle', or 'series'.
 
@@ -1411,7 +1425,11 @@
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \usebibmacro{eds:maintitle+etc}{issuetitle}}%
+        \iftoggle{swaptrans:issue}
+          {\usebibmacro{trans:maintitle+etc}{issuetitle}%
+           \usebibmacro{eds:maintitle+etc}{issuetitle}}%
+          {\usebibmacro{eds:maintitle+etc}{issuetitle}%
+           \usebibmacro{trans:maintitle+etc}{issuetitle}}}
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
@@ -2064,7 +2082,11 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \usebibmacro{eds:maintitle+etc}{series}%
+     \iftoggle{swaptrans:series}
+       {\usebibmacro{trans:maintitle+etc}{series}%
+        \usebibmacro{eds:maintitle+etc}{series}}%
+       {\usebibmacro{eds:maintitle+etc}{series}%
+        \usebibmacro{trans:maintitle+etc}{series}}%
      \newunit}}%
 
 \newbibmacro*{volume}{%
@@ -2166,7 +2188,7 @@
   \usebibmacro{maintitle}%
   \usebibmacro{note}%
   \usebibmacro{edition}{}%
-  \iftoggle{swaptrans}
+  \iftoggle{swaptrans:main}
     {\usebibmacro{trans:maintitle+etc}{maintitle}%
      \usebibmacro{eds:maintitle+etc}{maintitle}}%
     {\usebibmacro{eds:maintitle+etc}{maintitle}%
@@ -2399,8 +2421,11 @@
      \newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \usebibmacro{eds:maintitle+etc}{series}%
-     \setunit{\addcomma\space}}}
+     \iftoggle{swaptrans:series}
+       {\usebibmacro{trans:maintitle+etc}{series}%
+        \usebibmacro{eds:maintitle+etc}{series}}%
+       {\usebibmacro{eds:maintitle+etc}{series}%
+        \usebibmacro{trans:maintitle+etc}{series}}}}
 
 \newbibmacro*{seriesaddon}{%
   \iffieldundef{seriesaddon}
@@ -2435,10 +2460,9 @@
      \printfield[journum]{number}}%
     {}}
 
-% FIX: For translators of a 'series', check '\translatortypes'.
-
 \newbibmacro*{other:number}{%
-  \ifinlist{series}{\editortypes}
+  \ifboolexpr{ test {\ifinlist{series}{\editortypes}}
+               or test {\ifinlist{series}{\translatortypes}}}
     {\setunit{\addcomma\space}%
      \printfield{number}}%
     {\setunit{\addspace}% not '\setunit{\space}'
