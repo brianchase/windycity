@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Feb 2021 07:30:07 AM CST
+% Last modified: Sun 21 Feb 2021 07:32:34 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -130,18 +130,15 @@
   \settoggle{newauth}{#1}}%
 
 \providetoggle{swaptrans}
+\providetoggle{swaptrans:issuetitle}
+\providetoggle{swaptrans:maintitle}
+\providetoggle{swaptrans:series}
 \DeclareBiblatexOption{entry}[boolean]{swaptrans}[true]{%
   \settoggle{swaptrans}{#1}}%
-
-\providetoggle{swaptrans:issue}
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:issue}[true]{%
-  \settoggle{swaptrans:issue}{#1}}%
-
-\providetoggle{swaptrans:main}
+  \settoggle{swaptrans:issuetitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:main}[true]{%
-  \settoggle{swaptrans:main}{#1}}%
-
-\providetoggle{swaptrans:series}
+  \settoggle{swaptrans:maintitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:series}[true]{%
   \settoggle{swaptrans:series}{#1}}%
 
@@ -1191,7 +1188,14 @@
              {\toggletrue{notrans}}%
              {}}}}}
 
-% For editors of an 'issuetitle', 'maintitle', or 'series'.
+% For editors and translators of an 'issuetitle', 'maintitle', or 'series'.
+
+\newbibmacro*{edtrans:maintitle+etc}[1]{%
+  \iftoggle{swaptrans:#1}
+    {\usebibmacro{trans:maintitle+etc}{#1}%
+     \usebibmacro{eds:maintitle+etc}{#1}}%
+    {\usebibmacro{eds:maintitle+etc}{#1}%
+     \usebibmacro{trans:maintitle+etc}{#1}}}
 
 \newbibmacro*{eds:maintitle+etc}[1]{%
   \renewcommand*{\do}[1]{%
@@ -1214,8 +1218,6 @@
                and togl {swapvol}}
     {\newunit}%
     {\setunit{\addcomma\space}}}
-
-% For translators of an 'issuetitle', 'maintitle', or 'series'.
 
 \newbibmacro*{trans:maintitle+etc}[1]{%
   \renewcommand*{\do}[1]{%
@@ -1424,11 +1426,7 @@
        {\bibstring{in}\space
         \renewcommand*{\xtitle}{issue}%
         \usebibmacro{longtitle+titleaddon}%
-        \iftoggle{swaptrans:issue}
-          {\usebibmacro{trans:maintitle+etc}{issuetitle}%
-           \usebibmacro{eds:maintitle+etc}{issuetitle}}%
-          {\usebibmacro{eds:maintitle+etc}{issuetitle}%
-           \usebibmacro{trans:maintitle+etc}{issuetitle}}}
+        \usebibmacro{edtrans:maintitle+etc}{issuetitle}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
 
@@ -2081,11 +2079,7 @@
         \printfield{series}}%
      \isdot\addcomma
      \usebibmacro{seriesaddon}%
-     \iftoggle{swaptrans:series}
-       {\usebibmacro{trans:maintitle+etc}{series}%
-        \usebibmacro{eds:maintitle+etc}{series}}%
-       {\usebibmacro{eds:maintitle+etc}{series}%
-        \usebibmacro{trans:maintitle+etc}{series}}%
+     \usebibmacro{edtrans:maintitle+etc}{series}%
      \newunit}}%
 
 \newbibmacro*{volume}{%
@@ -2187,11 +2181,7 @@
   \usebibmacro{maintitle}%
   \usebibmacro{note}%
   \usebibmacro{edition}{}%
-  \iftoggle{swaptrans:main}
-    {\usebibmacro{trans:maintitle+etc}{maintitle}%
-     \usebibmacro{eds:maintitle+etc}{maintitle}}%
-    {\usebibmacro{eds:maintitle+etc}{maintitle}%
-     \usebibmacro{trans:maintitle+etc}{maintitle}}}
+  \usebibmacro{edtrans:maintitle+etc}{maintitle}}%
 
 \newbibmacro*{volume+number+etc}{%
   \iffieldundef{\xvolume volume}
@@ -2420,11 +2410,7 @@
      \newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \iftoggle{swaptrans:series}
-       {\usebibmacro{trans:maintitle+etc}{series}%
-        \usebibmacro{eds:maintitle+etc}{series}}%
-       {\usebibmacro{eds:maintitle+etc}{series}%
-        \usebibmacro{trans:maintitle+etc}{series}}}}
+     \usebibmacro{edtrans:maintitle+etc}{series}}}
 
 \newbibmacro*{seriesaddon}{%
   \iffieldundef{seriesaddon}
