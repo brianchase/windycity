@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Feb 2021 07:32:34 AM CST
+% Last modified: Sun 21 Feb 2021 04:54:39 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -953,12 +953,26 @@
     {\usebibmacro{edcombos:b}}}
 
 \newbibmacro*{transcombos:a}{%
-  \renewcommand*{\do}[1]{%
-    \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
-                 or test {\ifstrequal{##1}{transed}}}
-      {\renewcommand*{\cbx@bibstring}{##1}%
-       \listbreak}%
-      {}}% needs '%'
+  \ifnumgreater{\value{edlist}}{0}
+    {\renewcommand*{\do}[1]{%
+       \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
+                    or test {\ifstrequal{##1}{transed}}}
+         {\renewcommand*{\cbx@bibstring}{##1}%
+          \usebibmacro{swapstrings}{##1}%
+          \listbreak}%
+         {}}}
+    {\renewcommand*{\do}[1]{%
+       \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
+                    or test {\ifstrequal{##1}{transed}}}
+         {\renewcommand*{\cbx@bibstring}{##1}%
+          \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
+                       or test {\ifinlist{maintitle}{\editortypes}}
+                       or test {\ifinlist{series}{\editortypes}}
+                       or test {\iffieldundef{\yeditor type}}}
+            {}
+            {\usebibmacro{swapstrings}{##1}}%
+          \listbreak}%
+         {}}}
   \docsvlist{comptrans,edtrans,extrans,revtrans,transcomp,transex,transrev,transup,uptrans,transed}}%
 
 \newbibmacro*{transcombos:b}{%
@@ -972,12 +986,21 @@
              translator}}%
 
 \newbibmacro*{edcombos:a}{%
-  \renewcommand*{\do}[1]{%
-    \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
-                 or test {\ifstrequal{##1}{edtrans}}}
-      {\renewcommand*{\cbx@bibstring}{##1}%
-       \listbreak}%
-      {}}% needs '%'
+  \ifnumgreater{\value{edlist}}{0}
+    {\renewcommand*{\do}[1]{%
+       \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
+                    or test {\ifstrequal{##1}{edtrans}}}
+         {\renewcommand*{\cbx@bibstring}{##1}%
+          \usebibmacro{swapstrings}{##1}%
+          \listbreak}%
+         {}}}
+    {\renewcommand*{\do}[1]{%
+       \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
+                    or test {\ifstrequal{##1}{edtrans}}}
+         {\renewcommand*{\cbx@bibstring}{##1}%
+          \usebibmacro{swapstrings}{##1}%
+          \listbreak}%
+         {}}}
   \docsvlist{comptrans,extrans,revtrans,transcomp,transed,transex,transrev,transup,uptrans,edtrans}}%
 
 \newbibmacro*{edcombos:b}{%
@@ -989,6 +1012,31 @@
       {}}% needs '%'
   \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,compup,edcomp,edex,edrev,edup,
              excomp,exed,exrev,exup,revcomp,reved,revex,revup,upcomp,uped,upex,uprev,editor}}%
+
+\newbibmacro*{swapstrings}[1]{%
+  \iftoggle{swaptrans}
+    {\ifstrequal{#1}{comptrans}
+       {\renewcommand*{\cbx@bibstring}{transcomp}}%
+       {\ifstrequal{#1}{edtrans}
+          {\renewcommand*{\cbx@bibstring}{transed}}%
+          {\ifstrequal{#1}{extrans}
+             {\renewcommand*{\cbx@bibstring}{transex}}%
+             {\ifstrequal{#1}{revtrans}
+                {\renewcommand*{\cbx@bibstring}{transrev}}%
+                {\ifstrequal{#1}{transcomp}
+                   {\renewcommand*{\cbx@bibstring}{comptrans}}%
+                   {\ifstrequal{#1}{transed}
+                      {\renewcommand*{\cbx@bibstring}{edtrans}}%
+                      {\ifstrequal{#1}{transex}
+                         {\renewcommand*{\cbx@bibstring}{extrans}}%
+                         {\ifstrequal{#1}{transrev}
+                            {\renewcommand*{\cbx@bibstring}{revtrans}}%
+                            {\ifstrequal{#1}{transup}
+                               {\renewcommand*{\cbx@bibstring}{uptrans}}%
+                               {\ifstrequal{#1}{uptrans}
+                                  {\renewcommand*{\cbx@bibstring}{transup}}%
+                                  {}}}}}}}}}}}
+    {}}
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx:short}
@@ -1046,9 +1094,13 @@
 \newbibmacro*{editortypes}[1]{%
   \let\editortypes\empty
   \renewcommand*{\xeditor}{#1}%
+  \ifdef{\theedlist}
+    {\setcounter{edlist}{0}}%
+    {\newcounter{edlist}}%
   \iffieldundef{\xeditor type}
     {}
-    {\forcsvfield{\listadd\editortypes}{\xeditor type}}}
+    {\stepcounter{edlist}%
+     \forcsvfield{\listadd\editortypes}{\xeditor type}}}
 
 \newbibmacro*{translatortypes}[1]{%
   \let\translatortypes\empty
@@ -1191,18 +1243,21 @@
 % For editors and translators of an 'issuetitle', 'maintitle', or 'series'.
 
 \newbibmacro*{edtrans:maintitle+etc}[1]{%
+  \usebibmacro{eds:maintitle+etc}{#1}%
+  \usebibmacro{trans:maintitle+etc}{#1}%
   \iftoggle{swaptrans:#1}
-    {\usebibmacro{trans:maintitle+etc}{#1}%
-     \usebibmacro{eds:maintitle+etc}{#1}}%
-    {\usebibmacro{eds:maintitle+etc}{#1}%
-     \usebibmacro{trans:maintitle+etc}{#1}}}
+    {\toggletrue{swaptrans}%
+     \usebibmacro{trans:lists+etc}{#1}%
+     \usebibmacro{eds:lists+etc}{#1}}%
+    {\usebibmacro{eds:lists+etc}{#1}%
+     \usebibmacro{trans:lists+etc}{#1}}}
 
 \newbibmacro*{eds:maintitle+etc}[1]{%
   \renewcommand*{\do}[1]{%
-    \ifnameundef{##1}
+    \ifboolexpr{ test {\ifnameundef{##1}}
+                 and not test {\ifstrequal{##1}{editorc}}}
       {}
       {\usebibmacro{editortypes}{##1}%
-       \usebibmacro{eds:lists+etc}{#1}%
        \listbreak}}%
   \docsvlist{editor,editora,editorb,editorc}}%
 
@@ -1221,16 +1276,17 @@
 
 \newbibmacro*{trans:maintitle+etc}[1]{%
   \renewcommand*{\do}[1]{%
-    \ifnameundef{##1}
+    \ifboolexpr{ test {\ifnameundef{##1}}
+                 and not test {\ifstrequal{##1}{translatorb}}}
       {}
       {\usebibmacro{translatortypes}{##1}%
-       \usebibmacro{trans:lists+etc}{#1}%
        \listbreak}}%
   \docsvlist{translator,translatora,translatorb}}%
 
 \newbibmacro*{trans:lists+etc}[1]{%
   \ifinlist{#1}{\translatortypes}
     {\usebibmacro{edtranspunct:c}%
+     \setcounter{edlist}{0}% for 'swaptrans:*'
      \usebibmacro{transcombos}%
      \usebibmacro{pluga+printnames}}%
     {}}
