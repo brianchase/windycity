@@ -10,8 +10,6 @@ brianchase/windycity").
 
 ## Latest
 
-* added preamble option `shortafter` to print the same output as the
-  preamble option `short` but with long first citations
 * added support for expanders to allow the following editorial roles:
 
   - expanded by...
@@ -34,10 +32,13 @@ brianchase/windycity").
   `reviser,maintitle` in `editortype`)
 * added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
   entry options to swap positions of editors and translators of
-  `issuetitle`, `maintitle`, and `series`
+  `issuetitle`, `maintitle`, and `series` (almost but not yet fully
+  implemented!)
 * added support for printing a second tier of editors after some
   titles, as in "Edited by Jane Doe. Revised and Expanded by John
   Smith"
+* added preamble option `shortafter` to print the same output as the
+  preamble option `short` but with long first citations
 * for works in certain collections, fixed punctuation after the
   `edition` field
 
