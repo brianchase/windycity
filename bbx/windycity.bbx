@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Feb 2021 04:54:39 PM CST
+% Last modified: Sun 21 Feb 2021 06:19:47 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1248,7 +1248,8 @@
   \iftoggle{swaptrans:#1}
     {\toggletrue{swaptrans}%
      \usebibmacro{trans:lists+etc}{#1}%
-     \usebibmacro{eds:lists+etc}{#1}}%
+     \usebibmacro{eds:lists+etc}{#1}%
+     \togglefalse{swaptrans}}%
     {\usebibmacro{eds:lists+etc}{#1}%
      \usebibmacro{trans:lists+etc}{#1}}}
 
