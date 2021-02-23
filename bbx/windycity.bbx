@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Feb 2021 06:31:01 PM CST
+% Last modified: Mon 22 Feb 2021 07:55:41 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -460,6 +460,7 @@
 \let\yeditor\empty
 
 \providetoggle{authposition}
+\providetoggle{atleastone}
 \providetoggle{bibliography}
 \providetoggle{ibid:loccit}
 \providetoggle{multicite}
@@ -942,7 +943,10 @@
   \renewcommand*{\cbx@namelist}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
-     \usebibmacro{transcombos:a}}%
+     \ifboolexpr{ test {\iffieldundef{\xeditor type}}
+                  or test {\iffieldsequal{\xeditor type}{\yeditor type}}}
+       {\usebibmacro{transcombos:a}}%
+       {\usebibmacro{edcombos:a}}}
     {\usebibmacro{transcombos:b}}}
 
 \newbibmacro*{edcombos}{%
@@ -953,27 +957,26 @@
     {\usebibmacro{edcombos:b}}}
 
 \newbibmacro*{transcombos:a}{%
-  \ifnumgreater{\value{edlist}}{0}
-    {\renewcommand*{\do}[1]{%
-       \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
-                    or test {\ifstrequal{##1}{transed}}}
-         {\renewcommand*{\cbx@bibstring}{##1}%
-          \usebibmacro{swapstrings}{##1}%
-          \listbreak}%
-         {}}}
-    {\renewcommand*{\do}[1]{%
-       \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
-                    or test {\ifstrequal{##1}{transed}}}
-         {\renewcommand*{\cbx@bibstring}{##1}%
-          \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
-                       or test {\ifinlist{maintitle}{\editortypes}}
-                       or test {\ifinlist{series}{\editortypes}}
-                       or test {\iffieldundef{\yeditor type}}}
-            {}
-            {\usebibmacro{swapstrings}{##1}}%
-          \listbreak}%
-         {}}}
-  \docsvlist{comptrans,edtrans,extrans,revtrans,transcomp,transex,transrev,transup,uptrans,transed}}%
+  \togglefalse{atleastone}%
+  \renewcommand*{\do}[1]{%
+    \ifinlist{##1}{\translatortypes}
+      {\toggletrue{atleastone}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{transcomp,comped,compex,compiler,comprev,comptrans,compup}%
+  \iftoggle{atleastone}
+    {\renewcommand*{\cbx@bibstring}{transcomp}}%
+    {\docsvlist{transex,excomp,exed,expander,exrev,extrans,exup}%
+     \iftoggle{atleastone}
+       {\renewcommand*{\cbx@bibstring}{transex}}%
+       {\docsvlist{transrev,revcomp,reved,revex,reviser,revtrans,revup}%
+        \iftoggle{atleastone}
+          {\renewcommand*{\cbx@bibstring}{transrev}}%
+          {\docsvlist{transup,upcomp,updater,uped,upex,uprev,uptrans}%
+           \iftoggle{atleastone}
+             {\renewcommand*{\cbx@bibstring}{transup}%
+              \togglefalse{atleastone}}%
+             {\renewcommand*{\cbx@bibstring}{transed}}}}}}
 
 \newbibmacro*{transcombos:b}{%
   \renewcommand*{\do}[1]{%
@@ -986,22 +989,26 @@
              translator}}%
 
 \newbibmacro*{edcombos:a}{%
-  \ifnumgreater{\value{edlist}}{0}
-    {\renewcommand*{\do}[1]{%
-       \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
-                    or test {\ifstrequal{##1}{edtrans}}}
-         {\renewcommand*{\cbx@bibstring}{##1}%
-          \usebibmacro{swapstrings}{##1}%
-          \listbreak}%
-         {}}}
-    {\renewcommand*{\do}[1]{%
-       \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
-                    or test {\ifstrequal{##1}{edtrans}}}
-         {\renewcommand*{\cbx@bibstring}{##1}%
-          \usebibmacro{swapstrings}{##1}%
-          \listbreak}%
-         {}}}
-  \docsvlist{comptrans,extrans,revtrans,transcomp,transed,transex,transrev,transup,uptrans,edtrans}}%
+  \togglefalse{atleastone}%
+  \renewcommand*{\do}[1]{%
+    \ifinlist{##1}{\editortypes}
+      {\toggletrue{atleastone}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{comptrans,compiler,comped,compex,comprev,compup,transcomp}%
+  \iftoggle{atleastone}
+    {\renewcommand*{\cbx@bibstring}{comptrans}}%
+    {\docsvlist{extrans,excomp,exed,expander,exrev,exup,transex}%
+     \iftoggle{atleastone}
+       {\renewcommand*{\cbx@bibstring}{extrans}}%
+       {\docsvlist{revtrans,revcomp,reved,revex,reviser,revup,transrev}%
+        \iftoggle{atleastone}
+          {\renewcommand*{\cbx@bibstring}{revtrans}}%
+          {\docsvlist{uptrans,upcomp,updater,uped,upex,uprev,transup}%
+           \iftoggle{atleastone}
+             {\renewcommand*{\cbx@bibstring}{uptrans}%
+              \togglefalse{atleastone}}%
+             {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}
 
 \newbibmacro*{edcombos:b}{%
   \renewcommand*{\do}[1]{%
@@ -1010,33 +1017,9 @@
       {\renewcommand*{\cbx@bibstring}{##1}%
        \listbreak}%
       {}}% needs '%'
-  \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,compup,edcomp,edex,edrev,edup,
-             excomp,exed,exrev,exup,revcomp,reved,revex,revup,upcomp,uped,upex,uprev,editor}}%
-
-\newbibmacro*{swapstrings}[1]{%
-  \iftoggle{swaptrans}
-    {\ifstrequal{#1}{comptrans}
-       {\renewcommand*{\cbx@bibstring}{transcomp}}%
-       {\ifstrequal{#1}{edtrans}
-          {\renewcommand*{\cbx@bibstring}{transed}}%
-          {\ifstrequal{#1}{extrans}
-             {\renewcommand*{\cbx@bibstring}{transex}}%
-             {\ifstrequal{#1}{revtrans}
-                {\renewcommand*{\cbx@bibstring}{transrev}}%
-                {\ifstrequal{#1}{transcomp}
-                   {\renewcommand*{\cbx@bibstring}{comptrans}}%
-                   {\ifstrequal{#1}{transed}
-                      {\renewcommand*{\cbx@bibstring}{edtrans}}%
-                      {\ifstrequal{#1}{transex}
-                         {\renewcommand*{\cbx@bibstring}{extrans}}%
-                         {\ifstrequal{#1}{transrev}
-                            {\renewcommand*{\cbx@bibstring}{revtrans}}%
-                            {\ifstrequal{#1}{transup}
-                               {\renewcommand*{\cbx@bibstring}{uptrans}}%
-                               {\ifstrequal{#1}{uptrans}
-                                  {\renewcommand*{\cbx@bibstring}{transup}}%
-                                  {}}}}}}}}}}}
-    {}}
+  \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,comptrans,compup,edcomp,edex,
+             edrev,edtrans,edup,excomp,exed,exrev,extrans,exup,revcomp,reved,revex,revtrans,revup,
+             upcomp,uped,upex,uprev,uptrans,editor}}%
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx:short}
@@ -1094,13 +1077,9 @@
 \newbibmacro*{editortypes}[1]{%
   \let\editortypes\empty
   \renewcommand*{\xeditor}{#1}%
-  \ifdef{\theedlist}
-    {\setcounter{edlist}{0}}%
-    {\newcounter{edlist}}%
   \iffieldundef{\xeditor type}
     {}
-    {\stepcounter{edlist}%
-     \forcsvfield{\listadd\editortypes}{\xeditor type}}}
+    {\forcsvfield{\listadd\editortypes}{\xeditor type}}}
 
 \newbibmacro*{translatortypes}[1]{%
   \let\translatortypes\empty
@@ -1293,7 +1272,6 @@
     {}
     {\ifinlist{#1}{\translatortypes}
        {\usebibmacro{edtranspunct:c}%
-        \setcounter{edlist}{0}% for 'swaptrans:*'
         \usebibmacro{transcombos}%
         \usebibmacro{pluga+printnames}}%
        {}}}
