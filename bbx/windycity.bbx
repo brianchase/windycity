@@ -1,4 +1,4 @@
-% Last modified: Mon 22 Feb 2021 07:55:41 PM CST
+% Last modified: Tue 23 Feb 2021 07:55:41 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -866,8 +866,7 @@
           {}}}}
 
 \newbibmacro*{test:xeditor:a}[1]{%
-  \ifboolexpr{ test {\ifnameundef{\xeditor}}
-               or test {\ifinlist{issuetitle}{\editortypes}}
+  \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
                or test {\ifinlist{series}{\editortypes}}}
     {\toggletrue{noed}}%
     {\ifstrequal{#1}{ap}% not 'authposition' toggle
@@ -895,34 +894,37 @@
 
 \newbibmacro*{test:editor:authpos}{%
   \usebibmacro{editortypes}{editor}%
-  \usebibmacro{test:xeditor:a}{ap}%
   \iftoggle{noed}
     {}
-    {\ifboolexpr{ togl {collection:ib}
-                  and togl {swapvol}
-                  and not test {\ifnameundef{editora}}}
-       {\toggletrue{noed}}%
-       {\ifboolexpr{ togl {swapvol}
-                     and ( togl {collection:icbk}
-                     or togl {collection:icib} )}
+    {\usebibmacro{test:xeditor:a}{ap}%
+     \iftoggle{noed}
+       {}
+       {\ifboolexpr{ togl {collection:ib}
+                     and togl {swapvol}
+                     and not test {\ifnameundef{editora}}}
           {\toggletrue{noed}}%
-          {}}}}
+          {\ifboolexpr{ togl {swapvol}
+                        and ( togl {collection:icbk}
+                        or togl {collection:icib} )}
+             {\toggletrue{noed}}%
+             {}}}}}
 
 \newbibmacro*{test:editora:authpos}{%
   \usebibmacro{editortypes}{editora}%
-  \usebibmacro{test:xeditor:a}{ap}%
   \iftoggle{noed}
     {}
-    {\ifboolexpr{ togl {collection:ib}
-                  and not togl {swapvol}
-                  and test {\ifnameundef{editor}}}
-       {\toggletrue{noed}}%
-       {}}}
+    {\usebibmacro{test:xeditor:a}{ap}%
+     \iftoggle{noed}
+       {}
+       {\ifboolexpr{ togl {collection:ib}
+                     and not togl {swapvol}
+                     and test {\ifnameundef{editor}}}
+          {\toggletrue{noed}}%
+          {}}}}
 
 \newbibmacro*{test:trans:authpos}{%
   \usebibmacro{trans+transa+transb}%
-  \ifboolexpr{ test {\ifnameundef{\yeditor}}
-               or test {\ifinlist{issuetitle}{\translatortypes}}
+  \ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
                or test {\ifinlist{series}{\translatortypes}}}
     {\toggletrue{notrans}}%
     {\ifinlist{maintitle}{\translatortypes}
@@ -943,18 +945,24 @@
   \renewcommand*{\cbx@namelist}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
+     \toggletrue{noed}%
      \ifboolexpr{ test {\iffieldundef{\xeditor type}}
                   or test {\iffieldsequal{\xeditor type}{\yeditor type}}}
        {\usebibmacro{transcombos:a}}%
        {\usebibmacro{edcombos:a}}}
-    {\usebibmacro{transcombos:b}}}
+    {\iftoggle{noed}
+       {\usebibmacro{transcombos:b}}%
+       {\usebibmacro{transcombos:c}}}}
 
 \newbibmacro*{edcombos}{%
   \renewcommand*{\cbx@namelist}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
+     \toggletrue{notrans}%
      \usebibmacro{edcombos:a}}%
-    {\usebibmacro{edcombos:b}}}
+    {\iftoggle{notrans}
+       {\usebibmacro{edcombos:b}}%
+       {\usebibmacro{edcombos:c}}}}
 
 \newbibmacro*{transcombos:a}{%
   \togglefalse{atleastone}%
@@ -979,6 +987,17 @@
              {\renewcommand*{\cbx@bibstring}{transed}}}}}}
 
 \newbibmacro*{transcombos:b}{%
+  \renewcommand*{\do}[1]{%
+    \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
+                 or test {\ifstrequal{##1}{translator}}}
+      {\renewcommand*{\cbx@bibstring}{##1}%
+       \usebibmacro{swapstrings}{##1}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{comptrans,edtrans,extrans,revtrans,transcomp,transed,transex,transrev,transup,uptrans,
+             translator}}%
+
+\newbibmacro*{transcombos:c}{%
   \renewcommand*{\do}[1]{%
     \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
                  or test {\ifstrequal{##1}{translator}}}
@@ -1015,11 +1034,48 @@
     \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
                  or test {\ifstrequal{##1}{editor}}}
       {\renewcommand*{\cbx@bibstring}{##1}%
+       \usebibmacro{swapstrings}{##1}%
+       \listbreak}%
+      {}}% needs '%'
+  \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,comptrans,compup,edcomp,edex,
+             edrev,edtrans,edup,excomp,exed,exrev,extrans,exup,revcomp,reved,revex,revtrans,revup,
+             transcomp,transed,transex,transrev,transup,upcomp,uped,upex,uprev,uptrans,editor}}%
+
+\newbibmacro*{edcombos:c}{%
+  \renewcommand*{\do}[1]{%
+    \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
+                 or test {\ifstrequal{##1}{editor}}}
+      {\renewcommand*{\cbx@bibstring}{##1}%
        \listbreak}%
       {}}% needs '%'
   \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,comptrans,compup,edcomp,edex,
              edrev,edtrans,edup,excomp,exed,exrev,extrans,exup,revcomp,reved,revex,revtrans,revup,
              upcomp,uped,upex,uprev,uptrans,editor}}%
+
+\newbibmacro*{swapstrings}[1]{%
+  \iftoggle{swaptrans}
+    {\ifstrequal{#1}{comptrans}
+       {\renewcommand*{\cbx@bibstring}{transcomp}}%
+       {\ifstrequal{#1}{edtrans}
+          {\renewcommand*{\cbx@bibstring}{transed}}%
+          {\ifstrequal{#1}{extrans}
+             {\renewcommand*{\cbx@bibstring}{transex}}%
+             {\ifstrequal{#1}{revtrans}
+                {\renewcommand*{\cbx@bibstring}{transrev}}%
+                {\ifstrequal{#1}{transcomp}
+                   {\renewcommand*{\cbx@bibstring}{comptrans}}%
+                   {\ifstrequal{#1}{transed}
+                      {\renewcommand*{\cbx@bibstring}{edtrans}}%
+                      {\ifstrequal{#1}{transex}
+                         {\renewcommand*{\cbx@bibstring}{extrans}}%
+                         {\ifstrequal{#1}{transrev}
+                            {\renewcommand*{\cbx@bibstring}{revtrans}}%
+                            {\ifstrequal{#1}{transup}
+                               {\renewcommand*{\cbx@bibstring}{uptrans}}%
+                               {\ifstrequal{#1}{uptrans}
+                                  {\renewcommand*{\cbx@bibstring}{transup}}%
+                                  {}}}}}}}}}}}
+    {}}
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx:short}
@@ -1042,6 +1098,10 @@
 % For editors and translators not in the author's position.
 
 \newbibmacro*{edtrans}{%
+  \togglefalse{noed}%
+  \togglefalse{notrans}%
+  \usebibmacro{test:ed}%
+  \usebibmacro{test:trans}%
   \iftoggle{swaptrans}
     {\usebibmacro{transcombos+etc}%
      \usebibmacro{edcombos+etc}}%
@@ -1057,7 +1117,8 @@
        {\ifnameundef{editorb}
           {}
           {\usebibmacro{editortypes}{editorb}%
-           \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
+           \ifboolexpr{ togl {noed}
+                        or test {\ifinlist{issuetitle}{\editortypes}}
                         or test {\ifinlist{maintitle}{\editortypes}}
                         or test {\ifinlist{series}{\editortypes}}
                         or test {\iffieldundef{editorbtype}}}
@@ -1065,7 +1126,8 @@
              {\usebibmacro{edcombos}%
               \usebibmacro{pluga+etc}}}}
        {\usebibmacro{editortypes}{editora}%
-        \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
+        \ifboolexpr{ togl {noed}
+                     or test {\ifinlist{issuetitle}{\editortypes}}
                      or test {\ifinlist{maintitle}{\editortypes}}
                      or test {\ifinlist{series}{\editortypes}}
                      or test {\iffieldundef{editoratype}}}
@@ -1076,33 +1138,29 @@
 
 \newbibmacro*{editortypes}[1]{%
   \let\editortypes\empty
-  \renewcommand*{\xeditor}{#1}%
-  \iffieldundef{\xeditor type}
-    {}
-    {\forcsvfield{\listadd\editortypes}{\xeditor type}}}
+  \ifnameundef{#1}
+    {\toggletrue{noed}}%
+    {\renewcommand*{\xeditor}{#1}%
+     \iffieldundef{\xeditor type}
+       {}
+       {\forcsvfield{\listadd\editortypes}{\xeditor type}}}}
 
 \newbibmacro*{translatortypes}[1]{%
   \let\translatortypes\empty
-  \renewcommand*{\yeditor}{#1}%
-  \iffieldundef{\yeditor type}
-    {}
-    {\forcsvfield{\listadd\translatortypes}{\yeditor type}}}
+  \ifnameundef{#1}
+    {\toggletrue{notrans}}%
+    {\renewcommand*{\yeditor}{#1}%
+     \iffieldundef{\yeditor type}
+       {}
+       {\forcsvfield{\listadd\translatortypes}{\yeditor type}}}}
 
 \newbibmacro*{transcombos+etc}{%
-  \togglefalse{noed}%
-  \togglefalse{notrans}%
-  \usebibmacro{test:ed}%
-  \usebibmacro{test:trans}%
   \iftoggle{notrans}
     {}
     {\usebibmacro{transcombos}%
      \usebibmacro{pluga+etc}}}
 
 \newbibmacro*{edcombos+etc}{%
-  \togglefalse{noed}%
-  \togglefalse{notrans}%
-  \usebibmacro{test:ed}%
-  \usebibmacro{test:trans}%
   \iftoggle{noed}
     {}
     {\usebibmacro{edcombos}%
@@ -1164,43 +1222,48 @@
 
 \newbibmacro*{test:editor}{%
   \usebibmacro{editortypes}{editor}%
-  \usebibmacro{test:xeditor:a}{}%
   \iftoggle{noed}
     {}
-    {\ifdefstring{\xtitle}{book}
-       {\toggletrue{noed}}%
-       {}}}
-
-\newbibmacro*{test:editora}{%
-  \usebibmacro{editortypes}{editora}%
-  \usebibmacro{test:xeditor:a}{}%
-  \iftoggle{noed}
-    {}
-    {\ifboolexpr{ test {\ifdefempty{\xtitle}}
-                  and ( togl {collection:ib}
-                  or togl {collection:icbk}
-                  or togl {collection:icib}
-                  or not togl {collection} )}
-       {\toggletrue{noed}}%
-       {\ifboolexpr{ test {\ifdefstring{\xtitle}{bookbook}}
-                     and togl {swapvol}
-                     and ( togl {collection:icib}
-                     or togl {collection:icbk} )}
+    {\usebibmacro{test:xeditor:a}{}%
+     \iftoggle{noed}
+       {}
+       {\ifdefstring{\xtitle}{book}
           {\toggletrue{noed}}%
           {}}}}
 
+\newbibmacro*{test:editora}{%
+  \usebibmacro{editortypes}{editora}%
+  \iftoggle{noed}
+    {}
+    {\usebibmacro{test:xeditor:a}{}%
+     \iftoggle{noed}
+       {}
+       {\ifboolexpr{ test {\ifdefempty{\xtitle}}
+                     and ( togl {collection:ib}
+                     or togl {collection:icbk}
+                     or togl {collection:icib}
+                     or not togl {collection} )}
+          {\toggletrue{noed}}%
+          {\ifboolexpr{ test {\ifdefstring{\xtitle}{bookbook}}
+                        and togl {swapvol}
+                        and ( togl {collection:icib}
+                        or togl {collection:icbk} )}
+             {\toggletrue{noed}}%
+             {}}}}}
+
 \newbibmacro*{test:editorb}{%
   \usebibmacro{test:xeditor:a}{}%
-  \iftoggle{collection:icib}
-    {\ifdefstring{\xtitle}{book}
-       {\toggletrue{noed}}%
-       {}}
-    {}}
+  \iftoggle{noed}
+    {}
+    {\iftoggle{collection:icib}
+       {\ifdefstring{\xtitle}{book}
+          {\toggletrue{noed}}%
+          {}}
+       {}}}
 
 \newbibmacro*{test:trans}{%
   \usebibmacro{trans+transa+transb}%
-  \ifboolexpr{ test {\ifnameundef{\yeditor}}
-               or test {\ifinlist{issuetitle}{\translatortypes}}
+  \ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
                or test {\ifinlist{series}{\translatortypes}}}
     {\toggletrue{notrans}}%
     {\ifdefstring{\yeditor}{translatorb}
