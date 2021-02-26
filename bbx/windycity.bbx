@@ -1,4 +1,4 @@
-% Last modified: Tue 23 Feb 2021 07:55:41 PM CST
+% Last modified: Thu 25 Feb 2021 06:33:39 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1342,7 +1342,9 @@
 % A catchall for additional editorial information about a 'title'.
 
 \newbibmacro*{editoraddon}{%
-  \iffieldundef{editoraddon}
+  \ifboolexpr{ test {\iffieldundef{editoraddon}}
+               or not test {\ifdefstring{\xeditor}{editor}}
+               or togl {noed}}
     {}
     {\nopunct\printfield{editoraddon}%
      \clearfield{editoraddon}}}
