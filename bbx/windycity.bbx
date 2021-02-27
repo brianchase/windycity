@@ -1,4 +1,4 @@
-% Last modified: Sat 27 Feb 2021 10:19:32 AM CST
+% Last modified: Sat 27 Feb 2021 10:27:55 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1313,7 +1313,8 @@
         \usebibmacro{edcombos}%
         \usebibmacro{pluga+printnames}%
         \setunit{\addcomma\space}%
-        \usebibmacro{editoraddon}}%
+        \usebibmacro{editoraddon}%
+        \usebibmacro{eds:secondtier:b}{#1}}%
        {}}}
 
 \newbibmacro*{edtranspunct:c}{%
@@ -1338,6 +1339,16 @@
     {\ifinlist{#1}{\translatortypes}
        {\usebibmacro{edtranspunct:c}%
         \usebibmacro{transcombos}%
+        \usebibmacro{pluga+printnames}}%
+       {}}}
+
+\newbibmacro*{eds:secondtier:b}[1]{%
+  \usebibmacro{eds:maintitle+etc}{#1}%
+  \iftoggle{noed}
+    {}
+    {\ifinlist{#1}{\editortypes}
+       {\usebibmacro{edtranspunct:c}%
+        \usebibmacro{edcombos}%
         \usebibmacro{pluga+printnames}}%
        {}}}
 

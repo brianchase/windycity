@@ -35,9 +35,10 @@ brianchase/windycity").
 * added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
   entry options to swap positions of editors and translators of
   `issuetitle`, `maintitle`, and `series`
-* added support for printing a second tier of editors after some
-  titles, as in "Edited by Jane Doe. Revised and Expanded by John
-  Smith"
+* added support for printing a second tier of editors after `title`
+  (with some exceptions) and after `issuetitle`, `maintitle`, and
+  `series` (e.g. "Edited by Jane Doe. Revised and Expanded by John
+  Smith")
 * if the editors and translators of a `title` are the same, you can
   control the assignment with one name list and its corresponding type
   field (e.g. if Jane Doe is the compiler and translator of `title`,
