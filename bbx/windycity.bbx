@@ -1,4 +1,4 @@
-% Last modified: Thu 25 Feb 2021 06:33:39 PM CST
+% Last modified: Sat 27 Feb 2021 10:19:32 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1106,35 +1106,7 @@
     {\usebibmacro{transcombos+etc}%
      \usebibmacro{edcombos+etc}}%
     {\usebibmacro{edcombos+etc}%
-     \usebibmacro{transcombos+etc}}%
-  \usebibmacro{editoraddon}%
-  \usebibmacro{editora+editorb}}%
-
-\newbibmacro*{editora+editorb}{%
-  \ifboolexpr{ test {\iffieldundef{booktitle}}
-               and test {\iffieldundef{bookbooktitle}}}
-    {\ifnameundef{editora}
-       {\ifnameundef{editorb}
-          {}
-          {\usebibmacro{editortypes}{editorb}%
-           \ifboolexpr{ togl {noed}
-                        or test {\ifinlist{issuetitle}{\editortypes}}
-                        or test {\ifinlist{maintitle}{\editortypes}}
-                        or test {\ifinlist{series}{\editortypes}}
-                        or test {\iffieldundef{editorbtype}}}
-             {}
-             {\usebibmacro{edcombos}%
-              \usebibmacro{pluga+etc}}}}
-       {\usebibmacro{editortypes}{editora}%
-        \ifboolexpr{ togl {noed}
-                     or test {\ifinlist{issuetitle}{\editortypes}}
-                     or test {\ifinlist{maintitle}{\editortypes}}
-                     or test {\ifinlist{series}{\editortypes}}
-                     or test {\iffieldundef{editoratype}}}
-          {}
-          {\usebibmacro{edcombos}%
-           \usebibmacro{pluga+etc}}}}
-    {}}
+     \usebibmacro{transcombos+etc}}}
 
 \newbibmacro*{editortypes}[1]{%
   \let\editortypes\empty
@@ -1164,7 +1136,9 @@
   \iftoggle{noed}
     {}
     {\usebibmacro{edcombos}%
-     \usebibmacro{pluga+etc}}}
+     \usebibmacro{pluga+etc}%
+     \usebibmacro{editoraddon}%
+     \usebibmacro{eds:secondtier:a}}}
 
 \newbibmacro*{pluga+etc}{%
   \usebibmacro{edtranspunct:a}%
@@ -1187,6 +1161,32 @@
   \iftoggle{edshift}
     {\setunit{\addcomma\space}}%
     {\newunit}}%
+
+\newbibmacro*{eds:secondtier:a}{%
+  \ifboolexpr{ test {\iffieldundef{booktitle}}
+               and test {\iffieldundef{bookbooktitle}}}
+    {\ifnameundef{editora}
+       {\ifnameundef{editorb}
+          {}
+          {\usebibmacro{editortypes}{editorb}%
+           \ifboolexpr{ togl {noed}
+                        or test {\ifinlist{issuetitle}{\editortypes}}
+                        or test {\ifinlist{maintitle}{\editortypes}}
+                        or test {\ifinlist{series}{\editortypes}}
+                        or test {\iffieldundef{editorbtype}}}
+             {}
+             {\usebibmacro{edcombos}%
+              \usebibmacro{pluga+etc}}}}
+       {\usebibmacro{editortypes}{editora}%
+        \ifboolexpr{ togl {noed}
+                     or test {\ifinlist{issuetitle}{\editortypes}}
+                     or test {\ifinlist{maintitle}{\editortypes}}
+                     or test {\ifinlist{series}{\editortypes}}
+                     or test {\iffieldundef{editoratype}}}
+          {}
+          {\usebibmacro{edcombos}%
+           \usebibmacro{pluga+etc}}}}
+    {}}
 
 % Tests for 'edtrans' macro.
 
@@ -1311,7 +1311,9 @@
     {\ifinlist{#1}{\editortypes}
        {\usebibmacro{edtranspunct:c}%
         \usebibmacro{edcombos}%
-        \usebibmacro{pluga+printnames}}%
+        \usebibmacro{pluga+printnames}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{editoraddon}}%
        {}}}
 
 \newbibmacro*{edtranspunct:c}{%
@@ -1343,8 +1345,7 @@
 
 \newbibmacro*{editoraddon}{%
   \ifboolexpr{ test {\iffieldundef{editoraddon}}
-               or not test {\ifdefstring{\xeditor}{editor}}
-               or togl {noed}}
+               or not test {\ifdefstring{\xeditor}{editor}}}
     {}
     {\nopunct\printfield{editoraddon}%
      \clearfield{editoraddon}}}
