@@ -1,4 +1,4 @@
-% Last modified: Sat 27 Feb 2021 10:27:55 AM CST
+% Last modified: Sun 28 Feb 2021 12:21:13 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -971,16 +971,16 @@
       {\toggletrue{atleastone}%
        \listbreak}%
       {}}% needs '%'
-  \docsvlist{transcomp,comped,compex,compiler,comprev,comptrans,compup}%
+  \docsvlist{transcomp,comp,comped,compex,compiler,comprev,comptrans,compup}%
   \iftoggle{atleastone}
     {\renewcommand*{\cbx@bibstring}{transcomp}}%
-    {\docsvlist{transex,excomp,exed,expander,exrev,extrans,exup}%
+    {\docsvlist{transex,ex,excomp,exed,expander,exrev,extrans,exup}%
      \iftoggle{atleastone}
        {\renewcommand*{\cbx@bibstring}{transex}}%
-       {\docsvlist{transrev,revcomp,reved,revex,reviser,revtrans,revup}%
+       {\docsvlist{transrev,rev,revcomp,reved,revex,reviser,revtrans,revup}%
         \iftoggle{atleastone}
           {\renewcommand*{\cbx@bibstring}{transrev}}%
-          {\docsvlist{transup,upcomp,updater,uped,upex,uprev,uptrans}%
+          {\docsvlist{transup,up,upcomp,updater,uped,upex,uprev,uptrans}%
            \iftoggle{atleastone}
              {\renewcommand*{\cbx@bibstring}{transup}%
               \togglefalse{atleastone}}%
@@ -1014,16 +1014,16 @@
       {\toggletrue{atleastone}%
        \listbreak}%
       {}}% needs '%'
-  \docsvlist{comptrans,compiler,comped,compex,comprev,compup,transcomp}%
+  \docsvlist{comptrans,comp,compiler,comped,compex,comprev,compup,transcomp}%
   \iftoggle{atleastone}
     {\renewcommand*{\cbx@bibstring}{comptrans}}%
-    {\docsvlist{extrans,excomp,exed,expander,exrev,exup,transex}%
+    {\docsvlist{extrans,ex,excomp,exed,expander,exrev,exup,transex}%
      \iftoggle{atleastone}
        {\renewcommand*{\cbx@bibstring}{extrans}}%
-       {\docsvlist{revtrans,revcomp,reved,revex,reviser,revup,transrev}%
+       {\docsvlist{revtrans,rev,revcomp,reved,revex,reviser,revup,transrev}%
         \iftoggle{atleastone}
           {\renewcommand*{\cbx@bibstring}{revtrans}}%
-          {\docsvlist{uptrans,upcomp,updater,uped,upex,uprev,transup}%
+          {\docsvlist{uptrans,up,upcomp,updater,uped,upex,uprev,transup}%
            \iftoggle{atleastone}
              {\renewcommand*{\cbx@bibstring}{uptrans}%
               \togglefalse{atleastone}}%
@@ -1037,9 +1037,10 @@
        \usebibmacro{swapstrings}{##1}%
        \listbreak}%
       {}}% needs '%'
-  \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,comptrans,compup,edcomp,edex,
-             edrev,edtrans,edup,excomp,exed,exrev,extrans,exup,revcomp,reved,revex,revtrans,revup,
-             transcomp,transed,transex,transrev,transup,upcomp,uped,upex,uprev,uptrans,editor}}%
+  \docsvlist{comp,comped,compex,compiler,comprev,comptrans,compup,ed,edcomp,edex,edrev,edtrans,edup,
+             ex,excomp,exed,expander,exrev,extrans,exup,rev,revcomp,reved,revex,reviser,revtrans,
+             revup,transcomp,transed,transex,transrev,transup,up,upcomp,updater,uped,upex,uprev,
+             uptrans,editor}}%
 
 \newbibmacro*{edcombos:c}{%
   \renewcommand*{\do}[1]{%
@@ -1048,9 +1049,9 @@
       {\renewcommand*{\cbx@bibstring}{##1}%
        \listbreak}%
       {}}% needs '%'
-  \docsvlist{compiler,expander,reviser,updater,comped,compex,comprev,comptrans,compup,edcomp,edex,
-             edrev,edtrans,edup,excomp,exed,exrev,extrans,exup,revcomp,reved,revex,revtrans,revup,
-             upcomp,uped,upex,uprev,uptrans,editor}}%
+  \docsvlist{comp,comped,compex,compiler,comprev,comptrans,compup,ed,edcomp,edex,edrev,edtrans,edup,
+             ex,excomp,exed,expander,exrev,extrans,exup,rev,revcomp,reved,revex,reviser,revtrans,
+             revup,up,upcomp,updater,uped,upex,uprev,uptrans,editor}}%
 
 \newbibmacro*{swapstrings}[1]{%
   \iftoggle{swaptrans}

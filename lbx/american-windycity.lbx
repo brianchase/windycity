@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Jan 2021 06:28:07 PM CST
+% Last modified: Sun 28 Feb 2021 02:21:17 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -119,10 +119,10 @@
 }
 
 \NewBibliographyString{by}
-\NewBibliographyString{comped,comped+,compex,compex+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+,compup,compup+}
-\NewBibliographyString{editor+,edcomp,edcomp+,edex,edex+,edrev,edrev+,edtrans,edtrans+,edup,edup+}
+\NewBibliographyString{comp,comp+,comped,comped+,compex,compex+,compiler,compiler+,comprev,comprev+,comptrans,comptrans+,compup,compup+}
+\NewBibliographyString{ed,ed+,editor+,edcomp,edcomp+,edex,edex+,edrev,edrev+,edtrans,edtrans+,edup,edup+}
 \NewBibliographyString{expanded}
-\NewBibliographyString{excomp,excomp+,exed,exed+,expander,expander+,exrev,exrev+,extrans,extrans+,exup,exup+}
+\NewBibliographyString{ex,ex+,excomp,excomp+,exed,exed+,expander,expander+,exrev,exrev+,extrans,extrans+,exup,exup+}
 \NewBibliographyString{noplace}
 \NewBibliographyString{of}
 \NewBibliographyString{origpub}
@@ -133,13 +133,13 @@
 \NewBibliographyString{pseudo}
 \NewBibliographyString{reprint,reprinted}
 \NewBibliographyString{review,reviewnoauth}
-\NewBibliographyString{revcomp,revcomp+,reved,reved+,revex,revex+,reviser,reviser+,revtrans,revtrans+,revup,revup+}
+\NewBibliographyString{rev,rev+,revcomp,revcomp+,reved,reved+,revex,revex+,reviser,reviser+,revtrans,revtrans+,revup,revup+}
 \NewBibliographyString{revised}
 \NewBibliographyString{selfpub}
 \NewBibliographyString{special}
 \NewBibliographyString{subverbo,subverbos}
-\NewBibliographyString{transcomp,transcomp+,transed,transed+,transex,transex+,translator+,transrev,transrev+,transup,transup+}
-\NewBibliographyString{upcomp,upcomp+,updater,updater+,uped,uped+,upex,upex+,uprev,uprev+,uptrans,uptrans+}
+\NewBibliographyString{trans,trans+,transcomp,transcomp+,transed,transed+,transex,transex+,translator+,transrev,transrev+,transup,transup+}
+\NewBibliographyString{up,up+,upcomp,upcomp+,updater,updater+,uped,uped+,upex,upex+,uprev,uprev+,uptrans,uptrans+}
 \NewBibliographyString{updated}
 \NewBibliographyString{working}
 
@@ -151,6 +151,8 @@
   by            = {{by}{by}},
   chapter       = {{chap\adddot}{chap\adddot}},
   citedas       = {{hereafter cited as}{hereafter cited as}},
+  comp          = {{compiled by}{comp\adddot}},
+  comp+         = {{compiled by}{comps\adddot}},
   comped        = {{compiled and edit\-ed by}{comp\adddotspace and ed\adddot}},
   comped+       = {{compiled and edit\-ed by}{comps\adddotspace and eds\adddot}},
   compex        = {{compiled and expanded by}{comp\adddotspace and exp\adddot}},
@@ -163,6 +165,8 @@
   comptrans+    = {{compiled and translated by}{comps\adddotspace and trans\adddot}},
   compup        = {{compiled and updated by}{comp\adddotspace and up\adddot}},
   compup+       = {{compiled and updated by}{comps\adddotspace and up\adddot}},
+  ed            = {{edit\-ed by}{ed\adddot}},
+  ed+           = {{edit\-ed by}{eds\adddot}},
   edcomp        = {{edit\-ed and compiled by}{ed\adddotspace and comp\adddot}},
   edcomp+       = {{edit\-ed and compiled by}{eds\adddotspace and comps\adddot}},
   edex          = {{edit\-ed and expanded by}{ed\adddotspace and exp\adddot}},
@@ -176,6 +180,8 @@
   edtrans+      = {{edit\-ed and translated by}{eds\adddotspace and trans\adddot}},
   edup          = {{edit\-ed and updated by}{ed\adddotspace and up\adddot}},
   edup+         = {{edit\-ed and updated by}{eds\adddotspace and up\adddot}},
+  ex            = {{expanded by}{exp\adddot}},
+  ex+           = {{expanded by}{exp\adddot}},
   excomp        = {{expanded and compiled by}{exp\adddotspace and comp\adddot}},
   excomp+       = {{expanded and compiled by}{exp\adddotspace and comps\adddot}},
   exed          = {{expanded and edit\-ed by}{exp\adddotspace and ed\adddot}},
@@ -211,6 +217,8 @@
   references    = {{Bibliography}{Bibliography}},
   reprint       = {{reprint}{repr\adddot}},
   reprinted     = {{reprinted in}{reprinted in}},
+  rev           = {{revised by}{rev\adddot}},
+  rev+          = {{revised by}{revs\adddot}},
   reved         = {{revised and edit\-ed by}{rev\adddotspace and ed\adddot}},
   reved+        = {{revised and edit\-ed by}{revs\adddotspace and eds\adddot}},
   revex         = {{revised and expanded by}{rev\adddotspace and exp\adddot}},
@@ -230,6 +238,8 @@
   special       = {{special issue}{special issue}},
   subverbo      = {{s\adddot v\adddot}{s\adddot v\adddot}},
   subverbos     = {{s\adddot vv\adddot}{s\adddot vv\adddot}},
+  trans         = {{translated by}{trans\adddot}},
+  trans+        = {{translated by}{trans\adddot}},
   transcomp     = {{translated and compiled by}{trans\adddotspace and comp\adddot}},
   transcomp+    = {{translated and compiled by}{trans\adddotspace and comps\adddot}},
   transed       = {{translated and edit\-ed by}{trans\adddotspace and ed\adddot}},
@@ -242,6 +252,8 @@
   transrev+     = {{translated and revised by}{trans\adddotspace and revs\adddot}},
   transup       = {{translated and updated by}{trans\adddotspace and up\adddot}},
   transup+      = {{translated and updated by}{trans\adddotspace and up\adddot}},
+  up            = {{updated by}{up\adddot}},
+  up+           = {{updated by}{up\adddot}},
   upcomp        = {{updated and compiled by}{up\adddotspace and comp\adddot}},
   upcomp+       = {{updated and compiled by}{up\adddotspace and comps\adddot}},
   updated       = {{updated edition}{up\adddotspace ed\adddot}},
