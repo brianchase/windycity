@@ -1,4 +1,4 @@
-% Last modified: Sun 28 Feb 2021 12:21:13 PM CST
+% Last modified: Mon 01 Mar 2021 10:53:54 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -410,6 +410,7 @@
   \inherit{editortype}{editoratype}
   \inherit{editoratype}{editorbtype}
   \inherit{editorbtype}{editorctype}
+  \inherit{editoraddon}{editoraaddon}
   \inherit{translator}{translatora}
   \inherit{translatora}{translatorb}
   \inherit{translatortype}{translatoratype}
@@ -1139,7 +1140,9 @@
     {\usebibmacro{edcombos}%
      \usebibmacro{pluga+etc}%
      \usebibmacro{editoraddon}%
-     \usebibmacro{eds:secondtier:a}}}
+     \usebibmacro{editoraaddon}%
+     \usebibmacro{eds:secondtier:a}%
+     \usebibmacro{editoraaddon}}}
 
 \newbibmacro*{pluga+etc}{%
   \usebibmacro{edtranspunct:a}%
@@ -1315,7 +1318,10 @@
         \usebibmacro{pluga+printnames}%
         \setunit{\addcomma\space}%
         \usebibmacro{editoraddon}%
-        \usebibmacro{eds:secondtier:b}{#1}}%
+        \usebibmacro{editoraaddon}%
+        \usebibmacro{eds:secondtier:b}{#1}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{editoraaddon}}%
        {}}}
 
 \newbibmacro*{edtranspunct:c}{%
@@ -1353,7 +1359,7 @@
         \usebibmacro{pluga+printnames}}%
        {}}}
 
-% A catchall for additional editorial information about a 'title'.
+% Catchalls for additional editorial information.
 
 \newbibmacro*{editoraddon}{%
   \ifboolexpr{ test {\iffieldundef{editoraddon}}
@@ -1361,6 +1367,13 @@
     {}
     {\nopunct\printfield{editoraddon}%
      \clearfield{editoraddon}}}
+
+\newbibmacro*{editoraaddon}{%
+  \ifboolexpr{ test {\iffieldundef{editoraaddon}}
+               or not test {\ifdefstring{\xeditor}{editora}}}
+    {}
+    {\nopunct\printfield{editoraaddon}%
+     \clearfield{editoraaddon}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Names and Dashes  %%
