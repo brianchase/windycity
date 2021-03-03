@@ -1,4 +1,4 @@
-% Last modified: Mon 01 Mar 2021 10:53:54 AM CST
+% Last modified: Tue 02 Mar 2021 07:22:17 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -991,8 +991,7 @@
   \renewcommand*{\do}[1]{%
     \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
                  or test {\ifstrequal{##1}{translator}}}
-      {\renewcommand*{\cbx@bibstring}{##1}%
-       \usebibmacro{swapstrings}{##1}%
+      {\usebibmacro{swapstrings}{##1}%
        \listbreak}%
       {}}% needs '%'
   \docsvlist{comptrans,edtrans,extrans,revtrans,transcomp,transed,transex,transrev,transup,uptrans,
@@ -1034,8 +1033,7 @@
   \renewcommand*{\do}[1]{%
     \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
                  or test {\ifstrequal{##1}{editor}}}
-      {\renewcommand*{\cbx@bibstring}{##1}%
-       \usebibmacro{swapstrings}{##1}%
+      {\usebibmacro{swapstrings}{##1}%
        \listbreak}%
       {}}% needs '%'
   \docsvlist{comp,comped,compex,compiler,comprev,comptrans,compup,ed,edcomp,edex,edrev,edtrans,edup,
@@ -1076,8 +1074,8 @@
                                {\renewcommand*{\cbx@bibstring}{uptrans}}%
                                {\ifstrequal{#1}{uptrans}
                                   {\renewcommand*{\cbx@bibstring}{transup}}%
-                                  {}}}}}}}}}}}
-    {}}
+                                  {\renewcommand*{\cbx@bibstring}{#1}}}}}}}}}}}}
+    {\renewcommand*{\cbx@bibstring}{#1}}}
 
 \newbibmacro*{addplus:authpos}{%
   \iftoggle{cbx:short}
