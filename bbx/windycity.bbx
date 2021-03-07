@@ -1,4 +1,4 @@
-% Last modified: Tue 02 Mar 2021 07:22:17 PM CST
+% Last modified: Sun 07 Mar 2021 02:01:53 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -983,8 +983,7 @@
           {\renewcommand*{\cbx@bibstring}{transrev}}%
           {\docsvlist{transup,up,upcomp,updater,uped,upex,uprev,uptrans}%
            \iftoggle{atleastone}
-             {\renewcommand*{\cbx@bibstring}{transup}%
-              \togglefalse{atleastone}}%
+             {\renewcommand*{\cbx@bibstring}{transup}}%
              {\renewcommand*{\cbx@bibstring}{transed}}}}}}
 
 \newbibmacro*{transcombos:b}{%
@@ -1025,8 +1024,7 @@
           {\renewcommand*{\cbx@bibstring}{revtrans}}%
           {\docsvlist{uptrans,up,upcomp,updater,uped,upex,uprev,transup}%
            \iftoggle{atleastone}
-             {\renewcommand*{\cbx@bibstring}{uptrans}%
-              \togglefalse{atleastone}}%
+             {\renewcommand*{\cbx@bibstring}{uptrans}}%
              {\renewcommand*{\cbx@bibstring}{edtrans}}}}}}
 
 \newbibmacro*{edcombos:b}{%
