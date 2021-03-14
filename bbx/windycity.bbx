@@ -1,4 +1,4 @@
-% Last modified: Sun 07 Mar 2021 04:02:43 PM CST
+% Last modified: Sun 14 Mar 2021 02:56:58 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1112,7 +1112,7 @@
 
 \newbibmacro*{edcombos+etc}{%
   \iftoggle{noed}
-    {}
+    {\usebibmacro{eds:secondtier:a}}%
     {\usebibmacro{edcombos}%
      \usebibmacro{pluga+etc}%
      \usebibmacro{editoraddon}%
@@ -1145,15 +1145,15 @@
 \newbibmacro*{eds:secondtier:a}{%
   \ifboolexpr{ test {\iffieldundef{booktitle}}
                and test {\iffieldundef{bookbooktitle}}}
-    {\ifnameundef{editora}
+    {\togglefalse{noed}%
+     \ifnameundef{editora}
        {\ifnameundef{editorb}
           {}
           {\usebibmacro{editortypes}{editorb}%
            \ifboolexpr{ togl {noed}
                         or test {\ifinlist{issuetitle}{\editortypes}}
                         or test {\ifinlist{maintitle}{\editortypes}}
-                        or test {\ifinlist{series}{\editortypes}}
-                        or test {\iffieldundef{editorbtype}}}
+                        or test {\ifinlist{series}{\editortypes}}}
              {}
              {\usebibmacro{edcombos}%
               \usebibmacro{pluga+etc}}}}
@@ -1161,8 +1161,7 @@
         \ifboolexpr{ togl {noed}
                      or test {\ifinlist{issuetitle}{\editortypes}}
                      or test {\ifinlist{maintitle}{\editortypes}}
-                     or test {\ifinlist{series}{\editortypes}}
-                     or test {\iffieldundef{editoratype}}}
+                     or test {\ifinlist{series}{\editortypes}}}
           {}
           {\usebibmacro{edcombos}%
            \usebibmacro{pluga+etc}}}}
