@@ -1,4 +1,4 @@
-% Last modified: Sun 07 Feb 2021 01:56:17 PM CST
+% Last modified: Sun 14 Mar 2021 05:26:13 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -63,10 +63,12 @@ some distributions of \LaTeX, you might be able to skip this step.
 
 Either way, please consider downloading the most recent release of
 Windy City from \begingroup \hypersetup{urlcolor=blue}
-\href{https://www.ctan.org/pkg/windycity}{its home on CTAN}. More
-recent but potentially less reliable updates are available from Windy
-City's \href{https://github.com/brianchase/windycity}{repository on
-GitHub}.\endgroup
+\href{https://www.ctan.org/pkg/windycity}{its home on CTAN}. Releases
+without the PDF user guide are available from Windy City's
+\href{https://github.com/brianchase/windycity/releases}{repository on
+GitHub}. More recent but potentially less reliable updates are
+available on \href{https://github.com/brianchase/windycity}{the main
+project page}.\endgroup
 
 Windy City consists of four files:
 
@@ -650,14 +652,33 @@ translator, use \opt{swapauth}. This option works for \bibtype{book},
 \noindent According to \textit{CMOS}, if a work has an editor and a
 translator, their names should appear in citations in the order in
 which they appear on the work's title page (see \textit{CMOS}
-\ref{14.104}). By default, the style lists editors first. Entries with
-the option \bibfield{swaptrans} reverse this order: Their translators
-print first. If a work's translators and editors are the same,
-\bibfield{swaptrans} reverses the order of their roles, say, from
-\textit{edited and translated by} to \textit{translated and edited
-by}. The same goes for compilers, expanders, revisers, and updaters,
-which the style treats as specialized editors. For more information,
-see section \ref{edtranspos}.
+\ref{14.104}). By default, the style lists editors first. For the
+editors and translators of a \bibfield{title}, the option
+\opt{swaptrans} reverses this order: Their translators print first. If
+a work's translators and editors are the same, \opt{swaptrans}
+reverses the order of their roles, say, from \textit{edited and
+translated by} to \textit{translated and edited by}. The same goes
+for compilers, expanders, revisers, and updaters, which the style
+treats as specialized editors. For editors and translators of an
+\bibfield{issuetitle}, \bibfield{maintitle}, or \bibfield{series}, see
+\opt{swaptrans:issue}, \opt{swaptrans:main}, or
+\opt{swaptrans:series}, respectively. For more information, see
+section \ref{edtranspos}.
+
+\optitem[false]{swaptrans:issue}{\opt{true}, \opt{false}}
+
+Like \opt{swaptrans} but for editors and translators of an
+\bibfield{issuetitle}.
+
+\optitem[false]{swaptrans:main}{\opt{true}, \opt{false}}
+
+Like \opt{swaptrans} but for editors and translators of a
+\bibfield{maintitle}.
+
+\optitem[false]{swaptrans:series}{\opt{true}, \opt{false}}
+
+Like \opt{swaptrans} but for editors and translators of a
+\bibfield{series}.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -1183,16 +1204,16 @@ blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
 mind that blog posts take the usual \bibfield{title} and
 \bibfield{subtitle} fields.
 
-\item[editoraddon] Use this field to include additional editorial
-information about a book. It's available for \bibtype{book},
-\bibtype{incollection}, and \bibfield{review} entry types and their
-aliases. (For information on aliases in Windy City, see section
-\ref{entrytypes}.) When applicable, its content appears after a book's
-editors and translators without intervening punctuation. For an
-example, see section \ref{entry}, where the citation of
-\textit{Chaucer Life-Records} prints: ``from materials compiled by
-John M. Manly and Edith Richert, with the assistance of Lilian J.
-Redstone et al.''
+\item[editoraddon] This field holds editorial information about a work
+that belongs immediately after \bibfield{editor} has printed, without
+intervening punctuation. For an example, see \textit{CMOS}
+\ref{14.105}, where the citation of \textit{Chaucer Life-Records}
+includes: ``from materials compiled by John M. Manly and Edith
+Richert, with the assistance of Lilian J. Redstone et al.'' This field
+doesn't print when \bibfield{editor} prints in the author's position.
+As a result, options that may change where \bibfield{editor} prints,
+such as \opt{swaptrans} and \opt{swapauth}, may determine whether this
+field prints.
 
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
@@ -1329,13 +1350,20 @@ scope of the \bibtype{incollection} entry:
 scope of \bibtype{collection}, the style associates it with
 \textit{The Renaissance Philosophy of Man}.
 
-The style supports a second tier of editors after a \bibfield{title}
-field when no other \bibfield{title} is available for the assignment.
-If the style recognizes a second tiers of editors, \bibfield{editor}
+The style supports a second tier of editors after \bibfield{title}
+(with some exceptions) and after every \bibfield{issuetitle},
+\bibfield{maintitle}, and \bibfield{series}. With \bibfield{title}, a
+second tier of editors is supported in most cases. Exceptions occur
+only when another \bibfield{title} is available to take the
+assignment. Among other possibilities, this could happen with works
+cross-referenced to collections: The collection itself could have two
+tiers of editors, but works cross-referenced to it, such as articles
+and books, could only have one.
+
+If the style recognizes a second tier of editors, \bibfield{editor}
 precedes \bibfield{editora}, and \bibfield{editora} preceedes
-\bibfield{editorb}. (This features excludes \bibfield{editorc}.)
-Further, the second editor always prints after \bibfield{title}, even
-when the first occupies the author's position.
+\bibfield{editorb}. Further, the second editor always prints after
+\bibfield{title}, even when the first occupies the author's position.
 
 \begin{verbatim}
    @InCollection{myers2012,
@@ -1365,10 +1393,7 @@ editor of ``Pitch and Transposition,'' so both must be editors of
 \textit{A Performer's Guide to Seventeenth-Century Music}. If there
 were another \bibfield{title}, the style would assign
 \bibfield{editor} to \textit{A Performer's Guide} and
-\bibfield{editora} to the next one. Failure to assign a second tier of
-editors is more likely to happen with double or triple
-cross-referencing. That's rarely necessary, but it no doubt affects
-some works in collections.
+\bibfield{editora} to the next one.
 
 As these exaples also show, the style supports editorial roles beyond
 just editor and translator. Those roles are compiler, expander,
@@ -1427,17 +1452,18 @@ compex & compiler and expander & reved & reviser and editor\\
 comprev & compiler and reviser & revex & reviser and expander\\
 comptrans & compiler and translator & revtrans & reviser and translator\\
 compup & compiler and updater & revup & reviser and updater\\
+editor & editor & translator & translator\\
+edcomp & editor and compiler & transcomp & translator and compiler\\
+edex & editor and expander & transed & translator and editor\\
+edrev & editor and reviser & transex & translator and expander\\
+edtrans & editor and translator & transrev & translator and reviser\\
+edup & editor and updater & transup & translator and updater\\
 expander & expander & updater & updater\\
 excomp & expander and compiler & upcomp & updater and compiler\\
 exed & expander and editor & uped & updater and editor\\
 exrev & expander and reviser & upex & updater and expander\\
 extrans & expander and translator & uprev & updater and reviser\\
 exup & expander and updater & uptrans & updater and translator\\
-\midrule
-edcomp & editor and compiler & transcomp & translator and compiler\\
-edex & editor and expander & transex & translator and expander\\
-edrev & editor and reviser & transrev & translator and reviser\\
-edup & editor and updater & transup & translator and updater\\
 \end{tabular}
 \caption{}\label{table:ed}
 \end{table}
@@ -1451,25 +1477,89 @@ The first one below shows the output of \textit{reved} in the
 \item \cite{gowers2015}
 \end{citebib}
 
-% Try swapping the editor type in the entries above for other values
-% in Table \ref{table:ed}. Note that \textit{edrev} is the reverse of
-% \textit{reved}---\textit{edited and revised by} instead of
-% \textit{revised and edited by}. So, too, for \textit{comprev} and
-% \textit{revcomp}, \textit{comptrans} and \textit{transcomp}, and so
-% on.
+Windy City simplifies the assignments of editors and translators in
+several ways. For one, the default assignment of every editor name
+list is \textit{editor}, and the default assignment of every
+translator name list is \textit{translator}. As a result, you never
+need to use the editor or translator type fields with the values
+\textit{editor} or \textit{translator}. The name fields alone set the
+correct assignment.
 
-Missing from Table \ref{table:ed} are \textit{editor},
-\textit{translator}, \textit{edtrans}, and \textit{transed}. Windy
-City has bibliography strings for them, too, but they're meant for the
-style's internal use. It determines which of them applies, if any,
-based on the contents of the \bibfield{editor} and
-\bibfield{translator} fields and the option \opt{swaptrans}. You never
-need to use them in a bibliography database.
+Much the same holds when the editor and translator of a
+\bibfield{title} are the same. The usual way to set this is with
+identical name fields:
 
-Three more values of \bibfield{editortype} allow you to assign editors
-to higher level titles: \textit{maintitle}, \textit{series}, and
-\textit{issuetitle}. Here's an example from \textit{CMOS}
-\ref{14.123}:
+\begin{verbatim}
+  editor = {Doe, Jane},
+  translator = {Doe, Jane},
+\end{verbatim}
+
+\noindent This gives a default assignment of ``editor and translator''
+(\textit{edtrans} from Table \ref{table:ed}), unless you use the entry
+option \opt{swaptrans}, which defaults to ``translator and editor''
+(\textit{transed} from Table \ref{table:ed}). No editor or translator
+type field is necessary.
+
+When type fields are required, Windy City gives you options for how to
+structure your bibliography entries: If you like, you can set the
+assignment with just one editor or translator type field and its
+corresponding name field, or with both name fields and one type field,
+or with both name fields and both type fields. For example, to set
+Jane Doe as the compiler and translator of a \bibfield{title}, Windy
+City treats all five options below as equivalent:
+
+\begin{enumerate}[itemsep=0.2\baselineskip]
+
+\item
+
+\begin{verbatim}
+   editor = {Doe, Jane},
+   editortype = {comptrans},
+\end{verbatim}
+
+\item
+
+\begin{verbatim}
+   translator = {Doe, Jane},
+   translatortype = {comptrans},
+\end{verbatim}
+
+\item
+
+\begin{verbatim}
+   editor = {Doe, Jane},
+   translator = {Doe, Jane},
+   editortype = {comptrans},
+\end{verbatim}
+
+\item
+
+\begin{verbatim}
+   editor = {Doe, Jane},
+   translator = {Doe, Jane},
+   translatortype = {comptrans},
+\end{verbatim}
+
+\item
+
+\begin{verbatim}
+   editor = {Doe, Jane},
+   translator = {Doe, Jane},
+   editortype = {comptrans},
+   translatortype = {comptrans},
+\end{verbatim}
+
+\end{enumerate}
+
+The last option above raises the possibility that editor and
+translator type fields may conflict, that their contents may differ
+when, in reference to the same persons, they should be identical. In
+those cases, Windy City ignores the translator type field.
+
+Three more values for editor and translator type fields allow you to
+assign editors and translators to higher level titles:
+\textit{issuetitle}, \textit{maintitle}, and \textit{series}. Here's
+an example from \textit{CMOS} \ref{14.123}:
 
 \begin{verbatim}
    @Book{allen2009,
@@ -1489,24 +1579,27 @@ to higher level titles: \textit{maintitle}, \textit{series}, and
 \item \cite{allen2009}
 \end{citebib}
 
-\noindent If there were no \bibfield{editortype} assigning the editor
-to the series, the output would list a book's editor. In short, for a
-title's compilers, expanders, revisers, and updaters and for any title
-at a higher level than \bibfield{title}, you need to use
-\bibfield{editortype}. Combined with Windy City's support for citing
-articles, chapters, books, and other works within books, this scheme
-allows for several sets of editors per work, although it does limit
-you to just one set of compilers, expanders, revisers, and updaters.
+\noindent If there were no \bibfield{editortype} assigning
+\bibfield{editor} to the series, the style would assign it to
+\bibfield{title}. Much the same would go for a translator: You'd need
+a \bibfield{translator} field with that person's name and a
+\bibfield{translatortype} field with the value \textit{series}.
 
-What about translators? Unless a work's bibliography database entry
-has a \bibfield{translatortype} field with the value
-\textit{maintitle}, Windy City associates the names in
-\bibfield{translator} with the entry's lowest level title. (Recall
-``The Ascent of Mont Ventoux'' above.) You should rarely, and perhaps
-never, need more than one set of translators per work. But if you do,
-Windy City lets you assign as many as three---as long as you
-cross-reference a work with one set of translators to another with
-two.
+All combinations of editors and translators are available to
+\bibfield{issuetitle}, \bibfield{maintitle}, and \bibfield{series}
+with the help of strings from Table \ref{table:ed}. Commas function as
+delimiters. To take the previous example, you could list Catharine
+Stimpson as the editor and compiler of the series by putting the
+values \textit{series,edcomp} or \textit{edcomp,series} in
+\bibfield{editortype}.
+
+In short, for a title's compilers, expanders, revisers, and updaters,
+and for any title at a higher level than \bibfield{title}, you need to
+use an editor or translator type field (\bibfield{editortype} for
+\bibfield{editor} and \bibfield{translatortype} for
+\bibfield{translator}). Combined with Windy City's support for citing
+articles, chapters, books, and other works within books, this scheme
+allows for several sets of editors per work.
 
 The style has three other name lists for editors: \bibfield{editora},
 \bibfield{editorb}, and \bibfield{editorc}. If a work has more than
@@ -1534,10 +1627,19 @@ of thumb described above, reserving \bibfield{editor} for
 \subsection{Switching Places and Roles}
 \label{edtranspos}
 
-Normally, Windy City lists editors first. But if translators are
-listed first on a work's title page, you should reverse the order (see
-\textit{CMOS} \ref{14.104}). For that, use the entry option
-\opt{swaptrans}. Compare:
+Normally, Windy City lists editors first. But per \textit{CMOS}, if
+translators are listed first on a work's title page, you should
+reverse the order (see \textit{CMOS} \ref{14.104}). The style provides
+four entry options to do this, each of which applies to the editors
+and translators of different titles: \opt{swaptrans} (for
+\bibfield{title}), \opt{swaptrans:issue} (for \bibfield{issuetitle}),
+\opt{swaptrans:main} (for \bibfield{maintitle}), and
+\opt{swaptrans:series} (for \bibfield{series}). This level of control
+means that when a work has multiple levels of titles with multiple
+pairs of editors and translators, the style allows you to swap
+positions of some or all of them.
+
+For simplicity, let's focus on \opt{swaptrans}. Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -1584,9 +1686,9 @@ relevant \bibfield{editortype} field with a bibliography string from
 Table \ref{table:ed}. After all, for compilers, expanders, revisers,
 and updaters, you need to put a value in \bibfield{editortype} anyway.
 So, if you pick one that begins with \textit{trans}
-(\textit{transcomp}, \textit{transed}, \textit{transrev}, or
-\textit{transup}), Windy City will assume that the translator's role
-goes first.
+(\textit{transcomp}, \textit{transed}, \textit{transex},
+\textit{transrev}, or \textit{transup}), Windy City will assume that
+the translator's role goes first.
 
 On rare occasions, you may want to swap the position of an author and
 an editor or translator. \textit{CMOS} \ref{14.104} gives an example:
