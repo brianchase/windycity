@@ -1,4 +1,4 @@
-% Last modified: Sun 14 Mar 2021 02:56:58 PM CDT
+% Last modified: Mon 15 Mar 2021 06:00:10 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1171,35 +1171,34 @@
 
 \newbibmacro*{test:ed}{%
   \iftoggle{edshift}
-    {\usebibmacro{eda+edb+edc}}%
+    {\usebibmacro{test:eda+edb+edc}}%
     {\ifnameundef{editor}
-       {\usebibmacro{test:editora}}%
-       {\usebibmacro{test:editor}%
-        \iftoggle{noed}
-          {\togglefalse{noed}%
-           \usebibmacro{test:editora}}%
-          {}}}}
+       {\usebibmacro{test:eda}}%
+       {\usebibmacro{test:ed+eda}}}}
 
-\newbibmacro*{eda+edb+edc}{%
+\newbibmacro*{test:eda+edb+edc}{%
   \ifnameundef{editor}
     {\ifnameundef{editora}
        {\ifnameundef{editorb}
           {\usebibmacro{editortypes}{editorc}}%
           {\usebibmacro{editortypes}{editorb}}%
-        \usebibmacro{test:editorb}}%
-       {\usebibmacro{test:editora}%
+        \usebibmacro{test:edb}}%
+       {\usebibmacro{test:eda}%
         \iftoggle{noed}
           {\togglefalse{noed}%
            \usebibmacro{editortypes}{editorb}%
-           \usebibmacro{test:editorb}}%
+           \usebibmacro{test:edb}}%
           {}}}
-    {\usebibmacro{test:editor}%
-     \iftoggle{noed}
-       {\togglefalse{noed}%
-        \usebibmacro{test:editora}}%
-       {}}}
+    {\usebibmacro{test:ed+eda}}}
 
-\newbibmacro*{test:editor}{%
+\newbibmacro*{test:ed+eda}{%
+  \usebibmacro{test:editor+xeditor}%
+  \iftoggle{noed}
+    {\togglefalse{noed}%
+     \usebibmacro{test:eda}}%
+    {}}
+
+\newbibmacro*{test:editor+xeditor}{%
   \usebibmacro{editortypes}{editor}%
   \iftoggle{noed}
     {}
@@ -1210,7 +1209,7 @@
           {\toggletrue{noed}}%
           {}}}}
 
-\newbibmacro*{test:editora}{%
+\newbibmacro*{test:eda}{%
   \usebibmacro{editortypes}{editora}%
   \iftoggle{noed}
     {}
@@ -1230,7 +1229,7 @@
              {\toggletrue{noed}}%
              {}}}}}
 
-\newbibmacro*{test:editorb}{%
+\newbibmacro*{test:edb}{%
   \usebibmacro{test:xeditor:a}{}%
   \iftoggle{noed}
     {}
