@@ -1,4 +1,4 @@
-% Last modified: Tue 16 Mar 2021 05:55:58 PM CDT
+% Last modified: Tue 16 Mar 2021 05:56:57 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1143,28 +1143,19 @@
     {\newunit}}%
 
 \newbibmacro*{eds:secondtier:a}{%
-  \ifboolexpr{ test {\iffieldundef{booktitle}}
-               and test {\iffieldundef{bookbooktitle}}}
-    {\togglefalse{noed}%
-     \ifnameundef{editora}
-       {\ifnameundef{editorb}
-          {}
-          {\usebibmacro{editortypes}{editorb}%
-           \ifboolexpr{ togl {noed}
-                        or test {\ifinlist{issuetitle}{\editortypes}}
-                        or test {\ifinlist{maintitle}{\editortypes}}
-                        or test {\ifinlist{series}{\editortypes}}}
-             {}
-             {\usebibmacro{edcombos}%
-              \usebibmacro{pluga+etc}}}}
-       {\usebibmacro{editortypes}{editora}%
-        \ifboolexpr{ togl {noed}
-                     or test {\ifinlist{issuetitle}{\editortypes}}
-                     or test {\ifinlist{maintitle}{\editortypes}}
-                     or test {\ifinlist{series}{\editortypes}}}
-          {}
-          {\usebibmacro{edcombos}%
-           \usebibmacro{pluga+etc}}}}
+  \ifboolexpr{ ( test {\ifdefempty{\xtitle}}
+               and test {\iffieldundef{booktitle}} )
+               or ( test {\ifdefstring{\xtitle}{book}}
+               and test {\iffieldundef{bookbooktitle}} )}
+    {\usebibmacro{eds:maintitle+etc}%
+     \ifboolexpr{ togl {noed}
+                  or test {\ifdefstring{\xeditor}{editor}}
+                  or test {\ifinlist{issuetitle}{\editortypes}}
+                  or test {\ifinlist{maintitle}{\editortypes}}
+                  or test {\ifinlist{series}{\editortypes}}}
+       {}
+       {\usebibmacro{edcombos}%
+        \usebibmacro{pluga+etc}}}
     {}}
 
 % Tests for 'edtrans' macro.
