@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Mar 2021 06:00:10 PM CDT
+% Last modified: Tue 16 Mar 2021 05:55:58 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1263,8 +1263,8 @@
 % For editors and translators of an 'issuetitle', 'maintitle', or 'series'.
 
 \newbibmacro*{edtrans:maintitle+etc}[1]{%
-  \usebibmacro{eds:maintitle+etc}{#1}%
-  \usebibmacro{trans:maintitle+etc}{#1}%
+  \usebibmacro{eds:maintitle+etc}%
+  \usebibmacro{trans:maintitle+etc}%
   \iftoggle{swaptrans:#1}
     {\toggletrue{swaptrans}%
      \usebibmacro{trans:lists+etc}{#1}%
@@ -1273,7 +1273,7 @@
     {\usebibmacro{eds:lists+etc}{#1}%
      \usebibmacro{trans:lists+etc}{#1}}}
 
-\newbibmacro*{eds:maintitle+etc}[1]{%
+\newbibmacro*{eds:maintitle+etc}{%
   \toggletrue{noed}%
   \renewcommand*{\do}[1]{%
     \ifnameundef{##1}
@@ -1304,7 +1304,7 @@
     {\newunit}%
     {\setunit{\addcomma\space}}}
 
-\newbibmacro*{trans:maintitle+etc}[1]{%
+\newbibmacro*{trans:maintitle+etc}{%
   \toggletrue{notrans}%
   \renewcommand*{\do}[1]{%
     \ifnameundef{##1}
@@ -1324,7 +1324,7 @@
        {}}}
 
 \newbibmacro*{eds:secondtier:b}[1]{%
-  \usebibmacro{eds:maintitle+etc}{#1}%
+  \usebibmacro{eds:maintitle+etc}%
   \iftoggle{noed}
     {}
     {\ifinlist{#1}{\editortypes}
