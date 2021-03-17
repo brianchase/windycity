@@ -1,4 +1,4 @@
-% Last modified: Tue 16 Mar 2021 05:56:57 PM CDT
+% Last modified: Wed 17 Mar 2021 05:37:02 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -293,7 +293,7 @@
 % Mapping for when 'journal', 'journaltitle', 'organization', or
 % 'blogtitle' goes in the author's position.
 
-\DeclareSourcemap{
+\DeclareStyleSourcemap{
   \maps[datatype=bibtex]{
     \map[overwrite]{
       \pertype{article}
@@ -322,7 +322,7 @@
     }
   }
 }
-\DeclareSourcemap{
+\DeclareStyleSourcemap{
   \maps[datatype=bibtex]{
     \map[overwrite]{
       \pertype{online}
@@ -349,7 +349,7 @@
     }
   }
 }
-\DeclareSourcemap{
+\DeclareStyleSourcemap{
   \maps[datatype=bibtex]{
     \map[overwrite=false]{
       \pertype{inreference}
@@ -401,6 +401,8 @@
 \ResetDataInheritance
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
 \DeclareDataInheritance{*}{incollection,inbook,letter,review}{%
+  \inherit{titletype}{booktitletype}
+  \inherit{booktitletype}{bookbooktitletype}
   \inherit{author}{bookauthor}
   \inherit{authortype}{bookauthortype}
   \inherit{shortauthor}{shortbookauthor}
