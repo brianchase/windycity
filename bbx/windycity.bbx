@@ -1,4 +1,4 @@
-% Last modified: Tue 23 Mar 2021 05:07:25 PM CDT
+% Last modified: Tue 23 Mar 2021 05:09:03 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1236,6 +1236,7 @@
   \iftoggle{notrans}
     {}
     {\ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
+                  or test {\ifinlist{maintitle}{\translatortypes}}
                   or test {\ifinlist{series}{\translatortypes}}}
        {\toggletrue{notrans}}%
        {\ifdefstring{\yeditor}{translatorb}
