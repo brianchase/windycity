@@ -1,4 +1,4 @@
-% Last modified: Mon 22 Mar 2021 07:46:04 PM CDT
+% Last modified: Tue 23 Mar 2021 05:07:25 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -916,8 +916,8 @@
     {\ifstrequal{#1}{ap}% not 'authposition' toggle
        {\usebibmacro{test:b:ed+eda+edb}}%
        {\ifinlist{maintitle}{\editortypes}
-         {\toggletrue{noed}}%
-         {}}}}
+          {\toggletrue{noed}}%
+          {}}}}
 
 \newbibmacro*{test:b:ed+eda+edb}{%
   \ifinlist{maintitle}{\editortypes}
@@ -1104,7 +1104,8 @@
        {\edef\cbx@bibstring{\cbx@bibstring +}}%
        {}}}
 
-% For editors and translators not in the author's position.
+% For editors and translators after the author's position but before
+% 'issuetitle', 'maintitle', and 'series'.
 
 \newbibmacro*{edtrans:b}{%
   \usebibmacro{edtrans:b:ed}%
@@ -1169,7 +1170,7 @@
         \usebibmacro{pluga+etc}}}
     {}}
 
-% Tests for 'edtrans' macro.
+% Tests for 'edtrans:b' macro.
 
 \newbibmacro*{edtrans:b:ed}{%
   \usebibmacro{test:editors}%
