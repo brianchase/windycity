@@ -1,4 +1,4 @@
-% Last modified: Thu 25 Mar 2021 12:49:47 PM CDT
+% Last modified: Fri 26 Mar 2021 06:00:34 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -68,13 +68,13 @@
 \DeclareBiblatexOption{entry}[boolean]{listvols}[true]{%
   \settoggle{listvols}{#1}}%
 
+\providetoggle{newauth}
+\DeclareBiblatexOption{entry}[boolean]{newauth}[true]{%
+  \settoggle{newauth}{#1}}%
+
 \providetoggle{noauth}
 \DeclareBiblatexOption{entry}[boolean]{noauth}[true]{%
   \settoggle{noauth}{#1}}%
-
-\providetoggle{noreprint}
-\DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
-  \settoggle{noreprint}{#1}}%
 
 \DeclareBiblatexOption{global}[boolean]{nolos}[true]{%
   \ifstrequal{#1}{true}
@@ -84,6 +84,10 @@
 \providetoggle{nopages}
 \DeclareBiblatexOption{global}[boolean]{nopages}[true]{%
   \settoggle{nopages}{#1}}%
+
+\providetoggle{noreprint}
+\DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
+  \settoggle{noreprint}{#1}}%
 
 \providetoggle{reflist}
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
@@ -124,10 +128,6 @@
 \providetoggle{swapauth}
 \DeclareBiblatexOption{entry}[boolean]{swapauth}[true]{%
   \settoggle{swapauth}{#1}}%
-
-\providetoggle{newauth}
-\DeclareBiblatexOption{entry}[boolean]{newauth}[true]{%
-  \settoggle{newauth}{#1}}%
 
 \providetoggle{swaptrans}
 \providetoggle{swaptrans:issuetitle}
@@ -173,9 +173,6 @@
   maxbibnames=10,
   mincitenames=1,
   maxcitenames=3,
-% Remember, if 'mincrossrefs' is greater than 1, and you cite just one
-% entrykey in a document (or refsection, etc), the field 'crossref' is
-% undefined.
   mincrossrefs=2,
   minxrefs=2,
   pagetracker=page,
@@ -192,12 +189,7 @@
   useprefix=false,
   usetranslator=true}
 
-% If a document's language is English, set by babel or polyglossia or
-% by biblatex when neither babel nor polyglossia has been loaded, use
-% 'american-windycity.lbx':
 \DeclareLanguageMapping{english}{american-windycity}
-% If the document's language isn't English, try to override
-% 'american-windycity.lbx' with '<language>-windycity.lbx':
 \DeclareLanguageMappingSuffix{-windycity}
 
 \DeclareLabeldate{% 'reflist' preamble option loads an alternative
@@ -290,8 +282,8 @@
     \field{volume}
     \literal{0}}}
 
-% Mapping for when 'journal', 'journaltitle', 'organization', or
-% 'blogtitle' goes in the author's position.
+% When 'journal', 'journaltitle', 'organization', or 'blogtitle' goes
+% in the author's position.
 
 \DeclareStyleSourcemap{
   \maps[datatype=bibtex]{
@@ -568,8 +560,6 @@
    \global\togglefalse{reflist}}%
   {\item}
 
-% Index names only.
-
 \renewbibmacro*{bibindex}{%
   \ifbibindex
     {\indexnames{labelname}}%
@@ -608,8 +598,8 @@
 \DeclareIndexNameAlias{translator}{default}
 
 % Affixes like 'Jr.', should appear last, delimited with a comma, when
-% inverted, as in a bibliography, but not otherwise, as in a note. See
-% CMOS, 17th ed., 6.43 and 16.41, as well as the example in 14.75.
+% the name is inverted. See CMOS, 17th ed., 6.43 and 16.41, and the
+% example in 14.75.
 
 \renewbibmacro*{name:family-given}[4]{%
   \ifuseprefix
@@ -777,14 +767,18 @@
     \step[typesource=www,            typetarget=online]
     \step[typesource=inreference,    typetarget=reference]
     \step[typesource=mathesis,       typetarget=thesis]
-    \step[typesource=phdthesis,      typetarget=thesis]}
+    \step[typesource=phdthesis,      typetarget=thesis]
+  }
   \map{
     \step[fieldsource=school,        fieldtarget=institution]
     \step[fieldsource=address,       fieldtarget=location]
-    \step[fieldsource=journal,       fieldtarget=journaltitle]}}
+    \step[fieldsource=journal,       fieldtarget=journaltitle]
+  }
+}
 
 \DeclareBibliographyAlias{collection}{book}
 \DeclareBibliographyAlias{cite:collection}{cite:book}
+\DeclareBibliographyAlias{*}{book}
 
 \DeclareBibliographyAlias{inbook}{incollection}
 \DeclareBibliographyAlias{letter}{incollection}
@@ -793,8 +787,6 @@
 
 \DeclareBibliographyAlias{unpublished}{thesis}
 \DeclareBibliographyAlias{cite:unpublished}{cite:thesis}
-
-\DeclareBibliographyAlias{*}{book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Author's Position  %%
@@ -1428,7 +1420,7 @@
      \printfield[parens]{handle}%
      \clearfield{handle}}}
 
-% In short citations, omit addons. See CMOS, 17th ed., 14.80 and
+% Omit addons in short citations. See CMOS, 17th ed., 14.80 and
 % 14.209.
 
 \newbibmacro*{nameaddon}{%
