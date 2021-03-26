@@ -1,4 +1,4 @@
-% Last modified: Sun 14 Mar 2021 05:26:13 PM CDT
+% Last modified: Thu 25 Mar 2021 09:39:06 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1350,20 +1350,13 @@ scope of the \bibtype{incollection} entry:
 scope of \bibtype{collection}, the style associates it with
 \textit{The Renaissance Philosophy of Man}.
 
-The style supports a second tier of editors after \bibfield{title}
-(with some exceptions) and after every \bibfield{issuetitle},
-\bibfield{maintitle}, and \bibfield{series}. With \bibfield{title}, a
-second tier of editors is supported in most cases. Exceptions occur
-only when another \bibfield{title} is available to take the
-assignment. Among other possibilities, this could happen with works
-cross-referenced to collections: The collection itself could have two
-tiers of editors, but works cross-referenced to it, such as articles
-and books, could only have one.
-
-If the style recognizes a second tier of editors, \bibfield{editor}
-precedes \bibfield{editora}, and \bibfield{editora} preceedes
-\bibfield{editorb}. Further, the second editor always prints after
-\bibfield{title}, even when the first occupies the author's position.
+The style supports a second tier of editors after titles. In your
+bibliography database, make sure to list them in the proper order:
+\bibfield{editor} precedes \bibfield{editora}, and \bibfield{editora}
+precedes \bibfield{editorb}. When they apply to a \bibfield{title},
+second tier editors never print in the author's position. They print
+after \bibfield{title}, even when the first occupies the author's
+position.
 
 \begin{verbatim}
    @InCollection{myers2012,

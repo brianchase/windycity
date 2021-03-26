@@ -1,4 +1,4 @@
-% Last modified: Tue 23 Mar 2021 05:09:03 PM CDT
+% Last modified: Thu 25 Mar 2021 12:49:47 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -371,7 +371,58 @@
   }
 }
 
-% For 'collsonly' and 'nolos' bibliography options and 'reference' entry type.
+% Save the entry key of every editor, translator, and title.
+
+\DeclareStyleSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite]{
+      \step[fieldsource=entrykey]
+      \step[fieldset=titlekey, origfieldval]
+      \step[fieldset=booktitlekey, origfieldval]
+      \step[fieldset=editortype, fieldvalue={,}, appendstrict]
+      \step[fieldset=editortype, origfieldval, append]
+      \step[fieldset=editoratype, fieldvalue={,}, appendstrict]
+      \step[fieldset=editoratype, origfieldval, append]
+      \step[fieldset=editorbtype, fieldvalue={,}, appendstrict]
+      \step[fieldset=editorbtype, origfieldval, append]
+      \step[fieldset=editorctype, fieldvalue={,}, appendstrict]
+      \step[fieldset=editorctype, origfieldval, append]
+    }
+    \map[overwrite]{
+      \step[notfield=editorc, final]
+      \step[fieldset=editorctype, null]
+      \step[notfield=editorb, final]
+      \step[fieldset=editorbtype, null]
+      \step[notfield=editora, final]
+      \step[fieldset=editoratype, null]
+      \step[notfield=editor, final]
+      \step[fieldset=editortype, null]
+    }
+    \map[overwrite]{
+      \step[notfield=bookbooktitle, final]
+      \step[fieldset=bookbooktitlekey, null]
+      \step[notfield=booktitle, final]
+      \step[fieldset=booktitlekey, null]
+      \step[notfield=title, final]
+      \step[fieldset=titlekey, null]
+    }
+    \map[overwrite]{
+      \step[fieldsource=entrykey]
+      \step[fieldset=translatortype, fieldvalue={,}, appendstrict]
+      \step[fieldset=translatortype, origfieldval, append]
+      \step[fieldset=translatoratype, fieldvalue={,}, appendstrict]
+      \step[fieldset=translatoratype, origfieldval, append]
+    }
+    \map[overwrite]{
+      \step[notfield=translatora, final]
+      \step[fieldset=translatoratype, null]
+      \step[notfield=translator, final]
+      \step[fieldset=translatortype, null]
+    }
+  }
+}
+
+% For 'collsonly' and 'nolos' options and the 'reference' entry type.
 
 \defbibcheck{collsonly}{%
   \ifentrytype{inbook}
@@ -403,19 +454,21 @@
 \ResetDataInheritance
 \DefaultInheritance[\except{*}{review}{all=false}]{all=true,override=false}
 \DeclareDataInheritance{*}{incollection,inbook,letter,review}{%
+  \inherit[override=true]{titlekey}{booktitlekey}
+  \inherit[override=true]{booktitlekey}{bookbooktitlekey}
   \inherit{author}{bookauthor}
   \inherit{authortype}{bookauthortype}
   \inherit{shortauthor}{shortbookauthor}
-  \inherit{editor}{editora}
-  \inherit{editora}{editorb}
-  \inherit{editorb}{editorc}
-  \inherit{editortype}{editoratype}
-  \inherit{editoratype}{editorbtype}
-  \inherit{editorbtype}{editorctype}
+  \inherit[override=true]{editor}{editora}
+  \inherit[override=true]{editora}{editorb}
+  \inherit[override=true]{editorb}{editorc}
+  \inherit[override=true]{editortype}{editoratype}
+  \inherit[override=true]{editoratype}{editorbtype}
+  \inherit[override=true]{editorbtype}{editorctype}
   \inherit{editoraddon}{editoraaddon}
   \inherit{translator}{translatora}
   \inherit{translatora}{translatorb}
-  \inherit{translatortype}{translatoratype}
+  \inherit[override=true]{translatortype}{translatoratype}
   \inherit{title}{booktitle}
   \inherit{subtitle}{booksubtitle}
   \inherit{titleaddon}{booktitleaddon}
@@ -914,12 +967,14 @@
                or test {\ifinlist{series}{\editortypes}}}
     {\toggletrue{noed}}%
     {\ifstrequal{#1}{ap}% not 'authposition' toggle
-       {\usebibmacro{test:b:ed+eda+edb}}%
-       {\ifinlist{maintitle}{\editortypes}
-          {\toggletrue{noed}}%
-          {}}}}
+       {\usebibmacro{test:a:ap:ed+eda+edb}}%
+       {\xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
+          {\ifinlist{maintitle}{\editortypes}
+             {\toggletrue{noed}}%
+             {}}
+          {\toggletrue{noed}}}}}
 
-\newbibmacro*{test:b:ed+eda+edb}{%
+\newbibmacro*{test:a:ap:ed+eda+edb}{%
   \ifinlist{maintitle}{\editortypes}
     {\iftoggle{collection:bk}
        {\iftoggle{swapvol}
@@ -1155,20 +1210,23 @@
     {\newunit}}%
 
 \newbibmacro*{eds:secondtier:a}{%
-  \ifboolexpr{ ( test {\ifdefempty{\xtitle}}
-               and test {\iffieldundef{booktitle}} )
-               or ( test {\ifdefstring{\xtitle}{book}}
-               and test {\iffieldundef{bookbooktitle}} )}
-    {\usebibmacro{test:editors}%
-     \ifboolexpr{ togl {noed}
-                  or test {\ifdefstring{\xeditor}{editor}}
-                  or test {\ifinlist{issuetitle}{\editortypes}}
-                  or test {\ifinlist{maintitle}{\editortypes}}
-                  or test {\ifinlist{series}{\editortypes}}}
-       {}
+  \usebibmacro{test:editors}%
+  \ifboolexpr{ togl {noed}
+               or test {\ifdefstring{\xeditor}{editor}}
+               or test {\ifinlist{issuetitle}{\editortypes}}
+               or test {\ifinlist{maintitle}{\editortypes}}
+               or test {\ifinlist{series}{\editortypes}}}
+    {}
+    {\ifboolexpr{ ( test {\ifdefempty{\xtitle}}
+                  and test {\iffieldundef{booktitle}} )
+                  or ( test {\ifdefstring{\xtitle}{book}}
+                  and test {\iffieldundef{bookbooktitle}} )}
        {\usebibmacro{edcombos}%
-        \usebibmacro{pluga+etc}}}
-    {}}
+        \usebibmacro{pluga+etc}}%
+       {\xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
+          {\usebibmacro{edcombos}%
+           \usebibmacro{pluga+etc}}%
+          {}}}}
 
 % Tests for 'edtrans:b' macro.
 
@@ -1237,7 +1295,8 @@
     {}
     {\ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
                   or test {\ifinlist{maintitle}{\translatortypes}}
-                  or test {\ifinlist{series}{\translatortypes}}}
+                  or test {\ifinlist{series}{\translatortypes}}
+                  or not test {\xifinlist{\thefield{\xtitle titlekey}}{\translatortypes}}}
        {\toggletrue{notrans}}%
        {\ifdefstring{\yeditor}{translatorb}
           {\ifboolexpr{ test {\ifdefempty{\xtitle}}

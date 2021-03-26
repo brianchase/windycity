@@ -12,40 +12,46 @@ brianchase/windycity").
 
 * added preamble option `shortafter` to print the same output as the
   preamble option `short` but with long first citations
-* added support for expanders to allow the following editorial roles:
+* overhauled the processing of editors and translators:
 
-  - expanded by...
-  - expanded and compiled by...
-  - expanded and edited by...
-  - expanded and revised by...
-  - expanded and translated by...
-  - expanded and updated by...
-  - compiled and expanded by...
-  - edited and expanded by...
-  - revised and expanded by...
-  - translated and expanded by...
-  - updated and expanded by...
+  - added support for expanders, providing the following editorial
+    roles:
 
-* added support for translators of `issuetitle` and `series`
-* to expand the kinds of editors and translators available for
-  `issuetitle`, `maintitle` and `series`, editor and translator type
-  fields accept comma-separated bibliography strings (e.g. if `editor`
-  is the reviser of `maintitle`, put `maintitle,reviser` or
-  `reviser,maintitle` in `editortype`)
-* added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
-  entry options to swap positions of editors and translators of
-  `issuetitle`, `maintitle`, and `series`
-* added support for printing a second tier of editors after `title`
-  (with some exceptions) and after `issuetitle`, `maintitle`, and
-  `series` (e.g. "Edited by Jane Doe. Revised and Expanded by John
-  Smith")
-* if the editors and translators of a `title` are the same, you can
-  control the assignment with one name list and its corresponding type
-  field (e.g. if Jane Doe is the compiler and translator of `title`,
-  you can put `Doe, Jane` in `editor` and `comptrans` in `editortype`
-  or `Doe, Jane` in `translator` and `comptrans` in `translatortype`)
+    + expanded by...
+    + expanded and compiled by...
+    + expanded and edited by...
+    + expanded and revised by...
+    + expanded and translated by...
+    + expanded and updated by...
+    + compiled and expanded by...
+    + edited and expanded by...
+    + revised and expanded by...
+    + translated and expanded by...
+    + updated and expanded by...
+
+  - added support for translators of `issuetitle` and `series`
+  - editor and translator type fields now accept comma-separated
+    bibliography strings, expanding the kinds of editors and
+    translators available for `issuetitle`, `maintitle` and `series`
+    (e.g. if `editor` is the reviser of `maintitle`, put
+    `maintitle,reviser` or `reviser,maintitle` in `editortype`)
+  - added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
+    entry options to swap positions of editors and translators of
+    `issuetitle`, `maintitle`, and `series`
+  - added support for printing a second tier of editors after `title`,
+    `issuetitle`, `maintitle`, and `series` (e.g. "Edited by Jane Doe.
+    Revised and Expanded by John Smith")
+  - if the editors and translators of a `title` are the same, you can
+    control the assignment with one name list and its corresponding
+    type field (e.g. if Jane Doe is the compiler and translator of
+    `title`, you can put `Doe, Jane` in `editor` and `comptrans` in
+    `editortype` or `Doe, Jane` in `translator` and `comptrans` in
+    `translatortype`)
+
 * for works in certain collections, fixed punctuation after the
   `edition` field
+* fixed a bug that could assign translators meant for `maintitle` to
+  `title` or `booktitle` if the work has no authors or editors
 
 ## 2021-01-30
 
