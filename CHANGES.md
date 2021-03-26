@@ -51,7 +51,7 @@ brianchase/windycity").
 * for works in certain collections, fixed punctuation after the
   `edition` field
 * fixed a bug that could assign translators meant for `maintitle` to
-  `title` or `booktitle` if the work has no authors or editors
+  `title` or `booktitle`
 
 ## 2021-01-30
 
