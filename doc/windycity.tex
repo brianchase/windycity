@@ -1,4 +1,4 @@
-% Last modified: Sun 28 Mar 2021 01:20:52 PM CDT
+% Last modified: Sun 28 Mar 2021 06:27:59 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1053,7 +1053,8 @@ in perhaps unexpected ways.
 \label{stdfields}
 
 Examples in this document don't always make it clear how Windy City
-uses standard data fields. The section discusses some of them.
+uses standard data fields. The list below sheds light on a selection
+of fields that may raise more questions than others.
 
 \begin{marglist}
 
@@ -1068,7 +1069,7 @@ From \textit{CMOS} \ref{14.79}:
 \item \cite{hawkes1834}
 \end{citebib}
 
-With respect to pseudonymous authors, another solution is to use the
+For pseudonymous authors, another solution is to use the
 \bibfield{nameaddon} field. Unlike with \bibfield{authtype},
 \bibfield{nameaddon} allows you to include an author's given name in
 the brackets. For examples, see \textit{CMOS} \ref{14.81}.
@@ -1175,11 +1176,12 @@ bibliographic information doesn't allow Windy City to distinguish a
 journal article from a magazine or newspaper article. This happens
 when a magazine or newspaper article has an issue number. Normally,
 Windy City would respond by printing the issue number before the date
-and enclosing the date in parentheses. But the issue number needs to
-go first, and the date shouldn't be in parentheses. The workaround is
-to include a \bibfield{type} field with the value \textit{newsmag}.
-For an example, see \textit{CMOS} \ref{14.204} and compare it with the
-citation of Beattie in \ref{14.171}.
+and enclosing the date in parentheses. But for magazine and newspaper
+articles, the issue number needs to go first, and the date shouldn't
+be in parentheses. The workaround is to include a \bibfield{type}
+field with the value \textit{newsmag}. For an example, see
+\textit{CMOS} \ref{14.204} and compare it with the citation of Beattie
+in \ref{14.171}.
 
 \end{marglist}
 
@@ -1208,8 +1210,8 @@ includes: ``from materials compiled by John M. Manly and Edith
 Richert, with the assistance of Lilian J. Redstone et al.'' This field
 doesn't print when \bibfield{editor} prints in the author's position.
 As a result, options that may change where \bibfield{editor} prints,
-such as \opt{swaptrans} and \opt{swapauth}, may determine whether this
-field prints.
+such as \opt{swaptrans} and \opt{swapauth}, may determine whether
+\bibfield{editoraddon} prints.
 
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
@@ -1221,16 +1223,16 @@ information like \textit{2nd ser.} and \textit{n.s.} go in the
 
 \item[shorthand] Windy City doesn't automatically italicize a
 \bibfield{shorthand}. Per \textit{CMOS} 14.60, a shorthand should be
-italicized if the title that it abbreviates is italicized. Set it the
-bibliography database with \cmd{emph} or \cmd{mkbibemph}. For examples
-of a \bibfield{shorthand}, see section \ref{14.59} and the first
-citation of \textit{CMOS} in this document's introduction.
+italicized if the title that it abbreviates is italicized. Set it in
+the bibliography database with \cmd{emph} or \cmd{mkbibemph}. For
+examples of a \bibfield{shorthand}, see section \ref{14.59} and the
+first citation of \textit{CMOS} in this document's introduction.
 
 \item[shorthandintro] You may override the default announcement of a
 \bibfield{shorthand} by adding your preferred content to
-\bibfield{shorthandintro}. For an example, see the first citation of
-\textit{CMOS} in this document's introduction, where the announcement
-is a separate sentence, rather than in parentheses.
+\bibfield{shorthandintro}. See the first citation of \textit{CMOS} in
+this document's introduction, where the announcement isn't a note in
+parentheses but its own sentence.
 
 \item[shortmaintitle] This field contains the short form of a
 \bibfield{maintitle}. It should only be necessary for certain works in
