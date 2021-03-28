@@ -1,4 +1,4 @@
-% Last modified: Thu 25 Mar 2021 09:39:06 AM CDT
+% Last modified: Sun 28 Mar 2021 01:20:52 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -200,11 +200,11 @@ may have problems with sorting. (You'll notice some in \ref{ref}, at
 the end of this document.) For best results, use the \opt{reflist}
 preamble option.
 
-As you proceed through the this guide, note that all examples of
-citations and bibliographies are outputs of the style from commands
-that you can inspect in the document's source, \file{windycity.tex},
-and in its style file, \file{windycity.sty}. Almost all citations are
-from \cmd{cite} or \cmd{parencite}. A few are from more specialized
+As you proceed through this guide, note that all examples of citations
+and bibliographies are outputs of the style from commands that you can
+inspect in the document's source, \file{windycity.tex}, and in its
+style file, \file{windycity.sty}. Almost all citations are from
+\cmd{cite} or \cmd{parencite}. A few are from more specialized
 commands, such as \cmd{cite*} or \cmd{cites}. All example
 bibliographies are outputs of the style from \cmd{printbibliography}.
 All bibliographic data reside in \file{windycity.bib}.
@@ -213,7 +213,7 @@ All bibliographic data reside in \file{windycity.bib}.
 \label{short}
 
 Standard citations may take a variety of shorter forms. Windy City
-offers several preamble options and other means for reproducing them.
+offers several preamble options and other means for producing them.
 
 Let's start with another passage of default output:
 
@@ -310,19 +310,19 @@ break here may affect the output.}
 \item \cite[33]{morrison2004a}
 \end{citeonly}
 
-Other ways to make citations more concise: For a compromise between
-standard and short forms, try the  preamble option \opt{shortfirst}.
-It swaps long first citations for short ones but otherwise follows the
-standard (see section \ref{preamble}). For another variant, try
-\opt{shortafter}, which gives the same output as \opt{short} but with
-long first citations. Also with standard citations, the preamble
-option \opt{idemtracker} shortens the author's name of a work's first
-citation if the previous citation is of the same author (see section
-\ref{preamble}). The entry option \opt{noauth} omits the author's name
-altogether (see section \ref{entry}). And the \bibfield{shorthand}
-field allows you to set an abbreviation to stand in place of the
-author's name, the work's title, and other elements of a citation (see
-sections \ref{otherfields} and \ref{14.59}).
+For a compromise between standard and short forms, try the  preamble
+option \opt{shortfirst}. It swaps long first citations for short ones
+but otherwise follows the standard form (see section \ref{preamble}).
+For another variant, try \opt{shortafter}, which gives the same output
+as \opt{short} but with long first citations. Also with standard
+citations, the preamble option \opt{idemtracker} shortens the author's
+name of a work's first citation if the previous citation is of the
+same author (see section \ref{preamble}). The entry option
+\opt{noauth} omits the author's name altogether (see section
+\ref{entry}). And the \bibfield{shorthand} field allows you to set an
+abbreviation to stand in place of the author's name, the work's title,
+and other elements of a citation (see sections \ref{otherfields} and
+\ref{14.59}).
 
 \subsection{Preamble Options}
 \label{preamble}
@@ -384,7 +384,7 @@ collections. For discussion of multivolume works, see section
 \noindent This option controls whether consecutive citations of a work
 on the same page receive an \textit{ibid}. The qualification ``on the
 same page'' means that \textit{ibid.} always refers to a work cited on
-the current page without an \textit{ibid.} The latter isn't a
+the current page without an \textit{ibid}. The latter isn't a
 requirement of \textit{CMOS} but seems reasonable, since it prevents
 readers from having to look at another page to find the referent of an
 \textit{ibid}. For examples of its output, see section \ref{short} and
@@ -443,13 +443,10 @@ information.
 
 \noindent As shown in section \ref{short}, this option prints short
 citations (see \textit{CMOS} \ref{14.34}). The use of \opt{short} has
-one feature in common with \opt{ibid}: Just as \textit{ibid.} appears
-only for consecutive citations of a work on the same page, and so
-never refers to a citation on a previous page, \opt{short} affects
-consecutive citations of a work on the same page, never in reference
-to a citation on a previous page. As with \textit{ibid.}, this feature
-isn't required by \textit{CMOS}, but it prevents readers from having
-to look at another page to find the title of a citation.
+one feature in common with \opt{ibid}: It affects only consecutive
+citations of a work on the same page. As with \textit{ibid.}, this
+feature isn't required by \textit{CMOS}, but it prevents readers from
+having to look at another page to find the title of a citation.
 
 In contexts where \opt{short} would drop a title from a citation, but
 where no name occupies the author's position, it prints the work's
@@ -504,9 +501,9 @@ in \textit{CMOS} \ref{14.34}:
 resulting output consists mainly of the author's name and the work's
 title. According to \textit{CMOS}, this approach is optional for
 documents with complete bibliographies. (See \textit{CMOS}
-\ref{14.23}, also 14.29--14.36.) You may use \opt{shortfirst} in
-conjunction with \opt{ibid}. However, it adds nothing to \opt{short},
-which has the same effect on first citations.
+\ref{14.23}, also 14.29--14.36.) As with \opt{short}, you may use
+\opt{shortfirst} in conjunction with \opt{ibid} for more concise
+citations.
 
 \optitem[false]{shortlinks}{\opt{true}, \opt{false}}
 
@@ -517,8 +514,8 @@ bibliography. In standard citations, these links encompass the entire
 citation (minus some punctuation). With \opt{shortlinks}, they're
 embedded in just one element: the title or, if no title is present,
 whatever part of the citation occupies the author's position, such as
-the author's name, \textit{ibid.}, or a shorthand. For comparison,
-here's what default links are like in blue:
+the author's name, \textit{ibid.}, or a shorthand. For comparison, the
+blue text below shows default links:
 
 \hypersetup{citecolor=blue}
 \begin{citeonly}
@@ -561,10 +558,9 @@ For more information, see section \ref{collorder}.
 \subsection{Entry Options}
 \label{entry}
 
-An entry option is a value for the \bibfield{options} field of a
-work's database entry. It affects the format of that particular work.
-For options that affect the format of every work, see section
-\ref{preamble}.
+An entry option goes in the \bibfield{options} field of a work's
+database entry. It affects the format of that work. For options that
+affect the format of every work, see section \ref{preamble}.
 
 \begin{optionlist}
 
@@ -662,8 +658,8 @@ for compilers, expanders, revisers, and updaters, which the style
 treats as specialized editors. For editors and translators of an
 \bibfield{issuetitle}, \bibfield{maintitle}, or \bibfield{series}, see
 \opt{swaptrans:issue}, \opt{swaptrans:main}, or
-\opt{swaptrans:series}, respectively. For more information, see
-section \ref{edtranspos}.
+\opt{swaptrans:series}, respectively. See also section
+\ref{edtranspos}.
 
 \optitem[false]{swaptrans:issue}{\opt{true}, \opt{false}}
 
