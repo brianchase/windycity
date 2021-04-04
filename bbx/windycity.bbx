@@ -1,4 +1,4 @@
-% Last modified: Fri 26 Mar 2021 06:00:34 PM CDT
+% Last modified: Sun 04 Apr 2021 04:43:59 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -404,8 +404,12 @@
       \step[fieldset=translatortype, origfieldval, append]
       \step[fieldset=translatoratype, fieldvalue={,}, appendstrict]
       \step[fieldset=translatoratype, origfieldval, append]
+      \step[fieldset=translatorbtype, fieldvalue={,}, appendstrict]
+      \step[fieldset=translatorbtype, origfieldval, append]
     }
     \map[overwrite]{
+      \step[notfield=translatorb, final]
+      \step[fieldset=translatorbtype, null]
       \step[notfield=translatora, final]
       \step[fieldset=translatoratype, null]
       \step[notfield=translator, final]
@@ -461,6 +465,7 @@
   \inherit{translator}{translatora}
   \inherit{translatora}{translatorb}
   \inherit[override=true]{translatortype}{translatoratype}
+  \inherit[override=true]{translatoratype}{translatorbtype}
   \inherit{title}{booktitle}
   \inherit{subtitle}{booksubtitle}
   \inherit{titleaddon}{booktitleaddon}

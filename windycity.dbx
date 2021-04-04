@@ -21,8 +21,9 @@
   shortmaintitle,
   shortorganization,
   titlekey,
+  translatortype,
   translatoratype,
-  translatortype}
+  translatorbtype}
 \DeclareDatamodelFields[type=list,datatype=name]{%
   preface,
   shortbookauthor,
