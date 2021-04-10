@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Apr 2021 08:31:21 PM CDT
+% Last modified: Sat 10 Apr 2021 10:41:36 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1292,8 +1292,8 @@ translator, in that order, after the authors and title.
 
 Cross-referencing introduces a bit more complexity, but the principle
 is the same: Within the scope of an entry, the style associates
-\bibfield{editor} and \bibfield{translator} with the lowest level
-title. In this example from \textit{CMOS} \ref{14.30}, an essay is
+\bibfield{editor} and \bibfield{translator} with \bibfield{title}. In
+this example from \textit{CMOS} \ref{14.30}, an essay is
 cross-referenced to a collection:
 
 \begin{verbatim}
@@ -1357,14 +1357,13 @@ scope of \bibtype{collection}, the style associates it with
 \textit{The Renaissance Philosophy of Man}, not ``The Ascent of Mont
 Ventoux.''
 
-Windy City supports a second tier of editors after titles. This
-includes \bibfield{title}, \bibfield{issuetitle},
-\bibfield{maintitle}, and \bibfield{series}. In your bibliography
-database, make sure to list editors in the proper order:
-\bibfield{editor} precedes \bibfield{editora}, and \bibfield{editora}
-precedes \bibfield{editorb}. Second tier editors never print in the
-author's position, even when the first does. They always print after
-the relevant title.
+Windy City supports a second tier of editors after \bibfield{title},
+\bibfield{issuetitle}, \bibfield{maintitle}, and \bibfield{series}.
+Again, in your bibliography database, make sure to list editors in the
+proper order: \bibfield{editor} before \bibfield{editora},
+\bibfield{editora} before \bibfield{editorb}, and so on. Second tier
+editors never print in the author's position, even when the first
+does. They always print after the relevant title.
 
 \begin{verbatim}
    @InCollection{myers2012,
@@ -1389,17 +1388,16 @@ the relevant title.
 \end{bibonly}
 
 The editors print correctly in the examples above because there's no
-ambiguity about which title they're responsible for. Both editor name
-lists fall within \bibfield{carter2012}, so they can't apply to
-``Pitch and Transposition,'' and the only title left is \textit{A
-Performer's Guide}.
+ambiguity about which title they're responsible for. Both name lists
+fall within \bibfield{carter2012}, so they can't apply to ``Pitch and
+Transposition.'' That leaves \textit{A Performer's Guide}.
 
-As the examples above also help to show, the style supports a variety
-of editorial roles beyond just editor and translator. Those roles are
+As the examples above also indicate, the style supports a variety of
+editorial roles beyond just editor and translator. Those roles are
 compiler, expander, reviser, and updater. To assign them, you need to
-use the \bibfield{editortype} and \bibfield{translatortype} fields.
-Below are some bibliography database entries for examples in
-\textit{CMOS} \ref{14.103} and \ref{14.142}:
+use the editor and translator type fields. Below are some bibliography
+database entries for examples in \textit{CMOS} \ref{14.103} and
+\ref{14.142}:
 
 \begin{verbatim}
    @Book{schechter2011,
@@ -1431,9 +1429,7 @@ Below are some bibliography database entries for examples in
 \item \cite{turabian2013}
 \end{citebib}
 
-In addition to the six basic roles (editor, translator, compiler,
-expander, reviser, and updater), you may assign any pair of those
-roles to an editor or translator name list. A work's editor, for
+You may combine all six editorial roles in pairs. A work's editor, for
 example, can also be its translator, compiler, expander, reviser, or
 updater---but no more than one of these. Simply put the proper value
 in the corresponding type field. We saw this earlier with \textit{A
@@ -1451,7 +1447,7 @@ are the key lines:
 options discussed in section \ref{edtranspos}. For these dual roles,
 however, it's probably less confusing in the long run to change values
 in the editor or translator type fields. The choice is yours. Table
-\ref{table:ed} lists all editor and translator types.
+\ref{table:ed} lists all editor and translator roles.
 
 \begin{table}[H]
 \begin{tabular}{@{}r l r l@{}}
@@ -1480,9 +1476,9 @@ exup & expander and updater & uptrans & updater and translator\\
 \end{table}
 
 For examples in \textit{CMOS} that use values from Table
-\ref{table:ed}, we need to turn to the bibliography. The first example
-below shows the output of \textit{reved} in the \bibfield{editortype}
-field, the second of \textit{revup}.
+\ref{table:ed}, we need to turn to the book's bibliography. The first
+example below shows the output of \textit{reved} in the
+\bibfield{editortype} field, the second of \textit{revup}.
 
 \begin{citebib}
 \item \cite{fowler1965}
@@ -1502,32 +1498,32 @@ Windy City simplifies the assignments of editors and translators in
 several ways. For one, the default assignment of every editor name
 list is \textit{editor}, and the default assignment of every
 translator name list is \textit{translator}. As a result, you never
-need to use editor or translator type fields with values
-\textit{editor} or \textit{translator}. The name fields alone set the
+need to use the values \textit{editor} or \textit{translator} in the
+the type fields. It's strictly optional. The name fields alone set the
 correct assignment.
 
-Much the same holds when the editor and translator of a
-\bibfield{title} are the same. The usual way to set this is with
-identical name fields:
+Much the same holds when the editor and translator of a work are the
+same. The usual way to set this assignment is with identical name
+lists:
 
 \begin{verbatim}
    editor = {Doe, Jane},
    translator = {Doe, Jane},
 \end{verbatim}
 
-\noindent This gives a default assignment of ``editor and translator''
-(\textit{edtrans} from Table \ref{table:ed}), unless you use the entry
-option \opt{swaptrans}, which would give ``translator and editor''
-(\textit{transed} from Table \ref{table:ed}). No editor or translator
-type field is necessary.
+\noindent This gives a default assignment of \textit{editor and
+translator} (\textit{edtrans} from Table \ref{table:ed}), unless you
+use the appropriate \opt{swaptrans} entry option, which gives
+\textit{translator and editor} (\textit{transed} from Table
+\ref{table:ed}). No editor or translator type field is necessary.
 
-When type fields are required, Windy City gives you options for how to
-structure your bibliography entries: If you like, you can set the
+When type fields are required, Windy City offers flexibility over how
+you structure your bibliography entries: If you like, you can set the
 assignment with just one editor or translator type field and its
 corresponding name field, or with both name fields and one type field,
-or with both name fields and both type fields. For example, to set
-Jane Doe as the compiler and translator of a \bibfield{title}, Windy
-City treats all five options below as equivalent:
+or with both name fields and both type fields. To set Jane Doe as the
+compiler and translator of a \bibfield{title}, Windy City treats all
+five options below as equivalent:
 
 \begin{enumerate}[itemsep=0.2\baselineskip]
 
@@ -1575,14 +1571,13 @@ City treats all five options below as equivalent:
 The last option above raises the possibility that editor and
 translator type fields may conflict. What if the editor type is
 \textit{comptrans} and the translator type is something else, say,
-\textit{extrans}? If the editors and translators of a title are the
-same, but the type fields differ, Windy City reads the editor type
-field and ignores the translator type field.
+\textit{extrans}? If the editors and translators are the same, but the
+type fields differ, Windy City reads the editor type field and ignores
+the translator type field.
 
 Three more values for type fields allow you to assign editors and
-translators to higher level titles: \textit{issuetitle},
-\textit{maintitle}, and \textit{series}. Here's an example from
-\textit{CMOS} \ref{14.123}:
+translators to \textit{issuetitle}, \textit{maintitle}, and
+\textit{series}. Here's an example from \textit{CMOS} \ref{14.123}:
 
 \begin{verbatim}
    @Book{allen2009,
