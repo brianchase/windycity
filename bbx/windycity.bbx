@@ -1,4 +1,4 @@
-% Last modified: Sat 10 Apr 2021 11:01:30 AM CDT
+% Last modified: Sat 10 Apr 2021 07:55:22 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -981,12 +981,7 @@
     {\ifboolexpr{ togl {collection:bk}
                   and togl {swapvol}}
        {\toggletrue{noed}}%
-       {\ifboolexpr{ togl {collection:icbk}
-                     or togl {collection:icib}}
-          {\ifnameundef{translator}
-             {}
-             {\toggletrue{noed}}}
-          {}}}}
+       {}}}
 
 \newbibmacro*{test:editors}{%
   \renewcommand*{\do}[1]{%
@@ -2116,7 +2111,7 @@
         \ifcsdef{c@\thefield{crossref}}
           {\setcounter{\thefield{crossref}}{0}}%
           {\newcounter{\thefield{crossref}}}% needs '%'
-        \usebibmacro{incollections}}}}
+           \usebibmacro{incollections}}}}
 
 \newbibmacro*{websites}{%
   \ifboolexpr{ test {\iffieldundef{blogtitle}}
