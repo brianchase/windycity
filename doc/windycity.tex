@@ -1,4 +1,4 @@
-% Last modified: Sat 10 Apr 2021 06:45:02 PM CDT
+% Last modified: Mon 12 Apr 2021 07:48:41 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1213,6 +1213,13 @@ As a result, options that may affect where \bibfield{editor} prints,
 such as \opt{swaptrans} and \opt{swapauth}, may affect whether
 \bibfield{editoraddon} prints.
 
+% The main function of 'editoraaddon' is to inherit 'editoraddon'
+% during cross-referencing. I don't expect anyone to use it in a
+% bibliography database.
+
+%\item[editoraaddon] Like \bibfield{editoraddon} but for
+%\bibfield{editora}.
+
 \item[seriesaddon] This field is for additional information about a
 book's series. That includes information about the run of a series,
 such as \textit{2nd ser.} and \textit{n.s.} For examples, see
@@ -1254,15 +1261,23 @@ at first. This section covers all the relevant features and options.
 Windy City has four name lists for editors (\bibfield{editor},
 \bibfield{editora}, \bibfield{editorb}, and \bibfield{editorc}) and
 three name lists for translators (\bibfield{translator},
-\bibfield{translatora}, and \bibfield{translatorb}). For best results,
-use the name lists in order---\bibfield{editor} before
-\bibfield{editora}, \bibfield{translator} before
-\bibfield{translatora}, and so on---always starting with the editors
-and translators of a \bibfield{title} before those of an
+\bibfield{translatora}, and \bibfield{translatorb}). At points where
+it's prepared to print them, it cycles through one or both sets of
+lists, depending on the context, looking for names to print. The set
+of editors starts with \bibfield{editor}, followed by
+\bibfield{editora}, and so on. The set of translators starts with
+\bibfield{translator}, followed by \bibfield{translatora}, and so on.
+Editors precede translators, unless you reverse the order with a
+\opt{swaptrans} entry option (see section \ref{edtranspos}). Within
+each set, the style prints the first list that meets its criteria for
+that context. Apart from exceptions discussed below, then, you can
+assign any editor or translator name list to any \bibfield{title},
 \bibfield{issuetitle}, \bibfield{maintitle}, or \bibfield{series}.
 
+\subsubsection{The Basics}
+
 In most cases, you'll assign editors and translators to a
-\bibfield{title}. Since it's the default assignment, you can do it
+\bibfield{title}. Since it's the default assignment, you can do this
 just by adding the \bibfield{editor} and \bibfield{translator} fields
 to a database entry. The entry below is an example from \textit{CMOS}
 \ref{14.104}:
@@ -1286,8 +1301,7 @@ to a database entry. The entry below is an example from \textit{CMOS}
 \noindent When the style processes this entry, it identifies the
 editor and translator of the work with the names in the
 \bibfield{editor} and \bibfield{translator} fields. Since the entry
-doesn't use the \opt{swaptrans} entry option (see section
-\ref{edtranspos}), the resulting output lists the editor and
+doesn't use \opt{swaptrans}, the resulting output lists the editor and
 translator, in that order, after the authors and title.
 
 Cross-referencing introduces a bit more complexity, but the principle
@@ -1494,12 +1508,14 @@ Updated by Jane Doe and John Smith.'' What's not allowed is listing
 three or more roles at once, as in ``Edited, Translated, and Revised
 by Jane Doe.''
 
+\subsubsection{Other Options and Titles}
+
 Windy City simplifies the assignments of editors and translators in
 several ways. For one, the default assignment of every editor name
 list is \textit{editor}, and the default assignment of every
 translator name list is \textit{translator}. As a result, you never
 need to use the values \textit{editor} or \textit{translator} in the
-the type fields. It's strictly optional. The name fields alone set the
+type fields. It's strictly optional. The name fields alone set the
 correct assignment.
 
 Much the same holds when the editor and translator of a work are the
@@ -1621,7 +1637,8 @@ Combined with Windy City's support for citing articles, chapters,
 books, and other works within books, this scheme allows for several
 sets of editors per work.
 
-\subsection{Switching Places and Roles} \label{edtranspos}
+\subsection{Switching Places and Roles}
+\label{edtranspos}
 
 Normally, Windy City lists editors first. But per \textit{CMOS}, if
 translators are listed first on a work's title page, you should
@@ -1755,7 +1772,7 @@ priority, the collection's or the volume's. Consider an example from
 title of the collection. In standard notes and bibliographies,
 \textit{CMOS} gives you the option of reversing this order. (See
 especially \textit{CMOS} \ref{14.119}, \ref{14.121}, and \ref{14.122},
-and compare \ref{14.144} and \ref{15.41}.) Windy City does as well,
+and compare \ref{14.144} and \ref{15.41}.) Windy City does as well
 with the entry or preamble option \opt{swapvol}.
 
 \begin{citebib}

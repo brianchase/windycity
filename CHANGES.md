@@ -10,12 +10,18 @@ brianchase/windycity").
 
 ## Latest
 
-* added preamble option `shortafter` to print the same output as the
-  preamble option `short` but with long first citations
-* overhauled the processing of editors and translators:
+This release brings a long overdue redesign of the workflow for
+editors and translators. My hope is that users won't need to change
+their bibliography databases, but I did need to change one example in
+the user guide, moving an editor name list from a child entry to its
+parent, where it belonged in the first place. In all, the changes
+greatly extend the control and flexibility that users have over the
+placement of editors and translators while allowing for simpler
+internals.
 
-  - added support for expanders, providing the following editorial
-    roles:
+* highlights pertaining to editors and translators:
+
+  - added support for the following editorial roles:
 
     + expanded by...
     + expanded and compiled by...
@@ -29,12 +35,14 @@ brianchase/windycity").
     + translated and expanded by...
     + updated and expanded by...
 
-  - added support for translators of `issuetitle` and `series`
+  - added support for translators of `issuetitle` and `series`, which
+    means you may assign translators to every title to which you may
+    assign editors
   - editor and translator type fields now accept comma-separated
-    bibliography strings, expanding the kinds of editors and
-    translators available for `issuetitle`, `maintitle` and `series`
-    (e.g. if `editor` is the reviser of `maintitle`, put
-    `maintitle,reviser` or `reviser,maintitle` in `editortype`)
+    bibliography strings, making all editorial roles available for
+    `issuetitle`, `maintitle`, and `series` (e.g. if `editor` is the
+    reviser of `maintitle`, put `maintitle,reviser` or
+    `reviser,maintitle` in `editortype`)
   - added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
     entry options to swap positions of editors and translators of
     `issuetitle`, `maintitle`, and `series`
@@ -47,7 +55,11 @@ brianchase/windycity").
     `title`, you can put `Doe, Jane` in `editor` and `comptrans` in
     `editortype` or `Doe, Jane` in `translator` and `comptrans` in
     `translatortype`)
+   - fixed several issues, or more, affecting the placement of
+     editors and translators, mainly the latter
 
+* added preamble option `shortafter` to print the same output as the
+  preamble option `short` but with long first citations
 * for works in certain collections, fixed punctuation after the
   `edition` field
 
