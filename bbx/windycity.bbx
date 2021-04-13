@@ -1,4 +1,4 @@
-% Last modified: Mon 12 Apr 2021 07:21:10 PM CDT
+% Last modified: Mon 12 Apr 2021 09:41:21 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -924,18 +924,16 @@
   \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
     {\toggletrue{noed}}%
-    {\ifboolexpr{ togl {swapvol}
-                  and ( togl {collection:icbk}
-                  or togl {collection:icib} )}
-       {\xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
-          {\toggletrue{noed}}%
-          {\listbreak}}%
+    {\xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
        {\ifboolexpr{ togl {collection:ib}
                      and togl {swapvol}}
-          {\xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
+          {\toggletrue{noed}}%
+          {\ifboolexpr{ togl {swapvol}
+                        and ( togl {collection:icbk}
+                        or togl {collection:icib} )}
              {\toggletrue{noed}}%
-             {\listbreak}}%
-          {\listbreak}}}}
+             {\listbreak}}}
+       {\listbreak}}}
 
 \newbibmacro*{test:ed:a:type}{%
   \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
@@ -966,18 +964,16 @@
   \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
     {\toggletrue{notrans}}%
-    {\ifboolexpr{ togl {swapvol}
-                  and ( togl {collection:icbk}
-                  or togl {collection:icib} )}
-       {\xifinlist{\thefield{\xtitle titlekey}}{\translatortypes}
-          {\toggletrue{notrans}}%
-          {\listbreak}}%
+    {\xifinlist{\thefield{\xtitle titlekey}}{\translatortypes}
        {\ifboolexpr{ togl {collection:ib}
                      and togl {swapvol}}
-          {\xifinlist{\thefield{\xtitle titlekey}}{\translatortypes}
+          {\toggletrue{notrans}}%
+          {\ifboolexpr{ togl {swapvol}
+                        and ( togl {collection:icbk}
+                        or togl {collection:icib} )}
              {\toggletrue{notrans}}%
-             {\listbreak}}%
-          {\listbreak}}}}
+             {\listbreak}}}
+       {\listbreak}}}
 
 \newbibmacro*{test:trans:a:type}{%
   \ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
