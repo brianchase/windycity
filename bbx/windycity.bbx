@@ -1,4 +1,4 @@
-% Last modified: Mon 12 Apr 2021 09:41:21 PM CDT
+% Last modified: Tue 13 Apr 2021 05:28:31 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -381,14 +381,20 @@
       \step[fieldset=editorctype, origfieldval, append]
     }
     \map[overwrite]{
-      \step[notfield=editorc, final]
-      \step[fieldset=editorctype, null]
-      \step[notfield=editorb, final]
-      \step[fieldset=editorbtype, null]
-      \step[notfield=editora, final]
-      \step[fieldset=editoratype, null]
       \step[notfield=editor, final]
       \step[fieldset=editortype, null]
+    }
+    \map[overwrite]{
+      \step[notfield=editora, final]
+      \step[fieldset=editoratype, null]
+    }
+    \map[overwrite]{
+      \step[notfield=editorb, final]
+      \step[fieldset=editorbtype, null]
+    }
+    \map[overwrite]{
+      \step[notfield=editorc, final]
+      \step[fieldset=editorctype, null]
     }
     \map[overwrite]{
       \step[notfield=bookbooktitle, final]
