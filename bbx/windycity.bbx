@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Apr 2021 05:28:31 PM CDT
+% Last modified: Sat 17 Apr 2021 02:12:23 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -367,59 +367,19 @@
 
 \DeclareStyleSourcemap{
   \maps[datatype=bibtex]{
-    \map[overwrite]{
+    \map[overwrite, foreach={title,booktitle,bookbooktitle}]{
       \step[fieldsource=entrykey]
-      \step[fieldset=titlekey, origfieldval]
-      \step[fieldset=booktitlekey, origfieldval]
-      \step[fieldset=editortype, fieldvalue={,}, appendstrict]
-      \step[fieldset=editortype, origfieldval, append]
-      \step[fieldset=editoratype, fieldvalue={,}, appendstrict]
-      \step[fieldset=editoratype, origfieldval, append]
-      \step[fieldset=editorbtype, fieldvalue={,}, appendstrict]
-      \step[fieldset=editorbtype, origfieldval, append]
-      \step[fieldset=editorctype, fieldvalue={,}, appendstrict]
-      \step[fieldset=editorctype, origfieldval, append]
+      \step[fieldset=$MAPLOOPkey, origfieldval]
+      \step[notfield=$MAPLOOP, final]
+      \step[fieldset=$MAPLOOPkey, null]
     }
-    \map[overwrite]{
-      \step[notfield=editor, final]
-      \step[fieldset=editortype, null]
-    }
-    \map[overwrite]{
-      \step[notfield=editora, final]
-      \step[fieldset=editoratype, null]
-    }
-    \map[overwrite]{
-      \step[notfield=editorb, final]
-      \step[fieldset=editorbtype, null]
-    }
-    \map[overwrite]{
-      \step[notfield=editorc, final]
-      \step[fieldset=editorctype, null]
-    }
-    \map[overwrite]{
-      \step[notfield=bookbooktitle, final]
-      \step[fieldset=bookbooktitlekey, null]
-      \step[notfield=booktitle, final]
-      \step[fieldset=booktitlekey, null]
-      \step[notfield=title, final]
-      \step[fieldset=titlekey, null]
-    }
-    \map[overwrite]{
+    \map[overwrite, foreach={%
+        editor,editora,editorb,editorc,translator,translatora,translatorb}]{
       \step[fieldsource=entrykey]
-      \step[fieldset=translatortype, fieldvalue={,}, appendstrict]
-      \step[fieldset=translatortype, origfieldval, append]
-      \step[fieldset=translatoratype, fieldvalue={,}, appendstrict]
-      \step[fieldset=translatoratype, origfieldval, append]
-      \step[fieldset=translatorbtype, fieldvalue={,}, appendstrict]
-      \step[fieldset=translatorbtype, origfieldval, append]
-    }
-    \map[overwrite]{
-      \step[notfield=translatorb, final]
-      \step[fieldset=translatorbtype, null]
-      \step[notfield=translatora, final]
-      \step[fieldset=translatoratype, null]
-      \step[notfield=translator, final]
-      \step[fieldset=translatortype, null]
+      \step[fieldset=$MAPLOOPtype, fieldvalue={,}, appendstrict]
+      \step[fieldset=$MAPLOOPtype, origfieldval, append]
+      \step[notfield=$MAPLOOP, final]
+      \step[fieldset=$MAPLOOPtype, null]
     }
   }
 }
