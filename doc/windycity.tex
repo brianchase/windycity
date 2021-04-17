@@ -1,4 +1,4 @@
-% Last modified: Mon 12 Apr 2021 07:48:41 PM CDT
+% Last modified: Sat 17 Apr 2021 04:30:08 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1626,6 +1626,80 @@ delimiters. To take the previous example, you could list Catharine
 Stimpson as the editor and compiler of the series by putting the
 values \textit{series,edcomp} or \textit{edcomp,series} in
 \bibfield{editortype}.
+
+Almost any entry that relies on cross-referencing can be written
+without it. Doing so, however, requires using some fields in your
+bibliography database that are usually meant for the style's internal
+use. These fields include \bibfield{booktitle} (a cross-referenced
+\bibfield{title}) and \bibfield{bookbooktitle} (a double
+cross-referenced \bibfield{title}---a \bibfield{title}
+cross-referenced by a cross-referenced \bibfield{title}). To
+accommodate entries that don't use cross-referencing, the style
+accepts the values \textit{booktitle} and \textit{bookbooktitle} in
+editor and translator type fields.
+
+An example of double cross-referencing will set us up to use both:
+
+\begin{verbatim}
+   @InCollection{doe2018,
+     options = {swapvol},
+     author = {Doe, Jane},
+     title = {A Poem},
+     translator = {Smith, John},
+     pages = {56–57},
+     crossref = {jones2018}
+   }
+   @InBook{jones2018,
+     editor = {Jones, David},
+     title = {A Volume of Poems},
+     volume = {2},
+     year = {2018},
+     crossref = {white2016}
+   }
+   @Collection{white2016,
+     editor = {White, Amy},
+     title = {A Collection of Poems},
+     volumes = {4},
+     address = {Chicago},
+     publisher = {University of Chicago Press},
+     year = {2016–18}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite[56]{doe2018}
+\end{citebib}
+
+\noindent The following alternative dispenses with \bibfield{crossref}
+but needs two editor type fields, plus two other fields that don't
+usually appear in bibliography databases: \bibfield{bookvolume} (a
+cross-referenced \bibfield{volume}) and \bibfield{bookyear} (a
+cross-referenced \bibfield{year}).
+
+\begin{verbatim}
+   @InCollection{doe2018.alt,
+     author = {Doe, Jane},
+     title = {A Poem},
+     translator = {Smith, John},
+     pages = {56–57},
+     booktitle = {A Volume of Poems},
+     editor = {Jones, David},
+     editortype = {booktitle},
+     bookvolume = {2},
+     year = {2018},
+     bookbooktitle = {A Collection of Poems},
+     editora = {White, Amy},
+     editoratype = {bookbooktitle},
+     volumes = {4},
+     address = {Chicago},
+     publisher = {University of Chicago Press},
+     bookyear = {2016–18}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite[56]{doe2018.alt}
+\end{citebib}
 
 In short, for a title's compilers, expanders, revisers, and updaters,
 and for any title other than \bibfield{title}, you need to put the
@@ -3772,6 +3846,7 @@ sorting in this section are mentioned there. Creating a reference list
 in the preferred way, with the \opt{reflist} preamble option, should
 prevent those issues.\\}%
 
+\titleformat{\section}{\large\bfseries\filcenter}{}{2ex}{}
 \printbiblist[prenote=sh]{shorthand}
 \refstepcounter{sh}\label{sh}
 \printbibliography[notkeyword=notinbib,prenote=bib]
