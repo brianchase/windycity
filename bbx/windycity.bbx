@@ -1,4 +1,4 @@
-% Last modified: Sat 17 Apr 2021 02:12:23 PM CDT
+% Last modified: Sun 18 Apr 2021 03:20:08 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -879,11 +879,9 @@
       {\toggletrue{noed}}%
       {\togglefalse{noed}%
        \renewcommand*{\xeditor}{##1}%
-       \iffieldundef{\xeditor type}
-         {\usebibmacro{test:ed:a:notype}}%
-         {\let\editortypes\empty
-          \forcsvfield{\listadd\editortypes}{\xeditor type}%
-          \usebibmacro{test:ed:a:type}}}}% needs '%'
+       \let\editortypes\empty
+       \forcsvfield{\listadd\editortypes}{\xeditor type}%
+       \usebibmacro{test:ed:a:type}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
 \newbibmacro*{test:ed:a:notype}{%
@@ -970,11 +968,9 @@
       {\toggletrue{noed}}%
       {\togglefalse{noed}%
        \renewcommand*{\xeditor}{##1}%
-       \iffieldundef{\xeditor type}
-         {\usebibmacro{test:ed:b:notype}}%
-         {\let\editortypes\empty
-          \forcsvfield{\listadd\editortypes}{\xeditor type}%
-          \usebibmacro{test:ed:b:type}}}}% needs '%'
+       \let\editortypes\empty
+       \forcsvfield{\listadd\editortypes}{\xeditor type}%
+       \usebibmacro{test:ed:b:type}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
 \newbibmacro*{test:ed:b:notype}{%
@@ -1094,13 +1090,11 @@
       {\toggletrue{noed}}%
       {\togglefalse{noed}%
        \renewcommand*{\xeditor}{##1}%
-       \iffieldundef{\xeditor type}
-         {\toggletrue{noed}}%
-         {\let\editortypes\empty
-          \forcsvfield{\listadd\editortypes}{\xeditor type}%
-          \ifinlist{#1}{\editortypes}
-            {\listbreak}%
-            {\toggletrue{noed}}}}}% needs '%'
+       \let\editortypes\empty
+       \forcsvfield{\listadd\editortypes}{\xeditor type}%
+       \ifinlist{#1}{\editortypes}
+         {\listbreak}%
+         {\toggletrue{noed}}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
 \newbibmacro*{test:trans:c}[1]{%
@@ -1159,9 +1153,7 @@
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
      \toggletrue{noed}%
-     \iffieldundef{\xeditor type}
-       {\usebibmacro{transcombos:b}{\translatortypes}{transed}}%
-       {\usebibmacro{transcombos:b}{\editortypes}{transed}}}
+     \usebibmacro{transcombos:b}{\translatortypes}{transed}}%
     {\iftoggle{noed}
        {\usebibmacro{transcombos:c}}%
        {\usebibmacro{transcombos:b}{\translatortypes}{translator}}}}
@@ -1171,9 +1163,7 @@
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
      \toggletrue{notrans}%
-     \iffieldundef{\xeditor type}
-       {\usebibmacro{edcombos:b}{\translatortypes}{edtrans}}%
-       {\usebibmacro{edcombos:b}{\editortypes}{edtrans}}}
+     \usebibmacro{edcombos:b}{\editortypes}{edtrans}}%
     {\iftoggle{notrans}
        {\usebibmacro{edcombos:c}}%
        {\usebibmacro{edcombos:b}{\editortypes}{editor}}}}
