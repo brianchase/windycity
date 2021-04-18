@@ -1,4 +1,4 @@
-% Last modified: Sun 18 Apr 2021 03:38:57 PM CDT
+% Last modified: Sun 18 Apr 2021 04:19:29 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -478,8 +478,8 @@
 
 \let\xeditor\empty
 \let\yeditor\empty
-\let\editortypes\empty
-\let\translatortypes\empty
+\let\edtypes\empty
+\let\transtypes\empty
 
 \providetoggle{authposition}
 \providetoggle{atleastone}
@@ -879,37 +879,37 @@
       {\toggletrue{noed}}%
       {\togglefalse{noed}%
        \renewcommand*{\xeditor}{##1}%
-       \let\editortypes\empty
-       \forcsvfield{\listadd\editortypes}{\xeditor type}%
-       \usebibmacro{test:ed:a:type}}}% needs '%'
+       \let\edtypes\empty
+       \forcsvfield{\listadd\edtypes}{\xeditor type}%
+       \usebibmacro{test:a:types}{\edtypes}{noed}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
-\newbibmacro*{test:ed:a:type}{%
-  \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
-               or test {\ifinlist{series}{\editortypes}}}
-    {\toggletrue{noed}}%
-    {\ifinlist{maintitle}{\editortypes}
+\newbibmacro*{test:a:types}[2]{%
+  \ifboolexpr{ test {\ifinlist{issuetitle}{#1}}
+               or test {\ifinlist{series}{#1}}}
+    {\toggletrue{#2}}%
+    {\ifinlist{maintitle}{\edtypes}
        {\iftoggle{collection:bk}
           {\iftoggle{swapvol}
              {\listbreak}%
-             {\toggletrue{noed}}}
-          {\toggletrue{noed}}}
-       {\usebibmacro{test:ed:a:notype}}}}
-
-\newbibmacro*{test:ed:a:notype}{%
-  \ifboolexpr{ togl {collection:bk}
-               and togl {swapvol}}
-    {\toggletrue{noed}}%
-    {\xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
-       {\ifboolexpr{ togl {collection:ib}
+             {\toggletrue{#2}}}
+          {\toggletrue{#2}}}
+       {\ifboolexpr{ togl {collection:bk}
                      and togl {swapvol}}
-          {\toggletrue{noed}}%
-          {\ifboolexpr{ togl {swapvol}
-                        and ( togl {collection:icbk}
-                        or togl {collection:icib} )}
-             {\toggletrue{noed}}%
-             {\listbreak}}}
-       {\listbreak}}}
+          {\toggletrue{#2}}%
+          {\usebibmacro{test:a:keys}{#1}{#2}}}}}
+
+\newbibmacro*{test:a:keys}[2]{%
+  \xifinlist{\thefield{\xtitle titlekey}}{#1}
+    {\ifboolexpr{ togl {collection:ib}
+                  and togl {swapvol}}
+       {\toggletrue{#2}}%
+       {\ifboolexpr{ togl {swapvol}
+                     and ( togl {collection:icbk}
+                     or togl {collection:icib} )}
+          {\toggletrue{#2}}%
+          {\listbreak}}}
+    {\listbreak}}%
 
 \newbibmacro*{test:trans:a}{%
   \renewcommand*{\do}[1]{%
@@ -917,37 +917,10 @@
       {\toggletrue{notrans}}%
       {\togglefalse{notrans}%
        \renewcommand*{\yeditor}{##1}%
-       \let\translatortypes\empty
-       \forcsvfield{\listadd\translatortypes}{\yeditor type}%
-       \usebibmacro{test:trans:a:type}}}% needs '%'
+       \let\transtypes\empty
+       \forcsvfield{\listadd\transtypes}{\yeditor type}%
+       \usebibmacro{test:a:types}{\transtypes}{notrans}}}% needs '%'
   \docsvlist{translator,translatora,translatorb}}%
-
-\newbibmacro*{test:trans:a:type}{%
-  \ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
-               or test {\ifinlist{series}{\translatortypes}}}
-    {\toggletrue{notrans}}%
-    {\ifinlist{maintitle}{\translatortypes}
-       {\iftoggle{collection:bk}
-          {\iftoggle{swapvol}
-             {\listbreak}%
-             {\toggletrue{notrans}}}
-          {\toggletrue{notrans}}}
-       {\usebibmacro{test:trans:a:notype}}}}
-
-\newbibmacro*{test:trans:a:notype}{%
-  \ifboolexpr{ togl {collection:bk}
-               and togl {swapvol}}
-    {\toggletrue{notrans}}%
-    {\xifinlist{\thefield{\xtitle titlekey}}{\translatortypes}
-       {\ifboolexpr{ togl {collection:ib}
-                     and togl {swapvol}}
-          {\toggletrue{notrans}}%
-          {\ifboolexpr{ togl {swapvol}
-                        and ( togl {collection:icbk}
-                        or togl {collection:icib} )}
-             {\toggletrue{notrans}}%
-             {\listbreak}}}
-       {\listbreak}}}
 
 % For editors and translators after the author's position.
 
@@ -966,30 +939,30 @@
       {\toggletrue{noed}}%
       {\togglefalse{noed}%
        \renewcommand*{\xeditor}{##1}%
-       \let\editortypes\empty
-       \forcsvfield{\listadd\editortypes}{\xeditor type}%
-       \usebibmacro{test:ed:b:type}}}% needs '%'
+       \let\edtypes\empty
+       \forcsvfield{\listadd\edtypes}{\xeditor type}%
+       \usebibmacro{test:b:types}{\edtypes}{noed}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
-\newbibmacro*{test:ed:b:type}{%
-  \ifboolexpr{ test {\ifinlist{issuetitle}{\editortypes}}
-               or test {\ifinlist{maintitle}{\editortypes}}
-               or test {\ifinlist{series}{\editortypes}}}
-    {\toggletrue{noed}}%
-    {\ifinlist{booktitle}{\editortypes}
+\newbibmacro*{test:b:types}[2]{%
+  \ifboolexpr{ test {\ifinlist{issuetitle}{#1}}
+               or test {\ifinlist{maintitle}{#1}}
+               or test {\ifinlist{series}{#1}}}
+    {\toggletrue{#2}}%
+    {\ifinlist{booktitle}{#1}
        {\ifdefstring{\xtitle}{book}
-          {\usebibmacro{test:ed:b:notype}}%
-          {\toggletrue{noed}}}
-       {\ifinlist{bookbooktitle}{\editortypes}
+          {\usebibmacro{test:ed:b:keys}{#1}{#2}}%
+          {\toggletrue{#2}}}
+       {\ifinlist{bookbooktitle}{#1}
           {\ifdefstring{\xtitle}{bookbook}
-             {\usebibmacro{test:ed:b:notype}}%
-             {\toggletrue{noed}}}
-          {\usebibmacro{test:ed:b:notype}}}}}
+             {\usebibmacro{test:ed:b:keys}{#1}{#2}}%
+             {\toggletrue{#2}}}
+          {\usebibmacro{test:b:keys}{#1}{#2}}}}}
 
-\newbibmacro*{test:ed:b:notype}{%
-  \xifinlist{\thefield{\xtitle titlekey}}{\editortypes}
+\newbibmacro*{test:b:keys}[2]{%
+  \xifinlist{\thefield{\xtitle titlekey}}{#1}
     {\listbreak}%
-    {\toggletrue{noed}}}
+    {\toggletrue{#2}}}
 
 \newbibmacro*{test:trans:b}{%
   \renewcommand*{\do}[1]{%
@@ -997,30 +970,10 @@
       {\toggletrue{notrans}}%
       {\togglefalse{notrans}%
        \renewcommand*{\yeditor}{##1}%
-       \let\translatortypes\empty
-       \forcsvfield{\listadd\translatortypes}{\yeditor type}%
-       \usebibmacro{test:trans:b:type}}}% needs '%'
+       \let\transtypes\empty
+       \forcsvfield{\listadd\transtypes}{\yeditor type}%
+       \usebibmacro{test:b:types}{\transtypes}{notrans}}}% needs '%'
   \docsvlist{translator,translatora,translatorb}}%
-
-\newbibmacro*{test:trans:b:type}{%
-  \ifboolexpr{ test {\ifinlist{issuetitle}{\translatortypes}}
-               or test {\ifinlist{maintitle}{\translatortypes}}
-               or test {\ifinlist{series}{\translatortypes}}}
-    {\toggletrue{notrans}}%
-    {\ifinlist{booktitle}{\translatortypes}
-       {\ifdefstring{\xtitle}{book}
-          {\usebibmacro{test:trans:b:notype}}%
-          {\toggletrue{notrans}}}
-       {\ifinlist{bookbooktitle}{\translatortypes}
-          {\ifdefstring{\xtitle}{bookbook}
-             {\usebibmacro{test:trans:b:notype}}%
-             {\toggletrue{notrans}}}
-          {\usebibmacro{test:trans:b:notype}}}}}
-
-\newbibmacro*{test:trans:b:notype}{%
-  \xifinlist{\thefield{\xtitle titlekey}}{\translatortypes}
-    {\listbreak}%
-    {\toggletrue{notrans}}}
 
 \newbibmacro*{trans:b:combos}{%
   \iftoggle{notrans}
@@ -1086,9 +1039,9 @@
       {\toggletrue{noed}}%
       {\togglefalse{noed}%
        \renewcommand*{\xeditor}{##1}%
-       \let\editortypes\empty
-       \forcsvfield{\listadd\editortypes}{\xeditor type}%
-       \ifinlist{#1}{\editortypes}
+       \let\edtypes\empty
+       \forcsvfield{\listadd\edtypes}{\xeditor type}%
+       \ifinlist{#1}{\edtypes}
          {\listbreak}%
          {\toggletrue{noed}}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
@@ -1099,9 +1052,9 @@
       {\toggletrue{notrans}}%
       {\togglefalse{notrans}%
        \renewcommand*{\yeditor}{##1}%
-       \let\translatortypes\empty
-       \forcsvfield{\listadd\translatortypes}{\yeditor type}%
-       \ifinlist{#1}{\translatortypes}
+       \let\transtypes\empty
+       \forcsvfield{\listadd\transtypes}{\yeditor type}%
+       \ifinlist{#1}{\transtypes}
          {\listbreak}%
          {\toggletrue{notrans}}}}% needs '%'
   \docsvlist{translator,translatora,translatorb}}%
@@ -1147,20 +1100,20 @@
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
      \toggletrue{noed}%
-     \usebibmacro{transcombos:b}{\translatortypes}{transed}}%
+     \usebibmacro{transcombos:b}{\transtypes}{transed}}%
     {\iftoggle{noed}
        {\usebibmacro{transcombos:c}}%
-       {\usebibmacro{transcombos:b}{\translatortypes}{translator}}}}
+       {\usebibmacro{transcombos:b}{\transtypes}{translator}}}}
 
 \newbibmacro*{edcombos:a}{%
   \renewcommand*{\cbx@namelist}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
      \toggletrue{notrans}%
-     \usebibmacro{edcombos:b}{\editortypes}{edtrans}}%
+     \usebibmacro{edcombos:b}{\edtypes}{edtrans}}%
     {\iftoggle{notrans}
        {\usebibmacro{edcombos:c}}%
-       {\usebibmacro{edcombos:b}{\editortypes}{editor}}}}
+       {\usebibmacro{edcombos:b}{\edtypes}{editor}}}}
 
 \newbibmacro*{transcombos:b}[2]{%
   \togglefalse{atleastone}%
@@ -1185,7 +1138,7 @@
 
 \newbibmacro*{transcombos:c}{%
   \renewcommand*{\do}[1]{%
-    \ifboolexpr{ test {\ifinlist{##1}{\translatortypes}}
+    \ifboolexpr{ test {\ifinlist{##1}{\transtypes}}
                  or test {\ifstrequal{##1}{translator}}}
       {\usebibmacro{swapstrings}{##1}%
        \listbreak}%
@@ -1216,7 +1169,7 @@
 
 \newbibmacro*{edcombos:c}{%
   \renewcommand*{\do}[1]{%
-    \ifboolexpr{ test {\ifinlist{##1}{\editortypes}}
+    \ifboolexpr{ test {\ifinlist{##1}{\edtypes}}
                  or test {\ifstrequal{##1}{editor}}}
       {\usebibmacro{swapstrings}{##1}%
        \listbreak}%
@@ -2488,8 +2441,8 @@
     {}}
 
 \newbibmacro*{other:number}{%
-  \ifboolexpr{ test {\ifinlist{series}{\editortypes}}
-               or test {\ifinlist{series}{\translatortypes}}}
+  \ifboolexpr{ test {\ifinlist{series}{\edtypes}}
+               or test {\ifinlist{series}{\transtypes}}}
     {\setunit{\addcomma\space}%
      \printfield{number}}%
     {\setunit{\addspace}% not '\setunit{\space}'
