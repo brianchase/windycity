@@ -1,4 +1,4 @@
-% Last modified: Sun 18 Apr 2021 04:19:29 PM CDT
+% Last modified: Sun 18 Apr 2021 04:31:44 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -884,6 +884,17 @@
        \usebibmacro{test:a:types}{\edtypes}{noed}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
+\newbibmacro*{test:trans:a}{%
+  \renewcommand*{\do}[1]{%
+    \ifnameundef{##1}
+      {\toggletrue{notrans}}%
+      {\togglefalse{notrans}%
+       \renewcommand*{\yeditor}{##1}%
+       \let\transtypes\empty
+       \forcsvfield{\listadd\transtypes}{\yeditor type}%
+       \usebibmacro{test:a:types}{\transtypes}{notrans}}}% needs '%'
+  \docsvlist{translator,translatora,translatorb}}%
+
 \newbibmacro*{test:a:types}[2]{%
   \ifboolexpr{ test {\ifinlist{issuetitle}{#1}}
                or test {\ifinlist{series}{#1}}}
@@ -911,17 +922,6 @@
           {\listbreak}}}
     {\listbreak}}%
 
-\newbibmacro*{test:trans:a}{%
-  \renewcommand*{\do}[1]{%
-    \ifnameundef{##1}
-      {\toggletrue{notrans}}%
-      {\togglefalse{notrans}%
-       \renewcommand*{\yeditor}{##1}%
-       \let\transtypes\empty
-       \forcsvfield{\listadd\transtypes}{\yeditor type}%
-       \usebibmacro{test:a:types}{\transtypes}{notrans}}}% needs '%'
-  \docsvlist{translator,translatora,translatorb}}%
-
 % For editors and translators after the author's position.
 
 \newbibmacro*{editors:b}{%
@@ -944,6 +944,17 @@
        \usebibmacro{test:b:types}{\edtypes}{noed}}}% needs '%'
   \docsvlist{editor,editora,editorb,editorc}}%
 
+\newbibmacro*{test:trans:b}{%
+  \renewcommand*{\do}[1]{%
+    \ifnameundef{##1}
+      {\toggletrue{notrans}}%
+      {\togglefalse{notrans}%
+       \renewcommand*{\yeditor}{##1}%
+       \let\transtypes\empty
+       \forcsvfield{\listadd\transtypes}{\yeditor type}%
+       \usebibmacro{test:b:types}{\transtypes}{notrans}}}% needs '%'
+  \docsvlist{translator,translatora,translatorb}}%
+
 \newbibmacro*{test:b:types}[2]{%
   \ifboolexpr{ test {\ifinlist{issuetitle}{#1}}
                or test {\ifinlist{maintitle}{#1}}
@@ -963,17 +974,6 @@
   \xifinlist{\thefield{\xtitle titlekey}}{#1}
     {\listbreak}%
     {\toggletrue{#2}}}
-
-\newbibmacro*{test:trans:b}{%
-  \renewcommand*{\do}[1]{%
-    \ifnameundef{##1}
-      {\toggletrue{notrans}}%
-      {\togglefalse{notrans}%
-       \renewcommand*{\yeditor}{##1}%
-       \let\transtypes\empty
-       \forcsvfield{\listadd\transtypes}{\yeditor type}%
-       \usebibmacro{test:b:types}{\transtypes}{notrans}}}% needs '%'
-  \docsvlist{translator,translatora,translatorb}}%
 
 \newbibmacro*{trans:b:combos}{%
   \iftoggle{notrans}
