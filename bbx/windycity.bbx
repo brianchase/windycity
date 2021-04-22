@@ -1,4 +1,4 @@
-% Last modified: Mon 19 Apr 2021 07:14:43 PM CDT
+% Last modified: Wed 21 Apr 2021 07:34:42 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -975,21 +975,21 @@
     {\listbreak}%
     {\toggletrue{#2}}}
 
-\newbibmacro*{trans:b:combos}{%
-  \iftoggle{notrans}
-    {}
-    {\usebibmacro{transcombos:a}%
-     \usebibmacro{pluga+etc}}}
-
 \newbibmacro*{ed:b:combos}{%
   \iftoggle{noed}
     {\usebibmacro{ed:b:second}}%
     {\usebibmacro{edcombos:a}%
      \usebibmacro{pluga+etc}%
-     \usebibmacro{editoraddon}%
-     \usebibmacro{editoraaddon}%
+     \usebibmacro{editoraddon}{editor}%
+     \usebibmacro{editoraddon}{editora}%
      \usebibmacro{ed:b:second}%
-     \usebibmacro{editoraaddon}}}
+     \usebibmacro{editoraddon}{editora}}}
+
+\newbibmacro*{trans:b:combos}{%
+  \iftoggle{notrans}
+    {}
+    {\usebibmacro{transcombos:a}%
+     \usebibmacro{pluga+etc}}}
 
 \newbibmacro*{pluga+etc}{%
   \usebibmacro{edtranspunct:a}%
@@ -1066,11 +1066,11 @@
      \usebibmacro{edcombos:a}%
      \usebibmacro{pluga+printnames}%
      \setunit{\addcomma\space}%
-     \usebibmacro{editoraddon}%
-     \usebibmacro{editoraaddon}%
+     \usebibmacro{editoraddon}{editor}%
+     \usebibmacro{editoraddon}{editora}%
      \usebibmacro{ed:c:second}{#1}%
      \setunit{\addcomma\space}%
-     \usebibmacro{editoraaddon}}}
+     \usebibmacro{editoraddon}{editora}}}
 
 \newbibmacro*{edtranspunct:c}{%
   \ifboolexpr{ togl {collection:bk}
@@ -1228,21 +1228,12 @@
        {\edef\cbx@bibstring{\cbx@bibstring +}}%
        {}}}
 
-% Catchalls for additional editorial information.
-
-\newbibmacro*{editoraddon}{%
-  \ifboolexpr{ test {\iffieldundef{editoraddon}}
-               or not test {\ifdefstring{\xeditor}{editor}}}
+\newbibmacro*{editoraddon}[1]{%
+  \ifboolexpr{ test {\iffieldundef{#1addon}}
+               or not test {\ifdefstring{\xeditor}{#1}}}
     {}
-    {\nopunct\printfield{editoraddon}%
-     \clearfield{editoraddon}}}
-
-\newbibmacro*{editoraaddon}{%
-  \ifboolexpr{ test {\iffieldundef{editoraaddon}}
-               or not test {\ifdefstring{\xeditor}{editora}}}
-    {}
-    {\nopunct\printfield{editoraaddon}%
-     \clearfield{editoraaddon}}}
+    {\nopunct\printfield{#1addon}%
+     \clearfield{#1addon}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%  Names and Dashes  %%
