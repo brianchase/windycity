@@ -1,4 +1,4 @@
-% Last modified: Wed 21 Apr 2021 07:34:42 PM CDT
+% Last modified: Sat 24 Apr 2021 12:30:46 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -962,11 +962,11 @@
     {\toggletrue{#2}}%
     {\ifinlist{booktitle}{#1}
        {\ifdefstring{\xtitle}{book}
-          {\usebibmacro{test:ed:b:keys}{#1}{#2}}%
+          {\usebibmacro{test:b:keys}{#1}{#2}}%
           {\toggletrue{#2}}}
        {\ifinlist{bookbooktitle}{#1}
           {\ifdefstring{\xtitle}{bookbook}
-             {\usebibmacro{test:ed:b:keys}{#1}{#2}}%
+             {\usebibmacro{test:b:keys}{#1}{#2}}%
              {\toggletrue{#2}}}
           {\usebibmacro{test:b:keys}{#1}{#2}}}}}
 
