@@ -1,4 +1,4 @@
-% Last modified: Sun 25 Apr 2021 12:56:44 PM CDT
+% Last modified: Sun 25 Apr 2021 01:26:45 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -130,17 +130,37 @@
   \settoggle{swapauth}{#1}}%
 
 \providetoggle{swaptrans}
+\providetoggle{swaptrans:booktitle}
+\providetoggle{swaptrans:bookbooktitle}
 \providetoggle{swaptrans:issuetitle}
 \providetoggle{swaptrans:maintitle}
 \providetoggle{swaptrans:series}
+\providetoggle{swaptrans:title}
 \DeclareBiblatexOption{entry}[boolean]{swaptrans}[true]{%
-  \settoggle{swaptrans}{#1}}%
+  \settoggle{swaptrans:title}{#1}%
+  \settoggle{swaptrans:booktitle}{#1}%
+  \settoggle{swaptrans:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:booktitle}[true]{%
+  \settoggle{swaptrans:booktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:bookbooktitle}[true]{%
+  \settoggle{swaptrans:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:issuetitle}[true]{%
+  \settoggle{swaptrans:issuetitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:maintitle}[true]{%
+  \settoggle{swaptrans:maintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:series}[true]{%
+  \settoggle{swaptrans:series}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:title}[true]{%
+  \settoggle{swaptrans:title}{#1}}%
+% Short forms of the options above:
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:book}[true]{%
+  \settoggle{swaptrans:booktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:bookbook}[true]{%
+  \settoggle{swaptrans:bookbooktitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:issue}[true]{%
   \settoggle{swaptrans:issuetitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:main}[true]{%
   \settoggle{swaptrans:maintitle}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{swaptrans:series}[true]{%
-  \settoggle{swaptrans:series}{#1}}%
 
 \providetoggle{swapvol}
 \DeclareBiblatexOption{entry,global}[boolean]{swapvol}[true]{%
@@ -862,16 +882,12 @@
 \newbibmacro*{editors:a}{%
   \usebibmacro{test:ed:a}%
   \usebibmacro{test:trans:a}%
-  \ifboolexpr{ togl {noed}
-               and togl {notrans}}
-    {}
-    {\iftoggle{noed}
-       {\usebibmacro{transcombos:a}}%
-       {\iftoggle{notrans}
-          {\usebibmacro{edcombos:a}}%
-          {\iftoggle{swaptrans}
-             {\usebibmacro{transcombos:a}}%
-             {\usebibmacro{edcombos:a}}}}}}
+  \iftoggle{swapvol}
+    {\ifboolexpr{ test {\ifinlist{maintitle}{\edtypes}}
+                  or test {\ifinlist{maintitle}{\transtypes}}}
+       {\usebibmacro{test:swaptrans:a}{maintitle}}%
+       {\usebibmacro{test:swaptrans:a}{booktitle}}}
+    {\usebibmacro{test:swaptrans:a}{title}}}
 
 \newbibmacro*{test:ed:a}{%
   \renewcommand*{\do}[1]{%
@@ -922,16 +938,37 @@
           {\listbreak}}}
     {\listbreak}}%
 
+\newbibmacro*{test:swaptrans:a}[1]{%
+  \iftoggle{swaptrans:#1}
+    {\toggletrue{swaptrans}%
+     \iftoggle{notrans}
+       {\usebibmacro{ed:a:combos}}%
+       {\usebibmacro{trans:a:combos}}%
+     \togglefalse{swaptrans}}%
+    {\iftoggle{noed}
+       {\usebibmacro{trans:a:combos}}%
+       {\usebibmacro{ed:a:combos}}}}
+
+\newbibmacro*{ed:a:combos}{%
+  \iftoggle{noed}
+    {}
+    {\usebibmacro{edcombos:a}}}
+
+\newbibmacro*{trans:a:combos}{%
+  \iftoggle{notrans}
+    {}
+    {\usebibmacro{transcombos:a}}}
+
 % For editors and translators after the author's position.
 
 \newbibmacro*{editors:b}{%
   \usebibmacro{test:ed:b}%
   \usebibmacro{test:trans:b}%
-  \iftoggle{swaptrans}
-    {\usebibmacro{trans:b:combos}%
-     \usebibmacro{ed:b:combos}}%
-    {\usebibmacro{ed:b:combos}%
-     \usebibmacro{trans:b:combos}}}
+  \ifdefstring{\xtitle}{book}
+    {\usebibmacro{test:swaptrans:b}{booktitle}}%
+    {\ifdefstring{\xtitle}{bookbook}
+       {\usebibmacro{test:swaptrans:b}{bookbooktitle}}%
+       {\usebibmacro{test:swaptrans:b}{title}}}}
 
 \newbibmacro*{test:ed:b}{%
   \renewcommand*{\do}[1]{%
@@ -974,6 +1011,15 @@
   \xifinlist{\thefield{\xtitle titlekey}}{#1}
     {\listbreak}%
     {\toggletrue{#2}}}
+
+\newbibmacro*{test:swaptrans:b}[1]{%
+  \iftoggle{swaptrans:#1}
+    {\toggletrue{swaptrans}%
+     \usebibmacro{trans:b:combos}%
+     \usebibmacro{ed:b:combos}%
+     \togglefalse{swaptrans}}%
+    {\usebibmacro{ed:b:combos}%
+     \usebibmacro{trans:b:combos}}}
 
 \newbibmacro*{ed:b:combos}{%
   \iftoggle{noed}

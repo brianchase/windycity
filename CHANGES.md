@@ -46,6 +46,10 @@ internals.
   - added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
     entry options to swap positions of editors and translators of
     `issuetitle`, `maintitle`, and `series`
+  - for special circumstances (explained in the user guide), added
+    three more entry options for swapping editors and translators:
+    `swaptrans:title`, `swaptrans:booktitle`, and
+    `swaptrans:bookbooktitle`
   - added support for printing a second tier of editors after `title`,
     `issuetitle`, `maintitle`, and `series` (e.g. "Edited by Jane Doe.
     Revised and Expanded by John Smith")
