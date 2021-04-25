@@ -1,4 +1,4 @@
-% Last modified: Sat 24 Apr 2021 12:30:46 PM CDT
+% Last modified: Sun 25 Apr 2021 12:56:44 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -899,7 +899,7 @@
   \ifboolexpr{ test {\ifinlist{issuetitle}{#1}}
                or test {\ifinlist{series}{#1}}}
     {\toggletrue{#2}}%
-    {\ifinlist{maintitle}{\edtypes}
+    {\ifinlist{maintitle}{#1}
        {\iftoggle{collection:bk}
           {\iftoggle{swapvol}
              {\listbreak}%
