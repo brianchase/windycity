@@ -43,9 +43,9 @@ internals.
     `issuetitle`, `maintitle`, and `series` (e.g. if `editor` is the
     reviser of `maintitle`, put `maintitle,reviser` or
     `reviser,maintitle` in `editortype`)
-  - added `swaptrans:issue`, `swaptrans:main`, and `swaptrans:series`
-    entry options to swap positions of editors and translators of
-    `issuetitle`, `maintitle`, and `series`
+  - added `swaptrans:issuetitle`, `swaptrans:maintitle`, and
+    `swaptrans:series` entry options to swap positions of editors and
+    translators of `issuetitle`, `maintitle`, and `series`
   - for special circumstances (explained in the user guide), added
     three more entry options for swapping editors and translators:
     `swaptrans:title`, `swaptrans:booktitle`, and
