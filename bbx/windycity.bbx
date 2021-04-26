@@ -1,4 +1,4 @@
-% Last modified: Sun 25 Apr 2021 01:26:45 PM CDT
+% Last modified: Sun 25 Apr 2021 08:24:03 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1150,9 +1150,7 @@
      \iftoggle{atleastone}
        {}
        {\usebibmacro{edcombos:b}{\transtypes}{edtrans}}}
-    {\iftoggle{notrans}
-       {\usebibmacro{edcombos:c}}%
-       {\usebibmacro{edcombos:b}{\edtypes}{editor}}}}
+    {\usebibmacro{edcombos:c}}}
 
 \newbibmacro*{transcombos:a}{%
   \renewcommand*{\cbx@namelist}{\yeditor}%
@@ -1163,9 +1161,7 @@
      \iftoggle{atleastone}
        {}
        {\usebibmacro{transcombos:b}{\transtypes}{transed}}}
-    {\iftoggle{noed}
-       {\usebibmacro{transcombos:c}}%
-       {\usebibmacro{transcombos:b}{\transtypes}{translator}}}}
+    {\usebibmacro{transcombos:c}}}
 
 \newbibmacro*{edcombos:b}[2]{%
   \togglefalse{atleastone}%
