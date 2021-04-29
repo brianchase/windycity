@@ -1,4 +1,4 @@
-% Last modified: Sat 24 Apr 2021 12:23:42 PM CDT
+% Last modified: Wed 28 Apr 2021 07:48:29 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -648,25 +648,50 @@ translator, use \opt{swapauth}. This option works for \bibtype{book},
 \noindent According to \textit{CMOS}, if a work has an editor and a
 translator, their names should appear in citations in the order in
 which they appear on the work's title page (see \textit{CMOS}
-\ref{14.104}). By default, the style lists editors first. For the
-editors and translators of a \bibfield{title}, the option
-\opt{swaptrans} reverses this order: Their translators print first. If
-a work's translators and editors are the same, \opt{swaptrans}
-reverses the order of their roles, say, from \textit{edited and
-translated by} to \textit{translated and edited by}. The same goes
+\ref{14.104}). By default, the style lists editors first. The option
+\bibfield{swaptrans} reverses this order: Their translators print
+first. If a work's translators and editors are the same,
+\bibfield{swaptrans} reverses their roles, say, from \textit{edited
+and translated by} to \textit{translated and edited by}. The same goes
 for compilers, expanders, revisers, and updaters, which the style
 treats as specialized editors. For editors and translators of an
 \bibfield{issuetitle}, \bibfield{maintitle}, or \bibfield{series}, see
-\opt{swaptrans:issue}, \opt{swaptrans:main}, or
-\opt{swaptrans:series}, respectively. See also section
-\ref{edtranspos}.
+their respective options below. See also section \ref{edtranspos}.
+
+\optitem[false]{swaptrans:book}{\opt{true}, \opt{false}}
+
+A short form of \opt{swaptrans:booktitle}. See below.
+
+\optitem[false]{swaptrans:bookbook}{\opt{true}, \opt{false}}
+
+A short form of \opt{swaptrans:bookbooktitle}. See below.
+
+\optitem[false]{swaptrans:bookbooktitle}{\opt{true}, \opt{false}}
+
+Like \opt{swaptrans} but narrower in scope. It applies only to the
+editors and translators of a \bibfield{bookbooktitle} (a double
+cross-referenced \bibfield{title}). See section \ref{edtranspos}.
+
+\optitem[false]{swaptrans:booktitle}{\opt{true}, \opt{false}}
+
+Like \opt{swaptrans} but narrower in scope. It applies only to the
+editors and translators of a \bibfield{booktitle} (a cross-referenced
+\bibfield{title}). See section \ref{edtranspos}.
 
 \optitem[false]{swaptrans:issue}{\opt{true}, \opt{false}}
+
+A short form of \opt{swaptrans:issuetitle}. See below.
+
+\optitem[false]{swaptrans:issuetitle}{\opt{true}, \opt{false}}
 
 Like \opt{swaptrans} but for editors and translators of an
 \bibfield{issuetitle}.
 
 \optitem[false]{swaptrans:main}{\opt{true}, \opt{false}}
+
+A short form of \opt{swaptrans:maintitle}. See below.
+
+\optitem[false]{swaptrans:maintitle}{\opt{true}, \opt{false}}
 
 Like \opt{swaptrans} but for editors and translators of a
 \bibfield{maintitle}.
@@ -675,6 +700,13 @@ Like \opt{swaptrans} but for editors and translators of a
 
 Like \opt{swaptrans} but for editors and translators of a
 \bibfield{series}.
+
+\optitem[false]{swaptrans:title}{\opt{true}, \opt{false}}
+
+Like \opt{swaptrans} but narrower in scope. It applies only to the
+editors and translators of a \bibfield{title}, whereas
+\bibfield{swaptrans} also affects those of a \bibfield{booktitle} and
+\bibfield{bookbooktitle}. See section \ref{edtranspos}.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -1721,17 +1753,16 @@ sets of editors per work.
 
 Normally, Windy City lists editors first. But per \textit{CMOS}, if
 translators are listed first on a work's title page, you should
-reverse the order (see \textit{CMOS} \ref{14.104}). The style provides
-four entry options to do this, each of which applies to the editors
-and translators of different titles: \opt{swaptrans} (for
-\bibfield{title}), \opt{swaptrans:issue} (for \bibfield{issuetitle}),
-\opt{swaptrans:main} (for \bibfield{maintitle}), and
-\opt{swaptrans:series} (for \bibfield{series}). This level of control
-means that when a work has multiple levels of titles with multiple
-pairs of editors and translators, the style allows you to swap
-positions of some or all of them.
+reverse the order (see \textit{CMOS} \ref{14.104}). To do this, the
+style provides entry options for every title that accepts editors and
+translators. This means that if a work has multiple levels of titles
+with multiple pairs of editors and translators, you may swap positions
+of any pair without affecting the others.
 
-For simplicity, let's focus on \opt{swaptrans}. Compare:
+For simplicity, let's focus on \opt{swaptrans}, the option that
+suffices for most purposes. It applies to the editors and translators
+of works other than an \bibfield{issuetitle}, \bibfield{maintitle}, or
+\bibfield{series}. Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -1781,6 +1812,70 @@ So, if you pick one that begins with \textit{trans}
 (\textit{transcomp}, \textit{transed}, \textit{transex},
 \textit{transrev}, or \textit{transup}), Windy City will assume that
 the translator's role goes first.
+
+As often happens, cross-referencing raises some complications. The
+problem is that \opt{swaptrans} applies to the editors and translators
+of a \bibfield{title}, but cross-referenced works have more than one
+(a \bibfield{title}, a cross-referenced \bibfield{title}, and maybe
+even a double cross-referenced \bibfield{title}). Three more entry
+options allow you to pick among these titles so as to swap whichever
+set of editors and translators you want. Here's an example to showcase
+all three options:
+
+\begin{verbatim}
+   @InCollection{doe2017,
+     author = {Doe, Jane},
+     title = {An Essay},
+     editor = {White, Amy},
+     translator = {Jones, David},
+     pages = {18–35},
+     crossref = {jones2017}
+   }
+   @InBook{jones2017,
+     title = {A Volume of Essays},
+     editor = {Jones, David and White, Amy},
+     translator = {Jones, David},
+     volume = {1},
+     crossref = {white2017}
+   }
+   @Collection{white2017,
+     editor = {White, Amy and Jones, David and Rogers, Mary},
+     translator = {Jones, David and Rogers, Mary},
+     title = {A Collection of Essays},
+     volumes = {3},
+     address = {Chicago},
+     publisher = {University of Chicago Press},
+     year = {2017}
+   }
+\end{verbatim}
+
+To swap the first pair of editors and translators, use
+\opt{swaptrans:title}:
+
+\begin{citebib}
+\item \cite{doe2017a}
+\end{citebib}
+
+To swap the second pair of editors and translators, use
+\opt{swaptrans:booktitle} (or the short form \opt{swaptrans:book}):
+
+\begin{citebib}
+\item \cite{doe2017b}
+\end{citebib}
+
+To swap the third pair of editors and translators, use
+\opt{swaptrans:bookbooktitle} (or the short form
+\opt{swaptrans:bookbook}):
+
+\begin{citebib}
+\item \cite{doe2017c}
+\end{citebib}
+
+To swap editors and translators of an \bibfield{issuetitle},
+\bibfield{maintitle}, or \bibfield{series}, use
+\opt{swaptrans:issuetitle}, \opt{swaptrans:maintitle}, and
+\opt{swaptrans:series}, respectively. The first two also have short
+forms: \opt{swaptrans:issue} and \opt{swaptrans:main}.
 
 On rare occasions, you may want to swap the position of an author and
 an editor or translator. \textit{CMOS} \ref{14.104} gives an example:
