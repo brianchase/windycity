@@ -1,4 +1,4 @@
-% Last modified: Wed 28 Apr 2021 07:48:29 PM CDT
+% Last modified: Thu 29 Apr 2021 05:59:31 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1819,29 +1819,29 @@ of a \bibfield{title}, but cross-referenced works have more than one
 (a \bibfield{title}, a cross-referenced \bibfield{title}, and maybe
 even a double cross-referenced \bibfield{title}). Three more entry
 options allow you to pick among these titles so as to swap whichever
-set of editors and translators you want. Here's an example to showcase
-all three options:
+set of editors and translators you want. Here's a silly example to
+showcase all three options:
 
 \begin{verbatim}
    @InCollection{doe2017,
      author = {Doe, Jane},
      title = {An Essay},
-     editor = {White, Amy},
-     translator = {Jones, David},
+     editor = {Smith, John},
+     translator = {Smith, John},
      pages = {18–35},
      crossref = {jones2017}
    }
    @InBook{jones2017,
      title = {A Volume of Essays},
-     editor = {Jones, David and White, Amy},
-     translator = {Jones, David},
+     editor = {Smith, John},
+     translator = {Smith, John},
      volume = {1},
      crossref = {white2017}
    }
    @Collection{white2017,
-     editor = {White, Amy and Jones, David and Rogers, Mary},
-     translator = {Jones, David and Rogers, Mary},
      title = {A Collection of Essays},
+     editor = {Smith, John},
+     translator = {Smith, John},
      volumes = {3},
      address = {Chicago},
      publisher = {University of Chicago Press},
@@ -1857,15 +1857,14 @@ To swap the first pair of editors and translators, use
 \end{citebib}
 
 To swap the second pair of editors and translators, use
-\opt{swaptrans:booktitle} (or the short form \opt{swaptrans:book}):
+\opt{swaptrans:booktitle} (or \opt{swaptrans:book}):
 
 \begin{citebib}
 \item \cite{doe2017b}
 \end{citebib}
 
 To swap the third pair of editors and translators, use
-\opt{swaptrans:bookbooktitle} (or the short form
-\opt{swaptrans:bookbook}):
+\opt{swaptrans:bookbooktitle} (or \opt{swaptrans:bookbook}):
 
 \begin{citebib}
 \item \cite{doe2017c}
@@ -1873,11 +1872,11 @@ To swap the third pair of editors and translators, use
 
 To swap editors and translators of an \bibfield{issuetitle},
 \bibfield{maintitle}, or \bibfield{series}, use
-\opt{swaptrans:issuetitle}, \opt{swaptrans:maintitle}, and
+\opt{swaptrans:issuetitle}, \opt{swaptrans:maintitle}, or
 \opt{swaptrans:series}, respectively. The first two also have short
 forms: \opt{swaptrans:issue} and \opt{swaptrans:main}.
 
-On rare occasions, you may want to swap the position of an author and
+On rare occasions, you may want to swap positions of an author and
 an editor or translator. \textit{CMOS} \ref{14.104} gives an example:
 
 \begin{citebib}
@@ -1895,7 +1894,7 @@ position empty. Also, if it finds both an editor and a translator, and
 they're not the same person, it will print the editor's name in the
 author's position---again, giving priority to editors. If you want the
 translator's name in the author's position, use \opt{swapauth} with
-\opt{swaptrans}.
+the appropriate \opt{swaptrans} option.
 
 For correct sorting in a bibliography, a work that uses \opt{swapauth}
 needs a field like \bibfield{sortname} to sort it by the name of the
