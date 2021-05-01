@@ -1,4 +1,4 @@
-% Last modified: Thu 29 Apr 2021 05:59:31 PM CDT
+% Last modified: Sat 01 May 2021 01:51:20 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -641,7 +641,7 @@ to skip the \textit{date}. See section \ref{entrytypes} for examples.
 translator, use \opt{swapauth}. This option works for \bibtype{book},
 \bibtype{bookinbook}, \bibtype{collection}, \bibtype{inbook}, and
 \bibtype{incollection} entry types. For more information, see section
-\ref{edtranspos}.
+\ref{editors:swap}.
 
 \optitem[false]{swaptrans}{\opt{true}, \opt{false}}
 
@@ -653,10 +653,10 @@ which they appear on the work's title page (see \textit{CMOS}
 first. If a work's translators and editors are the same,
 \bibfield{swaptrans} reverses their roles, say, from \textit{edited
 and translated by} to \textit{translated and edited by}. The same goes
-for compilers, expanders, revisers, and updaters, which the style
-treats as specialized editors. For editors and translators of an
+for compilers, expanders, revisers, and updaters---all of whom the
+style treats as specialized editors. For editors and translators of an
 \bibfield{issuetitle}, \bibfield{maintitle}, or \bibfield{series}, see
-their respective options below. See also section \ref{edtranspos}.
+their respective options below. See also section \ref{editors:swap}.
 
 \optitem[false]{swaptrans:book}{\opt{true}, \opt{false}}
 
@@ -670,13 +670,13 @@ A short form of \opt{swaptrans:bookbooktitle}. See below.
 
 Like \opt{swaptrans} but narrower in scope. It applies only to the
 editors and translators of a \bibfield{bookbooktitle} (a double
-cross-referenced \bibfield{title}). See section \ref{edtranspos}.
+cross-referenced \bibfield{title}). See section \ref{editors:swap}.
 
 \optitem[false]{swaptrans:booktitle}{\opt{true}, \opt{false}}
 
 Like \opt{swaptrans} but narrower in scope. It applies only to the
 editors and translators of a \bibfield{booktitle} (a cross-referenced
-\bibfield{title}). See section \ref{edtranspos}.
+\bibfield{title}). See section \ref{editors:swap}.
 
 \optitem[false]{swaptrans:issue}{\opt{true}, \opt{false}}
 
@@ -705,8 +705,10 @@ Like \opt{swaptrans} but for editors and translators of a
 
 Like \opt{swaptrans} but narrower in scope. It applies only to the
 editors and translators of a \bibfield{title}, whereas
-\bibfield{swaptrans} also affects those of a \bibfield{booktitle} and
-\bibfield{bookbooktitle}. See section \ref{edtranspos}.
+\bibfield{swaptrans} also affects those of a \bibfield{booktitle} (a
+cross-referenced \bibfield{title}) and a \bibfield{bookbooktitle} (a
+double cross-referenced \bibfield{title}). See section
+\ref{editors:swap}.
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
 
@@ -1223,7 +1225,7 @@ the value \textit{newsmag}. For an example, see \textit{CMOS}
 Some of Windy City's nonstandard data fields are for its internal
 handling of cross-referencing. Those fields aren't listed below, as
 they're not usually meant for use in a bibliography database (but see
-section \ref{edtypes.other}). The rest store information that's
+section \ref{editors.other}). The rest store information that's
 crucial for correct formatting. Without them, quite a few citations in
 this document wouldn't match their counterparts in \textit{CMOS}.
 
@@ -1299,13 +1301,14 @@ of editors starts with \bibfield{editor}, followed by
 \bibfield{editora}, and so on. The set of translators starts with
 \bibfield{translator}, followed by \bibfield{translatora}, and so on.
 Editors precede translators, unless you reverse the order with a
-\opt{swaptrans} entry option (see section \ref{edtranspos}). Within
-each set, the style prints the first list that meets its criteria for
-that context. Apart from exceptions discussed below, then, you can
+\opt{swaptrans} entry option (see section \ref{editors:swap}). Within
+each set, the style prints the first name list that meets its criteria
+for that context. Apart from exceptions discussed below, you can
 assign any editor or translator name list to any \bibfield{title},
 \bibfield{issuetitle}, \bibfield{maintitle}, or \bibfield{series}.
 
 \subsubsection{The Basics}
+\label{editors:basics}
 
 In most cases, you'll assign editors and translators to a
 \bibfield{title}. Since it's the default assignment, you can do this
@@ -1409,14 +1412,14 @@ proper order: \bibfield{editor} before \bibfield{editora}, and so on.
 Second tier editors never print in the author's position, even when
 the first does. They always print after the relevant title.
 
-In the examples below, the editor name lists print correctly because
-there's no ambiguity about which title they're responsible for. Both
-fall within the same entry, \bibfield{carter2012}, where their default
-assignment is \textit{A Performer's Guide}. Citing a child entry,
-\bibfield{myers2012}, causes the editor name lists to print together
-after the collection's title, starting with \bibfield{editor}, whereas
-citing the parent causes \bibfield{editor} to print in the author's
-position.
+In the examples below, the editors print correctly because there's no
+ambiguity about which title they're responsible for. Both fall within
+the same entry, \bibfield{carter2012}, where their default assignment
+is \textit{A Performer's Guide}. Citing a child entry,
+\bibfield{myers2012}, places the editors after the collection's title,
+starting with \bibfield{editor}, whereas citing the parent places
+\bibfield{editor} in the author's position and \bibfield{editora}
+after the collection's title.
 
 \begin{verbatim}
    @InCollection{myers2012,
@@ -1492,10 +1495,10 @@ These are the key lines:
 
 \noindent Combinations that involve a translator's role, such as
 \textit{translated and compiled by}, respond to the \opt{swaptrans}
-options discussed in section \ref{edtranspos}. For these dual roles,
+options discussed in section \ref{editors:swap}. For these dual roles,
 however, it's probably less confusing in the long run to change values
 in the editor and translator type fields. The choice is yours. Table
-\ref{table:ed} lists all editor and translator roles.
+\ref{editors:table} lists all editor and translator roles.
 
 \begin{table}[H]
 \begin{tabular}{@{}r l r l@{}}
@@ -1520,12 +1523,12 @@ exrev & expander and reviser & upex & updater and expander\\
 extrans & expander and translator & uprev & updater and reviser\\
 exup & expander and updater & uptrans & updater and translator\\
 \end{tabular}
-\caption{}\label{table:ed}
+\caption{}\label{editors:table}
 \end{table}
 
 For examples in \textit{CMOS} that use values from Table
-\ref{table:ed}, we need to turn to the book's bibliography. The first
-example below shows the effect of \textit{reved}, the second of
+\ref{editors:table}, we need to turn to the book's bibliography. The
+first example below shows the effect of \textit{reved}, the second of
 \textit{revup}.
 
 \begin{citebib}
@@ -1543,7 +1546,7 @@ three or more roles at once, as in ``Edited, Translated, and Revised
 by Jane Doe.''
 
 \subsubsection{Other Options and Titles}
-\label{edtypes.other}
+\label{editors:other}
 
 Windy City simplifies the assignments of editors and translators in
 several ways. For one, the default assignment of every editor name
@@ -1563,10 +1566,10 @@ lists:
 \end{verbatim}
 
 \noindent This gives a default assignment of \textit{editor and
-translator} (\textit{edtrans} from Table \ref{table:ed}), unless you
+translator} (\textit{edtrans} from Table \ref{editors:table}), unless you
 use the appropriate \opt{swaptrans} entry option, which gives
 \textit{translator and editor} (\textit{transed} from Table
-\ref{table:ed}). No editor or translator type field is necessary.
+\ref{editors:table}). No editor or translator type field is necessary.
 
 When type fields are required, Windy City offers flexibility over how
 you structure your bibliography entries: If you like, you can set the
@@ -1656,7 +1659,7 @@ translators to \bibfield{issuetitle}, \bibfield{maintitle}, and
 putting \textit{issuetitle} and \textit{maintitle} in the relevant
 type fields.
 
-With the help of strings from Table \ref{table:ed}, all editor and
+With the help of strings from Table \ref{editors:table}, all editor and
 translator types are available to \bibfield{issuetitle},
 \bibfield{maintitle}, and \bibfield{series}. Commas function as
 delimiters. To take the previous example, you could list Catharine
@@ -1673,9 +1676,8 @@ cross-referenced \bibfield{title}---a \bibfield{title}
 cross-referenced by a cross-referenced \bibfield{title}). To
 accommodate entries that don't use cross-referencing, the style
 accepts the values \textit{booktitle} and \textit{bookbooktitle} in
-editor and translator type fields.
-
-An example of double cross-referencing will set us up to use both:
+editor and translator type fields. An example of double
+cross-referencing will set us up to use both:
 
 \begin{verbatim}
    @InCollection{doe2018,
@@ -1749,20 +1751,20 @@ books, and other works within books, this scheme allows for several
 sets of editors per work.
 
 \subsection{Switching Places and Roles}
-\label{edtranspos}
+\label{editors:swap}
 
-Normally, Windy City lists editors first. But per \textit{CMOS}, if
-translators are listed first on a work's title page, you should
-reverse the order (see \textit{CMOS} \ref{14.104}). To do this, the
-style provides entry options for every title that accepts editors and
-translators. This means that if a work has multiple levels of titles
-with multiple pairs of editors and translators, you may swap positions
-of any pair without affecting the others.
+According to \textit{CMOS}, if a work has an editor and a translator,
+their names should appear in citations in the order in which they
+appear on the work's title page (see \textit{CMOS} \ref{14.104}). By
+default, the style lists editors first. To reverse the order, the
+style provides a suite of entry options that apply to the editors and
+translators of different titles. This means that if a work has
+multiple sets of editors and translators, you may swap positions of
+any set without affecting the others.
 
-For simplicity, let's focus on \opt{swaptrans}, the option that
-suffices for most purposes. It applies to the editors and translators
-of works other than an \bibfield{issuetitle}, \bibfield{maintitle}, or
-\bibfield{series}. Compare:
+For simplicity, let's focus on \opt{swaptrans}. This option swaps the
+editors and translators of works other than an \bibfield{issuetitle},
+\bibfield{maintitle}, or \bibfield{series}. Compare:
 
 \begin{citebib}
 \item \cite{doe2010a}
@@ -1771,9 +1773,9 @@ of works other than an \bibfield{issuetitle}, \bibfield{maintitle}, or
 \item \cite{doe2010b}
 \end{citebib}
 
-If a work has no author, but has an editor, the style will print the
-editor's name in the author's position. The same happens if a work has
-no author but does have a translator. The following are examples from
+If a work has no author, but has editors, the style prints their names
+in the author's position. The same happens if a work has no author or
+editor but has translators. The following are examples from
 \textit{CMOS} \ref{14.103}:
 
 \begin{citebib}
@@ -1796,31 +1798,33 @@ in the author's position:
 \end{citebib}
 
 Similarly, if a work's editors and translators are the same, the style
-will print the editors' role first, as in \textit{edited and
-translated by}. Reverse them with \opt{swaptrans}. From \textit{CMOS}
+prints the editors' role first, as in \textit{edited and translated
+by}. Reverse them with \opt{swaptrans}. From \textit{CMOS}
 \ref{14.104}:
 
 \begin{citebib}
 \item \cite{menchu1999}
 \end{citebib}
 
-To make switching roles easier in these cases, you may also use the
-relevant \bibfield{editortype} field with a bibliography string from
-Table \ref{table:ed}. After all, for compilers, expanders, revisers,
-and updaters, you need to put a value in \bibfield{editortype} anyway.
-So, if you pick one that begins with \textit{trans}
+You may also swap roles by changing the value in the relevant
+\bibfield{editortype} field (see Table \ref{editors:table} in section
+\ref{editors:basics}). For compilers, expanders, revisers, and
+updaters, you need to put a value in \bibfield{editortype} anyway. You
+may as well pick a value that has the roles in the correct order.
+Either way, if you pick one that begins with \textit{trans}
 (\textit{transcomp}, \textit{transed}, \textit{transex},
-\textit{transrev}, or \textit{transup}), Windy City will assume that
-the translator's role goes first.
+\textit{transrev}, or \textit{transup}), Windy City assumes that the
+translator's role goes first. Using \opt{swaptrans} would then put the
+editor's role first.
 
 As often happens, cross-referencing raises some complications. The
 problem is that \opt{swaptrans} applies to the editors and translators
 of a \bibfield{title}, but cross-referenced works have more than one
 (a \bibfield{title}, a cross-referenced \bibfield{title}, and maybe
 even a double cross-referenced \bibfield{title}). Three more entry
-options allow you to pick among these titles so as to swap whichever
-set of editors and translators you want. Here's a silly example to
-showcase all three options:
+options allow you to pick among them so as to swap whichever set of
+editors and translators you want. Here's a silly example to showcase
+all three options:
 
 \begin{verbatim}
    @InCollection{doe2017,
@@ -1849,21 +1853,21 @@ showcase all three options:
    }
 \end{verbatim}
 
-To swap the first pair of editors and translators, use
+To swap the first set of editors and translators, use
 \opt{swaptrans:title}:
 
 \begin{citebib}
 \item \cite{doe2017a}
 \end{citebib}
 
-To swap the second pair of editors and translators, use
+To swap the second set of editors and translators, use
 \opt{swaptrans:booktitle} (or \opt{swaptrans:book}):
 
 \begin{citebib}
 \item \cite{doe2017b}
 \end{citebib}
 
-To swap the third pair of editors and translators, use
+To swap the third set of editors and translators, use
 \opt{swaptrans:bookbooktitle} (or \opt{swaptrans:bookbook}):
 
 \begin{citebib}
@@ -1876,8 +1880,8 @@ To swap editors and translators of an \bibfield{issuetitle},
 \opt{swaptrans:series}, respectively. The first two also have short
 forms: \opt{swaptrans:issue} and \opt{swaptrans:main}.
 
-On rare occasions, you may want to swap positions of an author and
-an editor or translator. \textit{CMOS} \ref{14.104} gives an example:
+On rare occasions, you may want to swap positions of an author and an
+editor or translator. From \textit{CMOS} \ref{14.104}:
 
 \begin{citebib}
 \item \cite{pound1953}
@@ -1888,10 +1892,10 @@ an editor or translator. \textit{CMOS} \ref{14.104} gives an example:
 \bibtype{collection}, \bibtype{inbook}, \bibtype{incollection},
 \bibtype{mvbook}, and \bibtype{mvcollection} entry types. But beware:
 Windy City doesn't look ahead to see if there's really an editor or
-translator to take the author's place. If it doesn't find one, it will
-still print the author's name after the title, leaving the author's
+translator to take the author's place. If it doesn't find one, it
+still prints the author's name after the title, leaving the author's
 position empty. Also, if it finds both an editor and a translator, and
-they're not the same person, it will print the editor's name in the
+they're not the same person, it prints the editor's name in the
 author's position---again, giving priority to editors. If you want the
 translator's name in the author's position, use \opt{swapauth} with
 the appropriate \opt{swaptrans} option.
@@ -2820,7 +2824,7 @@ database.
 \label{14.104}
 
 On how to make an author and editor swap places, see section
-\ref{edtranspos}.
+\ref{editors:swap}.
 
 \begin{citebib}
 \item \cite{bonnefoy1995}
