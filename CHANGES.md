@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2021-05-02
 
 This release brings a long overdue redesign of the workflow for
 editors and translators. My hope is that users won't need to change
