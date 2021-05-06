@@ -1,4 +1,4 @@
-% Last modified: Sun 02 May 2021 01:14:55 PM CDT
+% Last modified: Mon 03 May 2021 07:00:32 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -36,6 +36,10 @@
      \ExecuteBibliographyOptions{minxrefs=1}%
      \AtBeginBibliography{\blx@key@bibcheck{collsonly}}}
     {}}
+
+\providetoggle{dashed}
+\DeclareBiblatexOption{global}[boolean]{dashed}[true]{%
+  \settoggle{dashed}{#1}}%
 
 \providetoggle{doi}
 \DeclareBiblatexOption{entry,global}[boolean]{doi}[true]{%
@@ -179,6 +183,7 @@
   autopunct=true,
   block=none,
   citetracker=context,
+  dashed=true,
   date=long,
   dateabbrev=false,
   dateusetime=true,
@@ -1281,9 +1286,11 @@
 %%  Names and Dashes  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+% HERE:
 \newbibmacro*{printnames+etc}{%
   \ifboolexpr{ togl {authposition}
-               and togl {bibliography}}
+               and togl {bibliography}
+               and togl {dashed}}
     {\usebibmacro{bibnamedash+printnames}}%
     {\usebibmacro{printnames}}%
   \usebibmacro{handle}%

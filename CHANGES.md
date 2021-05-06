@@ -8,6 +8,12 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* added support for `dashed` bibliography option (true by default;
+  setting to false removes the 3-em dash for repeated names in
+  bibliographies and reference lists)
+
 ## 2021-05-02
 
 This release brings a long overdue redesign of the workflow for
