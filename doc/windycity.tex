@@ -1,4 +1,4 @@
-% Last modified: Thu 06 May 2021 06:43:21 PM CDT
+% Last modified: Thu 06 May 2021 07:08:40 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -237,9 +237,8 @@ A shorter form of this passage appears in \textit{CMOS}
 feature of the style. For demonstration purposes, though, it's
 possible.}
 
-% The use of 'shortfirst' below might be confusing. It's necessary to
-% simulate the effect of 'short' within a document that otherwise
-% gives default output.
+% Bibliography option 'short' sets 'short' and 'shortfirst' toggles to
+% true. Set them to true to simulate the 'short' bibliography option.
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
@@ -283,12 +282,17 @@ explained in section \ref{preamble}, Windy City won't print
 \textit{ibid.} in reference to a citation on a previous page. A page
 break here may affect the output.}
 
+% Bibliography option 'short' sets 'short' and 'shortfirst' toggles to
+% true. Bibliography option 'ibid' sets 'ibid', 'ibidpage', and
+% 'short' toggles to true. Set all those toggles to true to simulate
+% the 'short' and 'ibid' bibliography options.
+
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[18]{morrison2004a}
-\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}\toggletrue{ibidpage}}
 \item \cite[18]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[24--26]{morrison2004a}
@@ -2516,7 +2520,7 @@ options, see sections \ref{short} and \ref{preamble}.
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[18]{morrison2004a}
-\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
+\AtNextCitekey{\toggletrue{short}\toggletrue{ibid}\toggletrue{ibidpage}}
 \item \cite[18]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
 \item \cite[24--26]{morrison2004a}

@@ -1,4 +1,4 @@
-% Last modified: Mon 03 May 2021 07:00:32 PM CDT
+% Last modified: Thu 06 May 2021 05:09:14 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -53,8 +53,13 @@
 \DeclareBiblatexOption{global}[boolean]{ibid}[true]{%
   \ifstrequal{#1}{true}
     {\toggletrue{ibid}%
+     \toggletrue{ibidpage}%
      \toggletrue{short}}%
     {\togglefalse{ibid}}}
+
+\providetoggle{ibidpage}
+\DeclareBiblatexOption{global}[boolean]{ibidpage}[true]{%
+  \settoggle{ibidpage}{#1}}%
 
 \providetoggle{isbn}
 \DeclareBiblatexOption{entry,global}[boolean]{isbn}[true]{%

@@ -10,9 +10,13 @@ brianchase/windycity").
 
 ## Latest
 
-* added support for `dashed` bibliography option (true by default;
-  setting to false removes the 3-em dash for repeated names in
-  bibliographies and reference lists)
+* added support for `ibidpage` bibliography option (false by default;
+  if true, it suppresses the `postnote` field of a citation if the
+  previous citation on the page is to the same work with the same
+  `postnote`; set true by the `ibid` bibliography option)
+* added support for `dashed` bibliography option (true by default; if
+  false, it removes the 3-em dash for repeated names in bibliographies
+  and reference lists)
 
 ## 2021-05-02
 

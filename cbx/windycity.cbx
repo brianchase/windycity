@@ -1,4 +1,4 @@
-% Last modified: Sun 02 May 2021 01:14:43 PM CDT
+% Last modified: Thu 06 May 2021 07:21:53 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -298,7 +298,8 @@
 
 \newbibmacro*{cite:ibid+loccit}{%
   \bibcpstring{ibidem}%
-  \ifloccit
+  \ifboolexpr{ togl {ibidpage}
+               and test \ifloccit}
     {\global\toggletrue{ibid:loccit}}%
     {\usebibmacro{cite:volume}}}
 
@@ -315,7 +316,10 @@
   \iftoggle{noauth}
     {\usebibmacro{title+labelyear}}%
     {}% needs '%'
-  \usebibmacro{cite:volume}}%
+  \ifboolexpr{ togl {ibidpage}
+               and test \ifloccit}
+    {\global\toggletrue{ibid:loccit}}%
+    {\usebibmacro{cite:volume}}}
 
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx:short}%
@@ -324,7 +328,11 @@
     {\usebibmacro{short:review}}%
     {\usebibmacro{author+bookauthor+etc}%
      \usebibmacro{title+labelyear}%
-     \usebibmacro{cite:volume}}}
+     \ifboolexpr{ togl {ibidpage}
+                  and test \ifloccit
+                  and not test \iffirstonpage}
+       {\global\toggletrue{ibid:loccit}}%
+       {\usebibmacro{cite:volume}}}}
 
 \newbibmacro*{short:multicite}{%
   \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
@@ -478,8 +486,8 @@
   \usebibmacro{postnote+etc}%
   \usebibmacro{postpunct+etc}}%
 
-% In this context, '\ifloccit' is always true. Run it earlier, in
-% 'cite:ibid', and record the state with 'ibid:loccit'.
+% In this context, '\ifloccit' is always true. Run it earlier and
+% record the state with the 'loccit' toggle.
 
 \newbibmacro*{postnote+etc}{%
   \iftoggle{ibid:loccit}
