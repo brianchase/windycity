@@ -1,4 +1,4 @@
-% Last modified: Thu 06 May 2021 05:09:14 PM CDT
+% Last modified: Mon 10 May 2021 06:02:05 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1379,8 +1379,7 @@
         \printtext[bibhyperref]{\usebibmacro{longtitle}}}
        {\usebibmacro{longtitle}}%
      \usebibmacro{titleaddon}%
-     \usebibmacro{test:titledupes}%
-     \clearfield{\xtitle title}}}% test
+     \clearfield{\xtitle title}}}
 
 \newbibmacro*{longtitle}{%
   \printtext[\xtitle title]{%
@@ -1390,14 +1389,6 @@
       {\subtitlepunct
        \printfield[noformat]{\xtitle subtitle}}%
     \isdot}}%
-
-\newbibmacro*{test:titledupes}{%
-  \iffieldsequal{title}{booktitle}
-    {\ifboolexpr{ test {\iffieldundef{subtitle}}
-                  or test {\iffieldsequal{subtitle}{booksubtitle}}}
-       {\clearfield{booktitle}}%
-       {}}% test
-    {}}% test
 
 \newbibmacro*{titleaddon}{%
   \iffieldundef{\xtitle titleaddon}
