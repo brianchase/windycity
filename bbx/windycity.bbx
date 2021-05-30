@@ -1,4 +1,4 @@
-% Last modified: Sun 30 May 2021 12:47:52 PM CDT
+% Last modified: Sun 30 May 2021 01:01:17 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1371,6 +1371,14 @@
 
 \renewcommand*{\subtitlepunct}{\ifterm{\space}{:\space}}%
 
+\newbibmacro*{title+labelyear}{%
+  \iftoggle{bibliography}
+    {\usebibmacro{longtitle+titleaddon}%
+     \usebibmacro{b:labeldate+extradate}}%
+    {\iftoggle{shortfirst}
+       {\usebibmacro{shorttitle+shortlinks}}%
+       {\usebibmacro{longtitle+titleaddon}}}}
+
 \newbibmacro*{longtitle+titleaddon}{%
   \iffieldundef{\xtitle title}
     {}
@@ -1395,14 +1403,6 @@
     {}
     {\addspace% '\space' has issues with quotation marks
      \printfield{\xtitle titleaddon}}}
-
-\newbibmacro*{title+labelyear}{%
-  \iftoggle{bibliography}
-    {\usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{b:labeldate+extradate}}%
-    {\iftoggle{shortfirst}
-       {\usebibmacro{shorttitle+shortlinks}}%
-       {\usebibmacro{longtitle+titleaddon}}}}
 
 \newbibmacro*{shorttitle+shortlinks}{%
   \iftoggle{shortlinks}
