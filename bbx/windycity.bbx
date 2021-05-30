@@ -1,4 +1,4 @@
-% Last modified: Mon 10 May 2021 06:02:05 PM CDT
+% Last modified: Sun 30 May 2021 12:47:52 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1400,12 +1400,14 @@
   \iftoggle{bibliography}
     {\usebibmacro{longtitle+titleaddon}%
      \usebibmacro{b:labeldate+extradate}}%
-    {\ifboolexpr{ test \ifciteseen
-                  or togl {shortfirst}}
-       {\iftoggle{shortlinks}
-          {\printtext[bibhyperref]{\usebibmacro{shorttitle}}}
-          {\usebibmacro{shorttitle}}}
+    {\iftoggle{shortfirst}
+       {\usebibmacro{shorttitle+shortlinks}}%
        {\usebibmacro{longtitle+titleaddon}}}}
+
+\newbibmacro*{shorttitle+shortlinks}{%
+  \iftoggle{shortlinks}
+    {\printtext[bibhyperref]{\usebibmacro{shorttitle}}}
+    {\usebibmacro{shorttitle}}}
 
 \newbibmacro*{shorttitle}{%
   \ifboolexpr{ togl {collection:bk}
