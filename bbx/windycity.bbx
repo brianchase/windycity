@@ -1,4 +1,4 @@
-% Last modified: Sun 30 May 2021 01:01:17 PM CDT
+% Last modified: Sun 30 May 2021 05:42:26 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1383,8 +1383,7 @@
   \iffieldundef{\xtitle title}
     {}
     {\iftoggle{shortlinks}
-       {\togglefalse{shortlinks}%
-        \printtext[bibhyperref]{\usebibmacro{longtitle}}}
+       {\printtext[bibhyperref]{\usebibmacro{longtitle}}}
        {\usebibmacro{longtitle}}%
      \usebibmacro{titleaddon}%
      \clearfield{\xtitle title}}}
