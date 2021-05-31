@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 10:43:59 AM CDT
+% Last modified: Mon 31 May 2021 12:32:09 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -606,26 +606,37 @@
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
-     \ifdefvoid{#3}{}{%
-       \ifcapital
-         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
-         {\mkbibnameprefix{#3}\isdot}%
-       \ifprefchar{}{\bibnamedelimc}}%
-     \mkbibnamefamily{#1}\isdot
-     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
-     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{#2}\isdot}}
+     \mkbibcompletenamefamilygiven{%
+       \ifdefvoid{#3}
+         {}
+         {\ifcapital
+            {\mkbibnameprefix{\MakeCapital{#3}}\isdot}%
+            {\mkbibnameprefix{#3}\isdot}%
+          \ifprefchar{}{\bibnamedelimc}}%
+       \mkbibnamefamily{#1}\isdot
+       \ifdefvoid{#4}
+         {}
+         {\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
+       \ifdefvoid{#2}
+         {}
+         {\revsdnamepunct\bibnamedelimd\mkbibnamegiven{#2}\isdot}}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibnamefamily{#1}\isdot
-     \ifboolexpe{%
-       test {\ifdefvoid{#2}}
-       and
-       test {\ifdefvoid{#3}}}
-       {}
-       {\revsdnamepunct}%
-     \ifdefvoid{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
-     \ifdefvoid{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
-     \ifdefvoid{#4}{}{\revsdnamepunct\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}
+     \mkbibcompletenamefamilygiven{%
+       \mkbibnamefamily{#1}\isdot
+       \ifboolexpe{ test {\ifdefvoid{#2}}
+                    and test {\ifdefvoid{#3}}}
+         {}
+         {\revsdnamepunct}%
+       \ifdefvoid{#2}
+         {}
+         {\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
+       \ifdefvoid{#3}
+         {}
+         {\bibnamedelimd\mkbibnameprefix{#3}\isdot}%
+       \ifdefvoid{#4}
+         {}
+         {\revsdnamepunct\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}}}
 
 \renewcommand*{\mkbibindexname}[4]{%
   \ifuseprefix
