@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 12:42:59 PM CDT
+% Last modified: Mon 31 May 2021 03:06:15 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -504,7 +504,6 @@
 \let\pluga\empty
 \let\plugb\empty
 \let\xtitle\empty
-\let\xvolume\empty
 
 \let\xeditor\empty
 \let\yeditor\empty
@@ -1972,20 +1971,20 @@
   \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
     {\usebibmacro{maintitle+note+etc}%
-     \usebibmacro{volume+number+etc}%
+     \usebibmacro{volume+number+etc}{}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \toggletrue{edshift}%
      \usebibmacro{byauthor}%
      \usebibmacro{editors:b}%
-     \usebibmacro{volumes+bookseries+etc}}%
+     \usebibmacro{volumes+bookseries+etc}{}}%
     {\usebibmacro{title+labelyear}%
      \usebibmacro{byauthor}%
      \iffieldundef{maintitle}
        {\usebibmacro{note+edition+etc}%
-        \usebibmacro{volumes+bookseries+etc}}%
+        \usebibmacro{volumes+bookseries+etc}{}}%
        {\usebibmacro{editors:b}%
-        \usebibmacro{volumes+bookseries+etc}%
+        \usebibmacro{volumes+bookseries+etc}{}%
         \usebibmacro{maintitle+note+etc}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
@@ -2229,19 +2228,19 @@
   \usebibmacro{edition}{}%
   \usebibmacro{editors:c}{maintitle}}%
 
-\newbibmacro*{volume+number+etc}{%
-  \iffieldundef{\xvolume volume}
+\newbibmacro*{volume+number+etc}[1]{%
+  \iffieldundef{#1volume}
     {}
     {\usebibmacro{swapvol+pages}%
      \iffieldundef{series}
        {\newunit}%
        {\setunit{\addcomma\space}}%
-     \iffieldnum{\xvolume volume}
-       {\printfield[volume]{\xvolume volume}%
+     \iffieldnum{#1volume}
+       {\printfield[volume]{#1volume}%
         \usebibmacro{volume:number}}%
        {\bibstring{volumes}\space
-        \printfield[noformat]{\xvolume volume}}%
-     \clearfield{\xvolume volume}%
+        \printfield[noformat]{#1volume}}%
+     \clearfield{#1volume}%
      \usebibmacro{part}%
      \iftoggle{collection}
        {\iftoggle{swapvol}
@@ -2262,11 +2261,11 @@
      \renewcommand*{\cbx@namelist}{author}%
      \usebibmacro{printnames+etc}}}
 
-\newbibmacro*{volumes+bookseries+etc}{%
+\newbibmacro*{volumes+bookseries+etc}[1]{%
   \usebibmacro{volumes}%
   \usebibmacro{bookseries}%
   \usebibmacro{pages}%
-  \usebibmacro{volume+number+etc}%
+  \usebibmacro{volume+number+etc}{#1}%
   \usebibmacro{book:number}%
   \usebibmacro{part}}%
 
@@ -2343,10 +2342,9 @@
        \usebibmacro{note+edition+etc}%
        \iffieldundef{volume}
          {\iffieldundef{bookvolume}%
-            {\renewcommand*{\xvolume}{bookbook}}%
-            {\renewcommand*{\xvolume}{book}}%
-          \usebibmacro{volumes+bookseries+etc}}%
-         {\usebibmacro{volumes+bookseries+etc}}}}
+            {\usebibmacro{volumes+bookseries+etc}{bookbook}}%
+            {\usebibmacro{volumes+bookseries+etc}{book}}}
+         {\usebibmacro{volumes+bookseries+etc}{}}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
@@ -2530,17 +2528,17 @@
   \iftoggle{swapvol}
     {\usebibmacro{note}%
      \usebibmacro{edition}{}%
-     \usebibmacro{volumes+bookseries+etc}%
+     \usebibmacro{volumes+bookseries+etc}{}%
      \let\xtitle\empty
      \usebibmacro{longtitle+titleaddon}%
      \toggletrue{edshift}%
      \usebibmacro{byauthor}%
      \usebibmacro{editors:b}}%
-    {\usebibmacro{volume+number+etc}%
+    {\usebibmacro{volume+number+etc}{}%
      \toggletrue{edshift}%
      \usebibmacro{booktitle}%
      \usebibmacro{note+edition+etc}%
-     \usebibmacro{volumes+bookseries+etc}}}
+     \usebibmacro{volumes+bookseries+etc}{}}}
 
 \newbibmacro*{incollections:ic}{%
   \iftoggle{swapvol}
@@ -2549,22 +2547,19 @@
        {\usebibmacro{bookbooktitle}{}%
         \toggletrue{edshift}%
         \usebibmacro{note+edition+etc}}%
-     \renewcommand*{\xvolume}{book}%
-     \usebibmacro{volumes+bookseries+etc}%
+     \usebibmacro{volumes+bookseries+etc}{book}%
      \toggletrue{edshift}%
      \usebibmacro{booktitle}%
      \usebibmacro{editors:b}}%
     {\toggletrue{edshift}%
      \usebibmacro{booktitle}%
      \usebibmacro{editors:b}%
-     \renewcommand*{\xvolume}{book}%
-     \usebibmacro{volume+number+etc}%
+     \usebibmacro{volume+number+etc}{book}%
      \iftoggle{collection:icbk}
        {\usebibmacro{maintitle+note+etc}}%
        {\usebibmacro{bookbooktitle}{}%
         \toggletrue{edshift}%
         \usebibmacro{note+edition+etc}}%
-     \renewcommand*{\xvolume}{book}%
-     \usebibmacro{volumes+bookseries+etc}}}
+     \usebibmacro{volumes+bookseries+etc}{book}}}
 
 \endinput
