@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 12:32:09 PM CDT
+% Last modified: Mon 31 May 2021 12:42:59 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -644,16 +644,15 @@
      \@firstofone #1% remove spurious braces
      \ifdefvoid{#4}{}{ #4}%
      \ifdefvoid{#2}{}{, #2}%
-     \actualoperator
-     \ifdefvoid{#3}{}{\MakeCapital{#3} }%
-     #1%
-     \ifdefvoid{#4}{}{ #4}%
-     \ifdefvoid{#2}{}{, #2}}
+     \ifdefvoid{#3}{}{%
+       \actualoperator
+       \MakeCapital{#3} %
+       #1%
+       \ifdefvoid{#4}{}{ #4}%
+       \ifdefvoid{#2}{}{, #2}}}
     {\@firstofone #1% remove spurious braces
-     \ifboolexpe{%
-       test {\ifdefvoid{#2}}
-       and
-       test {\ifdefvoid{#3}}}
+     \ifboolexpe{test {\ifdefvoid{#2}}
+                 and test {\ifdefvoid{#3}}}
        {}
        {,}%
      \ifdefvoid{#2}{}{ #2}%
