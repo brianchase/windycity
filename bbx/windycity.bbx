@@ -1,4 +1,4 @@
-% Last modified: Sun 30 May 2021 05:42:26 PM CDT
+% Last modified: Mon 31 May 2021 10:43:59 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1372,12 +1372,10 @@
 \renewcommand*{\subtitlepunct}{\ifterm{\space}{:\space}}%
 
 \newbibmacro*{title+labelyear}{%
+  \usebibmacro{longtitle+titleaddon}%
   \iftoggle{bibliography}
-    {\usebibmacro{longtitle+titleaddon}%
-     \usebibmacro{b:labeldate+extradate}}%
-    {\iftoggle{shortfirst}
-       {\usebibmacro{shorttitle+shortlinks}}%
-       {\usebibmacro{longtitle+titleaddon}}}}
+    {\usebibmacro{b:labeldate+extradate}}%
+    {}}
 
 \newbibmacro*{longtitle+titleaddon}{%
   \iffieldundef{\xtitle title}
