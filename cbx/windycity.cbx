@@ -1,4 +1,4 @@
-% Last modified: Sun 30 May 2021 12:49:47 PM CDT
+% Last modified: Mon 31 May 2021 05:45:48 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -342,17 +342,25 @@
    {}}
 
 \newbibmacro*{short:review}{%
-  \ifnameundef{author}
-    {\bibcpstring{reviewnoauth}}%
-    {\usebibmacro{author+bookauthor+etc}%
-     \bibstring{review}}%
-  \space
-%  \renewcommand*{\xtitle}{book}%
-%  \usebibmacro{title+labelyear}%
+  \ifboolexpr{ test {\ifnameundef{author}}
+               and test {\iffieldundef{title}}}
+    {\bibcpstring{reviewnoauth}%
+     \usebibmacro{reviewedtitle}}%
+    {\ifnameundef{author}
+       {\usebibmacro{shorttitle+shortlinks}}%
+       {\iffieldundef{title}
+          {\usebibmacro{author+bookauthor+etc}%
+           \bibstring{review}%
+           \usebibmacro{reviewedtitle}}%
+          {\usebibmacro{author+bookauthor+etc}%
+           \usebibmacro{shorttitle+shortlinks}}}}
+  \usebibmacro{cite:volume}}%
+
+\newbibmacro*{reviewedtitle}{%
+  \setunit{\space}%
   \iffieldundef{shortbooktitle}
     {\printfield[title]{booktitle}\isdot}%
-    {\printfield[title]{shortbooktitle}\isdot}%
-  \usebibmacro{cite:volume}}%
+    {\printfield[title]{shortbooktitle}\isdot}}%
 
 \newbibmacro*{cite:volume}{%
   \usebibmacro{cite:punctuation}%

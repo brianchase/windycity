@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 03:06:15 PM CDT
+% Last modified: Mon 31 May 2021 05:53:28 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2373,9 +2373,9 @@
   \iftoggle{newauth}
     {\bibcpstring{reviewnoauth}}%
     {\bibstring{review}}%
-  \space
+  \setunit{\space}%
   \renewcommand*{\xtitle}{book}%
-  \usebibmacro{title+labelyear}%
+  \usebibmacro{longtitle+titleaddon}%
   \iftoggle{shortfirst}
     {\clearfield{booktitle}}%
     {\setunit{\addcomma\space}%

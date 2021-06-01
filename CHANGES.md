@@ -17,6 +17,10 @@ brianchase/windycity").
 * added support for `dashed` bibliography option (true by default; if
   false, it removes the 3-em dash for repeated names in bibliographies
   and reference lists)
+* subsequent citations to reviews with titles have the same basic form
+  as that of an article (e.g. Jane Doe, "Some Review"...), as opposed
+  to that of an untitled review (e.g. Jane Doe, review of *Some
+  Title*...)
 
 ## 2021-05-02
 
