@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 07:17:28 PM CDT
+% Last modified: Mon 31 May 2021 07:33:22 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -594,7 +594,7 @@
 
 \DeclareBibliographyDriver{cite:misc}{%
   \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{longtitle+titleaddon}{}%
+  \usebibmacro{title+titleaddon}{}%
   \newunit
   \printfield{usera}%
   \newunit}%
@@ -619,7 +619,7 @@
   \usebibmacro{reference:howpublished+etc}%
   \newunit
   \bibstring{subverbo}\space
-  \usebibmacro{longtitle+titleaddon}{}%
+  \usebibmacro{title+titleaddon}{}%
   \newunit
   \renewcommand*{\pluga}{\bibstring{by}\space}%
   \usebibmacro{reference:authpos}}%

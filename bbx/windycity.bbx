@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 07:14:41 PM CDT
+% Last modified: Mon 31 May 2021 07:51:39 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1380,24 +1380,25 @@
 
 \renewcommand*{\subtitlepunct}{\ifterm{\space}{:\space}}%
 
-\newbibmacro*{title+labelyear}{%
-  \usebibmacro{longtitle+titleaddon}{}%
+\newbibmacro*{title+labeldate}{%
+  \usebibmacro{title+titleaddon}{}%
   \iftoggle{bibliography}
     {\usebibmacro{b:labeldate+extradate}}%
     {}}
 
-\newbibmacro*{longtitle+titleaddon}[1]{%
+\newbibmacro*{title+titleaddon}[1]{%
   \iffieldundef{#1title}
     {}
     {\renewcommand*{\xtitle}{#1}%
      \iftoggle{shortlinks}
        {\togglefalse{shortlinks}%
-        \printtext[bibhyperref]{\usebibmacro{longtitle}{#1}}}
-       {\usebibmacro{longtitle}{#1}}%
+        \printtext[bibhyperref]{%
+          \usebibmacro{title+subtitle}{#1}}}
+       {\usebibmacro{title+subtitle}{#1}}%
      \usebibmacro{titleaddon}{#1}%
      \clearfield{#1title}}}
 
-\newbibmacro*{longtitle}[1]{%
+\newbibmacro*{title+subtitle}[1]{%
   \printtext[#1title]{%
     \printfield[noformat]{#1title}%
     \iffieldundef{#1subtitle}
@@ -1446,7 +1447,7 @@
 \renewbibmacro*{booktitle}{%
   \iffieldundef{booktitle}
     {}
-    {\usebibmacro{longtitle+titleaddon}{book}%
+    {\usebibmacro{title+titleaddon}{book}%
      \usebibmacro{bybookauthor+pages}}}
 
 \newbibmacro*{bookbooktitle}[1]{%
@@ -1455,12 +1456,12 @@
     {\ifstrequal{#1}{in}
        {\newunit\bibstring{in}\space}%
        {}% needs '%'
-     \usebibmacro{longtitle+titleaddon}{bookbook}}}
+     \usebibmacro{title+titleaddon}{bookbook}}}
 
 \renewbibmacro*{maintitle}{%
   \iffieldundef{maintitle}
     {}
-    {\usebibmacro{longtitle+titleaddon}{main}}}
+    {\usebibmacro{title+titleaddon}{main}}}
 
 \newbibmacro*{issuetitle}{%
   \iffieldundef{issuetitle}
@@ -1468,7 +1469,7 @@
     {\iffieldequalstr{issuetitle}{special issue}
        {}
        {\bibstring{in}\space
-        \usebibmacro{longtitle+titleaddon}{issue}%
+        \usebibmacro{title+titleaddon}{issue}%
         \usebibmacro{editors:c}{issuetitle}}%
      \newunit\bibstring{special}%
      \setunit{\addcomma\space}}}
@@ -1479,7 +1480,7 @@
     {\newunit
      \bibstring{origpub}%
      \space
-     \usebibmacro{longtitle+titleaddon}{orig}%
+     \usebibmacro{title+titleaddon}{orig}%
      \setunit{\addspace}% not '\setunit{\space}'
      \printtext[parens]{%
        \usebibmacro{origlocation}%
@@ -1852,7 +1853,7 @@
 \DeclareBibliographyDriver{misc}{%
   \usebibmacro{bibindex}%
   \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{title+labelyear}%
+  \usebibmacro{title+labeldate}%
   \newunit
   \printfield{userb}%
   \usebibmacro{doi+finentry+etc}}%
@@ -1910,7 +1911,7 @@
 
 \newbibmacro*{author+title+etc}{%
   \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{title+labelyear}%
+  \usebibmacro{title+labeldate}%
   \usebibmacro{note}%
   \usebibmacro{editors:b}}%
 
@@ -1918,7 +1919,7 @@
   \newunit
   \usebibmacro{part}%
   \usebibmacro{issuetitle}%
-  \usebibmacro{longtitle+titleaddon}{journal}%
+  \usebibmacro{title+titleaddon}{journal}%
   \usebibmacro{journallocation}%
   \usebibmacro{journalseries}%
   \usebibmacro{volume}%
@@ -1968,12 +1969,12 @@
                and togl {swapvol}}
     {\usebibmacro{maintitle+note+etc}%
      \usebibmacro{volume+number+etc}{}%
-     \usebibmacro{longtitle+titleaddon}{}%
+     \usebibmacro{title+titleaddon}{}%
      \toggletrue{edshift}%
      \usebibmacro{byauthor}%
      \usebibmacro{editors:b}%
      \usebibmacro{volumes+bookseries+etc}{}}%
-    {\usebibmacro{title+labelyear}{}%
+    {\usebibmacro{title+labeldate}{}%
      \usebibmacro{byauthor}%
      \iffieldundef{maintitle}
        {\usebibmacro{note+edition+etc}%
@@ -2000,7 +2001,7 @@
                      and not togl {collection:icib}}
           {\usebibmacro{booktitle}%
            \usebibmacro{editors:b}}%
-          {\usebibmacro{title+labelyear}%
+          {\usebibmacro{title+labeldate}%
            \usebibmacro{byauthor}%
            \usebibmacro{editors:b}%
            \usebibmacro{chapter+in}}}}
@@ -2027,9 +2028,9 @@
                and test {\iffieldundef{journaltitle}}
                and test {\iflistundef{organization}}}
     {}
-    {\usebibmacro{longtitle+titleaddon}{blog}%
+    {\usebibmacro{title+titleaddon}{blog}%
      \newunit
-     \usebibmacro{longtitle+titleaddon}{journal}%
+     \usebibmacro{title+titleaddon}{journal}%
      \newunit
      \printlist{organization}%
      \setunit{\addcomma\space}}}
@@ -2043,7 +2044,7 @@
   \usebibmacro{author+bookauthor+etc}%
   \iffieldundef{title}
     {}
-    {\usebibmacro{title+labelyear}%
+    {\usebibmacro{title+labeldate}%
      \newunit}%
   \usebibmacro{note}%
   \usebibmacro{review+title}%
@@ -2367,7 +2368,7 @@
     {\bibcpstring{reviewnoauth}}%
     {\bibstring{review}}%
   \setunit{\space}%
-  \usebibmacro{longtitle+titleaddon}{book}%
+  \usebibmacro{title+titleaddon}{book}%
   \iftoggle{shortfirst}
     {\clearfield{booktitle}}%
     {\setunit{\addcomma\space}%
@@ -2521,7 +2522,7 @@
     {\usebibmacro{note}%
      \usebibmacro{edition}{}%
      \usebibmacro{volumes+bookseries+etc}{}%
-     \usebibmacro{longtitle+titleaddon}{}%
+     \usebibmacro{title+titleaddon}{}%
      \toggletrue{edshift}%
      \usebibmacro{byauthor}%
      \usebibmacro{editors:b}}%
