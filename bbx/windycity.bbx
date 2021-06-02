@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 07:51:39 PM CDT
+% Last modified: Wed 02 Jun 2021 06:56:16 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1415,34 +1415,33 @@
 
 \newbibmacro*{shorttitle+shortlinks}{%
   \iftoggle{shortlinks}
-    {\printtext[bibhyperref]{\usebibmacro{shorttitle}}}
-    {\usebibmacro{shorttitle}}}
+    {\printtext[bibhyperref]{\usebibmacro{shorttitle+bk+ib}}}
+    {\usebibmacro{shorttitle+bk+ib}}}
 
-\newbibmacro*{shorttitle}{%
+\newbibmacro*{shorttitle+bk+ib}{%
   \ifboolexpr{ togl {collection:bk}
                and togl {swapvol}}
-    {\iffieldundef{shortmaintitle}
-       {\printfield[title]{maintitle}\isdot}%
-       {\printfield[title]{shortmaintitle}\isdot}}%
+    {\usebibmacro{shorttitle}{main}}%
     {\ifboolexpr{ togl {collection:ib}
                   and togl {swapvol}}
-       {\iffieldundef{shortbooktitle}
-         {\printfield[title]{booktitle}\isdot}%
-         {\printfield[title]{shortbooktitle}\isdot}}%
-       {\printfield[\thefield{entrytype}]{labeltitle}\isdot}}}
+       {\usebibmacro{shorttitle}{book}}%
+       {\usebibmacro{shorttitle}{label}}}}
 
-\newbibmacro*{shorttitle+crossref}{%
+\newbibmacro*{shorttitle+icbk+icib}{%
   \ifboolexpr{ togl {collection:icbk}
                and togl {swapvol}}
-    {\iffieldundef{shortmaintitle}
-       {\printfield[title]{maintitle}\isdot}%
-       {\printfield[title]{shortmaintitle}\isdot}}%
+    {\usebibmacro{shorttitle}{main}}%
     {\ifboolexpr{ togl {collection:icib}
                   and togl {swapvol}}
-       {\iffieldundef{shortbooktitle}
-         {\printfield[title]{booktitle}\isdot}%
-         {\printfield[title]{shortbooktitle}\isdot}}%
-       {\printfield[\thefield{entrytype}]{labeltitle}\isdot}}}
+       {\usebibmacro{shorttitle}{book}}%
+       {\usebibmacro{shorttitle}{label}}}}
+
+\newbibmacro*{shorttitle}[1]{%
+  \ifstrequal{#1}{label}
+    {\printfield[\thefield{entrytype}]{labeltitle}\isdot}%
+    {\iffieldundef{short#1title}
+       {\printfield[title]{#1title}\isdot}%
+       {\printfield[title]{short#1title}\isdot}}}
 
 \renewbibmacro*{booktitle}{%
   \iffieldundef{booktitle}
@@ -2350,7 +2349,7 @@
                  and togl {reflist}}
       {\usebibmacro{parencite:new}}%
       {\usebibmacro{author+bookauthor+etc}%
-       \usebibmacro{shorttitle+crossref}}%
+       \usebibmacro{shorttitle+icbk+icib}}%
     \usebibmacro{cite:volume}}}
 
 \newbibmacro*{pages}{%

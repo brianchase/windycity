@@ -1,4 +1,4 @@
-% Last modified: Mon 31 May 2021 07:33:22 PM CDT
+% Last modified: Wed 02 Jun 2021 06:56:19 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -345,22 +345,18 @@
   \ifboolexpr{ test {\ifnameundef{author}}
                and test {\iffieldundef{title}}}
     {\bibcpstring{reviewnoauth}%
-     \usebibmacro{reviewedtitle}}%
+     \setunit{\space}%
+     \usebibmacro{shorttitle}{book}}%
     {\ifnameundef{author}
        {\usebibmacro{shorttitle+shortlinks}}%
        {\iffieldundef{title}
           {\usebibmacro{author+bookauthor+etc}%
            \bibstring{review}%
-           \usebibmacro{reviewedtitle}}%
+           \setunit{\space}%
+           \usebibmacro{shorttitle}{book}}%
           {\usebibmacro{author+bookauthor+etc}%
            \usebibmacro{shorttitle+shortlinks}}}}
   \usebibmacro{cite:volume}}%
-
-\newbibmacro*{reviewedtitle}{%
-  \setunit{\space}%
-  \iffieldundef{shortbooktitle}
-    {\printfield[title]{booktitle}\isdot}%
-    {\printfield[title]{shortbooktitle}\isdot}}%
 
 \newbibmacro*{cite:volume}{%
   \usebibmacro{cite:punctuation}%
