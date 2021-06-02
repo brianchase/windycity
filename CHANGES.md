@@ -10,11 +10,11 @@ brianchase/windycity").
 
 ## Latest
 
-* added support for `ibidpage` bibliography option (false by default;
-  if true, it suppresses the `postnote` field of a citation if the
+* added support for `ibidpage` preamble option (false by default; if
+  true, it suppresses the `postnote` field of a citation if the
   previous citation on the page is to the same work with the same
-  `postnote`; set true by the `ibid` bibliography option)
-* added support for `dashed` bibliography option (true by default; if
+  `postnote`; set true by the `ibid` preamble option)
+* added support for `dashed` preamble option (true by default; if
   false, it removes the 3-em dash for repeated names in bibliographies
   and reference lists)
 * subsequent citations to reviews with titles have the same basic form
@@ -149,9 +149,9 @@ internals.
   pseudonymous authors with the value `pseudo` (the `nameaddon` field
   still works for this and, in fact, remains the only way to list a
   pseudonymous author's given name)
-* added a `nopages` bibliography option to stop automatic printing of
-  the `pages` field on first citations of `@article` and `@review`
-  entries (and their aliases) when the `postnote` is blank
+* added a `nopages` preamble option to stop automatic printing of the
+  `pages` field on first citations of `@article` and `@review` entries
+  (and their aliases) when the `postnote` is blank
 * added support for the `\fullcite` and `\footfullcite` citation
   commands
 * new citation commands: `idemcite`, `idemcites`, `footidemcite`,

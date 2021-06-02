@@ -1,4 +1,4 @@
-% Last modified: Sun 09 May 2021 01:12:36 PM CDT
+% Last modified: Tue 01 Jun 2021 07:14:24 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -237,8 +237,8 @@ A shorter form of this passage appears in \textit{CMOS}
 feature of the style. For demonstration purposes, though, it's
 possible.}
 
-% Bibliography option 'short' sets 'short' and 'shortfirst' toggles to
-% true. Set them to true to simulate the 'short' bibliography option.
+% Preamble option 'short' sets 'short' and 'shortfirst' toggles to
+% true. Set them to true to simulate the 'short' preamble option.
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
@@ -282,10 +282,10 @@ explained in section \ref{preamble}, Windy City won't print
 \textit{ibid.} in reference to a citation on a previous page. A page
 break here may affect the output.}
 
-% Bibliography option 'short' sets 'short' and 'shortfirst' toggles to
-% true. Bibliography option 'ibid' sets 'ibid', 'ibidpage', and
-% 'short' toggles to true. Set all those toggles to true to simulate
-% the 'short' and 'ibid' bibliography options.
+% Preamble option 'short' sets 'short' and 'shortfirst' toggles to
+% true. Preamble option 'ibid' sets 'ibid', 'ibidpage', and 'short'
+% toggles to true. Set all those toggles to true to simulate the
+% 'short' and 'ibid' preamble options.
 
 \begin{citeonly}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
@@ -1168,7 +1168,7 @@ contain:
 \noindent Note that when \bibfield{date} contains just a year of
 publication, you may use the classic \bibfield{year} field.
 
-\item[pages] See comments on the \opt{nopages} bibliography option in
+\item[pages] See comments on the \opt{nopages} preamble option in
 section \ref{preamble}.
 
 \item[pubstate] This fields indicates when a work is forthcoming (with
