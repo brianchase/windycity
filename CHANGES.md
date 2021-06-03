@@ -17,10 +17,10 @@ brianchase/windycity").
 * added support for `dashed` preamble option (true by default; if
   false, it removes the 3-em dash for repeated names in bibliographies
   and reference lists)
-* subsequent citations to reviews with titles have the same basic form
-  as that of an article (e.g. Jane Doe, "Some Review"...), as opposed
-  to that of an untitled review (e.g. Jane Doe, review of *Some
-  Title*...)
+* subsequent citations to reviews with titles now have the same basic
+  form as articles (e.g. Jane Doe, "Some Review"...), as opposed to
+  untitled reviews (e.g. Jane Doe, review of *Some Title*...)
+* Fixed `shortfirst` preamble option for `@review` entries
 
 ## 2021-05-02
 
