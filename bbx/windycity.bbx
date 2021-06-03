@@ -1,4 +1,4 @@
-% Last modified: Wed 02 Jun 2021 06:56:16 PM CDT
+% Last modified: Wed 02 Jun 2021 07:06:23 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1415,23 +1415,14 @@
 
 \newbibmacro*{shorttitle+shortlinks}{%
   \iftoggle{shortlinks}
-    {\printtext[bibhyperref]{\usebibmacro{shorttitle+bk+ib}}}
-    {\usebibmacro{shorttitle+bk+ib}}}
+    {\printtext[bibhyperref]{\usebibmacro{shorttitle+crossref}{}}}
+    {\usebibmacro{shorttitle+crossref}{}}}
 
-\newbibmacro*{shorttitle+bk+ib}{%
-  \ifboolexpr{ togl {collection:bk}
+\newbibmacro*{shorttitle+crossref}[1]{%
+  \ifboolexpr{ togl {collection:#1bk}
                and togl {swapvol}}
     {\usebibmacro{shorttitle}{main}}%
-    {\ifboolexpr{ togl {collection:ib}
-                  and togl {swapvol}}
-       {\usebibmacro{shorttitle}{book}}%
-       {\usebibmacro{shorttitle}{label}}}}
-
-\newbibmacro*{shorttitle+icbk+icib}{%
-  \ifboolexpr{ togl {collection:icbk}
-               and togl {swapvol}}
-    {\usebibmacro{shorttitle}{main}}%
-    {\ifboolexpr{ togl {collection:icib}
+    {\ifboolexpr{ togl {collection:#1ib}
                   and togl {swapvol}}
        {\usebibmacro{shorttitle}{book}}%
        {\usebibmacro{shorttitle}{label}}}}
@@ -2349,7 +2340,7 @@
                  and togl {reflist}}
       {\usebibmacro{parencite:new}}%
       {\usebibmacro{author+bookauthor+etc}%
-       \usebibmacro{shorttitle+icbk+icib}}%
+       \usebibmacro{shorttitle+crossref}{ic}}%
     \usebibmacro{cite:volume}}}
 
 \newbibmacro*{pages}{%
