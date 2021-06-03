@@ -1,4 +1,4 @@
-% Last modified: Wed 02 Jun 2021 02:31:59 PM CDT
+% Last modified: Thu 03 Jun 2021 12:43:37 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1431,8 +1431,8 @@
   \ifstrequal{#1}{label}
     {\printfield[\thefield{entrytype}]{labeltitle}\isdot}%
     {\iffieldundef{short#1title}
-       {\printfield[title]{#1title}\isdot}%
-       {\printfield[title]{short#1title}\isdot}}}
+       {\printfield[#1title]{#1title}\isdot}%
+       {\printfield[#1title]{short#1title}\isdot}}}
 
 \renewbibmacro*{booktitle}{%
   \iffieldundef{booktitle}
@@ -2025,7 +2025,6 @@
      \printlist{organization}%
      \setunit{\addcomma\space}}}
 
-% FIX:
 \newbibmacro*{reviews}{%
   \ifboolexpr{ test {\ifnameundef{author}}
                and not test {\ifnameundef{bookauthor}}}
@@ -2352,7 +2351,6 @@
         \togglefalse{edshift}}%
        {}}}
 
-% FIX:
 \newbibmacro*{review+title}{%
   \iftoggle{newauth}
     {\bibcpstring{reviewnoauth}}%
