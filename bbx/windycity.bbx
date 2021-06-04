@@ -1,4 +1,4 @@
-% Last modified: Thu 03 Jun 2021 12:43:37 PM CDT
+% Last modified: Fri 04 Jun 2021 05:30:28 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1391,8 +1391,7 @@
     {}
     {\renewcommand*{\xtitle}{#1}%
      \iftoggle{shortlinks}
-       {\togglefalse{shortlinks}%
-        \printtext[bibhyperref]{%
+       {\printtext[bibhyperref]{%
           \usebibmacro{title+subtitle}{#1}}}
        {\usebibmacro{title+subtitle}{#1}}%
      \usebibmacro{titleaddon}{#1}%
@@ -2004,7 +2003,7 @@
     {\usebibmacro{incollections}}%
     {\xifinlist{\thefield{crossref}}{\crossreflist}
        {\ifnumgreater{\value{\thefield{crossref}}}{0}
-          {\usebibmacro{crossref}%
+          {\usebibmacro{crossref+entrydata}%
            \usebibmacro{pages}}%
           {\usebibmacro{incollections}}}
        {\listxadd{\crossreflist}{\thefield{crossref}}%
@@ -2037,7 +2036,18 @@
     {\usebibmacro{title+labeldate}%
      \newunit}%
   \usebibmacro{note}%
-  \usebibmacro{review+title}%
+  \iftoggle{newauth}
+    {\bibcpstring{reviewnoauth}}%
+    {\bibstring{review}}%
+  \setunit{\space}%
+  \usebibmacro{title+titleaddon}{book}%
+  \setunit{\addcomma\space}%
+  \ifdefempty{\reviewee}
+    {}
+    {\restorename{bookauthor}{\reviewee}}%
+  \renewcommand*{\pluga}{\bibstring{by}\space}%
+  \renewcommand*{\cbx@namelist}{bookauthor}%
+  \usebibmacro{printnames+etc}%
   \setunit{\addcomma\space}%
   \toggletrue{edshift}%
   \usebibmacro{editors:b}}%
@@ -2330,7 +2340,7 @@
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
-\newbibmacro*{crossref}{%
+\newbibmacro*{crossref+entrydata}{%
   \renewcommand*{\cbx@deflabel}{labelname}%
   \global\toggletrue{cbx:short}%
   \entrydata{\thefield{crossref}}{%
@@ -2350,20 +2360,6 @@
         \clearfield{pages}%
         \togglefalse{edshift}}%
        {}}}
-
-\newbibmacro*{review+title}{%
-  \iftoggle{newauth}
-    {\bibcpstring{reviewnoauth}}%
-    {\bibstring{review}}%
-  \setunit{\space}%
-  \usebibmacro{title+titleaddon}{book}%
-  \setunit{\addcomma\space}%
-  \ifdefempty{\reviewee}
-    {}
-    {\restorename{bookauthor}{\reviewee}}%
-  \renewcommand*{\pluga}{\bibstring{by}\space}%
-  \renewcommand*{\cbx@namelist}{bookauthor}%
-  \usebibmacro{printnames+etc}}%
 
 \newbibmacro*{thesis+type}{%
   \ifentrytype{mathesis}
