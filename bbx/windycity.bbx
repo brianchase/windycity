@@ -1,4 +1,4 @@
-% Last modified: Fri 04 Jun 2021 05:30:28 PM CDT
+% Last modified: Fri 04 Jun 2021 05:52:13 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -448,25 +448,27 @@
 \DeclareDataInheritance{*}{incollection,inbook,letter,review}{%
   \inherit[override=true]{titlekey}{booktitlekey}
   \inherit[override=true]{booktitlekey}{bookbooktitlekey}
-  \inherit{author}{bookauthor}
-  \inherit{authortype}{bookauthortype}
-  \inherit{shortauthor}{shortbookauthor}
   \inherit[override=true]{editor}{editora}
   \inherit[override=true]{editora}{editorb}
   \inherit[override=true]{editorb}{editorc}
   \inherit[override=true]{editortype}{editoratype}
   \inherit[override=true]{editoratype}{editorbtype}
   \inherit[override=true]{editorbtype}{editorctype}
+  \inherit[override=true]{translatortype}{translatoratype}
+  \inherit[override=true]{translatoratype}{translatorbtype}
+  \inherit{author}{bookauthor}
+  \inherit{authortype}{bookauthortype}
+  \inherit{shortauthor}{shortbookauthor}
   \inherit{editoraddon}{editoraaddon}
   \inherit{translator}{translatora}
   \inherit{translatora}{translatorb}
-  \inherit[override=true]{translatortype}{translatoratype}
-  \inherit[override=true]{translatoratype}{translatorbtype}
   \inherit{title}{booktitle}
-  \inherit{subtitle}{booksubtitle}
-  \inherit{titleaddon}{booktitleaddon}
-  \inherit{shorttitle}{shortbooktitle}
   \inherit{booktitle}{bookbooktitle}
+  \inherit{subtitle}{booksubtitle}
+  \inherit{booksubtitle}{bookbooksubtitle}
+  \inherit{titleaddon}{booktitleaddon}
+  \inherit{booktitleaddon}{bookbooktitleaddon}
+  \inherit{shorttitle}{shortbooktitle}
   \inherit{volume}{bookvolume}
   \inherit{bookvolume}{bookbookvolume}
   \inherit{options}{options}}
