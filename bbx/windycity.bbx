@@ -1,4 +1,4 @@
-% Last modified: Fri 04 Jun 2021 05:52:13 PM CDT
+% Last modified: Sat 05 Jun 2021 03:02:23 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2027,26 +2027,20 @@
      \setunit{\addcomma\space}}}
 
 \newbibmacro*{reviews}{%
-  \ifboolexpr{ test {\ifnameundef{author}}
-               and not test {\ifnameundef{bookauthor}}}
-    {\savename{bookauthor}{\reviewee}%
-     \clearname{bookauthor}}%
-    {\let\reviewee\empty}%
-  \usebibmacro{author+bookauthor+etc}%
-  \iffieldundef{title}
-    {}
-    {\usebibmacro{title+labeldate}%
-     \newunit}%
-  \usebibmacro{note}%
+  \iftoggle{noauth}
+    {\bibsentence}%
+    {\usebibmacro{author+bookauthor+etc}}%
+  \usebibmacro{title+labeldate}%
+  \newunit
   \iftoggle{newauth}
-    {\bibcpstring{reviewnoauth}}%
+    {\bibstring{reviewnoauth}}%
     {\bibstring{review}}%
   \setunit{\space}%
-  \usebibmacro{title+titleaddon}{book}%
+  \iffieldundef{crossref}
+    {\usebibmacro{title+titleaddon}{book}}%
+    {\entrydata{\thefield{crossref}}{%
+      {\usebibmacro{title+titleaddon}{}}}}
   \setunit{\addcomma\space}%
-  \ifdefempty{\reviewee}
-    {}
-    {\restorename{bookauthor}{\reviewee}}%
   \renewcommand*{\pluga}{\bibstring{by}\space}%
   \renewcommand*{\cbx@namelist}{bookauthor}%
   \usebibmacro{printnames+etc}%

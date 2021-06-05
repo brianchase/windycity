@@ -10,17 +10,31 @@ brianchase/windycity").
 
 ## Latest
 
-* added support for `ibidpage` preamble option (false by default; if
-  true, it suppresses the `postnote` field of a citation if the
-  previous citation on the page is to the same work with the same
-  `postnote`; set true by the `ibid` preamble option)
-* added support for `dashed` preamble option (true by default; if
+* improved the workflow for titles, subtitles, and the like; no change
+  in output, except for the following:
+
+  - added support for printing the `subtitle` and `titleaddon` of an
+    entry cross-referenced by a cross-referenced entry (e.g. if you
+    cite an article cross-referenced to a volume cross-referenced to a
+    collection, the collection's `subtitle` and `titleaddon` will now
+    print)
+  - subsequent citations of `@review` entries with titles now have a
+    similar form as articles with titles (previously, they were the
+    same as untitled reviews)
+  - if the `crossref` field of an `@review` entry is defined, the
+    title of the cross-referenced entry now has the field format of
+    its entry type (previously, all such titles were in italics, never
+    in quotation marks)
+
+* added support for the `ibidpage` preamble option (false by default;
+  true with the `ibid` preamble option; if true, it suppresses the
+  `postnote` of a citation if the previous citation on the page is to
+  the same entry with the same `postnote`)
+* added support for the `dashed` preamble option (true by default; if
   false, it removes the 3-em dash for repeated names in bibliographies
   and reference lists)
-* subsequent citations to reviews with titles now have the same basic
-  form as articles (e.g. Jane Doe, "Some Review"...), as opposed to
-  untitled reviews (e.g. Jane Doe, review of *Some Title*...)
-* Fixed `shortfirst` preamble option for `@review` entries
+* fixed the `shortfirst` preamble option for `@review` entries
+* fixed `@review` entries with titles but no authors
 
 ## 2021-05-02
 
