@@ -1,4 +1,4 @@
-% Last modified: Sun 06 Jun 2021 09:41:55 AM CDT
+% Last modified: Sun 06 Jun 2021 10:56:10 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1302,7 +1302,6 @@
 %%  Names and Dashes  %%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-% HERE:
 \newbibmacro*{printnames+etc}{%
   \ifboolexpr{ togl {authposition}
                and togl {bibliography}
@@ -1331,8 +1330,8 @@
 \newbibmacro*{printnames}{%
   \ifnameundef{\cbx@namelist}
     {}
-    {\anona\pluga\printnames[\cbx@deflabel]{%
-       \cbx@namelist}\plugb\anonb}}%
+    {\pluga\anona\printnames[\cbx@deflabel]{%
+       \cbx@namelist}\anonb\plugb}}%
 
 % A screen name precedes 'nameaddon' and can be omitted from short
 % citations. See CMOS, 17th ed., 14.209.
@@ -2248,6 +2247,7 @@
           \setunit{\addcomma\space}\bibstring{by}\space}}%
        {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
      \renewcommand*{\cbx@namelist}{author}%
+     \usebibmacro{author+bookauthor+type}%
      \usebibmacro{printnames+etc}}}
 
 \newbibmacro*{volumes+bookseries+etc}[1]{%
