@@ -1,4 +1,4 @@
-% Last modified: Fri 04 Jun 2021 05:30:32 PM CDT
+% Last modified: Tue 08 Jun 2021 05:24:52 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -456,17 +456,6 @@
           {\newunit}%
           {\setunit{\addcolon\space}}}}}
 
-\newbibmacro*{reference:authpos}{%
-  \iftoggle{newauth}
-    {\usebibmacro{author+bookauthor+etc}%
-     \togglefalse{newauth}%
-     \clearlist{organization}%
-     \clearname{author}}%
-    {\iflistundef{organization}
-       {\usebibmacro{author+bookauthor+etc}}%
-       {\printlist{organization}%
-        \clearlist{organization}}}}
-
 \newbibmacro*{reference:howpublished+etc}{%
   \ifboolexpr{ test {\iffieldundef{howpublished}}
                and test {\iffieldundef{year}}}
@@ -610,15 +599,16 @@
   \newunit}%
 
 \DeclareBibliographyDriver{cite:reference}{%
-  \usebibmacro{reference:authpos}%
+  \iftoggle{newauth}
+    {\usebibmacro{author+bookauthor+etc}%
+     \clearname{author}}%
+    {\printlist{organization}}%
   \usebibmacro{edition}{}%
   \usebibmacro{reference:howpublished+etc}%
   \newunit
   \bibstring{subverbo}\space
   \usebibmacro{title+titleaddon}{}%
-  \newunit
-  \renewcommand*{\pluga}{\bibstring{by}\space}%
-  \usebibmacro{reference:authpos}}%
+  \usebibmacro{byauthor}}%
 
 \DeclareBibliographyDriver{cite:review}{%
   \usebibmacro{newauth}%
