@@ -1,4 +1,4 @@
-% Last modified: Sun 06 Jun 2021 10:56:10 AM CDT
+% Last modified: Tue 08 Jun 2021 12:50:26 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1448,11 +1448,6 @@
        {}% needs '%'
      \usebibmacro{title+titleaddon}{bookbook}}}
 
-\renewbibmacro*{maintitle}{%
-  \iffieldundef{maintitle}
-    {}
-    {\usebibmacro{title+titleaddon}{main}}}
-
 \newbibmacro*{issuetitle}{%
   \iffieldundef{issuetitle}
     {}
@@ -2211,10 +2206,12 @@
        {}}}
 
 \newbibmacro*{maintitle+note+etc}{%
-  \usebibmacro{maintitle}%
-  \usebibmacro{note}%
-  \usebibmacro{edition}{}%
-  \usebibmacro{editors:c}{maintitle}}%
+  \iffieldundef{maintitle}
+    {}
+    {\usebibmacro{title+titleaddon}{main}%
+     \usebibmacro{note}%
+     \usebibmacro{edition}{}%
+     \usebibmacro{editors:c}{maintitle}}}
 
 \newbibmacro*{volume+number+etc}[1]{%
   \iffieldundef{#1volume}
