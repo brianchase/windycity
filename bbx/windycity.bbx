@@ -1,4 +1,4 @@
-% Last modified: Tue 08 Jun 2021 12:50:26 PM CDT
+% Last modified: Wed 09 Jun 2021 06:20:27 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -835,36 +835,29 @@
     {}
     {\ifboolexpr{ togl {collection:ib}
                   and togl {swapvol}}
-      {\usebibmacro{bookauthor+namelist}}%
+      {\usebibmacro{author+namelist}{bookauthor}}%
       {\ifnameundef{author}
-         {\usebibmacro{bookauthor+namelist}}%
-         {\usebibmacro{author+namelist}}}}}
+         {\usebibmacro{author+namelist}{bookauthor}}%
+         {\usebibmacro{author+namelist}{author}}}}}
 
-\newbibmacro*{author+namelist}{%
-  \ifboolexpr{ test {\ifnameundef{shortauthor}}
+\newbibmacro*{author+namelist}[1]{%
+  \ifboolexpr{ test {\ifnameundef{short#1}}
                or togl {cbx:first}
                or togl {bibliography}}
-    {\renewcommand*{\cbx@namelist}{author}}%
-    {\renewcommand*{\cbx@namelist}{shortauthor}}%
-  \usebibmacro{author+bookauthor+type}}%
+    {\renewcommand*{\cbx@namelist}{#1}}%
+    {\renewcommand*{\cbx@namelist}{short#1}}%
+  \usebibmacro{author+bookauthor+type}{#1}}%
 
-\newbibmacro*{bookauthor+namelist}{%
-  \ifboolexpr{ test {\ifnameundef{shortbookauthor}}
-               or togl {bibliography}}
-    {\renewcommand*{\cbx@namelist}{bookauthor}}%
-    {\renewcommand*{\cbx@namelist}{shortbookauthor}}%
-  \usebibmacro{author+bookauthor+type}}%
-
-\newbibmacro*{author+bookauthor+type}{%
-  \iffieldundef{\cbx@namelist type}
+\newbibmacro*{author+bookauthor+type}[1]{%
+  \iffieldundef{#1type}
     {}
-    {\iffieldequalstr{\cbx@namelist type}{anon}
+    {\iffieldequalstr{#1type}{anon}
        {\renewcommand*{\anona}{\bibopenbracket}%
         \renewcommand*{\anonb}{\bibclosebracket}}%
-       {\iffieldequalstr{\cbx@namelist type}{anon?}
+       {\iffieldequalstr{#1type}{anon?}
           {\renewcommand*{\anona}{\bibopenbracket}%
            \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
-          {\ifboolexpr{ test {\iffieldequalstr{\cbx@namelist type}{pseudo}}
+          {\ifboolexpr{ test {\iffieldequalstr{#1type}{pseudo}}
                         and not togl {cbx:short}}
              {\renewcommand*{\anonb}{\space\mkbibbrackets{\bibstring{pseudo}}}}
              {}}}}}
@@ -2244,7 +2237,7 @@
           \setunit{\addcomma\space}\bibstring{by}\space}}%
        {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
      \renewcommand*{\cbx@namelist}{author}%
-     \usebibmacro{author+bookauthor+type}%
+     \usebibmacro{author+bookauthor+type}{author}%
      \usebibmacro{printnames+etc}}}
 
 \newbibmacro*{volumes+bookseries+etc}[1]{%
@@ -2304,6 +2297,7 @@
     {\renewcommand*{\pluga}{%
        \setunit{\addcomma\space}\bibstring{by}\space}%
      \renewcommand*{\cbx@namelist}{bookauthor}%
+     \usebibmacro{author+bookauthor+type}{bookauthor}%
      \usebibmacro{printnames+etc}%
      \usebibmacro{pages}}}
 
