@@ -1,4 +1,4 @@
-% Last modified: Wed 09 Jun 2021 06:20:27 PM CDT
+% Last modified: Wed 09 Jun 2021 06:35:32 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -846,9 +846,9 @@
                or togl {bibliography}}
     {\renewcommand*{\cbx@namelist}{#1}}%
     {\renewcommand*{\cbx@namelist}{short#1}}%
-  \usebibmacro{author+bookauthor+type}{#1}}%
+  \usebibmacro{author+type}{#1}}%
 
-\newbibmacro*{author+bookauthor+type}[1]{%
+\newbibmacro*{author+type}[1]{%
   \iffieldundef{#1type}
     {}
     {\iffieldequalstr{#1type}{anon}
@@ -2237,7 +2237,7 @@
           \setunit{\addcomma\space}\bibstring{by}\space}}%
        {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
      \renewcommand*{\cbx@namelist}{author}%
-     \usebibmacro{author+bookauthor+type}{author}%
+     \usebibmacro{author+type}{author}%
      \usebibmacro{printnames+etc}}}
 
 \newbibmacro*{volumes+bookseries+etc}[1]{%
@@ -2297,7 +2297,7 @@
     {\renewcommand*{\pluga}{%
        \setunit{\addcomma\space}\bibstring{by}\space}%
      \renewcommand*{\cbx@namelist}{bookauthor}%
-     \usebibmacro{author+bookauthor+type}{bookauthor}%
+     \usebibmacro{author+type}{bookauthor}%
      \usebibmacro{printnames+etc}%
      \usebibmacro{pages}}}
 
