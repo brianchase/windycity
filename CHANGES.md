@@ -33,7 +33,8 @@ brianchase/windycity").
 * added support for the `dashed` preamble option (true by default; if
   false, it removes the 3-em dash for repeated names in bibliographies
   and reference lists)
-
+* added support for using `annotate` as an entry option, not just as a
+  preamble option
 * fixed `anon` and `anon?` author types for contexts outside the
   author's position
 * fixed the `shortfirst` preamble option for `@review` entries
