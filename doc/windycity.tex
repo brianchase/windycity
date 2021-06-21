@@ -1,4 +1,4 @@
-% Last modified: Sun 20 Jun 2021 04:07:55 PM CDT
+% Last modified: Mon 21 Jun 2021 05:40:40 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -321,7 +321,7 @@ For another variant, try \opt{shortafter}, which gives the same output
 as \opt{short} but with long first citations. Also with standard
 citations, the preamble option \opt{idemtracker} shortens the author's
 name of a work's first citation if the previous citation is of the
-same author (see section \ref{preamble.native}). The entry option
+same author (see section \ref{preamble}). The entry option
 \opt{noauth} omits the author's name altogether (see section
 \ref{entry}). And the \bibfield{shorthand} field allows you to set an
 abbreviation to stand in place of the author's name, the work's title,
@@ -337,21 +337,28 @@ bibliographies, and reference lists. Windy City relies on many
 preamble options from \biblatex and supports or provides others to
 allow you to change the default output.
 
-Section \ref{preamble.windy} discusses the style's own preamble
-options. Section \ref{preamble.native} highlights a few options from
-\biblatex for additional customization.
+% Windy City sets preamble options for \biblatex in
+% \file{windycity.bbx}. The list there isn't complete. The style needs
+% to set some options to comply with \textit{CMOS}, sets others as a
+% precaution, and leaves still others untouched. Users who want
+% fine-grained control of the style should look through the list along
+% with \biblatex's user guide.
 
-\subsubsection{Windy City's Preamble Options}
-\label{preamble.windy}
-
-All options below are \opt{false} by default. Set them to \opt{true} by
-passing the name of the option to \biblatex, with or without an
-additional \opt{=true}. In other words, using \opt{annotate} as an
-example, the following are equivalent:
+Many options below are \opt{false} by default. Make an option
+\opt{true} by passing its name to \biblatex, with or without
+\opt{=true}. Using \opt{annotate} as an example, the following are
+equivalent:
 
 \begin{verbatim}
    \usepackage[annotate,style=windycity]{biblatex}
    \usepackage[annotate=true,style=windycity]{biblatex}
+\end{verbatim}
+
+If an option is \opt{true} by default, make it \opt{false} by passing
+its name with \opt{=false}. Using \opt{doi} as an example:
+
+\begin{verbatim}
+   \usepackage[doi=false,style=windycity]{biblatex}
 \end{verbatim}
 
 \begin{optionlist}
@@ -374,6 +381,22 @@ it does filter out chapters of books, books in books, and volumes of
 collections. For discussion of multivolume works, see section
 \ref{multivolume}.
 
+\optitem[true]{dashed}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{false} to remove the 3-em dash for repeated names
+in bibliographies and reference lists.
+
+\optitem[true]{doi}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{false} to prevent the \bibfield{doi} field from
+printing.
+
+\optitem[true]{eprint}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{false} to prevent the \bibfield{eprint} field from
+printing. For more information about eprints, see section
+\ref{datafields}.
+
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
 \noindent This option controls whether consecutive citations of a work
@@ -385,6 +408,35 @@ readers from having to look at another page to find the referent of an
 \textit{ibid}. For examples of its output, see section \ref{short} and
 \ref{14.34}. As of the 17th edition, \textit{CMOS} discourages the use
 of \textit{ibid.} (see \ref{14.34}).
+
+\optitem[false]{ibidpage}{\opt{true}, \opt{false}}
+
+\noindent If \opt{true}, the \bibfield{postnote} field won't print if
+the previous citation on the page is of the same entry with the same
+\bibfield{postnote}. The \opt{ibid} preamble option uses
+\opt{ibidpage}.
+
+\optitem[false]{idemtracker}{\opt{true}, \opt{false}, \opt{context},
+\opt{strict}, \opt{constrict}}
+
+\noindent If \opt{true}, the first citation of a work prints with a
+shortened author's name if the previous citation is of another work by
+the same author.
+
+Recall \textit{CMOS} \ref{14.34}, where the first citation of Toni
+Morrison's \textit{Song of Solomon} immediately follows citations of
+her \textit{Beloved}. The default output prints her full name twice,
+once for the first citation of \textit{Song of Solomon} and again for
+the first citation of \textit{Beloved}. If \opt{idemtracker} is
+\opt{true} (or in many contexts any value other than \opt{false}), her
+full name prints just once, at the beginning of the series.
+
+% As for \texit{CMOS}, the 16th edition, Figure 14.3, shows
+% consecutive citations of works by the same author, both of which
+% give the author's full name.
+
+For more information on \opt{idemtracker}, see the discussion in
+\biblatex's user guide.
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
@@ -548,71 +600,10 @@ collection or \textit{vice versa}. Windy City gives priority to the
 volume. To reverse this for all relevant citations, use \opt{swapvol}.
 For more information, see section \ref{collorder}.
 
-\end{optionlist}
-
-\subsubsection{Native \biblatex Preamble Options}
-\label{preamble.native}
-
-Windy City sets preamble options for \biblatex in
-\file{windycity.bbx}. The list there isn't complete. The style needs
-to set some options to comply with \textit{CMOS}, sets others as a
-precaution, and leaves still others untouched. Users who want
-fine-grained control of the style should look through the list along
-with the user guide for \biblatex.
-
-The options below are unique in that Windy City provides support for
-them (they're not style-independent). Note that, unlike those in the
-previous section, some of the options below are \opt{true} by default.
-
-\begin{optionlist}
-
-\optitem[true]{dashed}{\opt{true}, \opt{false}}
-
-\noindent Set this option to \opt{false} to remove the 3-em dash for
-repeated names in bibliographies and reference lists.
-
-\optitem[true]{doi}{\opt{true}, \opt{false}}
-
-\noindent Set this option to \opt{false} to suppress printing the
-\bibfield{doi} field in notes, bibliographies, and reference lists.
-
-\optitem[true]{eprint}{\opt{true}, \opt{false}}
-
-\noindent Set this option to \opt{false} to suppress printing the
-\bibfield{eprint} field in notes, bibliographies, and reference lists.
-For more information about eprints, see section \ref{datafields}.
-
-\optitem[false]{ibidpage}{\opt{true}, \opt{false}}
-
-\noindent Set this option to \opt{true} to suppress printing the
-\bibfield{postnote} field of a citation if the previous citation on
-the page is to the same entry with the same \bibfield{postnote}. The
-\opt{ibid} preamble option sets this option to \opt{true}.
-
-\optitem[false]{idemtracker}{\opt{true}, \opt{false}, \opt{context},
-\opt{strict}, \opt{constrict}}
-
-\noindent If this option is \opt{true}, the first citation of a work
-prints with a shortened author's name if the previous citation is of
-another work by the same author.
-
-Recall \textit{CMOS} \ref{14.34}, where the first citation of Toni
-Morrison's \textit{Song of Solomon} immediately follows citations of
-her \textit{Beloved}. The default output prints her full name twice,
-once for the first citation of \textit{Song of Solomon} and again for
-the first citation of \textit{Beloved}. With \opt{idemtracker} set to
-\opt{true} (or in many contexts to any value other than \opt{false}),
-the style prints her full name just once, at the beginning of the
-series.
-
-% As for \texit{CMOS}, the 16th edition, Figure 14.3, shows
-% consecutive citations of works by the same author, both of which
-% give the author's full name.
-
 \optitem[true]{url}{\opt{true}, \opt{false}}
 
-\noindent Set this option to \opt{false} to suppress printing the
-\bibfield{url} field in notes, bibliographies, and reference lists.
+\noindent Set \opt{false} to prevent the \bibfield{url} field from
+printing.
 
 \end{optionlist}
 
@@ -623,7 +614,43 @@ An entry option goes in the \bibfield{options} field of a work's
 database entry. It affects the format of that work. For options that
 affect the format of every work, see section \ref{preamble}.
 
+As with preamble options, many options below are \opt{false} by
+default. Make an option \opt{true} by putting its name in the
+\bibfield{options} field of a work's bibliography database entry, with
+or without \opt{=true}. Using \opt{annotate} as an example, the
+following are equivalent:
+
+\begin{verbatim}
+   options = {annotate},
+   options = {annotate=true},
+\end{verbatim}
+
+If an option is \opt{true} by default, make it \opt{false} by putting
+its name with \opt{=false} in the \bibfield{options} field. Using
+\opt{doi} as an example:
+
+\begin{verbatim}
+   options = {doi=false},
+\end{verbatim}
+
 \begin{optionlist}
+
+\optitem[false]{annotate}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{true} to print an entry's \bibfield{annotation}
+field. To change the spacing between entries and annotations, change
+the value of \cmd{bibitemsep}.
+
+\optitem[true]{doi}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{false} to prevent the \bibfield{doi} field from
+printing.
+
+\optitem[true]{eprint}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{false} to prevent the \bibfield{eprint} field from
+printing. For more information about eprints, see section
+\ref{datafields}.
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
@@ -779,6 +806,11 @@ to true, it changes the format of a work in a collection so that, in
 bibliographies and long citations, publication information for the
 collection precedes that of the volume. For more information, see
 section \ref{collorder}.
+
+\optitem[true]{url}{\opt{true}, \opt{false}}
+
+\noindent Set \opt{false} to prevent the \bibfield{url} field from
+printing.
 
 \end{optionlist}
 
