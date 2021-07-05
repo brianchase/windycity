@@ -1,4 +1,4 @@
-% Last modified: Mon 21 Jun 2021 05:40:40 PM CDT
+% Last modified: Mon 05 Jul 2021 03:02:25 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -57,9 +57,9 @@ interest.
 \subsection{Getting Started}
 
 If you already know how to use \biblatex, getting started with Windy
-City is easy. The first task is to confirm that \biblatex and Windy
-City are installed properly on your system. Since both are included in
-some distributions of \LaTeX, you might be able to skip this step.
+City is easy. First, confirm that \biblatex and Windy City are
+installed properly on your system. Since both are included in some
+distributions of \LaTeX, you might already have them.
 
 Either way, please consider downloading the most recent release of
 Windy City from its
@@ -400,14 +400,15 @@ printing. For more information about eprints, see section
 \optitem[false]{ibid}{\opt{true}, \opt{false}}
 
 \noindent This option controls whether consecutive citations of a work
-on the same page receive an \textit{ibid}. The qualification ``on the
-same page'' means that \textit{ibid.} always refers to a work cited on
-the current page without an \textit{ibid}. The latter isn't a
-requirement of \textit{CMOS} but seems reasonable, since it prevents
-readers from having to look at another page to find the referent of an
-\textit{ibid}. For examples of its output, see section \ref{short} and
-\ref{14.34}. As of the 17th edition, \textit{CMOS} discourages the use
-of \textit{ibid.} (see \ref{14.34}).
+on the same page receive an \textit{ibid}. For examples, see section
+\ref{short} and \textit{CMOS} \ref{14.34}. As of the 17th edition,
+\textit{CMOS} discourages the use of \textit{ibid.}
+
+% The qualification ``on the same page'' means that the referent of an
+% \textit{ibid.} is never on a different page. The latter isn't a
+% requirement of \textit{CMOS} but seems reasonable, since it prevents
+% readers from having to look at another page to find the referent of
+% an \textit{ibid}.
 
 \optitem[false]{ibidpage}{\opt{true}, \opt{false}}
 
@@ -474,7 +475,7 @@ bibliography, their results may overlap.
 \bibfield{pages} field if the \bibfield{postnote} field is blank. This
 lets you cite the entirety of a work without having to duplicate the
 content of the \bibfield{pages} field in the \bibfield{postnote}. To
-override this feature, use the \opt{nopages} option.
+override this feature, use \opt{nopages}.
 
 \optitem[false]{reflist}{\opt{true}, \opt{false}}
 
@@ -549,8 +550,7 @@ resulting output consists mainly of the author's name and the work's
 title. According to \textit{CMOS}, this approach is optional for
 documents with complete bibliographies. (See \textit{CMOS}
 \ref{14.23}, also 14.29--14.36.) As with \opt{short}, you may use
-\opt{shortfirst} in conjunction with \opt{ibid} for more concise
-citations.
+\opt{shortfirst} with \opt{ibid} for more concise citations.
 
 \optitem[false]{shortlinks}{\opt{true}, \opt{false}}
 
@@ -1538,10 +1538,9 @@ after the collection's title.
 
 As the examples above also indicate, the style supports a variety of
 editorial roles beyond just editor and translator. They are: compiler,
-expander, reviser, and updater. To assign them, you need to use the
-editor and translator type fields. Below are some bibliography
-database entries for examples in \textit{CMOS} \ref{14.103} and
-\ref{14.142}:
+expander, reviser, and updater. To assign them, use the editor and
+translator type fields. Below are some bibliography database entries
+for examples in \textit{CMOS} \ref{14.103} and \ref{14.142}:
 
 \begin{verbatim}
    @Book{schechter2011,
@@ -2208,15 +2207,14 @@ and if it lacks certain fields that it shouldn't have, such as a
 \bibfield{maintitle} field or a \bibfield{volume} field inherited from
 the cross-referenced entry. You can find the exact details in
 \file{windycity.bbx}. Just remember that entries like these should
-always be cross-referenced to a \bibtype{collection} or one of its
+always be cross-referenced to a \bibtype{collection} or to one of its
 aliases. Since Windy City treats them the same, it makes no difference
 whether you designate entries for volumes as \bibtype{bookinbook} or
 \bibtype{inbook}.
 
 With one exception, you can get the same output with a \bibtype{book},
 \bibtype{collection}, \bibtype{mvbook}, or \bibtype{mvcollection}
-entry. As before, the choice of entry type is arbitrary. All four are
-equivalent. Here's a counterpart to the previous example using
+entry. Here's a counterpart to the previous example using
 \bibtype{collection}:
 
 \begin{verbatim}
@@ -2235,21 +2233,22 @@ equivalent. Here's a counterpart to the previous example using
    }
 \end{verbatim}
 
-These entries work with \opt{swapvol} if they have \bibfield{volume}
-and \bibfield{maintitle} fields, among other conditions. You may
-prefer them over \bibfield{bookinbook} or \bibfield{inbook} entries if
-you only intend to cite one volume of the collection and have no need
-to cite the collection as a whole. You risk trouble, though, if the
-volumes of the collection have different publication dates, as they do
-for \textit{The Papers of Martin Luther King, Jr}. If the publication
-information for this volume goes last, the bibliography and long
-citation should list the publication date as \textit{2014}. If the
-publication information for the collection goes last, that date is
-\textit{1992–}. A \bibtype{book} or \bibtype{collection} entry,
-however, has just one field for a publication date, so using
-\opt{swapvol} on \bibfield{carson2014} would print \textit{2014}, not
-\textit{1992–}. Otherwise, the entry types are interchangeable. You
-can find examples of both approaches in \file{windycity.bib}.
+These entry types work with \opt{swapvol} if they have
+\bibfield{volume} and \bibfield{maintitle} fields, among other
+conditions. You may prefer them over \bibfield{bookinbook} or
+\bibfield{inbook} entries if you only intend to cite one volume of the
+collection and have no need to cite the collection as a whole. You
+risk trouble, though, if the volumes of the collection have different
+publication dates, as they do for \textit{The Papers of Martin Luther
+King, Jr}. If the publication information for this volume goes last,
+the bibliography and long citation should list the publication date as
+\textit{2014}. If the publication information for the collection goes
+last, that date is \textit{1992–}. A \bibtype{book} or
+\bibtype{collection} entry, however, has just one field for a
+publication date, so using \opt{swapvol} on \bibfield{carson2014}
+would print \textit{2014}, not \textit{1992–}. Otherwise, the entry
+types are interchangeable. You can find examples of both approaches in
+\file{windycity.bib}.
 
 Certain entries cross-referenced to entries that work with
 \opt{swapvol} also work with it. Those entry types are limited to
@@ -2342,10 +2341,10 @@ In citations of \textit{The Lisle Letters}, volume numbers and pages
 are separated by a colon. With \textit{The Complete Tales of Henry
 James}, only the second citation follows this pattern. In the first,
 the volume number appears earlier, after the editor's name. Why?
-Apparently, \textit{The Lisle Letters} count as a single, multivolume
-work because every volume has the same title and publication date. Not
-so \textit{The Complete Tales of Henry James}. Its volumes have
-different titles and publication dates.
+Apparently, \textit{The Lisle Letters} is a single, multivolume work
+because every volume has the same title and publication date. Not so
+\textit{The Complete Tales of Henry James}. Its volumes have different
+titles and publication dates.
 
 To get the right output, your bibliography database and citations need
 to reflect this distinction. Think of it this way: If a multivolume
@@ -2422,7 +2421,7 @@ in the bibliography database. Here's the entry for the volume cited in
 Since the volume number is part of the entry and needs to print in
 different places depending on the context, don't include it in the
 \bibfield{postnote}. Let Windy City handle it. Below is the source for
-the first and second citations of \textit{The Complete Tales Henry
+the first and second citations of \textit{The Complete Tales of Henry
 James}:
 
 \begin{verbatim}
@@ -2446,8 +2445,8 @@ Neither type of collection uses cross-referencing in the bibliography
 database. For \textit{The Lisle Letters}, cross-referencing would
 introduce needless complexity. A single work should have a single
 entry, not multiple, cross-referenced entries. For \textit{The
-Complete Tales Henry James}, cross-referencing would result in errors
-because, with different titles and publication dates, not all
+Complete Tales of Henry James}, cross-referencing would result in
+errors because, with different titles and publication dates, not all
 publication data for the collection is true of each volume. To cite
 the collection as a whole, as in \textit{CMOS} \ref{14.117}, add a
 separate entry:
