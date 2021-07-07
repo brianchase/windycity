@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2021-07-07
 
 * improved the workflow for titles, subtitles, and the like; no change
   in output, except for the following:
