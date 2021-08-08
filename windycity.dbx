@@ -29,5 +29,6 @@
 \DeclareDatamodelFields[type=list,datatype=name]{%
   preface,
   shortbookauthor,
+  shorttranslator,
   translatora,
   translatorb}

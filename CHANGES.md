@@ -8,6 +8,17 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* added support for the `shorteditor` field and added a
+  `shorttranslator` field (like `shortauthor`, they print only in the
+  author's position of subsequent citations, not in bibliographies,
+  reference lists, or first citations)
+* editor and translator type fields accept the values `anon`, `anon?`,
+  and `pseudo` to indicate anonymous and pseudonymous editors and
+  translators (since the fields accept multiple values, you could
+  list, for example, a pseudonymous compiler)
+
 ## 2021-07-07
 
 * improved the workflow for titles, subtitles, and the like; no change

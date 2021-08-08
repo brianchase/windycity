@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Jul 2021 05:45:49 PM CDT
+% Last modified: Sun 08 Aug 2021 11:25:09 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -835,32 +835,38 @@
     {}
     {\ifboolexpr{ togl {collection:ib}
                   and togl {swapvol}}
-      {\usebibmacro{author+namelist}{bookauthor}}%
+      {\usebibmacro{shortnames}{bookauthor}}%
       {\ifnameundef{author}
-         {\usebibmacro{author+namelist}{bookauthor}}%
-         {\usebibmacro{author+namelist}{author}}}}}
+         {\usebibmacro{shortnames}{bookauthor}%
+          \usebibmacro{test:authortypes}{bookauthor}}%
+         {\usebibmacro{shortnames}{author}%
+          \usebibmacro{test:authortypes}{author}}}}}
 
-\newbibmacro*{author+namelist}[1]{%
+\newbibmacro*{shortnames}[1]{%
   \ifboolexpr{ test {\ifnameundef{short#1}}
                or togl {cbx:first}
                or togl {bibliography}}
     {\renewcommand*{\cbx@namelist}{#1}}%
-    {\renewcommand*{\cbx@namelist}{short#1}}%
-  \usebibmacro{author+type}{#1}}%
+    {\renewcommand*{\cbx@namelist}{short#1}}}
 
-\newbibmacro*{author+type}[1]{%
+\newbibmacro*{test:authortypes}[1]{%
   \iffieldundef{#1type}
     {}
-    {\iffieldequalstr{#1type}{anon}
+    {\let\authtypes\empty
+     \forcsvfield{\listadd\authtypes}{#1type}%
+     \usebibmacro{types:shared}{\authtypes}}}
+
+\newbibmacro*{types:shared}[1]{%
+  \ifinlist{anon}{#1}
+    {\renewcommand*{\anona}{\bibopenbracket}%
+     \renewcommand*{\anonb}{\bibclosebracket}}%
+    {\ifinlist{anon?}{#1}
        {\renewcommand*{\anona}{\bibopenbracket}%
-        \renewcommand*{\anonb}{\bibclosebracket}}%
-       {\iffieldequalstr{#1type}{anon?}
-          {\renewcommand*{\anona}{\bibopenbracket}%
-           \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
-          {\ifboolexpr{ test {\iffieldequalstr{#1type}{pseudo}}
-                        and not togl {cbx:short}}
-             {\renewcommand*{\anonb}{\space\mkbibbrackets{\bibstring{pseudo}}}}
-             {}}}}}
+        \renewcommand*{\anonb}{\addquestion\bibclosebracket}}%
+       {\ifboolexpr{ test {\ifinlist{pseudo}{#1}}
+                     and not togl {cbx:short}}
+          {\renewcommand*{\anonb}{\space\mkbibbrackets{\bibstring{pseudo}}}}
+          {}}}}
 
 \newbibmacro*{namehash+etc}{%
   \usebibmacro{printnames+etc}%
@@ -1156,26 +1162,30 @@
 % Macros common to 'editors:a', 'editors:b', and 'editors:c'.
 
 \newbibmacro*{edcombos:a}{%
-  \renewcommand*{\cbx@namelist}{\xeditor}%
+  \usebibmacro{shortnames}{\xeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\yeditor}%
      \toggletrue{notrans}%
      \usebibmacro{edcombos:b}{\edtypes}{edtrans}%
      \iftoggle{atleastone}
-       {}
-       {\usebibmacro{edcombos:b}{\transtypes}{edtrans}}}
-    {\usebibmacro{edcombos:c}}}
+       {\usebibmacro{types:shared}{\edtypes}}%
+       {\usebibmacro{edcombos:b}{\transtypes}{edtrans}%
+        \usebibmacro{types:shared}{\transtypes}}}
+    {\usebibmacro{edcombos:c}%
+     \usebibmacro{types:shared}{\edtypes}}}
 
 \newbibmacro*{transcombos:a}{%
-  \renewcommand*{\cbx@namelist}{\yeditor}%
+  \usebibmacro{shortnames}{\yeditor}%
   \ifnamesequal{\xeditor}{\yeditor}
     {\clearname{\xeditor}%
      \toggletrue{noed}%
      \usebibmacro{transcombos:b}{\edtypes}{transed}%
      \iftoggle{atleastone}
-       {}
-       {\usebibmacro{transcombos:b}{\transtypes}{transed}}}
-    {\usebibmacro{transcombos:c}}}
+       {\usebibmacro{types:shared}{\edtypes}}%
+       {\usebibmacro{transcombos:b}{\transtypes}{transed}%
+        \usebibmacro{types:shared}{\transtypes}}}
+    {\usebibmacro{transcombos:c}%
+     \usebibmacro{types:shared}{\transtypes}}}
 
 \newbibmacro*{edcombos:b}[2]{%
   \togglefalse{atleastone}%
@@ -2237,7 +2247,7 @@
           \setunit{\addcomma\space}\bibstring{by}\space}}%
        {\renewcommand*{\pluga}{\newunit\bibstring{by}\space}}%
      \renewcommand*{\cbx@namelist}{author}%
-     \usebibmacro{author+type}{author}%
+     \usebibmacro{test:authortypes}{author}%
      \usebibmacro{printnames+etc}}}
 
 \newbibmacro*{volumes+bookseries+etc}[1]{%
@@ -2297,7 +2307,7 @@
     {\renewcommand*{\pluga}{%
        \setunit{\addcomma\space}\bibstring{by}\space}%
      \renewcommand*{\cbx@namelist}{bookauthor}%
-     \usebibmacro{author+type}{bookauthor}%
+     \usebibmacro{test:authortypes}{bookauthor}%
      \usebibmacro{printnames+etc}%
      \usebibmacro{pages}}}
 
