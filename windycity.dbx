@@ -1,5 +1,11 @@
-\ProvidesFile{windycity.dbx}[2021/07/07 Windy City data model file for
-  biblatex]
+\ProvidesFile{windycity.dbx}[2021/07/07 Windy City data model file for biblatex]
+\DeclareDatamodelFields[type=field,datatype=key]{%
+  booktitlekey,
+  bookbooktitlekey,
+  titlekey,
+  translatortype,
+  translatoratype,
+  translatorbtype}
 \DeclareDatamodelFields[type=field,datatype=literal]{%
   blogsubtitle,
   blogtitle,
@@ -10,8 +16,6 @@
   bookbooktitleaddon,
   bookvolume,
   bookbookvolume,
-  booktitlekey,
-  bookbooktitlekey,
   bookyear,
   editoraddon,
   editoraaddon,
@@ -21,11 +25,7 @@
   shortblog,
   shortbooktitle,
   shortmaintitle,
-  shortorganization,
-  titlekey,
-  translatortype,
-  translatoratype,
-  translatorbtype}
+  shortorganization}
 \DeclareDatamodelFields[type=list,datatype=name]{%
   preface,
   shortbookauthor,
