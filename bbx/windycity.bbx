@@ -1,4 +1,4 @@
-% Last modified: Sun 08 Aug 2021 11:25:09 AM CDT
+% Last modified: Wed 06 Oct 2021 05:53:02 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1611,7 +1611,8 @@
     {\iffieldundef{pubstate}
        {\usebibmacro{labeldate+date}{#1}}%
        {\iffieldequalstr{pubstate}{preprint}
-          {\bibstring{preprint}}%
+          {\bibstring{preprint}%
+           \setunit{\space}}%
           {\iffieldequalstr{pubstate}{prepub}
              {\newunit% necessary if no 'date'
               \bibstring{prepub}%
@@ -2059,10 +2060,12 @@
     {}
     {\printlist{location}%
      \setunit{\addcomma\space}}%
-  \iffieldundef{month}
-    {\usebibmacro{reflist+year+day}}%
+  \iffieldundef{year}
     {}
-  \printdate}%
+    {\iffieldundef{month}
+       {\usebibmacro{reflist+year+day}%
+        \printdate}%
+       {\printdate}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Third Tier Macros  %%
