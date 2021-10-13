@@ -25,7 +25,8 @@
   shortblog,
   shortbooktitle,
   shortmaintitle,
-  shortorganization}
+  shortorganization,
+  typeaddon}
 \DeclareDatamodelFields[type=list,datatype=name]{%
   preface,
   shortbookauthor,

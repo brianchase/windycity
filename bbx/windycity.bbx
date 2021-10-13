@@ -1,4 +1,4 @@
-% Last modified: Wed 06 Oct 2021 05:53:02 PM CDT
+% Last modified: Tue 12 Oct 2021 06:25:06 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -796,9 +796,6 @@
 \DeclareBibliographyAlias{letter}{incollection}
 \DeclareBibliographyAlias{cite:inbook}{cite:incollection}
 \DeclareBibliographyAlias{cite:letter}{cite:incollection}
-
-\DeclareBibliographyAlias{unpublished}{thesis}
-\DeclareBibliographyAlias{cite:unpublished}{cite:thesis}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Author's Position  %%
@@ -1877,6 +1874,15 @@
   \usebibmacro{bibindex}%
   \usebibmacro{author+title+etc}%
   \newunit
+  \usebibmacro{thesis:type}%
+  \usebibmacro{inst+loc+date}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{unpublished}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+title+etc}%
+  \newunit
+  \usebibmacro{unpublished:type}%
   \usebibmacro{inst+loc+date}%
   \usebibmacro{doi+finentry+etc}}%
 
@@ -2048,7 +2054,6 @@
   \usebibmacro{editors:b}}%
 
 \newbibmacro*{inst+loc+date}{%
-  \usebibmacro{thesis+type}%
   \ifboolexpr{ test {\iflistundef{institution}}
                and test {\iflistundef{venue}}}
     {}
@@ -2362,7 +2367,7 @@
         \togglefalse{edshift}}%
        {}}}
 
-\newbibmacro*{thesis+type}{%
+\newbibmacro*{thesis:type}{%
   \ifentrytype{mathesis}
     {\bibstring{mathesis}%
      \setunit{\addcomma\space}}%
@@ -2375,6 +2380,16 @@
             {\bibstring{\thefield{type}}}
             {\printfield{type}}%
           \setunit{\addcomma\space}}}}}
+
+\newbibmacro*{unpublished:type}{%
+  \iffieldundef{type}
+    {\usebibmacro{pubstate}{}}%
+    {\printfield{type}%
+     \iffieldundef{typeaddon}
+       {\setunit{\addcomma\space}}%
+       {\setunit{\space}%
+        \printfield{typeaddon}%
+        \setunit{\space}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%

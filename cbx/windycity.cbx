@@ -1,4 +1,4 @@
-% Last modified: Wed 07 Jul 2021 05:45:51 PM CDT
+% Last modified: Tue 12 Oct 2021 04:51:48 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -619,7 +619,20 @@
 \DeclareBibliographyDriver{cite:thesis}{%
   \usebibmacro{author+title+etc}%
   \setunit{\addspace}% not '\setunit{\space}'
-  \printtext[parens]{\usebibmacro{inst+loc+date}}%
+  \printtext[parens]{%
+    \usebibmacro{thesis:type}%
+    \usebibmacro{inst+loc+date}}%
+  \newunit}%
+
+\DeclareBibliographyDriver{cite:unpublished}{%
+  \usebibmacro{author+title+etc}%
+  \setunit{\addspace}% not '\setunit{\space}'
+  \printtext[parens]{%
+    \iffieldundef{type}
+      {\usebibmacro{pubstate}{}}%
+      {\printfield{type}%
+       \setunit{\addcomma\space}}%
+    \usebibmacro{inst+loc+date}}%
   \newunit}%
 
 \endinput

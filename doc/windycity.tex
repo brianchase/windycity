@@ -1,4 +1,4 @@
-% Last modified: Sun 03 Oct 2021 11:08:27 AM CDT
+% Last modified: Wed 13 Oct 2021 07:53:58 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1055,8 +1055,9 @@ Alias: \bibtype{inreference}
 
 \typeitem{thesis}
 
-Aliases: \bibtype{mastersthesis}, \bibtype{phdthesis},
-\bibtype{unpublished}
+Aliases: \bibtype{mastersthesis}, \bibtype{phdthesis}
+
+\typeitem{unpublished}
 
 \end{typelist}
 
@@ -1311,6 +1312,25 @@ parentheses. The workaround is to include a \bibfield{type} field with
 the value \textit{newsmag}. For an example, see \textit{CMOS}
 \ref{14.204} and compare it with the citation of Beattie in
 \ref{14.171}.
+
+\item[typeaddon] For \bibtype{unpublished} entries in bibliographies
+and reference lists, this field adds arbitrary content between the
+\bibfield{type} field (with values such as \textit{lecture} or
+\textit{paper}) and where it was delivered. Without it, Windy City
+follows \bibfield{type} with a comma. From \textit{CMOS} \ref{14.217}:
+
+\begin{bibonly}
+\nocite{hong2015.alt}
+\nocite{teplin2005.alt}
+\end{bibonly}
+
+\noindent When \bibfield{typeaddon} contains \textit{presented at
+the}:
+
+\begin{bibonly}
+\nocite{hong2015}
+\nocite{teplin2005}
+\end{bibonly}
 
 \end{marglist}
 
@@ -3639,10 +3659,21 @@ correct.
 \setcounter{subsubsection}{216}
 \subsubsection{Lectures and papers or posters presented at meetings}
 % 14.217 Lectures and papers or posters presented at meetings
+\label{14.217}
+
+Without using the optional \bibfield{typeaddon} field:
 
 \begin{citebib}
-\item \cite{hong2015}
+\item \cite{hong2015.alt}
+\item \cite{teplin2005.alt}
 \end{citebib}
+
+When \bibfield{typeaddon} contains \textit{presented at the}:
+
+\begin{bibonly}
+\nocite{hong2015}
+\nocite{teplin2005}
+\end{bibonly}
 
 \subsubsection{Working papers and the like}
 % 14.218 Working papers and the like
@@ -3651,6 +3682,7 @@ correct.
 \begin{citebib}
 \item \cite{lucki1980}
 \item \cite{bronfenbrenner2011}
+\item \cite{alarcon1771}
 \end{citebib}
 
 \setcounter{subsubsection}{219}
