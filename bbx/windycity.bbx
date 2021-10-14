@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Oct 2021 06:25:06 PM CDT
+% Last modified: Thu 14 Oct 2021 06:34:44 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -128,7 +128,10 @@
 
 \providetoggle{shortlinks}
 \DeclareBiblatexOption{global}[boolean]{shortlinks}[true]{%
-  \settoggle{shortlinks}{#1}}%
+  \ifstrequal{#1}{true}
+    {\toggletrue{shortlinks}%
+     \AtBeginBibliography{\togglefalse{shortlinks}}}
+    {}}
 
 \providetoggle{skipdate}
 \DeclareBiblatexOption{entry}[boolean]{skipdate}[true]{%

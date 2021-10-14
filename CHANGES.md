@@ -15,12 +15,14 @@ brianchase/windycity").
   *CMOS* 14.217)
 * added support for the `shorteditor` field and added a
   `shorttranslator` field (like `shortauthor`, they print only in the
-  author's position of subsequent citations, not in bibliographies,
-  reference lists, or first citations)
+  author's position of subsequent citations, not in bibliographies or
+  first citations)
 * editor and translator type fields accept the values `anon`, `anon?`,
   and `pseudo` to indicate anonymous and pseudonymous editors and
   translators (since the fields accept multiple values, you could
   list, for example, a pseudonymous compiler)
+* fixed the `shortlinks` option to stop it from inserting links in
+  bibliographies
 
 ## 2021-07-07
 
