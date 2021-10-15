@@ -1,4 +1,4 @@
-% Last modified: Thu 14 Oct 2021 06:34:44 PM CDT
+% Last modified: Fri 15 Oct 2021 06:07:34 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -183,7 +183,8 @@
   \settoggle{url}{#1}}
 
 % For setting 'minbibnames' and such, see CMOS, 17th ed., 14.76 and
-% 15.29.
+% 15.29. For 'citetracker' and 'loccittracker', 'constrict' is too
+% strict but seems to work well for 'ibidtracker'.
 
 \ExecuteBibliographyOptions{%
   abbreviate=true,
@@ -201,7 +202,7 @@
   idemtracker=false,
   indexing=true,
   labeldateparts=true,
-  loccittracker=constrict,
+  loccittracker=context,
   minbibnames=7,
   maxbibnames=10,
   mincitenames=1,
