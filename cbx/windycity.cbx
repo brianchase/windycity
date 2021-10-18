@@ -1,4 +1,4 @@
-% Last modified: Tue 12 Oct 2021 04:51:48 PM CDT
+% Last modified: Sun 17 Oct 2021 11:24:00 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -269,6 +269,7 @@
   \usebibmacro{savefields}}%
 
 \newbibmacro*{cite:seen}{%
+  \usebibmacro{test:loccit}%
   \iffieldundef{shorthand}
     {\ifboolexpr{ test \ifciteibid
                   and togl {short}
@@ -282,12 +283,22 @@
        {\printfield{shorthand}%
         \usebibmacro{cite:volume}}}}
 
+\newbibmacro*{test:loccit}{%
+  \ifboolexpr{ togl {ibidpage}
+               and test \ifciteibid
+               and test \ifloccit
+               and not test \iffirstonpage}
+    {\global\toggletrue{ibid:loccit}}%
+    {}}
+
 \newbibmacro*{cite:ibid}{%
   \iftoggle{ibid}
     {\iftoggle{shortlinks}
        {\printtext[bibhyperref]{%
-          \usebibmacro{cite:ibid+loccit}}}
-       {\usebibmacro{cite:ibid+loccit}}}
+          \bibcpstring{ibidem}%
+          \usebibmacro{cite:volume}}}
+       {\bibcpstring{ibidem}%
+        \usebibmacro{cite:volume}}}
     {\global\toggletrue{cbx:short}%
      \ifentrytype{review}
        {\usebibmacro{ibid:review}}%
@@ -295,13 +306,6 @@
           {\printtext[bibhyperref]{%
              \usebibmacro{cite:author+title+etc}}}
           {\usebibmacro{cite:author+title+etc}}}}}
-
-\newbibmacro*{cite:ibid+loccit}{%
-  \bibcpstring{ibidem}%
-  \ifboolexpr{ togl {ibidpage}
-               and test \ifloccit}
-    {\global\toggletrue{ibid:loccit}}%
-    {\usebibmacro{cite:volume}}}
 
 \newbibmacro*{ibid:review}{%
   \ifnameundef{author}
@@ -316,25 +320,18 @@
   \iftoggle{noauth}
     {\usebibmacro{shorttitle+shortlinks}}%
     {}% needs '%'
-  \ifboolexpr{ togl {ibidpage}
-               and test \ifloccit}
-    {\global\toggletrue{ibid:loccit}}%
-    {\usebibmacro{cite:volume}}}
+  \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx:short}%
-  \usebibmacro{short:multicite}%
+  \usebibmacro{test:multicite}%
   \ifentrytype{review}
     {\usebibmacro{short:review}}%
     {\usebibmacro{author+bookauthor+etc}%
-     \usebibmacro{shorttitle+shortlinks}%
-     \ifboolexpr{ togl {ibidpage}
-                  and test \ifloccit
-                  and not test \iffirstonpage}
-       {\global\toggletrue{ibid:loccit}}%
-       {\usebibmacro{cite:volume}}}}
+     \usebibmacro{shorttitle+shortlinks}}%
+  \usebibmacro{cite:volume}}%
 
-\newbibmacro*{short:multicite}{%
+\newbibmacro*{test:multicite}{%
   \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
                and togl {multicite}
                and togl {short}}
@@ -355,17 +352,18 @@
            \setunit{\space}%
            \usebibmacro{shorttitle}{book}}%
           {\usebibmacro{author+bookauthor+etc}%
-           \usebibmacro{shorttitle+shortlinks}}}}
-  \usebibmacro{cite:volume}}%
+           \usebibmacro{shorttitle+shortlinks}}}}}
 
 \newbibmacro*{cite:volume}{%
-  \usebibmacro{cite:punctuation}%
-  \iftoggle{swapvol}
-    {\ifboolexpr{ togl {collection:bk}
-                  or togl {collection:ib}}
-       {\usebibmacro{volume+page}}%
-       {}}
-    {}}
+  \iftoggle{ibid:loccit}
+    {}
+    {\usebibmacro{cite:punctuation}%
+     \iftoggle{swapvol}
+       {\ifboolexpr{ togl {collection:bk}
+                     or togl {collection:ib}}
+          {\usebibmacro{volume+page}}%
+          {}}
+       {}}}
 
 \newbibmacro*{cite:punctuation}{%
   \iffieldstart{postnote}{;}

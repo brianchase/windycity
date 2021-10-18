@@ -21,8 +21,12 @@ brianchase/windycity").
   and `pseudo` to indicate anonymous and pseudonymous editors and
   translators (since the fields accept multiple values, you could
   list, for example, a pseudonymous compiler)
-* fixed the `shortlinks` option to stop it from inserting links in
-  bibliographies
+* fixed at least one bug with the `ibidpage` bibliography option (it
+  prevented page numbers from printing in some contexts where most but
+  not all of the right conditions were met)
+* fixed the `shortlinks` bibliography option to stop `bibhyperref`
+  from inserting links in bibliographies
+* fixed a spacing problem in the postnotes of some `@review` entries
 
 ## 2021-07-07
 
