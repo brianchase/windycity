@@ -1,4 +1,4 @@
-% Last modified: Fri 15 Oct 2021 06:07:34 PM CDT
+% Last modified: Thu 21 Oct 2021 06:54:01 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2389,11 +2389,16 @@
   \iffieldundef{type}
     {\usebibmacro{pubstate}{}}%
     {\printfield{type}%
-     \iffieldundef{typeaddon}
-       {\setunit{\addcomma\space}}%
-       {\setunit{\space}%
-        \printfield{typeaddon}%
-        \setunit{\space}}}}
+     \usebibmacro{typeaddon}}}
+
+\newbibmacro*{typeaddon}{%
+  \iffieldundef{typeaddon}
+    {\setunit{\addcomma\space}}%
+    {\iffieldstart{typeaddon}{,}
+       {}
+       {\setunit{\space}}%
+     \printfield{typeaddon}%
+     \setunit{\space}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%

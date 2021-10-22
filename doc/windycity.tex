@@ -1,4 +1,4 @@
-% Last modified: Wed 13 Oct 2021 07:53:58 AM CDT
+% Last modified: Thu 21 Oct 2021 06:57:23 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1313,23 +1313,21 @@ the value \textit{newsmag}. For an example, see \textit{CMOS}
 \ref{14.204} and compare it with the citation of Beattie in
 \ref{14.171}.
 
-\item[typeaddon] For \bibtype{unpublished} entries in bibliographies
-and reference lists, this field adds arbitrary content between the
-\bibfield{type} field (with values such as \textit{lecture} or
-\textit{paper}) and where it was delivered. Without it, Windy City
-follows \bibfield{type} with a comma. From \textit{CMOS} \ref{14.217}:
-
-\begin{bibonly}
-\nocite{hong2015.alt}
-\nocite{teplin2005.alt}
-\end{bibonly}
-
-\noindent When \bibfield{typeaddon} contains \textit{presented at
-the}:
+\item[typeaddon] In bibliography entries of \bibtype{unpublished}
+works, this field adds arbitrary content after the \bibfield{type}
+field. To replicate examples in \textit{CMOS} \ref{14.217}, use
+\bibfield{typeaddon} with the value \textit{presented at the}:
 
 \begin{bibonly}
 \nocite{hong2015}
 \nocite{teplin2005}
+\end{bibonly}
+
+\noindent Without \bibfield{typeaddon}:
+
+\begin{bibonly}
+\nocite{hong2015.alt}
+\nocite{teplin2005.alt}
 \end{bibonly}
 
 \end{marglist}
@@ -3656,7 +3654,13 @@ correct.
 \item \cite{choi2008}
 \end{citebib}
 
-\setcounter{subsubsection}{216}
+\subsubsection{Unpublished manuscripts}
+% 14.216 Unpublished manuscripts
+
+\begin{citebib}
+\item \cite{balderdash2017}
+\end{citebib}
+
 \subsubsection{Lectures and papers or posters presented at meetings}
 % 14.217 Lectures and papers or posters presented at meetings
 \label{14.217}
