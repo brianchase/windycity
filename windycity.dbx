@@ -17,6 +17,7 @@
   bookvolume,
   bookbookvolume,
   bookyear,
+  collection,
   editoraddon,
   editoraaddon,
   endbookyear,

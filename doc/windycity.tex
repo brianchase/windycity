@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Oct 2021 06:57:23 PM CDT
+% Last modified: Thu 21 Oct 2021 07:30:55 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -384,7 +384,7 @@ collections. For discussion of multivolume works, see section
 \optitem[true]{dashed}{\opt{true}, \opt{false}}
 
 \noindent Set \opt{false} to remove the 3-em dash for repeated names
-in bibliographies and reference lists.
+in bibliographies.
 
 \optitem[true]{doi}{\opt{true}, \opt{false}}
 
@@ -1202,6 +1202,10 @@ For pseudonymous authors, another solution is to use the
 \bibfield{nameaddon} allows you to include an author's given name in
 the brackets. For examples, see \textit{CMOS} \ref{14.81}.
 
+\item[collection] Use this field with \bibtype{unpublished} works for
+names of manuscript collections. See examples in \textit{CMOS}
+\ref{14.222}, \ref{14.229}, and \ref{14.230}.
+
 \item[edition] To indicate a numbered edition of a work, put the
 edition's number in this field---for example, \textit{2} for a second
 edition. To indicate a revised edition, enter either \textit{revised}
@@ -1323,7 +1327,8 @@ field. To replicate examples in \textit{CMOS} \ref{14.217}, use
 \nocite{teplin2005}
 \end{bibonly}
 
-\noindent Without \bibfield{typeaddon}:
+\noindent For \textit{CMOS} \ref{14.216}, \bibfield{typeaddon}
+contains \textit{, last modified}:
 
 \begin{bibonly}
 \nocite{hong2015.alt}
@@ -3656,6 +3661,7 @@ correct.
 
 \subsubsection{Unpublished manuscripts}
 % 14.216 Unpublished manuscripts
+\label{14.216}
 
 \begin{citebib}
 \item \cite{balderdash2017}
@@ -3665,7 +3671,7 @@ correct.
 % 14.217 Lectures and papers or posters presented at meetings
 \label{14.217}
 
-Without using the optional \bibfield{typeaddon} field:
+Without using the \bibfield{typeaddon} field:
 
 \begin{citebib}
 \item \cite{hong2015.alt}
@@ -3700,6 +3706,49 @@ When \bibfield{typeaddon} contains \textit{presented at the}:
 \end{citebib}
 
 \setcounter{subsection}{8}
+\subsection{Manuscript Collections}
+\setcounter{subsection}{14}
+
+\setcounter{subsubsection}{221}
+\subsubsection{Note forms versus bibliography entries}
+% 14.222 Note forms versus bibliography entries
+\label{14.222}
+
+\begin{citebib}
+\item \cite[Alvin Johnson, memorandum, 1937, file 36,][]{kallen}
+\item \cite[Revere's Waste and Memoranda Book (vol. 1, 1761--83; vol. 2,
+1783--97),][]{revere}
+\end{citebib}
+
+\setcounter{subsubsection}{228}
+\subsubsection{Examples of note forms for manuscript collections}
+% 14.229 Examples of note forms for manuscript collections
+\label{14.229}
+
+\begin{citeonly}
+\item \cite[Burton to Merriam, telegram, 26 January 1923, box 26, folder
+17,][]{merriam}
+\item \cite[Minutes of the Committee for Improving the Condition of the Free
+Blacks, Pennsylvania Abolition Society, 1790--1803,][]{pasociety}
+\item \cite[Louis Agassiz, report to the Committee of Overseers\ldots
+\mkbibbrackets{28 December 1859},][]{overseers}
+\item \cite[Gilbert McMicken to Alexander Morris, 29 November 1881, Glasgow
+(Scotland), Document 1359, fol. 1r,][MS-12-84]{morris}
+\item \cite[Daily Expenses, July 1787, images 7--8,][]{washington}
+\end{citeonly}
+
+\setcounter{subsubsection}{229}
+\subsubsection{Examples of bibliography entries for manuscript collections}
+% 14.230 Examples of bibliography entries for manuscript collections
+\label{14.230}
+
+\begin{bibonly}
+\nocite{merriam}
+\nocite{pasociety}
+\nocite{washington}
+\end{bibonly}
+
+\setcounter{subsection}{9}
 \subsection{Special Types of References}
 \setcounter{subsection}{14}
 
@@ -3714,7 +3763,7 @@ citations below are different. They need the \bibtype{reference} or
 \bibtype{inreference} entry type. See section \ref{entrytypes} for
 more information. Following the suggestion in \textit{CMOS} 14.232,
 \bibtype{reference} and \bibtype{inreference} works don't appear in
-bibliographies or reference lists.
+bibliographies.
 
 \begin{citebib}
 \item \cite{salvation1980}
@@ -3731,8 +3780,8 @@ bibliographies or reference lists.
 Like some of the reference works in the previous section, the ones
 below need the \bibtype{reference} or \bibtype{inreference} entry
 type. As odd as it may seem, but consistent with \textit{CMOS}, they,
-too, aren't included in bibliographies and reference lists. See
-section \ref{entrytypes} for more information.
+too, aren't included in bibliographies. See section \ref{entrytypes}
+for more information.
 
 \begin{citeonly}
 \item \cite{toscanini2016}

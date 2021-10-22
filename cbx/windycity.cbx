@@ -1,4 +1,4 @@
-% Last modified: Sun 17 Oct 2021 11:24:00 AM CDT
+% Last modified: Thu 21 Oct 2021 06:16:01 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -189,16 +189,19 @@
      \usebibmacro{parencite:multicite}}}
 
 \newbibmacro*{parencite:date}{%
-  \ifboolexpr{ test {\ifentrytype{online}}
-               and test {\iffieldundef{year}}}
-    {\newunit
-     \usebibmacro{pubstate}{}}%
-    {\usebibmacro{parencite:origyear}%
-     \iffieldnums{labelyear}
-       {}% needs '%'
-       {\newunit}%
-     \usebibmacro{labeldate+endyear}%
-     \printfield{extradate}}}
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and not test {\iffieldundef{collection}}}
+    {}
+    {\ifboolexpr{ test {\ifentrytype{online}}
+                  and test {\iffieldundef{year}}}
+       {\newunit
+        \usebibmacro{pubstate}{}}%
+       {\usebibmacro{parencite:origyear}%
+        \iffieldnums{labelyear}
+          {}% needs '%'
+          {\newunit}%
+        \usebibmacro{labeldate+endyear}%
+        \printfield{extradate}}}}
 
 \newbibmacro*{parencite:origyear}{%
   \iffieldundef{origyear}
@@ -229,11 +232,14 @@
       \usebibmacro{cite:volume}}}}% needs '%'
 
 \newbibmacro*{parencite:new}{%
-  \iffieldundef{shorthand}
-    {\usebibmacro{parencite:auth+title}}%
-    {\printfield{shorthand}}%
-  \setunit{\addspace}% not '\setunit{\space}'
-  \usebibmacro{parencite:date}}%
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and not test {\iffieldundef{collection}}}
+    {\printfield{collection}}%
+    {\iffieldundef{shorthand}
+       {\usebibmacro{parencite:auth+title}}%
+       {\printfield{shorthand}}%
+     \setunit{\addspace}% not '\setunit{\space}'
+     \usebibmacro{parencite:date}}}
 
 \newbibmacro*{parencite:auth+title}{%
   \iftoggle{noauth}
@@ -325,11 +331,15 @@
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx:short}%
   \usebibmacro{test:multicite}%
-  \ifentrytype{review}
-    {\usebibmacro{short:review}}%
-    {\usebibmacro{author+bookauthor+etc}%
-     \usebibmacro{shorttitle+shortlinks}}%
-  \usebibmacro{cite:volume}}%
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and not test {\iffieldundef{collection}}}
+    {\usebibmacro{unpublished:collection}%
+     \usebibmacro{cite:punctuation}}%
+    {\ifentrytype{review}
+       {\usebibmacro{short:review}}%
+       {\usebibmacro{author+bookauthor+etc}%
+        \usebibmacro{shorttitle+shortlinks}}%
+     \usebibmacro{cite:volume}}}
 
 \newbibmacro*{test:multicite}{%
   \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
@@ -492,9 +502,11 @@
   \ifboolexpr{ test {\iffieldundef{postnote}}
                and test {\iffieldundef{pages}}
                and test {\iffieldundef{url}}}
-    {\usebibmacro{doi+url+etc}}%
+    {\usebibmacro{unpublished:series+etc}%
+     \usebibmacro{doi+url+etc}}%
     {\usebibmacro{cite:pages}%
      \usebibmacro{postnote}%
+     \usebibmacro{unpublished:series+etc}%
      \usebibmacro{doi+url+etc}}}
 
 % If the postnote is empty, print the page ranges of journal and
@@ -618,19 +630,21 @@
   \usebibmacro{author+title+etc}%
   \setunit{\addspace}% not '\setunit{\space}'
   \printtext[parens]{%
-    \usebibmacro{thesis:type}%
+    \usebibmacro{thesis:type+pubstate}%
     \usebibmacro{inst+loc+date}}%
   \newunit}%
 
 \DeclareBibliographyDriver{cite:unpublished}{%
-  \usebibmacro{author+title+etc}%
-  \setunit{\addspace}% not '\setunit{\space}'
-  \printtext[parens]{%
-    \iffieldundef{type}
-      {\usebibmacro{pubstate}{}}%
-      {\printfield{type}%
-       \setunit{\addcomma\space}}%
-    \usebibmacro{inst+loc+date}}%
+  \iffieldundef{collection}
+    {\usebibmacro{author+title+etc}%
+     \setunit{\addspace}% not '\setunit{\space}'
+     \printtext[parens]{%
+       \iffieldundef{type}
+         {\usebibmacro{pubstate}{}}%
+         {\printfield{type}%
+          \setunit{\addcomma\space}}%
+       \usebibmacro{inst+loc+date}}}
+    {\usebibmacro{unpublished:collection}}%
   \newunit}%
 
 \endinput

@@ -10,9 +10,11 @@ brianchase/windycity").
 
 ## Latest
 
+* added support for manuscript collections (see examples for *CMOS*
+  14.222, 14.229, and 14.230)
 * improved support for unpublished lectures, presentations, and
   similar works with the help of a `typeaddon` field (see examples for
-  *CMOS* 14.217)
+  *CMOS* 14.216 and 14.217)
 * added support for the `shorteditor` field and added a
   `shorttranslator` field (like `shortauthor`, they print only in the
   author's position of subsequent citations, not in bibliographies or

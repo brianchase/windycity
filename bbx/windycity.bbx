@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Oct 2021 06:54:01 PM CDT
+% Last modified: Thu 21 Oct 2021 06:39:17 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -316,8 +316,8 @@
     \field{volume}
     \literal{0}}}
 
-% When 'journal', 'journaltitle', 'organization', or 'blogtitle' goes
-% in the author's position.
+% When 'journal', 'journaltitle', 'organization', 'blogtitle' or
+% 'collection' goes in the author's position.
 
 \DeclareStyleSourcemap{
   \maps[datatype=bibtex]{
@@ -391,6 +391,19 @@
       \step[fieldsource=shortorganization]
       \step[fieldset=shortauthor, origfieldval]
       \step[fieldsource=shortauthor,
+            match=\regexp{(.+)},
+            replace=\regexp{{$1}}]
+    }
+  }
+}
+\DeclareStyleSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \pertype{unpublished}
+      \step[notfield=author, final]
+      \step[fieldsource=collection]
+      \step[fieldset=sortname, origfieldval]
+      \step[fieldsource=sortname,
             match=\regexp{(.+)},
             replace=\regexp{{$1}}]
     }
@@ -818,7 +831,10 @@
        {\usebibmacro{editors:a}%
         \ifnameundef{\cbx@namelist}
           {\toggletrue{noauth}%
-           \usebibmacro{authpos+deflabel}}%
+           \ifboolexpr{ test {\ifentrytype{unpublished}}
+                        and not test {\iffieldundef{collection}}}
+             {\usebibmacro{unpublished:collection}}%
+             {\usebibmacro{authpos+deflabel}}}
           {\usebibmacro{addplus+etc}%
            \usebibmacro{namehash+etc}}}
        {\usebibmacro{namehash+etc}}}}
@@ -877,6 +893,11 @@
      \usebibmacro{authpos+deflabel}%
      \newunit}%
     {\setunit{\addcomma\space}}}
+
+\newbibmacro*{unpublished:collection}{%
+  \iftoggle{shortlinks}
+    {\printtext[bibhyperref]{\printfield{collection}}}
+    {\printfield{collection}}}
 
 \newbibmacro*{supplement}{%
   \ifnameundef{afterword}
@@ -1878,7 +1899,7 @@
   \usebibmacro{bibindex}%
   \usebibmacro{author+title+etc}%
   \newunit
-  \usebibmacro{thesis:type}%
+  \usebibmacro{thesis:type+pubstate}%
   \usebibmacro{inst+loc+date}%
   \usebibmacro{doi+finentry+etc}}%
 
@@ -1886,8 +1907,11 @@
   \usebibmacro{bibindex}%
   \usebibmacro{author+title+etc}%
   \newunit
-  \usebibmacro{unpublished:type}%
-  \usebibmacro{inst+loc+date}%
+  \iffieldundef{collection}
+    {\usebibmacro{unpublished:type+pubstate}%
+     \usebibmacro{inst+loc+date}}%
+    {\usebibmacro{unpublished:type}%
+     \usebibmacro{unpublished:series+etc}}%
   \usebibmacro{doi+finentry+etc}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2129,7 +2153,7 @@
   \iffieldundef{volume}
     {}
     {\ifboolexpr{ togl {bibliography}
-               and togl {newauth}}
+                  and togl {newauth}}
        {\printfield[noformat]{volume}}%
        {\setunit{\space}%
         \printfield[noformat]{volume}}}}
@@ -2371,7 +2395,7 @@
         \togglefalse{edshift}}%
        {}}}
 
-\newbibmacro*{thesis:type}{%
+\newbibmacro*{thesis:type+pubstate}{%
   \ifentrytype{mathesis}
     {\bibstring{mathesis}%
      \setunit{\addcomma\space}}%
@@ -2385,7 +2409,7 @@
             {\printfield{type}}%
           \setunit{\addcomma\space}}}}}
 
-\newbibmacro*{unpublished:type}{%
+\newbibmacro*{unpublished:type+pubstate}{%
   \iffieldundef{type}
     {\usebibmacro{pubstate}{}}%
     {\printfield{type}%
@@ -2399,6 +2423,35 @@
        {\setunit{\space}}%
      \printfield{typeaddon}%
      \setunit{\space}}}
+
+\newbibmacro*{unpublished:type}{%
+  \iffieldundef{type}
+    {}
+    {\printfield{type}%
+     \newunit}}%
+
+\newbibmacro*{unpublished:series+etc}{%
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and not test {\iffieldundef{collection}}}
+    {\usebibmacro{unpublished:series}%
+     \usebibmacro{unpublished:volume}%
+     \newunit
+     \usebibmacro{inst+loc+date}}%
+    {}}
+
+\newbibmacro*{unpublished:series}{%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \usebibmacro{seriesaddon}%
+     \newunit}}%
+
+\newbibmacro*{unpublished:volume}{%
+  \iffieldundef{volume}
+    {}
+    {\printfield{volume}%
+     \newunit}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%
