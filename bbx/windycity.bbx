@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Oct 2021 06:39:17 PM CDT
+% Last modified: Fri 22 Oct 2021 09:24:02 AM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1905,12 +1905,15 @@
 
 \DeclareBibliographyDriver{unpublished}{%
   \usebibmacro{bibindex}%
-  \usebibmacro{author+title+etc}%
-  \newunit
   \iffieldundef{collection}
-    {\usebibmacro{unpublished:type+pubstate}%
+    {\usebibmacro{author+title+etc}%
+     \newunit
+     \usebibmacro{unpublished:type+pubstate}%
      \usebibmacro{inst+loc+date}}%
-    {\usebibmacro{unpublished:type}%
+    {\usebibmacro{author+bookauthor+etc}%
+     \usebibmacro{title+labeldate}%
+     \newunit
+     \usebibmacro{unpublished:type}%
      \usebibmacro{unpublished:series+etc}}%
   \usebibmacro{doi+finentry+etc}}%
 
@@ -2433,7 +2436,9 @@
 \newbibmacro*{unpublished:series+etc}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}
                and not test {\iffieldundef{collection}}}
-    {\usebibmacro{unpublished:series}%
+    {\usebibmacro{note}%
+     \usebibmacro{editors:b}%
+     \usebibmacro{unpublished:series}%
      \usebibmacro{unpublished:volume}%
      \newunit
      \usebibmacro{inst+loc+date}}%
