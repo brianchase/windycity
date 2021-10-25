@@ -1,4 +1,4 @@
-% Last modified: Fri 22 Oct 2021 09:24:02 AM CDT
+% Last modified: Mon 25 Oct 2021 06:29:41 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -715,12 +715,22 @@
 \DeclareFieldFormat{issuetitle}{\ifcapital{\MakeCapital{#1}}{#1}}
 \DeclareFieldFormat[letter,misc,patent]{title}{#1}
 \DeclareFieldFormat[letter,misc,patent]{labeltitle}{#1}
-\DeclareFieldFormat[thesis,unpublished]{title}{%
+\DeclareFieldFormat[thesis]{title}{%
   \iftoggle{bibliography}
     {\mkbibquote{#1}}%
     {\iftoggle{cbx:short}
        {\mkbibquote{#1}}%
        {\mkbibquote{#1}\nopunct}}}
+\DeclareFieldFormat[unpublished]{title}{%
+  \iftoggle{bibliography}
+    {\iffieldundef{collection}
+       {\mkbibquote{#1}}%
+       {#1}}%
+    {\iffieldundef{collection}
+       {\iftoggle{cbx:short}
+          {\mkbibquote{#1}}%
+          {\mkbibquote{#1}\nopunct}}%
+       {#1}}}
 \DeclareFieldFormat[thesis]{labeltitle}{%
   \iftoggle{bibliography}
     {\mkbibquote{#1}}%
@@ -1911,9 +1921,17 @@
      \usebibmacro{unpublished:type+pubstate}%
      \usebibmacro{inst+loc+date}}%
     {\usebibmacro{author+bookauthor+etc}%
-     \usebibmacro{title+labeldate}%
-     \newunit
-     \usebibmacro{unpublished:type}%
+     \iffieldundef{title}
+       {\usebibmacro{unpublished:type}}%
+       {\usebibmacro{title+titleaddon}{}%
+        \usebibmacro{unpublished:type}%
+        \setunit{\addcomma\space}%
+        \printlabeldate
+        \clearfield{date}%
+        \iffieldundef{type}
+          {\newunit
+           \usebibmacro{unpublished:collection}}%
+          {}}
      \usebibmacro{unpublished:series+etc}}%
   \usebibmacro{doi+finentry+etc}}%
 
@@ -2430,8 +2448,8 @@
 \newbibmacro*{unpublished:type}{%
   \iffieldundef{type}
     {}
-    {\printfield{type}%
-     \newunit}}%
+    {\newunit
+     \printfield{type}}}
 
 \newbibmacro*{unpublished:series+etc}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}

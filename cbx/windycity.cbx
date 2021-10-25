@@ -1,4 +1,4 @@
-% Last modified: Thu 21 Oct 2021 06:16:01 PM CDT
+% Last modified: Mon 25 Oct 2021 06:29:43 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -644,7 +644,14 @@
          {\printfield{type}%
           \setunit{\addcomma\space}}%
        \usebibmacro{inst+loc+date}}}
-    {\usebibmacro{unpublished:collection}}%
+    {\iffieldundef{title}
+       {}
+       {\usebibmacro{title+titleaddon}{}%
+        \setunit{\addcomma\space}%
+        \printlabeldate
+        \clearfield{date}%
+        \newunit}%
+     \usebibmacro{unpublished:collection}}%
   \newunit}%
 
 \endinput
