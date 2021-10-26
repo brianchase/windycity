@@ -1,4 +1,4 @@
-% Last modified: Mon 25 Oct 2021 06:29:41 PM CDT
+% Last modified: Tue 26 Oct 2021 05:49:41 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -699,12 +699,17 @@
 \DeclareFieldFormat{journaltitleaddon}{\mkbibbrackets{#1}}
 \DeclareFieldFormat{titleaddon}{\mkbibbrackets{#1}}
 
-\DeclareFieldFormat[article,incollection,online,reference,review]
+\DeclareFieldFormat[article,incollection,online,reference,review,thesis]
   {title}{\mkbibquote{#1}}
-\DeclareFieldFormat[article,incollection,online,reference,review]
+\DeclareFieldFormat[article,incollection,online,reference,review,thesis]
   {labeltitle}{\mkbibquote{#1}}
-\DeclareIndexFieldFormat[article,incollection,online,reference,review]
+\DeclareIndexFieldFormat[article,incollection,online,reference,review,thesis]
   {indextitle}{\usebibmacro{index:title}{\index}{\mkbibquote{#1}}}
+
+\DeclareFieldFormat[letter,misc,patent]{title}{#1}
+\DeclareFieldFormat[letter,misc,patent]{labeltitle}{#1}
+\DeclareIndexFieldFormat[letter,misc,patent]
+  {indextitle}{\usebibmacro{index:title}{\index}{#1}}
 
 \DeclareFieldAlias[inbook]{title}{title}
 \DeclareFieldAlias[inbook]{labeltitle}{labeltitle}
@@ -713,30 +718,18 @@
 
 \DeclareFieldFormat{chapter}{\bibstring{chapter}\space #1}
 \DeclareFieldFormat{issuetitle}{\ifcapital{\MakeCapital{#1}}{#1}}
-\DeclareFieldFormat[letter,misc,patent]{title}{#1}
-\DeclareFieldFormat[letter,misc,patent]{labeltitle}{#1}
-\DeclareFieldFormat[thesis]{title}{%
-  \iftoggle{bibliography}
+
+\DeclareFieldFormat[unpublished]
+  {title}{\usebibmacro{unpublished:format}{#1}}
+\DeclareFieldFormat[unpublished]
+  {labeltitle}{\usebibmacro{unpublished:format}{#1}}
+\DeclareIndexFieldFormat[unpublished]
+  {indextitle}{\usebibmacro{index:title}{\index}{% Macro below won't work here
+    \iffieldundef{collection}{\mkbibquote{#1}}{#1}}}
+\newbibmacro*{unpublished:format}[1]{%
+  \iffieldundef{collection}
     {\mkbibquote{#1}}%
-    {\iftoggle{cbx:short}
-       {\mkbibquote{#1}}%
-       {\mkbibquote{#1}\nopunct}}}
-\DeclareFieldFormat[unpublished]{title}{%
-  \iftoggle{bibliography}
-    {\iffieldundef{collection}
-       {\mkbibquote{#1}}%
-       {#1}}%
-    {\iffieldundef{collection}
-       {\iftoggle{cbx:short}
-          {\mkbibquote{#1}}%
-          {\mkbibquote{#1}\nopunct}}%
-       {#1}}}
-\DeclareFieldFormat[thesis]{labeltitle}{%
-  \iftoggle{bibliography}
-    {\mkbibquote{#1}}%
-    {\iftoggle{cbx:short}
-       {\mkbibquote{#1}}%
-       {\mkbibquote{#1}\nopunct}}}
+    {#1}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Other Field Formats  %%

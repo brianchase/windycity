@@ -28,6 +28,8 @@ brianchase/windycity").
   not all of the right conditions were met)
 * fixed the `shortlinks` bibliography option to stop `bibhyperref`
   from inserting links in bibliographies
+* fixed missing punctuation in notes between the title of an `@thesis`
+  entry and the `note` field
 * fixed a spacing problem in the postnotes of some `@review` entries
 
 ## 2021-07-07
