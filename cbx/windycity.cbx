@@ -1,4 +1,4 @@
-% Last modified: Mon 25 Oct 2021 06:29:43 PM CDT
+% Last modified: Wed 27 Oct 2021 07:02:47 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -190,6 +190,7 @@
 
 \newbibmacro*{parencite:date}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and test {\iffieldundef{title}}
                and not test {\iffieldundef{collection}}}
     {}
     {\ifboolexpr{ test {\ifentrytype{online}}
@@ -233,6 +234,7 @@
 
 \newbibmacro*{parencite:new}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and test {\iffieldundef{title}}
                and not test {\iffieldundef{collection}}}
     {\printfield{collection}}%
     {\iffieldundef{shorthand}
@@ -332,6 +334,7 @@
   \global\toggletrue{cbx:short}%
   \usebibmacro{test:multicite}%
   \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and test {\iffieldundef{title}}
                and not test {\iffieldundef{collection}}}
     {\usebibmacro{unpublished:collection}%
      \usebibmacro{cite:punctuation}}%
@@ -646,7 +649,8 @@
        \usebibmacro{inst+loc+date}}}
     {\iffieldundef{title}
        {}
-       {\usebibmacro{title+titleaddon}{}%
+       {\usebibmacro{author+bookauthor+etc}%
+        \usebibmacro{title+titleaddon}{}%
         \setunit{\addcomma\space}%
         \printlabeldate
         \clearfield{date}%
