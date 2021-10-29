@@ -1,4 +1,4 @@
-% Last modified: Wed 27 Oct 2021 07:02:47 PM CDT
+% Last modified: Fri 29 Oct 2021 06:34:08 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -189,20 +189,16 @@
      \usebibmacro{parencite:multicite}}}
 
 \newbibmacro*{parencite:date}{%
-  \ifboolexpr{ test {\ifentrytype{unpublished}}
-               and test {\iffieldundef{title}}
-               and not test {\iffieldundef{collection}}}
-    {}
-    {\ifboolexpr{ test {\ifentrytype{online}}
-                  and test {\iffieldundef{year}}}
-       {\newunit
-        \usebibmacro{pubstate}{}}%
-       {\usebibmacro{parencite:origyear}%
-        \iffieldnums{labelyear}
-          {}% needs '%'
-          {\newunit}%
-        \usebibmacro{labeldate+endyear}%
-        \printfield{extradate}}}}
+  \ifboolexpr{ test {\ifentrytype{online}}
+               and test {\iffieldundef{year}}}
+    {\newunit
+     \usebibmacro{pubstate}{}}%
+    {\usebibmacro{parencite:origyear}%
+     \iffieldnums{labelyear}
+       {}% needs '%'
+       {\newunit}%
+     \usebibmacro{labeldate+endyear}%
+     \printfield{extradate}}}
 
 \newbibmacro*{parencite:origyear}{%
   \iffieldundef{origyear}
@@ -233,15 +229,11 @@
       \usebibmacro{cite:volume}}}}% needs '%'
 
 \newbibmacro*{parencite:new}{%
-  \ifboolexpr{ test {\ifentrytype{unpublished}}
-               and test {\iffieldundef{title}}
-               and not test {\iffieldundef{collection}}}
-    {\printfield{collection}}%
-    {\iffieldundef{shorthand}
-       {\usebibmacro{parencite:auth+title}}%
-       {\printfield{shorthand}}%
-     \setunit{\addspace}% not '\setunit{\space}'
-     \usebibmacro{parencite:date}}}
+  \iffieldundef{shorthand}
+    {\usebibmacro{parencite:auth+title}}%
+    {\printfield{shorthand}}%
+  \setunit{\addspace}% not '\setunit{\space}'
+  \usebibmacro{parencite:date}}%
 
 \newbibmacro*{parencite:auth+title}{%
   \iftoggle{noauth}
@@ -257,7 +249,7 @@
                      and test {\ifnameundef{foreword}}
                      and test {\ifnameundef{introduction}}
                      and test {\ifnameundef{preface}}}
-          {\usebibmacro{author+bookauthor+etc}}%
+          {\usebibmacro{collection+author+etc}}%
           {\usebibmacro{supplement}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -333,16 +325,15 @@
 \newbibmacro*{cite:short}{%
   \global\toggletrue{cbx:short}%
   \usebibmacro{test:multicite}%
-  \ifboolexpr{ test {\ifentrytype{unpublished}}
-               and test {\iffieldundef{title}}
-               and not test {\iffieldundef{collection}}}
-    {\usebibmacro{unpublished:collection}%
-     \usebibmacro{cite:punctuation}}%
-    {\ifentrytype{review}
-       {\usebibmacro{short:review}}%
-       {\usebibmacro{author+bookauthor+etc}%
-        \usebibmacro{shorttitle+shortlinks}}%
-     \usebibmacro{cite:volume}}}
+  \ifentrytype{review}
+    {\usebibmacro{short:review}}%
+    {\usebibmacro{collection+author+etc}%
+     \usebibmacro{shorttitle+shortlinks}%
+     \ifboolexpr{ togl {ibidpage}
+                  and test \ifloccit
+                  and not test \iffirstonpage}
+       {\global\toggletrue{ibid:loccit}}%
+       {\usebibmacro{cite:volume}}}}
 
 \newbibmacro*{test:multicite}{%
   \ifboolexpr{ test {\iffieldequals{namehash}{\bbx@lasthash}}
@@ -366,6 +357,13 @@
            \usebibmacro{shorttitle}{book}}%
           {\usebibmacro{author+bookauthor+etc}%
            \usebibmacro{shorttitle+shortlinks}}}}}
+
+\newbibmacro*{collection+author+etc}{%
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and test {\iffieldundef{title}}
+               and not test {\iffieldundef{collection}}}
+    {\usebibmacro{unpublished:collection}}%
+    {\usebibmacro{author+bookauthor+etc}}}
 
 \newbibmacro*{cite:volume}{%
   \iftoggle{ibid:loccit}
@@ -647,15 +645,15 @@
          {\printfield{type}%
           \setunit{\addcomma\space}}%
        \usebibmacro{inst+loc+date}}}
-    {\iffieldundef{title}
+    {\usebibmacro{collection+author+etc}%
+     \iffieldundef{title}
        {}
-       {\usebibmacro{author+bookauthor+etc}%
-        \usebibmacro{title+titleaddon}{}%
+       {\usebibmacro{title+titleaddon}{}%
         \setunit{\addcomma\space}%
         \printlabeldate
         \clearfield{date}%
-        \newunit}%
-     \usebibmacro{unpublished:collection}}%
+        \newunit
+        \usebibmacro{unpublished:collection}}}% needs '%'
   \newunit}%
 
 \endinput
