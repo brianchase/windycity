@@ -1,4 +1,4 @@
-% Last modified: Fri 29 Oct 2021 06:35:19 PM CDT
+% Last modified: Fri 29 Oct 2021 06:49:59 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -895,12 +895,25 @@
      \newunit}%
     {\setunit{\addcomma\space}}}
 
-\newbibmacro*{unpublished:collection}{%
+\newbibmacro*{unpublished:collection+old}{%
   \iffieldundef{collection}
     {}
     {\iftoggle{shortlinks}
        {\printtext[bibhyperref]{\printfield{collection}}}
        {\printfield{collection}}}}
+
+\newbibmacro*{unpublished:collection}{%
+  \ifboolexpr{ test {\iffieldundef{collection}}
+               and test {\iffieldundef{shortcollection}}}
+    {}
+    {\ifboolexpr{ togl {cbx:short}
+                  and not test {\iffieldundef{shortcollection}}}
+       {\iftoggle{shortlinks}
+          {\printtext[bibhyperref]{\printfield{shortcollection}}}
+          {\printfield{shortcollection}}}
+       {\iftoggle{shortlinks}
+          {\printtext[bibhyperref]{\printfield{collection}}}
+          {\printfield{collection}}}}}
 
 \newbibmacro*{supplement}{%
   \ifnameundef{afterword}
