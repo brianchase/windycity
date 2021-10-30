@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Oct 2021 03:45:20 PM CDT
+% Last modified: Sat 30 Oct 2021 03:45:37 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1642,7 +1642,8 @@
     {\iffieldundef{pubstate}
        {\usebibmacro{labeldate+date}{#1}}%
        {\iffieldequalstr{pubstate}{preprint}
-          {\bibstring{preprint}%
+          {\newunit
+           \bibstring{preprint}%
            \setunit{\space}}%
           {\iffieldequalstr{pubstate}{prepub}
              {\newunit% necessary if no 'date'
@@ -1650,7 +1651,8 @@
               \setunit{\addcomma\space}%
               \printdate}%
              {\iffieldequalstr{pubstate}{working}
-                {\bibstring{working}%
+                {\newunit
+                 \bibstring{working}%
                  \setunit{\addcomma\space}}%
                 {\ifstrequal{#1}{parens}
                    {\printtext[parens]{\printfield{pubstate}}}
@@ -1917,15 +1919,16 @@
   \iffieldundef{collection}
     {\usebibmacro{author+title+etc}%
      \newunit
-     \usebibmacro{unpublished:type+pubstate}%
+     \usebibmacro{type+typeaddon}%
+     \usebibmacro{pubstate}{}%
      \usebibmacro{inst+loc+date}}%
     {\iffieldundef{title}
        {\toggletrue{skipdate}%
         \usebibmacro{author+bookauthor+etc}%
-        \usebibmacro{unpublished:type}}%
+        \usebibmacro{type+typeaddon}}%
        {\usebibmacro{author+bookauthor+etc}%
         \usebibmacro{title+titleaddon}{}%
-        \usebibmacro{unpublished:type}%
+        \usebibmacro{type+typeaddon}%
         \setunit{\addcomma\space}%
         \clearfield{labeldate}%
         \iftoggle{reflist}
@@ -2139,17 +2142,18 @@
         \printdate}%
        {\printdate}}}
 
-\newbibmacro*{unpublished:type+pubstate}{%
-  \iffieldundef{type}
-    {\usebibmacro{pubstate}{}}%
-    {\printfield{type}%
-     \usebibmacro{typeaddon}}}
-
-\newbibmacro*{unpublished:type}{%
+\newbibmacro*{type+typeaddon}{%
   \iffieldundef{type}
     {}
     {\newunit
-     \printfield{type}}}
+     \printfield{type}%
+     \iffieldundef{typeaddon}
+       {\setunit{\addcomma\space}}%
+       {\iffieldstart{typeaddon}{,}
+          {}
+          {\setunit{\space}}%
+        \printfield{typeaddon}%
+        \setunit{\space}}}}
 
 \newbibmacro*{unpublished:note+etc}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}
@@ -2456,15 +2460,6 @@
         \clearfield{pages}%
         \togglefalse{edshift}}%
        {}}}
-
-\newbibmacro*{typeaddon}{%
-  \iffieldundef{typeaddon}
-    {\setunit{\addcomma\space}}%
-    {\iffieldstart{typeaddon}{,}
-       {}
-       {\setunit{\space}}%
-     \printfield{typeaddon}%
-     \setunit{\space}}}
 
 \newbibmacro*{unpublished:series}{%
   \iffieldundef{series}
