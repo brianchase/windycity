@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Oct 2021 03:26:45 PM CDT
+% Last modified: Sat 30 Oct 2021 03:45:20 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -894,13 +894,6 @@
      \usebibmacro{authpos+deflabel}%
      \newunit}%
     {\setunit{\addcomma\space}}}
-
-\newbibmacro*{unpublished:collection+old}{%
-  \iffieldundef{collection}
-    {}
-    {\iftoggle{shortlinks}
-       {\printtext[bibhyperref]{\printfield{collection}}}
-       {\printfield{collection}}}}
 
 \newbibmacro*{unpublished:collection}{%
   \ifboolexpr{ test {\iffieldundef{collection}}
@@ -1943,7 +1936,7 @@
           {\newunit
            \usebibmacro{unpublished:collection}}%
           {}}
-     \usebibmacro{unpublished:series+etc}}%
+     \usebibmacro{unpublished:note+etc}}%
   \usebibmacro{doi+finentry+etc}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2158,7 +2151,7 @@
     {\newunit
      \printfield{type}}}
 
-\newbibmacro*{unpublished:series+etc}{%
+\newbibmacro*{unpublished:note+etc}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}
                and not test {\iffieldundef{collection}}}
     {\usebibmacro{note}%

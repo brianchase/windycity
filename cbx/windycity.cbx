@@ -1,4 +1,4 @@
-% Last modified: Fri 29 Oct 2021 06:34:08 PM CDT
+% Last modified: Sat 30 Oct 2021 03:46:05 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -503,11 +503,11 @@
   \ifboolexpr{ test {\iffieldundef{postnote}}
                and test {\iffieldundef{pages}}
                and test {\iffieldundef{url}}}
-    {\usebibmacro{unpublished:series+etc}%
+    {\usebibmacro{unpublished:note+etc}%
      \usebibmacro{doi+url+etc}}%
     {\usebibmacro{cite:pages}%
      \usebibmacro{postnote}%
-     \usebibmacro{unpublished:series+etc}%
+     \usebibmacro{unpublished:note+etc}%
      \usebibmacro{doi+url+etc}}}
 
 % If the postnote is empty, print the page ranges of journal and
