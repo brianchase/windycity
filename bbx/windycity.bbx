@@ -1,4 +1,4 @@
-% Last modified: Fri 29 Oct 2021 06:49:59 PM CDT
+% Last modified: Sat 30 Oct 2021 03:26:45 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2113,6 +2113,20 @@
   \toggletrue{edshift}%
   \usebibmacro{editors:b}}%
 
+\newbibmacro*{thesis:type+pubstate}{%
+  \ifentrytype{mathesis}
+    {\bibstring{mathesis}%
+     \setunit{\addcomma\space}}%
+    {\ifentrytype{phdthesis}
+       {\bibstring{phdthesis}%
+        \setunit{\addcomma\space}}%
+       {\iffieldundef{type}
+         {\usebibmacro{pubstate}{}}%
+         {\iffieldbibstring{type}
+            {\bibstring{\thefield{type}}}
+            {\printfield{type}}%
+          \setunit{\addcomma\space}}}}}
+
 \newbibmacro*{inst+loc+date}{%
   \ifboolexpr{ test {\iflistundef{institution}}
                and test {\iflistundef{venue}}}
@@ -2131,6 +2145,29 @@
        {\usebibmacro{reflist+year+day}%
         \printdate}%
        {\printdate}}}
+
+\newbibmacro*{unpublished:type+pubstate}{%
+  \iffieldundef{type}
+    {\usebibmacro{pubstate}{}}%
+    {\printfield{type}%
+     \usebibmacro{typeaddon}}}
+
+\newbibmacro*{unpublished:type}{%
+  \iffieldundef{type}
+    {}
+    {\newunit
+     \printfield{type}}}
+
+\newbibmacro*{unpublished:series+etc}{%
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and not test {\iffieldundef{collection}}}
+    {\usebibmacro{note}%
+     \usebibmacro{editors:b}%
+     \usebibmacro{unpublished:series}%
+     \usebibmacro{unpublished:volume}%
+     \newunit
+     \usebibmacro{inst+loc+date}}%
+    {}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Third Tier Macros  %%
@@ -2427,26 +2464,6 @@
         \togglefalse{edshift}}%
        {}}}
 
-\newbibmacro*{thesis:type+pubstate}{%
-  \ifentrytype{mathesis}
-    {\bibstring{mathesis}%
-     \setunit{\addcomma\space}}%
-    {\ifentrytype{phdthesis}
-       {\bibstring{phdthesis}%
-        \setunit{\addcomma\space}}%
-       {\iffieldundef{type}
-         {\usebibmacro{pubstate}{}}%
-         {\iffieldbibstring{type}
-            {\bibstring{\thefield{type}}}
-            {\printfield{type}}%
-          \setunit{\addcomma\space}}}}}
-
-\newbibmacro*{unpublished:type+pubstate}{%
-  \iffieldundef{type}
-    {\usebibmacro{pubstate}{}}%
-    {\printfield{type}%
-     \usebibmacro{typeaddon}}}
-
 \newbibmacro*{typeaddon}{%
   \iffieldundef{typeaddon}
     {\setunit{\addcomma\space}}%
@@ -2455,23 +2472,6 @@
        {\setunit{\space}}%
      \printfield{typeaddon}%
      \setunit{\space}}}
-
-\newbibmacro*{unpublished:type}{%
-  \iffieldundef{type}
-    {}
-    {\newunit
-     \printfield{type}}}
-
-\newbibmacro*{unpublished:series+etc}{%
-  \ifboolexpr{ test {\ifentrytype{unpublished}}
-               and not test {\iffieldundef{collection}}}
-    {\usebibmacro{note}%
-     \usebibmacro{editors:b}%
-     \usebibmacro{unpublished:series}%
-     \usebibmacro{unpublished:volume}%
-     \newunit
-     \usebibmacro{inst+loc+date}}%
-    {}}
 
 \newbibmacro*{unpublished:series}{%
   \iffieldundef{series}
