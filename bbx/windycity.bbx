@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Oct 2021 03:45:37 PM CDT
+% Last modified: Sun 31 Oct 2021 01:39:10 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1755,6 +1755,14 @@
        {}
        {\textendash\printfield{endorigyear}}}}
 
+\newbibmacro*{year+month+day}{%
+  \iffieldundef{year}
+    {}
+    {\iffieldundef{month}
+       {\usebibmacro{reflist+year+day}%
+        \printdate}%
+       {\printdate}}}
+
 % For reference lists.
 
 \newbibmacro*{a:labeldate+extradate}{%
@@ -1809,6 +1817,14 @@
 %%  Locations  %%
 %%%%%%%%%%%%%%%%%
 
+\newbibmacro*{journallocation}{%
+  \iflistundef{location}
+    {}
+    {\nopunct\setunit{\space}%
+     \printtext[parens]{%
+       \printlist{location}}}%
+     \clearlist{location}}%
+
 \newbibmacro*{loc+pub+year}{%
   \usebibmacro{loc+pub}{1}%
   \ifnumgreater{\value{publisher}}{1}
@@ -1819,17 +1835,23 @@
   \usebibmacro{year+bookyear}}%
 
 \newbibmacro*{loc+pub}[1]{%
-  \usebibmacro{location}{#1}%
+  \usebibmacro{location:a}{#1}%
   \setunit{\addcolon\space}%
   \printlist[publisher][#1-#1]{publisher}}%
 
-\newbibmacro*{location}[1]{%
+\newbibmacro*{location:a}[1]{%
   \ifboolexpr{ test {\iflistundef{location}}
                and test {\iffieldundef{howpublished}}
                and test {\iffieldundef{url}}
                and test {\iffieldundef{doi}}}
     {\bibstring{noplace}}%
     {\printlist[location][#1-#1]{location}}}
+
+\newbibmacro*{location:b}{%
+  \iflistundef{location}
+    {}
+    {\printlist{location}%
+     \setunit{\addcomma\space}}}
 
 \newbibmacro*{origlocation}{%
   \iflistundef{origlocation}
@@ -1838,6 +1860,15 @@
      \iflistundef{origpublisher}
        {\setunit{\addcomma\space}}%
        {\setunit{\addcolon\space}}}}
+
+\newbibmacro*{institution+venue}{%
+  \ifboolexpr{ test {\iflistundef{institution}}
+               and test {\iflistundef{venue}}}
+    {}
+    {\iflistundef{institution}
+       {\printfield{venue}}%
+       {\printlist{institution}}%
+     \setunit{\addcomma\space}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers  %%
@@ -2124,23 +2155,9 @@
           \setunit{\addcomma\space}}}}}
 
 \newbibmacro*{inst+loc+date}{%
-  \ifboolexpr{ test {\iflistundef{institution}}
-               and test {\iflistundef{venue}}}
-    {}
-    {\iflistundef{institution}
-       {\printfield{venue}}%
-       {\printlist{institution}}%
-     \setunit{\addcomma\space}}%
-  \iflistundef{location}
-    {}
-    {\printlist{location}%
-     \setunit{\addcomma\space}}%
-  \iffieldundef{year}
-    {}
-    {\iffieldundef{month}
-       {\usebibmacro{reflist+year+day}%
-        \printdate}%
-       {\printdate}}}
+  \usebibmacro{institution+venue}%
+  \usebibmacro{location:b}%
+  \usebibmacro{year+month+day}}%
 
 \newbibmacro*{type+typeaddon}{%
   \iffieldundef{type}
@@ -2193,14 +2210,6 @@
        {\printfield[noformat]{part}}%
      \setunit{\addcomma\space}%
      \clearfield{part}}}
-
-\newbibmacro*{journallocation}{%
-  \iflistundef{location}
-    {}
-    {\nopunct\setunit{\space}%
-     \printtext[parens]{%
-       \printlist{location}}}%
-     \clearlist{location}}%
 
 \newbibmacro*{journalseries}{%
   \iffieldundef{series}
