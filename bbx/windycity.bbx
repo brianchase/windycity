@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Oct 2021 01:39:10 PM CDT
+% Last modified: Sun 31 Oct 2021 06:04:02 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1763,6 +1763,18 @@
         \printdate}%
        {\printdate}}}
 
+\newbibmacro*{year+month+day+old}{%
+  \iffieldundef{year}
+    {}
+    {\ifboolexpr{ togl {reflist}
+                  and togl {bibliography}
+                  and test {\iffieldundef{month}}}
+       {}
+       {\iffieldundef{month}
+          {\usebibmacro{reflist+year+day}%
+           \printdate}%
+          {\printdate}}}}
+
 % For reference lists.
 
 \newbibmacro*{a:labeldate+extradate}{%
@@ -1961,11 +1973,11 @@
         \usebibmacro{title+titleaddon}{}%
         \usebibmacro{type+typeaddon}%
         \setunit{\addcomma\space}%
-        \clearfield{labeldate}%
-        \iftoggle{reflist}
+        \ifboolexpr{ togl {reflist}
+                     and test {\iffieldundef{month}}}
           {}
-          {\usebibmacro{labeldate+date}{label}%
-           \clearfield{date}}%
+          {\printdate
+           \clearfield{year}}%
         \iffieldundef{type}
           {\newunit
            \usebibmacro{unpublished:collection}}%

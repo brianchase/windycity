@@ -1,4 +1,4 @@
-% Last modified: Sat 30 Oct 2021 03:46:05 PM CDT
+% Last modified: Sun 31 Oct 2021 06:04:15 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -650,8 +650,10 @@
        {}
        {\usebibmacro{title+titleaddon}{}%
         \setunit{\addcomma\space}%
-        \printlabeldate
-        \clearfield{date}%
+        \iffieldundef{year}
+          {\printlabeldate}% for 'n.d.'
+          {\printdate
+           \global\clearfield{year}}% needs '\global'
         \newunit
         \usebibmacro{unpublished:collection}}}% needs '%'
   \newunit}%
