@@ -1,4 +1,4 @@
-% Last modified: Sun 31 Oct 2021 06:04:02 PM CDT
+% Last modified: Mon 01 Nov 2021 05:13:30 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1976,8 +1976,10 @@
         \ifboolexpr{ togl {reflist}
                      and test {\iffieldundef{month}}}
           {}
-          {\printdate
-           \clearfield{year}}%
+          {\iffieldundef{year}
+             {\printlabeldate}% for 'n.d.'
+             {\printdate
+              \clearfield{year}}}
         \iffieldundef{type}
           {\newunit
            \usebibmacro{unpublished:collection}}%
