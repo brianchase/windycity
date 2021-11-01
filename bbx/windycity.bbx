@@ -1,4 +1,4 @@
-% Last modified: Mon 01 Nov 2021 05:13:30 PM CDT
+% Last modified: Mon 01 Nov 2021 05:14:35 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1344,7 +1344,7 @@
     {\usebibmacro{printnames}}%
   \usebibmacro{handle}%
   \usebibmacro{nameaddon}%
-  \usebibmacro{newauth+journallocation}%
+  \usebibmacro{newauth+location}%
   \usebibmacro{a:labeldate+extradate}%
   \usebibmacro{clearnames+empty}}%
 
@@ -1392,11 +1392,11 @@
        {\printfield[brackets]{nameaddon}%
         \clearfield{nameaddon}}}}
 
-\newbibmacro*{newauth+journallocation}{%
+\newbibmacro*{newauth+location}{%
   \iftoggle{newauth}
     {\ifboolexpr{ test {\ifentrytype{article}}
                   and togl {bibliography}}
-       {\usebibmacro{journallocation}%
+       {\usebibmacro{article:location}%
         \newunit}%
        {}}
     {}}
@@ -1829,7 +1829,7 @@
 %%  Locations  %%
 %%%%%%%%%%%%%%%%%
 
-\newbibmacro*{journallocation}{%
+\newbibmacro*{article:location}{%
   \iflistundef{location}
     {}
     {\nopunct\setunit{\space}%
@@ -1964,6 +1964,7 @@
      \newunit
      \usebibmacro{type+typeaddon}%
      \usebibmacro{pubstate}{}%
+     \usebibmacro{unpublished:series}%
      \usebibmacro{inst+loc+date}}%
     {\iffieldundef{title}
        {\toggletrue{skipdate}%
@@ -2016,8 +2017,8 @@
   \usebibmacro{part}%
   \usebibmacro{issuetitle}%
   \usebibmacro{title+titleaddon}{journal}%
-  \usebibmacro{journallocation}%
-  \usebibmacro{journalseries}%
+  \usebibmacro{article:series}%
+  \usebibmacro{article:location}%
   \usebibmacro{volume}%
   \iftoggle{newauth}
     {\newunit}%
@@ -2069,14 +2070,14 @@
      \toggletrue{edshift}%
      \usebibmacro{byauthor}%
      \usebibmacro{editors:b}%
-     \usebibmacro{volumes+bookseries+etc}{}}%
+     \usebibmacro{volumes+series+etc}{}}%
     {\usebibmacro{title+labeldate}{}%
      \usebibmacro{byauthor}%
      \iffieldundef{maintitle}
        {\usebibmacro{note+edition+etc}%
-        \usebibmacro{volumes+bookseries+etc}{}}%
+        \usebibmacro{volumes+series+etc}{}}%
        {\usebibmacro{editors:b}%
-        \usebibmacro{volumes+bookseries+etc}{}%
+        \usebibmacro{volumes+series+etc}{}%
         \usebibmacro{maintitle+note+etc}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
@@ -2225,7 +2226,7 @@
      \setunit{\addcomma\space}%
      \clearfield{part}}}
 
-\newbibmacro*{journalseries}{%
+\newbibmacro*{article:series}{%
   \iffieldundef{series}
     {}
     {\iftoggle{newauth}
@@ -2375,9 +2376,9 @@
      \usebibmacro{test:authortypes}{author}%
      \usebibmacro{printnames+etc}}}
 
-\newbibmacro*{volumes+bookseries+etc}[1]{%
+\newbibmacro*{volumes+series+etc}[1]{%
   \usebibmacro{volumes}%
-  \usebibmacro{bookseries}%
+  \usebibmacro{book:series}%
   \usebibmacro{pages}%
   \usebibmacro{volume+number+etc}{#1}%
   \usebibmacro{book:number}%
@@ -2457,9 +2458,9 @@
        \usebibmacro{note+edition+etc}%
        \iffieldundef{volume}
          {\iffieldundef{bookvolume}%
-            {\usebibmacro{volumes+bookseries+etc}{bookbook}}%
-            {\usebibmacro{volumes+bookseries+etc}{book}}}
-         {\usebibmacro{volumes+bookseries+etc}{}}}}
+            {\usebibmacro{volumes+series+etc}{bookbook}}%
+            {\usebibmacro{volumes+series+etc}{book}}}
+         {\usebibmacro{volumes+series+etc}{}}}}
   \usebibmacro{date+loc+etc}%
   \usebibmacro{origtitle}}%
 
@@ -2545,7 +2546,7 @@
         \printfield{volumes}%
         \clearfield{volumes}}}}
 
-\newbibmacro*{bookseries}{%
+\newbibmacro*{book:series}{%
   \iffieldundef{series}
     {}
     {\usebibmacro{pages}%
@@ -2626,7 +2627,7 @@
   \iftoggle{swapvol}
     {\usebibmacro{note}%
      \usebibmacro{edition}{}%
-     \usebibmacro{volumes+bookseries+etc}{}%
+     \usebibmacro{volumes+series+etc}{}%
      \usebibmacro{title+titleaddon}{}%
      \toggletrue{edshift}%
      \usebibmacro{byauthor}%
@@ -2635,7 +2636,7 @@
      \toggletrue{edshift}%
      \usebibmacro{booktitle}%
      \usebibmacro{note+edition+etc}%
-     \usebibmacro{volumes+bookseries+etc}{}}}
+     \usebibmacro{volumes+series+etc}{}}}
 
 \newbibmacro*{incollections:ic}{%
   \iftoggle{swapvol}
@@ -2644,7 +2645,7 @@
        {\usebibmacro{bookbooktitle}{}%
         \toggletrue{edshift}%
         \usebibmacro{note+edition+etc}}%
-     \usebibmacro{volumes+bookseries+etc}{book}%
+     \usebibmacro{volumes+series+etc}{book}%
      \toggletrue{edshift}%
      \usebibmacro{booktitle}%
      \usebibmacro{editors:b}}%
@@ -2657,6 +2658,6 @@
        {\usebibmacro{bookbooktitle}{}%
         \toggletrue{edshift}%
         \usebibmacro{note+edition+etc}}%
-     \usebibmacro{volumes+bookseries+etc}{book}}}
+     \usebibmacro{volumes+series+etc}{book}}}
 
 \endinput

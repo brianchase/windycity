@@ -26,10 +26,12 @@ brianchase/windycity").
 * fixed at least one bug with the `ibidpage` bibliography option (it
   prevented page numbers from printing in some contexts where most but
   not all of the right conditions were met)
-* fixed the `shortlinks` bibliography option to stop `bibhyperref`
-  from inserting links in bibliographies
-* fixed missing punctuation in notes between the title of an `@thesis`
-  entry and the `note` field
+* fixed the `shortlinks` bibliography option to stop it from inserting
+  links in bibliographies (the links are meant only for citations)
+* fixed the relative positions of `series` and `location` in
+  `@article` entries
+* fixed missing punctuation in notes between `title` and `note` in
+  `@thesis` entries
 * fixed a spacing problem in the postnotes of some `@review` entries
 
 ## 2021-07-07
