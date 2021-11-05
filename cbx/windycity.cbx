@@ -1,4 +1,4 @@
-% Last modified: Mon 01 Nov 2021 05:14:19 PM CDT
+% Last modified: Fri 05 Nov 2021 05:43:37 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -168,8 +168,17 @@
   {\multicitedelim}%
   {\usebibmacro{cite:postnote}}%
 
+\DeclareCiteCommand{\parenauth}[\mkbibparens]
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \toggletrue{cbx:skipdate}%
+   \usebibmacro{parencite}}%
+  {\multicitedelim}%
+  {\usebibmacro{postnote}}%
+
 \DeclareMultiCiteCommand{\idemcites}{\idemcite}{\multicitedelim}%
-\DeclareMultiCiteCommand{\footidemcites}[\mkbibfootnote]{\footidemcite}{\multicitedelim}
+\DeclareMultiCiteCommand{\footidemcites}[\mkbibfootnote]{\footidemcite}{\multicitedelim}%
+\DeclareMultiCiteCommand{\parenauths}[\mkbibparens]{\parenauth}{\multicitedelim}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Parenthetical Citations  %%
@@ -189,16 +198,18 @@
      \usebibmacro{parencite:multicite}}}
 
 \newbibmacro*{parencite:date}{%
-  \ifboolexpr{ test {\ifentrytype{online}}
-               and test {\iffieldundef{year}}}
-    {\newunit
-     \usebibmacro{pubstate}{}}%
-    {\usebibmacro{parencite:origyear}%
-     \iffieldnums{labelyear}
-       {}% needs '%'
-       {\newunit}%
-     \usebibmacro{labeldate+endyear}%
-     \printfield{extradate}}}
+  \iftoggle{cbx:skipdate}
+    {}
+    {\ifboolexpr{ test {\ifentrytype{online}}
+                  and test {\iffieldundef{year}}}
+       {\newunit
+        \usebibmacro{pubstate}{}}%
+       {\usebibmacro{parencite:origyear}%
+        \iffieldnums{labelyear}
+          {}% needs '%'
+          {\newunit}%
+        \usebibmacro{labeldate+endyear}%
+        \printfield{extradate}}}}
 
 \newbibmacro*{parencite:origyear}{%
   \iffieldundef{origyear}

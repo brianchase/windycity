@@ -15,6 +15,9 @@ brianchase/windycity").
 * improved support for unpublished lectures, presentations, and
   similar works with the help of a `typeaddon` field (see examples for
   *CMOS* 14.216 and 14.217)
+* added `\parenauth` and `\parenauths` citation commands for
+  parenthetical citations that omit the year (see example in *CMOS*
+  15.54)
 * added support for the `shorteditor` field and added a
   `shorttranslator` field (like `shortauthor`, they print only in the
   author's position of subsequent citations, not in bibliographies or

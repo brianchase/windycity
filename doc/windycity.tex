@@ -1,4 +1,4 @@
-% Last modified: Fri 29 Oct 2021 06:58:29 PM CDT
+% Last modified: Fri 05 Nov 2021 05:43:24 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -953,12 +953,11 @@ The source for the passage above contains:
 
 \end{ltxsyntax}
 
-\subsubsection{Other Citation Commands}
-\label{cust.cmd}
+\subsubsection{Custom Commands: \emph{\cmd{idemcite}}}
+\label{idemcite}
 
-Windy City's custom citation commands are convenient but not strictly
-necessary. They make certain citations simpler than they would be with
-standard commands.
+This family of citation commands isn't strictly necessary but makes
+some citations simpler than they would be with standard commands.
 
 \begin{ltxsyntax}
 \cmditem{idemcite}[prenote][postnote]{key}
@@ -1016,6 +1015,25 @@ file easier to read:
 
 Notice that the only reason to use \cmd{footidemcites} rather than
 \cmd{footidemcite} is to insert \textit{and} before the last citation.
+
+\subsubsection{Custom Commands: \emph{\cmd{parenauth}}}
+\label{parenauth}
+
+You may prefer to omit the year from parenthetical citations if the
+context makes it clear or if the inclusion of \textit{n.d.} (for
+\textit{no date}) seems unnecessary or distracting. Omit the year with
+\cmd{parenauth} and \cmd{parenauths}.
+
+\begin{ltxsyntax}
+\cmditem{parenauth}[prenote][postnote]{key}
+\cmditem{parenauths}(multiprenote)(multipostnote)[prenote][postnote]{key}|...|[prenote][postnote]{key}
+\end{ltxsyntax}
+
+As with \cmd{parencite*} and \cmd{parencites*}, use these commands
+with care. Dropping the year from parenthetical citations could result
+in bad output, such as empty parentheses or ambiguous references.
+
+For an example, see \textit{CMOS} \ref{15.54}.
 
 \subsection{Entry Types}
 \label{entrytypes}
@@ -2679,7 +2697,8 @@ Chicago. All rights reserved. Reprinted by permission]{manet1992}
 % 14.57 Several citations in one note
 \label{14.57}
 
-See \ref{cust.cmd} for information on how to reproduce this example.
+See section \ref{idemcite} for information on how to reproduce this
+example.
 
 \begin{quote} Only when we gather the work of several
 scholars---Walter Sutton's explications of some of Whitman's shorter
@@ -4106,10 +4125,21 @@ with \ref{14.208} and \ref{15.42}.
 \setcounter{subsubsection}{53}
 \subsubsection{Manuscript collections in author-date format}
 % 15.54 Manuscript collections in author-date format
+\label{15.54}
+
+To omit the year from parenthetical citations, as in the example
+below, use the custom command \cmd{parenauth}. See section
+\ref{parenauth}:
+
+\begin{citeref}
+\item Alvin Johnson, in a memorandum prepared sometime in 1937
+\parenauth[file 36]{kallen}, observed that\ldots
+\end{citeref}
+
+\noindent An example with \cmd{parencite}:
 
 \begin{citeref}
 \item \parencite{dinkel}
-%\item \parencite[file 36]{kallen}
 \end{citeref}
 
 \subsubsection{Patents or other documents cited by more than one date}

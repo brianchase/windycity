@@ -1,4 +1,4 @@
-% Last modified: Mon 01 Nov 2021 05:14:35 PM CDT
+% Last modified: Fri 05 Nov 2021 05:43:47 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -539,6 +539,7 @@
 \providetoggle{cbx:first}
 \providetoggle{cbx:idem}
 \providetoggle{cbx:short}
+\providetoggle{cbx:skipdate}
 
 \providetoggle{collection}
 \providetoggle{collection:bk}
@@ -2071,7 +2072,7 @@
      \usebibmacro{byauthor}%
      \usebibmacro{editors:b}%
      \usebibmacro{volumes+series+etc}{}}%
-    {\usebibmacro{title+labeldate}{}%
+    {\usebibmacro{title+labeldate}%
      \usebibmacro{byauthor}%
      \iffieldundef{maintitle}
        {\usebibmacro{note+edition+etc}%
