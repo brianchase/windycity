@@ -1,4 +1,4 @@
-% Last modified: Fri 05 Nov 2021 05:43:47 PM CDT
+% Last modified: Sat 06 Nov 2021 05:56:47 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2014,7 +2014,9 @@
   \usebibmacro{editors:b}}%
 
 \newbibmacro*{articles}{%
-  \newunit
+  \iftoggle{newauth}
+    {\printunit{\newunitpunct}}%
+    {\newunit}%
   \usebibmacro{part}%
   \usebibmacro{issuetitle}%
   \usebibmacro{title+titleaddon}{journal}%
@@ -2231,23 +2233,18 @@
   \iffieldundef{series}
     {}
     {\iftoggle{newauth}
-       {\newunit
-        \printfield{series}}%
-       {\setunit{\addcomma\space}%
-        \printfield{series}}%
-     \isdot\addcomma
+       {\newunit}%
+       {\setunit{\addcomma\space}}%
+     \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \usebibmacro{editors:c}{series}%
-     \newunit}}%
+     \isdot\addcomma
+     \usebibmacro{editors:c}{series}}}
 
 \newbibmacro*{volume}{%
   \iffieldundef{volume}
     {}
-    {\ifboolexpr{ togl {bibliography}
-                  and togl {newauth}}
-       {\printfield[noformat]{volume}}%
-       {\setunit{\space}%
-        \printfield[noformat]{volume}}}}
+    {\setunit{\space}%
+     \printfield[noformat]{volume}}}
 
 % On how to format the issue number of periodicals, see CMOS, 17th
 % ed., 14.171 and 15.47.
@@ -2486,13 +2483,31 @@
         \togglefalse{edshift}}%
        {}}}
 
+% Thanks to David Fussner's biblatex-chicago for pointing me to this
+% command by Philipp Lehman. Source:
+% https://groups.google.com/forum/#!topic/comp.text.tex/kG003fkZK1I
+
+\newrobustcmd*{\iffieldstart}[2]{%
+  \iffieldundef{#1}
+    {\@secondoftwo}% originally '\@gobbletwo'
+    {\begingroup
+     \edef\@tempa{%
+       \long\def\noexpand\iffieldstart@i####1\detokenize{#2}####2}%
+     \@tempa\@nil{\endgroup\ifblank{##1}}%
+     \savefield*{#1}{\@tempa}%
+     \expandafter\iffieldstart@i\detokenize
+     \expandafter\expandafter\expandafter{%
+       \expandafter\@tempa\detokenize{#2}}\@nil}}%
+
 \newbibmacro*{unpublished:series}{%
   \iffieldundef{series}
     {}
     {\newunit
      \printfield{series}%
      \usebibmacro{seriesaddon}%
-     \newunit}}%
+     \iffieldundef{collection}
+       {\setunit{\addcomma\space}}%
+       {\newunit}}}
 
 \newbibmacro*{unpublished:volume}{%
   \iffieldundef{volume}
@@ -2559,7 +2574,7 @@
 \newbibmacro*{seriesaddon}{%
   \iffieldundef{seriesaddon}
     {}
-    {\addcomma\space
+    {\isdot\addcomma\space
      \printfield{seriesaddon}%
      \isdot\addcomma}}%
 

@@ -1,4 +1,4 @@
-% Last modified: Fri 05 Nov 2021 05:43:37 PM CDT
+% Last modified: Sat 06 Nov 2021 12:22:28 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -391,22 +391,6 @@
   \iffieldstart{postnote}{;}
     {}
     {\newunit}}%
-
-% Thanks to David Fussner's biblatex-chicago for pointing me to this
-% command by Philipp Lehman. Source:
-% https://groups.google.com/forum/#!topic/comp.text.tex/kG003fkZK1I
-
-\newrobustcmd*{\iffieldstart}[2]{%
-  \iffieldundef{#1}
-    {\@secondoftwo}% originally '\@gobbletwo'
-    {\begingroup
-     \edef\@tempa{%
-       \long\def\noexpand\iffieldstart@i####1\detokenize{#2}####2}%
-     \@tempa\@nil{\endgroup\ifblank{##1}}%
-     \savefield*{#1}{\@tempa}%
-     \expandafter\iffieldstart@i\detokenize
-     \expandafter\expandafter\expandafter{%
-       \expandafter\@tempa\detokenize{#2}}\@nil}}%
 
 \newbibmacro*{volume+page}{%
   \iffieldundef{volume}
