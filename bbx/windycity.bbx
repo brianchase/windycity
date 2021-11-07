@@ -1,4 +1,4 @@
-% Last modified: Sun 07 Nov 2021 11:42:07 AM CST
+% Last modified: Sun 07 Nov 2021 12:50:06 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1883,112 +1883,6 @@
        {\printlist{institution}}%
      \setunit{\addcomma\space}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Bibliography Drivers  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\DeclareBibliographyDriver{shorthand}{%
-  \usedriver
-    {\DeclareNameAlias{author}{sortname}}%
-    {\thefield{entrytype}}%
-  \iftoggle{annotate}
-    {\global\togglefalse{annotate}%
-     \usebibmacro{pageref+finentry}%
-     \global\toggletrue{annotate}}%
-    {\usebibmacro{pageref+finentry}}}
-
-\DeclareBibliographyDriver{article}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{newauth}%
-  \usebibmacro{author+title+etc}%
-  \usebibmacro{articles}%
-  \usebibmacro{colon+pages+etc}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{book}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{author+collection+etc}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{incollection}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{author+incollection+etc}%
-  \usebibmacro{crossref+incollections}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{misc}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{author+bookauthor+etc}%
-  \usebibmacro{title+labeldate}%
-  \newunit
-  \printfield{userb}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{online}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{newauth}%
-  \usebibmacro{author+title+etc}%
-  \newunit
-  \usebibmacro{websites}%
-  \usebibmacro{issue+month+etc}{}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{patent}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{author+title+etc}%
-  \newunit
-  \printfield{number}%
-  \newunit
-  \printfield{addendum}%
-  \usebibmacro{pageref+finentry}}%
-
-\DeclareBibliographyDriver{review}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{newauth}%
-  \usebibmacro{reviews}%
-  \usebibmacro{articles}%
-  \usebibmacro{colon+pages+etc}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{thesis}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{author+title+etc}%
-  \newunit
-  \usebibmacro{thesis:type+pubstate}%
-  \usebibmacro{inst+loc+date}%
-  \usebibmacro{doi+finentry+etc}}%
-
-\DeclareBibliographyDriver{unpublished}{%
-  \usebibmacro{bibindex}%
-  \iffieldundef{collection}
-    {\usebibmacro{author+title+etc}%
-     \newunit
-     \usebibmacro{type+typeaddon}%
-     \usebibmacro{pubstate}{}%
-     \usebibmacro{unpublished:series}%
-     \usebibmacro{inst+loc+date}}%
-    {\iffieldundef{title}
-       {\toggletrue{skipdate}%
-        \usebibmacro{author+bookauthor+etc}%
-        \usebibmacro{type+typeaddon}}%
-       {\usebibmacro{author+bookauthor+etc}%
-        \usebibmacro{title+titleaddon}{}%
-        \usebibmacro{type+typeaddon}%
-        \setunit{\addcomma\space}%
-        \ifboolexpr{ togl {reflist}
-                     and test {\iffieldundef{month}}}
-          {}
-          {\iffieldundef{year}
-             {\printlabeldate}% for 'n.d.'
-             {\printdate
-              \clearfield{year}}}
-        \iffieldundef{type}
-          {\newunit
-           \usebibmacro{unpublished:collection}}%
-          {}}
-     \usebibmacro{unpublished:note+etc}}%
-  \usebibmacro{doi+finentry+etc}}%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Second Tier Macros  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2190,16 +2084,36 @@
         \printfield{typeaddon}%
         \setunit{\space}}}}
 
-\newbibmacro*{unpublished:note+etc}{%
-  \ifboolexpr{ test {\ifentrytype{unpublished}}
-               and not test {\iffieldundef{collection}}}
-    {\usebibmacro{note}%
-     \usebibmacro{editors:b}%
-     \usebibmacro{unpublished:series}%
-     \usebibmacro{unpublished:volume}%
-     \newunit
-     \usebibmacro{inst+loc+date}}%
-    {}}
+\newbibmacro*{unpublished:series}{%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \usebibmacro{series+seriesaddon}%
+     \iffieldundef{collection}
+       {\setunit{\addcomma\space}}%
+       {\newunit}}}
+
+\newbibmacro*{manuscripts}{%
+  \iffieldundef{title}
+    {\toggletrue{skipdate}%
+     \usebibmacro{author+bookauthor+etc}%
+     \usebibmacro{type+typeaddon}}%
+    {\usebibmacro{author+bookauthor+etc}%
+     \usebibmacro{title+titleaddon}{}%
+     \usebibmacro{type+typeaddon}%
+     \setunit{\addcomma\space}%
+     \ifboolexpr{ togl {reflist}
+                  and test {\iffieldundef{month}}}
+       {}
+       {\iffieldundef{year}
+          {\printlabeldate}% for 'n.d.'
+          {\printdate
+           \clearfield{year}}}
+     \iffieldundef{type}
+       {\newunit
+        \usebibmacro{unpublished:collection}}%
+       {}}
+  \usebibmacro{unpublished:note+etc}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Third Tier Macros  %%
@@ -2496,20 +2410,24 @@
      \expandafter\expandafter\expandafter{%
        \expandafter\@tempa\detokenize{#2}}\@nil}}%
 
-\newbibmacro*{unpublished:series}{%
-  \iffieldundef{series}
-    {}
-    {\newunit
-     \usebibmacro{series+seriesaddon}%
-     \iffieldundef{collection}
-       {\setunit{\addcomma\space}}%
-       {\newunit}}}
+\newbibmacro*{series+seriesaddon}{%
+  \printfield{series}%
+  \usebibmacro{seriesaddon}%
+  \ifterm
+    {\printunit{\isdot\addcomma\space}}%
+    {\setunit{\addcomma\space}}%
+  \usebibmacro{editors:c}{series}}%
 
-\newbibmacro*{unpublished:volume}{%
-  \iffieldundef{volume}
-    {}
-    {\printfield{volume}%
-     \newunit}}%
+\newbibmacro*{unpublished:note+etc}{%
+  \ifboolexpr{ test {\ifentrytype{unpublished}}
+               and not test {\iffieldundef{collection}}}
+    {\usebibmacro{note}%
+     \usebibmacro{editors:b}%
+     \usebibmacro{unpublished:series}%
+     \usebibmacro{unpublished:volume}%
+     \newunit
+     \usebibmacro{inst+loc+date}}%
+    {}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Fourth and Higher Tier Macros  %%
@@ -2564,22 +2482,6 @@
     {\usebibmacro{pages}%
      \newunit
      \usebibmacro{series+seriesaddon}}}
-
-\newbibmacro*{series+seriesaddon}{%
-  \printfield{series}%
-  \usebibmacro{seriesaddon}%
-  \ifterm
-    {\printunit{\isdot\addcomma\space}}%
-    {\setunit{\addcomma\space}}%
-  \usebibmacro{editors:c}{series}}%
-
-\newbibmacro*{seriesaddon}{%
-  \iffieldundef{seriesaddon}
-    {}
-    {\ifterm
-       {\printunit{\isdot\addcomma\space}}%
-       {\setunit{\addcomma\space}}%
-     \printfield{seriesaddon}}}
 
 \newbibmacro*{swapvol+pages}{%
   \ifboolexpr{ togl {collection}
@@ -2678,5 +2580,106 @@
         \toggletrue{edshift}%
         \usebibmacro{note+edition+etc}}%
      \usebibmacro{volumes+series+etc}{book}}}
+
+\newbibmacro*{seriesaddon}{%
+  \iffieldundef{seriesaddon}
+    {}
+    {\ifterm
+       {\printunit{\isdot\addcomma\space}}%
+       {\setunit{\addcomma\space}}%
+     \printfield{seriesaddon}}}
+
+\newbibmacro*{unpublished:volume}{%
+  \iffieldundef{volume}
+    {}
+    {\printfield{volume}%
+     \newunit}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Bibliography Drivers  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareBibliographyDriver{shorthand}{%
+  \usedriver
+    {\DeclareNameAlias{author}{sortname}}%
+    {\thefield{entrytype}}%
+  \iftoggle{annotate}
+    {\global\togglefalse{annotate}%
+     \usebibmacro{pageref+finentry}%
+     \global\toggletrue{annotate}}%
+    {\usebibmacro{pageref+finentry}}}
+
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{newauth}%
+  \usebibmacro{author+title+etc}%
+  \usebibmacro{articles}%
+  \usebibmacro{colon+pages+etc}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+collection+etc}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+incollection+etc}%
+  \usebibmacro{crossref+incollections}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{title+labeldate}%
+  \newunit
+  \printfield{userb}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{newauth}%
+  \usebibmacro{author+title+etc}%
+  \newunit
+  \usebibmacro{websites}%
+  \usebibmacro{issue+month+etc}{}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{patent}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+title+etc}%
+  \newunit
+  \printfield{number}%
+  \newunit
+  \printfield{addendum}%
+  \usebibmacro{pageref+finentry}}%
+
+\DeclareBibliographyDriver{review}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{newauth}%
+  \usebibmacro{reviews}%
+  \usebibmacro{articles}%
+  \usebibmacro{colon+pages+etc}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{thesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{author+title+etc}%
+  \newunit
+  \usebibmacro{thesis:type+pubstate}%
+  \usebibmacro{inst+loc+date}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{unpublished}{%
+  \usebibmacro{bibindex}%
+  \iffieldundef{collection}
+    {\usebibmacro{author+title+etc}%
+     \newunit
+     \usebibmacro{type+typeaddon}%
+     \usebibmacro{pubstate}{}%
+     \usebibmacro{unpublished:series}%
+     \usebibmacro{inst+loc+date}}%
+    {\usebibmacro{manuscripts}}%
+  \usebibmacro{doi+finentry+etc}}%
 
 \endinput
