@@ -1,4 +1,4 @@
-% Last modified: Sat 06 Nov 2021 05:56:47 PM CDT
+% Last modified: Sun 07 Nov 2021 11:42:07 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2235,10 +2235,7 @@
     {\iftoggle{newauth}
        {\newunit}%
        {\setunit{\addcomma\space}}%
-     \printfield{series}%
-     \usebibmacro{seriesaddon}%
-     \isdot\addcomma
-     \usebibmacro{editors:c}{series}}}
+     \usebibmacro{series+seriesaddon}}}
 
 \newbibmacro*{volume}{%
   \iffieldundef{volume}
@@ -2503,8 +2500,7 @@
   \iffieldundef{series}
     {}
     {\newunit
-     \printfield{series}%
-     \usebibmacro{seriesaddon}%
+     \usebibmacro{series+seriesaddon}%
      \iffieldundef{collection}
        {\setunit{\addcomma\space}}%
        {\newunit}}}
@@ -2567,16 +2563,23 @@
     {}
     {\usebibmacro{pages}%
      \newunit
-     \printfield{series}%
-     \usebibmacro{seriesaddon}%
-     \usebibmacro{editors:c}{series}}}
+     \usebibmacro{series+seriesaddon}}}
+
+\newbibmacro*{series+seriesaddon}{%
+  \printfield{series}%
+  \usebibmacro{seriesaddon}%
+  \ifterm
+    {\printunit{\isdot\addcomma\space}}%
+    {\setunit{\addcomma\space}}%
+  \usebibmacro{editors:c}{series}}%
 
 \newbibmacro*{seriesaddon}{%
   \iffieldundef{seriesaddon}
     {}
-    {\isdot\addcomma\space
-     \printfield{seriesaddon}%
-     \isdot\addcomma}}%
+    {\ifterm
+       {\printunit{\isdot\addcomma\space}}%
+       {\setunit{\addcomma\space}}%
+     \printfield{seriesaddon}}}
 
 \newbibmacro*{swapvol+pages}{%
   \ifboolexpr{ togl {collection}
