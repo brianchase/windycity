@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2021-11-09
 
 * added support for manuscript collections (see examples for *CMOS*
   14.222, 14.229, and 14.230)
