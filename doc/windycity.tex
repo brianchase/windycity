@@ -1,4 +1,4 @@
-% Last modified: Fri 05 Nov 2021 05:43:24 PM CDT
+% Last modified: Tue 09 Nov 2021 06:54:17 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1021,7 +1021,7 @@ Notice that the only reason to use \cmd{footidemcites} rather than
 
 You may prefer to omit the year from parenthetical citations if the
 context makes it clear or if the inclusion of \textit{n.d.} (for
-\textit{no date}) seems unnecessary or distracting. Omit the year with
+\textit{no date}) seems unnecessary. Omit the year with
 \cmd{parenauth} and \cmd{parenauths}.
 
 \begin{ltxsyntax}
@@ -3748,6 +3748,7 @@ Blacks, Pennsylvania Abolition Society, 1790--1803,][]{pasociety}
 \item \cite[Gilbert McMicken to Alexander Morris, 29 November 1881, Glasgow
 (Scotland), Document 1359, fol. 1r,][MS-12-84]{morris}
 \item \cite[Daily Expenses, July 1787, images 7--8,][]{washington}
+\item \cite[Minutes, 15 April 1795,][]{pasociety}
 \end{citeonly}
 
 \setcounter{subsubsection}{229}
@@ -4127,16 +4128,14 @@ with \ref{14.208} and \ref{15.42}.
 % 15.54 Manuscript collections in author-date format
 \label{15.54}
 
-To omit the year from parenthetical citations, as in the example
-below, use the custom command \cmd{parenauth}. See section
-\ref{parenauth}:
+An example using \cmd{parenauth} (see section \ref{parenauth}):
 
 \begin{citeref}
 \item Alvin Johnson, in a memorandum prepared sometime in 1937
 \parenauth[file 36]{kallen}, observed that\ldots
 \end{citeref}
 
-\noindent An example with \cmd{parencite}:
+\noindent An example using \cmd{parencite}:
 
 \begin{citeref}
 \item \parencite{dinkel}
