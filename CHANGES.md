@@ -30,12 +30,13 @@ brianchase/windycity").
   prevented page numbers from printing in some contexts where most but
   not all of the right conditions were met)
 * fixed the `shortlinks` bibliography option to stop it from inserting
-  links in bibliographies (the links are meant only for citations)
-* fixed the relative positions of `series` and `location` in
-  `@article` entries
-* fixed missing punctuation in notes between `title` and `note` in
-  `@thesis` entries
-* fixed a spacing problem in the postnotes of some `@review` entries
+  links in bibliographies (the links belong only in citations)
+* for `@article` entries, fixed the relative positions of `series` and
+  `location`
+* for `@thesis` entries, fixed missing punctuation in notes between
+  `title` and `note`
+* fixed a spacing problem in the `postnote` of some `@review` entries
+
 
 ## 2021-07-07
 
