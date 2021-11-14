@@ -1,4 +1,4 @@
-% Last modified: Tue 09 Nov 2021 07:46:28 PM CST
+% Last modified: Sun 14 Nov 2021 10:54:37 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2424,7 +2424,8 @@
     {\usebibmacro{note}%
      \usebibmacro{editors:b}%
      \usebibmacro{unpublished:series}%
-     \usebibmacro{unpublished:volume}%
+     \newunit
+     \printfield{volume}%
      \newunit
      \usebibmacro{inst+loc+date}}%
     {}}
@@ -2588,12 +2589,6 @@
        {\printunit{\isdot\addcomma\space}}%
        {\setunit{\addcomma\space}}%
      \printfield{seriesaddon}}}
-
-\newbibmacro*{unpublished:volume}{%
-  \iffieldundef{volume}
-    {}
-    {\printfield{volume}%
-     \newunit}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Drivers  %%
