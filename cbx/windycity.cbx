@@ -1,4 +1,4 @@
-% Last modified: Tue 09 Nov 2021 07:46:18 PM CST
+% Last modified: Mon 15 Nov 2021 06:16:50 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -560,6 +560,10 @@
   \usebibmacro{author+title+etc}%
   \usebibmacro{articles}%
   \usebibmacro{colon+comma+etc}}%
+
+\DeclareBibliographyDriver{cite:artwork}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{artworks}}%
 
 \DeclareBibliographyDriver{cite:book}{%
   \usebibmacro{test:crossref}%

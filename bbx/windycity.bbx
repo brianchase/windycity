@@ -1,4 +1,4 @@
-% Last modified: Sun 14 Nov 2021 10:54:37 AM CST
+% Last modified: Mon 15 Nov 2021 06:16:46 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -770,8 +770,7 @@
 % the bibliography database with '\emph{}' or '\mkbibemph{}'.
 
 \DeclareFieldFormat{shorthand}{#1}
-\DeclareFieldFormat{shorthandintro}{%
-  \ifcapital{\MakeCapital{#1}}{#1}}%
+\DeclareFieldFormat{shorthandintro}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{shorthandwidth}{#1}
 \DeclareFieldFormat{type}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{url}{\url{#1}}
@@ -784,6 +783,7 @@
 \DeclareDriverSourcemap[datatype=bibtex]{
   \map{
     \step[typesource=periodical,     typetarget=article]
+    \step[typesource=image,          typetarget=artwork]
     \step[typesource=booklet,        typetarget=book]
     \step[typesource=manual,         typetarget=book]
     \step[typesource=mvbook,         typetarget=book]
@@ -1756,6 +1756,16 @@
        {}
        {\textendash\printfield{endorigyear}}}}
 
+\newbibmacro*{month+season+year}{%
+  \ifboolexpr{ togl {reflist}
+               and test {\iffieldundef{month}}
+               and test {\iffieldundef{season}}}
+    {}
+    {\iffieldundef{year}
+       {\printlabeldate}% for 'n.d.'
+       {\printdate
+        \clearfield{year}}}}
+
 \newbibmacro*{year+month+day}{%
   \iffieldundef{year}
     {}
@@ -1763,18 +1773,6 @@
        {\usebibmacro{reflist+year+day}%
         \printdate}%
        {\printdate}}}
-
-\newbibmacro*{year+month+day+old}{%
-  \iffieldundef{year}
-    {}
-    {\ifboolexpr{ togl {reflist}
-                  and togl {bibliography}
-                  and test {\iffieldundef{month}}}
-       {}
-       {\iffieldundef{month}
-          {\usebibmacro{reflist+year+day}%
-           \printdate}%
-          {\printdate}}}}
 
 % For reference lists.
 
@@ -1956,6 +1954,17 @@
   \usebibmacro{library}%
   \usebibmacro{pageref+finentry}}%
 
+\newbibmacro*{artworks}{%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{title+titleaddon}{}%
+  \newunit
+  \usebibmacro{month+season+year}%
+  \usebibmacro{type+typeaddon}%
+  \usebibmacro{note}%
+  \newunit
+  \usebibmacro{institution+venue}%
+  \usebibmacro{location:b}}%
+
 \newbibmacro*{author+collection+etc}{%
   \usebibmacro{test:collection}%
   \usebibmacro{author+bookauthor+etc}%
@@ -2102,13 +2111,7 @@
      \usebibmacro{title+titleaddon}{}%
      \usebibmacro{type+typeaddon}%
      \setunit{\addcomma\space}%
-     \ifboolexpr{ togl {reflist}
-                  and test {\iffieldundef{month}}}
-       {}
-       {\iffieldundef{year}
-          {\printlabeldate}% for 'n.d.'
-          {\printdate
-           \clearfield{year}}}
+     \usebibmacro{month+season+year}%
      \iffieldundef{type}
        {\newunit
         \usebibmacro{unpublished:collection}}%
@@ -2610,6 +2613,11 @@
   \usebibmacro{author+title+etc}%
   \usebibmacro{articles}%
   \usebibmacro{colon+pages+etc}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{artwork}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{artworks}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{book}{%

@@ -8,6 +8,12 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* added support for citing "paintings, photographs, and sculpture"
+  with the `@artwork` or `@image` entry type (see examples for *CMOS*
+  14.235)
+
 ## 2021-11-09
 
 * added support for manuscript collections (see examples for *CMOS*
