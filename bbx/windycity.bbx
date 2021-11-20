@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Nov 2021 06:16:46 PM CST
+% Last modified: Sat 20 Nov 2021 04:58:59 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -764,6 +764,7 @@
 \DeclareListFormat{publisher}{#1}
 \DeclareFieldFormat{pubstate}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
+\DeclareFieldFormat{series}{\ifcapital{\MakeCapital{#1}}{#1}}
 
 % A shorthand should be italicized if the title that it abbreviates is
 % also italicized. See CMOS, 17th ed., 14.60. Set italics for it in
