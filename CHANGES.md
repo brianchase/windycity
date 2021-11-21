@@ -13,6 +13,10 @@ brianchase/windycity").
 * added support for citing "paintings, photographs, and sculpture"
   with the `@artwork` or `@image` entry type (see examples for *CMOS*
   14.235)
+* added a `noetal` preamble and entry option to disable the truncation
+  of name lists (as a preamble option, it disables all truncation; as
+  an entry option it disables truncation in citations and bibliography
+  entries of specific works)
 
 ## 2021-11-09
 
@@ -32,10 +36,10 @@ brianchase/windycity").
   and `pseudo` to indicate anonymous and pseudonymous editors and
   translators (since the fields accept multiple values, you could
   list, for example, a pseudonymous compiler)
-* fixed at least one bug with the `ibidpage` bibliography option (it
+* fixed at least one bug with the `ibidpage` preamble option (it
   prevented page numbers from printing in some contexts where most but
   not all of the right conditions were met)
-* fixed the `shortlinks` bibliography option to stop it from inserting
+* fixed the `shortlinks` preamble option to stop it from inserting
   links in bibliographies (the links belong only in citations)
 * for `@article` entries, fixed the relative positions of `series` and
   `location`

@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Nov 2021 06:17:04 PM CST
+% Last modified: Sun 21 Nov 2021 10:58:12 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -460,6 +460,13 @@ use it with the \opt{isbn} and \opt{annotation} options, it prints
 after the former but before the latter. To print this information for
 selected works, use the \opt{library} entry option.
 
+\optitem[false]{noetal}{\opt{true}, \opt{false}}
+
+\noindent This option disables the truncation of name lists in all
+citations and bibliographies. To disable truncation in the citations
+and bibliography entries of specific works, use the \opt{noetal} entry
+option.
+
 \optitem[false]{nolos}{\opt{true}, \opt{false}}
 
 \noindent By default, every work with a \bibfield{shorthand} receives
@@ -697,6 +704,12 @@ title's position. Below is an example from \textit{CMOS} \ref{14.105}:
 \noindent To bypass the author's position in a single note, without
 affecting the bibliography, use starred versions of citation commands,
 such as \cmd{cite*}, \cmd{footcite*}, and \cmd{parencite*}.
+
+\optitem[false]{noetal}{\opt{true}, \opt{false}}
+
+\noindent This option disables the truncation of name lists in the
+citations and bibliography entries of specific works. To disable
+truncation in all works, use the \opt{noetal} preamble option.
 
 \optitem[false]{noreprint}{\opt{true}, \opt{false}}
 

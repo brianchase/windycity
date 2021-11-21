@@ -1,4 +1,4 @@
-% Last modified: Sat 20 Nov 2021 04:58:59 PM CST
+% Last modified: Sun 21 Nov 2021 10:59:17 AM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -84,6 +84,10 @@
 \providetoggle{noauth}
 \DeclareBiblatexOption{entry}[boolean]{noauth}[true]{%
   \settoggle{noauth}{#1}}%
+
+\providetoggle{noetal}
+\DeclareBiblatexOption{entry,global}[boolean]{noetal}[true]{%
+  \settoggle{noetal}{#1}}%
 
 \DeclareBiblatexOption{global}[boolean]{nolos}[true]{%
   \ifstrequal{#1}{true}
@@ -1366,8 +1370,11 @@
 \newbibmacro*{printnames}{%
   \ifnameundef{\cbx@namelist}
     {}
-    {\pluga\anona\printnames[\cbx@deflabel]{%
-       \cbx@namelist}\anonb\plugb}}%
+    {\iftoggle{noetal}
+       {\pluga\anona\printnames[\cbx@deflabel][-\value{listtotal}]{%
+          \cbx@namelist}\anonb\plugb}%
+       {\pluga\anona\printnames[\cbx@deflabel]{%
+          \cbx@namelist}\anonb\plugb}}}
 
 % A screen name precedes 'nameaddon' and can be omitted from short
 % citations. See CMOS, 17th ed., 14.209.
