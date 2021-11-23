@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Nov 2021 10:58:12 AM CST
+% Last modified: Mon 22 Nov 2021 07:03:01 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -710,6 +710,19 @@ such as \cmd{cite*}, \cmd{footcite*}, and \cmd{parencite*}.
 \noindent This option disables the truncation of name lists in the
 citations and bibliography entries of specific works. To disable
 truncation in all works, use the \opt{noetal} preamble option.
+
+\optitem[false]{noplace}{\opt{true}, \opt{false}}
+
+\noindent In contexts where Windy City expects to print a publisher's
+location, but no location is specified in the bibliography database,
+you can tell it to print \textit{n.p.} (no place) with this option.
+From \textit{CMOS} \ref{14.132}:
+
+\begin{citeonly}
+%\begin{itemize}[before=\small,itemindent=0ex]
+\item[] \cite{windsor1910}
+\end{citeonly}
+%\end{itemize}
 
 \optitem[false]{noreprint}{\opt{true}, \opt{false}}
 
@@ -3297,6 +3310,10 @@ field for the second example below contains \textit{vol. 6}.
 \setcounter{subsubsection}{131}
 \subsubsection{No place of publication}
 % 14.132 No place of publication
+\label{14.132}
+
+For \textit{n.p.} (no place), you need to use the entry option
+\opt{noplace}. See section \ref{entry}.
 
 \begin{citeonly}
 %\begin{itemize}[before=\small,itemindent=0ex]
