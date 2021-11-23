@@ -1,4 +1,4 @@
-% Last modified: Sun 21 Nov 2021 10:59:17 AM CST
+% Last modified: Mon 22 Nov 2021 07:14:53 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -97,6 +97,10 @@
 \providetoggle{nopages}
 \DeclareBiblatexOption{global}[boolean]{nopages}[true]{%
   \settoggle{nopages}{#1}}%
+
+\providetoggle{noplace}
+\DeclareBiblatexOption{entry}[boolean]{noplace}[true]{%
+  \settoggle{noplace}{#1}}%
 
 \providetoggle{noreprint}
 \DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
@@ -1511,8 +1515,7 @@
      \usebibmacro{title+titleaddon}{orig}%
      \setunit{\addspace}% not '\setunit{\space}'
      \printtext[parens]{%
-       \usebibmacro{origlocation}%
-       \usebibmacro{origpublisher}%
+       \usebibmacro{loc+pub+etc}{orig}%
        \ifboolexpr{ togl {bibliography}
                     and togl {reflist}}
          {}
@@ -1840,45 +1843,43 @@
   \iflistundef{location}
     {}
     {\nopunct\setunit{\space}%
-     \printtext[parens]{%
-       \printlist{location}}}%
+     \printtext[parens]{\printlist{location}}}%
      \clearlist{location}}%
 
-\newbibmacro*{loc+pub+year}{%
-  \usebibmacro{loc+pub}{1}%
-  \ifnumgreater{\value{publisher}}{1}
-    {\setunit{\addsemicolon\space}%
-     \usebibmacro{loc+pub}{2}}%
+\newbibmacro*{loc+pub+etc}[1]{%
+  \ifboolexpr{ test {\iflistundef{#1location}}
+               and test {\iflistundef{#1publisher}}}
     {}
-  \setunit{\addcomma\space}%
-  \usebibmacro{year+bookyear}}%
-
-\newbibmacro*{loc+pub}[1]{%
-  \usebibmacro{location:a}{#1}%
-  \setunit{\addcolon\space}%
-  \printlist[publisher][#1-#1]{publisher}}%
-
-\newbibmacro*{location:a}[1]{%
-  \ifboolexpr{ test {\iflistundef{location}}
-               and test {\iffieldundef{howpublished}}
-               and test {\iffieldundef{url}}
-               and test {\iffieldundef{doi}}}
-    {\bibstring{noplace}}%
-    {\printlist[location][#1-#1]{location}}}
-
-\newbibmacro*{location:b}{%
-  \iflistundef{location}
-    {}
-    {\printlist{location}%
+    {\usebibmacro{pubcount}%
+     \whileboolexpr{ test {\ifnumless{\value{pubcount}}{\value{#1location}}}
+                     or test {\ifnumless{\value{pubcount}}{\value{#1publisher}}}}
+       {\stepcounter{pubcount}%
+        \usebibmacro{#1loc+#1pub}{\value{pubcount}}%
+        \setunit{\addsemicolon\space}}%
      \setunit{\addcomma\space}}}
 
-\newbibmacro*{origlocation}{%
+\newbibmacro*{pubcount}{%
+  \ifltxcounter{pubcount}
+    {\setcounter{pubcount}{0}}%
+    {\newcounter{pubcount}}}
+
+\newbibmacro*{loc+pub}[1]{%
+  \ifboolexpr{ test {\iflistundef{location}}
+               and togl {noplace}}
+    {\bibstring{noplace}%
+     \setunit{\addcolon\space}}%
+    {\iflistundef{location}
+       {}
+       {\printlist[location][#1-#1]{location}%
+        \setunit{\addcolon\space}}}% needs '%'
+  \printlist[publisher][#1-#1]{publisher}}%
+
+\newbibmacro*{origloc+origpub}[1]{%
   \iflistundef{origlocation}
     {}
-    {\printlist{origlocation}%
-     \iflistundef{origpublisher}
-       {\setunit{\addcomma\space}}%
-       {\setunit{\addcolon\space}}}}
+    {\printlist[location][#1-#1]{origlocation}%
+     \setunit{\addcolon\space}}% needs '%'
+  \printlist[publisher][#1-#1]{origpublisher}}%
 
 \newbibmacro*{institution+venue}{%
   \ifboolexpr{ test {\iflistundef{institution}}
@@ -1971,7 +1972,8 @@
   \usebibmacro{note}%
   \newunit
   \usebibmacro{institution+venue}%
-  \usebibmacro{location:b}}%
+  \printlist{location}%
+  \setunit{\addcomma\space}}%
 
 \newbibmacro*{author+collection+etc}{%
   \usebibmacro{test:collection}%
@@ -2085,7 +2087,8 @@
 
 \newbibmacro*{inst+loc+date}{%
   \usebibmacro{institution+venue}%
-  \usebibmacro{location:b}%
+  \printlist{location}%
+  \setunit*{\addcomma\space}%
   \usebibmacro{year+month+day}}%
 
 \newbibmacro*{type+typeaddon}{%
@@ -2334,7 +2337,9 @@
           {\setunit{\addspace}% not '\setunit{\space}'
            \printtext[parens]{\usebibmacro{orig+etc}}}}
        {\newunit
-        \usebibmacro{loc+pub+year}}}}
+        \usebibmacro{loc+pub+etc}{}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{year+bookyear}}}}
 
 \newbibmacro*{test:bookauthor}{%
   \ifboolexpr{ test {\ifnamesequal{author}{bookauthor}}
@@ -2530,20 +2535,15 @@
      \printfield{number}}}
 
 \newbibmacro*{orig+etc}{%
-  \usebibmacro{origlocation}%
-  \usebibmacro{origpublisher}%
+  \usebibmacro{loc+pub+etc}{orig}%
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
     {}
     {\usebibmacro{origyear+origendyear}}%
   \usebibmacro{reprint}%
-  \usebibmacro{loc+pub+year}}%
-
-\newbibmacro*{origpublisher}{%
-  \iflistundef{origpublisher}
-    {}
-    {\printlist{origpublisher}%
-     \setunit{\addcomma\space}}}
+  \usebibmacro{loc+pub+etc}{}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{year+bookyear}}%
 
 \newbibmacro*{reprint}{%
   \ifboolexpr{ test {\iffieldundef{origyear}}

@@ -10,6 +10,17 @@ brianchase/windycity").
 
 ## Latest
 
+* improved how the style processes pairs of locations and publishers
+  (e.g. *Some City: Some Publisher*):
+
+  - lists may include indefinitely many pairs (previously, no more
+    than two were allowed)
+  - rather than try to guess when it's appropriate to print *n.p.* (no
+    place) when a publisher's location is missing, you must now
+    specify when you want it with the entry option `noplace`
+  - fixed a punctuation problem problem affecting some works that
+    lacked a publisher's location
+
 * added support for citing "paintings, photographs, and sculpture"
   with the `@artwork` or `@image` entry type (see examples for *CMOS*
   14.235)
