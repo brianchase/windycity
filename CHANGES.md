@@ -24,6 +24,10 @@ brianchase/windycity").
 * added support for citing "paintings, photographs, and sculpture"
   with the `@artwork` or `@image` entry type (see examples for *CMOS*
   14.235)
+* added support for citing "standards" with the `@standard` entry type
+  (see examples for *CMOS* 4.259; note that there's no way for Windy
+  City to print long or short forms of a publisher's name, depending
+  on the context, so it falls short on one example)
 * added a `noetal` preamble and entry option to disable the truncation
   of name lists (as a preamble option, it disables all truncation; as
   an entry option it disables truncation in citations and bibliography

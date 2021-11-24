@@ -1,4 +1,4 @@
-% Last modified: Mon 22 Nov 2021 07:14:53 PM CST
+% Last modified: Tue 23 Nov 2021 06:00:38 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -2071,6 +2071,17 @@
   \toggletrue{edshift}%
   \usebibmacro{editors:b}}%
 
+\newbibmacro*{standards}{%
+  \usebibmacro{author+bookauthor+etc}%
+  \usebibmacro{title+labeldate}%
+  \usebibmacro{note+edition+etc}%
+  \usebibmacro{volumes+series+etc}{}%
+  \iftoggle{bibliography}
+    {\newunit
+     \usebibmacro{loc+pub+year}}%
+    {\setunit{\addspace}% not '\setunit{\space}'
+     \printtext[parens]{\usebibmacro{loc+pub+year}}}}
+
 \newbibmacro*{thesis:type+pubstate}{%
   \ifentrytype{mathesis}
     {\bibstring{mathesis}%
@@ -2410,6 +2421,13 @@
         \togglefalse{edshift}}%
        {}}}
 
+\newbibmacro*{loc+pub+year}{%
+  \usebibmacro{loc+pub+etc}{}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{month+season+year}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{pubstate}{}}%
+
 % Thanks to David Fussner's biblatex-chicago for pointing me to this
 % command by Philipp Lehman. Source:
 % https://groups.google.com/forum/#!topic/comp.text.tex/kG003fkZK1I
@@ -2671,6 +2689,11 @@
   \usebibmacro{reviews}%
   \usebibmacro{articles}%
   \usebibmacro{colon+pages+etc}%
+  \usebibmacro{doi+finentry+etc}}%
+
+\DeclareBibliographyDriver{standard}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{standards}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{thesis}{%

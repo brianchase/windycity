@@ -1,4 +1,4 @@
-% Last modified: Mon 15 Nov 2021 06:16:50 PM CST
+% Last modified: Tue 23 Nov 2021 05:45:13 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -625,6 +625,12 @@
   \usebibmacro{reviews}%
   \usebibmacro{articles}%
   \usebibmacro{colon+comma+etc}}%
+
+\DeclareBibliographyDriver{cite:standard}{%
+  \toggletrue{noauth}%
+  \usebibmacro{standards}%
+  \usebibmacro{cite:punctuation}%
+  \usebibmacro{volume+page}}%
 
 \DeclareBibliographyDriver{cite:thesis}{%
   \usebibmacro{author+title+etc}%
