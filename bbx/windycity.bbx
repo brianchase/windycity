@@ -1,4 +1,4 @@
-% Last modified: Tue 23 Nov 2021 06:00:38 PM CST
+% Last modified: Fri 26 Nov 2021 03:48:44 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1519,7 +1519,7 @@
        \ifboolexpr{ togl {bibliography}
                     and togl {reflist}}
          {}
-         {\usebibmacro{origyear+origendyear}}}}}
+         {\usebibmacro{year+endyear}{orig}}}}}
 
 %%%%%%%%%%%%%%%%%%%
 %%  Collections  %%
@@ -1723,49 +1723,33 @@
 \newbibmacro*{year+bookyear}{%
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
-    {\ifboolexpr{ test {\iffieldundef{bookyear}}
-                  or test {\iffieldundef{year}}
+    {\ifboolexpr{ test {\iffieldundef{year}}
                   or test {\iffieldsequal{year}{bookyear}}
                   or not test {\iffieldequalstr{labeldatesource}{bookyear}}}
        {}
-       {\printfield{bookyear}%
-        \usebibmacro{endbookyear}}}
+       {\usebibmacro{year+endyear}{book}}}
     {\ifboolexpr{ test {\iffieldundef{year}}
                   and test {\iffieldundef{bookyear}}}
        {\usebibmacro{pubstate}{label}}%
        {\iffieldundef{bookyear}
-          {\printfield{year}%
-           \usebibmacro{endyear}}%
+          {\usebibmacro{year+endyear}{}}%
           {\ifboolexpr{ togl {collection}
                         and togl {swapvol}
                         and not test {\iffieldundef{year}}}
-             {\printfield{year}%
-              \usebibmacro{endyear}}%
-             {\printfield{bookyear}%
-              \usebibmacro{endbookyear}}}}}}
+             {\usebibmacro{year+endyear}{}}%
+             {\usebibmacro{year+endyear}{book}}}}}}
 
-\newbibmacro*{endyear}{%
-  \iffieldundef{endyear}
+\newbibmacro*{year+endyear}[1]{%
+  \iffieldundef{#1year}
     {}
-    {\iffieldsequal{year}{endyear}
-       {}
-       {\textendash\printfield{endyear}}}}
+    {\printfield{#1year}%
+     \usebibmacro{endyear}{#1}}}
 
-\newbibmacro*{endbookyear}{%
-  \iffieldundef{endbookyear}
+\newbibmacro*{endyear}[1]{%
+  \ifboolexpr{ test {\iffieldundef{#1endyear}}
+               or test {\iffieldsequal{#1year}{#1endyear}}}
     {}
-    {\iffieldsequal{bookyear}{endbookyear}
-       {}
-       {\textendash\printfield{endbookyear}}}}
-
-\newbibmacro*{origyear+origendyear}{%
-  \iffieldundef{origyear}
-    {}
-    {\printfield{origyear}%
-     \ifboolexpr{ test {\iffieldundef{endorigyear}}
-                  or test {\iffieldsequal{origyear}{endorigyear}}}
-       {}
-       {\textendash\printfield{endorigyear}}}}
+    {\textendash\printfield{#1endyear}}}
 
 \newbibmacro*{month+season+year}{%
   \ifboolexpr{ togl {reflist}
@@ -1814,7 +1798,7 @@
 \newbibmacro*{reflist+origyear}{%
   \iffieldundef{origyear}
     {}
-    {\printtext[parens]{\usebibmacro{origyear+origendyear}}%
+    {\printtext[parens]{\usebibmacro{year+endyear}{orig}}%
      \space}}%
 
 % The next macro helps bib environments that use the 'reflist' toggle
@@ -1832,7 +1816,7 @@
     {\iffieldundef{year}
        {\usebibmacro{pubstate}{label}}%
        {\usebibmacro{pubstate}{date}%
-        \usebibmacro{endyear}}}
+        \usebibmacro{endyear}{}}}
      {\usebibmacro{pubstate}{label}}}
 
 %%%%%%%%%%%%%%%%%
@@ -2557,7 +2541,7 @@
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
     {}
-    {\usebibmacro{origyear+origendyear}}%
+    {\usebibmacro{year+endyear}{orig}}%
   \usebibmacro{reprint}%
   \usebibmacro{loc+pub+etc}{}%
   \setunit{\addcomma\space}%
