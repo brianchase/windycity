@@ -1,4 +1,4 @@
-% Last modified: Sat 27 Nov 2021 04:38:31 PM CST
+% Last modified: Sun 28 Nov 2021 04:46:27 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -325,7 +325,7 @@ same author (see section \ref{preamble}). The entry option
 \opt{noauth} omits the author's name altogether (see section
 \ref{entry}). And the \bibfield{shorthand} field allows you to set an
 abbreviation to stand in place of the author's name, the work's title,
-and other elements of a citation (see sections \ref{otherfields} and
+and other elements of a citation (see sections \ref{stdfields} and
 \ref{14.59}).
 
 \subsection{Preamble Options}
@@ -1250,10 +1250,6 @@ For pseudonymous authors, another solution is to use the
 \bibfield{nameaddon} allows you to include an author's given name in
 the brackets. For examples, see \textit{CMOS} \ref{14.81}.
 
-\item[collection] Use this field with \bibtype{unpublished} works for
-names of manuscript collections. See examples in \textit{CMOS}
-\ref{14.222}, \ref{14.229}, and \ref{14.230}.
-
 \item[edition] To indicate a numbered edition of a work, put the
 edition's number in this field---for example, \textit{2} for a second
 edition. To indicate a revised edition, enter either \textit{revised}
@@ -1330,11 +1326,18 @@ field.
 \nocite{faraday,huang2015,jubb2015,lucki1980}
 \end{bibonly}
 
-\item[series] See comments on \bibfield{seriesaddon} in section
-\ref{datafields}.
+\item[shorthand] Windy City doesn't automatically italicize a
+\bibfield{shorthand}. Per \textit{CMOS} 14.60, a shorthand should be
+italicized if the title that it abbreviates is italicized. Set it in
+the bibliography database with \cmd{emph} or \cmd{mkbibemph}. For
+examples of a \bibfield{shorthand}, see section \ref{14.59} and the
+first citation of \textit{CMOS} in this document's introduction.
 
-\item[shortcollection] Similar to \bibfield{shorttitle} but for the
-short name of a \bibfield{collection}.
+\item[shorthandintro] You may override the default announcement of a
+\bibfield{shorthand} by adding your preferred content to
+\bibfield{shorthandintro}. See the first citation of \textit{CMOS} in
+this document's introduction, where the announcement isn't a note in
+parentheses but its own sentence.
 
 \item[titleaddon] Like \bibfield{nameaddon}, this field encloses its
 content in brackets. This is especially useful for translated titles.
@@ -1368,27 +1371,9 @@ the value \textit{newsmag}. For an example, see \textit{CMOS}
 \ref{14.204} and compare it with the citation of Beattie in
 \ref{14.171}.
 
-\item[typeaddon] In bibliography entries of \bibtype{unpublished}
-works, this field adds arbitrary content after the \bibfield{type}
-field. To replicate examples in \textit{CMOS} \ref{14.217}, use
-\bibfield{typeaddon} with the value \textit{presented at the}:
-
-\begin{bibonly}
-\nocite{hong2015}
-\nocite{teplin2005}
-\end{bibonly}
-
-\noindent For \textit{CMOS} \ref{14.216}, \bibfield{typeaddon}
-contains \textit{last modified}, preceded by a comma and a space:
-
-\begin{citebib}
-\item \cite{balderdash2017}
-\end{citebib}
-
 \end{marglist}
 
-\subsubsection{Other Data Fields}
-\label{otherfields}
+\subsubsection{Nonstandard Data Fields}
 
 Some of Windy City's nonstandard data fields are for its internal
 handling of cross-referencing. Those fields aren't listed below, as
@@ -1403,6 +1388,10 @@ this document wouldn't match their counterparts in \textit{CMOS}.
 blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
 mind that blog posts take the usual \bibfield{title} and
 \bibfield{subtitle} fields.
+
+\item[collection] Use this field with \bibtype{unpublished} works for
+names of manuscript collections. See examples in \textit{CMOS}
+\ref{14.222}, \ref{14.229}, and \ref{14.230}.
 
 \item[editoraddon] This field holds editorial information about a work
 that belongs immediately after \bibfield{editor} has printed, without
@@ -1430,23 +1419,30 @@ journals, which occasionally have a series but no series name,
 information like \textit{2nd ser.} and \textit{n.s.} go in the
 \bibfield{series} field.
 
-\item[shorthand] Windy City doesn't automatically italicize a
-\bibfield{shorthand}. Per \textit{CMOS} 14.60, a shorthand should be
-italicized if the title that it abbreviates is italicized. Set it in
-the bibliography database with \cmd{emph} or \cmd{mkbibemph}. For
-examples of a \bibfield{shorthand}, see section \ref{14.59} and the
-first citation of \textit{CMOS} in this document's introduction.
-
-\item[shorthandintro] You may override the default announcement of a
-\bibfield{shorthand} by adding your preferred content to
-\bibfield{shorthandintro}. See the first citation of \textit{CMOS} in
-this document's introduction, where the announcement isn't a note in
-parentheses but its own sentence.
+\item[shortcollection] Similar to \bibfield{shorttitle} but for the
+short name of a \bibfield{collection}.
 
 \item[shortmaintitle] This field contains the short form of a
 \bibfield{maintitle}. It should only be necessary for certain works in
 collections. See the citation of \textit{The Complete Tales of Henry
 James} in section \ref{multivolume}.
+
+\item[typeaddon] In bibliography entries of \bibtype{unpublished}
+works, this field adds arbitrary content after the \bibfield{type}
+field. To replicate examples in \textit{CMOS} \ref{14.217}, use
+\bibfield{typeaddon} with the value \textit{presented at the}:
+
+\begin{bibonly}
+\nocite{hong2015}
+\nocite{teplin2005}
+\end{bibonly}
+
+\noindent For \textit{CMOS} \ref{14.216}, \bibfield{typeaddon}
+contains \textit{last modified}, preceded by a comma and a space:
+
+\begin{citebib}
+\item \cite{balderdash2017}
+\end{citebib}
 
 \end{marglist}
 
@@ -2749,7 +2745,7 @@ Whitman's forms.\footnotemark[1] \end{quote}
 % 14.59 Abbreviations for frequently cited works
 \label{14.59}
 
-For information on shorthands, see section \ref{otherfields}.
+For information on shorthands, see section \ref{stdfields}.
 
 \begin{citebib}
 % There's no way to suppress these fields in the bibliography:
