@@ -1,4 +1,4 @@
-% Last modified: Sun 28 Nov 2021 04:46:27 PM CST
+% Last modified: Mon 29 Nov 2021 05:57:18 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1306,6 +1306,14 @@ contain:
 \noindent Note that when \bibfield{date} contains just a year of
 publication, you may use the classic \bibfield{year} field.
 
+\item[label] The publication year of a work is usually easy for Windy
+City to determine. It simply reads the \bibfield{date} or
+\bibfield{year} field of a work's bibliography database entry. But
+sometimes, especially when works with different publication dates are
+cross-referenced, the style needs to make difficult choices. If it
+picks the wrong year, you can override the error by putting the
+correct one in the \bibfield{label} field.
+
 \item[pages] See comments on the \opt{nopages} preamble option in
 section \ref{preamble}.
 
@@ -2357,10 +2365,13 @@ one work in one volume.
 As mentioned in \textit{CMOS} \ref{15.41}, reference lists should give
 priority to the volume, not to the collection. Nevertheless, Windy
 City doesn't prevent you from using \opt{swapvol} with \opt{reflist}.
-Either way, remember that when a volume and a collection have
-different publication dates, a reference list entry prints both dates,
-which in turn requires you to use the \bibtype{bookinbook} or
-\bibtype{inbook} approach.
+(If you do use them together, it's best to choose the \opt{swapvol}
+entry option, which does a better job at formatting and sorting works
+in reference lists than the \opt{swapvol} preamble option.) Either
+way, remember that when a volume and a collection have different
+publication dates, a reference list entry prints both dates, which in
+turn requires you to use the \bibtype{bookinbook} or \bibtype{inbook}
+approach.
 
 \begin{refonly}
 \nocite{armstrong2014}

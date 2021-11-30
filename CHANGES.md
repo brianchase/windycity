@@ -10,6 +10,35 @@ brianchase/windycity").
 
 ## Latest
 
+* improved the handling of `labeldate` for `@inbook` and `@bookinbook`
+  entries (for the most part, affecting books in collections when
+  they're formatted for reference lists)
+
+  - fixed cases of *n.d.* (no date) in reference lists when works
+    without a `year` or `date` field were cross-referenced to
+    works with a `year` or `date` field (previously, you could fix
+    this by listing the date in both the parent and child entries)
+  - also in reference lists, fixed occasional missing publication
+    dates after the publisher's position when it differed from the
+    one printed after the author's position (publication dates can
+    differ when a work in a collection has a different publication
+    date than the collection as a whole)
+  - with one exception, fixed the assignment of `labeldate` to correct
+    problems with sorting in reference lists and to ensure that
+    multiple works by the same authors in the same year are
+    differentiated with letters (as in *2015a*, *2015b*, etc.)
+  - exception to the previous: works in reference lists formatted with
+    the `swapvol` preamble option (but not the `swapvol` entry option)
+  - fixed the position of publication dates in reference lists when a
+    work's format is changed by `swapvol` (previously, dates weren't
+    swapped along with other elements of the format)
+  - if Windy City still fails to assign the correct `labeldate`, you
+    can do it manually with the `label` field
+  - reminder: following *CMOS* 15.41, you probably shouldn't use
+    `swapvol` in reference lists anyway because a reference list entry
+    should give a work's volume first, which is what Windy City does
+    by default and what `swapvol` changes
+
 * improved how the style processes pairs of locations and publishers
   (e.g. *Some City: Some Publisher*):
 

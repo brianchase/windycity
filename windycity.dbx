@@ -23,6 +23,7 @@
   endbookyear,
   handle,
   seriesaddon,
+  setlabel,
   shortblog,
   shortbooktitle,
   shortcollection,

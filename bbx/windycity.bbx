@@ -1,4 +1,4 @@
-% Last modified: Sat 27 Nov 2021 11:41:56 AM CST
+% Last modified: Mon 29 Nov 2021 06:11:36 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -110,12 +110,6 @@
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
   \ifstrequal{#1}{true}
     {\toggletrue{reflist}%
-     \DeclareLabeldate{%
-       \field{date}
-       \field{year}
-       \field{origdate}
-       \field{urldate}
-       \literal{nodate}}
      \ExecuteBibliographyOptions{%
        sorting=nyt}}%
     {\togglefalse{reflist}}}
@@ -183,12 +177,17 @@
   \settoggle{swaptrans:maintitle}{#1}}%
 
 \providetoggle{swapvol}
-\DeclareBiblatexOption{entry,global}[boolean]{swapvol}[true]{%
+\DeclareBiblatexOption{entry}[boolean]{swapvol}[true]{%
   \settoggle{swapvol}{#1}}%
+
+\providetoggle{swapvol:global}
+\DeclareBiblatexOption{global}[boolean]{swapvol}[true]{%
+  \settoggle{swapvol}{#1}%
+  \settoggle{swapvol:global}{#1}}%
 
 \providetoggle{url}
 \DeclareBiblatexOption{entry,global}[boolean]{url}[true]{%
-  \settoggle{url}{#1}}
+  \settoggle{url}{#1}}%
 
 % For setting 'minbibnames' and such, see CMOS, 17th ed., 14.76 and
 % 15.29. For 'citetracker' and 'loccittracker', 'constrict' is too
@@ -236,7 +235,9 @@
 \DeclareLanguageMapping{english}{american-windycity}
 \DeclareLanguageMappingSuffix{-windycity}
 
-\DeclareLabeldate{% 'reflist' preamble option loads an alternative
+\DeclareLabeldate{%
+  \field{label}
+  \field{setlabel}
   \field{bookyear}
   \field{date}
   \field{year}
@@ -431,7 +432,7 @@
       \step[fieldset=$MAPLOOPkey, null]
     }
     \map[overwrite, foreach={%
-        editor,editora,editorb,editorc,translator,translatora,translatorb}]{
+         editor,editora,editorb,editorc,translator,translatora,translatorb}]{
       \step[fieldsource=entrykey]
       \step[fieldset=$MAPLOOPtype, fieldvalue={,}, appendstrict]
       \step[fieldset=$MAPLOOPtype, origfieldval, append]
@@ -441,7 +442,32 @@
   }
 }
 
-% For 'collsonly' and 'nolos' options and the 'reference' entry type.
+% Workarounds to get the correct 'labeldate'.
+
+\DeclareStyleSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \pertype{inbook}
+      \pertype{bookinbook}
+      \step[notfield=options, final]
+      \step[fieldsource=year, final]
+      \step[fieldset=setlabel, origfieldval]
+    }
+  }
+}
+\DeclareStyleSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \pertype{inbook}
+      \pertype{bookinbook}
+      \step[fieldsource=options, notmatch=\regexp{swapvol}, final]
+      \step[fieldsource=year, final]
+      \step[fieldset=setlabel, origfieldval]
+    }
+  }
+}
+
+% For 'collsonly' and 'nolos' options and the '@reference' entry type.
 
 \defbibcheck{collsonly}{%
   \ifentrytype{inbook}
@@ -1726,10 +1752,13 @@
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
     {\ifboolexpr{ test {\iffieldundef{year}}
-                  or test {\iffieldsequal{year}{bookyear}}
-                  or not test {\iffieldequalstr{labeldatesource}{bookyear}}}
+                  or test {\iffieldundef{bookyear}}
+                  or test {\iffieldsequal{year}{bookyear}}}
        {}
-       {\usebibmacro{year+endyear}{book}}}
+       {\ifboolexpr{ togl {collection}
+                     and togl {swapvol}}
+          {\usebibmacro{year+endyear}{}}%
+          {\usebibmacro{year+endyear}{book}}}}
     {\ifboolexpr{ test {\iffieldundef{year}}
                   and test {\iffieldundef{bookyear}}}
        {\usebibmacro{pubstate}{label}}%
@@ -1744,8 +1773,12 @@
 \newbibmacro*{year+endyear}[1]{%
   \iffieldundef{#1year}
     {}
-    {\printfield{#1year}%
-     \usebibmacro{endyear}{#1}}}
+    {\ifboolexpr{ togl {bibliography}
+                  and togl {reflist}
+                  and test {\iffieldsequal{#1year}{label}}}
+       {}
+       {\printfield{#1year}%
+        \usebibmacro{endyear}{#1}}}}
 
 \newbibmacro*{endyear}[1]{%
   \ifboolexpr{ test {\iffieldundef{#1endyear}}
@@ -1803,23 +1836,14 @@
     {\printtext[parens]{\usebibmacro{year+endyear}{orig}}%
      \space}}%
 
-% The next macro helps bib environments that use the 'reflist' toggle
-% (see the 'reflist' bib environment set elsewhere in this file).
-% Since they can't use the 'reflist' preamble option, they can't load
-% the DeclareLabeldate for reference lists. The macro below makes the
-% output consistent in those cases but can cause problems with
-% sorting. Resolve them with '\sortyear'. Also, end dates go here. See
-% CMOS, 17th ed., 15.37 and 15.41. Although '\printlabeldate' prints
-% them, the workaround needs to run 'endyear', which can cause
-% problems not only with sorting but with 'extralabeldate'.
-
 \newbibmacro*{labeldate+endyear}{%
-  \iffieldequalstr{labeldatesource}{bookyear}
-    {\iffieldundef{year}
-       {\usebibmacro{pubstate}{label}}%
-       {\usebibmacro{pubstate}{date}%
-        \usebibmacro{endyear}{}}}
-     {\usebibmacro{pubstate}{label}}}
+  \ifboolexpr{ togl {collection}
+               and togl {swapvol:global}
+               and test {\iffieldundef{label}}
+               and not test {\iffieldundef{bookyear}}
+               and not test {\iffieldsequal{year}{bookyear}}}
+    {\usebibmacro{year+endyear}{book}}%
+    {\usebibmacro{pubstate}{label}}}
 
 %%%%%%%%%%%%%%%%%
 %%  Locations  %%
