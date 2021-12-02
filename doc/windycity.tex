@@ -1,4 +1,4 @@
-% Last modified: Mon 29 Nov 2021 05:57:18 PM CST
+% Last modified: Wed 01 Dec 2021 06:07:12 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -715,8 +715,8 @@ truncation in all works, use the \opt{noetal} preamble option.
 
 \noindent In contexts where Windy City expects to print a publisher's
 location, but no location is specified in the bibliography database,
-you can tell it to print \textit{n.p.} (no place) with this option.
-From \textit{CMOS} \ref{14.132}:
+you can tell it to print \textit{n.p.} (for \textit{no place}) with
+this option. From \textit{CMOS} \ref{14.132}:
 
 \begin{citeonly}
 %\begin{itemize}[before=\small,itemindent=0ex]
@@ -1025,9 +1025,7 @@ three ways:
    \footnote{Sutton, \cite*{sutton1959}; Fussell, \cite*{fussell1962}...
 \end{verbatim}
 
-\noindent They're ugly workarounds, exploiting starred citations
-commands to suppress the author's position while you add names
-manually---but they do work.
+\noindent They're ugly workarounds, but they work.
 
 With \cmd{idemcites} and \cmd{footidemcites}, on the other hand, you
 have simpler alternatives that make your intentions clearer and your
@@ -1057,9 +1055,13 @@ context makes it clear or if the inclusion of \textit{n.d.} (for
 
 As with \cmd{parencite*} and \cmd{parencites*}, use these commands
 with care. Dropping the year from parenthetical citations could result
-in bad output, such as empty parentheses or ambiguous references.
+in bad output, such as empty parentheses or ambiguous references. From
+\textit{CMOS} \ref{15.54}.
 
-For an example, see \textit{CMOS} \ref{15.54}.
+\begin{quote}
+Alvin Johnson, in a memorandum prepared sometime in 1937
+\parenauth[file 36]{kallen}, observed that\ldots
+\end{quote}
 
 \subsection{Entry Types}
 \label{entrytypes}
@@ -1208,15 +1210,15 @@ cross-references above:
 
 \noindent The option \opt{skipdate} is necessary only if you plan to
 format your bibliography as a reference list. It prevents Windy City
-from printing \textit{n.d.} (no date) after the name to indicate a
-missing publication date. After adding the \bibtype{misc} entries, use
-\cmd{nocite} with their entry keys to add them to your bibliography,
-and cite the remaining entries as usual. For examples of automatic
-cross-referencing in notes and bibliographies see section \ref{notes}
-(\ref{14.108}), section \ref{paren} (\ref{15.42}), and section
-\ref{collections}.
+from printing \textit{n.d.} (for \textit{no date}) after the author's
+position.
 
-For more discussion of entry types, see section \ref{datafields}.
+Use \cmd{nocite} with the \bibtype{misc} entries to add them to your
+bibliography, then cite the remaining entries as usual.
+
+For examples of automatic cross-referencing in notes and
+bibliographies see section \ref{notes} (\ref{14.108}), section
+\ref{paren} (\ref{15.42}), and section \ref{collections}.
 
 \subsection{Data Fields}
 \label{datafields}
@@ -1290,13 +1292,14 @@ contain:
    date = {2013},
 \end{verbatim}
 
-\noindent Whereas for \textit{Autumn 2013}, use either:
+\noindent Whereas for \textit{Autumn 2013}, put either
+\textit{2013-23} in \bibfield{date} or:
 
-\begin{verbatim}
-   date = {2013-23},
-\end{verbatim}
+%\begin{verbatim}
+%   date = {2013-23},
+%\end{verbatim}
 
-\noindent Or:
+%\noindent Or:
 
 \begin{verbatim}
    issue = {Autumn},
@@ -1314,8 +1317,8 @@ cross-referenced, the style needs to make difficult choices. If it
 picks the wrong year, you can override the error by putting the
 correct one in the \bibfield{label} field.
 
-\item[pages] See comments on the \opt{nopages} preamble option in
-section \ref{preamble}.
+%\item[pages] See comments on the \opt{nopages} preamble option in
+%section \ref{preamble}.
 
 \item[pubstate] This fields indicates when a work is forthcoming (with
 value \textit{forthcoming}), a preprint (with value
@@ -1392,10 +1395,11 @@ this document wouldn't match their counterparts in \textit{CMOS}.
 
 \begin{marglist}
 
-\item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}] The name of a
-blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
-mind that blog posts take the usual \bibfield{title} and
-\bibfield{subtitle} fields.
+%\item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}]
+
+\item[blogtitle] The name of a blog goes in \bibfield{blogtitle} and
+\bibfield{blogsubtitle}. Keep in mind that blog posts take the usual
+\bibfield{title} and \bibfield{subtitle} fields.
 
 \item[collection] Use this field with \bibtype{unpublished} works for
 names of manuscript collections. See examples in \textit{CMOS}
@@ -3319,8 +3323,8 @@ field for the second example below contains \textit{vol. 6}.
 % 14.132 No place of publication
 \label{14.132}
 
-For \textit{n.p.} (no place), you need to use the entry option
-\opt{noplace}. See section \ref{entry}.
+To insert \textit{n.p.} (for \textit{no place}), you need to use the
+entry option \opt{noplace}. See section \ref{entry}.
 
 \begin{citeonly}
 %\begin{itemize}[before=\small,itemindent=0ex]
@@ -4186,7 +4190,8 @@ with \ref{14.208} and \ref{15.42}.
 % 15.54 Manuscript collections in author-date format
 \label{15.54}
 
-An example using \cmd{parenauth} (see section \ref{parenauth}):
+This example requires the \cmd{parenauth} citation command (see
+section \ref{parenauth}):
 
 \begin{citeref}
 \item Alvin Johnson, in a memorandum prepared sometime in 1937

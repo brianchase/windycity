@@ -27,6 +27,11 @@ brianchase/windycity").
     problems with sorting in reference lists and to ensure that
     multiple works by the same authors in the same year are
     differentiated with letters (as in *2015a*, *2015b*, etc.)
+  - fixed the assignment of `labeldate` to correct problems with
+    sorting in reference lists, ensure that multiple works by the same
+    authors in the same year are differentiated with letters (as in
+    *2015a*, *2015b*, etc.), and ensure that those letters aren't
+    appended incorrectly
   - exception to the previous: works in reference lists formatted with
     the `swapvol` preamble option (but not the `swapvol` entry option)
   - fixed the position of publication dates in reference lists when a
