@@ -1,4 +1,4 @@
-% Last modified: Mon 29 Nov 2021 06:11:36 PM CST
+% Last modified: Fri 03 Dec 2021 07:55:56 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -32,8 +32,7 @@
 
 \DeclareBiblatexOption{global}[boolean]{collsonly}[true]{%
   \ifstrequal{#1}{true}
-    {\ExecuteBibliographyOptions{mincrossrefs=1}%
-     \ExecuteBibliographyOptions{minxrefs=1}%
+    {\ExecuteBibliographyOptions{mincrossrefs=1,minxrefs=1}%
      \AtBeginBibliography{\blx@key@bibcheck{collsonly}}}
     {}}
 
@@ -110,8 +109,7 @@
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
   \ifstrequal{#1}{true}
     {\toggletrue{reflist}%
-     \ExecuteBibliographyOptions{%
-       sorting=nyt}}%
+     \ExecuteBibliographyOptions{sorting=nyt}}%
     {\togglefalse{reflist}}}
 
 \providetoggle{short}
