@@ -1,4 +1,4 @@
-% Last modified: Fri 03 Dec 2021 06:12:48 PM CST
+% Last modified: Sat 04 Dec 2021 01:42:47 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -1067,17 +1067,11 @@ Alvin Johnson, in a memorandum prepared sometime in 1937
 \subsection{Entry Types}
 \label{entrytypes}
 
-%Windy City recognizes every entry type from \BibTeX, as well as some
-%that are specific to \biblatex.
-
 You may assign any work to one of the core entry types in the list
 below or to one of their so-called ``type aliases,'' which, minor
 differences aside, give the same output. If an entry has a type other
 than the ones listed below, Windy City processes it as a
 \bibtype{book}.
-
-% This list used to combine type aliases (or hard aliases) and soft
-% aliases, but users don't need to know about the latter.
 
 \begin{typelist}
 \RaggedRight
@@ -1419,11 +1413,10 @@ this document wouldn't match their counterparts in \textit{CMOS}.
 
 \begin{marglist}
 
-%\item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}]
-
-\item[blogtitle] The name of a blog goes in \bibfield{blogtitle} and
-\bibfield{blogsubtitle}. Keep in mind that blog posts take the usual
-\bibfield{title} and \bibfield{subtitle} fields.
+\item[\smash{\tshortstack[l]{blogtitle\\blogsubtitle}}] The name of a
+blog goes in \bibfield{blogtitle} and \bibfield{blogsubtitle}. Keep in
+mind that blog posts take the usual \bibfield{title} and
+\bibfield{subtitle} fields.
 
 \item[collection] Use this field with \bibtype{unpublished} works for
 names of manuscript collections. See examples in \textit{CMOS}
