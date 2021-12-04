@@ -1,4 +1,4 @@
-% Last modified: Wed 01 Dec 2021 06:07:12 PM CST
+% Last modified: Fri 03 Dec 2021 06:12:48 PM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -376,10 +376,11 @@ field of a work's bibliography database entry.
 \noindent Citing individual works of a collection adds entries for
 those works to the bibliography. To exclude them and print only an
 entry for the whole collection, use \opt{collsonly}. It has no effect
-on many \bibtype{incollection} entries, such as articles in books, but
-it does filter out chapters of books, books in books, and volumes of
-collections. For discussion of multivolume works, see section
-\ref{multivolume}.
+on many \bibtype{incollection} entries, such as articles in books, or
+on \bibtype{article} entries cross-referenced to a
+\bibtype{periodical}, but it does filter out chapters of books, books
+in books, and volumes of collections. For discussion of multivolume
+works, see section \ref{multivolume}.
 
 \optitem[true]{dashed}{\opt{true}, \opt{false}}
 
@@ -1066,70 +1067,93 @@ Alvin Johnson, in a memorandum prepared sometime in 1937
 \subsection{Entry Types}
 \label{entrytypes}
 
-Windy City recognizes every entry type from \BibTeX, as well as some
-that are specific to \biblatex.
+%Windy City recognizes every entry type from \BibTeX, as well as some
+%that are specific to \biblatex.
+
+You may assign any work to one of the core entry types in the list
+below or to one of their so-called ``type aliases,'' which, minor
+differences aside, give the same output. If an entry has a type other
+than the ones listed below, Windy City processes it as a
+\bibtype{book}.
+
+% This list used to combine type aliases (or hard aliases) and soft
+% aliases, but users don't need to know about the latter.
 
 \begin{typelist}
 \RaggedRight
 
 \typeitem{article}
 
-Alias: \bibtype{periodical}
+Type alias: \bibtype{periodical}
 
 \typeitem{artwork}
 
-Alias: \bibtype{image}
+Type alias: \bibtype{image}
 
 \typeitem{book}
 
-Aliases: \bibtype{booklet}, \bibtype{collection}, \bibtype{manual},
-\bibtype{mvbook}, \bibtype{mvcollection}, \bibtype{proceedings},
-\bibtype{report}, \bibtype{techreport}
+Type aliases: \bibtype{booklet}, \bibtype{manual}, \bibtype{mvbook},
+\bibtype{mvcollection}, \bibtype{proceedings}, \bibtype{report},
+\bibtype{techreport}
+
+\typeitem{collection} No type aliases
+
+\typeitem{inbook}
+
+Type alias: \bibtype{bookinbook}
 
 \typeitem{incollection}
 
-Aliases: \bibtype{bookinbook}, \bibtype{conference},
-\bibtype{inproceedings}, \bibtype{inbook}, \bibtype{letter},
+Type aliases: \bibtype{conference}, \bibtype{inproceedings},
 \bibtype{suppbook}, \bibtype{suppcollection}
 
-\typeitem{letter} No aliases
-\typeitem{misc} No aliases
-\typeitem{online} No aliases
-\typeitem{patent} No aliases
+\typeitem{letter} No type aliases
+\typeitem{misc} No type aliases
+\typeitem{online}
+
+Type aliases: \bibtype{electronic}, \bibtype{www}
+
+\typeitem{patent} No type aliases
 
 \typeitem{reference}
 
-Alias: \bibtype{inreference}
+Type alias: \bibtype{inreference}
 
-\typeitem{review} No aliases
+\typeitem{review} No type aliases
+
+\typeitem{standard} No type aliases
 
 \typeitem{thesis}
 
-Aliases: \bibtype{mastersthesis}, \bibtype{phdthesis}
+Type aliases: \bibtype{mastersthesis}, \bibtype{phdthesis}
 
-\typeitem{unpublished} No aliases
+\typeitem{unpublished} No type aliases
 
 \end{typelist}
 
-\noindent For the most part, you may assign every work to the basic
-entry types listed above. A PhD thesis, for example, may have a
-\bibtype{thesis} or \bibtype{phdthesis} entry type. The output is the
-same. If an entry has a type other than the ones listed above, Windy
-City processes it as a book.
+Aliases don't always have the same functions, even when they're fully
+interchangeable. The difference, though, might be just conceptual. For
+example, articles in a periodical should take the \bibtype{article}
+entry type rather than \bibtype{periodical}---not because there's any
+difference in output, but because, if only in principle, the latter is
+for citing the periodical itself, not its contents. If you want to
+save some lines in your bibliography database, use it for a periodical
+when you cite multiple articles from that source.
 
-One comment about \bibtype{reference} and \bibtype{inreference}
-entries: You may cross-reference \bibtype{inreference} entries to
-\bibtype{reference} entries, as with articles in books, but you can
-get the same output with one or the other alone. Take an example from
-\textit{CMOS} \ref{14.232}:
+The same is true for the \bibtype{inreference} and \bibtype{reference}
+entry types. You may cross-reference \bibtype{inreference} entries to
+\bibtype{reference} entries, but they're otherwise equivalent. Take an
+example from \textit{CMOS} \ref{14.232}:
 
 \begin{citeonly}
 \item \cite{salvation1980}
 \end{citeonly}
 
-A bibliography database could have an \bibtype{inreference} entry for
-the article cross-ref\-er\-enc\-ed to a \bibtype{reference} entry for
-\textit{Encyclopaedia Britannica}:
+\noindent One way to get that output is to cross-reference an
+\bibtype{inreference} entry (for the article) to a \bibtype{reference}
+entry (for the encyclopedia):\footnote{Incidentally, reference works
+don't always have titles in italics. When necessary, you need to set
+italics in your bibliography database.}
 
 \begin{verbatim}
    @InReference{salvation1980,
@@ -1143,11 +1167,7 @@ the article cross-ref\-er\-enc\-ed to a \bibtype{reference} entry for
    }
 \end{verbatim}
 
-\noindent This approach makes sense if you plan to cite more than one
-article from the source.\footnote{Incidentally, reference works don't
-always have titles in italics. As a result, you need to set italics in
-your bibliography database.} But you could also have a single entry of
-either type with the same data:
+\noindent But you could also have a single entry of either type:
 
 \begin{verbatim}
    @Reference{salvation1980,
@@ -1157,6 +1177,10 @@ either type with the same data:
      year = {1980}
    }
 \end{verbatim}
+
+On the differences between the \bibtype{thesis},
+\bibtype{mastersthesis}, and \bibtype{phdthesis} entry types, see
+section \ref{stdfields}.
 
 For unusually complicated citations, or those just not supported by
 the style, consider using the \bibtype{misc} entry type. The style
@@ -1292,14 +1316,14 @@ contain:
    date = {2013},
 \end{verbatim}
 
-\noindent Whereas for \textit{Autumn 2013}, put either
-\textit{2013-23} in \bibfield{date} or:
+\noindent Whereas for \textit{Autumn 2013}, use either:
+%, put either \textit{2013-23} in \bibfield{date} or:
 
-%\begin{verbatim}
-%   date = {2013-23},
-%\end{verbatim}
+\begin{verbatim}
+   date = {2013-23},
+\end{verbatim}
 
-%\noindent Or:
+\noindent Or:
 
 \begin{verbatim}
    issue = {Autumn},
@@ -1317,8 +1341,8 @@ cross-referenced, the style needs to make difficult choices. If it
 picks the wrong year, you can override the error by putting the
 correct one in the \bibfield{label} field.
 
-%\item[pages] See comments on the \opt{nopages} preamble option in
-%section \ref{preamble}.
+\item[pages] See comments on the \opt{nopages} preamble option in
+section \ref{preamble}.
 
 \item[pubstate] This fields indicates when a work is forthcoming (with
 value \textit{forthcoming}), a preprint (with value
