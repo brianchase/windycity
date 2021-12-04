@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2021-12-04
 
 * improved the handling of `labeldate` for `@inbook` and `@bookinbook`
   entries (for the most part, affecting books in collections when
@@ -36,9 +36,9 @@ brianchase/windycity").
   - if Windy City still fails to assign the correct `labeldate`, you
     can do it manually with the `label` field
   - reminder: following *CMOS* 15.41, you probably shouldn't use
-    `swapvol` in reference lists anyway because a reference list entry
-    should give a work's volume first, which is what Windy City does
-    by default and what `swapvol` changes
+    `swapvol` in reference lists because a reference list entry should
+    give a work's volume first, which is what Windy City does by
+    default and what `swapvol` changes
 
 * improved how the style processes pairs of locations and publishers
   (e.g. *Some City: Some Publisher*):
