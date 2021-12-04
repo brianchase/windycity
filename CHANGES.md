@@ -23,10 +23,6 @@ brianchase/windycity").
     one printed after the author's position (publication dates can
     differ when a work in a collection has a different publication
     date than the collection as a whole)
-  - with one exception, fixed the assignment of `labeldate` to correct
-    problems with sorting in reference lists and to ensure that
-    multiple works by the same authors in the same year are
-    differentiated with letters (as in *2015a*, *2015b*, etc.)
   - fixed the assignment of `labeldate` to correct problems with
     sorting in reference lists, ensure that multiple works by the same
     authors in the same year are differentiated with letters (as in
