@@ -8,6 +8,11 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
+## Latest
+
+* added support for the `yeardivision` field (support for `season`
+  remains for backward compatibility)
+
 ## 2021-12-04
 
 * improved the handling of `labeldate` for `@inbook` and `@bookinbook`

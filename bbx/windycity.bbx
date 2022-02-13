@@ -1,4 +1,4 @@
-% Last modified: Sat 04 Dec 2021 01:25:10 PM CST
+% Last modified: Sun 13 Feb 2022 04:24:43 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -779,7 +779,7 @@
     {\ifcapital{\MakeCapital{#1}}{#1}}}
 \DeclareFieldFormat{endmonth}{\mkbibmonth{#1}}%
 \DeclareFieldFormat{howpublished}{\ifcapital{\MakeCapital{#1}}{#1}}%
-\DeclareFieldFormat{issue}{\MakeCapital{#1}}% always capitalize
+\DeclareFieldFormat{issue}{\MakeCapital{#1}}
 \DeclareFieldFormat{journum}{%
   \ifnumeral{#1}
     {no\adddotspace\printfield{number}}%
@@ -797,8 +797,9 @@
 \DeclareFieldFormat{postnote}{#1}
 \DeclareListFormat{publisher}{#1}
 \DeclareFieldFormat{pubstate}{\ifcapital{\MakeCapital{#1}}{#1}}%
-\DeclareFieldFormat{season}{\MakeCapital{#1}}% always capitalize
+\DeclareFieldFormat{season}{\MakeCapital{#1}}% deprecated
 \DeclareFieldFormat{series}{\ifcapital{\MakeCapital{#1}}{#1}}
+\DeclareFieldFormat{yeardivision}{\MakeCapital{#1}}
 
 % A shorthand should be italicized if the title that it abbreviates is
 % also italicized. See CMOS, 17th ed., 14.60. Set italics for it in
@@ -1722,21 +1723,28 @@
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
     {\ifboolexpr{ test {\iffieldundef{issue}}
-                  and test {\iffieldundef{season}}}
+                  and test {\iffieldundef{season}}% deprecated
+                  and test {\iffieldundef{yeardivision}}}
        {}
        {\setunit{\space}%
         \iffieldundef{issue}
-          {\printtext[parens]{\printfield{season}}}
+          {\printtext[parens]{\usebibmacro{yeardivision+season}}}
           {\printtext[parens]{\printfield{issue}}}}}
     {\setunit{\space}%
      \printtext[parens]{\usebibmacro{issue+season+year}}}}
 
+\newbibmacro*{yeardivision+season}{%
+  \iffieldundef{yeardivision}
+    {\printfield{season}}% deprecated
+    {\printfield{yeardivision}}}
+
 \newbibmacro*{issue+season+year}{%
   \ifboolexpr{ test {\iffieldundef{issue}}
-               and test {\iffieldundef{season}}}
+               and test {\iffieldundef{season}}% deprecated
+               and test {\iffieldundef{yeardivision}}}
     {\printfield{year}}%
     {\iffieldundef{issue}
-      {\printfield{season}%
+      {\usebibmacro{yeardivision+season}%
        \space
        \printfield{year}}%
       {\printfield{issue}%
@@ -1787,7 +1795,8 @@
 \newbibmacro*{month+season+year}{%
   \ifboolexpr{ togl {reflist}
                and test {\iffieldundef{month}}
-               and test {\iffieldundef{season}}}
+               and test {\iffieldundef{season}}% deprecated
+               and test {\iffieldundef{yeardivision}}}
     {}
     {\iffieldundef{year}
        {\printlabeldate}% for 'n.d.'
@@ -1957,7 +1966,8 @@
        {\ifboolexpr{test {\iffieldundef{number}}
                     and test {\iffieldundef{month}}
                     and test {\iffieldundef{issue}}
-                    and test {\iffieldundef{season}}}
+                    and test {\iffieldundef{season}}% deprecated
+                    and test {\iffieldundef{yeardivision}}}
           {\setunit{\addcolon}%
            \printfield{pages}}%
           {\setunit{\addcolon\space}%
@@ -2199,7 +2209,8 @@
     {\ifboolexpr{ togl {bibliography}
                   and togl {reflist}
                   and test {\iffieldundef{issue}}
-                  and test {\iffieldundef{season}}
+                  and test {\iffieldundef{season}}% deprecated
+                  and test {\iffieldundef{yeardivision}}
                   and test {\iffieldundef{month}}
                   and not test {\iffieldundef{volume}}}
        {\setunit{\space}%
