@@ -1,4 +1,4 @@
-% Last modified: Tue 13 Apr 2021 05:25:58 PM CDT
+% Last modified: Sun 13 Feb 2022 10:28:05 AM CST
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{windycity}
 \RequirePackage{ifxetex}
@@ -105,6 +105,13 @@
   {\end{enumerate}
    \printbibliography[env=bib,heading=none,segment=\therefsegment]
    \endrefsegment}%
+\newenvironment{citenobib}
+  {\begin{enumerate}[%
+     before=\RaggedRight\citereset\newrefsegment\small,
+     itemindent=2.2em,
+     labelsep=0.2em,
+     leftmargin=1.1em]}%
+  {\end{enumerate}}%
 \newenvironment{citeref}
   {\begin{itemize}[label=,labelsep=0.2em,leftmargin=1.1em]
    \item\begin{enumerate*}[%
@@ -116,13 +123,16 @@
    \end{itemize}
    \printbibliography[env=ref,heading=none,segment=\therefsegment]
    \endrefsegment}%
-\newenvironment{citeonly}
-  {\begin{enumerate}[%
-     before=\RaggedRight\citereset\newrefsegment\small,
-     itemindent=2.2em,
-     labelsep=0.2em,
-     leftmargin=1.1em]}%
-  {\end{enumerate}}%
+\newenvironment{citenoref}
+  {\begin{itemize}[label=,labelsep=0.2em,leftmargin=1.1em]
+   \item\begin{enumerate*}[%
+     afterlabel=,
+     before=\citereset\newrefsegment\small\noindent,
+     itemjoin={{, }},
+     label=]}%
+  {\end{enumerate*}
+   \end{itemize}
+   \endrefsegment}%
 \newenvironment{bibonly}
   {\citereset\newrefsegment\small}%
   {\printbibliography[env=bib,heading=none,segment=\therefsegment]

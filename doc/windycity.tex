@@ -1,4 +1,4 @@
-% Last modified: Sat 04 Dec 2021 01:43:53 PM CST
+% Last modified: Sun 13 Feb 2022 10:28:35 AM CST
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -17,7 +17,7 @@
 
 \section{Introduction}
 
-\nfootnote{Copyright \textcopyright\ 2014--2021 Brian Chase. Under the
+\nfootnote{Copyright \textcopyright\ 2014--2022 Brian Chase. Under the
 terms of the \LaTeX\ Project Public License, version 1.3, permission
 is granted to copy, distribute, or modify this software. See
 \url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt} or
@@ -136,14 +136,14 @@ style is meant to handle.
 For a first set of examples, consider this passage from \textit{CMOS}
 \ref{14.30}:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite[24--25]{morley1995}
 \item \cite{schwartz1992}
 \item \cite{kaiser1964}
 \item \cite[43]{morley1995}
 \item \cite[138]{schwartz1992}
 \item \cite[189--90]{kaiser1964}
-\end{citeonly}
+\end{citenobib}
 
 A work's first citation is similar to its entry in the bibliography.
 It includes all or most of its bibliographic information. Subsequent
@@ -217,7 +217,7 @@ offers several preamble options and other means for producing them.
 
 Let's start with another passage of default output:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite[3]{morrison2004a}
 \item \cite[18]{morrison2004a}
 \item \cite[18]{morrison2004a}
@@ -230,7 +230,7 @@ Let's start with another passage of default output:
 \item \cite[201-2]{diaz2007}
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \item \cite[33]{morrison2004a}
-\end{citeonly}
+\end{citenobib}
 
 A shorter form of this passage appears in \textit{CMOS}
 \ref{14.34}:\footnote{Switching forms within a document isn't a
@@ -240,7 +240,7 @@ possible.}
 % Preamble option 'short' sets 'short' and 'shortfirst' toggles to
 % true. Set them to true to simulate the 'short' preamble option.
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
@@ -265,7 +265,7 @@ possible.}
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[33]{morrison2004a}
-\end{citeonly}
+\end{citenobib}
 
 In this version, a work's first citation gives short names and titles
 and omits all other publication information. Consecutive citations of
@@ -287,7 +287,7 @@ break here may affect the output.}
 % toggles to true. Set all those toggles to true to simulate the
 % 'short' and 'ibid' preamble options.
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
@@ -312,7 +312,7 @@ break here may affect the output.}
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[33]{morrison2004a}
-\end{citeonly}
+\end{citenobib}
 
 For a compromise between standard and short forms, try the  preamble
 option \opt{shortfirst}. It swaps long first citations for short ones
@@ -524,7 +524,7 @@ in \textit{CMOS} \ref{14.34}:
 % 'shortafter' doesn't. Hence, to display the output of 'shortafter'
 % below, you need only toggle true 'short'.
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
@@ -549,7 +549,7 @@ in \textit{CMOS} \ref{14.34}:
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[33]{morrison2004a}
-\end{citeonly}
+\end{citenobib}
 
 \optitem[false]{shortfirst}{\opt{true}, \opt{false}}
 
@@ -573,18 +573,18 @@ the author's name, \textit{ibid.}, or a shorthand. For comparison, the
 blue text below shows default links:
 
 \hypersetup{citecolor=blue}
-\begin{citeonly}
+\begin{citenobib}
 \item \cite[24--25]{morley1995}
 \item \cite{schwartz1992}
 \item \cite{kaiser1964}
 \item \cite[43]{morley1995}
 \item \cite[138]{schwartz1992}
 \item \cite[189--90]{kaiser1964}
-\end{citeonly}
+\end{citenobib}
 
 \noindent And here they are with \opt{shortlinks}:
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{shortlinks}}
 \item \cite[24--25]{morley1995}
 \AtNextCitekey{\toggletrue{shortlinks}}
@@ -597,7 +597,7 @@ blue text below shows default links:
 \item \cite[138]{schwartz1992}
 \AtNextCitekey{\toggletrue{shortlinks}}
 \item \cite[189--90]{kaiser1964}
-\end{citeonly}
+\end{citenobib}
 \hypersetup{citecolor=}
 
 \optitem[false]{swapvol}{\opt{true}, \opt{false}}
@@ -719,10 +719,10 @@ location, but no location is specified in the bibliography database,
 you can tell it to print \textit{n.p.} (for \textit{no place}) with
 this option. From \textit{CMOS} \ref{14.132}:
 
-\begin{citeonly}
+\begin{citenobib}
 %\begin{itemize}[before=\small,itemindent=0ex]
 \item[] \cite{windsor1910}
-\end{citeonly}
+\end{citenobib}
 %\end{itemize}
 
 \optitem[false]{noreprint}{\opt{true}, \opt{false}}
@@ -1007,9 +1007,9 @@ respectively, to elucidate the strategy in ``indirection''---do we
 begin to get a sense of both the extent and the specificity of
 Whitman's forms.\footnotemark[1] \end{quote}
 
-\begin{citeonly}
+\begin{citenobib}
 \item \idemcites{sutton1959,fussell1962,coffman1954,coffman1955,rountree1958}[and][]{lovell1960}
-\end{citeonly}
+\end{citenobib}
 
 Without commands like \cmd{idemcite}, there's often no easy way to
 tell Windy City to shorten names. The preamble option
@@ -1139,9 +1139,9 @@ entry types. You may cross-reference \bibtype{inreference} entries to
 \bibtype{reference} entries, but they're otherwise equivalent. Take an
 example from \textit{CMOS} \ref{14.232}:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite{salvation1980}
-\end{citeonly}
+\end{citenobib}
 
 \noindent One way to get that output is to cross-reference an
 \bibtype{inreference} entry (for the article) to a \bibtype{reference}
@@ -2162,19 +2162,19 @@ short citations), the one with priority determines which one
 identifies the work. By default, as you can see in the second note
 below, the volume has priority:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite{armstrong2014}
 \item \cite[45]{armstrong2014}
-\end{citeonly}
+\end{citenobib}
 
 \noindent Whereas with \opt{swapvol}:
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{swapvol}}
 \item \cite{armstrong2014}
 \AtNextCitekey{\toggletrue{swapvol}}
 \item \cite[45]{armstrong2014}
-\end{citeonly}
+\end{citenobib}
 
 Notice the volume number in the second note above, separated from the
 page by a colon. When the collection has priority, the volume number
@@ -2426,9 +2426,9 @@ without regard to the \bibfield{postnote}, use the entry option
 \opt{listvols}. Windy City uses it to match some examples in
 \textit{CMOS}, such as in \ref{14.59}:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite[1:126]{shurtleff1853}
-\end{citeonly}
+\end{citenobib}
 
 \subsection{Collections as Single Works}
 \label{multivolume}
@@ -2440,12 +2440,12 @@ illustrate the distinction between a collection that counts as a
 single work and one that doesn't, \textit{CMOS} gives the following
 examples in \ref{14.118}:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite[4:243]{byrne1981}
 \item \cite*[32--33]{james1963.5}
 \item \cite[4:245]{byrne1981}
 \item \cite*[34]{james1963.5}
-\end{citeonly}
+\end{citenobib}
 
 In citations of \textit{The Lisle Letters}, volume numbers and pages
 are separated by a colon. With \textit{The Complete Tales of Henry
@@ -2501,10 +2501,10 @@ Subsequent entries indicate the collection in whatever short form
 corresponds to the preamble options. The following shows the default
 output for two such citations of the collection:
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite{byrne1981}
 \item \cite{byrne1981}
-\end{citeonly}
+\end{citenobib}
 
 For collections like \textit{The Complete Tales of Henry James}, which
 don't count as single works, every volume needs to have its own entry
@@ -2545,11 +2545,11 @@ editor's name, long before the \bibfield{postnote}. The second prints
 it just before the \bibfield{postnote}, separated from the page by a
 colon:
 
-\begin{citeonly}
+\begin{citenobib}
 \item[2.] \cite*[32--33]{james1963.5}
 \item[\ldots]
 \item[4.] \cite*[34]{james1963.5}
-\end{citeonly}
+\end{citenobib}
 
 Neither type of collection uses cross-referencing in the bibliography
 database. For \textit{The Lisle Letters}, cross-referencing would
@@ -2685,7 +2685,7 @@ To help with cross-checking, subsection numbers and headings are from
 On short citations and the \opt{short} and \opt{ibid} preamble
 options, see sections \ref{short} and \ref{preamble}.
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
@@ -2709,11 +2709,11 @@ options, see sections \ref{short} and \ref{preamble}.
 \AtNextMultiCite{\toggletrue{short}}
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}} \item \cite[33]{morrison2004a}
-\end{citeonly}
+\end{citenobib}
 
 \noindent With options \opt{short} and \opt{ibid}:
 
-\begin{citeonly}
+\begin{citenobib}
 \AtNextCitekey{\toggletrue{short}\toggletrue{shortfirst}}
 \item \cite[3]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}\toggletrue{ibid}}
@@ -2738,7 +2738,7 @@ options, see sections \ref{short} and \ref{preamble}.
 \item \cites[240]{morrison2004b}[32]{morrison2004a}
 \AtNextCitekey{\toggletrue{short}}
 \item \cite[33]{morrison2004a}
-\end{citeonly}
+\end{citenobib}
 
 \setcounter{subsubsection}{53}
 \subsubsection{Source notes for previously published material}
@@ -2768,9 +2768,9 @@ respectively, to elucidate the strategy in ``indirection''---do we
 begin to get a sense of both the extent and the specificity of
 Whitman's forms.\footnotemark[1] \end{quote}
 
-\begin{citeonly}
+\begin{citenobib}
 \item \idemcites{sutton1959,fussell1962,coffman1954,coffman1955,rountree1958}[and][]{lovell1960}
-\end{citeonly}
+\end{citenobib}
 
 \setcounter{subsubsection}{58}
 \subsubsection{Abbreviations for frequently cited works}
@@ -3343,11 +3343,11 @@ field for the second example below contains \textit{vol. 6}.
 To insert \textit{n.p.} (for \textit{no place}), you need to use the
 entry option \opt{noplace}. See section \ref{entry}.
 
-\begin{citeonly}
+\begin{citenobib}
 %\begin{itemize}[before=\small,itemindent=0ex]
 \item[] \cite{windsor1910}
 \item[] \cite{vliet1890}
-\end{citeonly}
+\end{citenobib}
 %\end{itemize}
 
 \setcounter{subsubsection}{136}
@@ -3800,7 +3800,7 @@ correct.
 % 14.229 Examples of note forms for manuscript collections
 \label{14.229}
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite[Burton to Merriam, telegram, 26 January 1923, box 26, folder
 17,][]{merriam}
 \item \cite[Minutes of the Committee for Improving the Condition of the Free
@@ -3811,7 +3811,7 @@ Blacks, Pennsylvania Abolition Society, 1790--1803,][]{pasociety}
 (Scotland), Document 1359, fol. 1r,][MS-12-84]{morris}
 \item \cite[Daily Expenses, July 1787, images 7--8,][]{washington}
 \item \cite[Minutes, 15 April 1795,][]{pasociety}
-\end{citeonly}
+\end{citenobib}
 
 \setcounter{subsubsection}{229}
 \subsubsection{Examples of bibliography entries for manuscript collections}
@@ -3866,12 +3866,12 @@ type. As odd as it may seem, but consistent with \textit{CMOS}, they,
 too, aren't included in bibliographies. See section \ref{entrytypes}
 for more information.
 
-\begin{citeonly}
+\begin{citenobib}
 \item \cite{toscanini2016}
 \item \cite{cairns2016}
 \item \cite{wikipedia2016}
 \item \cite{merriam2016}
-\end{citeonly}
+\end{citenobib}
 
 \subsubsection{Citing individual reference entries by author}
 % 14.234 Citing individual reference entries by author
@@ -4006,9 +4006,9 @@ after the year, not before.
 \subsubsection{Additional material in text citations}
 % 15.24 Additional material in text citations
 
-\begin{citeref}
+\begin{citenoref}
 \item \parencite[; t-tests are used here]{mandolan2017}
-\end{citeref}
+\end{citenoref}
 
 \subsubsection{Text citations in relation to surrounding text and punctuation}
 % 15.25 Text citations in relation to surrounding text and punctuation
@@ -4024,7 +4024,7 @@ blue states and between churchgoers and secular voters. \end{quote}
 \subsubsection{Several references to the same source}
 % 15.27 Several references to the same source
 
-\begin{citeref}% 'even\-tanned' prevents even--[break]tanned
+\begin{citenoref}% 'even\-tanned' prevents even--[break]tanned
 \item Complexion figures prominently in Morgan's descriptions. When
 Jasper compliments his mother's choice of car (a twelve-cylinder
 Mediterranean roadster with leather and wood-grained interior), ``his
@@ -4034,26 +4034,26 @@ never changes, her ``even\-tanned good looks''
 \parencite[56]{chaston2000}, ``burnished visage''
 \parencite[101]{chaston2000}, and ``air-brushed confidence''
 \parencite[211]{chaston2000} providing the foil to the drama in her
-midst. \end{citeref}
+midst. \end{citenoref}
 
 \setcounter{subsubsection}{28}
 \subsubsection{Text citations of works with more than three authors}
 % 15.29 Text citations of works with more than three authors
 
-\begin{citeref}
+\begin{citenoref}
 \item \parencite{schonen2017a}
 \item \parencite{schonen2017b}
-\end{citeref}
+\end{citenoref}
 
 \subsubsection{Multiple text references}
 % 15.30 Multiple text references
 
-\begin{citeref}
+\begin{citenoref}
 \item \parencite{armstrong1989,beigl1989,pickett1985}
 \item \parencites{whittaker1967,whittaker1975,wiens1989a,wiens1989b}
 \item \parencites[328]{wong1999}[475]{wong2000}[67]{garcia1998}
 \item \parencites{guest2006}[see also][]{stalle2008}{rahn2009}
-\end{citeref}
+\end{citenoref}
 
 \setcounter{subsection}{2}
 \subsection{Author-Date References: Special Cases}
