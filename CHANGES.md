@@ -12,6 +12,8 @@ brianchase/windycity").
 
 * added support for the `yeardivision` field (support for `season`
   remains for backward compatibility)
+* fixed the `year` field of `@standard` entries printing when
+  `pubstate` supersedes it
 
 ## 2021-12-04
 

@@ -1,4 +1,4 @@
-% Last modified: Mon 14 Feb 2022 08:40:09 AM CST
+% Last modified: Tue 22 Feb 2022 05:59:12 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1649,10 +1649,10 @@
 
 \newbibmacro*{issue+month+etc}[1]{%
   \iffieldundef{year}
-    {\setunit{\space}%
-     \iffieldundef{month}
-       {\usebibmacro{pubstate}{parens}}%
-       {\printtext[parens]{\printdate}}}
+    {\ifstrequal{#1}{parens}
+       {\setunit{\space}}%
+       {\setunit{\addcomma\space}}%
+     \usebibmacro{pubstate}{#1}}%
     {\ifboolexpr{ test {\iffieldundef{volume}}
                   and test {\iffieldundef{number}}}
        {\iffieldundef{journal}
@@ -1664,13 +1664,12 @@
            \printdate}}%
        {\iffieldundef{month}
           {\usebibmacro{reflist+issue+season}}%
-          {\ifstrequal{#1}{noparens}
-             {\usebibmacro{reflist+year+day}%
-              \newunit
-              \usebibmacro{pubstate}{date}}%
-             {\usebibmacro{reflist+year+day}%
-              \setunit{\space}%
-              \printtext[parens]{\printdate}}}}}}
+          {\usebibmacro{reflist+year+day}%
+           \ifstrequal{#1}{parens}
+             {\setunit{\space}%
+              \printtext[parens]{\printdate}}%
+             {\newunit
+              \usebibmacro{pubstate}{date}}}}}}
 
 \newbibmacro*{pubstate}[1]{%
   \iftoggle{authposition}
@@ -1945,12 +1944,12 @@
     {\newunit}%
     {\setunit{\addcomma\space}}%
   \iffieldequalstr{type}{newsmag}
-    {\usebibmacro{issue+month+etc}{noparens}%
+    {\usebibmacro{issue+month+etc}{}%
      \usebibmacro{periodical:number}}%
     {\usebibmacro{periodical:number}%
      \iffieldequalstr{pubstate}{prepub}
-       {\usebibmacro{issue+month+etc}{noparens}}%
-       {\usebibmacro{issue+month+etc}{}}}% needs '%'
+       {\usebibmacro{issue+month+etc}{}}%
+       {\usebibmacro{issue+month+etc}{parens}}}% needs '%'
   \toggletrue{edshift}%
   \usebibmacro{edition}{noformat}}%
 
@@ -2442,10 +2441,10 @@
 
 \newbibmacro*{loc+pub+year}{%
   \usebibmacro{loc+pub+etc}{}%
-  \setunit{\addcomma\space}%
-  \usebibmacro{month+season+year}%
-  \setunit{\addcomma\space}%
-  \usebibmacro{pubstate}{}}%
+  \usebibmacro{reflist+year+day}%
+  \iffieldundef{pubstate}
+    {\usebibmacro{issue+month+etc}{}}%
+    {\usebibmacro{pubstate}{}}}
 
 % Thanks to David Fussner's biblatex-chicago for pointing me to this
 % command by Philipp Lehman. Source:
@@ -2690,7 +2689,7 @@
   \usebibmacro{author+title+etc}%
   \newunit
   \usebibmacro{websites}%
-  \usebibmacro{issue+month+etc}{}%
+  \usebibmacro{issue+month+etc}{parens}%
   \usebibmacro{doi+finentry+etc}}%
 
 \DeclareBibliographyDriver{patent}{%
