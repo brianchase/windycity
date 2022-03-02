@@ -1,4 +1,4 @@
-% Last modified: Tue 22 Feb 2022 05:59:12 PM CST
+% Last modified: Tue 01 Mar 2022 06:48:54 PM CST
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1655,15 +1655,13 @@
      \usebibmacro{pubstate}{#1}}%
     {\ifboolexpr{ test {\iffieldundef{volume}}
                   and test {\iffieldundef{number}}}
-       {\iffieldundef{journal}
-          {}
-          {\setunit{\addcomma\space}}%
-        \iffieldundef{month}
+       {\iffieldundef{month}
           {\usebibmacro{issue+season+year}}%
           {\usebibmacro{reflist+year+day}%
            \printdate}}%
        {\iffieldundef{month}
-          {\usebibmacro{reflist+issue+season}}%
+          {\setunit{\space}%
+           \usebibmacro{reflist+issue+season}}%
           {\usebibmacro{reflist+year+day}%
            \ifstrequal{#1}{parens}
              {\setunit{\space}%
@@ -1694,21 +1692,27 @@
                  \setunit{\addcomma\space}}%
                 {\ifstrequal{#1}{parens}
                    {\printtext[parens]{\printfield{pubstate}}}
-                   {\printfield{pubstate}}}}}% needs '%'
-        \clearfield{pubstate}}}}
+                   {\printfield{pubstate}}}}}}}}
 
 \newbibmacro*{labeldate+date}[1]{%
   \ifstrequal{#1}{label}
     {\printlabeldate}%
     {\ifstrequal{#1}{date}
-       {\printdate}%
+       {\ifboolexpr{ test {\iffieldundef{year}}
+                     and test {\iffieldundef{month}}}
+         {\iffieldundef{yeardivision}
+            {\printfield{season}}% deprecated
+            {\printfield{yeardivision}}}
+         {\printdate}}%
        {}}}
 
 \newbibmacro*{reflist+year+day}{%
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}
-               and test {\iffieldundef{day}}}
-    {\iffieldundef{endyear}
+               and test {\iffieldundef{day}}
+               and test {\iffieldundef{season}}% deprecated
+               and test {\iffieldundef{yeardivision}}}
+   {\iffieldundef{endyear}
        {\clearfield{year}}%
        {\iffieldsequal{year}{endyear}
           {\clearfield{year}%
@@ -1718,6 +1722,16 @@
 
 % Treat 'yeardivision' and 'season' as alternatives for 'issue'.
 
+\newbibmacro*{issue+season+year}{%
+  \iffieldundef{issue}
+    {\usebibmacro{labeldate+date}{date}}%
+    {\ifboolexpr{ test {\iffieldundef{season}}% deprecated
+                  and test {\iffieldundef{yeardivision}}}
+      {\printfield{issue}%
+       \setunit{\addspace}% not '\addspace'
+       \printfield{year}}%
+      {\usebibmacro{labeldate+date}{date}}}}
+
 \newbibmacro*{reflist+issue+season}{%
   \ifboolexpr{ togl {bibliography}
                and togl {reflist}}
@@ -1725,30 +1739,9 @@
                   and test {\iffieldundef{season}}% deprecated
                   and test {\iffieldundef{yeardivision}}}
        {}
-       {\setunit{\space}%
-        \iffieldundef{issue}
-          {\printtext[parens]{\usebibmacro{yeardivision+season}}}
-          {\printtext[parens]{\printfield{issue}}}}}
-    {\setunit{\space}%
-     \printtext[parens]{\usebibmacro{issue+season+year}}}}
-
-\newbibmacro*{yeardivision+season}{%
-  \iffieldundef{yeardivision}
-    {\printfield{season}}% deprecated
-    {\printfield{yeardivision}}}
-
-\newbibmacro*{issue+season+year}{%
-  \ifboolexpr{ test {\iffieldundef{issue}}
-               and test {\iffieldundef{season}}% deprecated
-               and test {\iffieldundef{yeardivision}}}
-    {\printfield{year}}%
-    {\iffieldundef{issue}
-      {\usebibmacro{yeardivision+season}%
-       \space
-       \printfield{year}}%
-      {\printfield{issue}%
-       \space
-       \printfield{year}}}}
+       {\clearfield{year}%
+        \printtext[parens]{\usebibmacro{issue+season+year}}}}
+    {\printtext[parens]{\usebibmacro{issue+season+year}}}}
 
 % Per CMOS, 17th ed., 14.119, print the publication year of the
 % last-mentioned title.
@@ -1791,24 +1784,14 @@
     {}
     {\textendash\printfield{#1endyear}}}
 
-\newbibmacro*{month+season+year}{%
-  \ifboolexpr{ togl {reflist}
+\newbibmacro*{year+month+day}[1]{%
+  \ifboolexpr{ togl {bibliography}
+               and togl {reflist}
                and test {\iffieldundef{month}}
                and test {\iffieldundef{season}}% deprecated
                and test {\iffieldundef{yeardivision}}}
     {}
-    {\iffieldundef{year}
-       {\printlabeldate}% for 'n.d.'
-       {\printdate
-        \clearfield{year}}}}
-
-\newbibmacro*{year+month+day}{%
-  \iffieldundef{year}
-    {}
-    {\iffieldundef{month}
-       {\usebibmacro{reflist+year+day}%
-        \printdate}%
-       {\printdate}}}
+    {\usebibmacro{labeldate+date}{#1}}}
 
 % For reference lists.
 
@@ -1984,7 +1967,7 @@
   \usebibmacro{author+bookauthor+etc}%
   \usebibmacro{title+titleaddon}{}%
   \newunit
-  \usebibmacro{month+season+year}%
+  \usebibmacro{year+month+day}{date}%
   \usebibmacro{type+typeaddon}%
   \usebibmacro{note}%
   \newunit
@@ -2117,7 +2100,7 @@
   \usebibmacro{institution+venue}%
   \printlist{location}%
   \setunit*{\addcomma\space}%
-  \usebibmacro{year+month+day}}%
+  \usebibmacro{year+month+day}{date}}%
 
 \newbibmacro*{type+typeaddon}{%
   \iffieldundef{type}
@@ -2150,7 +2133,7 @@
      \usebibmacro{title+titleaddon}{}%
      \usebibmacro{type+typeaddon}%
      \setunit{\addcomma\space}%
-     \usebibmacro{month+season+year}%
+     \usebibmacro{year+month+day}{label}%
      \iffieldundef{type}
        {\newunit
         \usebibmacro{unpublished:collection}}%
@@ -2441,9 +2424,8 @@
 
 \newbibmacro*{loc+pub+year}{%
   \usebibmacro{loc+pub+etc}{}%
-  \usebibmacro{reflist+year+day}%
   \iffieldundef{pubstate}
-    {\usebibmacro{issue+month+etc}{}}%
+    {\usebibmacro{year+month+day}{date}}%
     {\usebibmacro{pubstate}{}}}
 
 % Thanks to David Fussner's biblatex-chicago for pointing me to this
