@@ -10,6 +10,48 @@ brianchase/windycity").
 
 ## Latest
 
+* added preamble option `sentencecase` to put titles in
+  sentence-style capitalization (see *CMOS* 8.158)
+* added entry options to override, per entry, the default formats of
+  titles:
+
+  - Change every title field recognized by Windy City: `title`,
+    `booktitle`, `bookbooktitle`, `issuetitle`, `journal` (or
+    `journaltitle`), `maintitle`, `origtitle`, `blogtitle`
+
+  - To put a title in italics:
+
+    + For `title`, use `emph` or `emph:title`
+    + For all others: `emph:<title field>`
+
+  - To put a title in quotes:
+
+    + For `title`, use `quote` or `quote:title`
+    + For all others: `quote:<title field>`
+
+  - To put a title in sentence-style capitalization (see *CMOS* 8.158):
+
+    + For `title`, use `sentencecase` or `sentencecase:title`
+    + For all others: `sentencecase:<title field>`
+
+  - To remove formatting from a title (e.g. no italics or quotes):
+
+    + For `title`, use `noformat` or `noformat:title`
+    + For all others: `noformat:<title field>`
+
+  - To put the first character of a title in uppercase when `\ifcapital` is true:
+
+    + For `title`, use `ifcapital` or `ifcapital:title`
+    + For all others: `ifcapital:<title field>`
+
+  - Note that you can use some of the options above at the same time,
+    such as putting a title in both italics and sentence case.
+    Exceptions: You can't use the `emph` and `quote` options together
+    (the `emph` options prevail), you can't use either with the
+    `noformat` options (the `noformat` options prevail), and you can't
+    use the `setencecase` and `ifcapital` options together (the
+    `sentencecase` options prevail).
+
 * added support for the `yeardivision` field (support for `season`
   remains for backward compatibility)
 * fixed the `year` field of `@standard` entries printing when

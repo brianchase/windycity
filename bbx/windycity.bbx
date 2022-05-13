@@ -1,4 +1,4 @@
-% Last modified: Tue 01 Mar 2022 06:48:54 PM CST
+% Last modified: Thu 12 May 2022 07:31:07 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -44,6 +44,35 @@
 \DeclareBiblatexOption{entry,global}[boolean]{doi}[true]{%
   \settoggle{doi}{#1}}
 
+\providetoggle{emph:blog}
+\providetoggle{emph:book}
+\providetoggle{emph:bookbook}
+\providetoggle{emph:issue}
+\providetoggle{emph:journal}
+\providetoggle{emph:main}
+\providetoggle{emph:orig}
+\providetoggle{emph:}
+\DeclareBiblatexOption{entry}[boolean]{emph:blogtitle}[true]{%
+  \settoggle{emph:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:booktitle}[true]{%
+  \settoggle{emph:book}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:bookbooktitle}[true]{%
+  \settoggle{emph:bookbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:issuetitle}[true]{%
+  \settoggle{emph:issue}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:journal}[true]{%
+  \settoggle{emph:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:journaltitle}[true]{%
+  \settoggle{emph:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:maintitle}[true]{%
+  \settoggle{emph:main}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:origtitle}[true]{%
+  \settoggle{emph:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:title}[true]{%
+  \settoggle{emph:}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph}[true]{%
+  \settoggle{emph:}{#1}}%
+
 \providetoggle{eprint}
 \DeclareBiblatexOption{entry,global}[boolean]{eprint}[true]{%
   \settoggle{eprint}{#1}}
@@ -59,6 +88,35 @@
 \providetoggle{ibidpage}
 \DeclareBiblatexOption{global}[boolean]{ibidpage}[true]{%
   \settoggle{ibidpage}{#1}}%
+
+\providetoggle{ifcapital:blog}
+\providetoggle{ifcapital:book}
+\providetoggle{ifcapital:bookbook}
+\providetoggle{ifcapital:issue}
+\providetoggle{ifcapital:journal}
+\providetoggle{ifcapital:main}
+\providetoggle{ifcapital:orig}
+\providetoggle{ifcapital:}
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:blogtitle}[true]{%
+  \settoggle{ifcapital:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:booktitle}[true]{%
+  \settoggle{ifcapital:book}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:bookbooktitle}[true]{%
+  \settoggle{ifcapital:bookbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:issuetitle}[true]{%
+  \settoggle{ifcapital:issue}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:journal}[true]{%
+  \settoggle{ifcapital:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:journaltitle}[true]{%
+  \settoggle{ifcapital:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:maintitle}[true]{%
+  \settoggle{ifcapital:main}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:origtitle}[true]{%
+  \settoggle{ifcapital:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:title}[true]{%
+  \settoggle{ifcapital:}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital}[true]{%
+  \settoggle{ifcapital:}{#1}}%
 
 \providetoggle{isbn}
 \DeclareBiblatexOption{entry,global}[boolean]{isbn}[true]{%
@@ -88,6 +146,35 @@
 \DeclareBiblatexOption{entry,global}[boolean]{noetal}[true]{%
   \settoggle{noetal}{#1}}%
 
+\providetoggle{noformat:blog}
+\providetoggle{noformat:book}
+\providetoggle{noformat:bookbook}
+\providetoggle{noformat:issue}
+\providetoggle{noformat:journal}
+\providetoggle{noformat:main}
+\providetoggle{noformat:orig}
+\providetoggle{noformat:}
+\DeclareBiblatexOption{entry}[boolean]{noformat:blogtitle}[true]{%
+  \settoggle{noformat:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:booktitle}[true]{%
+  \settoggle{noformat:book}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:bookbooktitle}[true]{%
+  \settoggle{noformat:bookbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:issuetitle}[true]{%
+  \settoggle{noformat:issue}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:journal}[true]{%
+  \settoggle{noformat:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:journaltitle}[true]{%
+  \settoggle{noformat:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:maintitle}[true]{%
+  \settoggle{noformat:main}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:origtitle}[true]{%
+  \settoggle{noformat:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:title}[true]{%
+  \settoggle{noformat:}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat}[true]{%
+  \settoggle{noformat:}{#1}}%
+
 \DeclareBiblatexOption{global}[boolean]{nolos}[true]{%
   \ifstrequal{#1}{true}
     {\AtBeginBibliography{\blx@key@bibcheck{nolos}}}
@@ -105,12 +192,79 @@
 \DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
   \settoggle{noreprint}{#1}}%
 
+\providetoggle{quote:blog}
+\providetoggle{quote:book}
+\providetoggle{quote:bookbook}
+\providetoggle{quote:issue}
+\providetoggle{quote:journal}
+\providetoggle{quote:main}
+\providetoggle{quote:orig}
+\providetoggle{quote:}
+\DeclareBiblatexOption{entry}[boolean]{quote:blogtitle}[true]{%
+  \settoggle{quote:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:booktitle}[true]{%
+  \settoggle{quote:book}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:bookbooktitle}[true]{%
+  \settoggle{quote:bookbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:issuetitle}[true]{%
+  \settoggle{quote:issue}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:journal}[true]{%
+  \settoggle{quote:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:journaltitle}[true]{%
+  \settoggle{quote:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:maintitle}[true]{%
+  \settoggle{quote:main}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:origtitle}[true]{%
+  \settoggle{quote:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:title}[true]{%
+  \settoggle{quote:}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote}[true]{%
+  \settoggle{quote:}{#1}}%
+
 \providetoggle{reflist}
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
   \ifstrequal{#1}{true}
     {\toggletrue{reflist}%
      \ExecuteBibliographyOptions{sorting=nyt}}%
     {\togglefalse{reflist}}}
+
+\providetoggle{sentencecase:blog}
+\providetoggle{sentencecase:book}
+\providetoggle{sentencecase:bookbook}
+\providetoggle{sentencecase:issue}
+\providetoggle{sentencecase:journal}
+\providetoggle{sentencecase:main}
+\providetoggle{sentencecase:orig}
+\providetoggle{sentencecase:}
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:blogtitle}[true]{%
+  \settoggle{sentencecase:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:booktitle}[true]{%
+  \settoggle{sentencecase:book}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:bookbooktitle}[true]{%
+  \settoggle{sentencecase:bookbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:issuetitle}[true]{%
+  \settoggle{sentencecase:issue}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:journal}[true]{%
+  \settoggle{sentencecase:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:journaltitle}[true]{%
+  \settoggle{sentencecase:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:maintitle}[true]{%
+  \settoggle{sentencecase:main}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:origtitle}[true]{%
+  \settoggle{sentencecase:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:title}[true]{%
+  \settoggle{sentencecase:}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase}[true]{%
+  \settoggle{sentencecase:}{#1}}%
+\DeclareBiblatexOption{global}[boolean]{sentencecase}[true]{%
+  \settoggle{sentencecase:blog}{#1}%
+  \settoggle{sentencecase:book}{#1}%
+  \settoggle{sentencecase:bookbook}{#1}%
+  \settoggle{sentencecase:issue}{#1}%
+  \settoggle{sentencecase:journal}{#1}%
+  \settoggle{sentencecase:main}{#1}%
+  \settoggle{sentencecase:orig}{#1}%
+  \settoggle{sentencecase:}{#1}}%
 
 \providetoggle{short}
 \DeclareBiblatexOption{global}[boolean]{short}[true]{%
@@ -554,6 +708,7 @@
 \let\anona\empty
 \let\anonb\empty
 \let\crossreflist\empty
+\let\title@format\empty
 \let\pluga\empty
 \let\plugb\empty
 \let\xtitle\empty
@@ -738,7 +893,7 @@
   {title}{\mkbibquote{#1}}
 \DeclareFieldFormat[article,incollection,online,reference,review,thesis]
   {labeltitle}{\mkbibquote{#1}}
-\DeclareIndexFieldFormat[article,incollection,online,reference,review,thesis]
+\DeclareIndexFieldFormat[article,incollection,reference,review,thesis]
   {indextitle}{\usebibmacro{index:title}{\index}{\mkbibquote{#1}}}
 
 \DeclareFieldFormat[letter,misc,patent]{title}{#1}
@@ -752,7 +907,11 @@
 \DeclareFieldAlias[book]{origtitle}{title}
 
 \DeclareFieldFormat{chapter}{\bibstring{chapter}\space #1}
-\DeclareFieldFormat{issuetitle}{\ifcapital{\MakeCapital{#1}}{#1}}
+\DeclareFieldFormat{ifcapital}{\ifcapital{\MakeCapital{#1}}{#1}}
+\DeclareFieldFormat{issuetitle}{#1}% Neither quotes nor italics
+\DeclareFieldFormat{mkbibemph}{\mkbibemph{#1}}
+\DeclareFieldFormat{mkbibquote}{\mkbibquote{#1}}
+\DeclareFieldFormat{sentencecase}{\MakeSentenceCase{#1}}
 
 \DeclareFieldFormat[unpublished]
   {title}{\usebibmacro{unpublished:format}{#1}}
@@ -1467,12 +1626,133 @@
     {\renewcommand*{\xtitle}{#1}%
      \iftoggle{shortlinks}
        {\printtext[bibhyperref]{%
-          \usebibmacro{title+subtitle}{#1}}}
-       {\usebibmacro{title+subtitle}{#1}}%
+          \usebibmacro{test:title}{#1}}}
+       {\usebibmacro{test:title}{#1}}%
      \usebibmacro{titleaddon}{#1}%
      \clearfield{#1title}}}
 
-\newbibmacro*{title+subtitle}[1]{%
+\newbibmacro*{test:title}[1]{%
+  \iftoggle{noformat:#1}
+    {\iftoggle{ifcapital:#1}
+       {\usebibmacro{title:norformat+ifcapital}{#1}}%
+       {\iftoggle{sentencecase:#1}
+          {\usebibmacro{title:norformat+sentencecase}{#1}}%
+          {\usebibmacro{title:norformat}{#1}}}}
+    {\iftoggle{sentencecase:#1}
+       {\iftoggle{emph:#1}
+          {\usebibmacro{title:sentencecase+emph}{#1}}%
+          {\iftoggle{quote:#1}
+             {\usebibmacro{title:sentencecase+quote}{#1}}%
+             {\usebibmacro{title:sentencecase}{#1}}}}
+       {\iftoggle{emph:#1}
+          {\iftoggle{ifcapital:#1}
+             {\usebibmacro{title:ifcapital+emph}{#1}}%
+             {\usebibmacro{title:emph}{#1}}}
+          {\iftoggle{quote:#1}
+             {\iftoggle{ifcapital:#1}
+                {\usebibmacro{title:ifcapital+quote}{#1}}%
+                {\usebibmacro{title:quote}{#1}}}
+             {\iftoggle{ifcapital:#1}
+                {\usebibmacro{title:ifcapital}{#1}}%
+                {\usebibmacro{title:default}{#1}}}}}}}
+
+\newbibmacro*{title:norformat+ifcapital}[1]{%
+  \printfield[ifcapital]{#1title}%
+  \iffieldundef{#1subtitle}
+    {}
+    {\subtitlepunct
+     \printfield[ifcapital]{#1subtitle}}%
+  \isdot}%
+
+\newbibmacro*{title:norformat+sentencecase}[1]{%
+  \printfield[sentencecase]{#1title}%
+  \iffieldundef{#1subtitle}
+    {}
+    {\subtitlepunct
+     \printfield[sentencecase]{#1subtitle}}%
+  \isdot}%
+
+\newbibmacro*{title:norformat}[1]{%
+  \printfield[noformat]{#1title}%
+  \iffieldundef{#1subtitle}
+    {}
+    {\subtitlepunct
+     \printfield[noformat]{#1subtitle}}%
+  \isdot}%
+
+\newbibmacro*{title:sentencecase+emph}[1]{%
+  \printtext[mkbibemph]{%
+    \printfield[sentencecase]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[sentencecase]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:sentencecase+quote}[1]{%
+  \printtext[mkbibquote]{%
+    \printfield[sentencecase]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[sentencecase]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:sentencecase}[1]{%
+  \printtext[#1title]{%
+    \printfield[sentencecase]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[sentencecase]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:ifcapital+emph}[1]{%
+  \printtext[mkbibemph]{%
+    \printfield[ifcapital]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[ifcapital]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:emph}[1]{%
+  \printtext[mkbibemph]{%
+    \printfield[noformat]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[noformat]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:ifcapital+quote}[1]{%
+  \printtext[mkbibquote]{%
+    \printfield[ifcapital]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[ifcapital]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:quote}[1]{%
+  \printtext[mkbibquote]{%
+    \printfield[noformat]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[noformat]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:ifcapital}[1]{%
+  \printtext[#1title]{%
+    \printfield[ifcapital]{#1title}%
+    \iffieldundef{#1subtitle}
+      {}
+      {\subtitlepunct
+       \printfield[ifcapital]{#1subtitle}}%
+    \isdot}}%
+
+\newbibmacro*{title:default}[1]{%
   \printtext[#1title]{%
     \printfield[noformat]{#1title}%
     \iffieldundef{#1subtitle}
