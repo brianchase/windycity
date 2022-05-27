@@ -1,4 +1,4 @@
-% Last modified: Thu 12 May 2022 07:31:07 PM CDT
+% Last modified: Thu 26 May 2022 07:46:56 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1634,131 +1634,35 @@
 \newbibmacro*{test:title}[1]{%
   \iftoggle{noformat:#1}
     {\iftoggle{ifcapital:#1}
-       {\usebibmacro{title:norformat+ifcapital}{#1}}%
+       {\usebibmacro{title+options}{#1}{noformat}{ifcapital}}%
        {\iftoggle{sentencecase:#1}
-          {\usebibmacro{title:norformat+sentencecase}{#1}}%
-          {\usebibmacro{title:norformat}{#1}}}}
+          {\usebibmacro{title+options}{#1}{noformat}{sentencecase}}%
+          {\usebibmacro{title+options}{#1}{noformat}{noformat}}}}
     {\iftoggle{sentencecase:#1}
        {\iftoggle{emph:#1}
-          {\usebibmacro{title:sentencecase+emph}{#1}}%
+          {\usebibmacro{title+options}{#1}{mkbibemph}{sentencecase}}%
           {\iftoggle{quote:#1}
-             {\usebibmacro{title:sentencecase+quote}{#1}}%
-             {\usebibmacro{title:sentencecase}{#1}}}}
+             {\usebibmacro{title+options}{#1}{mkbibquote}{sentencecase}}%
+             {\usebibmacro{title+options}{#1}{#1title}{sentencecase}}}}
        {\iftoggle{emph:#1}
           {\iftoggle{ifcapital:#1}
-             {\usebibmacro{title:ifcapital+emph}{#1}}%
-             {\usebibmacro{title:emph}{#1}}}
+             {\usebibmacro{title+options}{#1}{mkbibemph}{ifcapital}}%
+             {\usebibmacro{title+options}{#1}{mkbibemph}{noformat}}}
           {\iftoggle{quote:#1}
              {\iftoggle{ifcapital:#1}
-                {\usebibmacro{title:ifcapital+quote}{#1}}%
-                {\usebibmacro{title:quote}{#1}}}
+                {\usebibmacro{title+options}{#1}{mkbibquote}{ifcapital}}%
+                {\usebibmacro{title+options}{#1}{mkbibquote}{noformat}}}
              {\iftoggle{ifcapital:#1}
-                {\usebibmacro{title:ifcapital}{#1}}%
-                {\usebibmacro{title:default}{#1}}}}}}}
+                {\usebibmacro{title+options}{#1}{#1title}{ifcapital}}%
+                {\usebibmacro{title+options}{#1}{#1title}{noformat}}}}}}}
 
-\newbibmacro*{title:norformat+ifcapital}[1]{%
-  \printfield[ifcapital]{#1title}%
-  \iffieldundef{#1subtitle}
-    {}
-    {\subtitlepunct
-     \printfield[ifcapital]{#1subtitle}}%
-  \isdot}%
-
-\newbibmacro*{title:norformat+sentencecase}[1]{%
-  \printfield[sentencecase]{#1title}%
-  \iffieldundef{#1subtitle}
-    {}
-    {\subtitlepunct
-     \printfield[sentencecase]{#1subtitle}}%
-  \isdot}%
-
-\newbibmacro*{title:norformat}[1]{%
-  \printfield[noformat]{#1title}%
-  \iffieldundef{#1subtitle}
-    {}
-    {\subtitlepunct
-     \printfield[noformat]{#1subtitle}}%
-  \isdot}%
-
-\newbibmacro*{title:sentencecase+emph}[1]{%
-  \printtext[mkbibemph]{%
-    \printfield[sentencecase]{#1title}%
+\newbibmacro*{title+options}[3]{%
+  \printtext[#2]{%
+    \printfield[#3]{#1title}%
     \iffieldundef{#1subtitle}
       {}
       {\subtitlepunct
-       \printfield[sentencecase]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:sentencecase+quote}[1]{%
-  \printtext[mkbibquote]{%
-    \printfield[sentencecase]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[sentencecase]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:sentencecase}[1]{%
-  \printtext[#1title]{%
-    \printfield[sentencecase]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[sentencecase]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:ifcapital+emph}[1]{%
-  \printtext[mkbibemph]{%
-    \printfield[ifcapital]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[ifcapital]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:emph}[1]{%
-  \printtext[mkbibemph]{%
-    \printfield[noformat]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[noformat]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:ifcapital+quote}[1]{%
-  \printtext[mkbibquote]{%
-    \printfield[ifcapital]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[ifcapital]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:quote}[1]{%
-  \printtext[mkbibquote]{%
-    \printfield[noformat]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[noformat]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:ifcapital}[1]{%
-  \printtext[#1title]{%
-    \printfield[ifcapital]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[ifcapital]{#1subtitle}}%
-    \isdot}}%
-
-\newbibmacro*{title:default}[1]{%
-  \printtext[#1title]{%
-    \printfield[noformat]{#1title}%
-    \iffieldundef{#1subtitle}
-      {}
-      {\subtitlepunct
-       \printfield[noformat]{#1subtitle}}%
+       \printfield[#3]{#1subtitle}}%
     \isdot}}%
 
 \newbibmacro*{titleaddon}[1]{%
