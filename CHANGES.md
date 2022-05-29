@@ -56,6 +56,7 @@ brianchase/windycity").
   remains for backward compatibility)
 * fixed the `year` field of `@standard` entries printing when
   `pubstate` supersedes it
+* fixed missing field format for `shortmaintitle`
 
 ## 2021-12-04
 
