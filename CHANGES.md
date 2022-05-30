@@ -16,9 +16,9 @@ brianchase/windycity").
   titles:
 
   - Change every title field recognized by Windy City: `title`,
-    `blogtitle`, `booktitle`, `bookbooktitle`, `issuetitle`, `journal`
+    `blogtitle`, `bookbooktitle`, `booktitle`, `issuetitle`, `journal`
     (or its equivalent `journaltitle`), `maintitle`, `origtitle`,
-    `shorttitle`, `shortbooktitle`, and `shortmaintitle`
+    `shortbooktitle`, `shorttitle`, and `shortmaintitle`
 
   - To put a title in italics:
 
@@ -57,6 +57,9 @@ brianchase/windycity").
     short title (e.g. `sentencecase:maintitle` implies
     `sentencecase:shortmaintitle`).
 
+* `shorthand` is now in italics by default and in quotes for entry
+  types `article`, `incollection` , `online`, `reference`, `review`,
+  and `thesis` (previously, `shorthand` had no format)
 * added support for the `yeardivision` field (support for `season`
   remains for backward compatibility)
 * fixed the `year` field of `@standard` entries printing when
