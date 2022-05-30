@@ -57,9 +57,6 @@ brianchase/windycity").
     short title (e.g. `sentencecase:maintitle` implies
     `sentencecase:shortmaintitle`).
 
-* `shorthand` is now in italics by default and in quotes for entry
-  types `article`, `incollection` , `online`, `reference`, `review`,
-  and `thesis` (previously, `shorthand` had no format)
 * added support for the `yeardivision` field (support for `season`
   remains for backward compatibility)
 * fixed the `year` field of `@standard` entries printing when

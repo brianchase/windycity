@@ -1,4 +1,4 @@
-% Last modified: Mon 30 May 2022 02:01:05 PM CDT
+% Last modified: Mon 30 May 2022 04:04:53 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -1026,11 +1026,13 @@
 \DeclareFieldFormat{yeardivision}{\MakeCapital{#1}}
 
 % A shorthand should be italicized if the title that it abbreviates is
-% also italicized. See CMOS, 17th ed., 14.60.
+% also italicized. See CMOS, 17th ed., 14.60. Set italics for it in
+% the bibliography database with '\emph{}' or '\mkbibemph{}'.
 
-\DeclareFieldFormat{shorthand}{\mkbibemph{#1}}
+\DeclareFieldFormat{shorthand}{#1}
 \DeclareFieldFormat[article,incollection,online,reference,review,thesis]
   {shorthand}{\mkbibquote{#1}}
+\DeclareFieldFormat[letter,misc,patent]{shorthand}{#1}
 \DeclareFieldFormat{shorthandintro}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{shorthandwidth}{#1}
 \DeclareFieldFormat{type}{\ifcapital{\MakeCapital{#1}}{#1}}%
