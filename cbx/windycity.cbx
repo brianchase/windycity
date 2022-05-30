@@ -1,4 +1,4 @@
-% Last modified: Tue 22 Feb 2022 05:59:14 PM CST
+% Last modified: Sun 29 May 2022 08:20:43 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -322,14 +322,14 @@
   \ifnameundef{author}
     {\bibcpstring{reviewnoauth}%
      \space
-     \usebibmacro{shorttitle+shortlinks}}%
+     \usebibmacro{shorttitle+crossref}{}}%
     {\usebibmacro{author+bookauthor+etc}}%
   \usebibmacro{cite:volume}}%
 
 \newbibmacro*{cite:author+title+etc}{%
   \usebibmacro{author+bookauthor+etc}%
   \iftoggle{noauth}
-    {\usebibmacro{shorttitle+shortlinks}}%
+    {\usebibmacro{shorttitle+crossref}{}}%
     {}% needs '%'
   \usebibmacro{cite:volume}}%
 
@@ -339,7 +339,7 @@
   \ifentrytype{review}
     {\usebibmacro{short:review}}%
     {\usebibmacro{collection+author+etc}%
-     \usebibmacro{shorttitle+shortlinks}%
+     \usebibmacro{shorttitle+crossref}{}%
      \ifboolexpr{ togl {ibidpage}
                   and test \ifloccit
                   and not test \iffirstonpage}
@@ -360,14 +360,14 @@
      \setunit{\space}%
      \usebibmacro{shorttitle}{book}}%
     {\ifnameundef{author}
-       {\usebibmacro{shorttitle+shortlinks}}%
+       {\usebibmacro{shorttitle+crossref}{}}%
        {\iffieldundef{title}
           {\usebibmacro{author+bookauthor+etc}%
            \bibstring{review}%
            \setunit{\space}%
            \usebibmacro{shorttitle}{book}}%
           {\usebibmacro{author+bookauthor+etc}%
-           \usebibmacro{shorttitle+shortlinks}}}}}
+           \usebibmacro{shorttitle+crossref}{}}}}}
 
 \newbibmacro*{collection+author+etc}{%
   \ifboolexpr{ test {\ifentrytype{unpublished}}

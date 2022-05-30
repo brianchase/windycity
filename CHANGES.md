@@ -16,8 +16,9 @@ brianchase/windycity").
   titles:
 
   - Change every title field recognized by Windy City: `title`,
-    `booktitle`, `bookbooktitle`, `issuetitle`, `journal` (or
-    `journaltitle`), `maintitle`, `origtitle`, `blogtitle`
+    `blogtitle`, `booktitle`, `bookbooktitle`, `issuetitle`, `journal`
+    (or its equivalent `journaltitle`), `maintitle`, `origtitle`,
+    `shorttitle`, `shortbooktitle`, and `shortmaintitle`
 
   - To put a title in italics:
 
@@ -44,13 +45,17 @@ brianchase/windycity").
     + For `title`, use `ifcapital` or `ifcapital:title`
     + For all others: `ifcapital:<title field>`
 
-  - Note that you can use some of the options above at the same time,
-    such as putting a title in both italics and sentence case.
-    Exceptions: You can't use the `emph` and `quote` options together
-    (the `emph` options prevail), you can't use either with the
-    `noformat` options (the `noformat` options prevail), and you can't
-    use the `setencecase` and `ifcapital` options together (the
-    `sentencecase` options prevail).
+  - You can use some of the options above at the same time, such as
+    putting a title in both italics and sentence case. Exceptions: You
+    can't use the `emph` and `quote` options together (the `emph`
+    options prevail), you can't use either with the `noformat` options
+    (the `noformat` options prevail), and you can't use the
+    `setencecase` and `ifcapital` options together (the `sentencecase`
+    options prevail).
+
+  - Setting an option for a title sets the related option for its
+    short title (e.g. `sentencecase:maintitle` implies
+    `sentencecase:shortmaintitle`).
 
 * added support for the `yeardivision` field (support for `season`
   remains for backward compatibility)
