@@ -1,4 +1,4 @@
-% Last modified: Mon 30 May 2022 11:06:49 AM CDT
+% Last modified: Mon 30 May 2022 02:01:05 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -57,11 +57,11 @@
 \providetoggle{emph:}
 \DeclareBiblatexOption{entry}[boolean]{emph:blogtitle}[true]{%
   \settoggle{emph:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:bookbooktitle}[true]{%
+  \settoggle{emph:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{emph:booktitle}[true]{%
   \settoggle{emph:book}{#1}%
   \settoggle{emph:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:bookbooktitle}[true]{%
-  \settoggle{emph:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{emph:issuetitle}[true]{%
   \settoggle{emph:issue}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{emph:journal}[true]{%
@@ -115,11 +115,11 @@
 \providetoggle{ifcapital:}
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:blogtitle}[true]{%
   \settoggle{ifcapital:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:bookbooktitle}[true]{%
+  \settoggle{ifcapital:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:booktitle}[true]{%
   \settoggle{ifcapital:book}{#1}%
   \settoggle{ifcapital:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:bookbooktitle}[true]{%
-  \settoggle{ifcapital:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:issuetitle}[true]{%
   \settoggle{ifcapital:issue}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:journal}[true]{%
@@ -185,11 +185,11 @@
 \providetoggle{noformat:}
 \DeclareBiblatexOption{entry}[boolean]{noformat:blogtitle}[true]{%
   \settoggle{noformat:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:bookbooktitle}[true]{%
+  \settoggle{noformat:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{noformat:booktitle}[true]{%
   \settoggle{noformat:book}{#1}%
   \settoggle{noformat:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:bookbooktitle}[true]{%
-  \settoggle{noformat:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{noformat:issuetitle}[true]{%
   \settoggle{noformat:issue}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{noformat:journal}[true]{%
@@ -244,11 +244,11 @@
 \providetoggle{quote:}
 \DeclareBiblatexOption{entry}[boolean]{quote:blogtitle}[true]{%
   \settoggle{quote:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote:bookbooktitle}[true]{%
+  \settoggle{quote:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{quote:booktitle}[true]{%
   \settoggle{quote:book}{#1}%
   \settoggle{quote:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:bookbooktitle}[true]{%
-  \settoggle{quote:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{quote:issuetitle}[true]{%
   \settoggle{quote:issue}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{quote:journal}[true]{%
@@ -293,11 +293,11 @@
 \providetoggle{sentencecase:}
 \DeclareBiblatexOption{entry}[boolean]{sentencecase:blogtitle}[true]{%
   \settoggle{sentencecase:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:bookbooktitle}[true]{%
+  \settoggle{sentencecase:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{sentencecase:booktitle}[true]{%
   \settoggle{sentencecase:book}{#1}%
   \settoggle{sentencecase:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:bookbooktitle}[true]{%
-  \settoggle{sentencecase:bookbook}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{sentencecase:issuetitle}[true]{%
   \settoggle{sentencecase:issue}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{sentencecase:journal}[true]{%
@@ -364,20 +364,20 @@
   \settoggle{swapauth}{#1}}%
 
 \providetoggle{swaptrans}
-\providetoggle{swaptrans:booktitle}
 \providetoggle{swaptrans:bookbooktitle}
+\providetoggle{swaptrans:booktitle}
 \providetoggle{swaptrans:issuetitle}
 \providetoggle{swaptrans:maintitle}
 \providetoggle{swaptrans:series}
 \providetoggle{swaptrans:title}
 \DeclareBiblatexOption{entry}[boolean]{swaptrans}[true]{%
   \settoggle{swaptrans:title}{#1}%
-  \settoggle{swaptrans:booktitle}{#1}%
-  \settoggle{swaptrans:bookbooktitle}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{swaptrans:booktitle}[true]{%
+  \settoggle{swaptrans:bookbooktitle}{#1}%
   \settoggle{swaptrans:booktitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:bookbooktitle}[true]{%
   \settoggle{swaptrans:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{swaptrans:booktitle}[true]{%
+  \settoggle{swaptrans:booktitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:issuetitle}[true]{%
   \settoggle{swaptrans:issuetitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{swaptrans:maintitle}[true]{%
@@ -846,9 +846,9 @@
     {\indexnames{labelname}}%
     {}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Field Formats for Names  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%
+%%  Field Formats  %%
+%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareNameAlias{author}{sortname}
 \DeclareNameAlias{afterword}{sortname}
@@ -935,9 +935,7 @@
      \ifdefvoid{#3}{}{ #3}%
      \ifdefvoid{#4}{}{, #4}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Field Formats for Titles  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title formats:
 
 \DeclareFieldFormat{blogtitle}{\mkbibemph{#1}}
 \DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
@@ -994,9 +992,7 @@
     {\mkbibquote{#1}}%
     {#1}}%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Other Field Formats  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other field formats:
 
 \DeclareFieldFormat{addendum}{\ifcapital{\MakeCapital{#1}}{#1}}%
 \DeclareFieldFormat{annotation}{\\[\bibitemsep] #1}
@@ -1030,8 +1026,7 @@
 \DeclareFieldFormat{yeardivision}{\MakeCapital{#1}}
 
 % A shorthand should be italicized if the title that it abbreviates is
-% also italicized. See CMOS, 17th ed., 14.60. Set italics for it in
-% the bibliography database with '\emph{}' or '\mkbibemph{}'.
+% also italicized. See CMOS, 17th ed., 14.60.
 
 \DeclareFieldFormat{shorthand}{\mkbibemph{#1}}
 \DeclareFieldFormat[article,incollection,online,reference,review,thesis]
