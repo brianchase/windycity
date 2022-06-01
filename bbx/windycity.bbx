@@ -1,4 +1,4 @@
-% Last modified: Tue 31 May 2022 07:38:09 PM CDT
+% Last modified: Wed 01 Jun 2022 06:46:40 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -231,47 +231,47 @@
 \DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
   \settoggle{noreprint}{#1}}%
 
-\providetoggle{quote:blog}
-\providetoggle{quote:book}
-\providetoggle{quote:bookbook}
-\providetoggle{quote:issue}
-\providetoggle{quote:journal}
-\providetoggle{quote:label}
-\providetoggle{quote:main}
-\providetoggle{quote:orig}
-\providetoggle{quote:shortbook}
-\providetoggle{quote:shortmain}
-\providetoggle{quote:}
-\DeclareBiblatexOption{entry}[boolean]{quote:blogtitle}[true]{%
-  \settoggle{quote:blog}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:bookbooktitle}[true]{%
-  \settoggle{quote:bookbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:booktitle}[true]{%
-  \settoggle{quote:book}{#1}%
-  \settoggle{quote:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:issuetitle}[true]{%
-  \settoggle{quote:issue}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:journal}[true]{%
-  \settoggle{quote:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:journaltitle}[true]{%
-  \settoggle{quote:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:maintitle}[true]{%
-  \settoggle{quote:main}{#1}%
-  \settoggle{quote:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:origtitle}[true]{%
-  \settoggle{quote:orig}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:shorttitle}[true]{%
-  \settoggle{quote:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:shortbooktitle}[true]{%
-  \settoggle{quote:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:shortmaintitle}[true]{%
-  \settoggle{quote:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote:title}[true]{%
-  \settoggle{quote:label}{#1}%
-  \settoggle{quote:}{#1}}%
+\providetoggle{quotes:blog}
+\providetoggle{quotes:book}
+\providetoggle{quotes:bookbook}
+\providetoggle{quotes:issue}
+\providetoggle{quotes:journal}
+\providetoggle{quotes:label}
+\providetoggle{quotes:main}
+\providetoggle{quotes:orig}
+\providetoggle{quotes:shortbook}
+\providetoggle{quotes:shortmain}
+\providetoggle{quotes:}
+\DeclareBiblatexOption{entry}[boolean]{quotes:blogtitle}[true]{%
+  \settoggle{quotes:blog}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:bookbooktitle}[true]{%
+  \settoggle{quotes:bookbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:booktitle}[true]{%
+  \settoggle{quotes:book}{#1}%
+  \settoggle{quotes:shortbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:issuetitle}[true]{%
+  \settoggle{quotes:issue}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:journal}[true]{%
+  \settoggle{quotes:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:journaltitle}[true]{%
+  \settoggle{quotes:journal}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:maintitle}[true]{%
+  \settoggle{quotes:main}{#1}%
+  \settoggle{quotes:shortmain}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:origtitle}[true]{%
+  \settoggle{quotes:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shorttitle}[true]{%
+  \settoggle{quotes:label}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shortbooktitle}[true]{%
+  \settoggle{quotes:shortbook}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shortmaintitle}[true]{%
+  \settoggle{quotes:shortmain}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:title}[true]{%
+  \settoggle{quotes:label}{#1}%
+  \settoggle{quotes:}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{quote}[true]{%
-  \settoggle{quote:label}{#1}%
-  \settoggle{quote:}{#1}}%
+  \settoggle{quotes:label}{#1}%
+  \settoggle{quotes:}{#1}}%
 
 \providetoggle{reflist}
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
@@ -850,6 +850,19 @@
 %%  Field Formats  %%
 %%%%%%%%%%%%%%%%%%%%%
 
+% Generic formats:
+
+\DeclareFieldFormat{brackets}{\mkbibbrackets{#1}}
+\DeclareFieldFormat{capital}{\MakeCapital{#1}}
+\DeclareFieldFormat{emph}{\mkbibemph{#1}}
+\DeclareFieldFormat{ifcapital}{\ifcapital{\MakeCapital{#1}}{#1}}
+\DeclareFieldFormat{noformat}{#1}
+\DeclareFieldFormat{parens}{\mkbibparens{#1}}
+\DeclareFieldFormat{quotes}{\mkbibquote{#1}}
+\DeclareFieldFormat{sentencecase}{\MakeSentenceCase{#1}}
+
+% Name formats (defaults set in biblatex.def):
+
 \DeclareNameAlias{author}{sortname}
 \DeclareNameAlias{afterword}{sortname}
 \DeclareNameAlias{bookauthor}{sortname}
@@ -937,24 +950,24 @@
 
 % Title formats:
 
-\DeclareFieldFormat{blogtitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{bookbooktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{journaltitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{labeltitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{maintitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{shortbooktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{shortmaintitle}{\mkbibemph{#1}}
-\DeclareFieldFormat{title}{\mkbibemph{#1}}
+\DeclareFieldAlias{blogtitle}{emph}
+\DeclareFieldAlias{bookbooktitle}{emph}
+\DeclareFieldAlias{booktitle}{emph}
+\DeclareFieldAlias{journaltitle}{emph}
+\DeclareFieldAlias{labeltitle}{emph}
+\DeclareFieldAlias{maintitle}{emph}
+\DeclareFieldAlias{shortbooktitle}{emph}
+\DeclareFieldAlias{shortmaintitle}{emph}
+\DeclareFieldAlias{title}{emph}
 
 \DeclareIndexFieldFormat{indextitle}{%
   \usebibmacro{index:title}{\index}{\mkbibemph{#1}}}
 \renewbibmacro*{index:title}[2]{%
   \usebibmacro{index:field}{#1}{\thefield{indexsorttitle}}{#2}}%
 
-\DeclareFieldFormat{blogtitleaddon}{\mkbibparens{#1}}
-\DeclareFieldFormat{journaltitleaddon}{\mkbibbrackets{#1}}
-\DeclareFieldFormat{titleaddon}{\mkbibbrackets{#1}}
+\DeclareFieldAlias{blogtitleaddon}{parens}
+\DeclareFieldAlias{journaltitleaddon}{brackets}
+\DeclareFieldAlias{titleaddon}{brackets}
 
 \DeclareFieldFormat[article,incollection,online,reference,review,thesis]
   {title}{\mkbibquote{#1}}
@@ -968,17 +981,13 @@
 \DeclareIndexFieldFormat[letter,misc,patent]
   {indextitle}{\usebibmacro{index:title}{\index}{#1}}
 
-\DeclareFieldAlias[inbook]{title}{title}
-\DeclareFieldAlias[inbook]{labeltitle}{labeltitle}
+\DeclareFieldAlias[inbook]{title}{emph}
+\DeclareFieldAlias[inbook]{labeltitle}{emph}
 \DeclareIndexFieldAlias[inbook]{indextitle}{indextitle}
-\DeclareFieldAlias[book]{origtitle}{title}
+\DeclareFieldAlias[book]{origtitle}{emph}
 
 \DeclareFieldFormat{chapter}{\bibstring{chapter}\space #1}
-\DeclareFieldFormat{ifcapital}{\ifcapital{\MakeCapital{#1}}{#1}}
-\DeclareFieldFormat{issuetitle}{#1}% Neither quotes nor italics
-\DeclareFieldFormat{mkbibemph}{\mkbibemph{#1}}
-\DeclareFieldFormat{mkbibquote}{\mkbibquote{#1}}
-\DeclareFieldFormat{sentencecase}{\MakeSentenceCase{#1}}
+\DeclareFieldAlias{issuetitle}{noformat}
 
 \DeclareFieldFormat[unpublished]
   {title}{\usebibmacro{unpublished:format}{#1}}
@@ -994,16 +1003,16 @@
 
 % Other field formats:
 
-\DeclareFieldFormat{addendum}{\ifcapital{\MakeCapital{#1}}{#1}}%
+\DeclareFieldAlias{addendum}{ifcapital}
 \DeclareFieldFormat{annotation}{\\[\bibitemsep] #1}
 \DeclareFieldAlias{doi}{url}
 \DeclareFieldFormat{edition}{%
   \ifinteger{#1}
     {\mkbibordedition{#1}~\bibstring{edition}}%
     {\ifcapital{\MakeCapital{#1}}{#1}}}
-\DeclareFieldFormat{endmonth}{\mkbibmonth{#1}}%
-\DeclareFieldFormat{howpublished}{\ifcapital{\MakeCapital{#1}}{#1}}%
-\DeclareFieldFormat{issue}{\MakeCapital{#1}}
+\DeclareFieldAlias{endmonth}{month}
+\DeclareFieldAlias{howpublished}{ifcapital}
+\DeclareFieldAlias{issue}{capital}
 \DeclareFieldFormat{journum}{%
   \ifnumeral{#1}
     {no\adddotspace\printfield{number}}%
@@ -1013,29 +1022,27 @@
                and test {\iffieldundef{bookyear}}}
     {\biblcstring{#1}}%
     {\ifbibstring{#1}{\bibstring{#1}}{\stripzeros{#1}}}}
-\DeclareListFormat{location}{#1}%
+\DeclareListFormat{location}{#1}
 \DeclareFieldFormat{month}{\mkbibmonth{#1}}%
-\DeclareFieldFormat{note}{\ifcapital{\MakeCapital{#1}}{#1}}%
-\DeclareFieldFormat{pages}{#1}
+\DeclareFieldAlias{note}{ifcapital}
+\DeclareFieldAlias{pages}{noformat}
 \DeclareFieldFormat{part}{\bibstring{part}\space#1}
-\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldAlias{postnote}{noformat}
 \DeclareListFormat{publisher}{#1}
-\DeclareFieldFormat{pubstate}{\ifcapital{\MakeCapital{#1}}{#1}}%
-\DeclareFieldFormat{season}{\MakeCapital{#1}}% deprecated
-\DeclareFieldFormat{series}{\ifcapital{\MakeCapital{#1}}{#1}}
-\DeclareFieldFormat{yeardivision}{\MakeCapital{#1}}
+\DeclareFieldAlias{pubstate}{ifcapital}
+\DeclareFieldAlias{season}{capital}% deprecated
+\DeclareFieldAlias{series}{ifcapital}
+\DeclareFieldAlias{yeardivision}{capital}
 
 % A shorthand should be italicized if the title that it abbreviates is
 % also italicized. See CMOS, 17th ed., 14.60. Set italics for it in
 % the bibliography database with '\emph{}' or '\mkbibemph{}'.
 
-\DeclareFieldFormat{shorthand}{#1}
+\DeclareFieldAlias{shorthand}{noformat}
 \DeclareFieldFormat[article,incollection,online,reference,review,thesis]
   {shorthand}{\mkbibquote{#1}}
-\DeclareFieldFormat[letter,misc,patent]{shorthand}{#1}
-\DeclareFieldFormat{shorthandintro}{\ifcapital{\MakeCapital{#1}}{#1}}%
-\DeclareFieldFormat{shorthandwidth}{#1}
-\DeclareFieldFormat{type}{\ifcapital{\MakeCapital{#1}}{#1}}%
+\DeclareFieldAlias{shorthandintro}{ifcapital}
+\DeclareFieldAlias{type}{ifcapital}
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\space#1}
 
@@ -1711,18 +1718,18 @@
           {\usebibmacro{title+options}{#1}{noformat}{noformat}}}}
     {\iftoggle{sentencecase:#1}
        {\iftoggle{emph:#1}
-          {\usebibmacro{title+options}{#1}{mkbibemph}{sentencecase}}%
-          {\iftoggle{quote:#1}
-             {\usebibmacro{title+options}{#1}{mkbibquote}{sentencecase}}%
+          {\usebibmacro{title+options}{#1}{emph}{sentencecase}}%
+          {\iftoggle{quotes:#1}
+             {\usebibmacro{title+options}{#1}{quotes}{sentencecase}}%
              {\usebibmacro{title+options}{#1}{#1title}{sentencecase}}}}
        {\iftoggle{emph:#1}
           {\iftoggle{ifcapital:#1}
-             {\usebibmacro{title+options}{#1}{mkbibemph}{ifcapital}}%
-             {\usebibmacro{title+options}{#1}{mkbibemph}{noformat}}}
-          {\iftoggle{quote:#1}
+             {\usebibmacro{title+options}{#1}{emph}{ifcapital}}%
+             {\usebibmacro{title+options}{#1}{emph}{noformat}}}
+          {\iftoggle{quotes:#1}
              {\iftoggle{ifcapital:#1}
-                {\usebibmacro{title+options}{#1}{mkbibquote}{ifcapital}}%
-                {\usebibmacro{title+options}{#1}{mkbibquote}{noformat}}}
+                {\usebibmacro{title+options}{#1}{quotes}{ifcapital}}%
+                {\usebibmacro{title+options}{#1}{quotes}{noformat}}}
              {\iftoggle{ifcapital:#1}
                 {\usebibmacro{title+options}{#1}{#1title}{ifcapital}}%
                 {\usebibmacro{title+options}{#1}{#1title}{noformat}}}}}}}

@@ -15,39 +15,39 @@ brianchase/windycity").
 * added entry options to override, per entry, the default formats of
   titles:
 
-  - Change every title field recognized by Windy City: `title`,
-    `blogtitle`, `bookbooktitle`, `booktitle`, `issuetitle`, `journal`
-    (or its equivalent `journaltitle`), `maintitle`, `origtitle`,
-    `shortbooktitle`, `shorttitle`, and `shortmaintitle`
+  - Supported fields: `title`, `blogtitle`, `bookbooktitle`,
+    `booktitle`, `issuetitle`, `journal` (and its equivalent
+    `journaltitle`), `maintitle`, `origtitle`, `shortbooktitle`,
+    `shorttitle`, and `shortmaintitle`
 
   - To put a title in italics:
 
     + For `title`, use `emph` or `emph:title`
-    + For all others: `emph:<title field>`
+    + For all others: `emph:<field name>`
 
   - To put a title in quotes:
 
-    + For `title`, use `quote` or `quote:title`
-    + For all others: `quote:<title field>`
+    + For `title`, use `quotes` or `quotes:title`
+    + For all others: `quotes:<field name>`
 
   - To put a title in sentence-style capitalization (see *CMOS* 8.158):
 
     + For `title`, use `sentencecase` or `sentencecase:title`
-    + For all others: `sentencecase:<title field>`
+    + For all others: `sentencecase:<field name>`
 
   - To remove formatting from a title (e.g. no italics or quotes):
 
     + For `title`, use `noformat` or `noformat:title`
-    + For all others: `noformat:<title field>`
+    + For all others: `noformat:<field name>`
 
   - To put the first character of a title in uppercase when `\ifcapital` is true:
 
     + For `title`, use `ifcapital` or `ifcapital:title`
-    + For all others: `ifcapital:<title field>`
+    + For all others: `ifcapital:<field name>`
 
   - You can use some of the options above at the same time, such as
     putting a title in both italics and sentence case. Exceptions: You
-    can't use the `emph` and `quote` options together (the `emph`
+    can't use the `emph` and `quotes` options together (the `emph`
     options prevail), you can't use either with the `noformat` options
     (the `noformat` options prevail), and you can't use the
     `setencecase` and `ifcapital` options together (the `sentencecase`
