@@ -61,7 +61,11 @@ brianchase/windycity").
   remains for backward compatibility)
 * fixed the `year` field of `@standard` entries printing when
   `pubstate` supersedes it
-* fixed missing field format for `shortmaintitle`
+* fixed a missing field format for `shortmaintitle`
+* fixed a setting that caused `@reference` and `@inreference` works to
+  format incorrectly if (1) `organization` was supposed to occupy the
+  author's position *and* (2) their bibliography database entries had
+  an `options` field
 
 ## 2021-12-04
 
