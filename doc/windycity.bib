@@ -1,10 +1,11 @@
 @STRING{ucp = "University of Chicago Press"}
 
 @Book{chicago2017,
+  options = {emph:shorthand},
   author = {{University of Chicago Press}},
   title = {The Chicago Manual of Style},
-  shorthand = {\emph{CMOS}},
-  shorthandintro = {\addperiod\space Hereafter, \printfield{shorthand}},
+  shorthand = {CMOS},
+  shorthandintro = {\addperiod\space Hereafter, \printfield[emph]{shorthand}},
   edition = {17},
   address = {Chicago},
   publisher = ucp,
@@ -433,10 +434,10 @@
 % 14.59 Abbreviations for frequently cited works
 
 @Collection{shurtleff1853,
-  options = {listvols},
+  options = {emph:shorthand,listvols},
   editor = {Shurtleff, Nathaniel B.},
   title = {Records of the Governor and Company of the Massachusetts Bay in New England (1628–86)},
-  shorthand = {\emph{Mass. Records}},
+  shorthand = {Mass. Records},
   volumes = {5},
   address = {Boston},
   year = {1853–54}
@@ -882,10 +883,11 @@
   year = {1977}
 }
 @Book{furet1999,% see also 14.59
+  options = {emph:shorthand},
   author = {Furet, François},
   title = {The Passing of an Illusion},
-%  shorthand = {\emph{PI}},
-  shorthandintro = {\mkbibparens{hereafter cited in text as \printfield{shorthand}}},
+%  shorthand = {PI},
+  shorthandintro = {\mkbibparens{hereafter cited in text as \printfield[emph]{shorthand}}},
   translator = {Furet, Deborah},
   address = {Chicago},
   publisher = ucp,

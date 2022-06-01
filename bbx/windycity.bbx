@@ -1,4 +1,4 @@
-% Last modified: Wed 01 Jun 2022 06:46:40 PM CDT
+% Last modified: Wed 01 Jun 2022 06:53:23 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -44,48 +44,6 @@
 \DeclareBiblatexOption{entry,global}[boolean]{doi}[true]{%
   \settoggle{doi}{#1}}
 
-\providetoggle{emph:blog}
-\providetoggle{emph:book}
-\providetoggle{emph:bookbook}
-\providetoggle{emph:issue}
-\providetoggle{emph:journal}
-\providetoggle{emph:label}
-\providetoggle{emph:main}
-\providetoggle{emph:orig}
-\providetoggle{emph:shortbook}
-\providetoggle{emph:shortmain}
-\providetoggle{emph:}
-\DeclareBiblatexOption{entry}[boolean]{emph:blogtitle}[true]{%
-  \settoggle{emph:blog}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:bookbooktitle}[true]{%
-  \settoggle{emph:bookbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:booktitle}[true]{%
-  \settoggle{emph:book}{#1}%
-  \settoggle{emph:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:issuetitle}[true]{%
-  \settoggle{emph:issue}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:journal}[true]{%
-  \settoggle{emph:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:journaltitle}[true]{%
-  \settoggle{emph:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:maintitle}[true]{%
-  \settoggle{emph:main}{#1}%
-  \settoggle{emph:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:origtitle}[true]{%
-  \settoggle{emph:orig}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:shorttitle}[true]{%
-  \settoggle{emph:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:shortbooktitle}[true]{%
-  \settoggle{emph:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:shortmaintitle}[true]{%
-  \settoggle{emph:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph:title}[true]{%
-  \settoggle{emph:}{#1}%
-  \settoggle{emph:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{emph}[true]{%
-  \settoggle{emph:}{#1}%
-  \settoggle{emph:label}{#1}}%
-
 \providetoggle{eprint}
 \DeclareBiblatexOption{entry,global}[boolean]{eprint}[true]{%
   \settoggle{eprint}{#1}}
@@ -101,48 +59,6 @@
 \providetoggle{ibidpage}
 \DeclareBiblatexOption{global}[boolean]{ibidpage}[true]{%
   \settoggle{ibidpage}{#1}}%
-
-\providetoggle{ifcapital:blog}
-\providetoggle{ifcapital:book}
-\providetoggle{ifcapital:bookbook}
-\providetoggle{ifcapital:issue}
-\providetoggle{ifcapital:journal}
-\providetoggle{ifcapital:label}
-\providetoggle{ifcapital:main}
-\providetoggle{ifcapital:orig}
-\providetoggle{ifcapital:shortbook}
-\providetoggle{ifcapital:shortmain}
-\providetoggle{ifcapital:}
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:blogtitle}[true]{%
-  \settoggle{ifcapital:blog}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:bookbooktitle}[true]{%
-  \settoggle{ifcapital:bookbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:booktitle}[true]{%
-  \settoggle{ifcapital:book}{#1}%
-  \settoggle{ifcapital:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:issuetitle}[true]{%
-  \settoggle{ifcapital:issue}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:journal}[true]{%
-  \settoggle{ifcapital:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:journaltitle}[true]{%
-  \settoggle{ifcapital:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:maintitle}[true]{%
-  \settoggle{ifcapital:main}{#1}%
-  \settoggle{ifcapital:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:origtitle}[true]{%
-  \settoggle{ifcapital:orig}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:shorttitle}[true]{%
-  \settoggle{ifcapital:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:shortbooktitle}[true]{%
-  \settoggle{ifcapital:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:shortmaintitle}[true]{%
-  \settoggle{ifcapital:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital:title}[true]{%
-  \settoggle{ifcapital:}{#1}%
-  \settoggle{ifcapital:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{ifcapital}[true]{%
-  \settoggle{ifcapital:}{#1}%
-  \settoggle{ifcapital:label}{#1}}%
 
 \providetoggle{isbn}
 \DeclareBiblatexOption{entry,global}[boolean]{isbn}[true]{%
@@ -172,48 +88,6 @@
 \DeclareBiblatexOption{entry,global}[boolean]{noetal}[true]{%
   \settoggle{noetal}{#1}}%
 
-\providetoggle{noformat:blog}
-\providetoggle{noformat:book}
-\providetoggle{noformat:bookbook}
-\providetoggle{noformat:issue}
-\providetoggle{noformat:journal}
-\providetoggle{noformat:label}
-\providetoggle{noformat:main}
-\providetoggle{noformat:orig}
-\providetoggle{noformat:shortbook}
-\providetoggle{noformat:shortmain}
-\providetoggle{noformat:}
-\DeclareBiblatexOption{entry}[boolean]{noformat:blogtitle}[true]{%
-  \settoggle{noformat:blog}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:bookbooktitle}[true]{%
-  \settoggle{noformat:bookbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:booktitle}[true]{%
-  \settoggle{noformat:book}{#1}%
-  \settoggle{noformat:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:issuetitle}[true]{%
-  \settoggle{noformat:issue}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:journal}[true]{%
-  \settoggle{noformat:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:journaltitle}[true]{%
-  \settoggle{noformat:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:maintitle}[true]{%
-  \settoggle{noformat:main}{#1}%
-  \settoggle{noformat:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:origtitle}[true]{%
-  \settoggle{noformat:orig}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:shorttitle}[true]{%
-  \settoggle{noformat:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:shortbooktitle}[true]{%
-  \settoggle{noformat:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:shortmaintitle}[true]{%
-  \settoggle{noformat:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat:title}[true]{%
-  \settoggle{noformat:label}{#1}%
-  \settoggle{noformat:}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{noformat}[true]{%
-  \settoggle{noformat:label}{#1}%
-  \settoggle{noformat:}{#1}}%
-
 \DeclareBiblatexOption{global}[boolean]{nolos}[true]{%
   \ifstrequal{#1}{true}
     {\AtBeginBibliography{\blx@key@bibcheck{nolos}}}
@@ -231,108 +105,12 @@
 \DeclareBiblatexOption{entry}[boolean]{noreprint}[true]{%
   \settoggle{noreprint}{#1}}%
 
-\providetoggle{quotes:blog}
-\providetoggle{quotes:book}
-\providetoggle{quotes:bookbook}
-\providetoggle{quotes:issue}
-\providetoggle{quotes:journal}
-\providetoggle{quotes:label}
-\providetoggle{quotes:main}
-\providetoggle{quotes:orig}
-\providetoggle{quotes:shortbook}
-\providetoggle{quotes:shortmain}
-\providetoggle{quotes:}
-\DeclareBiblatexOption{entry}[boolean]{quotes:blogtitle}[true]{%
-  \settoggle{quotes:blog}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:bookbooktitle}[true]{%
-  \settoggle{quotes:bookbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:booktitle}[true]{%
-  \settoggle{quotes:book}{#1}%
-  \settoggle{quotes:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:issuetitle}[true]{%
-  \settoggle{quotes:issue}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:journal}[true]{%
-  \settoggle{quotes:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:journaltitle}[true]{%
-  \settoggle{quotes:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:maintitle}[true]{%
-  \settoggle{quotes:main}{#1}%
-  \settoggle{quotes:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:origtitle}[true]{%
-  \settoggle{quotes:orig}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:shorttitle}[true]{%
-  \settoggle{quotes:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:shortbooktitle}[true]{%
-  \settoggle{quotes:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:shortmaintitle}[true]{%
-  \settoggle{quotes:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quotes:title}[true]{%
-  \settoggle{quotes:label}{#1}%
-  \settoggle{quotes:}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{quote}[true]{%
-  \settoggle{quotes:label}{#1}%
-  \settoggle{quotes:}{#1}}%
-
 \providetoggle{reflist}
 \DeclareBiblatexOption{global}[boolean]{reflist}[true]{%
   \ifstrequal{#1}{true}
     {\toggletrue{reflist}%
      \ExecuteBibliographyOptions{sorting=nyt}}%
     {\togglefalse{reflist}}}
-
-\providetoggle{sentencecase:blog}
-\providetoggle{sentencecase:book}
-\providetoggle{sentencecase:bookbook}
-\providetoggle{sentencecase:issue}
-\providetoggle{sentencecase:journal}
-\providetoggle{sentencecase:label}
-\providetoggle{sentencecase:main}
-\providetoggle{sentencecase:orig}
-\providetoggle{sentencecase:shortbook}
-\providetoggle{sentencecase:shortmain}
-\providetoggle{sentencecase:}
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:blogtitle}[true]{%
-  \settoggle{sentencecase:blog}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:bookbooktitle}[true]{%
-  \settoggle{sentencecase:bookbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:booktitle}[true]{%
-  \settoggle{sentencecase:book}{#1}%
-  \settoggle{sentencecase:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:issuetitle}[true]{%
-  \settoggle{sentencecase:issue}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:journal}[true]{%
-  \settoggle{sentencecase:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:journaltitle}[true]{%
-  \settoggle{sentencecase:journal}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:maintitle}[true]{%
-  \settoggle{sentencecase:main}{#1}%
-  \settoggle{sentencecase:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:origtitle}[true]{%
-  \settoggle{sentencecase:orig}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:shorttitle}[true]{%
-  \settoggle{sentencecase:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:shortbooktitle}[true]{%
-  \settoggle{sentencecase:shortbook}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:shortmaintitle}[true]{%
-  \settoggle{sentencecase:shortmain}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase:title}[true]{%
-  \settoggle{sentencecase:}{#1}%
-  \settoggle{sentencecase:label}{#1}}%
-\DeclareBiblatexOption{entry}[boolean]{sentencecase}[true]{%
-  \settoggle{sentencecase:}{#1}%
-  \settoggle{sentencecase:label}{#1}}%
-\DeclareBiblatexOption{global}[boolean]{sentencecase}[true]{%
-  \settoggle{sentencecase:blog}{#1}%
-  \settoggle{sentencecase:book}{#1}%
-  \settoggle{sentencecase:bookbook}{#1}%
-  \settoggle{sentencecase:issue}{#1}%
-  \settoggle{sentencecase:journal}{#1}%
-  \settoggle{sentencecase:label}{#1}%
-  \settoggle{sentencecase:main}{#1}%
-  \settoggle{sentencecase:orig}{#1}%
-  \settoggle{sentencecase:shortbook}{#1}%
-  \settoggle{sentencecase:shortmain}{#1}%
-  \settoggle{sentencecase:}{#1}}%
 
 \providetoggle{short}
 \DeclareBiblatexOption{global}[boolean]{short}[true]{%
@@ -408,6 +186,245 @@
 \providetoggle{url}
 \DeclareBiblatexOption{entry,global}[boolean]{url}[true]{%
   \settoggle{url}{#1}}%
+
+% Options for formatting titles and other fields:
+
+\providetoggle{emph:blogtitle}
+\providetoggle{emph:booktitle}
+\providetoggle{emph:bookbooktitle}
+\providetoggle{emph:issuetitle}
+\providetoggle{emph:journaltitle}
+\providetoggle{emph:labeltitle}
+\providetoggle{emph:maintitle}
+\providetoggle{emph:origtitle}
+\providetoggle{emph:shortbooktitle}
+\providetoggle{emph:shorthand}
+\providetoggle{emph:shortmaintitle}
+\providetoggle{emph:title}
+\DeclareBiblatexOption{entry}[boolean]{emph:blogtitle}[true]{%
+  \settoggle{emph:blogtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:bookbooktitle}[true]{%
+  \settoggle{emph:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:booktitle}[true]{%
+  \settoggle{emph:booktitle}{#1}%
+  \settoggle{emph:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:issuetitle}[true]{%
+  \settoggle{emph:issuetitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:journal}[true]{%
+  \settoggle{emph:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:journaltitle}[true]{%
+  \settoggle{emph:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:maintitle}[true]{%
+  \settoggle{emph:maintitle}{#1}%
+  \settoggle{emph:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:origtitle}[true]{%
+  \settoggle{emph:origtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:shortbooktitle}[true]{%
+  \settoggle{emph:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:shorthand}[true]{%
+  \settoggle{emph:shorthand}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:shortmaintitle}[true]{%
+  \settoggle{emph:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:shorttitle}[true]{%
+  \settoggle{emph:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph:title}[true]{%
+  \settoggle{emph:title}{#1}%
+  \settoggle{emph:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph}[true]{%
+  \settoggle{emph:title}{#1}%
+  \settoggle{emph:labeltitle}{#1}}%
+
+\providetoggle{ifcapital:blogtitle}
+\providetoggle{ifcapital:booktitle}
+\providetoggle{ifcapital:bookbooktitle}
+\providetoggle{ifcapital:issuetitle}
+\providetoggle{ifcapital:journaltitle}
+\providetoggle{ifcapital:labeltitle}
+\providetoggle{ifcapital:maintitle}
+\providetoggle{ifcapital:origtitle}
+\providetoggle{ifcapital:shortbooktitle}
+\providetoggle{ifcapital:shorthand}
+\providetoggle{ifcapital:shortmaintitle}
+\providetoggle{ifcapital:title}
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:blogtitle}[true]{%
+  \settoggle{ifcapital:blogtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:bookbooktitle}[true]{%
+  \settoggle{ifcapital:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:booktitle}[true]{%
+  \settoggle{ifcapital:booktitle}{#1}%
+  \settoggle{ifcapital:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:issuetitle}[true]{%
+  \settoggle{ifcapital:issuetitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:journal}[true]{%
+  \settoggle{ifcapital:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:journaltitle}[true]{%
+  \settoggle{ifcapital:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:maintitle}[true]{%
+  \settoggle{ifcapital:maintitle}{#1}%
+  \settoggle{ifcapital:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:origtitle}[true]{%
+  \settoggle{ifcapital:origtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:shortbooktitle}[true]{%
+  \settoggle{ifcapital:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:shorthand}[true]{%
+  \settoggle{ifcapital:shorthand}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:shortmaintitle}[true]{%
+  \settoggle{ifcapital:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:shorttitle}[true]{%
+  \settoggle{ifcapital:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital:title}[true]{%
+  \settoggle{ifcapital:title}{#1}%
+  \settoggle{ifcapital:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital}[true]{%
+  \settoggle{ifcapital:title}{#1}%
+  \settoggle{ifcapital:labeltitle}{#1}}%
+
+\providetoggle{noformat:blogtitle}
+\providetoggle{noformat:booktitle}
+\providetoggle{noformat:bookbooktitle}
+\providetoggle{noformat:issuetitle}
+\providetoggle{noformat:journaltitle}
+\providetoggle{noformat:labeltitle}
+\providetoggle{noformat:maintitle}
+\providetoggle{noformat:origtitle}
+\providetoggle{noformat:shortbooktitle}
+\providetoggle{noformat:shorthand}
+\providetoggle{noformat:shortmaintitle}
+\providetoggle{noformat:title}
+\DeclareBiblatexOption{entry}[boolean]{noformat:blogtitle}[true]{%
+  \settoggle{noformat:blogtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:bookbooktitle}[true]{%
+  \settoggle{noformat:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:booktitle}[true]{%
+  \settoggle{noformat:booktitle}{#1}%
+  \settoggle{noformat:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:issuetitle}[true]{%
+  \settoggle{noformat:issuetitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:journal}[true]{%
+  \settoggle{noformat:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:journaltitle}[true]{%
+  \settoggle{noformat:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:maintitle}[true]{%
+  \settoggle{noformat:maintitle}{#1}%
+  \settoggle{noformat:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:origtitle}[true]{%
+  \settoggle{noformat:orig}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:shortbooktitle}[true]{%
+  \settoggle{noformat:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:shorthand}[true]{%
+  \settoggle{noformat:shorthand}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:shortmaintitle}[true]{%
+  \settoggle{noformat:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:shorttitle}[true]{%
+  \settoggle{noformat:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat:title}[true]{%
+  \settoggle{noformat:labeltitle}{#1}%
+  \settoggle{noformat:title}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat}[true]{%
+  \settoggle{noformat:labeltitle}{#1}%
+  \settoggle{noformat:title}{#1}}%
+
+\providetoggle{quotes:blogtitle}
+\providetoggle{quotes:booktitle}
+\providetoggle{quotes:bookbooktitle}
+\providetoggle{quotes:issuetitle}
+\providetoggle{quotes:journaltitle}
+\providetoggle{quotes:labeltitle}
+\providetoggle{quotes:maintitle}
+\providetoggle{quotes:origtitle}
+\providetoggle{quotes:shortbooktitle}
+\providetoggle{quotes:shorthand}
+\providetoggle{quotes:shortmaintitle}
+\providetoggle{quotes:title}
+\DeclareBiblatexOption{entry}[boolean]{quotes:blogtitle}[true]{%
+  \settoggle{quotes:blogtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:bookbooktitle}[true]{%
+  \settoggle{quotes:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:booktitle}[true]{%
+  \settoggle{quotes:booktitle}{#1}%
+  \settoggle{quotes:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:issuetitle}[true]{%
+  \settoggle{quotes:issuetitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:journal}[true]{%
+  \settoggle{quotes:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:journaltitle}[true]{%
+  \settoggle{quotes:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:maintitle}[true]{%
+  \settoggle{quotes:maintitle}{#1}%
+  \settoggle{quotes:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:origtitle}[true]{%
+  \settoggle{quotes:origtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shortbooktitle}[true]{%
+  \settoggle{quotes:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shorthand}[true]{%
+  \settoggle{quotes:shorthand}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shortmaintitle}[true]{%
+  \settoggle{quotes:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:shorttitle}[true]{%
+  \settoggle{quotes:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes:title}[true]{%
+  \settoggle{quotes:labeltitle}{#1}%
+  \settoggle{quotes:title}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quote}[true]{%
+  \settoggle{quotes:labeltitle}{#1}%
+  \settoggle{quotes:title}{#1}}%
+
+\providetoggle{sentencecase:blogtitle}
+\providetoggle{sentencecase:booktitle}
+\providetoggle{sentencecase:bookbooktitle}
+\providetoggle{sentencecase:issuetitle}
+\providetoggle{sentencecase:journaltitle}
+\providetoggle{sentencecase:labeltitle}
+\providetoggle{sentencecase:maintitle}
+\providetoggle{sentencecase:origtitle}
+\providetoggle{sentencecase:shortbooktitle}
+\providetoggle{sentencecase:shorthand}
+\providetoggle{sentencecase:shortmaintitle}
+\providetoggle{sentencecase:title}
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:blogtitle}[true]{%
+  \settoggle{sentencecase:blogtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:bookbooktitle}[true]{%
+  \settoggle{sentencecase:bookbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:booktitle}[true]{%
+  \settoggle{sentencecase:booktitle}{#1}%
+  \settoggle{sentencecase:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:issuetitle}[true]{%
+  \settoggle{sentencecase:issuetitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:journal}[true]{%
+  \settoggle{sentencecase:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:journaltitle}[true]{%
+  \settoggle{sentencecase:journaltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:maintitle}[true]{%
+  \settoggle{sentencecase:maintitle}{#1}%
+  \settoggle{sentencecase:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:origtitle}[true]{%
+  \settoggle{sentencecase:origtitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:shortbooktitle}[true]{%
+  \settoggle{sentencecase:shortbooktitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:shorthand}[true]{%
+  \settoggle{sentencecase:shorthand}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:shortmaintitle}[true]{%
+  \settoggle{sentencecase:shortmaintitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:shorttitle}[true]{%
+  \settoggle{sentencecase:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase:title}[true]{%
+  \settoggle{sentencecase:title}{#1}%
+  \settoggle{sentencecase:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase}[true]{%
+  \settoggle{sentencecase:title}{#1}%
+  \settoggle{sentencecase:labeltitle}{#1}}%
+\DeclareBiblatexOption{global}[boolean]{sentencecase}[true]{%
+  \settoggle{sentencecase:blogtitle}{#1}%
+  \settoggle{sentencecase:booktitle}{#1}%
+  \settoggle{sentencecase:bookbooktitle}{#1}%
+  \settoggle{sentencecase:issuetitle}{#1}%
+  \settoggle{sentencecase:journaltitle}{#1}%
+  \settoggle{sentencecase:labeltitle}{#1}%
+  \settoggle{sentencecase:maintitle}{#1}%
+  \settoggle{sentencecase:origtitle}{#1}%
+  \settoggle{sentencecase:shortbooktitle}{#1}%
+  \settoggle{sentencecase:shortmaintitle}{#1}%
+  \settoggle{sentencecase:title}{#1}}%
 
 % For setting 'minbibnames' and such, see CMOS, 17th ed., 14.76 and
 % 15.29. For 'citetracker' and 'loccittracker', 'constrict' is too
@@ -1045,6 +1062,37 @@
 \DeclareFieldAlias{type}{ifcapital}
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\space#1}
+
+\newbibmacro*{test:format}[2]{%
+  \iftoggle{noformat:#1}
+    {\iftoggle{ifcapital:#1}
+       {\usebibmacro{print:#2}{#1}{noformat}{ifcapital}}%
+       {\iftoggle{sentencecase:#1}
+          {\usebibmacro{print:#2}{#1}{noformat}{sentencecase}}%
+          {\usebibmacro{print:#2}{#1}{noformat}{noformat}}}}
+    {\iftoggle{sentencecase:#1}
+       {\iftoggle{emph:#1}
+          {\usebibmacro{print:#2}{#1}{emph}{sentencecase}}%
+          {\iftoggle{quotes:#1}
+             {\usebibmacro{print:#2}{#1}{quotes}{sentencecase}}%
+             {\usebibmacro{print:#2}{#1}{#1}{sentencecase}}}}
+       {\iftoggle{emph:#1}
+          {\iftoggle{ifcapital:#1}
+             {\usebibmacro{print:#2}{#1}{emph}{ifcapital}}%
+             {\usebibmacro{print:#2}{#1}{emph}{noformat}}}
+          {\iftoggle{quotes:#1}
+             {\iftoggle{ifcapital:#1}
+                {\usebibmacro{print:#2}{#1}{quotes}{ifcapital}}%
+                {\usebibmacro{print:#2}{#1}{quotes}{noformat}}}
+             {\iftoggle{ifcapital:#1}
+                {\usebibmacro{print:#2}{#1}{#1}{ifcapital}}%
+                {\usebibmacro{print:#2}{#1}{#1}{noformat}}}}}}}
+
+\newbibmacro*{print:field}[3]{%
+  \printtext[#2]{\printfield[#3]{#1}}}
+
+\newbibmacro*{print:list}[3]{% Not in use!
+  \printtext[#2]{\printlist[#3]{#1}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Bibliography Aliases  %%
@@ -1706,41 +1754,16 @@
 \newbibmacro*{title+shortlinks}[1]{%
   \iftoggle{shortlinks}
     {\printtext[bibhyperref]{%
-       \usebibmacro{test:title}{#1}}}
-    {\usebibmacro{test:title}{#1}}}
+       \usebibmacro{test:format}{#1title}{title}}}
+    {\usebibmacro{test:format}{#1title}{title}}}
 
-\newbibmacro*{test:title}[1]{%
-  \iftoggle{noformat:#1}
-    {\iftoggle{ifcapital:#1}
-       {\usebibmacro{title+options}{#1}{noformat}{ifcapital}}%
-       {\iftoggle{sentencecase:#1}
-          {\usebibmacro{title+options}{#1}{noformat}{sentencecase}}%
-          {\usebibmacro{title+options}{#1}{noformat}{noformat}}}}
-    {\iftoggle{sentencecase:#1}
-       {\iftoggle{emph:#1}
-          {\usebibmacro{title+options}{#1}{emph}{sentencecase}}%
-          {\iftoggle{quotes:#1}
-             {\usebibmacro{title+options}{#1}{quotes}{sentencecase}}%
-             {\usebibmacro{title+options}{#1}{#1title}{sentencecase}}}}
-       {\iftoggle{emph:#1}
-          {\iftoggle{ifcapital:#1}
-             {\usebibmacro{title+options}{#1}{emph}{ifcapital}}%
-             {\usebibmacro{title+options}{#1}{emph}{noformat}}}
-          {\iftoggle{quotes:#1}
-             {\iftoggle{ifcapital:#1}
-                {\usebibmacro{title+options}{#1}{quotes}{ifcapital}}%
-                {\usebibmacro{title+options}{#1}{quotes}{noformat}}}
-             {\iftoggle{ifcapital:#1}
-                {\usebibmacro{title+options}{#1}{#1title}{ifcapital}}%
-                {\usebibmacro{title+options}{#1}{#1title}{noformat}}}}}}}
-
-\newbibmacro*{title+options}[3]{%
+\newbibmacro*{print:title}[3]{%
   \printtext[#2]{%
-    \printfield[#3]{#1title}%
-    \iffieldundef{#1subtitle}
+    \printfield[#3]{#1}%
+    \iffieldundef{\xtitle subtitle}
       {}
       {\subtitlepunct
-       \printfield[#3]{#1subtitle}}%
+       \printfield[#3]{\xtitle subtitle}}%
     \isdot}}%
 
 \newbibmacro*{titleaddon}[1]{%
@@ -1759,11 +1782,12 @@
        {\usebibmacro{shorttitle}{label}}}}
 
 \newbibmacro*{shorttitle}[1]{%
+  \renewcommand*{\xtitle}{#1}%
+  \clearfield{#1subtitle}%
   \ifstrequal{#1}{label}
     {\usebibmacro{title+shortlinks}{label}}%
     {\iffieldundef{short#1title}
-      {\clearfield{#1subtitle}%
-       \usebibmacro{title+shortlinks}{#1}}%
+      {\usebibmacro{title+shortlinks}{#1}}%
       {\usebibmacro{title+shortlinks}{short#1}}}}
 
 \renewbibmacro*{booktitle}{%

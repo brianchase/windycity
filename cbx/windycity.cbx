@@ -1,4 +1,4 @@
-% Last modified: Sun 29 May 2022 08:20:43 PM CDT
+% Last modified: Wed 01 Jun 2022 06:54:41 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -242,7 +242,7 @@
 \newbibmacro*{parencite:new}{%
   \iffieldundef{shorthand}
     {\usebibmacro{parencite:auth+title}}%
-    {\printfield{shorthand}}%
+    {\usebibmacro{test:format}{shorthand}{field}}%
   \setunit{\addspace}% not '\setunit{\space}'
   \usebibmacro{parencite:date}}%
 
@@ -289,9 +289,9 @@
        {\usebibmacro{cite:short}}}
     {\iftoggle{shortlinks}
        {\printtext[bibhyperref]{%
-          \printfield{shorthand}%
+          \usebibmacro{test:format}{shorthand}{field}%
           \usebibmacro{cite:volume}}}
-       {\printfield{shorthand}%
+       {\usebibmacro{test:format}{shorthand}{field}%
         \usebibmacro{cite:volume}}}}
 
 \newbibmacro*{test:loccit}{%
@@ -540,7 +540,7 @@
        {\setunit{\addspace}%
         \printtext[parens]{%
           \bibstring{citedas}\space
-          \printfield{shorthand}}}
+          \usebibmacro{test:format}{shorthand}{field}}}
        {\setunit{\addspace}%
         \printfield{shorthandintro}}}}
 

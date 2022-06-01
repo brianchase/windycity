@@ -18,7 +18,7 @@ brianchase/windycity").
   - Supported fields: `title`, `blogtitle`, `bookbooktitle`,
     `booktitle`, `issuetitle`, `journal` (and its equivalent
     `journaltitle`), `maintitle`, `origtitle`, `shortbooktitle`,
-    `shorttitle`, and `shortmaintitle`
+    `shorthand`, `shorttitle`, and `shortmaintitle`
 
   - To put a title in italics:
 
