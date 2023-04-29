@@ -19,32 +19,12 @@ brianchase/windycity").
     `booktitle`, `issuetitle`, `journal` (and its equivalent
     `journaltitle`), `maintitle`, `origtitle`, `shortbooktitle`,
     `shorthand`, `shorttitle`, and `shortmaintitle`
-
-  - To put a title in italics:
-
-    + For `title`, use `emph` or `emph:title`
-    + For all others: `emph:<field name>`
-
-  - To put a title in quotes:
-
-    + For `title`, use `quotes` or `quotes:title`
-    + For all others: `quotes:<field name>`
-
-  - To put a title in sentence-style capitalization (see *CMOS* 8.158):
-
-    + For `title`, use `sentencecase` or `sentencecase:title`
-    + For all others: `sentencecase:<field name>`
-
-  - To remove formatting from a title (e.g. no italics or quotes):
-
-    + For `title`, use `noformat` or `noformat:title`
-    + For all others: `noformat:<field name>`
-
-  - To put the first character of a title in uppercase when `\ifcapital` is true:
-
-    + For `title`, use `ifcapital` or `ifcapital:title`
-    + For all others: `ifcapital:<field name>`
-
+  - For italics: `emph:<field name>`
+  - For quotes: `quotes:<field name>`
+  - For sentence-style capitalization: `sentencecase:<field name>`
+  - To remove formatting (italics and quotes): `noformat:<field name>`
+  - Uppercase the first character when `\ifcapital` is true:
+    `ifcapital:<field name>`
   - You can use some of the options above at the same time, such as
     putting a title in both italics and sentence case. Exceptions: You
     can't use the `emph` and `quotes` options together (the `emph`
@@ -52,7 +32,6 @@ brianchase/windycity").
     (the `noformat` options prevail), and you can't use the
     `setencecase` and `ifcapital` options together (the `sentencecase`
     options prevail).
-
   - Setting an option for a title sets the related option for its
     short title (e.g. `sentencecase:maintitle` implies
     `sentencecase:shortmaintitle`).
