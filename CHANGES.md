@@ -19,12 +19,15 @@ brianchase/windycity").
     `booktitle`, `issuetitle`, `journal` (and its equivalent
     `journaltitle`), `maintitle`, `origtitle`, `shortbooktitle`,
     `shorthand`, `shorttitle`, and `shortmaintitle`
-  - For italics: `emph:<field name>`
-  - For quotes: `quotes:<field name>`
-  - For sentence-style capitalization: `sentencecase:<field name>`
-  - To remove formatting (italics and quotes): `noformat:<field name>`
-  - Uppercase the first character when `\ifcapital` is true:
-    `ifcapital:<field name>`
+  - For italics: `emph:<field>` (`emph` is short for `emph:title`)
+  - For quotes: `quotes:<field>` (`quotes` is short for
+    `quotes:title`)
+  - For sentence-style capitalization: `sentencecase:<field>`
+    (`sentencecase` is short for `sentencecase:title`)
+  - To remove formatting (italics and quotes): `noformat:<field>`
+    (`noformat` is short for `noformat:title`)
+  - Uppercase the first letter when `\ifcapital` is true:
+    `ifcapital:<field>` (`ifcapital` is short for `ifcapital:title`)
   - You can use some of the options above at the same time, such as
     putting a title in both italics and sentence case. Exceptions: You
     can't use the `emph` and `quotes` options together (the `emph`

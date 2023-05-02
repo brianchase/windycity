@@ -1,4 +1,4 @@
-% Last modified: Sat 29 Apr 2023 06:37:52 PM CDT
+% Last modified: Mon 01 May 2023 07:27:12 PM CDT
 
 % Permission is granted to copy, distribute and/or modify this
 % software under the terms of the LaTeX Project Public License (LPPL),
@@ -201,6 +201,7 @@
 \providetoggle{emph:shorthand}
 \providetoggle{emph:shortmaintitle}
 \providetoggle{emph:title}
+\providetoggle{emph}
 \DeclareBiblatexOption{entry}[boolean]{emph:blogtitle}[true]{%
   \settoggle{emph:blogtitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{emph:bookbooktitle}[true]{%
@@ -230,6 +231,9 @@
 \DeclareBiblatexOption{entry}[boolean]{emph:title}[true]{%
   \settoggle{emph:title}{#1}%
   \settoggle{emph:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{emph}[true]{%
+  \settoggle{emph:title}{#1}%
+  \settoggle{emph:labeltitle}{#1}}%
 
 \providetoggle{ifcapital:blogtitle}
 \providetoggle{ifcapital:booktitle}
@@ -243,6 +247,7 @@
 \providetoggle{ifcapital:shorthand}
 \providetoggle{ifcapital:shortmaintitle}
 \providetoggle{ifcapital:title}
+\providetoggle{ifcapital}
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:blogtitle}[true]{%
   \settoggle{ifcapital:blogtitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:bookbooktitle}[true]{%
@@ -272,6 +277,9 @@
 \DeclareBiblatexOption{entry}[boolean]{ifcapital:title}[true]{%
   \settoggle{ifcapital:title}{#1}%
   \settoggle{ifcapital:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{ifcapital}[true]{%
+  \settoggle{ifcapital:title}{#1}%
+  \settoggle{ifcapital:labeltitle}{#1}}%
 
 \providetoggle{noformat:blogtitle}
 \providetoggle{noformat:booktitle}
@@ -285,6 +293,7 @@
 \providetoggle{noformat:shorthand}
 \providetoggle{noformat:shortmaintitle}
 \providetoggle{noformat:title}
+\providetoggle{noformat}
 \DeclareBiblatexOption{entry}[boolean]{noformat:blogtitle}[true]{%
   \settoggle{noformat:blogtitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{noformat:bookbooktitle}[true]{%
@@ -314,6 +323,9 @@
 \DeclareBiblatexOption{entry}[boolean]{noformat:title}[true]{%
   \settoggle{noformat:labeltitle}{#1}%
   \settoggle{noformat:title}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{noformat}[true]{%
+  \settoggle{noformat:labeltitle}{#1}%
+  \settoggle{noformat:title}{#1}}%
 
 \providetoggle{quotes:blogtitle}
 \providetoggle{quotes:booktitle}
@@ -327,6 +339,7 @@
 \providetoggle{quotes:shorthand}
 \providetoggle{quotes:shortmaintitle}
 \providetoggle{quotes:title}
+\providetoggle{quotes}
 \DeclareBiblatexOption{entry}[boolean]{quotes:blogtitle}[true]{%
   \settoggle{quotes:blogtitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{quotes:bookbooktitle}[true]{%
@@ -354,6 +367,9 @@
 \DeclareBiblatexOption{entry}[boolean]{quotes:shorttitle}[true]{%
   \settoggle{quotes:labeltitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{quotes:title}[true]{%
+  \settoggle{quotes:labeltitle}{#1}%
+  \settoggle{quotes:title}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{quotes}[true]{%
   \settoggle{quotes:labeltitle}{#1}%
   \settoggle{quotes:title}{#1}}%
 
@@ -397,6 +413,9 @@
 \DeclareBiblatexOption{entry}[boolean]{sentencecase:shorttitle}[true]{%
   \settoggle{sentencecase:labeltitle}{#1}}%
 \DeclareBiblatexOption{entry}[boolean]{sentencecase:title}[true]{%
+  \settoggle{sentencecase:title}{#1}%
+  \settoggle{sentencecase:labeltitle}{#1}}%
+\DeclareBiblatexOption{entry}[boolean]{sentencecase}[true]{%
   \settoggle{sentencecase:title}{#1}%
   \settoggle{sentencecase:labeltitle}{#1}}%
 \DeclareBiblatexOption{global}[boolean]{sentencecase}[true]{%

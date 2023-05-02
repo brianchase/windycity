@@ -1,4 +1,4 @@
-% Last modified: Mon 16 May 2022 06:02:14 PM CDT
+% Last modified: Tue 02 May 2023 07:46:31 AM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -495,6 +495,18 @@ reference list is to pass \opt{env=reflist} to
 \cmd{printbibliography}. See section \ref{overview} for more
 information.
 
+\optitem[false]{sentencecase}{\opt{true}, \opt{false}}
+
+\noindent This option puts titles in sentence-style capitalization,
+also called sentence case (see \textit{CMOS} 8.158), whereby the first
+letter is uppercase and subsequent letters are lowercase. Affected
+fields: \bibfield{title}, \bibfield{blogtitle},
+\bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
+\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
+\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
+\bibfield{shorthand}, \bibfield{shorttitle}, and
+\bibfield{shortmaintitle}.
+
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
 \noindent As shown in section \ref{short}, this option prints short
@@ -654,11 +666,61 @@ the value of \cmd{bibitemsep}.
 \noindent Set \opt{false} to prevent the \bibfield{doi} field from
 printing.
 
+\optitem[false]{emph}{\opt{true}, \opt{false}}
+
+\noindent Short for \opt{emph:title}.
+
+\optitem[false]{emph:<field>}{\opt{true}, \opt{false}}
+
+\noindent This option puts titles in italics. Supported values of
+\bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
+\bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
+\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
+\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
+\bibfield{shorthand}, \bibfield{shorttitle}, and
+\bibfield{shortmaintitle}.
+
 \optitem[true]{eprint}{\opt{true}, \opt{false}}
 
 \noindent Set \opt{false} to prevent the \bibfield{eprint} field from
 printing. For more information about eprints, see section
 \ref{datafields}.
+
+\optitem[false]{ifcapital}{\opt{true}, \opt{false}}
+
+\noindent Short for \opt{ifcapital:title}.
+
+\optitem[false]{ifcapital:<field>}{\opt{true}, \opt{false}}
+
+\noindent This option uppercases the first letter of titles when
+\cmd{ifcapital} is true. Supported values of \bibfield{<field>}:
+\bibfield{title}, \bibfield{blogtitle}, \bibfield{bookbooktitle},
+\bibfield{booktitle}, \bibfield{issuetitle}, \bibfield{journal} (and
+its equivalent \bibfield{journaltitle}), \bibfield{maintitle},
+\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{shorttitle}, and \bibfield{shortmaintitle}.
+
+Using this option with \opt{noformat:<field>} allows you to work with
+data in the title fields of bibliography database entries that
+shouldn't all receive the same format. An example from \textit{CMOS}
+\ref{14.210}:
+
+\begin{verbatim}
+   @Online{braun2016,
+     options = {noformat,ifcapital},
+     author = {Braun, Caroline},
+     title = {reply to \mkbibquote{How did the `cool kids' from high
+              school turn out?}},
+     organization = {Quora},
+     date = {2016-08-09},
+     url = {https://www.quora.com/How-did-the-cool-kids-from-high
+            -school-turn-out/}
+   }
+\end{verbatim}
+
+\begin{citebib}
+\item \cite{braun2016}
+\end{citebib}
 
 \optitem[false]{isbn}{\opt{true}, \opt{false}}
 
@@ -712,6 +774,20 @@ such as \cmd{cite*}, \cmd{footcite*}, and \cmd{parencite*}.
 citations and bibliography entries of specific works. To disable
 truncation in all works, use the \opt{noetal} preamble option.
 
+\optitem[false]{noformat}{\opt{true}, \opt{false}}
+
+\noindent Short for \opt{noformat:title}.
+
+\optitem[false]{noformat:<field>}{\opt{true}, \opt{false}}
+
+\noindent This option removes formatting (italics and quotes) from
+titles. Supported values of \bibfield{<field>}: \bibfield{title},
+\bibfield{blogtitle}, \bibfield{bookbooktitle}, \bibfield{booktitle},
+\bibfield{issuetitle}, \bibfield{journal} (and its equivalent
+\bibfield{journaltitle}), \bibfield{maintitle}, \bibfield{origtitle},
+\bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{shorttitle}, and \bibfield{shortmaintitle}.
+
 \optitem[false]{noplace}{\opt{true}, \opt{false}}
 
 \noindent In contexts where Windy City expects to print a publisher's
@@ -744,6 +820,36 @@ the author-year format):
 \begin{refonly}
 \nocite{darwin1964}
 \end{refonly}
+
+\optitem[false]{quotes}{\opt{true}, \opt{false}}
+
+\noindent Short for \opt{quotes:title}.
+
+\optitem[false]{quotes:<field>}{\opt{true}, \opt{false}}
+
+\noindent This option puts titles in quotes. Supported values of
+\bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
+\bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
+\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
+\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
+\bibfield{shorthand}, \bibfield{shorttitle}, and
+\bibfield{shortmaintitle}.
+
+\optitem[false]{sentencecase}{\opt{true}, \opt{false}}
+
+\noindent Short for \opt{sentencecase:title}.
+
+\optitem[false]{sentencecase:<field>}{\opt{true}, \opt{false}}
+
+\noindent This option puts titles in sentence-style capitalization,
+also called sentence case (see \textit{CMOS} 8.158), whereby the first
+letter is uppercase and subsequent letters are lowercase. Supported
+values of \bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
+\bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
+\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
+\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
+\bibfield{shorthand}, \bibfield{shorttitle}, and
+\bibfield{shortmaintitle}.
 
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
@@ -3731,6 +3837,7 @@ correct.
 
 \subsubsection{Electronic mailing lists and forums}
 % 14.210 Electronic mailing lists and forums
+\label{14.210}
 
 \begin{citebib}
 \item \cite{powell1998}
