@@ -16,16 +16,16 @@ brianchase/windycity").
   titles:
 
   - Supported fields: `title`, `blogtitle`, `bookbooktitle`,
-    `booktitle`, `issuetitle`, `journal` (and its equivalent
-    `journaltitle`), `maintitle`, `origtitle`, `shortbooktitle`,
-    `shorthand`, `shorttitle`, and `shortmaintitle`
+    `booktitle`, `issuetitle`, `journal`, `journaltitle`,
+    `maintitle`, `origtitle`, `shortbooktitle`, `shorthand`,
+    `shorttitle`, and `shortmaintitle`
   - For italics: `emph:<field>` (`emph` is short for `emph:title`)
   - For quotes: `quotes:<field>` (`quotes` is short for
     `quotes:title`)
   - For sentence-style capitalization: `sentencecase:<field>`
     (`sentencecase` is short for `sentencecase:title`)
-  - To remove formatting (italics and quotes): `noformat:<field>`
-    (`noformat` is short for `noformat:title`)
+  - To remove formatting: `noformat:<field>` (`noformat` is short for
+    `noformat:title`)
   - Uppercase the first letter when `\ifcapital` is true:
     `ifcapital:<field>` (`ifcapital` is short for `ifcapital:title`)
   - You can use some of the options above at the same time, such as

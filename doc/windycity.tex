@@ -1,4 +1,4 @@
-% Last modified: Tue 02 May 2023 07:46:31 AM CDT
+% Last modified: Wed 03 May 2023 05:19:34 PM CDT
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage{windycity}
 
@@ -502,10 +502,9 @@ also called sentence case (see \textit{CMOS} 8.158), whereby the first
 letter is uppercase and subsequent letters are lowercase. Affected
 fields: \bibfield{title}, \bibfield{blogtitle},
 \bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
-\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
-\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
-\bibfield{shorthand}, \bibfield{shorttitle}, and
-\bibfield{shortmaintitle}.
+\bibfield{journal}, \bibfield{journaltitle}, \bibfield{maintitle},
+\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{shorttitle}, and \bibfield{shortmaintitle}.
 
 \optitem[false]{short}{\opt{true}, \opt{false}}
 
@@ -675,10 +674,9 @@ printing.
 \noindent This option puts titles in italics. Supported values of
 \bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
 \bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
-\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
-\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
-\bibfield{shorthand}, \bibfield{shorttitle}, and
-\bibfield{shortmaintitle}.
+\bibfield{journal}, \bibfield{journaltitle}, \bibfield{maintitle},
+\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{shorttitle}, and \bibfield{shortmaintitle}.
 
 \optitem[true]{eprint}{\opt{true}, \opt{false}}
 
@@ -695,15 +693,14 @@ printing. For more information about eprints, see section
 \noindent This option uppercases the first letter of titles when
 \cmd{ifcapital} is true. Supported values of \bibfield{<field>}:
 \bibfield{title}, \bibfield{blogtitle}, \bibfield{bookbooktitle},
-\bibfield{booktitle}, \bibfield{issuetitle}, \bibfield{journal} (and
-its equivalent \bibfield{journaltitle}), \bibfield{maintitle},
-\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{booktitle}, \bibfield{issuetitle}, \bibfield{journal},
+\bibfield{journaltitle}, \bibfield{maintitle}, \bibfield{origtitle},
+\bibfield{shortbooktitle}, \bibfield{shorthand},
 \bibfield{shorttitle}, and \bibfield{shortmaintitle}.
 
-Using this option with \opt{noformat:<field>} allows you to work with
-data in the title fields of bibliography database entries that
-shouldn't all receive the same format. An example from \textit{CMOS}
-\ref{14.210}:
+In combination with \opt{noformat:<field>}, this option allows you to
+work with complex titles, where different parts need different formats
+in different contexts. From \textit{CMOS} \ref{14.210}:
 
 \begin{verbatim}
    @Online{braun2016,
@@ -780,12 +777,11 @@ truncation in all works, use the \opt{noetal} preamble option.
 
 \optitem[false]{noformat:<field>}{\opt{true}, \opt{false}}
 
-\noindent This option removes formatting (italics and quotes) from
-titles. Supported values of \bibfield{<field>}: \bibfield{title},
-\bibfield{blogtitle}, \bibfield{bookbooktitle}, \bibfield{booktitle},
-\bibfield{issuetitle}, \bibfield{journal} (and its equivalent
-\bibfield{journaltitle}), \bibfield{maintitle}, \bibfield{origtitle},
-\bibfield{shortbooktitle}, \bibfield{shorthand},
+\noindent This option removes formatting from titles. Supported values
+of \bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
+\bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
+\bibfield{journal}, \bibfield{journaltitle}, \bibfield{maintitle},
+\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
 \bibfield{shorttitle}, and \bibfield{shortmaintitle}.
 
 \optitem[false]{noplace}{\opt{true}, \opt{false}}
@@ -830,10 +826,9 @@ the author-year format):
 \noindent This option puts titles in quotes. Supported values of
 \bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
 \bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
-\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
-\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
-\bibfield{shorthand}, \bibfield{shorttitle}, and
-\bibfield{shortmaintitle}.
+\bibfield{journal}, \bibfield{journaltitle}, \bibfield{maintitle},
+\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{shorttitle}, and \bibfield{shortmaintitle}.
 
 \optitem[false]{sentencecase}{\opt{true}, \opt{false}}
 
@@ -846,10 +841,9 @@ also called sentence case (see \textit{CMOS} 8.158), whereby the first
 letter is uppercase and subsequent letters are lowercase. Supported
 values of \bibfield{<field>}: \bibfield{title}, \bibfield{blogtitle},
 \bibfield{bookbooktitle}, \bibfield{booktitle}, \bibfield{issuetitle},
-\bibfield{journal} (and its equivalent \bibfield{journaltitle}),
-\bibfield{maintitle}, \bibfield{origtitle}, \bibfield{shortbooktitle},
-\bibfield{shorthand}, \bibfield{shorttitle}, and
-\bibfield{shortmaintitle}.
+\bibfield{journal}, \bibfield{journaltitle}, \bibfield{maintitle},
+\bibfield{origtitle}, \bibfield{shortbooktitle}, \bibfield{shorthand},
+\bibfield{shorttitle}, and \bibfield{shortmaintitle}.
 
 \optitem[false]{skipdate}{\opt{true}, \opt{false}}
 
