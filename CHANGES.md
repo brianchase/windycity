@@ -8,7 +8,7 @@ indicate updates to Windy City's [repository on
 GitHub](https://github.com/brianchase/windycity "GitHub:
 brianchase/windycity").
 
-## Latest
+## 2023-05-03
 
 * added preamble option `sentencecase` to put titles in
   sentence-style capitalization (see *CMOS* 8.158)
